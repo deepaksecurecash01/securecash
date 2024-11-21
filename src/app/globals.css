@@ -2,20 +2,577 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+img,
+video {
+  max-width: unset;
+  height: unset;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+.inner {
+  width: 100%;
+  max-width: 1366px;
+  margin: 0 auto;
+}
+
+@-webkit-keyframes fade {
+  from {
+    filter: brightness(0);
+  }
+
+  to {
+    filter: brightness(1);
   }
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@keyframes fade {
+  from {
+    filter: brightness(0);
+  }
+
+  to {
+    filter: brightness(1);
+  }
+}
+
+hr.divider-white {
+  background-color: #ffffff;
+  text-align: left;
+}
+
+#banner {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+#banner-slider {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+}
+
+#banner-slider:hover {
+  cursor: pointer;
+}
+
+.bannerSlides img {
+  width: 100%;
+}
+
+#banner .text hr {
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+#banner .text h1 {
+  color: #c7a652;
+  font-family: "Montserrat Bold", sans-serif;
+}
+
+#banner-info {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #000;
+  position: relative;
+  top: -34px;
+  border-radius: 40px;
+  display: inline-block;
+  color: #fff;
+  font-size: 14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#banner-info .mid-row {
+  padding-top: 20px;
+  padding-bottom: 20px;
+  padding-left: 0px;
+}
+
+#banner-info ul {
+  list-style: none;
+}
+
+#banner-info ul li {
+  color: #fff;
+  font-size: 14px;
+}
+
+#banner-info i {
+  font-size: 22px;
+  position: relative;
+  top: 0px;
+}
+
+#banner-info span {
+  position: relative;
+  top: -3px;
+  line-height: 1.7em;
+}
+
+#banner img {
+  width: 100%;
+  height: 100%;
+}
+
+#banner-mid .mid-row {
+  padding-left: 0px;
+}
+
+.mid-row {
+  padding-left: 70px;
+  width: 33%;
+  float: left;
+  text-align: center;
+  position: relative;
+}
+
+.mid-row img {
+  height: 60px;
+  padding-bottom: 10px;
+}
+
+.mid-row h4 {
+  padding-bottom: 30px;
+  color: #c7a652;
+  font-size: 40px;
+  font-family: "Montserrat Black";
+}
+
+.mid-row p {
+  color: #fff;
+  font-size: 16px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+#banner-mid .row-regular {
+  position: relative;
+  height: 100%;
+}
+
+#banner #banner-slider .slideshow-container h3.prata {
+  text-shadow: 2px 2px 5px #111111;
+  margin: 8px 0 24px 0;
+}
+
+#banner #banner-slider .slideshow-container h1.montSemi {
+  text-shadow: 2px 2px 6px #111111;
+  margin-bottom: 30px;
+}
+
+#banner #banner-slider .slideshow-container p {
+  text-shadow: 2px 2px 5px #111111;
+}
+
+#banner #banner-slider .slideshow-container .d-btn {
+  min-height: 60px;
+  padding: 0 40px;
+}
+
+#banner #banner-slider .slideshow-container .d-btn p {
+  text-shadow: none;
+}
+
+.bannerSlides {
+  display: none;
+  /* Hide all slides by default */
+}
+
+.bannerSlides.active {
+  display: block;
+  /* Show only the active slide */
+}
+
+::-webkit-input-placeholder {
+  color: #999;
+}
+
+:-ms-input-placeholder {
+  color: #999;
+}
+
+::placeholder {
+  color: #999;
+}
+
+a.btn-wrapper {
+  text-decoration: none;
+}
+
+div.d-btn {
+  min-width: 182px;
+  min-height: 70px;
+  max-height: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  background-color: #c7a652;
+}
+
+div.d-btn p {
+  margin: 0;
+  padding: 0;
+  color: #000000;
+  font-size: 16px;
+}
+
+div.btn-learn-more p {
+  margin: 0;
+  padding: 0;
+  color: #ffffff;
+  font-size: 16px;
+}
+
+div.btn-learn-more {
+  line-height: 22px;
+  width: 182px;
+  margin-top: 48px;
+}
+
+div.btn-learn-more:hover p {
+  color: #000;
+  text-decoration: none;
+}
+
+div.btn-learn-more:hover {
+  background-color: #000000;
+  background: #fff;
+}
+
+hr.divider-2 {
+  height: 4px;
+  border: none;
+  margin: 30px 0 24px 0;
+  width: 100px;
+  border-radius: 5px;
+}
+
+.email-desktop {
+  display: block;
+}
+
+.email-mobile {
+  display: none;
+}
+
+.text {
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 70%;
+  text-align: left;
+  top: 20%;
+  color: #fff;
+}
+
+.text .divider {
+  margin: 35px auto 25px 0;
+}
+
+.text h3 {
+  font-size: 32px;
+  line-height: 1em;
+  margin-bottom: 24px;
+}
+
+.text h1 {
+  font-size: 56px;
+  text-shadow: 0.11em 0.06em 0.08em rgba(12, 12, 12, 0.23);
+  line-height: 1em;
+  margin-bottom: 16px;
+}
+
+.text p {
+  font-size: 24px;
+  line-height: 1em;
+}
+
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #a3a3a3;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.dot-navigation {
+  text-align: center;
+}
+
+.dot-navigation ul {
+  list-style: none;
+}
+
+.dot-navigation ul li {
+  padding-bottom: 8px;
+}
+
+.dot.active {
+  background-color: #ffffff;
+  width: 20px;
+  height: 20px;
+}
+
+.dot:hover {
+  background-color: #ffffff;
+  width: 20px;
+  height: 20px;
+}
+
+.inner-controls {
+  position: absolute;
+  width: 40px;
+  margin: 0 30px auto auto;
+  height: 68px;
+  z-index: 10;
+  top: calc(50% - (120px * 0.5));
+  right: 0;
+  cursor: default;
+}
+
+.btn-learn {
+  background: #c7a652;
+  border-radius: 40px;
+  margin-top: 40px;
+  color: #fff;
+  font-size: 20px;
+  padding: 20px 40px 20px 40px;
+  border: 0;
+  cursor: pointer;
+  font-family: "Montserrat SemiBold";
+}
+
+.btn-learn:hover {
+  background: #fff;
+  color: #000;
+}
+
+@media only screen and (max-width: 1024px) {
+  #banner .text hr {
+    margin-top: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  div.btn-learn-more {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .email-desktop {
+    display: none;
+  }
+  #banner-info {
+    width: 95%;
+    display: inline-block;
+    border-radius: 0;
+    margin: 0 auto;
+    width: 100%;
+    top: 0;
+    padding: 4px 0;
+  }
+  #banner-info .mid-row {
+    width: 100%;
+    margin: 0 auto;
+    float: none;
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  header .header-wrapper,
+  #banner-info {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  #banner-info {
+    border-radius: 0;
+    margin: 0 auto;
+    width: 100%;
+    top: 0;
+    padding: 10px 0 20px 0;
+  }
+  #banner img {
+    min-height: 300px;
+  }
+  .email-desktop {
+    display: none;
+  }
+  #banner hr.divider-2,
+  hr.divider-2 {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #banner-mid .mid-row {
+    width: 100%;
+    float: none;
+    margin: 0 auto;
+    padding-bottom: 50px;
+  }
+  #banner-info .mid-row {
+    width: 100%;
+    margin: 0 auto;
+    float: none;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
+
+@media only screen and (max-width: 736px) {
+  div.btn-learn-more {
+    min-height: 50px;
+    min-width: 130px;
+    width: 150px;
+  }
+}
+@media only screen and (max-width: 768px) {
+  #banner {
+    margin-top: 42px;
+  }
+  #banner-mid .mid-row {
+    padding: 50px 0;
+  }
+
+  div.btn-learn-more {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+  }
+  #banner-info {
+    display: inline-block;
+  }
+  #banner-info {
+    padding: 4px 0;
+  }
+
+  #banner-info .mid-row {
+    padding-top: 4px;
+    padding-bottom: 4px;
+  }
+}
+@media (max-width: 375px) {
+  .home-hero #banner-slider {
+    overflow: hidden !important;
+  }
+}
+@media (max-width: 480px) {
+  #banner .bannerSlides img {
+    min-height: 424px;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 360px) {
+  #banner .bannerSlides img {
+    min-height: 418px;
+  }
+}
+@media (max-width: 320px) {
+  #banner .text h1 {
+    font-size: 26px !important;
+    padding-top: 0;
+  }
+  #banner-info i {
+    font-size: 18px;
+  }
+  #banner-info {
+    padding: 10px 0;
+  }
+  #banner-info .mid-row {
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
+    font-size: 12px;
+  }
+}
+@media (max-width: 1280px) {
+  .home-hero .bannerSlides img {
+    width: auto !important;
+    height: 100%;
+    object-fit: cover;
+    max-height: 528px;
+  }
+}
+
+@media (max-width: 768px) {
+  .home-hero .bannerSlides img {
+    height: 424px !important;
+  }
+}
+
+@media (max-width: 375px) {
+  .home-hero .bannerSlides img {
+    height: 398px !important;
+  }
+}
+@media (max-width: 414px) {
+  #banner .text h1 {
+    font-size: 26px !important;
+    padding-top: 0;
+  }
+  div.btn-learn-more {
+    min-height: 50px;
+    min-width: 130px;
+    width: 150px;
+  }
+  #banner-info i {
+    font-size: 18px;
+  }
+  #banner-info {
+    padding: 10px 0;
+  }
+  #banner-info .mid-row {
+    width: 80%;
+    margin: 0 auto;
+    font-size: 12px;
+  }
+}
+@media (max-width: 768px) {
+  .about-hero #banner-info {
+    padding: 16px 0;
+  }
+}
+@media (max-width: 480px) {
+  #banner #banner-slider .slideshow-container h3.prata {
+    line-height: 29px;
+    margin: 0 auto 24px auto;
+  }
+}
+
+@media (max-width: 480px) {
+  #banner #banner-slider .slideshow-container h1.montSemi {
+    line-height: 29px;
+  }
+}
+
+@media (max-width: 768px) {
+  #banner #banner-slider .slideshow-container .d-btn {
+    padding: 0 20px;
+    min-height: 54px;
+  }
+}
+@media (max-width: 720px) {
+  div.btn-learn-more {
+    min-width: 164px;
+    width: 164px;
+  }
 }
