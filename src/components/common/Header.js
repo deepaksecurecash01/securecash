@@ -84,10 +84,10 @@ const Navbar = () => {
   return (
     <header className="fixed z-50 bg-white w-full h-auto max-h-[135px] top-0 transition-all duration-500 shadow-[0_1px_6px_0_rgba(32,33,36,.28)]">
       <div className="w-full max-w-screen-1366px mx-auto my-2.5 flex justify-evenly items-center">
-        <div className="w-full 992px:w-[95%] 1600px:w-full flex 992px:flex-row flex-col justify-center items-center">
+        <div className="w-full 1024px:w-[95%] 1600px:w-full flex 1024px:flex-row flex-col justify-center items-center">
           <div
             id="logo"
-            className="inline 992px:mx-0 992px:text-left 992px:pb-0 mx-auto text-center pb-5"
+            className="inline 1024px:mx-0 1024px:text-left 1024px:pb-0 mx-auto text-center pb-5"
           >
             <Link href="/" onClick={handleMenuClick}>
               <Image
@@ -102,9 +102,9 @@ const Navbar = () => {
           </div>
 
           {/* Mobile Menu */}
-          <div id="mobile-menu" className="block 992px:hidden w-full">
+          <div id="mobile-menu" className="block 1024px:hidden w-full">
             <button
-              className="bg-primary w-full py-4 px-2.5 text-white pl-7"
+              className="bg-primary w-full py-[15px] px-2.5 text-white pl-7"
               onClick={toggleMobileMenu}
             >
               <span className="flex items-center gap-0.5">
@@ -124,14 +124,17 @@ const Navbar = () => {
                   key={index}
                   className={`border-b border-light-border py-5 ${
                     item.submenuId && activeSubMenu === item.submenuId
-                      ? "bg-black pb-0 text-active-text"
+                      ? "bg-black pb-0"
                       : " text-black"
                   }`}
                 >
                   {item.submenuId ? (
                     <>
                       <button
-                        className="ml-[20%] flex items-center gap-4"
+                        className={`ml-[20%] flex items-center gap-4 ${
+                          activeSubMenu === item.submenuId &&
+                          " text-active-text"
+                        }`}
                         onClick={() => toggleMobileSubMenu(item.submenuId)}
                       >
                         <i className="rotate-45 border-dark-border border-r-2 border-b-2 w-2 h-2" />
@@ -156,7 +159,7 @@ const Navbar = () => {
           {/* Main Menu */}
           <div
             id="main-menu"
-            className="w-full 992px:flex flex-row items-center hidden"
+            className="w-full 1024px:flex flex-row items-center hidden"
           >
             <ul className="m-0 p-0 bg-white list-none flex flex-row justify-between items-center ml-auto w-[97%] 1200px:w-[90%]">
               {menuItems

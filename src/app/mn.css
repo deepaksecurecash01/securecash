@@ -1,0 +1,78 @@
+ #banner-info .mid-row {
+   width: 100%;
+   margin: 0 auto;
+   float: none;
+   padding-top: 4px;
+   padding-bottom: 4px;
+ }
+
+ @media only screen and (max-width: 992px) {
+   #banner-info {
+     border-radius: 0;
+     margin: 0 auto;
+     width: 100%;
+     top: 0;
+     padding: 10px 0 20px 0;
+   }
+
+   #banner-info .mid-row {
+     width: 100%;
+     margin: 0 auto;
+     float: none;
+     padding-top: 5px;
+     padding-bottom: 5px;
+   }
+ }
+
+
+     
+  
+     @media (max-width: 768px) {
+          #banner-info {
+              display: inline-block;
+            }
+          
+            #banner-info {
+              padding: 4px 0;
+            }
+          
+            #banner-info .mid-row {
+              padding-top: 4px;
+              padding-bottom: 4px;
+            }
+     }
+
+         @media (max-width: 320px) {
+       
+           #banner-info i {
+             font-size: 18px;
+           }
+    
+           #banner-info {
+             padding: 10px 0;
+           }
+    
+           #banner-info .mid-row {
+             width: 80%;
+             margin: 0 auto;
+             text-align: left;
+             font-size: 12px;
+           }
+         }
+                                 @media (max-width: 320px) {
+                
+                                  #banner-info i {
+                                      font-size: 18px;
+                                    }
+                                  
+                                    #banner-info {
+                                      padding: 10px 0;
+                                    }
+                                  
+                                    #banner-info .mid-row {
+                                      width: 80%;
+                                      margin: 0 auto;
+                                      font-size: 12px;
+                                    }
+                                   }
+                                 

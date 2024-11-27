@@ -10,6 +10,7 @@ module.exports = {
       screens: {
         "320px": "320px", // Extra extra small devices
         "360px": "360px", // Extra small devices
+        "414px": "414px", // Small devices
         "480px": "480px", // Small devices
         "600px": "600px", // Medium devices (large small devices)
         "768px": "768px", // Large small devices (tablets portrait)
