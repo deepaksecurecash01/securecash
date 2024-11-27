@@ -66,17 +66,17 @@ const Welcome = () => {
                         />
                         <h4>Cash Collection Services</h4>
                       </div>
-                      <p className=" font-montserrat font-light">
+                      <p className="font-montserrat font-light">
                         Our plain clothes staff will visit your premises at an
                         agreed time, pick up and secure your takings, drive them
                         to your bank in one of our unmarked vehicles and deposit
                         them in your account. At a later time, we will deliver
                         the bank deposit records back to your office. We call
-                        this our "Banking Courier Service" and we can collect
-                        your cash takings (including cheques) any hour or any
-                        day or night. That includes weekends and public holidays
-                        because our number one priority is ensuring the cash
-                        security of our clients.
+                        this our &quot;Banking Courier Service&quot; and we can
+                        collect your cash takings (including cheques) any hour
+                        or any day or night. That includes weekends and public
+                        holidays because our number one priority is ensuring the
+                        cash security of our clients.
                       </p>
                     </div>
                     <div className="item-box align-left">
@@ -88,13 +88,13 @@ const Welcome = () => {
                         />
                         <h4>Cash Delivery Services</h4>
                       </div>
-                      <p className=" font-montserrat font-light">
+                      <p className="font-montserrat font-light">
                         When you want cash delivered to your organisation, just
-                        order our cash delivery service. We call it a "Change
-                        Order Service" because often our clients are ordering
-                        small change to meets their trading needs. So we pick up
-                        the needed amount of change, in whatever denominations
-                        you require.
+                        order our cash delivery service. We call it a
+                        &quot;Change Order Service&quot; because often our
+                        clients are ordering small change to meet their trading
+                        needs. So we pick up the needed amount of change, in
+                        whatever denominations you require.
                       </p>
                     </div>
                     <div className="item-box align-left">
@@ -106,14 +106,13 @@ const Welcome = () => {
                         />
                         <h4>Cash Counting Services</h4>
                       </div>
-                      <p className=" font-montserrat font-light">
-                        If you don't want your staff to have to deal with
+                      <p className="font-montserrat font-light">
+                        If you don&apos;t want your staff to have to deal with
                         counting the takings, our cash counting service can
                         assist. We collect your cash and count it before
                         depositing it into your bank account.{" "}
                         <a className="read-more-link" onClick={toggleContent}>
-                          {" "}
-                          Show Less{" "}
+                          Show Less
                         </a>
                       </p>
                     </div>
