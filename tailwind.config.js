@@ -29,7 +29,7 @@ module.exports = {
         prata: ["var(--font-prata)"],
       },
       colors: {
-        primary: "#C7A652", // Primary background color
+        primary: "#c7a652", // Primary background color
         "light-border": "#E9E9E9", // Light border color
         "active-text": "#C5A44B", // Text color on hover or active
         "dark-border": "#636363", // Dark border color
@@ -38,6 +38,11 @@ module.exports = {
       backgroundImage: (theme) => ({
         "quote-icon": "url('/images/quote.png')",
         "quote-icon-white": "url('/images/quote-white.png')",
+        "content-bg": "url('/images/main-background.webp')",
+        "banner-mid-bg": "url('/images/banner/home-statistics.jpg')",
+        "banner-mid-mobile-bg":
+          "url('/images/banner/home-statistics-mobile.jpg')",
+        "main-content-bg": "url('/images/banner/mainbg.webp')",
       }),
     },
   },

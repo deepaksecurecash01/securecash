@@ -1,78 +1,1046 @@
- #banner-info .mid-row {
-   width: 100%;
-   margin: 0 auto;
-   float: none;
-   padding-top: 4px;
-   padding-bottom: 4px;
- }
+@media (max-width: 1024px) {
+  .forms-quote .chkbox-container .chkbox input:checked+label:after {
+    top: 2px;
+  }
+}
 
- @media only screen and (max-width: 992px) {
-   #banner-info {
-     border-radius: 0;
-     margin: 0 auto;
-     width: 100%;
-     top: 0;
-     padding: 10px 0 20px 0;
-   }
+@media (max-width: 768px) {
+  .forms-quote .chkbox-container .chkbox input:checked+label:after {
+    left: 12px;
+    width: 9px;
+    height: 23px;
+    top: 0px;
+  }
+}
 
-   #banner-info .mid-row {
-     width: 100%;
-     margin: 0 auto;
-     float: none;
-     padding-top: 5px;
-     padding-bottom: 5px;
-   }
- }
+@media only screen and (max-width: 1024px) {
 
+  .chkbox-container,
+  .input-container,
+  .forms-quote label,
+  .button-controls-container,
+  .input-container-select,
+  .comment-container,
+  .forms-quote h5.checkboxHeaderText {
+    width: 90%;
+  }
 
-     
-  
-     @media (max-width: 768px) {
-          #banner-info {
-              display: inline-block;
-            }
-          
-            #banner-info {
-              padding: 4px 0;
-            }
-          
-            #banner-info .mid-row {
-              padding-top: 4px;
-              padding-bottom: 4px;
-            }
-     }
+  .chkbox-container {
+    margin-bottom: 0px;
+  }
 
-         @media (max-width: 320px) {
-       
-           #banner-info i {
-             font-size: 18px;
-           }
-    
-           #banner-info {
-             padding: 10px 0;
-           }
-    
-           #banner-info .mid-row {
-             width: 80%;
-             margin: 0 auto;
-             text-align: left;
-             font-size: 12px;
-           }
-         }
-                                 @media (max-width: 320px) {
-                
-                                  #banner-info i {
-                                      font-size: 18px;
-                                    }
-                                  
-                                    #banner-info {
-                                      padding: 10px 0;
-                                    }
-                                  
-                                    #banner-info .mid-row {
-                                      width: 80%;
-                                      margin: 0 auto;
-                                      font-size: 12px;
-                                    }
-                                   }
-                                 
+  .chkbox-row {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  .chkbox-grid .chkbox input[type="checkbox"]:checked+label:after {
+    top: 11px;
+    height: 12px;
+    width: 4px;
+    left: 6px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+
+  .chkbox-container,
+  .input-container,
+  .forms-quote label,
+  .input-container-select,
+  .comment-container,
+  .forms-quote h5.checkboxHeaderText {
+    width: 100%;
+  }
+
+  .forms-quote .long-lbl {
+    width: 100% !important;
+  }
+
+  .button-controls-container {
+    width: 90%;
+  }
+
+  input[type="checkbox"]:checked+label:after {
+    width: 5px;
+    height: 13px;
+    left: 7px;
+  }
+
+  input[type="checkbox"] {
+    width: 24px;
+    height: 24px;
+  }
+
+  input[type="checkbox"]+label span {
+    width: 24px;
+    height: 24px;
+  }
+
+  .comment-container {
+    padding-top: 0;
+    align-self: center;
+  }
+
+  .step,
+  .step.active {
+    width: 18px !important;
+    height: 18px !important;
+    margin: 0;
+    margin-right: 10px;
+  }
+
+  .step-dots {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 !important;
+  }
+
+  #frm-contact {
+    display: none;
+  }
+
+  #frm-contact-mobile {
+    display: block;
+    padding-bottom: 40px;
+  }
+
+  #step-dots-container {
+    display: none;
+  }
+
+  #step-dots-container-mobile {
+    display: block;
+  }
+
+  .chkbox-container {
+    flex-direction: column;
+  }
+
+  .forms-quote h5 {
+    text-align: start;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .col-days input[type="checkbox"] {
+    margin-top: 10px;
+  }
+
+  .chkbox-container .control-wrapper {
+    margin-top: 12px;
+  }
+
+  p.form-spacer {
+    margin-bottom: 25px;
+  }
+
+  p.form-spacer-small {
+    margin-bottom: 14px;
+  }
+
+  #frm-contact-mobile {
+    height: 560px;
+    padding-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  #frm-contact-mobile .tab-show {
+    display: flex;
+    flex-grow: 1;
+    justify-content: start;
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .forms-quote button {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .right-contact-row p {
+    margin-bottom: 0px;
+  }
+
+  .right-contact-row ul li {
+    margin-top: 24px;
+  }
+
+  .right-contact-row ul li:first-child {
+    margin-top: 0;
+  }
+
+  .right-contact-row ul li:before {
+    top: 9px;
+  }
+
+  .mobile-form-content-elements {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+}
+
+@media only screen and (max-width: 992px) {
+  #content-contact .inner-big {
+    display: block;
+  }
+
+  .content-scroll {
+    height: 100% !important;
+    margin: 0 auto;
+  }
+
+  #content-contact {
+    padding-top: 40px !important;
+    padding-bottom: 40px !important;
+  }
+
+  #content-contact>div>div.right-contact-row>div {
+    width: 85%;
+  }
+
+  div.chkbox-container {
+    margin: 0;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-6,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-7,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-8,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-9 {
+    width: 130px;
+    justify-self: end;
+    text-align: right;
+  }
+
+  #frm-contact .chkbox-container-cash .checkbox-wrapper-9 {
+    justify-self: left;
+  }
+
+  .chkbox-grid,
+  #frm-contact .chkbox-container-cash {
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  .checkbox-wrapper-4,
+  .checkbox-wrapper-5,
+  .checkbox-wrapper-6,
+  #frm-contact .chkbox-container-cash .checkbox-wrapper-4,
+  #frm-contact .chkbox-container-cash .checkbox-wrapper-5,
+  #frm-contact .chkbox-container-cash .checkbox-wrapper-6 {
+    justify-self: center;
+    width: 120px;
+  }
+
+  #frm-contact .chkbox-container-cash .checkbox-wrapper-9 {
+    justify-self: right;
+  }
+
+  .checkbox-wrapper-7,
+  .checkbox-wrapper-8 {
+    width: 100px;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-6,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-7,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-8,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-9 {
+    width: 130px;
+    justify-self: end;
+    text-align: right;
+  }
+
+  #frm-contact .chkbox-container-cash .checkbox-wrapper-9 {
+    justify-self: left;
+  }
+
+  .chkbox-grid,
+  #frm-contact .chkbox-container-cash {
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  .checkbox-wrapper-4,
+  .checkbox-wrapper-5,
+  .checkbox-wrapper-6,
+  #frm-contact .chkbox-container-cash .checkbox-wrapper-4,
+  #frm-contact .chkbox-container-cash .checkbox-wrapper-5,
+  #frm-contact .chkbox-container-cash .checkbox-wrapper-6 {
+    justify-self: center;
+    width: 120px;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container .checkbox-wrapper-3 {
+    width: 132px;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-grid {
+    grid-template-rows: repeat(4, 1fr);
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container-cash.chkbox-grid {
+    grid-template-rows: repeat(5, 1fr);
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container .checkbox-wrapper-4 {
+    justify-self: left;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container .checkbox-wrapper-5,
+  #quote-content-right>#frm-contact .chkbox-container .checkbox-wrapper-6,
+  #quote-content-right>#frm-contact .chkbox-container .checkbox-wrapper-7,
+  #quote-content-right>#frm-contact .chkbox-container .checkbox-wrapper-8 {
+    width: 102px;
+    justify-self: end;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container-cash.chkbox-grid .checkbox-wrapper-5 {
+    justify-self: start;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-6,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-7,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-8,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-9 {
+    width: 110px;
+    justify-self: end;
+    text-align: right;
+  }
+
+  #frm-contact .chkbox-container-cash .checkbox-wrapper-9 {
+    justify-self: right;
+  }
+
+  #content-contact>div>div.right-contact-row {
+    padding-left: 0px;
+    padding-top: 40px !important;
+  }
+
+  form.forms-quote {
+    width: auto;
+    max-width: auto;
+    height: auto;
+    padding: 30px;
+    margin: 0 10px;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #content-contact>div>div.right-contact-row {
+    padding-left: 0px;
+    padding-top: 40px !important;
+  }
+
+  #content-contact>div>div.right-contact-row>h5 {
+    padding-left: 52px;
+  }
+
+  #content-contact>div>div.right-contact-row>h5 {
+    padding-left: 52px;
+  }
+
+  div.chkbox-container.chkbox-row input,
+  input[type="checkbox"]+label span {
+    width: 36px;
+    height: 36px;
+  }
+
+  div.chkbox-container.chkbox-row input,
+  input[type="checkbox"]+label span {
+    width: 36px;
+    height: 36px;
+  }
+
+  .frm-contact .control-wrapper .chkbox label,
+  .chkbox-container h5,
+  .chkbox-container p {
+    font-size: 16px !important;
+    display: inline;
+  }
+
+  .chkbox-container {
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+
+  input[type="checkbox"]:checked+label:after {
+    content: "";
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    color: #fff;
+    transition: all 0.2s;
+    cursor: pointer;
+    font-size: 36px;
+    border: solid white;
+    border-width: 0 4px 4px 0;
+    top: 0;
+    height: 20px;
+    width: 10px;
+    left: 10px;
+  }
+
+  .chkbox-grid .chkbox input[type="checkbox"]:checked+label:after {
+    top: 9px;
+    height: 23px;
+    width: 10px;
+    left: 11px;
+  }
+
+  input[type="checkbox"]:checked+label span {
+    background: #c6a54b;
+  }
+
+  input[type="checkbox"]+label span {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    margin: -2px 10px 0 0;
+    vertical-align: middle;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  r #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper {
+    width: 150px;
+  }
+
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper-7,
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper-8,
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper-9 {
+    justify-self: end;
+    width: 140px;
+  }
+
+  .chkbox-grid,
+  .chkbox-grid.chkbox-container-cash {
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-6 {
+    justify-self: left;
+  }
+
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-7,
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-8,
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-9 {
+    width: 140px;
+  }
+
+  .frm-contact .control-wrapper .chkbox label,
+  .chkbox-container h5,
+  .chkbox-container p {
+    font-size: 16px !important;
+    display: inline;
+  }
+
+  .chkbox-container {
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+
+  r #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper {
+    width: 150px;
+  }
+
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper-7,
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper-8,
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper-9 {
+    justify-self: end;
+    width: 140px;
+  }
+
+  .chkbox-grid,
+  .chkbox-grid.chkbox-container-cash {
+    grid-template-rows: repeat(3, 1fr);
+  }
+
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-6 {
+    justify-self: left;
+  }
+
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-7,
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-8,
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-9 {
+    width: 140px;
+  }
+
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-7,
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-8 {
+    justify-self: right;
+    width: 140px;
+  }
+
+  .chkbox-container,
+  .input-container,
+  .forms-quote label,
+  .input-container-select,
+  .comment-container,
+  .forms-quote h5.checkboxHeaderText {
+    width: 100%;
+  }
+
+  .forms-quote .long-lbl {
+    width: 100% !important;
+  }
+
+  .forms-quote h5 {
+    text-align: start;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #content-contact {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    margin-top: 40px !important;
+  }
+
+  #content-contact>div>div.right-contact-row>div {
+    margin-top: 24px;
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  #content-contact div div.right-contact-row div ul li p {
+    padding-right: 16px;
+  }
+
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper-7,
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper-8,
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper-9 {
+    justify-self: end;
+    width: 130px;
+  }
+
+  .chkbox-grid.chkbox-container-cash {
+    grid-template-rows: repeat(5, 1fr);
+  }
+
+  .chkbox-grid {
+    grid-template-rows: repeat(4, 1fr);
+  }
+
+  .chkbox-grid .checkbox-wrapper-4 {
+    justify-self: left;
+  }
+
+  .chkbox-grid .checkbox-wrapper-5,
+  .chkbox-grid .checkbox-wrapper-6,
+  .chkbox-grid .checkbox-wrapper-7,
+  .chkbox-grid .checkbox-wrapper-8 {
+    justify-self: left;
+  }
+
+  #content-contact>div>div.right-contact-row {
+    padding-top: 35px !important;
+  }
+
+  #content-contact>div>div.right-contact-row>h5 {
+    padding-left: 25px;
+  }
+
+  #content-contact>div>div.right-contact-row>div {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  #content-contact div div.right-contact-row div ul li p {
+    padding-right: 16px;
+  }
+
+  #content-contact>div>div.right-contact-row>div {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+
+  .input-container,
+  .frm-contact label,
+  .button-controls-container,
+  .input-container-select,
+  .comment-container,
+  .frm-contact .long-lbl,
+  .chkbox-container h5,
+  .frm-contact h5.checkboxHeaderText {
+    width: 100% !important;
+  }
+
+  .input-container,
+  .frm-contact label,
+  .button-controls-container,
+  .input-container-select,
+  .comment-container,
+  .frm-contact .long-lbl,
+  .chkbox-container h5,
+  .frm-contact h5.checkboxHeaderText {
+    width: 100% !important;
+  }
+
+  .frm-contact button {
+    width: 90%;
+  }
+
+  .chkbox-container {
+    width: 100% !important;
+  }
+
+  .chkbox-container .control-wrapper div:nth-child(1) {
+    margin-right: 0;
+  }
+
+  .chkbox-container .control-wrapper {
+    justify-content: space-evenly;
+  }
+
+  .checkbox-wrapper {
+    width: 160px;
+  }
+
+  .content-columns .leftside-column h3 {
+    line-height: 1.6em;
+  }
+
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper.checkbox-wrapper-6,
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper.checkbox-wrapper-7,
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper.checkbox-wrapper-8,
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper.checkbox-wrapper-9 {
+    justify-self: end;
+    width: 150px;
+  }
+}
+
+@media only screen and (max-width: 414px) {
+  .chkbox-container {
+    flex-direction: column;
+  }
+
+  .chkbox-container h5 {
+    display: block;
+    width: 100%;
+    margin-top: 0px !important;
+  }
+
+  .chkbox-container {
+    margin-bottom: 0 !important;
+  }
+
+  .chkbox-container .control-wrapper {
+    justify-content: space-between;
+  }
+
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash {
+    grid-template-rows: repeat(5, 1fr);
+  }
+
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper-7,
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper-8,
+  #quote-content-left #frm-contact-mobile .chkbox-container-cash .checkbox-wrapper-9 {
+    justify-self: end;
+    width: 130px;
+  }
+
+  .chkbox-grid.chkbox-container-cash {
+    grid-template-rows: repeat(5, 1fr);
+  }
+}
+
+@media only screen and (max-width: 320px) {
+
+  div.chkbox-container input,
+  input[type="checkbox"]+label span {
+    width: 24px;
+    height: 24px;
+    padding: 0;
+    margin: 0;
+    margin-right: 5px;
+  }
+
+  div.chkbox-container .control-wrapper input:checked+label:after {
+    left: 7px;
+    width: 6px;
+    height: 16px;
+  }
+
+  .chkbox-container p {
+    width: 150px;
+  }
+
+  .chkbox-container .control-wrapper div:nth-child(1) {
+    margin-right: 16px;
+  }
+
+  .checkbox-wrapper {
+    width: 140px;
+  }
+
+  .chkbox-grid .chkbox input[type="checkbox"]:checked+label:after {
+    left: 7px;
+    width: 6px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .forms-quote .chkbox-container .chkbox input:checked+label:after {
+    left: 12px;
+    width: 9px;
+    height: 23px;
+    top: 0px;
+  }
+}
+
+@media (max-width: 768px) {
+  .forms-quote .chkbox-grid .chkbox input:checked+label:after {
+    top: 10px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .forms-quote .chkbox-grid {
+    justify-content: space-around;
+  }
+
+  div.chkbox-container.chkbox-row input,
+  input[type="checkbox"]+label span {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    margin-right: 5px;
+  }
+
+  div.chkbox-container.chkbox-row input:checked+label:after {
+    left: 6px;
+    width: 4px;
+    height: 12px;
+  }
+
+  .frm-contact .control-wrapper .chkbox label,
+  .chkbox-container h5,
+  .chkbox-container p {
+    font-size: 14px !important;
+    display: inline;
+  }
+
+  .chkbox-container p {
+    width: 150px;
+  }
+
+  .chkbox-container .control-wrapper div:nth-child(1) {
+    margin-right: 16px;
+  }
+
+  .chkbox-grid.chkbox-container-cash {
+    grid-template-rows: repeat(5, 1fr);
+  }
+
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-5 {
+    justify-self: start;
+  }
+
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-6,
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-7,
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-8,
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-9 {
+    width: 100px;
+  }
+
+  #quote-content-right>#frm-contact>div.tab.tab-change.t-included.tab-show>div.chkbox-container.chkbox-grid .checkbox-wrapper-5 {
+    justify-self: center;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-9 {
+    width: 110px;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash {
+    grid-template-rows: repeat(4, 1fr);
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-4,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-6,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-7,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-8 {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 1024px) {
+  .forms-quote .chkbox-grid .chkbox input:checked+label:after {
+    top: 11px;
+  }
+}
+
+@media (max-width: 768px) {
+  #quote-content-right .forms-quote {
+    margin-top: 0 !important;
+  }
+
+  .chkbox-container,
+  .input-container,
+  .forms-quote label,
+  .input-container-select,
+  .comment-container,
+  .forms-quote h5.checkboxHeaderText {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  #content-contact>div>div.right-contact-row>div {
+    height: 565px;
+  }
+
+  .chkbox-container,
+  .input-container,
+  .forms-quote label,
+  .button-controls-container,
+  .input-container-select,
+  .comment-container,
+  .forms-quote h5.checkboxHeaderText {
+    width: 90%;
+  }
+
+  #content-contact>div>div.right-contact-row {
+    padding-top: 0;
+  }
+
+  #content-contact>div>div.right-contact-row>h1 {
+    padding-right: 16px;
+  }
+
+  #content-contact>div>div.right-contact-row>h5 {
+    margin-bottom: 20px;
+  }
+
+  #content-contact>div>div.right-contact-row>div {
+    height: 658px;
+  }
+}
+
+@media only screen and (max-width: 1366px) {
+  #content-contact .inner-big {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #quote-content-right>.frm-contact h5.checkboxHeaderText,
+  #quote-content-right>.frm-contact .button-controls-container,
+  #quote-content-right>.frm-contact .comment-container,
+  #quote-content-right>.frm-contact .input-container-select,
+  #quote-content-right>.frm-contact label,
+  #quote-content-right>.frm-contact .input-container,
+  #quote-content-right>.frm-contact .chkbox-container {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .content-scroll {
+    height: 560px;
+  }
+
+  #quote-content-right .chkbox-container-cash .checkbox-wrapper-6 {
+    justify-self: center;
+  }
+
+  .forms-quote .long-lbl {
+    width: 80% !important;
+  }
+
+  #quote-content-right .checkbox-wrapper-1,
+  #quote-content-right .checkbox-wrapper-2,
+  #quote-content-right .checkbox-wrapper-3 {
+    width: 150px;
+  }
+
+  #quote-content-right .checkbox-wrapper-4,
+  #quote-content-right .checkbox-wrapper-5,
+  #quote-content-right .checkbox-wrapper-6 {
+    width: 134px;
+  }
+
+  #quote-content-right .checkbox-wrapper-7,
+  #quote-content-right .checkbox-wrapper-8,
+  #quote-content-right .checkbox-wrapper-9 {
+    width: 118px;
+  }
+
+  #quote-content-right>.frm-contact label {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  #quote-content-right .chkbox-container-cash .checkbox-wrapper-6 {
+    justify-self: center;
+  }
+
+  #quote-content-right>.frm-contact .long-lbl {
+    width: 90% !important;
+  }
+}
+
+@media only screen and (max-width: 1280px) {
+  form.forms-quote {
+    width: 100%;
+  }
+
+  .content-scroll {
+    height: 642px;
+  }
+
+  #quote-content-right .chkbox-container-cash .checkbox-wrapper-6 {
+    justify-self: end;
+  }
+
+  #quote-content-right>.frm-contact input {
+    padding: 16px;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-3 {
+    width: 152px;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-5 {
+    justify-self: start;
+  }
+
+  #frm-contact .chkbox-container-cash,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash {
+    grid-template-rows: repeat(5, 1fr);
+  }
+
+  #frm-contact .chkbox-container-cash .checkbox-wrapper-5 {
+    justify-self: start;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .forms-quote .long-lbl {
+    width: 90% !important;
+  }
+
+  .checkbox-wrapper-4 {
+    justify-self: start;
+  }
+
+  .checkbox-wrapper-5,
+  .checkbox-wrapper-6,
+  .checkbox-wrapper-7,
+  .checkbox-wrapper-8,
+  .checkbox-wrapper-9 {
+    justify-self: end;
+    width: 80%;
+  }
+
+  #quote-content-right .checkbox-wrapper-7,
+  #quote-content-right .checkbox-wrapper-8,
+  #quote-content-right .checkbox-wrapper-9 {
+    width: 132px;
+  }
+
+  #quote-content-right>.frm-contact .chkbox-row {
+    margin-bottom: 20px;
+  }
+
+  #quote-content-right .chkbox-container-cash .checkbox-wrapper-6 {
+    justify-self: end;
+  }
+
+  #quote-content-right>.frm-contact input {
+    padding: 16px;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-3 {
+    width: 152px;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-5 {
+    justify-self: start;
+  }
+}
+
+@media (max-width: 1024px) {
+  .forms-quote .chkbox-container .chkbox input:checked+label:after {
+    top: 2px;
+  }
+
+  div.chkbox-container.chkbox-row input,
+  input[type="checkbox"]+label span {
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    margin: 0;
+    margin-right: 5px;
+  }
+
+  div.chkbox-container.chkbox-row input:checked+label:after {
+    left: 6px;
+    width: 4px;
+    height: 12px;
+  }
+
+  .checkbox-wrapper-4 {
+    justify-self: left;
+  }
+
+  .checkbox-wrapper-5,
+  .checkbox-wrapper-6,
+  .checkbox-wrapper-7,
+  .checkbox-wrapper-8 {
+    justify-self: right;
+    width: 120px;
+  }
+
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-5 {
+    justify-self: start;
+  }
+
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-6,
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-7,
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-8,
+  .chkbox-grid.chkbox-container-cash .checkbox-wrapper-9 {
+    width: 100px;
+  }
+
+  #quote-content-right>#frm-contact>div.tab.tab-change.t-included.tab-show>div.chkbox-container.chkbox-grid .checkbox-wrapper-5 {
+    justify-self: center;
+  }
+
+  #quote-content-right .checkbox-wrapper-7,
+  #quote-content-right .checkbox-wrapper-8,
+  #quote-content-right .checkbox-wrapper-9 {
+    width: 134px;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-9 {
+    width: 110px;
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash {
+    grid-template-rows: repeat(4, 1fr);
+  }
+
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-4,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-6,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-7,
+  #quote-content-right>#frm-contact .chkbox-container.chkbox-container-cash .checkbox-wrapper-8 {
+    justify-self: start;
+  }
+}

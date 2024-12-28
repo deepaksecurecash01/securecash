@@ -112,143 +112,29 @@ const Banner = () => {
                 />
               </picture>
               <div className="w-full max-w-[1366px] mx-auto">
-                
-
-
-
-
-
-
-
-
-
-
-                <div className="absolute bottom-[8px] px-0 mr-0 top-[10%] mt-12  480px:mt-14 600px:mt-7 768px:mt-14 600px:top-[20%] w-full text-center p-[8px_12px] text-white 
-                1024px:w-[70%] 1024px:text-left 1024px:top-[10%] 1024px:bottom-auto 1024px:pl-[52px] 1200px:mt-0 1280px:mt-7 1200px:top-[15%] 1280px:top-[20%] 1366px:mt-10">
-                  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  
-
-
-
-
-
-
-
-
-
+                <div
+                  className="absolute bottom-[8px] px-0 mr-0 top-[10%] mt-12  480px:mt-14 600px:mt-7 768px:mt-14 600px:top-[20%] w-full text-center p-[8px_12px] text-white 
+                1024px:w-[70%] 1024px:text-left 1024px:top-[10%] 1024px:bottom-auto 1024px:pl-[52px] 1200px:mt-0 1280px:mt-7 1200px:top-[15%] 1280px:top-[20%] 1366px:mt-10"
+                >
                   <hr className="h-[4px] w-[100px] mx-auto my-[30px] bg-white rounded-[5px] border-0 1024px:mx-0 1024px:text-left text-center mb-6 1024px:mt-0 mt-0" />
 
-                  
-
-
-
-
-
-
-
-
-
-                  <h3 className="font-prata text-[20px]  leading-[24px] text-center my-[8px_0_24px_0] w-[90%] mb-6  mx-auto 1024px:mx-0 1024px:text-left 768px:text-2xl 992px:text-[32px]
-                   992px:leading-[1em] 992px:mb-[24px] [text-shadow:2px_2px_5px_#111111]">
+                  <h3
+                    className="font-prata text-[20px]  leading-[24px] text-center my-[8px_0_24px_0] w-[90%] mb-6  mx-auto 1024px:mx-0 1024px:text-left 768px:text-2xl 992px:text-[32px]
+                   992px:leading-[1em] 992px:mb-[24px] [text-shadow:2px_2px_5px_#111111]"
+                  >
                     {slide.heading}
-                  </h3>                  
+                  </h3>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                  
-
-
-
-
-
-
-
-
-                  <h1 className="montSemi font-montserrat mb-6 font-bold text-[26px] 480px:text-[30px] leading-[28px] text-center mb-7.5 w-[90%] mx-auto 1024px:mx-0 
-                  text-[#c7a652] 480px:leading-[1em] 768px:text-5xl 992px:text-[56px] 992px:mb-[16px] 1024px:text-left [text-shadow:2px_2px_6px_#111111]">
+                  <h1
+                    className="montSemi font-montserrat mb-6 font-bold text-[26px] 480px:text-[30px] leading-[28px] text-center mb-7.5 w-[90%] mx-auto 1024px:mx-0 
+                  text-[#c7a652] 480px:leading-[1em] 768px:text-5xl 992px:text-[56px] 992px:mb-[16px] 1024px:text-left [text-shadow:2px_2px_6px_#111111]"
+                  >
                     {slide.subHeading}
                   </h1>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                   <p className="[text-shadow:2px_2px_5px_#111111] text-[16px] 992px:text-[24px] text-center w-[86%] mx-auto  768px:text-xl 1024px:mx-0 leading-[24px]  1024px:text-left">
                     {slide.text}
                   </p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                   <a href={slide.buttonLink} className="btn-wrapper">
                     <div className="flex flex-row justify-center items-center w-[200px] min-h-[50px] min-w-[130px] px-5 py-0 mt-5 rounded-full bg-[#c7a652] btn-learn-more hover:bg-white 480px:w-[150px] 768px:w-[182px] 768px:min-w-[182px] 768px:min-h-[60px] 768px:mt-8 1366px:mt-12 max-h-[70px] group mx-auto 1024px:mx-0">

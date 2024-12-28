@@ -10,12 +10,12 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
-const prata = Prata({
-  subsets: ["latin"],
-  display: "swap",
+
+const prata = localFont({
+  src: "./fonts/prata-regular-webfont.ttf",
   variable: "--font-prata",
-  weight: ["400"],
 });
+
 
 export const metadata = {
   title: "SecureCash",
@@ -27,7 +27,6 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${montserrat.className} ${prata.variable} antialiased`}>
         <Header />
-
         {children}
         <Footer />
       </body>

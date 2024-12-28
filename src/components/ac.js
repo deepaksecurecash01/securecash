@@ -1,141 +1,152 @@
-"use client";
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
+import Checkbox from "../ui/checkbox/Checkbox";
+import WarningPopup from "./WarningPopup";
 
-const Banner = () => {
-  const [slideIndex, setSlideIndex] = useState(1);
-  const bannerInterval = useRef(null);
-
-  const slides = [
-    {
-      mobile: "https://www.securecash.com.au/images/banner/Slide-1-mobile.jpg",
-      tablet: "https://www.securecash.com.au/images/banner/Slide-1-tablet.jpg",
-      web: "https://www.securecash.com.au/images/banner/Slide-1-web.jpg",
-      heading: "Let Us Do Your Banking,",
-      subHeading: "Don't Take The Risk!",
-      text: "Anywhere. Anytime. Australia Wide.",
-      buttonText: "Learn More",
-      buttonLink: "#welcome",
-    },
-    {
-      mobile: "https://www.securecash.com.au/images/banner/Slide-2-mobile.jpg",
-      tablet: "https://www.securecash.com.au/images/banner/Slide-2-tablet.jpg",
-      web: "https://www.securecash.com.au/images/banner/Slide-2-web.jpg",
-      heading: "Start Taking Advantage Of Our Services Today",
-      subHeading: "Get A Quote From SecureCash",
-      text: "We Just Need A Few Details!",
-      buttonText: "Get a Quote",
-      buttonLink: "https://www.securecash.com.au/quote/",
-    },
-    {
-      mobile: "https://www.securecash.com.au/images/banner/Slide-3-mobile.jpg",
-      tablet: "https://www.securecash.com.au/images/banner/Slide-3-tablet.jpg",
-      web: "https://www.securecash.com.au/images/banner/Slide-3-web.jpg",
-      heading: "We're Pushing Our Industry Into The Future",
-      subHeading: "Take Advantage Of Our eDockets System",
-      text: "Control Your Services With A Click Of A Button",
-      buttonText: "Learn More",
-      buttonLink: "https://www.edockets.app/",
-    },
-    {
-      mobile: "https://www.securecash.com.au/images/banner/Slide-4-mobile.jpg",
-      tablet: "https://www.securecash.com.au/images/banner/Slide-4-tablet.jpg",
-      web: "https://www.securecash.com.au/images/banner/Slide-4-web.jpg",
-      heading: "Our Services Are Covert",
-      subHeading: "We Don't Attract Unwanted Attention",
-      text: "A Safer Solution For Your Business",
-      buttonText: "Learn More",
-      buttonLink:
-        "https://www.securecash.com.au/about-us/#about-us-section-service",
-    },
-    {
-      mobile: "https://www.securecash.com.au/images/banner/Slide-5-mobile.jpg",
-      tablet: "https://www.securecash.com.au/images/banner/Slide-5-tablet.jpg",
-      web: "https://www.securecash.com.au/images/banner/Slide-5-web.jpg",
-      heading: "Use A Provider You Can Trust",
-      subHeading: "We Have Been Operating Over 25 Years",
-      text: "Our Managers Have Over 100 Years Combined Industry Experience",
-      buttonText: "About Us",
-      buttonLink: "https://www.securecash.com.au/about-us/",
-    },
-  ];
-
-  const slideBannerAuto = () => {
-    setSlideIndex((prev) => (prev >= slides.length ? 1 : prev + 1));
-  };
-
-  useEffect(() => {
-    startBanner();
-    return () => stopBanner();
-  }, []);
-
-  const startBanner = () => {
-    bannerInterval.current = setInterval(slideBannerAuto, 5000);
-  };
-
-  const stopBanner = () => {
-    clearInterval(bannerInterval.current);
-  };
-
+const InputField = ({
+  label,
+  name,
+  placeholder,
+  type = "text",
+  Icon,
+  errorMessage,
+  register,
+  errors,
+  currentErrorField,
+  setCurrentErrorField,
+}) => {
+  console.log(errors.name);
   return (
-    <div className="pt-[118px]">
-      <div id="banner" className="flex flex-col justify-end items-center">
-        <div
-          id="banner-slider"
-          className="w-full inline-block relative hover:cursor-pointer"
-          onMouseOver={stopBanner}
-          onMouseOut={startBanner}
-        >
-          <div className="slideshow-container relative m-auto cursor-default">
-            {slides.map((slide, index) => (
-              <div
-                key={index}
-                className={`bannerSlides fade ${
-                  slideIndex === index + 1 ? "block" : "hidden"
-                }`}
-              >
-                <picture>
-                  <source srcSet={slide.mobile} media="(max-width: 480px)" />
-                  <source srcSet={slide.tablet} media="(max-width: 768px)" />
-                  <img src={slide.web} alt="" className="w-full h-full" />
-                </picture>
-                <div className="inner w-full max-w-[1366px] mx-auto">
-                  <div className="text">
-                    <hr className="divider-2 divider-white mb-[18px] text-center mx-auto mt-0 1024px:mb-6" />
-                    <h3 className="prata text-shadow[2px_2px_5px_#111111] my-[8px_0_24px_0]">
-                      {slide.heading}
-                    </h3>
-                    <h1 className="montSemi text-center text-shadow[2px_2px_6px_#111111] mb-7.5 text-[#c7a652] font-[Montserrat-Bold] font-sans">
-                      {slide.subHeading}
-                    </h1>
-                    <p className="text-shadow[2px_2px_5px_#111111] text-center">
-                      {slide.text}
-                    </p>
-                    <a href={slide.buttonLink} className="btn-wrapper">
-                      <div className="d-btn btn-learn-more min-h-[60px] px-10">
-                        <p className="text-shadow-none">{slide.buttonText}</p>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="inner-controls">
-            <ul className="dot-navigation">
-              {slides.map((_, n) => (
-                <li key={n}>
-                  <span
-                    className={`dot ${slideIndex === n + 1 ? "active" : ""}`}
-                    onClick={() => setSlideIndex(n + 1)}
-                  />
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+    <div className="relative">
+      <label className="text-white text-base inline-block mt-6 mb-2.5 w-full text-left">
+        {label}
+      </label>
+      <div
+        className={`input-container relative w-[100%] mx-auto text-left flex items-center bg-white rounded-md border `}
+      >
+        <input
+          className={`w-full text-sm py-2 px-3 shadow-none font-montserrat border-none peer rounded-sm   ${
+            errors[name] && currentErrorField === name
+              ? " focus:outline-red-600"
+              : " focus:outline-primary"
+          }`}
+          type={type}
+          name={name}
+          data-validate={name}
+          {...register(name)}
+          onFocus={() => setCurrentErrorField(name)}
+          onBlur={() => setCurrentErrorField(null)}
+          placeholder={placeholder}
+          required
+        />
+        <Icon
+          className={`icon min-w-[50px] before:pr-0 text-[18px] text-[#999]  ${
+            errors[name] && currentErrorField === name
+              ? "text-red-500"
+              : "peer-focus:text-primary"
+          }`}
+        />
+        {errors[name] && (
+          <WarningPopup
+            error={errors[name]?.message}
+            isFirstError={currentErrorField === name}
+          />
+        )}
       </div>
     </div>
   );
 };
 
-export default Banner;
+const CheckboxGroup = ({
+  label,
+  name,
+  options,
+  errorMessage,
+  register,
+  errors,
+  currentErrorField,
+  setCurrentErrorField,
+}) => (
+  <div className="chkbox-container w-[100%] mx-auto text-left relative chkbox-row">
+    <label className="text-white text-base inline-block mt-6 mb-2.5 w-4/5 text-left">
+      {label}
+    </label>
+    <div className="control-wrapper flex flex-row justify-around items-center w-full mt-2">
+      {options.map((option, index) => (
+        <Checkbox
+          option={option}
+          key={index}
+          name={"ServiceOptions"}
+          register={register}
+          currentErrorField={currentErrorField}
+          setCurrentErrorField={setCurrentErrorField}
+          className="chkbox float-left text-left relative  "
+        />
+      ))}
+      {errors[name] && (
+        <WarningPopup
+          error={errors[name]?.message}
+          isFirstError={currentErrorField === name}
+        />
+      )}
+    </div>
+  </div>
+);
+
+const Quote = ({
+  inputFields,
+  register,
+  errors,
+  currentErrorField,
+  setCurrentErrorField,
+}) => {
+  const serviceOptions = ["Banking", "Change"];
+
+  return (
+    <div className="form-page quote">
+      <h3 className="text-white pb-4 leading-[30px] text-[22px] 1200px:text-[26px] text-center capitalize">
+        Want a quote from SecureCash?
+      </h3>
+      <p className="form-sub-header text-white pb-4 text-center capitalize">
+        We Just Need A Few Details
+      </p>
+      <hr className="divider-2 h-[4px] border-0 mt-4 mx-auto w-[100px] rounded-[5px] bg-[#c7a652] divider-bottom mb-0 divider-centered" />
+
+      <div className="form-tab ">
+        {inputFields.slice(0, 4).map((field, index) => (
+          <InputField
+            key={index}
+            {...field}
+            register={register}
+            errors={errors}
+            currentErrorField={currentErrorField}
+            setCurrentErrorField={setCurrentErrorField}
+          />
+        ))}
+      </div>
+
+      <div className="form-tab">
+        {inputFields.slice(4).map((field, index) => (
+          <InputField
+            key={index + 4}
+            {...field}
+            register={register}
+            errors={errors}
+            currentErrorField={currentErrorField}
+            setCurrentErrorField={setCurrentErrorField}
+          />
+        ))}
+        <CheckboxGroup
+          label="Services You Require"
+          name="Service"
+          options={serviceOptions}
+          register={register}
+          errors={errors}
+          currentErrorField={currentErrorField}
+          setCurrentErrorField={setCurrentErrorField}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default Quote;

@@ -1,0 +1,27 @@
+/* Universal Scrollable Styles */
+.contentScroll {
+  overflow: auto;
+
+  /* Custom scrollbar variables */
+  --scrollbarBG: #ebebeb;
+  --thumbBG: #808080;
+
+  /* Cross-browser scrollbar styles */
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG); /* Firefox */
+}
+
+/* Webkit scrollbar styles (Chrome, Edge, Safari) */
+.contentScroll::-webkit-scrollbar {
+  width: 10px; /* Adjust scrollbar width */
+}
+
+.contentScroll::-webkit-scrollbar-thumb {
+  background: var(--thumbBG); /* Thumb color */
+  border-radius: 20px; /* Rounded thumb */
+}
+
+.contentScroll::-webkit-scrollbar-track {
+  background: var(--scrollbarBG); /* Track color */
+  border-radius: 20px; /* Rounded track */
+}

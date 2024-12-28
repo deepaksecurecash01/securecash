@@ -67,7 +67,39 @@
         </div>
     </div>
 </div>
-<div id="banner-mid">%%Home-Counter%%</div>
+<div id="banner-mid">
+    <div class="inner" id="content-counter-wrapper">
+        <div class="mid-row">
+            <h4 class="banner-mid-header">
+                <div id="value1">2,031</div>
+            </h4>
+            <img src="https://www.securecash.com.au/images/icons/clients.webp"
+                onerror="this.onerror=null; this.src='https://www.securecash.com.au/images/icons/clients.png'"
+                alt="Customers">
+            <p>Customers</p>
+        </div>
+        <div class='mid-row-divider'></div>
+        <div class="mid-row">
+            <h4 class="banner-mid-header">
+                <div id="value2">316,788</div>
+            </h4>
+            <img src="https://www.securecash.com.au/images/icons/services.webp"
+                onerror="this.onerror=null; this.src='https://www.securecash.com.au/images/icons/services.png'"
+                alt="Services Performed">
+            <p>Services Performed</p>
+        </div>
+        <div class='mid-row-divider'>&nbsp;</div>
+        <div class="mid-row">
+            <h4 class="banner-mid-header"></span>
+                <div>$<span id="value3">2,785,877,642</span></div>
+            </h4>
+            <img src="https://www.securecash.com.au/images/icons/transport.webp"
+                onerror="this.onerror=null; this.src='https://www.securecash.com.au/images/icons/transport.png'"
+                alt="Cash Moved">
+            <p>Cash Moved</p>
+        </div>
+    </div>
+</div>
 <div id="content-middle">
     <div class="inner content-middle-wraper">
         <div class="left-row-content-middle">
@@ -188,10 +220,408 @@
         </div>
     </div>
 </div>
-<div class="home-video-section">%%VideoContent%%</div>
+<div class="home-video-section">
+    <div id="video-section">
+        <div class="black-bar"></div>
+        <div class="video-container" style="text-align:center;">
+            <picture>
+                <source data-srcset="https://www.securecash.com.au/images/intro-video.webp" type="image/webp">
+                <source data-srcset="https://www.securecash.com.au/images/intro-video.jpg" type="image/png">
+                <img data-src="https://www.securecash.com.au/images/intro-video.webp"
+                    alt="SecureCash Introduction Video" onclick="IntroVideo()" class="lazyload" width="1024"
+                    height="576" style="max-width:100%; height: auto;">
+            </picture>
+            <div id="iframe-container"></div>
+            <h2>A couple words from our Chief Operating Officer - Bethaney Bacchus</h2>
+        </div>
+    </div>
+    <script>
+        function IntroVideo() {
+            document.querySelector('div#iframe-container').innerHTML = '<iframe class="video-player" src="https://player.vimeo.com/video/330415813?autoplay=1&title=0&byline=0&portrait=0" frameborder="0" allowfullscreen=""></iframe>';
+            document.querySelector('div.video-container picture').style.display = 'none';
+        }
+    </script>
+</div>
 <div id="content-contact">
     <div class="inner-big">
-        <div class="left-contact-row">%%Form--Quote%%</div>
+        <div class="left-contact-row">
+            <form class="forms-quote-v2 forms-quote submit-status quote-page-form" data-formid="Quote"
+                onsubmit="_FormsQuoteNext()" novalidate>
+                <input type="hidden" name="FormID" data-validate="UID-Letters*" value="">
+                <div class="form-page quote">
+                    <h3>Want a quote from SecureCash?</h3>
+                    <p class="form-sub-header">We Just Need A Few Details</p>
+                    <hr class="divider-2 divider-gold divider-bottom divider-centered">
+                    <div class="form-tab">
+                        <div>
+                            <label>Full Name</label>
+                            <div class="input-container">
+                                <input type="text" name="Name" data-validate="Name" placeholder="Enter your full name"
+                                    required>
+                                <i class="fa fa-user icon"></i>
+                                <div class="form-notification dispatch-error Name">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter your full name.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Organisation Name</label>
+                            <div class="input-container">
+                                <input type="text" name="Organisation" data-validate="Inline"
+                                    placeholder="Enter your organisation's name" required>
+                                <i class="fa fa-users icon"></i>
+                                <div class="form-notification dispatch-error Organisation">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enteryour organisation's name.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Phone Number</label>
+                            <div class="input-container">
+                                <input type="text" name="Phone" data-validate="Phone-Single"
+                                    placeholder="Enter your phone number" required>
+                                <i class="fa fa-phone icon"></i>
+                                <div class="form-notification dispatch-error Phone">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter your phone number.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Where Did You Hear About Us?</label>
+                            <div class="input-container">
+                                <input type="text" name="Referrer" data-validate="Inline"
+                                    placeholder="Enter where did you hear about us" required>
+                                <i class="fa fa-comments icon"></i>
+                                <div class="form-notification dispatch-error Referrer">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter where did you hear about us.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-tab">
+                        <div>
+                            <label>Email Address</label>
+                            <div class="input-container">
+                                <input type="email" name="Email" data-validate="Email" placeholder="Your email address"
+                                    required>
+                                <i class="fa fa-envelope icon"></i>
+                                <div class="form-notification dispatch-error Email">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter your email address.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Postal Address</label>
+                            <div class="input-container">
+                                <input type="text" name="Address" data-validate="Inline"
+                                    placeholder="Enter your postal address" required />
+                                <i class="fa fa-home icon"></i>
+                                <div class="form-notification dispatch-error Address">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter your postal address.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Location/s For Service (Suburb, State, Postcode)</label>
+                            <div class="input-container">
+                                <input type="text" name="Locations" data-validate="Inline"
+                                    placeholder="Enter location/s for the service" required>
+                                <i class="fa fa-map-marker icon"></i>
+                                <div class="form-notification dispatch-error Locations">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter the location/s at where you require services.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="chkbox-container chkbox-row">
+                            <label style="color:#fff;">Services You Require</label>
+                            <div class="control-wrapper">
+                                <div class="chkbox">
+                                    <input type="checkbox" class="chkbank hasBanking" name="Service">
+                                    <label for="chkbank"><span></span>Banking</label>
+                                </div>
+                                <div class="chkbox">
+                                    <input type="checkbox" class="chkchange hasChange" name="Service">
+                                    <label for="chkchange"><span></span>Change</label>
+                                </div>
+                                <div class="form-notification dispatch-error Services">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please select what services you require.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-page banking">
+                    <h3>Banking</h3>
+                    <hr class="divider-2 divider-gold divider-bottom divider-centered" width="20%" color="#c7a652"
+                        size="4">
+                    <div class="form-tab">
+                        <div>
+                            <label>Collection Frequency</label>
+                            <div class="input-container-select">
+                                <i class="fa fa-calendar icon"></i>
+                                <select name="BankingFrequency" data-validate="Inline">
+                                    <option value="">Please select...</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Fortnightly">Fortnightly</option>
+                                    <option value="Ad Hoc">Ad Hoc</option>
+                                    <option value="Special Event (once off)">Special Event (once off)</option>
+                                </select>
+                                <div class="form-notification dispatch-error BankingFrequency">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter how often we will collect your banking.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Average Collection Amount</label>
+                            <div class="input-container-select">
+                                <i class="fa fa-money icon"></i>
+                                <select name="BankingAmount" data-validate="Inline">
+                                    <option value="">Select Amount:</option>
+                                    <option value="$0 - $5000">$0 - $5000</option>
+                                    <option value="$5000 - $20,000">$5000 - $20,000</option>
+                                    <option value="$20,000 - $40,000">$20,000 - $40,000</option>
+                                    <option value="$40,000 - $50,000">$40,000 - $50,000</option>
+                                    <option value="over $50,000">over $50,000</option>
+                                </select>
+                                <div class="form-notification dispatch-error BankingAmount">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter the average collection amount.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Who Do You Bank With?</label>
+                            <div class="input-container">
+                                <input type="text" name="BankingBank" data-validate="Inline"
+                                    placeholder="Who do you bank with?">
+                                <i class="fa fa-university icon"></i>
+                                <div class="form-notification dispatch-error BankingBank">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter who you bank with.</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-tab">
+                        <div>
+                            <h5 class="checkboxHeaderText">Usual day/s for collection?</h5>
+                            <div class="chkbox-container chkbox-grid">
+                                <div class="checkbox-wrapper checkbox-wrapper-1">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="BankingDays" value="Monday"
+                                            data-validate="CheckboxMulti" class="mon">
+                                        <label for="mon"><span></span>Monday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-2">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="BankingDays" value="Tuesday"
+                                            data-validate="CheckboxMulti" class="tue">
+                                        <label for="tue"><span></span>Tuesday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-3">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="BankingDays" value="Wednesday"
+                                            data-validate="CheckboxMulti" class="wed">
+                                        <label for="wed"><span></span>Wednesday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-4">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="BankingDays" value="Thursday"
+                                            data-validate="CheckboxMulti" class="thur">
+                                        <label for="thur"><span></span>Thursday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-5">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="BankingDays" value="Friday"
+                                            data-validate="CheckboxMulti" class="fri">
+                                        <label for="fri"><span></span>Friday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-6">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="BankingDays" value="Saturday"
+                                            data-validate="CheckboxMulti" class="sat">
+                                        <label for="sat"><span></span>Saturday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-7">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="BankingDays" value="Sunday"
+                                            data-validate="CheckboxMulti" class="sun">
+                                        <label for="sun"><span></span>Sunday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-8">
+                                    <div class="chkbox grid-content-right">
+                                        <input type="checkbox" name="BankingDays" value="Ad Hoc"
+                                            data-validate="CheckboxMulti" class="adhoc">
+                                        <label for="adhoc"><span></span>Ad Hoc</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-tab">
+                        <div class="comment-container">
+                            <label>Comments</label>
+                            <textarea name="BankingComments" data-validate="Multiline"
+                                placeholder="Anything else you would like us to know?" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-page change">
+                    <h3>Change</h3>
+                    <hr class="divider-2 divider-gold divider-bottom divider-centered" width="20%" color="#c7a652"
+                        size="4">
+                    <div class="form-tab">
+                        <div>
+                            <label>Frequency for change?</label>
+                            <div class="input-container-select">
+                                <i class="fa fa-calendar icon"></i>
+                                <select name="ChangeFrequency" data-validate="Inline">
+                                    <option value="">Please select...</option>
+                                    <option value="Weekly">Weekly</option>
+                                    <option value="Fortnightly">Fortnightly</option>
+                                    <option value="Ad Hoc">Ad Hoc</option>
+                                    <option value="Special Event (once off)">Special Event (once off)</option>
+                                </select>
+                                <div class="form-notification dispatch-error ChangeFrequency">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter how often we will deliver at your location.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Average notes value?</label>
+                            <div class="input-container-select">
+                                <i class="fa fa-money icon"></i>
+                                <select name="ChangeNotesAmount" data-validate="Inline">
+                                    <option value="">Select Amount:</option>
+                                    <option value="$0 - $1000">$0 - $1000</option>
+                                    <option value="$1000 - $5000">$1000 - $5000</option>
+                                    <option value="$5000- $20,000">$5000- $20,000</option>
+                                    <option value="$20,000 - $50,000">$20,000 - $50,000</option>
+                                    <option value="over $50,000">over $50,000</option>
+                                </select>
+                                <div class="form-notification dispatch-error ChangeNotesAmount">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter the average delivery amount (notes only).</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <label>Average coins value?</label>
+                            <div class="input-container">
+                                <i class="fa fa-usd currency" aria-hidden="true"></i>
+                                <input placeholder="Enter amount" class="currency-input" name="ChangeCoinsAmount"
+                                    data-validate="Inline">
+                                <i class="fa fa-money icon"></i>
+                                <div class="form-notification dispatch-error ChangeCoinsAmount">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter the average delivery amount (coins only).</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-tab">
+                        <div>
+                            <h5 class="checkboxHeaderText">Usual day/s for delivery?</h5>
+                            <div class="chkbox-container chkbox-grid chkbox-container-cash">
+                                <div class="checkbox-wrapper checkbox-wrapper-1">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="ChangeDays" value="Monday"
+                                            data-validate="CheckboxMulti" class="delmon">
+                                        <label for="delmon"><span></span>Monday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-2">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="ChangeDays" value="Tuesday"
+                                            data-validate="CheckboxMulti" class="deltue">
+                                        <label for="deltue"><span></span>Tuesday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-3">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="ChangeDays" value="Wednesday"
+                                            data-validate="CheckboxMulti" class="delwed">
+                                        <label for="delwed"><span></span>Wednesday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-4">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="ChangeDays" value="Thursday"
+                                            data-validate="CheckboxMulti" class="delthur">
+                                        <label for="delthur"><span></span>Thursday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-5">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="ChangeDays" value="Friday"
+                                            data-validate="CheckboxMulti" class="delfri">
+                                        <label for="delfri"><span></span>Friday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-6">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="ChangeDays" value="Saturday"
+                                            data-validate="CheckboxMulti" class="delsat">
+                                        <label for="delsat"><span></span>Saturday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-7">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="ChangeDays" value="Sunday"
+                                            data-validate="CheckboxMulti" class="delsun">
+                                        <label for="delsun"><span></span>Sunday</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-8">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="ChangeDays" value="Ad Hoc"
+                                            data-validate="CheckboxMulti" class="deladhoc">
+                                        <label for="deladhoc"><span></span>Ad Hoc</label>
+                                    </div>
+                                </div>
+                                <div class="checkbox-wrapper checkbox-wrapper-9">
+                                    <div class="chkbox">
+                                        <input type="checkbox" name="ChangeDays" value="Banking"
+                                            data-validate="CheckboxMulti" class="adhoc">
+                                        <label for="banking"><span></span>Banking</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-tab">
+                        <div class="comment-container">
+                            <label>Comments</label>
+                            <textarea name="ChangeComments" data-validate="Multiline"
+                                placeholder="Anything else you would like us to know?" rows="3"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="button-controls-container">
+                    <div class="button-section">
+                        <input type="submit" id="GTM-TRACKER-QUOTE" class="nextBtn btn-wf-submit" value="Next"
+                            onsubmit="_FormsQuoteNext()">
+                    </div>
+                </div>
+            </form>
+        </div>
         <div class="right-contact-row">
             <h3 class="prata2">Make The Right Choice</h3>
             <hr class="divider-2 divider-gold divider-bottom">
