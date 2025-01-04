@@ -14,7 +14,7 @@ const CheckboxGroup = ({
   setCurrentErrorField,
 }) => (
   <div className="w-full text-left relative">
-    <label className="text-white text-base inline-block mt-6 mb-2.5">
+    <label className="text-white text-base inline-block mt-4 mb-2">
       {label}
     </label>
     <div className="control-wrapper relative flex flex-row justify-around items-center w-full mt-2">
@@ -55,7 +55,7 @@ const Quote = ({
 
   return (
     <div className="form-page quote">
-      <h3 className="text-white pb-4 text-center capitalize text-lg">
+      <h3 className="text-white pb-4 text-center capitalize">
         Want a quote from SecureCash?
       </h3>
       <p className="text-white pb-4 text-center capitalize">

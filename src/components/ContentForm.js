@@ -20,7 +20,7 @@ import BankingSchema from "@/zod/BankingSchema";
 import ChangeSchema from "@/zod/ChangeSchema";
 
 const ContentForm = () => {
-  const [currentStep, setCurrentStep] = useState(2);
+  const [currentStep, setCurrentStep] = useState(0);
   const [selectedServices, setSelectedServices] = useState(['Banking','Change']);
   const [currentErrorField, setCurrentErrorField] = useState(null);
   const [formData, setFormData] = useState({});

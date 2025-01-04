@@ -12,7 +12,7 @@ const montserrat = Montserrat({
 });
 
 const prata = localFont({
-  src: "./fonts/prata-regular-webfont.ttf",
+  src: "../../public/fonts/Prata-Regular.ttf",
   variable: "--font-prata",
 });
 

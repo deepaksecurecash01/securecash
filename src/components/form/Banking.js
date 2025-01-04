@@ -103,7 +103,7 @@ const Banking = ({
       {/* Comments Section */}
       <div className="form-tab">
         <div className="comment-container w-full mx-auto text-left block clear-both">
-          <label className="text-white text-base inline-block mt-6 mb-2.5 w-full text-left">
+          <label className="text-white text-base inline-block mt-4 mb-2 w-full text-left">
             Comments
           </label>
           <textarea

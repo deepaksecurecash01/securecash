@@ -27,7 +27,7 @@ const Checkbox = ({
         className={` mt-2 text-sm p-2.5 shadow-none font-montserrat border-none w-[28px] h-[28px] opacity-0 absolute z-[999999] peer`}
       />
       <label
-        className="text-white text-base inline-block mb-2.5 text-left mt-[10px] w-full  relative"
+        className="text-white text-base inline-block mb-2 text-left mt-[10px] w-full  relative"
         htmlFor={value}
       >
         <span className="w-[28px] h-[28px]"></span>

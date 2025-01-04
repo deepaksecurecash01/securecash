@@ -17,7 +17,7 @@ const hasError = errors[name] && currentErrorField === name;
 const [isFocused, setIsFocused] = useState(false);
   return (
     <div className="relative">
-      <label className="text-white text-base inline-block mt-6 mb-2.5 w-full text-left">
+      <label className="text-white text-base inline-block mt-4 mb-2 w-full text-left">
         {label}
       </label>
       <div className="relative w-full flex items-center bg-white rounded-md border">

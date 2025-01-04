@@ -26,7 +26,7 @@ module.exports = {
 
       fontFamily: {
         montserrat: ["var(--font-montserrat)"],
-        prata: ["var(--font-prata)"],
+        prata: ['"Prata Regular"', "serif"], // Ensure exact font name here
       },
       colors: {
         primary: "#c7a652", // Primary background color
@@ -43,6 +43,8 @@ module.exports = {
         "banner-mid-mobile-bg":
           "url('/images/banner/home-statistics-mobile.jpg')",
         "main-content-bg": "url('/images/banner/mainbg.webp')",
+        "team-bg": "url('/images/team.webp')",
+        "brown-overlay": "url('/images/brown-overlay.png')",
       }),
     },
   },

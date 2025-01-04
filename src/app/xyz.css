@@ -878,188 +878,10 @@ header i {
   padding: 0;
 }
 
-#about-us-team-slider {
-  padding-top: 120px;
-  padding-bottom: 120px;
-  position: relative;
-}
 
-.team-carousel {
-  display: flex;
-  width: 100%;
-  position: relative;
-  transition: 1s;
-  left: 0;
-  height: 672px;
-  flex-direction: row;
-}
 
-.team-item-wrapper {
-  position: relative;
-  height: 100%;
-  min-width: 600px;
-  margin-right: 160px;
-}
 
-.team-item-about-content {
-  background-color: white;
-  border-radius: 8px;
-  position: absolute;
-  top: 50px;
-  right: 0;
-  width: -moz-calc(100% - 50px);
-  width: -webikit-calc(100% - 50px);
-  width: calc(100% - 50px);
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-  -webkit-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-  -moz-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-  height: -moz-calc(100% - 50px);
-  height: -webikit-calc(100% - 50px);
-  height: calc(100% - 50px);
-}
 
-.team-carousel .team-item-wrapper .item-container .member-info p.prata {
-  margin-bottom: 24px;
-}
-
-.team-carousel .team-item-wrapper .item-container .member-info .email-info {
-  padding: 8px 0px;
-}
-
-.team-carousel .team-item-wrapper .item-container .member-info .mail-icon {
-  margin: 0;
-  padding: 0;
-}
-
-.team-carousel .team-item-wrapper .item-container .member-info p {
-  font-size: 16px;
-  max-height: 21px;
-}
-
-.team-carousel .team-item-wrapper .item-container .member-info h4 {
-  font-size: 22px;
-}
-
-.team-carousel .team-item-wrapper .item-container .member-info {
-  padding: 20px;
-}
-
-#about-us-team-slider
-  .team-carousel
-  .team-item-wrapper
-  .item-container
-  .member-info {
-  background-color: #b9984b;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-}
-
-#about-us-team-slider
-  .team-carousel
-  .team-item-wrapper
-  .item-container
-  .member-info
-  p,
-#about-us-team-slider
-  .team-carousel
-  .team-item-wrapper
-  .item-container
-  .member-info
-  a,
-#about-us-team-slider
-  .team-carousel
-  .team-item-wrapper
-  .item-container
-  .member-info
-  p.prata,
-#about-us-team-slider
-  .team-carousel
-  .team-item-wrapper
-  .item-container
-  .member-info
-  h4 {
-  color: #ffffff;
-}
-
-#about-us-team-slider
-  .team-carousel-wrapper
-  .team-carousel
-  .team-item-wrapper
-  .item-container
-  .member-info
-  p,
-#about-us-team-slider
-  .team-carousel
-  .team-item-wrapper
-  .item-container
-  .member-info
-  p.prata {
-  font-weight: 800;
-}
-
-#about-us-team-slider
-  .team-carousel
-  .team-item-wrapper
-  .item-container
-  .member-info
-  .mail-icon,
-#about-us-team-slider
-  .team-carousel
-  .team-item-wrapper
-  .item-container
-  .member-info
-  .social-media
-  img {
-  filter: brightness(10);
-}
-
-.team-item-about-content p {
-  margin-left: 55%;
-  padding-right: 16px;
-  font-size: 16px;
-  line-height: 1.6em;
-  font-family: "Montserrat Light";
-}
-
-.team-item-about-content .wrapper {
-  border-right: 4px solid #b9984b;
-}
-
-.team-carousel .team-item-wrapper .item-container {
-  position: relative;
-  width: 300px;
-  margin: 0;
-  z-index: 9999;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
-  box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-  -webkit-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-  -moz-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-}
-
-#about-team-scroll-controll {
-  width: 48px;
-  height: 150px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  position: absolute;
-  top: -moz-calc(50% - 75px);
-  top: -webikit-calc(50% - 75px);
-  top: calc(50% - 75px);
-  right: -moz-calc((100% - 1366px) / 6);
-  right: -webikit-calc((100% - 1366px) / 6);
-  right: calc((100% - 1366px) / 6);
-}
-
-#about-us-team-slider > .inner .team-carousel-wrapper {
-  overflow: hidden;
-}
 
 #about-team-scroll-btn-up {
   background-image: url(../images/about-us-images/arrow.png);
@@ -1318,17 +1140,7 @@ h3.prata2 {
   margin-bottom: 24px;
 }
 
-.service-container p.small,
-.right-contact-row p.small,
-.bottom-row-left .row-container p.small {
-  line-height: 1em;
-  margin: 0;
-  padding: 0;
-}
 
-.bottom-row-left .row-container h2.montSemiBold {
-  color: #ffffff;
-}
 
 .right-contact-row p.small {
   font-family: Montserrat;
@@ -1509,9 +1321,7 @@ h3.prata2 {
   color: #fff;
 }
 
-.row-container h1 {
-  color: #c7a652;
-}
+
 
 .right-row {
   float: left;
@@ -1542,243 +1352,10 @@ h3.prata2 {
   z-index: -1;
 }
 
-#bottom-content {
-  display: grid;
-  grid-template-columns: 50% 50%;
-  clear: both;
-  position: relative;
-  height: 600px;
-  width: 100%;
-  margin: 100px 0 auto;
-}
 
-.bottom-row-left {
-  background: #c7a652;
-  position: relative;
-}
 
-.bottom-row-right {
-  background-repeat: no-repeat;
-  background-size: cover;
-}
 
-.webp .bottom-row-right {
-  background-image: url("../images/team.webp");
-}
 
-.no-webp .bottom-row-right {
-  background-image: url("../images/team.jpg");
-}
-
-#content-cash {
-  position: absolute;
-  z-index: 100;
-  width: 1024px;
-  margin-top: 80px;
-}
-
-.row-container {
-  width: 683px;
-  margin-top: 80px;
-  margin-right: 0;
-  color: #fff;
-  margin-left: auto;
-}
-
-.row-container .divider {
-  margin: 60px 0px 30px 0px;
-  width: 20%;
-  height: 4px;
-  background: #fff;
-  border: none;
-}
-
-.row-container h3.montSemiBold {
-  font-size: 34px;
-  margin: 15px 0 30px 0;
-  font-family: "Montserrat Bold";
-}
-
-.row-container h3 {
-  font-size: 36px;
-  font-weight: normal;
-}
-
-.row-container p {
-  font-size: 16px;
-}
-
-.cash-row {
-  float: left;
-  width: 28%;
-  border-radius: 20px;
-  background: #ffffff;
-  padding: 0 40px 30px 40px;
-  -webkit-box-shadow: -2px 10px 15px -1px rgba(0, 0, 0, 0.31);
-  -moz-box-shadow: -2px 10px 15px -1px rgba(0, 0, 0, 0.31);
-  box-shadow: -2px 10px 15px -1px rgba(0, 0, 0, 0.31);
-  margin-right: 42px;
-}
-
-.cash-row h3 {
-  margin-top: 18px;
-  margin-bottom: 15px;
-  font-size: 16px;
-  color: #c7a652;
-}
-
-.cash-row p {
-  color: #3f3f3f;
-  font-size: 14px;
-  font-family: "Montserrat Light";
-  line-height: 2em;
-}
-
-.cash-row img {
-  width: 25%;
-  background: url("../images/brown-overlay.png");
-  padding-top: 50px;
-}
-
-#space-white,
-#companies {
-  background: #fff;
-  min-height: 195px;
-  clear: both;
-  float: none;
-  width: 100%;
-  margin: 0 auto;
-}
-
-#space-white {
-  padding-right: 52px;
-}
-
-#content-contact .inner-big {
-  display: flex;
-}
-
-.left-contact-row,
-.right-contact-row {
-  flex: 1;
-}
-
-#team-content {
-  background: #ebebeb;
-  display: inline-block;
-  width: 100%;
-  padding-top: 100px;
-  margin-top: 100px;
-}
-
-#team-content hr {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-#team-content h3 {
-  text-align: center;
-  font-size: 32px;
-  color: #000;
-}
-
-.mail-icon {
-  width: 5%;
-  padding-bottom: 9px;
-  margin-right: 5px;
-}
-
-.members-slider {
-  width: 92%;
-  float: left;
-  margin-bottom: 100px;
-}
-
-.member {
-  width: 23%;
-  float: left;
-  margin-right: 20px;
-  background: #ffffff;
-}
-
-.member-info {
-  padding: 25px 20px 60px 20px;
-  clear: both;
-  overflow: hidden;
-}
-
-.member-info h4 {
-  font-size: 20px;
-  font-weight: 600;
-  padding-bottom: 12px;
-  color: #333333;
-}
-
-.member-info p,
-.member-info a {
-  font-size: 14px;
-  color: #929292;
-}
-
-.member-info p {
-  margin-bottom: 18px;
-  font-size: 14px;
-  color: #808080;
-}
-
-.member-info a {
-  font-weight: normal;
-}
-
-.member-info a:hover {
-  text-decoration: none;
-  color: #c7a652;
-}
-
-.member-controls {
-  width: 8%;
-  float: left;
-  padding-top: 118px;
-  padding-left: 40px;
-}
-
-.member-controls p a {
-  font-size: 50px;
-}
-
-.member-controls a:hover {
-  text-decoration: none;
-}
-
-.email-info {
-  padding: 10px 0px 10px 0px;
-}
-
-.team-pic {
-  width: 100%;
-}
-
-.social-media img {
-  width: 80%;
-}
-
-.social-media {
-  padding-top: 5px;
-}
-
-.social-media ul {
-  list-style: none;
-}
-
-.social-media ul li {
-  float: left;
-  padding-right: 5px;
-}
-
-.social-media ul li img:hover {
-  filter: contrast(0);
-  -webkit-filter: contrast(0);
-}
 
 #companies1 {
   padding: 65px 0 65px 0;
@@ -2030,14 +1607,7 @@ footer p {
   right: 10%;
 }
 
-#space-white h5 {
-  font-size: 16px;
-  color: #000000;
-  text-align: right;
-  padding-top: 18px;
-  font-family: Montserrat;
-  font-weight: 400;
-}
+
 
 .btn {
   width: 253px;
@@ -2119,16 +1689,7 @@ hr.divider-centered {
   width: 120px;
 }
 
-.row-container .divider-2 {
-  margin-bottom: 24px;
-}
 
-.divider-left {
-  background-color: #c7a652;
-  height: 4px;
-  border: none;
-  margin: 20px 0 30px 0;
-}
 
 .content-header {
   font-size: 54px;
@@ -2191,20 +1752,7 @@ hr.divider-centered {
   font-weight: 400;
 }
 
-.bottom-content-text h4 {
-  margin-bottom: 80px;
-  margin-top: 20px;
-  font-size: 26px;
-}
 
-.bottom-content-text span {
-  color: #c1a04b;
-}
-
-.bottom-content-text p {
-  line-height: 1.8em;
-  font-size: 16px;
-}
 
 .bottom-seal-content {
   padding-bottom: 40px;
@@ -3088,26 +2636,6 @@ div.callback-button:hover {
   width: 108px;
 }
 
-#about-us-team-slider
-  .team-carousel-wrapper
-  .team-carousel
-  .team-item-wrapper
-  .team-item-about-content {
-  display: flex;
-}
-
-#about-us-team-slider .team-carousel-wrapper .team-about-us-profile-label {
-  display: none;
-}
-
-#about-us-team-slider
-  .team-carousel
-  .team-item-wrapper
-  .item-container
-  .member-info
-  h4 {
-  margin-bottom: 8px;
-}
 
 .section-content::-webkit-scrollbar-thumb {
   background: #808080;
@@ -4146,11 +3674,6 @@ i.fa.fa-long-arrow-down {
   text-decoration: none;
 }
 
-#mobile-service-slider,
-#mobile-service-controls,
-.mobile-members-slider {
-  display: none;
-}
 
 @media only screen and (max-width: 1366px) {
   .text {
@@ -4164,20 +3687,9 @@ i.fa.fa-long-arrow-down {
     margin-right: auto;
   }
 
-  #content-cash > .cash-row {
-    height: 480px;
-    margin-right: 20px;
-    width: 320px;
-  }
 
-  #team-content {
-    padding-bottom: 0px;
-  }
 
-  #team-content > div > div.members-slider {
-    margin-bottom: 100px;
-    padding-right: 5%;
-  }
+
 
   #footer-links > div {
     width: 95%;
@@ -4195,21 +3707,8 @@ i.fa.fa-long-arrow-down {
     padding: 25px 16px 60px 16px;
   }
 
-  #bottom-content {
-    height: 450px;
-  }
 
-  #bottom-content .row-container h2 {
-    font-size: 30px;
-  }
 
-  #bottom-content .row-container p {
-    font-size: 16px;
-  }
-
-  #space-white {
-    padding-bottom: 370px;
-  }
 
   header .header-wrapper,
   #banner-info {
@@ -4225,9 +3724,6 @@ i.fa.fa-long-arrow-down {
     width: 100%;
   }
 
-  .row-container {
-    width: 650px;
-  }
 
   #content-contact .inner-big {
     width: 95%;
@@ -4235,28 +3731,15 @@ i.fa.fa-long-arrow-down {
     margin-right: auto;
   }
 
-  .members-slider {
-    width: 1230px;
-  }
 
   h2.montSemiBold,
   h3.prata2 {
     line-height: 1.4em;
   }
 
-  .service-container p.small,
-  .right-contact-row p.small,
-  .bottom-row-left .row-container p.small {
-    line-height: 2em;
-  }
 
-  .row-container {
-    margin-top: 40px;
-  }
 
-  #content-cash {
-    margin-top: 40px;
-  }
+
 
   .content-scroll {
     height: 560px;
@@ -4399,28 +3882,11 @@ i.fa.fa-long-arrow-down {
 }
 
 @media only screen and (max-width: 1200px) {
-  #space-white h5 {
-    width: 300px;
-    right: 20px;
-    position: absolute;
-    text-align: center;
-    display: none;
-  }
 
-  .members-slider {
-    width: 1020px;
-    padding-right: 0px;
-  }
 
-  .row-container {
-    width: 540px;
-  }
 
-  #content-cash {
-    left: 50%;
-    -webkit-transform: translateX(-50%);
-    transform: translateX(-20%);
-  }
+
+
 
   .slides {
     height: 385px;
@@ -4585,13 +4051,7 @@ i.fa.fa-long-arrow-down {
 }
 
 @media only screen and (max-width: 1024px) {
-  #team-content {
-    padding-bottom: 0px;
-  }
 
-  #space-white h5 {
-    display: none;
-  }
 
   #content-middle {
     padding-top: 0;
@@ -4638,9 +4098,6 @@ i.fa.fa-long-arrow-down {
     width: 290px;
   }
 
-  #space-white {
-    padding-bottom: 430px;
-  }
 
   .video {
     width: 100%;
@@ -4655,10 +4112,7 @@ i.fa.fa-long-arrow-down {
     width: 97%;
   }
 
-  #banner .text hr,
-  .row-container .divider-2 {
-    margin-bottom: 18px;
-  }
+
 
   #banner-info {
     width: 95%;
@@ -4734,10 +4188,7 @@ i.fa.fa-long-arrow-down {
     width: 40%;
   }
 
-  .members-slider {
-    width: 890px;
-    padding-right: 0px !important;
-  }
+
 
   .text {
     top: 20px;
@@ -4756,34 +4207,13 @@ i.fa.fa-long-arrow-down {
     height: 340px;
   }
 
-  .row-container {
-    width: 490px;
-    margin-top: 32px;
-  }
-
-  #content-cash {
-    margin-top: 32px;
-    width: 900px;
-    left: 78px;
-    transform: none;
-  }
-
-  #content-cash > .cash-row {
-    width: 30%;
-    height: 495px;
-    padding: 0 16px 16px 16px;
-  }
 
   h2.montSemiBold,
   h3.prata2 {
     line-height: 1.4em;
   }
 
-  .service-container p.small,
-  .right-contact-row p.small,
-  .bottom-row-left .row-container p.small {
-    line-height: 2em;
-  }
+
 
   .left-row-content-middle {
     padding-right: 40px;
@@ -4818,15 +4248,9 @@ i.fa.fa-long-arrow-down {
     height: 658px;
   }
 
-  #bottom-content {
-    height: 390px;
-  }
+ 
 
-  .bottom-row-right {
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
+ 
 
   .text {
     width: 100%;
@@ -5251,13 +4675,7 @@ i.fa.fa-long-arrow-down {
     display: block;
   }
 
-  #main-menu,
-  .text .divider,
-  .service-container .divider,
-  #bottom-content .bottom-row-right,
-  #space-white {
-    display: none;
-  }
+
 
   #mobile-menu {
     display: block;
@@ -5648,64 +5066,6 @@ i.fa.fa-long-arrow-down {
     margin: 0 auto !important;
   }
 
-  #bottom-content {
-    display: block;
-    height: auto;
-  }
-
-  #bottom-content .bottom-row-left {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  #bottom-content .row-container {
-    text-align: center;
-    padding-top: 10px;
-  }
-
-  #bottom-content .row-container h2 {
-    line-height: 1.4em;
-  }
-
-  #bottom-content .row-container p {
-    line-height: 1.6em;
-  }
-
-  #content-cash {
-    position: relative;
-    width: 100%;
-    margin: 0 auto;
-    top: 10px;
-    right: 0;
-    left: 0;
-    padding-bottom: 40px !important;
-  }
-
-  .cash-row {
-    float: none;
-    width: 90%;
-    margin: 0 auto 20px auto;
-  }
-
-  .cash-row h4 {
-    font-size: 18px;
-  }
-
-  .cash-row p {
-    font-size: 15px;
-  }
-
-  .row-container .divider {
-    margin: 60px auto 30px auto;
-  }
-
-  .slideshow {
-    width: 100%;
-    height: 300px;
-    position: relative;
-    text-align: center;
-    margin: 0 auto;
-  }
 
   .slideshow[data-transition="zoom"] {
     overflow: hidden;
@@ -5775,14 +5135,7 @@ i.fa.fa-long-arrow-down {
     right: 0;
   }
 
-  .members-slider,
-  .member-controls {
-    display: none;
-  }
 
-  .mobile-members-slider {
-    display: block;
-  }
 
   .item-container {
     width: 70% !important;
@@ -5877,9 +5230,7 @@ i.fa.fa-long-arrow-down {
     margin: 0 auto;
   }
 
-  #team-content h2 {
-    line-height: 1.8em;
-  }
+ 
 
   .social-media {
     display: inline-block;
@@ -6022,13 +5373,7 @@ i.fa.fa-long-arrow-down {
     transform: none;
   }
 
-  #content .center-content-text,
-  .bottom-content-text p,
-  .seal-text {
-    width: 100%;
-    padding: 40px 20px 0 20px;
-    text-align: justify;
-  }
+
 
   .cta-box img {
     width: 100%;
@@ -6140,46 +5485,6 @@ i.fa.fa-long-arrow-down {
 
   #content-middle .inner .left-row .service-container .montSemiBold {
     padding: 8px 0;
-  }
-
-  #content-cash .cash-row .header-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 20px;
-  }
-
-  .cash-row {
-    padding-bottom: 16px;
-  }
-
-  .cash-row img {
-    width: 80px;
-    margin-right: 16px;
-    padding-top: 35px;
-  }
-
-  .cash-row h4 {
-    font-size: 22px;
-  }
-
-  #companies1 {
-    padding: 30px 0;
-  }
-
-  #content > div.content-columns {
-    width: 100%;
-  }
-
-  #content-contact > div > div.right-contact-row > div {
-    width: 85%;
-  }
-
-  #content-cash > .cash-row {
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
   }
 
   header .header-wrapper {
@@ -6517,9 +5822,7 @@ i.fa.fa-long-arrow-down {
     margin-bottom: 20px;
   }
 
-  .row-container .divider {
-    margin: 30px auto 30px auto;
-  }
+
 
   .member-info {
     padding: 25px 20px 30px 20px;
@@ -6541,9 +5844,7 @@ i.fa.fa-long-arrow-down {
     padding-right: 0;
   }
 
-  #bottom-content div.bottom-row-left div.row-container h2 {
-    margin-bottom: 24px;
-  }
+
 
   .right-contact-row .divider {
     margin-top: 16px !important;
@@ -6817,47 +6118,9 @@ i.fa.fa-long-arrow-down {
     margin-top: 24px;
   }
 
-  #bottom-content {
-    margin-top: 40px;
-  }
 
-  #bottom-content .row-container {
-    width: 95%;
-    margin: 0 auto;
-    padding: 40px 0;
-  }
 
-  #content-cash > .cash-row {
-    width: 100%;
-    padding: 0 24px 24px 24px;
-  }
 
-  #bottom-content .row-container p {
-    line-height: 2em;
-    text-align: left;
-    margin-bottom: 0;
-  }
-
-  #bottom-content .row-container p.small {
-    text-align: center;
-    margin-bottom: 24px;
-  }
-
-  .cash-row h3 {
-    font-size: 24px;
-  }
-
-  #content-cash {
-    padding-bottom: 0 !important;
-  }
-
-  #team-content {
-    margin-top: 0;
-  }
-
-  .row-container .divider-2 {
-    margin-top: 0;
-  }
 
   #banner-info {
     padding: 4px 0;
@@ -7882,29 +7145,13 @@ i.fa.fa-long-arrow-down {
     text-align: left;
   }
 
-  #bottom-content div.bottom-row-left div.row-container h2 {
-    margin: 18px auto;
-    line-height: 1.2em;
-  }
+
 
   #content-contact div div.right-contact-row div ul li p {
     padding-right: 16px;
   }
 
-  #team-content h3 {
-    font-size: 24px;
-    line-height: 1.5em;
-    width: 60%;
-    margin: 0 auto;
-  }
 
-  #team-content {
-    padding: 24px 10px;
-  }
-
-  #team-content hr {
-    margin: 10px auto 20px auto;
-  }
 
   .member-info {
     padding: 16px;
@@ -8000,12 +7247,6 @@ i.fa.fa-long-arrow-down {
     margin-right: auto;
   }
 
-  #bottom-content .row-container p.small {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-  }
 
   #frm-contact-mobile {
     height: 584px;
@@ -8610,33 +7851,14 @@ i.fa.fa-long-arrow-down {
     margin-bottom: 25px;
   }
 
-  .row-container h3 {
-    text-align: left;
-  }
 
-  #bottom-content div.bottom-row-left div.row-container h2 {
-    margin: 18px auto;
-    line-height: 1.2em;
-  }
+
+
 
   #content-contact div div.right-contact-row div ul li p {
     padding-right: 16px;
   }
 
-  #team-content h2 {
-    font-size: 24px;
-    line-height: 1.5em;
-    width: 65%;
-    margin: 0 auto;
-  }
-
-  #team-content {
-    padding: 24px 10px;
-  }
-
-  #team-content hr {
-    margin: 10px auto 20px auto;
-  }
 
   .member-info {
     padding: 16px;
@@ -8708,9 +7930,7 @@ i.fa.fa-long-arrow-down {
     width: 100%;
   }
 
-  .row-container h3.prata2 {
-    text-align: center;
-  }
+
 
   #team-content h3 {
     line-height: 1.6em;
@@ -8972,11 +8192,7 @@ img {
   overflow: hidden;
 }
 
-.team-slider-grid {
-  transition: 1s;
-  position: relative;
-  white-space: nowrap;
-}
+
 
 .item-container {
   display: inline-block;
@@ -9011,11 +8227,7 @@ img {
   height: 24px;
 }
 
-.team-slider-grid .item {
-  margin-left: 0;
-  background: white;
-  float: left;
-}
+
 
 #teamprevdisabled,
 #teamnextdisabled {
@@ -9071,11 +8283,6 @@ img {
   text-decoration: none;
 }
 
-.team-slider-grid .item {
-  margin-left: 0;
-  background: white;
-  float: left;
-}
 
 .text-paragraph {
   line-height: 2em;
@@ -17347,21 +16554,13 @@ body.quiz-modal-on .site-modal-outer {
 }
 
 @media (max-width: 1280px) {
-  #space-white {
-    padding-right: 8px;
-  }
+
 }
 
-@media (max-width: 1280px) {
-  .home-services-section {
-    padding-left: 14px;
-  }
-}
+
 
 @media (max-width: 1280px) {
-  .members-slider {
-    width: 1161px;
-  }
+ 
 }
 
 @media (max-width: 768px) {
