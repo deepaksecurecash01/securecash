@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import Quote from "./form/Quote";
 import Banking from "./form/Banking";
 import Change from "./form/Change";
 import {
@@ -18,10 +17,14 @@ import {
 import { QuoteFormSchema } from "@/zod/QuoteFormSchema";
 import BankingSchema from "@/zod/BankingSchema";
 import ChangeSchema from "@/zod/ChangeSchema";
+import Quote from "./form/Quote";
 
 const ContentForm = () => {
   const [currentStep, setCurrentStep] = useState(0);
-  const [selectedServices, setSelectedServices] = useState(['Banking','Change']);
+  const [selectedServices, setSelectedServices] = useState([
+    "Banking",
+    "Change",
+  ]);
   const [currentErrorField, setCurrentErrorField] = useState(null);
   const [formData, setFormData] = useState({});
 

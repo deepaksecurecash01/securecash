@@ -20,20 +20,21 @@ const Banking = ({
   errors,
   currentErrorField,
   setCurrentErrorField,
-}) => {  const selectionBoxes = [
-  {
-    label: "Collection Frequency",
-    name: "BankingFrequency",
-    icon: FaCalendarAlt,
-    options: frequencyOptions,
-  },
-  {
-    label: "Average Collection Amount",
-    name: "BankingAmount",
-    icon: FaMoneyBillAlt,
-    options: amountOptions,
-  },
-];
+}) => {
+  const selectionBoxes = [
+    {
+      label: "Collection Frequency",
+      name: "BankingFrequency",
+      icon: FaCalendarAlt,
+      options: frequencyOptions,
+    },
+    {
+      label: "Average Collection Amount",
+      name: "BankingAmount",
+      icon: FaMoneyBillAlt,
+      options: amountOptions,
+    },
+  ];
   return (
     <div className="form-page banking">
       <h3 className="text-white pb-4  leading-[30px] text-[22px] text-center capitalize">

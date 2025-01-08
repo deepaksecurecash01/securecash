@@ -64,7 +64,7 @@ const BottomContent = () => {
             </p>
             <div
               id="content-cash"
-              className="relative w-full 992px:absolute mt-[32px] 992px:flex 992px:gap-5 1200px:gap-10 992px:w-[900px] 1024px:w-[88%] 992px:inset-x-0 mx-auto  transform-none 1200px:w-[950px] -translate-x-[20%] 1366px:mx-0 1366px:inset-x-[35%]"
+              className="relative w-full 992px:absolute mt-[32px] 992px:flex 992px:gap-5  1366px:gap-10 992px:w-[900px]  transform-none  1366px:w-[950px]   1366px:-translate-x-[20%] 1366px:mx-0 1366px:inset-x-[35%]"
             >
               {services.map((service, index) => (
                 <ServiceRow

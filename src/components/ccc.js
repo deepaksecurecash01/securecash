@@ -1,247 +1,123 @@
-import React from 'react'
+import React, { useState } from "react";
 
-const TeamContent = () =>
-{
-    const teamMembers = [
-      {
-        name: "Darren Bacchus",
-        position: "Chief Executive Officer",
-        email: "darren@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/darren.png",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/in/darrenbacchus/",
-        },
-      },
-      {
-        name: "Beth Bacchus",
-        position: "Chief Operating Officer",
-        email: "beth@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/beth.png",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/in/bethaneybacchus/",
-        },
-      },
-      {
-        name: "Jo French",
-        position: "Chief Administrative Officer",
-        email: "jo@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/jo.png",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/in/joanne-french-b67492b7/",
-        },
-      },
-      {
-        name: "Dylan Cross",
-        position: "Chief Information Officer",
-        email: "dylan@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/dylan.png",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/in/dylan-cross-491822153/",
-        },
-      },
-      {
-        name: "John Dalag",
-        position: "Chief Financial Officer",
-        email: "john@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/john.png",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/company/securecash",
-        },
-      },
-      {
-        name: "Gretchen Dalag",
-        position: "Accounts",
-        email: "gretchen@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/gretchen.png",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/company/securecash",
-        },
-      },
-      {
-        name: "Ange Brua",
-        position: "Customer Service",
-        email: "angeline@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/ange.png",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/company/securecash",
-        },
-      },
-      {
-        name: "Hazel Lucidia",
-        position: "Operations",
-        email: "hazel@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/hazel.jpg",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/company/securecash",
-        },
-      },
-      {
-        name: "Maddie Penaredondo",
-        position: "Operations Manager",
-        email: "maddie@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/maddie.jpg",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/company/securecash",
-        },
-      },
-      {
-        name: "Mitchell Cabral",
-        position: "IT Support",
-        email: "mitchell@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/mitchell.jpg",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/company/securecash",
-        },
-      },
-      {
-        name: "Dennise Estipona",
-        position: "Customer Service",
-        email: "dennise@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/dennise.jpg",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/company/securecash",
-        },
-      },
-      {
-        name: "Mary Baga",
-        position: "Customer Service",
-        email: "mary@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/mary.jpg",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/company/securecash",
-        },
-      },
-      {
-        name: "Drex Aradilla",
-        position: "Reconciliation Manager",
-        email: "drex@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/drex.jpg",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/company/securecash",
-        },
-      },
-      {
-        name: "Kyla Lapugot",
-        position: "Reconciliation",
-        email: "kyla@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/kyla.jpg",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/company/securecash",
-        },
-      },
-      {
-        name: "Nadeem",
-        position: "Software Engineer",
-        email: "nadeem@securecash.com.au",
-        image: "https://www.securecash.com.au/images/team/nadeem.jpg",
-        socialLinks: {
-          facebook: "https://www.facebook.com/SecureCash/",
-          twitter: "https://twitter.com/SecureCash",
-          youtube: "https://www.youtube.com/securecash",
-          linkedin: "https://www.linkedin.com/company/securecash",
-        },
-      },
-    ];
+const Carousel2 = ({ members }) => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const goToNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % members.length);
+  };
+
+  const goToPrevSlide = () => {
+    setCurrentSlide((prev) => {
+      const newSlide = (prev - 1 + members.length) % members.length;
+      console.log(newSlide); // Logs the correct new slide value
+      return newSlide;
+    });
+  };
 
   return (
-    <div id="team-content">
-      <div className="w-full max-w-[1366px] mx-[auto] my-[0]">
-        <div className="members-slider">
-          <div className="team-slider">
-            <div className="team-slider-grid flex" style={{ left: 0 }}>
-              {teamMembers.map((member, index) => (
-                <div className="item-container w-[24%]" key={index}>
-                  <div className="item">
+    <div className="mobile-members-slider 992px:hidden">
+      <div className=" h-[480px] relative   768px:h-[220px] select-none block  992px:h-[300px]">
+        {members.map((member, index) => (
+          <div
+            key={index}
+            className={` absolute inline-block w-full text-center mx-auto 992px:opacity-100  992px:visible  ${
+              currentSlide === index
+                ? " visible opacity-100"
+                : " opacity-0 invisible"
+            }  992px:relative transition-opacity duration-1000 ease-in-out  992px:align-top  992px:w-[30%]  992px:float-left text-white `}
+          >
+            <div className="relative">
+              <div className="item-container inline-block w-[80%] 768px:[290px]  1024px:w-[24%] m-[6px] bg-white self-center justify-center items-center align-top">
+                <div className="item ml-0 bg-[white] float-left">
+                  <img
+                    className="team-pic w-full mx-auto my-0"
+                    src={member.image}
+                    alt={member.name}
+                  />
+                </div>
+                <div className="member-info p-4 414px:p-0  414px:pl-[20px]  414px:pr-[20px] w-full text-left  768px:pl-[16px]  768px:pr-[16px]  1366px:pl-[20px]  1366px:pr-[20px]  414px:py-[25px] clear-both overflow-hidden">
+                  <h4 className="text-[20px] font-semibold pb-[12px] text-[#333333]">
+                    {member.name}
+                  </h4>
+                  <p className=" font-prata text-[14px] text-[#808080] mb-[18px]">
+                    {member.position}
+                  </p>
+                  <div className="email-info flex justify-items-center px-0 py-[10px]">
                     <img
-                      className="team-pic"
-                      src={member.image}
-                      alt={member.name}
+                      className="mail-icon w-[5%] mr-2 py-[5px]"
+                      src="https://www.securecash.com.au/images/icons/mail.png"
+                      alt="mail"
                     />
+                    <a
+                      className="text-[14px] text-[#929292] hover:no-underline hover:text-[#c7a652]"
+                      href={`mailto:${member.email}`}
+                    >
+                      {member.email}
+                    </a>
                   </div>
-                  <div className="member-info">
-                    <h4>{member.name}</h4>
-                    <p className="prata">{member.position}</p>
-                    <div className="email-info">
-                      <img
-                        className="mail-icon"
-                        src="https://www.securecash.com.au/images/icons/mail.png"
-                        alt="Email"
-                      />
-                      <a href={`mailto:${member.email}`}>{member.email}</a>
-                    </div>
-                    <div className="social-media">
-                      <ul>
-                        {Object.entries(member.socialLinks).map(
-                          ([platform, url]) => (
-                            <li key={platform}>
-                              <a href={url}>
-                                <img
-                                  src={`https://www.securecash.com.au/images/icons/social/webp/${platform}.webp`}
-                                  alt={platform}
-                                />
-                              </a>
-                            </li>
-                          )
-                        )}
-                      </ul>
-                    </div>
+                  <div className="social-media pt-[5px]">
+                    <ul className=" list-none">
+                      <li className="float-left pr-[5px]">
+                        <a href={member.socialLinks?.facebook}>
+                          <img
+                            className="w-[80%] hover:filter hover:contrast-0"
+                            src="https://www.securecash.com.au/images/icons/social/webp/fb.webp"
+                            alt="Facebook"
+                          />
+                        </a>
+                      </li>
+                      <li className="float-left pr-[5px]">
+                        <a href={member.socialLinks?.twitter}>
+                          <img
+                            className="w-[80%] hover:filter hover:contrast-0"
+                            src="https://www.securecash.com.au/images/icons/social/webp/twitter.webp"
+                            alt="Twitter"
+                          />
+                        </a>
+                      </li>
+                      <li className="float-left pr-[5px]">
+                        <a href={member.socialLinks?.youtube}>
+                          <img
+                            className="w-[80%] hover:filter hover:contrast-0"
+                            src="https://www.securecash.com.au/images/icons/social/webp/yt.webp"
+                            alt="YouTube"
+                          />
+                        </a>
+                      </li>
+                      <li className="float-left pr-[5px]">
+                        <a href={member.socialLinks?.linkedin}>
+                          <img
+                            className="w-[80%] hover:filter hover:contrast-0"
+                            src="https://www.securecash.com.au/images/icons/social/webp/linkedin.webp"
+                            alt="LinkedIn"
+                          />
+                        </a>
+                      </li>
+                    </ul>
                   </div>
                 </div>
-              ))}
+              </div>
+              <div className="   z-[999] text-[50px]  mx-auto text-primary 992px:hidden">
+                <button
+                  className="   absolute transition-opacity duration-200 cursor-pointer left-2 hover:opacity-100 top-1/2"
+                  onClick={goToPrevSlide}
+                >
+                  <span>❮</span>
+                </button>
+                <button
+                  className="    absolute transition-opacity duration-200 cursor-pointer   right-2 hover:opacity-100 top-1/2"
+                  onClick={goToNextSlide}
+                >
+                  <span>❯</span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
+        ))}
       </div>
     </div>
   );
-}
+};
 
-export default TeamContent;
-
-
-  <div
-              id="content-cash"
-              className="relative w-full 992px:absolute mt-[32px] flex justify-between 992px:w-[900px] 992px:inset-x-0 992px:right-0 mx-auto  transform-none  mr-10 1366px:mt-[80px] -translate-x-[20%] 1200px:left-0 1200px:-translate-x-0"
-            ></div>
+export default Carousel2;

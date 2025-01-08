@@ -3,7 +3,6 @@ import Checkbox from "../ui/checkbox/Checkbox";
 import WarningPopup from "./WarningPopup";
 import { InputField } from "../InputField";
 
-
 const CheckboxGroup = ({
   label,
   name,
@@ -34,7 +33,7 @@ const CheckboxGroup = ({
         <WarningPopup
           error={errors[name]?.message}
           isFirstError={currentErrorField === name}
-          className={'top-12 left-[70px]'}
+          className={"top-12 left-[70px]"}
         />
       )}
     </div>
@@ -84,7 +83,6 @@ const Quote = ({
           setCurrentErrorField={setCurrentErrorField}
         />
       </div>
-      
     </div>
   );
 };

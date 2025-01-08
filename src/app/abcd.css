@@ -1780,25 +1780,6 @@ h3.prata2 {
   -webkit-filter: contrast(0);
 }
 
-#companies1 {
-  padding: 65px 0 65px 0;
-}
-
-#companies1 ul {
-  list-style: none;
-  margin: 0 auto;
-  width: 90%;
-  margin: 0 auto;
-}
-
-#companies1 ul li {
-  float: left;
-  padding: 20px;
-}
-
-#companies1 ul li img {
-  width: 70%;
-}
 
 #companies2 {
   background: #000000;
@@ -3062,10 +3043,7 @@ div.callback-button:hover {
   height: calc(100% - 48px);
 }
 
-#bg-gray-company-slider > #companies1,
-#bg-gray-company-slider > #companies1 > .slider {
-  background-color: #f0f0f0;
-}
+
 
 #quote-content-left > img {
   height: 320px;
@@ -6164,9 +6142,7 @@ i.fa.fa-long-arrow-down {
     font-size: 22px;
   }
 
-  #companies1 {
-    padding: 30px 0;
-  }
+
 
   #content > div.content-columns {
     width: 100%;
@@ -8902,65 +8878,11 @@ img {
   width: 100%;
 }
 
-#companies1 .slider {
-  background: #fff;
-  height: 100%;
-  margin: auto;
-  overflow: hidden;
-  width: 100%;
-}
 
-.slider::before,
-.slider::after {
-  content: "";
-  height: 100px;
-  position: absolute;
-  width: 200px;
-  z-index: 2;
-}
 
-.slider::after {
-  right: 0;
-  top: 0;
-  transform: rotateZ(180deg);
-}
 
-.slider::before {
-  left: 0;
-  top: 0;
-}
 
-#companies1 .slider .slide-track {
-  animation: scrollright 60s linear infinite;
-  display: flex;
-  width: calc(300px * 36);
-}
 
-.slider .slide {
-  width: 300px;
-  padding: 0px;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-.slide img {
-  vertical-align: middle;
-  -webkit-filter: contrast(0);
-  filter: contrast(0);
-  height: 150px;
-}
-
-.logo-small {
-  width: 300px !important;
-  height: 80px !important;
-  display: inline-block;
-}
-
-.slide img:hover {
-  cursor: default;
-  -webkit-filter: contrast(100%);
-  filter: contrast(100%);
-}
 
 .team-slider-hldr {
   position: relative;

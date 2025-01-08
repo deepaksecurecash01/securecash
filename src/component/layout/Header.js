@@ -83,8 +83,8 @@ const Navbar = () => {
 
   return (
     <header className="fixed z-50 bg-white w-full h-auto max-h-[135px] top-0 transition-all duration-500 shadow-[0_1px_6px_0_rgba(32,33,36,.28)]">
-      <div className="w-full max-w-screen-1366px mx-auto my-2.5 flex justify-evenly items-center">
-        <div className="w-full 1024px:w-[95%] 1600px:w-full flex 1024px:flex-row flex-col justify-center items-center">
+      <div className="w-full max-w-[1366px] mx-auto my-2.5 flex justify-evenly items-center">
+        <div className="w-full 1024px:w-[95%] 1366px:w-full 1600px:w-full flex 1024px:flex-row flex-col justify-center items-center">
           <div
             id="logo"
             className="inline 1024px:mx-0 1024px:text-left 1024px:pb-0 mx-auto text-center pb-5"

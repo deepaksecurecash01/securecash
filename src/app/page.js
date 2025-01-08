@@ -1,9 +1,10 @@
 import Banner from "@/components/bnr";
 import BottomContent from "@/components/BottomContent";
+import CompaniesSlider from "@/components/CompaniesSlider";
 import ContentContact from "@/components/ContentContact";
 import NewBanner from "@/components/newbanner";
 import TeamContent from "@/components/TeamContent";
-import Welcome from "@/components/Welcome";
+import Welcome from "@/components/common/Welcome";
 import Image from "next/image";
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
       <ContentContact />
       <BottomContent />
       <TeamContent />
+      <CompaniesSlider />
     </div>
   );
 }

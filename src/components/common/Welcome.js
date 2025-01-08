@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import "@slightlyoff/lite-vimeo";
-import ScrollableSection from "./ui/scrollable-section/ScrollableSection";
+import ScrollableSection from "../ui/scrollable-section/ScrollableSection";
 const Welcome = () => {
   const [isExpanded, setIsExpanded] = useState(false); // State for showing/hiding content
 
@@ -31,7 +31,7 @@ const Welcome = () => {
               alt="SecureCash"
               id="content-logo"
               className="block mx-auto"
-            />
+            /> 
             <hr className="divider-2 divider-gold divider-bottom h-[4px] mb-[40px] border-0 mt-[16px] w-[100px] 414px:my-[24px] rounded-[5px] bg-primary text-center mx-auto" />
             <p
               id="header-content"

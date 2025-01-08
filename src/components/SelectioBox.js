@@ -1,6 +1,6 @@
 import { useState } from "react";
-import WarningPopup from "./form/WarningPopup";
-import SelectOption from "./SelectOption";
+import WarningPopup from "../components/form/WarningPopup";
+import SelectOption from "../components/SelectOption";
 
 export const SelectioBox = ({
   label,

@@ -1,152 +1,349 @@
-import React from "react";
-import Checkbox from "../ui/checkbox/Checkbox";
-import WarningPopup from "./WarningPopup";
+"use client";
+import { useEffect, useState, useRef } from "react";
+import { TeamMember } from "./TeamMember";
+import Carousel2 from "./Carousel2";
 
-const InputField = ({
-  label,
-  name,
-  placeholder,
-  type = "text",
-  Icon,
-  errorMessage,
-  register,
-  errors,
-  currentErrorField,
-  setCurrentErrorField,
-}) => {
-  console.log(errors.name);
+const TeamContent = () => {
+  const listEl = useRef(null);
+  const [count, setCount] = useState(0);
+  const [detectWidth, setDetectWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 0
+  );
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      setDetectWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const getScrollPercentage = () => (detectWidth <= 1024 ? 34 : 25);
+
+  // Handle Previous Slide
+  const handlePrev = () => {
+    const newCount = count + 1;
+    setCount(newCount);
+    const widthScroll = getScrollPercentage();
+    if (listEl.current) {
+      listEl.current.style.left = `${newCount * widthScroll}%`;
+    }
+  };
+
+  // Handle Next Slide
+  const handleNext = () => {
+    const newCount = count - 1;
+    setCount(newCount);
+    const widthScroll = getScrollPercentage();
+    if (listEl.current) {
+      listEl.current.style.left = `${newCount * widthScroll}%`;
+    }
+  };
+
+  const cardShowing = detectWidth <= 1024 ? -11 : -11;
+
+  const teamMembers = [
+    {
+      name: "Darren Bacchus",
+      position: "Chief Executive Officer",
+      email: "darren@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/darren.png",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/in/darrenbacchus/",
+      },
+    },
+    {
+      name: "Beth Bacchus",
+      position: "Chief Operating Officer",
+      email: "beth@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/beth.png",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/in/bethaneybacchus/",
+      },
+    },
+    {
+      name: "Jo French",
+      position: "Chief Administrative Officer",
+      email: "jo@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/jo.png",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/in/joanne-french-b67492b7/",
+      },
+    },
+    {
+      name: "Dylan Cross",
+      position: "Chief Information Officer",
+      email: "dylan@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/dylan.png",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/in/dylan-cross-491822153/",
+      },
+    },
+    {
+      name: "John Dalag",
+      position: "Chief Financial Officer",
+      email: "john@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/john.png",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/company/securecash",
+      },
+    },
+    {
+      name: "Gretchen Dalag",
+      position: "Accounts",
+      email: "gretchen@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/gretchen.png",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/company/securecash",
+      },
+    },
+    {
+      name: "Ange Brua",
+      position: "Customer Service",
+      email: "angeline@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/ange.png",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/company/securecash",
+      },
+    },
+    {
+      name: "Hazel Lucidia",
+      position: "Operations",
+      email: "hazel@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/hazel.jpg",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/company/securecash",
+      },
+    },
+    {
+      name: "Maddie Penaredondo",
+      position: "Operations Manager",
+      email: "maddie@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/maddie.jpg",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/company/securecash",
+      },
+    },
+    {
+      name: "Mitchell Cabral",
+      position: "IT Support",
+      email: "mitchell@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/mitchell.jpg",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/company/securecash",
+      },
+    },
+    {
+      name: "Dennise Estipona",
+      position: "Customer Service",
+      email: "dennise@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/dennise.jpg",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/company/securecash",
+      },
+    },
+    {
+      name: "Mary Baga",
+      position: "Customer Service",
+      email: "mary@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/mary.jpg",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/company/securecash",
+      },
+    },
+    {
+      name: "Drex Aradilla",
+      position: "Reconciliation Manager",
+      email: "drex@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/drex.jpg",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/company/securecash",
+      },
+    },
+    {
+      name: "Kyla Lapugot",
+      position: "Reconciliation",
+      email: "kyla@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/kyla.jpg",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/company/securecash",
+      },
+    },
+    {
+      name: "Nadeem",
+      position: "Software Engineer",
+      email: "nadeem@securecash.com.au",
+      image: "https://www.securecash.com.au/images/team/nadeem.jpg",
+      socialLinks: {
+        facebook: "https://www.facebook.com/SecureCash/",
+        twitter: "https://twitter.com/SecureCash",
+        youtube: "https://www.youtube.com/securecash",
+        linkedin: "https://www.linkedin.com/company/securecash",
+      },
+    },
+  ];
+
+  const goToNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % teamMembers.length);
+  };
+
+  const goToPrevSlide = () => {
+    setCurrentSlide((prev) => {
+      const newSlide = (prev - 1 + teamMembers.length) % teamMembers.length;
+      console.log(newSlide); // Logs the correct new slide value
+      return newSlide;
+    });
+  };
+
   return (
-    <div className="relative">
-      <label className="text-white text-base inline-block mt-6 mb-2.5 w-full text-left">
-        {label}
-      </label>
-      <div
-        className={`input-container relative w-[100%] mx-auto text-left flex items-center bg-white rounded-md border `}
-      >
-        <input
-          className={`w-full text-sm py-2 px-3 shadow-none font-montserrat border-none peer rounded-sm   ${
-            errors[name] && currentErrorField === name
-              ? " focus:outline-red-600"
-              : " focus:outline-primary"
-          }`}
-          type={type}
-          name={name}
-          data-validate={name}
-          {...register(name)}
-          onFocus={() => setCurrentErrorField(name)}
-          onBlur={() => setCurrentErrorField(null)}
-          placeholder={placeholder}
-          required
-        />
-        <Icon
-          className={`icon min-w-[50px] before:pr-0 text-[18px] text-[#999]  ${
-            errors[name] && currentErrorField === name
-              ? "text-red-500"
-              : "peer-focus:text-primary"
-          }`}
-        />
-        {errors[name] && (
-          <WarningPopup
-            error={errors[name]?.message}
-            isFirstError={currentErrorField === name}
-          />
-        )}
+    <div
+      id="team-content"
+      className="bg-[#ebebeb] inline-block w-full px-[10px] py-[24px]  414px:pt-[100px] 414px:px-0 414px:py mt-0  768px:mt-[100px]"
+    >
+      <div className="w-full max-w-[1366px] mx-[auto] my-[0]">
+        <h3 className="text-[24px] leading-[1.5em] w-3/5 mx-[auto] my-[0] font-prata text-center  414px:text-[32px] text-[#000]">
+          Meet The SecureCash Team
+        </h3>
+        <hr className="divider-2 h-[4px] border-0  mt-4 mb-[40px] w-[100px] rounded-[5px] bg-[#c7a652]  divider-bottom mx-auto" />
+        <div className="member-controls hidden 992px:block w-[8%] float-left pt-[118px] pl-[40px]">
+          <p>
+            <a
+              id="teamprev"
+              className="btn-prev text-primary text-[50px]"
+              onClick={handlePrev}
+              style={{
+                display: count >= 0 ? "none" : "block",
+                cursor: "pointer",
+              }}
+            >
+              ❮
+            </a>
+            <a
+              id="teamprevdisabled"
+              className=" text-primary text-[50px] cursor-not-allowed opacity-50 pointer-events-none no-underline"
+              style={{
+                display: count < 0 ? "none" : "block",
+                cursor: "default",
+              }}
+            >
+              ❮
+            </a>
+          </p>
+          <p>
+            <a
+              id="teamnext"
+              className="btn-next  text-primary text-[50px]"
+              onClick={handleNext}
+              style={{
+                display: count <= cardShowing ? "none" : "block",
+                cursor: "pointer",
+              }}
+            >
+              ❯
+            </a>
+            <a
+              id="teamnextdisabled"
+              className=" text-primary text-[50px] cursor-not-allowed opacity-50 pointer-events-none no-underline"
+              style={{
+                display: count > cardShowing ? "none" : "block",
+                cursor: "default",
+              }}
+            >
+              ❯
+            </a>
+          </p>
+        </div>
+        <div className="mobile-members-slider 992px:hidden">
+          <div className=" h-[480px] relative   768px:h-[220px] select-none block  992px:h-[300px]">
+            <div>
+              {teamMembers.map((member, index) => (
+                <div
+                  key={index}
+                  className={` absolute inline-block w-full text-center mx-auto 992px:opacity-100  992px:visible  ${
+                    currentSlide === index
+                      ? " visible opacity-100"
+                      : " opacity-0 invisible"
+                  }  992px:relative transition-opacity duration-1000 ease-in-out  992px:align-top  992px:w-[30%]  992px:float-left text-white `}
+                >
+                  <div className="relative">
+                    <TeamMember
+                      member={member}
+                      key={index}
+                      goToNextSlide={goToNextSlide}
+                      goToPrevSlide={goToPrevSlide}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <div className="members-slider hidden 1024px:block  1024px:w-[890px]  1200px::w-[1020px] 1280px:w-[1161px] 1366px:w-[1230px] w-[92%] float-left mb-[100px]">
+          <div className="team-slider w-full overflow-hidden">
+            <div
+              className="team-slider-grid [transition:1s] relative whitespace-nowrap"
+              ref={listEl}
+              style={{
+                position: "relative",
+                left: `${count * getScrollPercentage()}%`,
+              }}
+            >
+              {teamMembers.map((member, index) => (
+                <TeamMember key={index} member={member} />
+              ))}
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );
 };
 
-const CheckboxGroup = ({
-  label,
-  name,
-  options,
-  errorMessage,
-  register,
-  errors,
-  currentErrorField,
-  setCurrentErrorField,
-}) => (
-  <div className="chkbox-container w-[100%] mx-auto text-left relative chkbox-row">
-    <label className="text-white text-base inline-block mt-6 mb-2.5 w-4/5 text-left">
-      {label}
-    </label>
-    <div className="control-wrapper flex flex-row justify-around items-center w-full mt-2">
-      {options.map((option, index) => (
-        <Checkbox
-          option={option}
-          key={index}
-          name={"ServiceOptions"}
-          register={register}
-          currentErrorField={currentErrorField}
-          setCurrentErrorField={setCurrentErrorField}
-          className="chkbox float-left text-left relative  "
-        />
-      ))}
-      {errors[name] && (
-        <WarningPopup
-          error={errors[name]?.message}
-          isFirstError={currentErrorField === name}
-        />
-      )}
-    </div>
-  </div>
-);
-
-const Quote = ({
-  inputFields,
-  register,
-  errors,
-  currentErrorField,
-  setCurrentErrorField,
-}) => {
-  const serviceOptions = ["Banking", "Change"];
-
-  return (
-    <div className="form-page quote">
-      <h3 className="text-white pb-4 leading-[30px] text-[22px] 1200px:text-[26px] text-center capitalize">
-        Want a quote from SecureCash?
-      </h3>
-      <p className="form-sub-header text-white pb-4 text-center capitalize">
-        We Just Need A Few Details
-      </p>
-      <hr className="divider-2 h-[4px] border-0 mt-4 mx-auto w-[100px] rounded-[5px] bg-[#c7a652] divider-bottom mb-0 divider-centered" />
-
-      <div className="form-tab ">
-        {inputFields.slice(0, 4).map((field, index) => (
-          <InputField
-            key={index}
-            {...field}
-            register={register}
-            errors={errors}
-            currentErrorField={currentErrorField}
-            setCurrentErrorField={setCurrentErrorField}
-          />
-        ))}
-      </div>
-
-      <div className="form-tab">
-        {inputFields.slice(4).map((field, index) => (
-          <InputField
-            key={index + 4}
-            {...field}
-            register={register}
-            errors={errors}
-            currentErrorField={currentErrorField}
-            setCurrentErrorField={setCurrentErrorField}
-          />
-        ))}
-        <CheckboxGroup
-          label="Services You Require"
-          name="Service"
-          options={serviceOptions}
-          register={register}
-          errors={errors}
-          currentErrorField={currentErrorField}
-          setCurrentErrorField={setCurrentErrorField}
-        />
-      </div>
-    </div>
-  );
-};
-
-export default Quote;
+export default TeamContent;

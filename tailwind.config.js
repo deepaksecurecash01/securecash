@@ -25,8 +25,9 @@ module.exports = {
       },
 
       fontFamily: {
-        montserrat: ["var(--font-montserrat)"],
-        prata: ['"Prata Regular"', "serif"], // Ensure exact font name here
+        montserrat: ['"Montserrat"'],
+        prata: ["var(--font-prata)"], // Ensure exact font name here
+        "prata-regular": ['"Prata Regular"', "serif"], // Ensure exact font name here
       },
       colors: {
         primary: "#c7a652", // Primary background color
