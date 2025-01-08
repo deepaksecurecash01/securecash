@@ -77,9 +77,7 @@ const slides = [
   },
 ];
 
-const NewBanner = () =>
-{
-
+const NewBanner = () => {
   return (
     <div>
       {/* Mid Banner */}
@@ -141,7 +139,7 @@ const NewBanner = () =>
                 className="montSemiBold text-[40px] w-3/4 992px:w-auto py-2 leading-[1.4em] 992px:py-0 font-montserrat mb-6 font-bold  480px:text-[30px] text-center mb-7.5  mx-auto 992px:mx-0 
                   text-[#c7a652] 480px:leading-[1em] 768px:text-5xl 992px:text-[40px] 992px:leading-[1.4em] 992px:mb-[24px] 992px:text-left"
               >
-                Don't Take The Risk!
+                {`Don't Take The Risk!`}
               </h2>
               <p className="small text-[14px] leading-[1em] text-center 992px:text-left  414px:leading-[1.3em] 768px:text-[16px] mb-0 1024px:leading-[2em] 1366px:leading-[1em] m-0 p-0">
                 Anywhere, Anytime, Australia Wide
@@ -174,7 +172,6 @@ const NewBanner = () =>
       </div>
     </div>
   );
- 
-}
+};
 
 export default NewBanner;

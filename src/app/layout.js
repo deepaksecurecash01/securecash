@@ -2,8 +2,8 @@ import { Open_Sans, Montserrat, Prata } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 
-import Header from "@/component/layout/Header";
-import Footer from "@/component/layout/Footer";
+import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
 
 const montserrat = Montserrat({
   subsets: ["latin"],

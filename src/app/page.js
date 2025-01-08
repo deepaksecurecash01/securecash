@@ -1,4 +1,4 @@
-import Banner from "@/components/bnr";
+import Banner from "@/component/common/Banner";
 import BottomContent from "@/components/BottomContent";
 import CompaniesSlider from "@/components/CompaniesSlider";
 import ContentContact from "@/components/ContentContact";
