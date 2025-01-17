@@ -1,3 +1,5 @@
+import CarouselNavigationButton from "./common/CarouselNavigationButton";
+
 const SocialLink = ({ href, icon, alt }) => (
   <li className="float-left pr-[5px]">
     <a href={href}>
@@ -65,25 +67,9 @@ export const TeamMember = ({ member, goToNextSlide, goToPrevSlide }) => (
       </div>
     </div>
     {goToNextSlide && goToPrevSlide && (
-      <NavigationButtons onNext={goToNextSlide} onPrev={goToPrevSlide} />
+      <CarouselNavigationButton onNext={goToNextSlide} onPrev={goToPrevSlide} />
     )}
   </div>
 );
 
 // components/NavigationButtons.js
-const NavigationButtons = ({ onNext, onPrev }) => (
-  <div className="z-[999] text-[50px] mx-auto text-primary 992px:hidden">
-    <button
-      className="absolute transition-opacity duration-200 cursor-pointer left-2 hover:opacity-100 top-1/2"
-      onClick={onPrev}
-    >
-      <span>❮</span>
-    </button>
-    <button
-      className="absolute transition-opacity duration-200 cursor-pointer right-2 hover:opacity-100 top-1/2"
-      onClick={onNext}
-    >
-      <span>❯</span>
-    </button>
-  </div>
-);

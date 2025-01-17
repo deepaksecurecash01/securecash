@@ -74,7 +74,7 @@ export const TeamMember = ({ member, goToNextSlide, goToPrevSlide }) => {
         </div>
       </div>
       {goToNextSlide && goToPrevSlide && (
-        <div className="   z-[999] text-[50px]  mx-auto text-primary 992px:hidden">
+        <div className="   z-40 text-[50px]  mx-auto text-primary 992px:hidden">
           <button
             className="   absolute transition-opacity duration-200 cursor-pointer left-2 hover:opacity-100 top-1/2"
             onClick={goToPrevSlide}

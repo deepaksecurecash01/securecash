@@ -1,4 +1,6 @@
+"use client";
 import React, { useState } from "react";
+import Controls from "./Controls";
 
 const Carousel = () => {
   const [currentSlideSection, setCurrentSlideSection] = useState(0);
@@ -65,7 +67,7 @@ const Carousel = () => {
       <div className="slides h-[190px] relative   768px:h-[220px] select-none block  992px:h-[300px]  1200px:h-[310px]">
         <div className="slide-container block ">
           <div
-            className={`slide-image h-full  992px:block 992px:space-x-2  w-full top-0   ${
+            className={`slide-image h-full relative  992px:block 992px:space-x-2  w-full top-0   ${
               currentSlideSection === 0
                 ? " opacity-100 transform scale-100 transition-opacity duration-1000 ease-in-out"
                 : " 992px:opacity-0 transition-all duration-[700ms] ease-in-out "
@@ -91,7 +93,7 @@ const Carousel = () => {
                     {slide.description}
                   </p>
                 </div>
-                <div className="serviceitem-controls block relative top-[-200px] z-[999] text-[100px] text-white 992px:hidden">
+                <div className="serviceitem-controls block relative top-[-200px] z-40 text-[100px] text-white 992px:hidden">
                   <button
                     className="prev-slide   absolute transition-opacity duration-200 cursor-pointer left-0 hover:opacity-100"
                     onClick={goToPrevSlide}
@@ -108,31 +110,16 @@ const Carousel = () => {
               </div>
             ))}
           </div>
-          <div className="carousel-controls hidden 992px:block absolute -top-1/2 left-0 right-0 z-[999] text-[100px] leading-[600px] text-white">
-            <label
-              htmlFor="img-1"
-              className={`prev-slide  absolute p-5 opacity-50 transition-opacity duration-200 cursor-pointer h-12 w-12   right-0 top-[-90px] hover:opacity-100 ${
-                currentSlideSection === 0 ? "block" : "hidden"
-              }  `}
-              onClick={toggleSlide}
-            >
-              <span>‹</span>
-            </label>
-            <label
-              htmlFor="img-1"
-              className={`next-slide    right-0 hover:opacity-100 absolute p-5 opacity-50 transition-opacity duration-200 cursor-pointer h-12 w-12 ${
-                currentSlideSection === 0 ? "block" : "hidden"
-              } `}
-              onClick={toggleSlide}
-            >
-              <span>›</span>
-            </label>
-          </div>
+          <Controls
+            toggleSlide={toggleSlide}
+            section={0}
+            currentSlideSection={currentSlideSection}
+          />
         </div>
 
-        <div className="slide-container block">
+        <div className="slide-container block ">
           <div
-            className={`slide-image 992px:block 992px:space-x-2  w-full top-0 absolute ${
+            className={`slide-image  992px:block 992px:space-x-2  w-full top-0 absolute ${
               currentSlideSection === 1
                 ? " opacity-100 transform scale-100 transition-opacity duration-1000 ease-in-out"
                 : " 992px:opacity-0 transition-all duration-[700ms] ease-in-out"
@@ -158,7 +145,7 @@ const Carousel = () => {
                     {slide.description}
                   </p>
                 </div>
-                <div className="serviceitem-controls block relative top-[-200px] z-[999] text-[100px] text-white 992px:hidden">
+                <div className="serviceitem-controls block relative top-[-200px] z-40 text-[100px] text-white 992px:hidden">
                   <button
                     className="prev-slide   absolute transition-opacity duration-200 cursor-pointer left-0 hover:opacity-100"
                     onClick={goToPrevSlide}
@@ -175,26 +162,11 @@ const Carousel = () => {
               </div>
             ))}
           </div>
-          <div className="carousel-controls hidden 992px:block absolute -top-1/2 left-0 right-0 z-[999] text-[100px] leading-[600px] text-white">
-            <label
-              htmlFor="img-1"
-              className={`prev-slide  absolute p-5 opacity-50 transition-opacity duration-200 cursor-pointer h-12 w-12   right-0 top-[-90px] hover:opacity-100 ${
-                currentSlideSection === 1 ? "block" : "hidden"
-              }  `}
-              onClick={toggleSlide}
-            >
-              <span>‹</span>
-            </label>
-            <label
-              htmlFor="img-1"
-              className={`next-slide    right-0 hover:opacity-100 absolute p-5 opacity-50 transition-opacity duration-200 cursor-pointer h-12 w-12 ${
-                currentSlideSection === 1 ? "block" : "hidden"
-              } `}
-              onClick={toggleSlide}
-            >
-              <span>›</span>
-            </label>
-          </div>
+          <Controls
+            toggleSlide={toggleSlide}
+            section={1}
+            currentSlideSection={currentSlideSection}
+          />
         </div>
       </div>
     </div>

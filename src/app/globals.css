@@ -8,13 +8,6 @@ video {
   height: unset;
 }
 
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
 @-webkit-keyframes fade {
   from {
     filter: brightness(0);
@@ -85,11 +78,14 @@ p strong {
   font-family: "Montserrat Light";
 }
 
-
 #mobile-menu {
   /* box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28); */
   -webkit-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
   -moz-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
+}
+
+:root:has(.no-doc-scroll) {
+  overflow: hidden;
 }
 
 @media only screen and (max-width: 1366px) {}

@@ -24,7 +24,7 @@ const Checkbox = ({
         onFocus={() => setCurrentErrorField(name)}
         onBlur={() => setCurrentErrorField(null)}
         data-validate="CheckboxMulti"
-        className={` mt-2 text-sm p-2.5 shadow-none font-montserrat border-none w-[28px] h-[28px] opacity-0 absolute z-[999999] peer`}
+        className={` mt-2 text-sm p-2.5 shadow-none font-montserrat border-none w-[28px] h-[28px] opacity-0 absolute z-40 peer`}
       />
       <label
         className="text-white text-base inline-block mb-2 text-left mt-[10px] w-full  relative"

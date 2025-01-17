@@ -20,6 +20,7 @@ module.exports = {
         "1200px": "1200px", // Desktops (smaller)
         "1280px": "1280px", // Large laptops / small desktops
         "1366px": "1366px", // Larger laptops and small desktops
+        "1440px": "1440px", // Larger laptops and small desktops
         "1600px": "1600px", // Ultra-large devices (ultrawide monitors)
         "1920px": "1920px", // Super large devices (4K displays)
       },
@@ -27,7 +28,7 @@ module.exports = {
       fontFamily: {
         montserrat: ['"Montserrat"'],
         prata: ["var(--font-prata)"], // Ensure exact font name here
-        "prata-regular": ['"Prata Regular"', "serif"], // Ensure exact font name here
+        'prata-regular': ['"Prata Regular"', "serif"], // Ensure exact font name here
       },
       colors: {
         primary: "#c7a652", // Primary background color
@@ -47,6 +48,14 @@ module.exports = {
         "team-bg": "url('/images/team.webp')",
         "brown-overlay": "url('/images/brown-overlay.png')",
       }),
+      keyframes: {
+        fade: {
+          "0%": { filter: "brightness(0)", opacity: 0 },
+          "50%": { filter: "brightness(0.5)", opacity: 0.7 },
+          "100%": { filter: "brightness(1)", opacity: 1 },
+        },
+      },
+      animation: { fade: "fade 1.5s ease-in-out" },
     },
   },
   plugins: [],
