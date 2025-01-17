@@ -103,3 +103,14 @@ p strong {
 @media only screen and (max-width: 414px) {}
 
 @media only screen and (max-width: 320px) {}
+
+#content-middle .slick-list {
+  width: 90% !important;
+}
+
+@media screen and (max-width: 991px) {
+  #content-middle .slick-list {
+    width: 100% !important;
+  }
+  
+}

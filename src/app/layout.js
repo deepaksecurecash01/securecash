@@ -11,10 +11,11 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 });
-
-const prata = localFont({
-  src: "../../public/fonts/Prata-Regular.ttf",
+const prata = Prata({
+  subsets: ["latin"],
+  display: "swap",
   variable: "--font-prata",
+  weight: [ "400"],
 });
 
 

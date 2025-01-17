@@ -1,74 +1,117 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
+import Controls from "./Controls";
+import Slider from "react-slick";
 
-export const TeamMember = ({ member }) => (
-  <div className="item-container inline-block w-[80%] 768px:[290px]  1024px:w-[24%] m-[6px] bg-white self-center justify-center items-center align-top">
-    <div className="item ml-0 bg-[white] float-left">
-      <img
-        className="team-pic w-full mx-auto my-0"
-        src={member.image}
-        alt={member.name}
-      />
-    </div>
-    <div className="member-info p-4 414px:p-0  414px:pl-[20px]  414px:pr-[20px] w-full text-left  768px:pl-[16px]  768px:pr-[16px]  1366px:pl-[20px]  1366px:pr-[20px]  414px:py-[25px] clear-both overflow-hidden">
-      <h4 className="text-[20px] font-semibold pb-[12px] text-[#333333]">
-        {member.name}
-      </h4>
-      <p className=" font-prata text-[14px] text-[#808080] mb-[18px]">
-        {member.position}
-      </p>
-      <div className="email-info flex justify-items-center px-0 py-[10px]">
-        <img
-          className="mail-icon w-[5%] mr-2 py-[5px]"
-          src="https://www.securecash.com.au/images/icons/mail.png"
-          alt="mail"
-        />
-        <a
-          className=" text-[14px] text-[#929292] hover:no-underline hover:text-[#c7a652]"
-          href={`mailto:${member.email}`}
-        >
-          {member.email}
-        </a>
+const Carousel = () => {
+  const [currentSlideSection, setCurrentSlideSection] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const slides = [
+    {
+      imgSrc: "https://www.securecash.com.au/images/icons/australia.png",
+      title: "Australia Wide",
+      description:
+        "SecureCash is a one stop cash in transit agency that will manage your banking &amp; change order services no matter where you are located in Australia.",
+    },
+    {
+      imgSrc: "https://www.securecash.com.au/images/icons/edocket.png",
+      title: "eDocket System",
+      description:
+        "Using our industry leading software technology unique to only SecureCash, we are able to track &amp; trace your deposit with a click of a button.",
+    },
+    {
+      imgSrc: "https://www.securecash.com.au/images/icons/flexible.png",
+      title: "Total Flexibility",
+      description:
+        "You can have your banking collected on any day or days you choose, &amp; you are free to cancel or change the days your banking is collected whenever you want.",
+    },
+    {
+      imgSrc: "https://www.securecash.com.au/images/icons/banks.png",
+      title: "All Major Banks",
+      description:
+        "We work with most major banks in Australia including the NAB, Commonwealth Bank, ANZ, Westpac &amp; some local banks such as BankSA &amp; Bendigo Bank.",
+    },
+    {
+      imgSrc: "https://www.securecash.com.au/images/icons/contracts.png",
+      title: "No Lock-in Contracts",
+      description:
+        "We do not lock you into lengthy contracts, you are free to try our service &amp; if you find that it is not suitable for your organisation, then you can cancel at anytime with notice.",
+    },
+    {
+      imgSrc: "https://www.securecash.com.au/images/icons/olservices.png",
+      title: "Online Services",
+      description:
+        "Customers are able to book extra pickups, cancel a scheduled pickup, submit change orders, &amp; even verify a banking courier’s identification all online.",
+    },
+  ];
+
+  const goToNextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const goToPrevSlide = () => {
+    setCurrentSlide((prev) => {
+      const newSlide = (prev - 1 + slides.length) % slides.length;
+      console.log(newSlide); // Logs the correct new slide value
+      return newSlide;
+    });
+  };
+
+  const toggleSlide = () => {
+    setCurrentSlideSection((prev) => (prev === 0 ? 1 : 0));
+    console.log(currentSlide);
+  };
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+  };
+
+  return (
+    <div className="carousel">
+      <div className="slides h-[190px] relative   768px:h-[220px] select-none block  992px:h-[300px]  1200px:h-[310px]">
+        <div className="slide-container block ">
+          <Slider {...settings}>
+            {slides.map((slide, index) => (
+              <div
+                key={index + 3}
+                className={`service-item inline-block w-full text-center mx-auto 992px:opacity-100 absolute 992px:visible 992px:relative transition-opacity duration-1000 ease-in-out  992px:align-top  992px:w-[30%]  992px:float-left text-white `}
+              >
+                <div className="service-img">
+                  <img className="h-[60px] mx-auto" src={slide.imgSrc} alt="" />
+                </div>
+                <div className="service-info text-white clear-both">
+                  <h3 className="text-heading leading-[1.6em] text-[16px] font-montserrat font-bold my-[1rem]">
+                    {slide.title}
+                  </h3>
+                  <p className=" w-[70%] 992px:w-[95%] text-center text-[14px] leading-[1.6em]  992px:leading-[1.6em]  1024px:leading-[2em] mx-auto whitespace-normal  font-montserrat font-light 992px:text-center">
+                    {slide.description}
+                  </p>
+                </div>
+                <div className="serviceitem-controls block relative top-[-200px] z-40 text-[100px] text-white 992px:hidden">
+                  <button
+                    className="prev-slide   absolute transition-opacity duration-200 cursor-pointer left-0 hover:opacity-100"
+                    onClick={goToPrevSlide}
+                  >
+                    <span>‹</span>
+                  </button>
+                  <button
+                    className="next-slide    absolute transition-opacity duration-200 cursor-pointer   right-0 hover:opacity-100"
+                    onClick={goToNextSlide}
+                  >
+                    <span>›</span>
+                  </button>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
       </div>
-      <div className="social-media pt-[5px]">
-        <ul className=" list-none">
-          <li className="float-left pr-[5px]">
-            <a href={member.socialLinks?.facebook}>
-              <img
-                className="w-[80%] hover:filter hover:contrast-0"
-                src="https://www.securecash.com.au/images/icons/social/webp/fb.webp"
-                alt="Facebook"
-              />
-            </a>
-          </li>
-          <li className="float-left pr-[5px]">
-            <a href={member.socialLinks?.twitter}>
-              <img
-                className="w-[80%] hover:filter hover:contrast-0"
-                src="https://www.securecash.com.au/images/icons/social/webp/twitter.webp"
-                alt="Twitter"
-              />
-            </a>
-          </li>
-          <li className="float-left pr-[5px]">
-            <a href={member.socialLinks?.youtube}>
-              <img
-                className="w-[80%] hover:filter hover:contrast-0"
-                src="https://www.securecash.com.au/images/icons/social/webp/yt.webp"
-                alt="YouTube"
-              />
-            </a>
-          </li>
-          <li className="float-left pr-[5px]">
-            <a href={member.socialLinks?.linkedin}>
-              <img
-                className="w-[80%] hover:filter hover:contrast-0"
-                src="https://www.securecash.com.au/images/icons/social/webp/linkedin.webp"
-                alt="LinkedIn"
-              />
-            </a>
-          </li>
-        </ul>
-      </div>
     </div>
-  </div>
-);
+  );
+};
+
+export default Carousel;

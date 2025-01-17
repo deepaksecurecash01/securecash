@@ -55,7 +55,7 @@ const Welcome = () => {
               fontWeight="normal"
               lineHeight="1em"
               textAlign="center"
-              marginBottom="24px"
+              marginBottom=""
               className="mx-auto"
             >
               Welcome to

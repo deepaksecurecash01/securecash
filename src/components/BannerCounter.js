@@ -24,6 +24,7 @@ const BannerCounter = ({ stats }) => {
                 <Heading
                   as="h4"
                   fontSize="40px"
+                  fontWeight="black"
                   color="#c7a652"
                   marginBottom="30px"
                   responsiveClassName="pb-[30px]"

@@ -1,10 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import Controls from "./Controls";
+import Slider from "react-slick";
 
 const Carousel = () => {
-  const [currentSlideSection, setCurrentSlideSection] = useState(0);
-  const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
     {
@@ -45,131 +44,106 @@ const Carousel = () => {
     },
   ];
 
-  const goToNextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-  };
 
-  const goToPrevSlide = () => {
-    setCurrentSlide((prev) => {
-      const newSlide = (prev - 1 + slides.length) % slides.length;
-      console.log(newSlide); // Logs the correct new slide value
-      return newSlide;
-    });
-  };
 
-  const toggleSlide = () => {
-    setCurrentSlideSection((prev) => (prev === 0 ? 1 : 0));
-    console.log(currentSlide);
-  };
+const CustomPrevArrow = ({ currentSlide, slideCount, onClick }) => (
+  <div
+    className={`  absolute p-5 opacity-50 transition-opacity duration-200 cursor-pointer z-10   992px:right-0  992px:top-20 hover:opacity-100 text-[50px] text-white `}
+    onClick={() => {
+      if (onClick) {
+        onClick();
+      }
+    }}
+  >
+    ❮
+  </div>
+);
 
+const CustomNextArrow = ({ currentSlide, slideCount, onClick }) => (
+  <div
+    className={`  absolute p-5 opacity-50 transition-opacity duration-200 cursor-pointer top-0 z-10  right-0  992px:top-40 hover:opacity-100 text-[50px] text-white `}
+    onClick={() => {
+      if (onClick) {
+        onClick();
+      }
+    }}
+  >
+    ❯
+  </div>
+);
+
+
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 700,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    nextArrow: <CustomNextArrow />,
+    prevArrow: <CustomPrevArrow />,
+    responsive: [
+    
+      {
+        breakpoint: 1366,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+        },
+      },
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      {
+        breakpoint: 991,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      
+    ],
+  };
   return (
-    <div className="carousel">
-      <div className="slides h-[190px] relative   768px:h-[220px] select-none block  992px:h-[300px]  1200px:h-[310px]">
-        <div className="slide-container block ">
-          <div
-            className={`slide-image h-full relative  992px:block 992px:space-x-2  w-full top-0   ${
-              currentSlideSection === 0
-                ? " opacity-100 transform scale-100 transition-opacity duration-1000 ease-in-out"
-                : " 992px:opacity-0 transition-all duration-[700ms] ease-in-out "
-            }`}
-          >
-            {slides.slice(0, 3).map((slide, index) => (
-              <div
-                key={index}
-                className={`service-item inline-block w-full text-center mx-auto 992px:opacity-100 absolute 992px:visible  ${
-                  currentSlide === index
-                    ? " visible opacity-100"
-                    : " opacity-0 invisible"
-                }  992px:relative transition-opacity duration-1000 ease-in-out  992px:align-top  992px:w-[30%]  992px:float-left text-white `}
-              >
-                <div className="service-img">
-                  <img className="h-[60px] mx-auto" src={slide.imgSrc} alt="" />
+         
+            <Slider {...settings}>
+              {slides.map((slide, index) => (
+                <div
+                  key={index}
+                  className={`slick-item inline-block w-full text-center mx-auto opacity-100  visible relative transition-opacity duration-1000 ease-in-out  992px:align-top  992px:w-[30%]  992px:float-left text-white  `}
+                >
+                  <div className="service-img">
+                    <img
+                      className="h-[60px] mx-auto"
+                      src={slide.imgSrc}
+                      alt=""
+                    />
+                  </div>
+                  <div className="service-info text-white clear-both">
+                    <h3 className="text-heading leading-[1.6em] text-[16px] font-montserrat font-bold my-[1rem]">
+                      {slide.title}
+                    </h3>
+                    <p className=" w-[70%] 992px:w-[95%] text-center text-[14px] leading-[1.6em]  992px:leading-[1.6em]  1024px:leading-[2em] mx-auto whitespace-normal  font-montserrat font-light 992px:text-center">
+                      {slide.description}
+                    </p>
+                  </div>
+                  
                 </div>
-                <div className="service-info text-white clear-both">
-                  <h3 className="text-heading leading-[1.6em] text-[16px] font-montserrat font-bold my-[1rem]">
-                    {slide.title}
-                  </h3>
-                  <p className=" w-[70%] 992px:w-[95%] text-center text-[14px] leading-[1.6em]  992px:leading-[1.6em]  1024px:leading-[2em] mx-auto whitespace-normal  font-montserrat font-light 992px:text-center">
-                    {slide.description}
-                  </p>
-                </div>
-                <div className="serviceitem-controls block relative top-[-200px] z-40 text-[100px] text-white 992px:hidden">
-                  <button
-                    className="prev-slide   absolute transition-opacity duration-200 cursor-pointer left-0 hover:opacity-100"
-                    onClick={goToPrevSlide}
-                  >
-                    <span>‹</span>
-                  </button>
-                  <button
-                    className="next-slide    absolute transition-opacity duration-200 cursor-pointer   right-0 hover:opacity-100"
-                    onClick={goToNextSlide}
-                  >
-                    <span>›</span>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-          <Controls
-            toggleSlide={toggleSlide}
-            section={0}
-            currentSlideSection={currentSlideSection}
-          />
-        </div>
-
-        <div className="slide-container block ">
-          <div
-            className={`slide-image  992px:block 992px:space-x-2  w-full top-0 absolute ${
-              currentSlideSection === 1
-                ? " opacity-100 transform scale-100 transition-opacity duration-1000 ease-in-out"
-                : " 992px:opacity-0 transition-all duration-[700ms] ease-in-out"
-            }`}
-          >
-            {slides.slice(3, 6).map((slide, index) => (
-              <div
-                key={index + 3}
-                className={`service-item inline-block w-full text-center mx-auto 992px:opacity-100 absolute 992px:visible  ${
-                  currentSlide === index + 3
-                    ? " visible opacity-100"
-                    : " opacity-0 invisible"
-                }  992px:relative transition-opacity duration-1000 ease-in-out  992px:align-top  992px:w-[30%]  992px:float-left text-white `}
-              >
-                <div className="service-img">
-                  <img className="h-[60px] mx-auto" src={slide.imgSrc} alt="" />
-                </div>
-                <div className="service-info text-white clear-both">
-                  <h3 className="text-heading leading-[1.6em] text-[16px] font-montserrat font-bold my-[1rem]">
-                    {slide.title}
-                  </h3>
-                  <p className=" w-[70%] 992px:w-[95%] text-center text-[14px] leading-[1.6em]  992px:leading-[1.6em]  1024px:leading-[2em] mx-auto whitespace-normal  font-montserrat font-light 992px:text-center">
-                    {slide.description}
-                  </p>
-                </div>
-                <div className="serviceitem-controls block relative top-[-200px] z-40 text-[100px] text-white 992px:hidden">
-                  <button
-                    className="prev-slide   absolute transition-opacity duration-200 cursor-pointer left-0 hover:opacity-100"
-                    onClick={goToPrevSlide}
-                  >
-                    <span>‹</span>
-                  </button>
-                  <button
-                    className="next-slide    absolute transition-opacity duration-200 cursor-pointer   right-0 hover:opacity-100"
-                    onClick={goToNextSlide}
-                  >
-                    <span>›</span>
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-          <Controls
-            toggleSlide={toggleSlide}
-            section={1}
-            currentSlideSection={currentSlideSection}
-          />
-        </div>
-      </div>
-    </div>
+              ))}
+            </Slider>
+         
   );
 };
 

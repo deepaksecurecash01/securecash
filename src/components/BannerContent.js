@@ -11,8 +11,8 @@ const BannerContent = () => {
       id="content-middle"
       className="bg-[#1a1a1a] min-h-[614px] 414px:min-h-[540px] pl-0 flex p-0 pt-0  992px:inline-block w-full mx-auto"
     >
-      <div className="inner w-[95%] max-w-[1366px] mx-auto flex flex-col justify-evenly 992px:items-center py-[40px]  992px:flex-row  992px:py-[100px] ">
-        <div className="w-full text-center pr-0   1024px:pr-0  992px:[flex:2] text-white ">
+      <div className="inner w-[95%] max-w-[1366px] mx-auto  992px:grid  992px:grid-cols-5 py-[40px]  992px:f  992px:py-[100px] ">
+        <div className="w-full text-center pr-0  992px:col-span-2   992px:pr-0 text-white ">
           <div className="service-container p-4 992px:p-0 pt-0 leading-[2em] m-0 text-[16px] text-white">
             <Divider responsiveClassName="992px:mx-0 992px:text-left 1024px:mt-0" />
 
@@ -48,16 +48,14 @@ const BannerContent = () => {
             >
               Anywhere, Anytime, Australia Wide
             </Paragraph>
-
-           
           </div>
         </div>
 
         {/* Carousel */}
-        <div className="ml-0 mt-[40px] 768px:mt-0  992px:[flex:3]  992px:ml-[40px] ">
+        <div className="ml-0 mt-[40px] 992px:mt-0  992px:ml-[40px]   992px:col-span-3">
           <div
             id="service-slider"
-            className="w-[90%] h-[248px] 360px:h-[232px] 480px:h-auto 992px:h-0  480px:w-[80%]  768px:my-[16px] mx-auto 992px:w-full"
+            className=""
           >
             <Carousel />
           </div>
