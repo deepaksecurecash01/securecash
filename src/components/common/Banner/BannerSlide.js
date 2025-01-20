@@ -21,6 +21,8 @@ const BannerSlide = ({ slides = [] }) => {
     fade: true,
     slidesToShow: 1,
     slidesToScroll: 1,
+        pauseOnHover: true,
+
     beforeChange: (_, next) => {
       setCurrentSlide(next);
     },

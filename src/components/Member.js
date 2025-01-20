@@ -1,51 +1,29 @@
 "use client";
 import React, { useState } from "react";
 import Controls from "./Controls";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
 import Slider from "react-slick";
-
-const Member = () => {
-  const slides = [
-    {
-      imgSrc: "https://www.securecash.com.au/images/icons/australia.png",
-      title: "Australia Wide",
-      description:
-        "SecureCash is a one stop cash in transit agency that will manage your banking &amp; change order services no matter where you are located in Australia.",
-    },
-    {
-      imgSrc: "https://www.securecash.com.au/images/icons/edocket.png",
-      title: "eDocket System",
-      description:
-        "Using our industry leading software technology unique to only SecureCash, we are able to track &amp; trace your deposit with a click of a button.",
-    },
-    {
-      imgSrc: "https://www.securecash.com.au/images/icons/flexible.png",
-      title: "Total Flexibility",
-      description:
-        "You can have your banking collected on any day or days you choose, &amp; you are free to cancel or change the days your banking is collected whenever you want.",
-    },
-    {
-      imgSrc: "https://www.securecash.com.au/images/icons/banks.png",
-      title: "All Major Banks",
-      description:
-        "We work with most major banks in Australia including the NAB, Commonwealth Bank, ANZ, Westpac &amp; some local banks such as BankSA &amp; Bendigo Bank.",
-    },
-    {
-      imgSrc: "https://www.securecash.com.au/images/icons/contracts.png",
-      title: "No Lock-in Contracts",
-      description:
-        "We do not lock you into lengthy contracts, you are free to try our service &amp; if you find that it is not suitable for your organisation, then you can cancel at anytime with notice.",
-    },
-    {
-      imgSrc: "https://www.securecash.com.au/images/icons/olservices.png",
-      title: "Online Services",
-      description:
-        "Customers are able to book extra pickups, cancel a scheduled pickup, submit change orders, &amp; even verify a banking courier’s identification all online.",
-    },
-  ];
-
+const SocialLink = ({ href, icon, alt }) => (
+  <li className="float-left pr-[5px]">
+    <a href={href}>
+      <img
+        className="w-[80%] hover:filter hover:contrast-0"
+        src={`https://www.securecash.com.au/images/icons/social/webp/${icon}.webp`}
+        alt={alt}
+      />
+    </a>
+  </li>
+);
+const Member = ({ member }) => {
   const CustomPrevArrow = ({ currentSlide, slideCount, onClick }) => (
     <div
-      className={`  absolute p-5 opacity-50 transition-opacity duration-200 cursor-pointer z-10   992px:right-0  992px:top-20 hover:opacity-100 text-[50px] text-white `}
+      className={`  absolute p-5 transition-opacity duration-200 cursor-pointer z-10   992px:left-0  992px:top-20 text-primary text-[50px]  ${
+        currentSlide === 0
+          ? "opacity-50 cursor-not-allowed pointer-events-none"
+          : "opacity-100 cursor-pointer"
+      }`}
       onClick={() => {
         if (onClick) {
           onClick();
@@ -58,7 +36,11 @@ const Member = () => {
 
   const CustomNextArrow = ({ currentSlide, slideCount, onClick }) => (
     <div
-      className={`  absolute p-5 opacity-50 transition-opacity duration-200 cursor-pointer top-0 z-10  right-0  992px:top-40 hover:opacity-100 text-[50px] text-white `}
+      className={`  absolute p-5 transition-opacity duration-200 cursor-pointer top-0 z-10  left-0  992px:top-40 opacity-100 text-primary text-[50px] ${
+        currentSlide >= slideCount - 4
+          ? "cursor-not-allowed opacity-50 pointer-events-none no-underline"
+          : "cursor-pointer"
+      } `}
       onClick={() => {
         if (onClick) {
           onClick();
@@ -69,63 +51,140 @@ const Member = () => {
     </div>
   );
 
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 700,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    nextArrow: <CustomNextArrow />,
-    prevArrow: <CustomPrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1366,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
+  const CustomArrow = ({
+    direction,
+    currentSlide,
+    slideCount,
+    slidesToShow,
+    onClick,
+  }) => {
+    const isPrev = direction === "prev";
+    const isDisabled = isPrev
+      ? currentSlide === 0
+      : currentSlide >= slideCount - slidesToShow;
 
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
+    return (
+      <div
+        className={`absolute p-5 transition-opacity duration-200 z-10 text-primary text-[50px] ${
+          isPrev ? "992px:left-0 992px:top-20" : "left-0 top-0 992px:top-40"
+        } ${
+          isDisabled ? "opacity-50 pointer-events-none cursor-not-allowed no-underline" : "cursor-pointer"
+        }`}
+        onClick={!isDisabled ? onClick : undefined}
+        aria-label={isPrev ? "Previous Slide" : "Next Slide"}
+      >
+        {isPrev ? "❮" : "❯"}
+      </div>
+    );
   };
+
+
+const settings = {
+  dots: false,
+  infinite: false,
+  speed: 700,
+  slidesToShow: 4,
+  slidesToScroll: 1,
+  nextArrow: <CustomArrow direction="next" slidesToShow={4} />,
+  prevArrow: <CustomArrow direction="prev" slidesToShow={4} />,
+  responsive: [
+    {
+      breakpoint: 1366,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        nextArrow: <CustomArrow direction="next" slidesToShow={4} />,
+        prevArrow: <CustomArrow direction="prev" slidesToShow={4} />,
+      },
+    },
+    {
+      breakpoint: 1140,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        nextArrow: <CustomArrow direction="next" slidesToShow={3} />,
+        prevArrow: <CustomArrow direction="prev" slidesToShow={3} />,
+      },
+    },
+    {
+      breakpoint: 992,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+        nextArrow: <CustomArrow direction="next" slidesToShow={2} />,
+        prevArrow: <CustomArrow direction="prev" slidesToShow={2} />,
+      },
+    },
+    {
+      breakpoint: 767,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        nextArrow: <CustomArrow direction="next" slidesToShow={1} />,
+        prevArrow: <CustomArrow direction="prev" slidesToShow={1} />,
+      },
+    },
+  ],
+};
+
   return (
     <Slider {...settings}>
-      {slides.map((slide, index) => (
+      {member.map((member, index) => (
         <div
           key={index}
-          className={`slick-item inline-block w-full text-center mx-auto opacity-100  visible relative transition-opacity duration-1000 ease-in-out  992px:align-top  992px:w-[30%]  992px:float-left text-white  `}
+          className="item-container inline-block w-[80%] 1024px:w-[25%] bg-white self-center justify-center items-center align-top"
         >
-          <div className="service-img">
-            <img className="h-[60px] mx-auto" src={slide.imgSrc} alt="" />
+          <div className="item ml-0 bg-white float-left">
+            <img
+              className="team-pic w-full mx-auto my-0"
+              src={member.image}
+              alt={member.name}
+            />
           </div>
-          <div className="service-info text-white clear-both">
-            <h3 className="text-heading leading-[1.6em] text-[16px] font-montserrat font-bold my-[1rem]">
-              {slide.title}
-            </h3>
-            <p className=" w-[70%] 992px:w-[95%] text-center text-[14px] leading-[1.6em]  992px:leading-[1.6em]  1024px:leading-[2em] mx-auto whitespace-normal  font-montserrat font-light 992px:text-center">
-              {slide.description}
+          <div className="member-info p-4 414px:p-0 414px:pl-[20px] 414px:pr-[20px] w-full text-left 768px:pl-[16px] 768px:pr-[16px] 1366px:pl-[20px] 1366px:pr-[20px] 414px:py-[25px] clear-both overflow-hidden">
+            <h4 className="text-[20px] font-semibold pb-[12px] text-[#333333]">
+              {member.name}
+            </h4>
+            <p className="font-prata text-[14px] text-[#808080] mb-[18px]">
+              {member.position}
             </p>
+            <div className="email-info flex justify-items-center px-0 py-[10px]">
+              <img
+                className="mail-icon w-[5%] mr-2 py-[5px]"
+                src="https://www.securecash.com.au/images/icons/mail.png"
+                alt="mail"
+              />
+              <a
+                className="text-[14px] text-[#929292] hover:no-underline hover:text-[#c7a652]"
+                href={`mailto:${member.email}`}
+              >
+                {member.email}
+              </a>
+            </div>
+            <div className="social-media pt-[5px]">
+              <ul className="list-none">
+                <SocialLink
+                  href={member.socialLinks?.facebook}
+                  icon="fb"
+                  alt="Facebook"
+                />
+                <SocialLink
+                  href={member.socialLinks?.twitter}
+                  icon="twitter"
+                  alt="Twitter"
+                />
+                <SocialLink
+                  href={member.socialLinks?.youtube}
+                  icon="yt"
+                  alt="YouTube"
+                />
+                <SocialLink
+                  href={member.socialLinks?.linkedin}
+                  icon="linkedin"
+                  alt="LinkedIn"
+                />
+              </ul>
+            </div>
           </div>
         </div>
       ))}
