@@ -1,19 +1,19 @@
-import Banner from "@/components/common/Banner/Banner";
-import BottomContent from "@/components/BottomContent";
-import CompaniesSlider from "@/components/CompaniesSlider";
-import ContentContact from "@/components/ContentContact";
-import NewBanner from "@/components/newbanner";
-import TeamContent from "@/components/TeamContent";
-import Welcome from "@/components/Welcome";
+import Banner from "@/components/homepage/BannerSection";
+import Welcome from "@/components/homepage/WelcomeSection";
+import MidBanner from "@/components/homepage/MidBanner";
+import FormSection from "@/components/homepage/FormSection";
+import CardsSection from "@/components/homepage/CardsSection";
+import CompaniesSlider from "@/components/common/CompaniesSlider";
+import TeamContent from "@/components/homepage/TeamSection";
 
 export default function Home() {
   return (
     <>
       <Banner />
       <Welcome />
-      <NewBanner />
-      <ContentContact />
-      <BottomContent />
+      <MidBanner />
+      <FormSection />
+      <CardsSection />
       <TeamContent />
       <CompaniesSlider />
     </>
