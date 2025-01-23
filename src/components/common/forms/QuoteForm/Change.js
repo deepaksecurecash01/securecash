@@ -10,6 +10,10 @@ import WarningPopup from "../elements/WarningPopup";
 import SelectOption from "@/components/common/forms/elements/SelectOption";
 import { InputField } from "../elements/InputField";
 import { SelectionBox } from "../elements/SelectionBox";
+import Divider from "@/components/common/Divider";
+import Heading from "@/components/common/Heading";
+import SubHeading from "@/components/common/SubHeading";
+import Paragraph from "@/components/common/Paragraph";
 
 const Change = ({
   frequencyOptions,

@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import "@slightlyoff/lite-vimeo";
 import Image from "next/image";
 import Divider from "@/components/common/Divider";
 import Heading from "@/components/common/Heading";
@@ -8,6 +7,7 @@ import SubHeading from "@/components/common/SubHeading";
 import Paragraph from "@/components/common/Paragraph";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "@/components/homepage/WelcomeSection/ContentScroll";
+import VimeoLite from "@/components/VimeoLite";
 
 const servicesData = [
   {
@@ -144,7 +144,10 @@ const Welcome = () => {
               </ScrollableSection>
             </div>
             <div className="rightside-column pb-0 float-none w-full 992px:w-1/2 p-0 mx-auto my-0 992px:pb-0">
-              <lite-vimeo videoid="312442368"></lite-vimeo>
+              <VimeoLite
+                videoId="312442368"
+
+              />
             </div>
           </div>
         </div>
