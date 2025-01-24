@@ -1,4 +1,4 @@
-import { Open_Sans, Montserrat, Prata } from "next/font/google";
+import { Montserrat, Prata } from "next/font/google";
 import "./globals.css";
 
 import Header from "@/components/common/Header";

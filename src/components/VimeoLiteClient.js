@@ -1,43 +1,15 @@
-import React, { useState, useRef, useEffect } from "react";
+"use client";
+
 import Image from "next/image";
 
-const VimeoLite = ({
+const VimeoLiteClient = ({
   videoId,
   title = "Vimeo Video",
   width = "100%",
   aspectRatio = "16:9",
   thumbnail,
 }) => {
-  const [videoState, setVideoState] = useState("idle");
-  const iframeRef = useRef(null);
-  const [thumbnailUrl, setThumbnailUrl] = useState(thumbnail);
-
-  useEffect(() => {
-    if (!thumbnail) {
-      fetch(`https://vimeo.com/api/v2/video/${videoId}.json`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data && data[0]) {
-            setThumbnailUrl(data[0].thumbnail_large);
-          }
-        })
-        .catch((error) =>
-          console.error("Error fetching Vimeo thumbnail:", error)
-        );
-    }
-  }, [videoId, thumbnail]);
-
-  const handlePlay = () => {
-    if (iframeRef.current) {
-      const newSrc = `https://player.vimeo.com/video/${videoId}?autoplay=1&title=0&byline=0&portrait=0`;
-
-      // Set iframe src directly
-      iframeRef.current.src = newSrc;
-
-      // Update state to playing
-      setVideoState("playing");
-    }
-  };
+  const iframeUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1&muted=1`;
 
   return (
     <div
@@ -60,8 +32,9 @@ const VimeoLite = ({
         }}
       >
         {/* Thumbnail Layer */}
-        {videoState === "idle" && thumbnailUrl && (
+        {thumbnail && (
           <div
+            id={`thumbnail-${videoId}`}
             className="vimeo-lite-preview group"
             style={{
               position: "absolute",
@@ -75,39 +48,35 @@ const VimeoLite = ({
               justifyContent: "center",
               zIndex: 10,
               transition: "all 0.2s cubic-bezier(0, 0, 0.2, 1)",
-              overflow: "hidden",
             }}
-            onClick={handlePlay}
+            onClick={() => {
+              const iframeElement = document.getElementById(
+                `iframe-${videoId}`
+              );
+              if (iframeElement) {
+                iframeElement.style.display = "block"; // Show iframe
+                iframeElement.src = iframeUrl; // Load video
+              }
+              const thumbnailElement = document.getElementById(
+                `thumbnail-${videoId}`
+              );
+              if (thumbnailElement) {
+                thumbnailElement.style.display = "none"; // Hide thumbnail
+              }
+            }}
           >
-            {/* Thumbnail Image with Next.js Image */}
-            {thumbnailUrl && (
-              <Image
-                src={thumbnailUrl}
-                alt={title}
-                fill
-                style={{
-                  objectFit: "cover",
-                  objectPosition: "center",
-                  zIndex: 1, // Ensure the image stays under the vignette
-                }}
-              />
-            )}
-
-            {/* Vignette Effect using pseudo-element */}
-            <div
+            <Image
+              src={thumbnail}
+              alt={title}
+              fill
+              priority={true}
               style={{
-                position: "absolute",
-                top: 0,
-                left: 0,
-                width: "100%",
-                height: "100%",
-                background:
-                  "radial-gradient(circle, transparent 50%, rgba(0, 0, 0, 0.6) 100%)", // Vignette at corners, clear center
-                zIndex: 2, // Ensure vignette is on top of the image
+                objectFit: "cover",
+                objectPosition: "center",
               }}
-            ></div>
+            />
 
-            {/* YouTube-style Play Button */}
+            {/* Play Button */}
             <div
               className={`youtube-play-button bg-[#212121] opacity-80 group-hover:bg-primary group-hover:opacity-100`}
               style={{
@@ -139,7 +108,7 @@ const VimeoLite = ({
 
         {/* Iframe Layer */}
         <iframe
-          ref={iframeRef}
+          id={`iframe-${videoId}`}
           style={{
             position: "absolute",
             top: 0,
@@ -147,9 +116,9 @@ const VimeoLite = ({
             width: "100%",
             height: "100%",
             border: "none",
-            zIndex: videoState === "playing" ? 9 : 1,
+            zIndex: 9,
+            display: "none", // Initially hidden
           }}
-          src={null} // Set initial src to null to avoid the empty string issue
           title={title}
           allow="autoplay; fullscreen; picture-in-picture"
           allowFullScreen
@@ -159,4 +128,4 @@ const VimeoLite = ({
   );
 };
 
-export default VimeoLite;
+export default VimeoLiteClient;

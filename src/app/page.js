@@ -8,7 +8,7 @@ import TeamContent from "@/components/homepage/TeamSection";
 
 export default function Home() {
   return (
-    <>
+    <div className=" overflow-hidden">
       <Banner />
       <Welcome />
       <MidBanner />
@@ -16,6 +16,6 @@ export default function Home() {
       <CardsSection />
       <TeamContent />
       <CompaniesSlider />
-    </>
+    </div>
   );
 }

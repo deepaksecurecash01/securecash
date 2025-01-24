@@ -64,32 +64,32 @@ const BannerSlide = ({ slides = [] }) => {
   };
 
   return (
-    <div className="relative">
-      <Slider className="" ref={sliderRef} {...settings}>
-        {slides.map((slide, index) => (
-          <div key={index} className=" relative animate-fade ">
-            <div className="absolute inset-0 bg-black/30 transition-opacity duration-700" />
-            <picture className="w-full">
-              <source media="(min-width: 1200px)" srcSet={`${slide.web}`} />
-              <source srcSet={slide.tablet} media="(min-width: 768px)" />
-              <source media="(max-width: 480px)" srcSet={`${slide.mobile}`} />
-              <Image
-                width={0}
-                height={0}
-                alt={slide.alt || "Banner Image"}
-                src={slide.mobile}
-                priority={true}
-                sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 100vw"
-                className="h-full w-full min-h-[480px] 414px:min-h-[490px] object-cover 768px:min-h-[600px] 1280px:h-full -z-10"
-              />
-            </picture>
-            <Container>
-              <BannerContent {...slide} />
-            </Container>
-          </div>
-        ))}
-      </Slider>
-    </div>
+   <div className="relative w-full">
+  <Slider className="relative" ref={sliderRef} {...settings}>
+    {slides.map((slide, index) => (
+      <div key={index} className="relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/30 transition-opacity duration-700" />
+        <picture className="w-full h-full">
+          <source media="(min-width: 1200px)" srcSet={slide.web} />
+          <source media="(min-width: 768px)" srcSet={slide.tablet} />
+          <source media="(max-width: 480px)" srcSet={slide.mobile} />
+          <Image
+            width={1200}
+            height={800}
+            alt={slide.alt || "Banner Image"}
+            src={slide.mobile}
+            priority
+            sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 100vw"
+            className="w-full h-[480px] 414px:h-[490px] 768px:h-[600px] 1280px:h-[800px] object-cover"
+          />
+        </picture>
+        <Container className=" z-10">
+          <BannerContent {...slide} />
+        </Container>
+      </div>
+    ))}
+  </Slider>
+</div>
   );
 };
 
