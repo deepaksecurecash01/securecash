@@ -19,7 +19,7 @@ const Slide = ({ slide, isActive }) => (
       <Image
         width={1209}
         height={800}
-        loading="lazy"
+        priority
         alt={slide.alt || "Banner Image"}
         src={slide.mobile}
         sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 100vw"
@@ -51,66 +51,14 @@ const SlideControls = ({ slides, currentSlide, onSlideChange }) => (
   </div>
 );
 
-const SLIDES = [
-  {
-    mobile: "https://www.securecash.com.au/images/banner/Slide-1-mobile.jpg",
-    tablet: "https://www.securecash.com.au/images/banner/Slide-1-tablet.jpg",
-    web: "https://www.securecash.com.au/images/banner/Slide-1-web.jpg",
-    heading: "Let Us Do Your Banking,",
-    subHeading: "Don't Take The Risk!",
-    text: "Anywhere. Anytime. Australia Wide.",
-    buttonText: "Learn More",
-    buttonLink: "#welcome",
-  },
-  {
-    mobile: "https://www.securecash.com.au/images/banner/Slide-2-mobile.jpg",
-    tablet: "https://www.securecash.com.au/images/banner/Slide-2-tablet.jpg",
-    web: "https://www.securecash.com.au/images/banner/Slide-2-web.jpg",
-    heading: "Start Taking Advantage Of Our Services Today",
-    subHeading: "Get A Quote From SecureCash",
-    text: "We Just Need A Few Details!",
-    buttonText: "Get a Quote",
-    buttonLink: "https://www.securecash.com.au/quote/",
-  },
-  {
-    mobile: "https://www.securecash.com.au/images/banner/Slide-3-mobile.jpg",
-    tablet: "https://www.securecash.com.au/images/banner/Slide-3-tablet.jpg",
-    web: "https://www.securecash.com.au/images/banner/Slide-3-web.jpg",
-    heading: "We're Pushing Our Industry Into The Future",
-    subHeading: "Take Advantage Of Our eDockets System",
-    text: "Control Your Services With A Click Of A Button",
-    buttonText: "Learn More",
-    buttonLink: "https://www.edockets.app/",
-  },
-  {
-    mobile: "https://www.securecash.com.au/images/banner/Slide-4-mobile.jpg",
-    tablet: "https://www.securecash.com.au/images/banner/Slide-4-tablet.jpg",
-    web: "https://www.securecash.com.au/images/banner/Slide-4-web.jpg",
-    heading: "Our Services Are Covert",
-    subHeading: "We Don't Attract Unwanted Attention",
-    text: "A Safer Solution For Your Business",
-    buttonText: "Learn More",
-    buttonLink:
-      "https://www.securecash.com.au/about-us/#about-us-section-service",
-  },
-  {
-    mobile: "https://www.securecash.com.au/images/banner/Slide-5-mobile.jpg",
-    tablet: "https://www.securecash.com.au/images/banner/Slide-5-tablet.jpg",
-    web: "https://www.securecash.com.au/images/banner/Slide-5-web.jpg",
-    heading: "Use A Provider You Can Trust",
-    subHeading: "We Have Been Operating Over 25 Years",
-    text: "Our Managers Have Over 100 Years Combined Industry Experience",
-    buttonText: "About Us",
-    buttonLink: "https://www.securecash.com.au/about-us/",
-  },
-];
+
 
 const BannerSlide = ({ slides = [] }) => {
  const [slideIndex, setSlideIndex] = useState(1);
   const bannerInterval = useRef(null);
 
   const slideBannerAuto = () => {
-    setSlideIndex((prev) => (prev >= SLIDES.length ? 1 : prev + 1));
+    setSlideIndex((prev) => (prev >= slides.length ? 1 : prev + 1));
   };
 
   useEffect(() => {
@@ -136,7 +84,7 @@ const BannerSlide = ({ slides = [] }) => {
       }}
     >
       <div className="slideshow-container">
-        {SLIDES.map((slide, index) => (
+        {slides.map((slide, index) => (
           <Slide
             key={index}
             slide={slide}
