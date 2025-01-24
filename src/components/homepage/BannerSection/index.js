@@ -58,14 +58,9 @@ const SLIDES = [
 const Banner = () => {
   return (
     <div id="banner" className="flex flex-col justify-end items-center ">
-      <div
-        id="banner-slider"
-        className="w-full inline-block relative overflow-hidden"
-      >
-        <div className="slideshow-container">
+     
           <BannerSlide slides={SLIDES} />
-        </div>
-      </div>
+      
       <BannerInfo />
     </div>
   );

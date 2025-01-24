@@ -1,39 +1,47 @@
 "use client";
+import BannerInfo from "@/component/common/BannerInfo";
 import React, { useEffect, useRef, useState } from "react";
-import Image from "next/image";
-import Container from "@/components/layout/Container";
-import BannerContent from "./BannerContent";
 
-
-const Slide = ({ slide, isActive }) => (
+const BannerSlide = ({ slide, isActive }) => (
   <div
-    className={`bannerSlides relative animate-fade transition-opacity duration-300 ${
-      isActive ? " opacity-100 block" : " opacity-0 hidden"
-    }`}
+    className={`bannerSlides relative fade ${isActive ? "block" : "hidden"}`}
   >
-    <div className="absolute inset-0 bg-black/35 transition-opacity duration-700" />
+    <div className="bg-black w-full h-full z-0 absolute opacity-35" />
     <picture>
-      <source media="(min-width: 1200px)" srcSet={slide.web} />
-      <source media="(min-width: 768px)" srcSet={slide.tablet} />
-      <source media="(max-width: 480px)" srcSet={slide.mobile} />
-      <Image
-        width={1209}
-        height={800}
-        loading="lazy"
-        alt={slide.alt || "Banner Image"}
-        src={slide.mobile}
-        sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 100vw"
+      <source srcSet={slide.mobile} media="(max-width: 480px)" />
+      <source srcSet={slide.tablet} media="(max-width: 768px)" />
+      <img
+        src={slide.web}
+        alt=""
         className="h-full w-full min-h-[480px] 414px:min-h-[490px] object-cover 768px:min-h-[600px] 1280px:h-full -z-10"
       />
     </picture>
-    <Container className=" z-10">
-      <BannerContent {...slide} />
-    </Container>
+    <div className="w-full max-w-[1366px] mx-auto">
+      <div className="absolute bottom-[8px] px-0 mr-0 top-[10%] mt-12 480px:mt-14 600px:mt-7 768px:mt-14 600px:top-[20%] w-full text-center p-[8px_12px] text-white 1024px:w-[70%] 1024px:text-left 1024px:top-[10%] 1024px:bottom-auto 1024px:pl-[52px] 1200px:mt-0 1280px:mt-7 1200px:top-[15%] 1280px:top-[20%] 1366px:mt-10">
+        <hr className="h-[4px] w-[100px] mx-auto my-[30px] bg-white rounded-[5px] border-0 1024px:mx-0 1024px:text-left text-center mb-6 1024px:mt-0 mt-0" />
+        <h3 className="font-prata text-[20px] leading-[24px] text-center my-[8px_0_24px_0] w-[90%] mb-6 mx-auto 1024px:mx-0 1024px:text-left 768px:text-2xl 992px:text-[32px] 992px:leading-[1em] 992px:mb-[24px] [text-shadow:2px_2px_5px_#111111]">
+          {slide.heading}
+        </h3>
+        <h1 className="montSemi font-montserrat mb-6 font-bold text-[26px] 480px:text-[30px] leading-[28px] text-center mb-7.5 w-[90%] mx-auto 1024px:mx-0 text-[#c7a652] 480px:leading-[1em] 768px:text-5xl 992px:text-[56px] 992px:mb-[16px] 1024px:text-left [text-shadow:2px_2px_6px_#111111]">
+          {slide.subHeading}
+        </h1>
+        <p className="[text-shadow:2px_2px_5px_#111111] text-[16px] 992px:text-[24px] text-center w-[86%] mx-auto 768px:text-xl 1024px:mx-0 leading-[24px] 1024px:text-left">
+          {slide.text}
+        </p>
+        <a href={slide.buttonLink} className="btn-wrapper">
+          <div className="flex flex-row justify-center items-center w-[200px] min-h-[50px] min-w-[130px] px-5 py-0 mt-5 rounded-full bg-[#c7a652] btn-learn-more hover:bg-white 480px:w-[150px] 768px:w-[182px] 768px:min-w-[182px] 768px:min-h-[60px] 768px:mt-8 1366px:mt-12 max-h-[70px] group mx-auto 1024px:mx-0">
+            <p className="m-0 p-0 text-sm w-full text-[#ffffff] group-hover:text-[#000] 480px:text-base hover:no-underline text-center">
+              {slide.buttonText}
+            </p>
+          </div>
+        </a>
+      </div>
+    </div>
   </div>
 );
 
 const SlideControls = ({ slides, currentSlide, onSlideChange }) => (
-  <div className="inner-controls absolute w-5 h-[68px] z-10 top-[calc(50%-80px)] right-0 cursor-default ml-auto mr-0 320px:w-[40px] 768px:right-0 992px:mr-[30px] 1200px:right-0">
+  <div className="inner-controls absolute w-5 h-[68px] z-10 top-[calc(50%-60px)] right-0 cursor-default ml-auto mr-0 320px:w-[40px] 768px:right-0 992px:mr-[30px] 1200px:right-0">
     <ul className="dot-navigation absolute top-[32%] list-none">
       {slides.map((_, index) => (
         <li key={index}>
@@ -105,8 +113,8 @@ const SLIDES = [
   },
 ];
 
-const BannerSlide = ({ slides = [] }) => {
- const [slideIndex, setSlideIndex] = useState(1);
+const Banner = () => {
+  const [slideIndex, setSlideIndex] = useState(1);
   const bannerInterval = useRef(null);
 
   const slideBannerAuto = () => {
@@ -127,30 +135,33 @@ const BannerSlide = ({ slides = [] }) => {
   }, []);
 
   return (
-    <div
-      id="banner-slider"
-      className="w-full inline-block relative overflow-hidden"
-      onMouseOver={() => clearInterval(bannerInterval.current)}
-      onMouseOut={() => {
-        bannerInterval.current = setInterval(slideBannerAuto, 5000);
-      }}
-    >
-      <div className="slideshow-container">
-        {SLIDES.map((slide, index) => (
-          <Slide
-            key={index}
-            slide={slide}
-            isActive={slideIndex === index + 1}
-          />
-        ))}
+    <div id="banner" className=" flex flex-col justify-end items-center">
+      <div
+        id="banner-slider"
+        className="w-full inline-block relative overflow-hidden"
+        onMouseOver={() => clearInterval(bannerInterval.current)}
+        onMouseOut={() => {
+          bannerInterval.current = setInterval(slideBannerAuto, 5000);
+        }}
+      >
+        <div className="slideshow-container">
+          {SLIDES.map((slide, index) => (
+            <BannerSlide
+              key={index}
+              slide={slide}
+              isActive={slideIndex === index + 1}
+            />
+          ))}
+        </div>
+        <SlideControls
+          slides={SLIDES}
+          currentSlide={slideIndex}
+          onSlideChange={setSlideIndex}
+        />
       </div>
-      <SlideControls
-        slides={SLIDES}
-        currentSlide={slideIndex}
-        onSlideChange={setSlideIndex}
-      />
+      <BannerInfo />
     </div>
   );
 };
 
-export default BannerSlide;
+export default Banner;
