@@ -93,7 +93,7 @@ const BannerSlide = ({ slides = [] }) => {
         ))}
       </div>
       <SlideControls
-        slides={SLIDES}
+        slides={slides}
         currentSlide={slideIndex}
         onSlideChange={setSlideIndex}
       />
