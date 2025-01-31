@@ -21,7 +21,7 @@ const Divider = ({
 
   return (
     <hr
-      className={`h-[4px] rounded-[5px] border-0 ${colorClass} w-[${width}] ${margin} ${padding} mx-auto text-center 1024px:${alignmentClass} ${responsiveClassName}`}
+      className={`h-[4px] rounded-[5px] border-0 ${colorClass} w-[${width}] max-w-[${width}] ${margin} ${padding} mx-auto text-center 1024px:${alignmentClass} ${responsiveClassName}`}
     />
   );
 };

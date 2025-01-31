@@ -4,7 +4,8 @@ import Heading from "@/components/common/Heading";
 import Paragraph from "@/components/common/Paragraph";
 import SubHeading from "@/components/common/SubHeading";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
-import ContentScroll from "./ContentScroll";import QuoteForm from "@/components/common/forms/QuoteForm";
+import ContentScroll from "./ContentScroll";
+import QuoteForm from "@/components/common/forms/QuoteForm";
 
 const FormSection = () =>
 {

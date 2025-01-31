@@ -4,11 +4,15 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 import Slider from "react-slick";
+import Image from "next/image";
 const SocialLink = ({ href, icon, alt }) => (
   <li className="float-left pr-[5px]">
     <a href={href}>
-      <img
-        className="w-[80%] hover:filter hover:contrast-0"
+      <Image
+        width={25}
+        height={25}
+        quality={80}
+        className=" hover:filter hover:contrast-0"
         src={`https://www.securecash.com.au/images/icons/social/webp/${icon}.webp`}
         alt={alt}
       />
@@ -106,11 +110,15 @@ const TeamSlider = ({ member }) => {
       {member.map((member, index) => (
         <div
           key={index}
-          className="item-container inline-block w-[80%] 1024px:w-[25%] bg-white self-center justify-center items-center align-top"
+          className="item-container inline-block w-[80%] 1024px:w-full bg-white self-center justify-center items-center align-top"
         >
-          <div className="item ml-0 bg-white float-left">
-            <img
-              className="team-pic w-full mx-auto my-0 "
+          <div className="item ml-0 w-full float-left">
+            <Image
+              className="team-pic w-full mx-auto my-0 object-center"
+              width={500}
+              height={300}
+              priority={true}
+              quality={80}
               src={member.image}
               alt={member.name}
             />
@@ -136,7 +144,7 @@ const TeamSlider = ({ member }) => {
               </a>
             </div>
             <div className="social-media pt-[5px]">
-              <ul className="list-none">
+              <ul className="list-none flex gap-2">
                 <SocialLink
                   href={member.socialLinks?.facebook}
                   icon="fb"

@@ -67,13 +67,13 @@ const Welcome = () => {
               height={0}
               className=" h-auto block mx-auto"
             />
-            <Divider
-              color="primary"
-              width="100px"
-              margin="mt-[16px] mb-[40px]"
-              alignment="center"
-              responsiveStyles="414px:my-[24px]"
-            />
+              <Divider
+                color="primary"
+                width="100px"
+                margin="mt-[16px] mb-[40px]"
+                alignment="center"
+                responsiveStyles="414px:my-[24px]"
+              />
 
             <Paragraph
               fontSize="16px"
@@ -144,10 +144,7 @@ const Welcome = () => {
               </ScrollableSection>
             </div>
             <div className="rightside-column pb-0 float-none w-full 992px:w-1/2 p-0 mx-auto my-0 992px:pb-0">
-              <VimeoLite
-                videoId="312442368"
-
-              />
+              <VimeoLite videoId="312442368" />
             </div>
           </div>
         </div>

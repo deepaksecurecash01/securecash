@@ -4,7 +4,6 @@ import Image from "next/image";
 import Container from "@/components/layout/Container";
 import BannerContent from "./BannerContent";
 
-
 const Slide = ({ slide, isActive }) => (
   <div
     className={`bannerSlides relative animate-fade transition-opacity duration-300 ${
@@ -16,10 +15,9 @@ const Slide = ({ slide, isActive }) => (
       <source media="(min-width: 1200px)" srcSet={slide.web} />
       <source media="(min-width: 768px)" srcSet={slide.tablet} />
       <source media="(max-width: 480px)" srcSet={slide.mobile} />
-      <Image
-        width={1209}
-        height={800}
-        priority
+      <img
+
+        priority="true"
         alt={slide.alt || "Banner Image"}
         src={slide.mobile}
         sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 100vw"
@@ -51,10 +49,8 @@ const SlideControls = ({ slides, currentSlide, onSlideChange }) => (
   </div>
 );
 
-
-
 const BannerSlide = ({ slides = [] }) => {
- const [slideIndex, setSlideIndex] = useState(1);
+  const [slideIndex, setSlideIndex] = useState(1);
   const bannerInterval = useRef(null);
 
   const slideBannerAuto = () => {
