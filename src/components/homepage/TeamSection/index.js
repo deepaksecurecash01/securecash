@@ -175,7 +175,10 @@ const TeamContent = () => {
         <hr className="divider-2 h-[4px] border-0 mt-4 mb-[40px] w-[100px] rounded-[5px] bg-[#c7a652] divider-bottom mx-auto" />
 
         <div className="members-slider relative select-none block w-full float-left mb-[100px]">
-          <div className="team-slider w-[90%] mx-auto  1024px:w-full overflow-hidden">
+          <div
+            className="team-slider w-[90%] mx-auto  1024px:w-full overflow-hidden"
+            aria-label="Team Members"
+          >
             <TeamSlider member={teamMembers} />
           </div>
         </div>

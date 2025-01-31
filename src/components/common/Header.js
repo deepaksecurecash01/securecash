@@ -50,7 +50,7 @@ const Logo = ({ onClick }) => (
         width={285}
         height={0}
         className="w-[285px] h-auto"
-        priority
+        priority={true}
       />
     </Link>
   </div>

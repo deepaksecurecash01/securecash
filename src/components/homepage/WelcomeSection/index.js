@@ -65,6 +65,7 @@ const Welcome = () => {
               alt="SecureCash Logo"
               width={320}
               height={0}
+              priority={true}
               className=" h-auto block mx-auto"
             />
               <Divider

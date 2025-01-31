@@ -114,13 +114,13 @@ const TeamSlider = ({ member }) => {
         >
           <div className="item ml-0 w-full float-left">
             <Image
-              className="team-pic w-full mx-auto my-0 object-center"
+              className="w-full mx-auto my-0 object-center"
               width={500}
               height={300}
-              priority={true}
+              priority={index < 4}
               quality={80}
               src={member.image}
-              alt={member.name}
+              alt={`${member.name}, ${member.position}`}
             />
           </div>
           <div className="member-info p-4 414px:p-0 414px:pl-[20px] 414px:pr-[20px] w-full text-left 768px:pl-[16px] 768px:pr-[16px] 1366px:pl-[20px] 1366px:pr-[20px] 414px:py-[25px] clear-both overflow-hidden">
@@ -135,10 +135,12 @@ const TeamSlider = ({ member }) => {
                 className="mail-icon w-[5%] mr-2 py-[5px]"
                 src="https://www.securecash.com.au/images/icons/mail.png"
                 alt="mail"
+                aria-hidden="true"
               />
               <a
                 className="text-[14px] text-[#929292] hover:no-underline hover:text-[#c7a652]"
                 href={`mailto:${member.email}`}
+                aria-label={`Send email to ${member.name}`}
               >
                 {member.email}
               </a>
