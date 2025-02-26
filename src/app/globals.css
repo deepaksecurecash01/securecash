@@ -64,31 +64,13 @@ video {
   overflow: hidden;
 }
 
-@media only screen and (max-width: 1366px) {}
 
-@media only screen and (max-width: 1280px) {}
 
-@media only screen and (max-width: 1200px) {}
 
-@media only screen and (max-width: 1024px) {}
-
-@media only screen and (max-width: 992px) {}
-
-@media only screen and (max-width: 768px) {}
-
-@media only screen and (max-width: 414px) {}
-
-@media only screen and (max-width: 320px) {}
-
-#content-middle .slick-list {
-  width: 90% !important;
+#team .slick-list {
+  width: 85% !important;
+  margin: 0 auto !important;
 }
-
-
-    #team .slick-list {
-      width: 85% !important;
-      margin: 0 auto !important;
-    }
 
 
 #team .slick-slide>div {
@@ -104,17 +86,19 @@ video {
 
 @media (min-width: 768px) {
 
-#team .slick-list {
+  #team .slick-list {
     width: 92% !important;
     margin-left: auto !important;
     margin-right: 0 !important;
   }
+
   #team .slick-track {
     display: flex;
     justify-content: space-evenly !important;
     gap: 0.7rem;
   }
 }
+
 @media (min-width: 1024px) {
 
   #team .slick-list {
@@ -123,4 +107,40 @@ video {
     margin-right: 0 !important;
   }
 
+}
+
+@media only screen and (max-width: 1366px) {}
+
+@media only screen and (max-width: 1280px) {}
+
+@media only screen and (max-width: 1200px) {}
+
+
+
+
+
+
+
+
+@media only screen and (max-width: 320px) {}
+
+#content-middle .slick-list {
+  width: 90% !important;
+}
+
+
+#about-us-section-story .section-header {
+  align-items: flex-start
+}
+
+#about-us-section-story .section-header h3 {
+  padding-left: 0
+}
+
+#about-us-section-story p {
+  text-align: left
+}
+
+#about-us-section-story .section-content-wrapper img {
+  width: 100%
 }

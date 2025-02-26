@@ -5,10 +5,8 @@
   /* Custom scrollbar variables */
   --scrollbarBG: #ebebeb;
   --thumbBG: #808080;
-
+    /* Rounded thumb */
   /* Cross-browser scrollbar styles */
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: var(--thumbBG) var(--scrollbarBG); /* Firefox */
 }
 
 /* Webkit scrollbar styles (Chrome, Edge, Safari) */
@@ -25,3 +23,4 @@
   background: var(--scrollbarBG); /* Track color */
   border-radius: 20px; /* Rounded track */
 }
+

@@ -24,7 +24,7 @@ const Slide = ({ slide, isActive }) => (
         className="h-full w-full min-h-[480px] 414px:min-h-[490px] object-cover 768px:min-h-[600px] 1280px:h-full -z-10"
       />
     </picture>
-    <Container className=" z-10">
+    <Container className=" z-10 w-full">
       <BannerContent {...slide} />
     </Container>
   </div>

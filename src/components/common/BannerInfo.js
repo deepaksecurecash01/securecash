@@ -3,8 +3,8 @@ import Link from "next/link";
 import { FaPhoneAlt, FaEnvelope, FaUserAlt } from "react-icons/fa";
 
 const BannerInfo = () => (
-  <Container>
-    <div className="w-full mx-auto bg-black relative top-[-34px] py-2.5 px-0 text-white text-sm  1024px:rounded-[40px] 1024px:py-0 1024px:px-0  1024px:w-[95%] 1024px:flex justify-center items-center 1440px:w-full">
+  <Container className="w-full">
+    <div className={`w-full mx-auto bg-black relative  1024px:top-[-36px] py-3 px-0 text-white text-sm  1024px:rounded-[40px] 1024px:py-0 1024px:px-0  1024px:w-[95%] 1024px:flex justify-center items-center 1440px:w-full`}>
       <InfoItem icon={FaPhoneAlt} size="20px">
         Ask Us Anything&nbsp;
         <Link href="tel:1300732873" className="text-primary hover:underline">

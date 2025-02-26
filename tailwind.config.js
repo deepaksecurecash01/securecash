@@ -47,7 +47,14 @@ module.exports = {
         "main-content-bg": "url('/images/banner/mainbg.webp')",
         "team-bg": "url('/images/team.webp')",
         "brown-overlay": "url('/images/brown-overlay.png')",
+        'quote-header': "url('/images/bg-quote-header-left.png'), url('/images/bg-quote-header-right.png')",
+
       }),
+      backgroundPosition: {
+        'quote-header': 'left center, right center',
+      },
+
+
       keyframes: {
         fade: {
           "0%": { filter: "brightness(0)", opacity: 0 },

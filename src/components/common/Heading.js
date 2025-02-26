@@ -16,7 +16,6 @@ const Heading = ({
   textShadow = false,
 }) => {
 
-
   // Determine the correct color class
   const colorClass = color.includes("#")
     ? `text-[${color}]`
