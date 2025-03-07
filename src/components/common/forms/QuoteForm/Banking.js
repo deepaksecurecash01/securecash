@@ -61,7 +61,7 @@ const Banking = ({
         alignment="center" // Center alignment
       />
 
-      <div className="form-tab">
+      <div className="form-tab 480px:w-[90%] mx-auto">
         {selectionBoxes.map((box, index) => (
           <SelectionBox
             key={index}
@@ -88,7 +88,7 @@ const Banking = ({
         />
       </div>
 
-      <div className="form-tab">
+      <div className="form-tab 480px:w-[90%] mx-auto">
         {/* Usual day/s for collection */}
         <div>
           <h5 className="checkboxHeaderText pt-6 text-base inline-block text-left font-normal w-full text-white pb-4 capitalize">
@@ -121,7 +121,7 @@ const Banking = ({
       </div>
 
       {/* Comments Section */}
-      <div className="form-tab">
+      <div className="form-tab 480px:w-[90%] mx-auto">
         <div className="comment-container w-full mx-auto text-left block clear-both">
           <label className="text-white text-base inline-block mt-4 mb-2 w-full text-left">
             Comments

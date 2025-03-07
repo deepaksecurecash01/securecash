@@ -1,14 +1,23 @@
 import AboutusSection from '@/components/about-us/AboutusSection';
+import Banner from '@/components/about-us/Banner';
 import HeadlineContent from '@/components/about-us/HeadlineContent';
-import React from 'react'
+import TeamSlider from '@/components/about-us/TeamSection/TeamSlider';
+import React from 'react';
 
-const page = () => {
+import TeamSection from '@/components/about-us/TeamSection';
+import BottomBanner from '@/components/about-us/BottomBanner';
+
+const page = () =>
+{
   return (
     <div>
       <HeadlineContent />
-      <AboutusSection/>
+      <AboutusSection />
+      <Banner />
+      <TeamSection />
+      <BottomBanner />
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

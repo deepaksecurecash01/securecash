@@ -176,7 +176,7 @@ const TeamContent = () => {
 
         <div className="members-slider relative select-none block w-full float-left mb-[100px]">
           <div
-            className="team-slider w-[90%] mx-auto  1024px:w-full overflow-hidden"
+            className="team-slider w-[90%] mx-auto  1024px:w-full "
             aria-label="Team Members"
           >
             <TeamSlider member={teamMembers} />

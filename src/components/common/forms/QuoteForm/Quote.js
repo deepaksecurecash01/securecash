@@ -16,7 +16,7 @@ const CheckboxGroup = ({
   currentErrorField,
   setCurrentErrorField,
 }) => (
-  <div className="w-full text-left relative">
+  <div className=" text-left relative">
     <label className="text-white text-base inline-block mt-4 mb-2">
       {label}
     </label>
@@ -61,9 +61,10 @@ const Quote = ({
       <Heading
         as="h3"
         color="white"
-        fontSize="26px"
+        fontSize="22px"
         textAlign="center"
         fontWeight="normal"
+        lineHeight="30px"
         marginBottom="0px"
         responsiveClassName="capitalize"
         className="pb-4"
@@ -88,7 +89,7 @@ const Quote = ({
         alignment="center" // Center alignment
       />
 
-      <div className="form-tab">
+      <div className="form-tab  480px:w-[90%] mx-auto">
         {inputFields.map((field, index) => (
           <InputField
             key={index}

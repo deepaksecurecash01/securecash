@@ -36,7 +36,7 @@ const BannerContent = ({
       textShadow={true}
       textAlign="center"
       className="mx-auto"
-      responsiveClassName=" 768px:text-5xl 992px:text-[56px] 1024px:text-left 1024px:mx-0"
+      responsiveClassName="w-[80%] 1024px:w-full mx-auto 768px:text-5xl 992px:text-[56px] 1024px:text-left 1024px:mx-0"
     >
       {subHeading}
     </Heading>

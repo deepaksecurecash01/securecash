@@ -4,9 +4,10 @@ import Heading from "@/components/common/Heading";
 import SubHeading from "@/components/common/SubHeading";
 import Paragraph from "@/components/common/Paragraph";
 
-const ContentScroll = ({ scrollData }) => {
+const ContentScroll = ({ scrollData }) =>
+{
   return (
-    <ul className="list-none w-full">
+    <ul className="list-none w-full  1024px:pr-6">
       {scrollData.map((item, index) => (
         <li key={index}>
           <div className=" flex items-center  mb-[14px] gap-3">
@@ -31,10 +32,10 @@ const ContentScroll = ({ scrollData }) => {
           </div>
           <Paragraph
             textAlign="left"
-            marginBottom="50px"
+            marginBottom="0px"
             lineHeight="2rem"
             responsiveClassName="414px:pr-0 pl-8"
-            className="pr-4 mt-2.5"
+            className="pr-4 mt-2.5 mb-6  1024px:mb-[50px]"
           >
             {item.content}
           </Paragraph>

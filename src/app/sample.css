@@ -819,50 +819,6 @@ header i {
     background-position: center
 }
 
-#about-us-banner-bottom {
-    height: 340px;
-    width: 100%
-}
-
-#about-us-banner-bottom::before {
-    content: "";
-    height: 340px;
-    width: 100%;
-    position: absolute;
-    background: url(https://securecash.com.au/images/team.webp) left 34% no-repeat;
-    background-size: cover;
-    filter: brightness(0.5)
-}
-
-.no-webp #about-us-banner-bottom::before {
-    content: "";
-    height: 340px;
-    width: 100%;
-    position: absolute;
-    background: url(https://securecash.com.au/images/team.jpg) left 34% no-repeat;
-    background-size: cover
-}
-
-#about-us-banner-bottom div {
-    position: relative;
-    z-index: 9999;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    flex-direction: column;
-    color: white;
-    height: 100%
-}
-
-#about-us-banner-bottom div h2 {
-    font-size: 40px;
-    line-height: 2em
-}
-
-#about-us-banner-bottom div hr {
-    margin: 6px 0 36px 0;
-    padding: 0
-}
 
 #about-us-team-slider {
     padding-top: 120px;
@@ -8066,15 +8022,7 @@ i.fa.fa-long-arrow-down {
         padding-bottom: 40px
     }
 
-    #about-us-banner-bottom div h2 {
-        line-height: 1.4em;
-        text-align: center
-    }
-
-    .no-webp #about-us-banner-bottom::before,
-    #about-us-banner-bottom::before {
-        background-position: center
-    }
+ 
 
     .no-webp #about-us-banner>#banner-mid-content::before,
     #about-us-banner>#banner-mid-content::before {
@@ -16624,13 +16572,7 @@ body.quiz-modal-on .site-modal-outer {
     }
 }
 
-@media (max-width: 480px) {
-    #about-us-banner-bottom div h2 {
-        line-height: 1.25em;
-        margin-bottom: 10px;
-        text-align: center
-    }
-}
+
 
 @media (max-width: 1366px) {
     #welcome-header-section {

@@ -8,10 +8,10 @@ const ContentScroll = ({ sectionContent }) => {
         <li key={index}>
           <Paragraph
             textAlign="left"
-            marginBottom="50px"
+            marginBottom="0"
             lineHeight="2rem"
             responsiveClassName="414px:pr-0"
-            className="pr-4 mb-4  1024px:mb-[1.25rem]"
+            className=" mb-4  1024px:mb-[1.25rem]"
           >
             {paragraph}
           </Paragraph>

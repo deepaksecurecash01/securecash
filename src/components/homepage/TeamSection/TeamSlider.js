@@ -36,16 +36,16 @@ const TeamSlider = ({ member }) => {
       <div
         className={`absolute  1024px:px-5 transition-opacity duration-200 z-10 text-primary text-[50px] top-1/2 transform -translate-y-1/2 ${
           isPrev
-            ? "  768px:left-0  768px:top-[42%]"
-            : " right-0  768px:left-0  768px:top-[58%]"
+          ? " -left-[3%] 768px:left-0  768px:top-[42%]"
+          : "-right-[3%]  768px:left-0  768px:top-[58%]"
         } ${
           isDisabled
             ? "opacity-50 pointer-events-none cursor-not-allowed no-underline"
-            : "cursor-pointer"
+            : ""
         }`}
       >
         <div
-          className={``}
+          className={` 768px:w-16 cursor-pointer flex justify-center items-center`}
           onClick={!isDisabled ? onClick : undefined}
           aria-label={isPrev ? "Previous Slide" : "Next Slide"}
         >

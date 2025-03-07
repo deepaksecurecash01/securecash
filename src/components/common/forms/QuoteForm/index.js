@@ -277,7 +277,7 @@ const QuoteForm = () => {
   return (
     <div className="float-none w-full mx-auto 992px:w-1/2 992px:float-left relative left-0 flex-1 flex justify-center">
       <form
-        className="forms-quote-v2 h-auto mx-2.5 992px:mx-0 px-[30px] 1366px:h-full forms-quote submit-status mt-4 992px:mt-0 992px:mb-16 w-full lg:mt-0 lg:mb-0 992px:w-[546px] shadow-md text-center py-8 rounded-lg bg-[#1a1a1a]"
+        className="forms-quote-v2 h-auto mx-2.5 992px:mx-0 px-[30px] 1366px:h-full forms-quote submit-status mt-4 992px:mt-0 992px:mb-16 w-full lg:mt-0 lg:mb-0 992px:w-[546px] shadow-[3px_3px_5px_0px_rgba(0,0,0,0.75)] text-center py-8 rounded-[6px] bg-[#1a1a1a]"
         data-formid="Quote"
         onSubmit={handleSubmit(handleFormSubmit)}
         noValidate

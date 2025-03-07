@@ -80,6 +80,7 @@ video {
 @media screen and (max-width: 991px) {
   #content-middle .slick-list {
     width: 100% !important;
+      margin: 0 auto !important;
   }
 
 }
@@ -109,16 +110,31 @@ video {
 
 }
 
-@media only screen and (max-width: 1366px) {}
-
-@media only screen and (max-width: 1280px) {}
-
-@media only screen and (max-width: 1200px) {}
-
-
+@media only screen and (max-width: 1024px) {
+  #about-us-banner>#banner-mid-content::before {
+    background-position: center
+  }
+}
 
 
 
+@media (max-width: 414px) {#about-us-banner-bottom div h2 {
+    line-height: 1.4em;
+    text-align: center
+  }
+
+  .no-webp #about-us-banner-bottom::before,
+  #about-us-banner-bottom::before {
+    background-position: center
+  }}
+
+@media (max-width: 480px) {
+  #about-us-banner-bottom div h2 {
+    line-height: 1.25em;
+    margin-bottom: 10px;
+    text-align: center
+  }
+}
 
 
 
@@ -126,21 +142,52 @@ video {
 
 #content-middle .slick-list {
   width: 90% !important;
+    margin: 0 auto !important;
 }
 
 
-#about-us-section-story .section-header {
-  align-items: flex-start
-}
 
-#about-us-section-story .section-header h3 {
-  padding-left: 0
-}
 
-#about-us-section-story p {
-  text-align: left
-}
-
-#about-us-section-story .section-content-wrapper img {
+#about-us-banner-bottom {
+  height: 340px;
   width: 100%
+}
+
+#about-us-banner-bottom::before {
+  content: "";
+  height: 340px;
+  width: 100%;
+  position: absolute;
+  background: url(https://securecash.com.au/images/team.webp) left 34% no-repeat;
+  background-size: cover;
+  filter: brightness(0.5)
+}
+
+.no-webp #about-us-banner-bottom::before {
+  content: "";
+  height: 340px;
+  width: 100%;
+  position: absolute;
+  background: url(https://securecash.com.au/images/team.jpg) left 34% no-repeat;
+  background-size: cover
+}
+
+#about-us-banner-bottom div {
+  position: relative;
+  z-index: 9999;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  height: 100%
+}
+
+#about-us-banner-bottom div h2 {
+  font-size: 40px;
+}
+
+#about-us-banner-bottom div hr {
+  margin: 6px 0 36px 0;
+  padding: 0
 }

@@ -62,7 +62,7 @@ const ContentScrollBar = () => {
       >
         Make The Right Choice
       </SubHeading>
-      <Divider color="primary" margin=" mb-[24px]" alignment="left" />
+      <Divider color="primary" margin=" mb-[24px]" alignment="left" responsiveClassName="992px:mx-0 992px:text-left" />
       <Heading
         as="h2"
         color="#c7a652"

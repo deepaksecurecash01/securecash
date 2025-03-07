@@ -41,7 +41,7 @@ const Welcome = () => {
   };
 
   return (
-    <div className=" w-full bg-content-bg bg-no-repeat bg-center inline-block 992px:mt-[47px]">
+    <div className=" w-full bg-content-bg bg-no-repeat bg-center inline-block mt-10 992px:mt-[47px]">
       <div className="w-full max-w-[1366px] mx-auto">
         <div
           id="content"
@@ -106,7 +106,7 @@ const Welcome = () => {
                     as="h3"
                     fontWeight="bold"
                     fontSize="22px"
-                    lineHeight="22px"
+                    lineHeight="1.6em"
                     textAlign="center"
                     marginBottom="40px"
                     responsiveClassName="480px:text-[26px] 992px:text-left 768px:mb-[48px] 768px:leading-[1.6rem]"

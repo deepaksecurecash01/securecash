@@ -8,7 +8,7 @@ const ServiceRow = ({ imgSrc, link, title, description }) => (
         alt={title}
         className="w-[80px] mr-[16px] pt-[35px] 992px:w-1/4 bg-brown-overlay 992px:pt-[50px]"
       />
-      <h3 className="montBold mt-[18px] mb-[15px] text-[24px] 992px:text-[16px] text-[#c7a652] font-montserrat font-bold">
+      <h3 className="montBold mt-[18px] mb-[15px] mx-auto 768px:mx-0 text-[24px] 992px:text-[16px] text-[#c7a652] font-montserrat font-bold">
         <a href={link}>{title}</a>
       </h3>
     </div>
@@ -18,7 +18,8 @@ const ServiceRow = ({ imgSrc, link, title, description }) => (
   </div>
 );
 
-const CardsSection = () => {
+const CardsSection = () =>
+{
   const services = [
     {
       imgSrc: "https://www.securecash.com.au/images/icons/cash-collections.png",
@@ -47,9 +48,9 @@ const CardsSection = () => {
     <>
       <div
         id="bottom-content"
-        className="grid 992px:grid-cols-[50%_50%] clear-both relative h-auto 992px:h-[450px] 1366px:h-[600px] w-full mt-10 768px:mt-[100px] mx-0 mb-auto"
+        className="grid 992px:grid-cols-[50%_50%] clear-both relative h-auto 992px:h-[450px] 1366px:h-[600px] w-full mt-10 1024px:mt-[100px] mx-0 mb-auto"
       >
-        <div className="bottom-row-left bg-[#c7a652]  w-full mx-auto relative">
+        <div className="bottom-row-left bg-[#c7a652]  w-full mx-auto  1200px:relative">
           <div className="row-container w-[95%] mx-auto py-[40px] 992px:pl-[14px] 992px:w-[490px] mt-[32px] pt-2.5 text-center  1200px:w-[650px] 1366px:w-[683px] 1366px:mr-0 1366px:ml-auto 1024px:mt-10 1366px:mt-[80px] text-[#fff]">
             <hr className="divider-2 h-[4px] border-0 mb-[24px] w-[100px] rounded-[5px] bg-[#fff] divider-bottom mx-auto 992px:mx-0" />
 
@@ -64,7 +65,7 @@ const CardsSection = () => {
             </p>
             <div
               id="content-cash"
-              className="relative w-full 992px:absolute mt-[32px] 992px:flex 992px:gap-5  1366px:gap-10 992px:w-[900px]  transform-none  1366px:w-[950px] 1366px:left-2/5"
+              className="relative w-[92%] 414px:w-[88%] mx-auto 992px:absolute mt-[32px] 992px:flex 992px:gap-5 transform 992px:left-1/2 992px:transform 992px:-translate-x-1/2 1200px:left-auto 1200px:transform-none   1366px:gap-10 992px:w-[900px] 1366px:w-[950px] 1366px:left-auto"
             >
               {services.map((service, index) => (
                 <ServiceRow
@@ -82,7 +83,7 @@ const CardsSection = () => {
       </div>
       <div
         id="space-white"
-        className="bg-[#fff]  1200px:min-h-[195px] clear-both float-none w-full mx-auto my-0 pr-2 1280px:pr-[52px] 1024px:pb-[370px] 1280px:pb-0"
+        className="bg-[#fff]  1200px:min-h-[195px] clear-both float-none w-full mx-auto my-0 pr-2 1280px:pr-[52px] 992px:pb-[370px] 1366px:pb-0"
       >
         <div className=" w-full max-w-[1366px] mx-auto my-0 z-40">
           <h5 className="   text-center hidden 1200px:w-full 1200px:right-0 1280px:mr-12 1200px:block text-[16px] text-[#000000] 1200px:text-right pt-[18px] font-montserrat font-normal">
