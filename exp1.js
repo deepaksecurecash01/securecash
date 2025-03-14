@@ -1,99 +1,130 @@
-import React from "react";
-import Container from "../layout/Container";
-import Divider from "../common/Divider";
-import ScrollableSection from "../layout/ScrollbarSection";
-import ContentScroll from "./ContentScroll";
-import Heading from "../common/Heading";
+import Typography from "@/components/common/Typography";
+import Container from "@/components/layout/Container";
 
-export const HelpSection = ({
-  title,
-  imageUrl,
-  imageAlt,
-  imageWidth,
-  imageHeight,
-  sectionContent = [],
-  imagePosition = "left",
-  id,
-  hasCTA = false
-}) =>
+const BlogIndex = () =>
 {
-  // Determine if image is on left or right
-  const isImageLeft = imagePosition === "left";
-
-  // Set order classes based on image position
-  const firstSectionOrder = isImageLeft ? "" : "order-1 600px:order-2";
-  const secondSectionOrder = isImageLeft ? "" : "order-2 600px:order-1";
-
-  // Background and padding classes
-  let bgClass = "";
-  let paddingY = "";
-
-  // Set bgClass and paddingY based on id using string includes instead of template literals
-  if (id && id.includes("story")) {
-    bgClass = "bg-[#dfdfdf]";
-  } else {
-    bgClass = "bg-quote-header";
-  }
-
-  if (id && id.includes("help")) {
-    paddingY = "600px:pt-[87px] 600px:pb-[120px]";
-  } else {
-    paddingY = "600px:py-[120px]";
-  }
+  const blogPosts = [
+    {
+      href: "https://www.securecash.com.au/blog/banking-updates-april-2021/",
+      imgSrc: "https://www.securecash.com.au/images/blog/banking-updates-april-2021-featured-img.jpg",
+      alt: "Banking Updates April 2021",
+      title: "Banking Updates April 2021",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/differences-between-cit-models/",
+      imgSrc: "https://www.securecash.com.au/images/blog/differences-between-cit-models-featured-img.jpg",
+      alt: "Differences Between... CIT Models",
+      title: "Differences Between... CIT Models",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/history-of-banks-part-2/",
+      imgSrc: "https://www.securecash.com.au/images/blog/history-of-banks-img-2.jpg",
+      alt: "History of Banks - Part 2",
+      title: "History of Banks - Part 2",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/history-of-banks-part-1/",
+      imgSrc: "https://www.securecash.com.au/images/blog/history-of-banks-featured-img.jpg",
+      alt: "History of Banks - Part 1",
+      title: "History of Banks - Part 1",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/creating-online-services/",
+      imgSrc: "https://www.securecash.com.au/images/blog/creating-online-services-featured-img.jpg",
+      alt: "Creating Online Services",
+      title: "Creating Online Services",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/what-covid-changes-are-you-keeping/",
+      imgSrc: "https://www.securecash.com.au/images/blog/what-covid-changes-are-you-keeping-featured-img.jpg",
+      alt: "What Covid Changes are you Keeping?",
+      title: "What Covid Changes are you Keeping?",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/paradigm-shifts/",
+      imgSrc: "https://www.securecash.com.au/images/blog/paradigm-shifts-featured-img.jpg",
+      alt: "Paradigm Shifts",
+      title: "Paradigm Shifts",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/history-of-cash-in-transit/",
+      imgSrc: "https://www.securecash.com.au/images/blog/history-of-cash-in-transit-featured-img.jpg",
+      alt: "History of Cash in Transit",
+      title: "History of Cash in Transit",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/bank-cyber-safety/",
+      imgSrc: "https://www.securecash.com.au/images/blog/bank-cyber-safety-featured-img.jpg",
+      alt: "Bank Cyber Safety",
+      title: "Bank Cyber Safety",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/merry-christmas-2020/",
+      imgSrc: "https://www.securecash.com.au/images/blog/merry-christmas-2020-featured-img.jpg",
+      alt: "Merry Christmas 2020",
+      title: "Merry Christmas 2020",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/terminology-of-cash-in-transit/",
+      imgSrc: "https://www.securecash.com.au/images/blog/blog-terminology-of-cit-featured-img.jpg",
+      alt: "Terminology of Cash in Transit",
+      title: "Terminology of Cash in Transit",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/differences-between-banks/",
+      imgSrc: "https://www.securecash.com.au/images/blog/differences-between-banks-featured-img.jpg",
+      alt: "Differences Between... Banks",
+      title: "Differences Between... Banks",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/negative-interest-rates/",
+      imgSrc: "https://www.securecash.com.au/images/blog/laptop.jpg",
+      alt: "Negative Interest Rates",
+      title: "Negative Interest Rates",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/the-relevance-of-cash/",
+      imgSrc: "https://www.securecash.com.au/images/blog/relevance-of-cash-featured-img.jpg",
+      alt: "The Relevance of Cash",
+      title: "The Relevance of Cash",
+    },
+    {
+      href: "https://www.securecash.com.au/blog/office-culture/",
+      imgSrc: "https://www.securecash.com.au/images/blog/featured-img-office-culture.jpg",
+      alt: "Office Culture",
+      title: "Office Culture",
+    },
+  ];
 
   return (
-    <div
-      className={`mt-0 h-auto py-0 bg-none ${bgClass} bg-no-repeat bg-cover 480px:bg-contain w-full 480px:h-full about-us-section pb-[16px] flex ${paddingY}`}
-      id={id}
-    >
-      <Container className="section-col inner relative h-full 600px:h-[calc(342px+80px)] 768px:h-[500px] 1200px:h-full flex flex-col mt-0 600px:flex-row w-full 1024px:w-[95%] 1440px:w-full">
-        <div className={`section-content-wrapper w-full h-full flex flex-col justify-end ${firstSectionOrder}`}>
-          <img
-            src={imageUrl}
-            alt={imageAlt}
-            width={imageWidth}
-            height={imageHeight}
-            className="w-full 1200px:w-auto h-[calc(100%-68px)]"
-          />
-        </div>
-        <div className={`section-content-wrapper w-full flex flex-col justify-start 768px:justify-end ${secondSectionOrder}`}>
-          <div className="content bg-white h-full flex flex-col self-end 1200px:max-h-[calc(636px-56px)]">
-            <div className="section-header px-10 600px:px-6 py-[18px] relative 600px:absolute 1200px:relative 600px:top-[30px] right-0 w-auto 768px:top-0 768px:px-8 768px:py-10 bg-[#000000] items-end justify-center text-[#ffffff] m-0 flex flex-col text-right">
-              <Divider
-                color="primary"
-                alignment="left"
-                margin="m-0"
-                responsiveClassName="768px:text-left 768px:mx-0 hidden 1200px:block divider-gold divider-2"
-              />
-              <Heading
-                as="h3"
-                color=""
-                fontWeight="bold"
-                fontSize="32px"
-                lineHeight="1.4em"
-                marginBottom="8px"
-                textAlign="center"
-                className=""
-                responsiveClassName="text-[32px] 768px:text-right 1200px:pl-[46px] 1366px:pl-[56px] 600px:text-[30px] 768px:text-[32px] 992px:text-[40px] 1200px:mt-6 1200px:mb-2"
+    <section className="blog-index-main mb-[90px] mt-[84px]">
+      <Container className="inner-grid w-full max-[1366px]:max-w-[1280px]">
+        <div className="blog-index-main--content flex flex-wrap p-0 mx-[15px] 1280px:mx-0 px-[60px] 768px:px-[12px] 1280px:px-0">
+          {blogPosts.map((item, index) => (
+            <div key={index} className="blog-index-main--content-item w-full  768px:w-1/3 px-2 mb-[38px]  1024px:px-[12px] ">
+              <Link href={`/blog/${item.id}`} className="flex flex-wrap justify-center transition-all duration-200 ease-in">
+                <img
+                  src={item.imgSrc}
+                  className="blog-index-main--content-item__img blog-content-img-right h-[220px] 414px:h-[240px] 480px:h-[270px] 768px:h-[200px] 1024px:h-[240px] mb-[12px] object-cover w-full object-[100%_100%]"
+                  alt={item.alt}
+                  width="431"
+                  height="240"
+                />
+              </Link>
+              <Typography
+                as="h4"
+                fontFamily="font-montserrat"
+                className="text-[22px] font-bold text-primary text-left pb-5"
               >
-                {title}
-              </Heading>
+                <a href={item.href} className="flex flex-wrap justify-center transition-all duration-200 ease-in">{item.title}</a>
+              </Typography>
+
             </div>
-
-            <ScrollableSection className={`section-content h-auto 600px:mt-[120px] 768px:mt-[142px] ${!id.includes("story") && 'bg-white'} pt-8 600px:pt-5 pb-4 px-8 mx-2 1200px:mt-2.5 leading-[2]`}>
-              <ContentScroll sectionContent={sectionContent} />
-
-              {hasCTA && (
-                <div className="flex justify-center 768px:justify-end items-center">
-                  <div className="w-[200px] bg-[#c7a652] text-[#fff] text-center px-[8px] py-[12px] rounded-[50px] mt-0 768px:ml-0 z-10 hover:bg-[#000000] hover:cursor-pointer no-underline mr-0">
-                    <a href="https://www.securecash.com.au/quote">Get a Quote</a>
-                  </div>
-                </div>
-              )}
-            </ScrollableSection>
-          </div>
+          ))}
         </div>
       </Container>
-    </div>
+    </section>
   );
 };
+
+export default BlogIndex;

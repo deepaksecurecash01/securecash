@@ -1,8 +1,10 @@
 "use client";
 import React from "react";
 import VimeoLite from "../VimeoLite";
+import Typography from "./Typography";
 
-const VideoSection = () => {
+const VideoSection = () =>
+{
   return (
     <div className="home-video-section">
       <div
@@ -14,10 +16,18 @@ const VideoSection = () => {
           <div className="video-player max-w-[1024px] w-full h-full">
             <VimeoLite videoId="330415813" />
           </div>
-
-          <h2 className="text-[16px] mt-[4px] leading-[22px] w-[90%] text-black text-center relative z-[1] 768px:text-xl 992px:text-[16px] 768px:leading-[1.6rem] 768px:w-[80%] 992px:w-full my-[16px] mx-auto 992px:mt-0 font-montserrat font-normal">
+          <Typography
+            as="h2"
+            fontFamily="montserrat"
+            className="text-[16px] mt-[4px] leading-[22px] w-[90%] text-black 
+             text-center relative z-[1] 768px:text-xl 992px:text-[16px] 
+             768px:leading-[1.6rem] 768px:w-[80%] 992px:w-full my-[16px] 
+             mx-auto 992px:mt-0 font-normal"
+          >
             A couple words from our Chief Operating Officer - Bethaney Bacchus
-          </h2>
+          </Typography>
+
+
         </div>
       </div>
     </div>

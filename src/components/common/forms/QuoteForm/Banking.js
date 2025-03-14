@@ -1,5 +1,6 @@
 import React from "react";
-import {
+import
+{
   FaCalendarAlt,
   FaMoneyBillAlt,
   FaUniversity,
@@ -10,9 +11,8 @@ import WarningPopup from "../elements/WarningPopup";
 import SelectOption from "@/components/common/forms/elements/SelectOption";
 import { InputField } from "@/components/common/forms/elements/InputField";
 import Divider from "@/components/common/Divider";
-import Heading from "@/components/common/Heading";
-import SubHeading from "@/components/common/SubHeading";
-import Paragraph from "@/components/common/Paragraph";
+import Typography from "@/components/common/Typography";
+
 import { SelectionBox } from "../elements/SelectionBox";
 
 const Banking = ({
@@ -24,7 +24,8 @@ const Banking = ({
   errors,
   currentErrorField,
   setCurrentErrorField,
-}) => {
+}) =>
+{
   const selectionBoxes = [
     {
       label: "Collection Frequency",
@@ -41,19 +42,14 @@ const Banking = ({
   ];
   return (
     <div className="form-page banking">
-      <Heading
+      <Typography
         as="h3"
-        color="white"
-        fontSize="22px"
-        textAlign="center"
-        lineHeight="30px"
-        fontWeight="normal"
-        marginBottom="0px"
-        responsiveClassName="capitalize"
-        className="pb-4"
+        fontFamily="montserrat"
+        className="text-white font-normal text-center capitalize pb-4 text-[22px] leading-[30px]"
       >
         Banking
-      </Heading>
+      </Typography>
+
 
       <Divider
         color="primary" // Custom gold color

@@ -5,9 +5,12 @@ import "slick-carousel/slick/slick-theme.css";
 
 import Slider from "react-slick";
 import Image from "next/image";
+import Typography from "@/components/common/Typography";
+
+import Link from "next/link";
 const SocialLink = ({ href, icon, alt }) => (
   <li className="float-left pr-[5px]">
-    <a href={href}>
+    <Link href={href} target="_blank">
       <Image
         width={25}
         height={25}
@@ -16,17 +19,19 @@ const SocialLink = ({ href, icon, alt }) => (
         src={`https://www.securecash.com.au/images/icons/social/webp/${icon}.webp`}
         alt={alt}
       />
-    </a>
+    </Link>
   </li>
 );
-const TeamSlider = ({ member }) => {
+const TeamSlider = ({ member }) =>
+{
   const CustomArrow = ({
     direction,
     currentSlide,
     slideCount,
     slidesToShow,
     onClick,
-  }) => {
+  }) =>
+  {
     const isPrev = direction === "prev";
     const isDisabled = isPrev
       ? currentSlide === 0
@@ -34,15 +39,13 @@ const TeamSlider = ({ member }) => {
 
     return (
       <div
-        className={`absolute  1024px:px-5 transition-opacity duration-200 z-10 text-primary text-[50px] top-1/2 transform -translate-y-1/2 ${
-          isPrev
-          ? " -left-[3%] 768px:left-0  768px:top-[42%]"
-          : "-right-[3%]  768px:left-0  768px:top-[58%]"
-        } ${
-          isDisabled
+        className={`absolute  1024px:px-5 transition-opacity duration-200 z-10 text-primary text-[50px] top-1/2 transform -translate-y-1/2 ${isPrev
+            ? " -left-[3%] 768px:left-0  768px:top-[42%]"
+            : "-right-[3%]  768px:left-0  768px:top-[58%]"
+          } ${isDisabled
             ? "opacity-50 pointer-events-none cursor-not-allowed no-underline"
             : ""
-        }`}
+          }`}
       >
         <div
           className={` 768px:w-16 cursor-pointer flex justify-center items-center`}
@@ -124,26 +127,40 @@ const TeamSlider = ({ member }) => {
             />
           </div>
           <div className="member-info p-4 414px:p-0 414px:pl-[20px] 414px:pr-[20px] w-full text-left 768px:pl-[16px] 768px:pr-[16px] 1366px:pl-[20px] 1366px:pr-[20px] 414px:py-[25px] clear-both overflow-hidden">
-            <h4 className="text-[20px] font-semibold pb-[12px] text-[#333333]">
+            <Typography
+              as="h4"
+              fontFamily="montserrat"
+              className="text-[20px] font-semibold text-[#333333] pb-3 text-left"
+            >
               {member.name}
-            </h4>
-            <p className="font-prata text-[14px] text-[#808080] mb-[18px]">
+            </Typography>
+
+            <Typography
+              as="h5"
+              fontFamily="prata"
+              className="text-[14px] text-[#808080] font-normal leading-normal text-left mb-[18px]"
+            >
               {member.position}
-            </p>
+            </Typography>
+
+
+
             <div className="email-info flex justify-items-center px-0 py-[10px]">
-              <img
-                className="mail-icon w-[5%] mr-2 py-[5px]"
+              <Image
+                width={5}
+                height={5}
+                className="mail-icon w-[5%] h-auto mr-2 py-[5px]"
                 src="https://www.securecash.com.au/images/icons/mail.png"
                 alt="mail"
                 aria-hidden="true"
               />
-              <a
+              <Link
                 className="text-[14px] text-[#929292] hover:no-underline hover:text-[#c7a652]"
                 href={`mailto:${member.email}`}
                 aria-label={`Send email to ${member.name}`}
               >
                 {member.email}
-              </a>
+              </Link>
             </div>
             <div className="social-media pt-[5px]">
               <ul className="list-none flex gap-2">

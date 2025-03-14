@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Divider from "@/components/common/Divider";
-import Heading from "@/components/common/Heading";
+import Typography from "@/components/common/Typography";
 import SubHeading from "@/components/common/SubHeading";
 import Paragraph from "@/components/common/Paragraph";
 
@@ -18,27 +18,23 @@ const ContentScroll = ({ scrollData }) =>
               width={20}
               height={15}
             />
-            <Heading
+            <Typography
               as="h4"
-              fontSize="16px"
-              color="#333333"
-              fontWeight="bold"
-              textAlign="left"
-              marginBottom="0"
-              responsiveClassName=""
+              fontFamily="font-montserrat"
+              className="text-[16px] font-bold text-[#333333] text-left mb-0"
             >
               {item.title}:
-            </Heading>
+            </Typography>
+
           </div>
-          <Paragraph
-            textAlign="left"
-            marginBottom="0px"
-            lineHeight="2rem"
-            responsiveClassName="414px:pr-0 pl-8"
-            className="pr-4 mt-2.5 mb-6  1024px:mb-[50px]"
+          <Typography
+            as="p"
+            fontFamily="font-montserrat"
+            className="text-left font-light leading-[2rem] pr-4 mt-2.5 mb-6 1024px:mb-[50px] 414px:pr-0 pl-8"
           >
             {item.content}
-          </Paragraph>
+          </Typography>
+
         </li>
       ))}
     </ul>

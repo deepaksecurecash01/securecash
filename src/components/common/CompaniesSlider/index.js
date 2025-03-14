@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React, { useMemo } from "react";
 
 const BASE_URL = "https://www.securecash.com.au/images/companies/";
@@ -30,8 +31,10 @@ const slideData = companyNames.map((name) => ({
 
 const Slide = ({ src, alt }) => (
   <div className="w-[300px] p-0 mt-auto mb-auto">
-    <img
-      className="align-middle filter contrast-0 h-[150px] hover:cursor-default hover:filter hover:contrast-[100%]"
+    <Image
+      className="align-middle filter contrast-0 h-[150px] w-auto hover:cursor-default hover:filter hover:contrast-[100%]"
+      width={300}
+      height={150}
       src={src}
       alt={alt}
     />

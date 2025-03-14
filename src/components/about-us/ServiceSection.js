@@ -3,7 +3,7 @@ import Container from "../layout/Container";
 import Divider from "../common/Divider";
 import ScrollableSection from "../layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
-import Heading from "../common/Heading";
+import Typography from "../common/Typography";
 
 export const ServiceSection = ({
     title,
@@ -67,19 +67,13 @@ export const ServiceSection = ({
                                         margin="m-0"
                                         responsiveClassName="768px:text-left 768px:mx-0 hidden 1200px:block divider-gold divider-2"
                                     />
-                                    <Heading
+                                    <Typography
                                         as="h3"
-                                        color=""
-                                        fontWeight="bold"
-                                        fontSize="32px"
-                                        lineHeight="1.4em"
-                                        marginBottom="8px"
-                                        textAlign="center"
-                                        className=""
-                                        responsiveClassName="text-[32px] 768px:text-right 1200px:pl-[46px] 1366px:pl-[56px] 600px:text-[30px] 768px:text-[32px] 992px:text-[40px] 1200px:mt-6 1200px:mb-2"
+                                        fontFamily="montserrat"
+                                        className="text-[32px] font-bold leading-[1.4em] text-center 768px:text-right 1200px:pl-[46px] 1366px:pl-[56px] 600px:text-[30px] 768px:text-[32px] 992px:text-[40px] 1200px:mt-6 1200px:mb-2"
                                     >
                                         {title}
-                                    </Heading>
+                                    </Typography>
                                 </div>
 
                                 <ScrollableSection className={`section-content h-auto 600px:mt-[120px] 768px:mt-[142px] ${!id.includes("story") && 'bg-white'} pt-8 600px:pt-5 pb-4 px-8 mx-2 1200px:mt-2.5 leading-[2]`}>

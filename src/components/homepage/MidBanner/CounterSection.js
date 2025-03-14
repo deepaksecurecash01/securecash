@@ -2,10 +2,11 @@
 import Image from "next/image";
 import React from "react";
 import CountUp from "react-countup";
-import Heading from "@/components/common/Heading";
+import Typography from "@/components/common/Typography";
 import Paragraph from "@/components/common/Paragraph";
 
-const CounterSection = ({ stats }) => {
+const CounterSection = ({ stats }) =>
+{
   return (
     <section
       id="banner-mid"
@@ -21,21 +22,21 @@ const CounterSection = ({ stats }) => {
           ({ id, value, imgSrc, prefix, imgFallback, alt, description }) => (
             <React.Fragment key={id}>
               <div className="mid-row py-[50px] 992px:py-0 w-full float-none mx-auto pb-[50px] pl-0 992px:w-1/3 text-center relative 992px:float-left">
-                <Heading
+                <Typography
                   as="h4"
-                  fontSize="40px"
-                  fontWeight="black"
-                  color="#c7a652"
-                  marginBottom="30px"
-                  responsiveClassName="pb-[30px]"
-                  className="banner-mid-header font-black"
+                  fontFamily="montserrat"
+                  className="banner-mid-header font-black text-[40px] text-primary pb-[30px]"
                 >
-                  <CountUp end={value} prefix={prefix && "$"} duration={3} />
-                </Heading>
+                  <CountUp end={value} prefix={prefix ? "$" : ""} duration={3} />
+                </Typography>
+
+
+
 
                 <Image
                   src={imgSrc}
-                  onError={(e) => {
+                  onError={(e) =>
+                  {
                     e.target.onerror = null;
                     e.target.src = imgFallback;
                   }}
@@ -44,15 +45,13 @@ const CounterSection = ({ stats }) => {
                   className="h-[60px] w-auto pb-[10px] mx-auto"
                   alt={alt}
                 />
-                <Paragraph
-                  fontSize="16px"
-                  color="white"
-                  fontWeight="normal"
-                  marginBottom="0"
-                  className="pb-0"
+                <Typography
+                  as="p"
+                  className="text-[16px] text-white font-normal pb-0 mb-0"
                 >
                   {description}
-                </Paragraph>
+                </Typography>
+
               </div>
               {id < stats.length && (
                 <div className="mid-row-divider h-0.5 w-[150px] 992px:h-[100px] 992px:w-0.5 bg-white z-10"></div>

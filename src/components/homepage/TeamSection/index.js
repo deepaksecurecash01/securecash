@@ -1,5 +1,7 @@
 "use client";
+import Typography from "@/components/common/Typography";
 import TeamSlider from "./TeamSlider";
+import Divider from "@/components/common/Divider";
 
 // data/teamMembers.js
 const teamMembers = [
@@ -162,17 +164,28 @@ const teamMembers = [
 ];
 
 // components/TeamContent.js
-const TeamContent = () => {
+const TeamContent = () =>
+{
   return (
     <div
       id="team"
       className="bg-[#ebebeb] inline-block w-full px-[10px] py-[24px] 414px:pt-[100px] 414px:px-0 414px:py mt-0 768px:p-[50px] 992px:mt-[100px] 992px:px-2 992px:pt-[100px]"
     >
       <div className="w-full max-w-[1366px] mx-[auto] my-[0]">
-        <h3 className="text-[24px] leading-[1.5em] w-3/5 414px:w-auto mx-[auto] my-[0] font-prata text-center 414px:text-[32px] text-[#000]">
+        <Typography
+          as="h3"
+          fontFamily="prata"
+          className="text-[24px] text-[#000] font-normal leading-[1.5em] text-center w-3/5 mx-auto my-0 414px:w-auto 414px:text-[32px]"
+        >
           Meet The SecureCash Team
-        </h3>
-        <hr className="divider-2 h-[4px] border-0 mt-4 mb-[40px] w-[100px] rounded-[5px] bg-[#c7a652] divider-bottom mx-auto" />
+        </Typography>
+
+
+        <Divider
+          color="#c7a652"
+          alignment="center"
+          margin="mb-10 mt-4"
+        />
 
         <div className="members-slider relative select-none block w-full float-left mb-[100px]">
           <div

@@ -4,15 +4,17 @@ import Container from "../../layout/Container";
 import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
-import Slider from "react-slick";
+import Typography from "@/components/common/Typography";
 import Paragraph from "@/components/common/Paragraph";
+import SubHeading from "@/components/common/SubHeading";
+import Slider from "react-slick";
+import Link from "next/link";
 
 
 
 const SocialLink = ({ href, icon, alt }) => (
     <li className="float-left pr-[5px]">
-        <a href={href}>
+        <Link href={href}>
             <Image
                 width={25}
                 height={25}
@@ -21,7 +23,7 @@ const SocialLink = ({ href, icon, alt }) => (
                 src={`https://www.securecash.com.au/images/icons/social/webp/${icon}.webp`}
                 alt={alt}
             />
-        </a>
+        </Link>
     </li>
 );
 
@@ -131,26 +133,38 @@ const TeamSlider = ({ member }) =>
                             />
                         </div>
                         <div className="member-info p-4 414px:p-0 414px:pl-[20px] 414px:pr-[20px] w-full text-left 768px:pl-[16px] 768px:pr-[16px] 1366px:pl-[20px] 1366px:pr-[20px] 414px:py-[25px] clear-both overflow-hidden bg-[#b9984b]  rounded-bl-[6px] rounded-br-[6px]">
-                            <h4 className="text-[22px] font-semibold pb-[12px] text-white">
+                            <Typography
+                                as="h4"
+                                fontFamily="montserrat"
+                                className="text-white font-semibold text-left text-[22px] pb-3"
+                            >
                                 {member.name}
-                            </h4>
-                            <p className="font-prata font-extrabold text-[16px] text-white mb-[12px]">
+                            </Typography>
+
+                            <Typography
+                                as="h5"
+                                fontFamily="prata"
+                                className="text-white font-extrabold text-left text-[16px] leading-normal pb-3"
+                            >
                                 {member.position}
-                            </p>
+                            </Typography>
+
                             <div className="email-info flex justify-items-center px-0 py-[10px]">
-                                <img
-                                    className="mail-icon w-[5%] mr-2 py-[5px] filter brightness-[10]"
+                                <Image
+                                    width={5}
+                                    height={5}
+                                    className="mail-icon w-[5%] h-auto mr-2 py-[5px] filter brightness-[10]"
                                     src="https://www.securecash.com.au/images/icons/mail.png"
                                     alt="mail"
                                     aria-hidden="true"
                                 />
-                                <a
+                                <Link
                                     className="text-[14px] text-white hover:no-underline hover:text-[#c7a652]"
                                     href={`mailto:${member.email}`}
                                     aria-label={`Send email to ${member.name}`}
                                 >
                                     {member.email}
-                                </a>
+                                </Link>
                             </div>
                             <div className="social-media pt-[5px]">
                                 <ul className="list-none flex gap-2 filter brightness-[10]">
@@ -180,16 +194,14 @@ const TeamSlider = ({ member }) =>
                     </div>
                     <div className="team-item-about-content h-[710px]  414px:h-[600px] 480px:h-[500px]  768px:border-x-[4px] border-[#b9984b]  768px:absolute  768px:top-[50px] right-0  768px:w-[calc(100%-50px)]  768px:h-[calc(100%-50px)] bg-white  768px:rounded-[8px] flex justify-center ">
                         <div className="wrapper max-h-full  768px:before:content-[''] 768px:before:h-[376px] 1024px:before:h-[320px]  1100px:before:h-[376px] 768px:before:w-[242px]  1024px:before:w-[200px]  1100px:before:w-[224px] 1200px:before:w-[252px] before:inline-block before:float-left before:mr-[32px] before:mb-3.5">
-                            <Paragraph
-                                textAlign="left"
-                                fontSize="15px"
-                                marginBottom="0px"
-                                lineHeight="2rem"
-                                responsiveClassName="414px:pr-0"
-                                className="block my-5 mx-4  768px:my-[38px] 768px:mx-8 pr-0 text-[15px]"
+                            <Typography
+                                as="p"
+                                fontWeight="montserrat"
+                                className="block my-5 mx-4 pr-0 text-left text-[15px] leading-[2rem] 768px:my-[38px] 768px:mx-8 414px:pr-0 font-light"
                             >
                                 {member.description}
-                            </Paragraph>
+                            </Typography>
+
                         </div>
                     </div>
                 </div>

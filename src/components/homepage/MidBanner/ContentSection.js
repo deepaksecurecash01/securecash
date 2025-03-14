@@ -1,10 +1,11 @@
 import Carousel from "@/components/homepage/MidBanner/Carousel";
 import Divider from "@/components/common/Divider";
-import Heading from "@/components/common/Heading";
+import Typography from "@/components/common/Typography";
 import SubHeading from "@/components/common/SubHeading";
 import Paragraph from "@/components/common/Paragraph";
 
-const ContentSection = () => {
+const ContentSection = () =>
+{
   return (
     <section
       id="content-middle"
@@ -15,38 +16,35 @@ const ContentSection = () => {
           <div className="service-container p-4 992px:p-0 pt-0 leading-[2em] m-0 text-[16px] text-white">
             <Divider responsiveClassName="992px:mx-0 992px:text-left 1024px:mt-0" />
 
-            <SubHeading
+            <Typography
               as="h3"
-              fontSize="22px"
-              lineHeight="36px"
-              textAlign="center"
-              marginBottom="24px"
-              responsiveClassName="w-[90%] 992px:w-auto mx-auto 992px:mx-0 992px:text-left 768px:text-2xl 992px:text-[28px] 992px:leading-[1.4em]"
+              fontFamily="prata"
+              className="text-[22px] leading-[36px] text-center mb-[24px] 
+             w-[90%] 992px:w-auto mx-auto 992px:mx-0 992px:text-left 
+             768px:text-2xl 992px:text-[28px] 992px:leading-[1.4em]"
             >
               Let Us Do Your Banking,
-            </SubHeading>
-            <Heading
+            </Typography>
+
+            <Typography
               as="h2"
-              color="#c7a652"
-              fontWeight="bold"
-              fontSize="40px"
-              lineHeight="1.4em"
-              textAlign="center"
-              marginBottom="24px"
-              responsiveClassName="w-3/4 mx-auto 992px:mx-0 480px:text-[30px] 768px:text-5xl 992px:w-auto 992px:text-[40px] 992px:leading-[1.4em] 992px:mb-[24px] 992px:text-left"
+              fontFamily="montserrat"
+              className="text-[40px] font-bold leading-[1.4em] text-center text-[#c7a652] mb-[24px] 
+             w-3/4 mx-auto 992px:mx-0 480px:text-[30px] 768px:text-5xl 
+             992px:w-auto 992px:text-[40px] 992px:leading-[1.4em] 992px:mb-[24px] 992px:text-left"
             >
               {`Don't Take The Risk!`}
-            </Heading>
-            <Paragraph
-              fontSize="14px"
-              lineHeight="1em"
-              textAlign="center"
-              marginBottom="0"
-              fontWeight="normal"
-              responsiveClassName="992px:text-left 414px:leading-[1.3em] 768px:text-[16px] 1024px:leading-[2em] 1366px:leading-[1em]"
+            </Typography>
+
+            <Typography
+              as="p"
+              className="text-[14px] leading-[1em] text-center mb-0 font-normal 
+             992px:text-left 414px:leading-[1.3em] 768px:text-[16px] 
+             1024px:leading-[2em] 1366px:leading-[1em]"
             >
               Anywhere, Anytime, Australia Wide
-            </Paragraph>
+            </Typography>
+
           </div>
         </div>
 

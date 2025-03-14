@@ -1,6 +1,6 @@
 import React from 'react';
 import Divider from '../common/Divider';
-import Heading from '../common/Heading';
+import Typography from '../common/Typography';
 
 const Banner = () =>
 {
@@ -17,19 +17,14 @@ const Banner = () =>
                         margin="m-0"
                         responsiveClassName="768px:text-left 768px:mx-0 divider-gold divider-2 z-20"
                     />
-                    <Heading
+                    <Typography
                         as="h2"
-                        color="white"
-                        fontWeight="medium"
-                        fontSize="40px"
-                        lineHeight="1.4em"
-                        marginBottom="0px"
-                        textAlign="center"
-                        className="font-medium max-[414px]:text-[36px]"
-                        responsiveClassName="text-[32px] z-30 py-6"
+                        fontFamily="montserrat"
+                        className="text-white font-medium text-center max-[414px]:text-[36px] text-[32px] z-30 py-6"
                     >
                         Join The SecureCash Family
-                    </Heading>
+                    </Typography>
+
                     <div className="w-[200px] bg-[#c7a652] text-[#fff] text-center px-[8px] py-[14px] rounded-[50px] mt-0 768px:ml-0 z-10 hover:bg-[#fff] hover:text-[#000] hover:cursor-pointer no-underline mr-0">
                         <a href="https://www.securecash.com.au/quote">Get a Quote</a>
                     </div>

@@ -3,9 +3,7 @@ import Checkbox from "@/components/common/checkbox/Checkbox";
 import WarningPopup from "../elements/WarningPopup";
 import { InputField } from "../elements/InputField";
 import Divider from "@/components/common/Divider";
-import Heading from "@/components/common/Heading";
-import SubHeading from "@/components/common/SubHeading";
-import Paragraph from "@/components/common/Paragraph";
+import Typography from "@/components/common/Typography";
 
 const CheckboxGroup = ({
   label,
@@ -50,7 +48,8 @@ const Quote = ({
   errors,
   currentErrorField,
   setCurrentErrorField,
-}) => {
+}) =>
+{
   const serviceOptions = [
     { label: "Banking", value: "Banking" },
     { label: "Change", value: "Change" },
@@ -58,30 +57,22 @@ const Quote = ({
 
   return (
     <div className="form-page quote">
-      <Heading
+      <Typography
         as="h3"
-        color="white"
-        fontSize="22px"
-        textAlign="center"
-        fontWeight="normal"
-        lineHeight="30px"
-        marginBottom="0px"
-        responsiveClassName="capitalize"
-        className="pb-4"
+        fontFamily="montserrat"
+        className="text-white font-montserrat text-center capitalize pb-4 text-[22px] leading-[30px]"
       >
         Want a quote from SecureCash?
-      </Heading>
-      <Paragraph
-        color="white"
-        textAlign="center"
-        fontWeight="normal"
-        fontSize="16px"
-        marginBottom="0px"
-        responsiveClassName="capitalize"
-        className="pb-4"
+      </Typography>
+
+      <Typography
+        as="p"
+        fontFamily="font-montserrat"
+        className="text-white  font-normal text-center capitalize pb-4 text-[16px]"
       >
         We Just Need A Few Details
-      </Paragraph>
+      </Typography>
+
 
       <Divider
         color="primary" // Custom gold color

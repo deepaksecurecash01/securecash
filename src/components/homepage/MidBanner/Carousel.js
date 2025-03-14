@@ -1,8 +1,11 @@
 "use client";
+import Typography from "@/components/common/Typography";
+import Image from "next/image";
 import React, { useState } from "react";
 import Slider from "react-slick";
 
-const Carousel = () => {
+const Carousel = () =>
+{
   const slides = [
     {
       imgSrc: "https://www.securecash.com.au/images/icons/australia.png",
@@ -45,7 +48,8 @@ const Carousel = () => {
   const CustomPrevArrow = ({ currentSlide, slideCount, onClick }) => (
     <div
       className={`  absolute  1024px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer z-10 top-1/2  transform -translate-y-1/2 992px:-right-3  992px:top-[38%] hover:opacity-100 text-[50px] text-white `}
-      onClick={() => {
+      onClick={() =>
+      {
         if (onClick) {
           onClick();
         }
@@ -58,7 +62,8 @@ const Carousel = () => {
   const CustomNextArrow = ({ currentSlide, slideCount, onClick }) => (
     <div
       className={`  absolute  1024px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer top-1/2 z-10 right-0   992px:-right-3 transform -translate-y-1/2  992px:top-[62%] hover:opacity-100 text-[50px] text-white `}
-      onClick={() => {
+      onClick={() =>
+      {
         if (onClick) {
           onClick();
         }
@@ -116,15 +121,34 @@ const Carousel = () => {
           className={`slick-item inline-block w-full text-center mx-auto opacity-100  visible relative transition-opacity duration-1000 ease-in-out  992px:align-top  992px:w-[30%]  992px:float-left text-white  `}
         >
           <div className="service-img">
-            <img className="h-[60px] mx-auto" src={slide.imgSrc} alt="" />
+            <Image
+              width={60}
+              height={60}
+              className="h-[60px] w-auto mx-auto"
+              src={slide.imgSrc}
+              alt=""
+            />
           </div>
           <div className="service-info text-white clear-both">
-            <h3 className="text-heading leading-[1.6em] text-[16px] font-montserrat font-bold my-[1rem]">
+            <Typography
+              as="h2"
+              fontFamily="montserrat"
+              className="text-white text-[16px] leading-[1.6em] text-center font-bold my-[1rem]"
+            >
               {slide.title}
-            </h3>
-            <p className=" w-[70%] 992px:w-[95%] text-center text-[14px] leading-[1.6em]  992px:leading-[1.6em]  1024px:leading-[2em] mx-auto whitespace-normal  font-montserrat font-light 992px:text-center">
+            </Typography>
+
+            <Typography
+              as="p"
+              fontFamily="montserrat"
+              className="text-[14px] leading-[1.6em] text-center font-light mb-0 
+             w-[70%] 992px:w-[95%] 992px:leading-[1.6em] 
+             1024px:leading-[2em] mx-auto whitespace-normal 992px:text-center"
+            >
               {slide.description}
-            </p>
+            </Typography>
+
+
           </div>
         </div>
       ))}

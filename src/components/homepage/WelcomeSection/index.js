@@ -2,8 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import Divider from "@/components/common/Divider";
-import Heading from "@/components/common/Heading";
-import SubHeading from "@/components/common/SubHeading";
+import Typography from "@/components/common/Typography";
 import Paragraph from "@/components/common/Paragraph";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "@/components/homepage/WelcomeSection/ContentScroll";
@@ -33,10 +32,12 @@ const servicesData = [
   },
 ];
 
-const Welcome = () => {
+const Welcome = () =>
+{
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const toggleContent = () => {
+  const toggleContent = () =>
+  {
     setIsExpanded((prev) => !prev);
   };
 
@@ -48,17 +49,14 @@ const Welcome = () => {
           className=" min-h-[400px] w-full 992px:w-auto mx-auto pt-0"
         >
           <div className="center-content pb-0 block w-[82%] 768px:[80%] 992px:w-[70%] mx-auto mb-[40px] 992px:mb-0">
-            <SubHeading
+            <Typography
               as="h4"
-              fontSize="32px"
-              fontWeight="regular"
-              lineHeight="1em"
-              textAlign="center"
-              marginBottom=""
-              className="mx-auto"
+              fontFamily="prata-regular"
+              className="text-[32px] text-center mx-auto"
             >
               Welcome to
-            </SubHeading>
+            </Typography>
+
 
             <Image
               src="/images/SecureCash.webp"
@@ -68,21 +66,18 @@ const Welcome = () => {
               priority={true}
               className=" h-auto block mx-auto"
             />
-              <Divider
-                color="primary"
-                width="100px"
-                margin="mt-[16px] mb-[40px]"
-                alignment="center"
-                responsiveStyles="414px:my-[24px]"
-              />
-
-            <Paragraph
-              fontSize="16px"
-              lineHeight="2rem"
-              textAlign="center"
-              marginBottom="12px"
-              marginTop="16px"
-              responsiveClassName="992px:text-center 480px:mb-0"
+            <Divider
+              color="primary"
+              width="100px"
+              margin="mt-[16px] mb-[40px]"
+              alignment="center"
+              responsiveStyles="414px:my-[24px]"
+            />
+            <Typography
+              as="p"
+              fontFamily="montserrat"
+              className="text-[16px] leading-[2rem] text-center mb-[12px] mt-[16px] 
+             992px:text-center 480px:mb-0 font-light"
             >
               Do you need cash in transit services? SecureCash specialises in
               picking up your money and banking it. Wherever you are, anywhere
@@ -90,7 +85,8 @@ const Welcome = () => {
               can collect your takings and deposit them at your bank. Whether
               you need cash collection, cash counting, or cash delivery,
               SecureCash has got you covered.&nbsp;
-            </Paragraph>
+            </Typography>
+
           </div>
           <div className="content-columns pt-0 block text-left mt-[40px] 768px:mt-0 992px:w-[95%] 992px:mx-auto 1366px:w-full 992px:flex 992px:pt-[100px] items-center">
             <div className="leftside-column mb-[40px] 992px:mb-0 text-left w-full 992px:w-1/2 p-0 mx-auto my-0 pl-0 ">
@@ -102,39 +98,36 @@ const Welcome = () => {
                   className="scrollable-content my-2"
                   style={{ direction: "ltr" }}
                 >
-                  <Heading
+                  <Typography
                     as="h3"
-                    fontWeight="bold"
-                    fontSize="22px"
-                    lineHeight="1.6em"
-                    textAlign="center"
-                    marginBottom="40px"
-                    responsiveClassName="480px:text-[26px] 992px:text-left 768px:mb-[48px] 768px:leading-[1.6rem]"
+                    className="text-[22px] font-bold leading-[1.6em] text-center mb-10 
+             480px:text-[26px] 992px:text-left 
+             768px:mb-[48px] 768px:leading-[1.6rem]"
                   >
                     Our Cash In Transit Services
-                  </Heading>
+                  </Typography>
 
-                  <Paragraph
-                    fontSize="16px"
-                    lineHeight="2rem"
-                    textAlign="left"
-                    marginBottom="32px"
-                    marginTop="24px"
-                    responsiveClassName="768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left"
+
+
+                  <Typography
+                    as="p"
+                    fontFamily="montserrat"
+                    className="text-[16px] leading-[2rem] text-left mb-[32px] mt-[24px] 
+             768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light"
                   >
                     What cash in transit service does your business need? As one
                     of the largest and most respected cash logistics companies
                     in Australia, SecureCash can serve your specific needs, we
                     provide:&nbsp;
                     <button
-                      className={`read-more-link inline 768px:hidden ${
-                        isExpanded && "hidden"
-                      } text-[#957433] text-[16px] font-bold font-[Montserrat] hover:underline`}
+                      className={`read-more-link inline 768px:hidden ${isExpanded && "hidden"} 
+                text-[#957433] text-[16px] font-bold font-[Montserrat] hover:underline`}
                       onClick={toggleContent}
                     >
                       Read More
                     </button>
-                  </Paragraph>
+                  </Typography>
+
 
                   <ContentScroll
                     isExpanded={isExpanded}

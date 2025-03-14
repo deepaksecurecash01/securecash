@@ -1,20 +1,19 @@
 import React from "react";
-import Paragraph from "../common/Paragraph";
+import Typography from "../common/Typography";
 
 const ContentScroll = ({ sectionContent }) => {
   return (
     <ul className="list-none w-full">
       {sectionContent.map((paragraph, index) => (
         <li key={index}>
-          <Paragraph
-            textAlign="left"
-            marginBottom="0"
-            lineHeight="2rem"
-            responsiveClassName="414px:pr-0"
-            className=" mb-4  1024px:mb-[1.25rem]"
+          <Typography
+            as="p"
+            fontFamily="montserrat"
+            className="text-left font-light leading-[2rem] mb-4 1024px:mb-4 414px:pr-0"
           >
             {paragraph}
-          </Paragraph>
+          </Typography>
+
         </li>
       ))}
       

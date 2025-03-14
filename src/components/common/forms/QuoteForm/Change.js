@@ -1,5 +1,6 @@
 import React from "react";
-import {
+import
+{
   FaCalendarAlt,
   FaMoneyBillAlt,
   FaDollarSign,
@@ -11,9 +12,8 @@ import SelectOption from "@/components/common/forms/elements/SelectOption";
 import { InputField } from "../elements/InputField";
 import { SelectionBox } from "../elements/SelectionBox";
 import Divider from "@/components/common/Divider";
-import Heading from "@/components/common/Heading";
-import SubHeading from "@/components/common/SubHeading";
-import Paragraph from "@/components/common/Paragraph";
+import Typography from "@/components/common/Typography";
+
 
 const Change = ({
   frequencyOptions,
@@ -25,7 +25,8 @@ const Change = ({
   errors,
   currentErrorField,
   setCurrentErrorField,
-}) => {
+}) =>
+{
   const selectionBoxes = [
     {
       label: "Frequency for change?",
@@ -42,19 +43,13 @@ const Change = ({
   ];
   return (
     <div className="form-page change ">
-      <Heading
+      <Typography
         as="h3"
-        color="white"
-        fontSize="22px"
-        textAlign="center"
-        lineHeight="30px"
-        fontWeight="normal"
-        marginBottom="0px"
-        responsiveClassName="capitalize"
-        className="pb-4"
+        fontFamily="montserrat"
+        className="text-white font-normal text-center capitalize pb-4 text-[22px] leading-[30px]"
       >
         Change
-      </Heading>
+      </Typography>
 
       <Divider
         color="primary" // Custom gold color

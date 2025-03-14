@@ -1,11 +1,12 @@
 import Divider from "@/components/common/Divider";
-import Heading from "@/components/common/Heading";
+import Heading from "@/components/common/Typography";
 import Paragraph from "@/components/common/Paragraph";
 import SubHeading from "@/components/common/SubHeading";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
 
-const ContentScrollBar = () => {
+const ContentScrollBar = () =>
+{
   const contentItems = [
     {
       title: "Plain clothes",

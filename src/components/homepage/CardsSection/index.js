@@ -1,20 +1,36 @@
+import Divider from "@/components/common/Divider";
+import Typography from "@/components/common/Typography";
+import Paragraph from "@/components/common/Paragraph";
+import Image from "next/image";
 import React from "react";
 
 const ServiceRow = ({ imgSrc, link, title, description }) => (
   <div className="cash-row flex-1 mb-5 992px:mb-0 w-full px-[24px] py-0 float-none my-0 992px:w-[30%] h-auto 992px:h-[495px] 992px:px-4 992px:pb-4 mx-auto pb-6 992px:float-left 1200px:w-[320px] 1366px:w-[68%] rounded-[20px] bg-[#ffffff] 1024px:px-4 1366px:h-auto [box-shadow:-2px_10px_15px_-1px_rgba(0,_0,_0,_0.31)] 1366px:px-10 1366px:pb-[30px]">
     <div className="header-wrapper flex flex-row 992px:flex-col justify-start items-center 992px:items-start mb-[20px] 992px:mb-0">
-      <img
+      <Image
+        width={80}
+        height={80}
         src={imgSrc}
         alt={title}
         className="w-[80px] mr-[16px] pt-[35px] 992px:w-1/4 bg-brown-overlay 992px:pt-[50px]"
       />
-      <h3 className="montBold mt-[18px] mb-[15px] mx-auto 768px:mx-0 text-[24px] 992px:text-[16px] text-[#c7a652] font-montserrat font-bold">
+      <Typography
+        as="h3"
+        fontFamily="font-montserrat"
+        className="text-[#c7a652] text-center font-bold text-[24px] mt-[18px] mb-[15px] mx-auto 768px:mx-0 992px:text-[16px]"
+      >
         <a href={link}>{title}</a>
-      </h3>
+      </Typography>
     </div>
-    <p className="text-[#3f3f3f] text-left text-[16px] 1280px:text-[14px] font-montserrat font-light leading-[2em]">
-      {description}
-    </p>
+
+      <Typography
+        as="p"
+        fontFamily="font-montserrat"
+        className="text-[#3f3f3f] text-left font-light text-[16px] leading-[2em] mb-0 1280px:text-[14px]"
+      >
+        {description}
+      </Typography>
+
   </div>
 );
 
@@ -52,17 +68,34 @@ const CardsSection = () =>
       >
         <div className="bottom-row-left bg-[#c7a652]  w-full mx-auto  1200px:relative">
           <div className="row-container w-[95%] mx-auto py-[40px] 992px:pl-[14px] 992px:w-[490px] mt-[32px] pt-2.5 text-center  1200px:w-[650px] 1366px:w-[683px] 1366px:mr-0 1366px:ml-auto 1024px:mt-10 1366px:mt-[80px] text-[#fff]">
-            <hr className="divider-2 h-[4px] border-0 mb-[24px] w-[100px] rounded-[5px] bg-[#fff] divider-bottom mx-auto 992px:mx-0" />
-
-            <h3 className=" font-prata text-[32px] leading-[1.4em] text-center 992px:text-left mb-4">
+            <Divider
+              alignment="left"
+              responsiveClassName="1024px:mt-0 1024px:mb-6"
+            />
+            <Typography
+              as="h3"
+              fontFamily="font-prata-regular"
+              className="text-inherit text-center font-prata text-[32px] leading-[1.4em] mb-[16px] 992px:text-left"
+            >
               Your One-Stop
-            </h3>
-            <h2 className="montSemiBold mx-auto my-[18px] leading-[1.2em] font-montserrat font-bold 992px:text-left text-[#fff] text-[40px] 414px:leading-[1.4em] text-center mb-[24px]">
+            </Typography>
+
+            <Typography
+              as="h2"
+              fontFamily="font-montserrat"
+              className="text-white text-center font-bold text-[40px] leading-[1.2em] mt-[18px] mb-[24px] mx-auto montSemiBold 414px:leading-[1.4em] 992px:text-left"
+            >
               Secure Banking Courier Service
-            </h2>
-            <p className="w-4/5 ml-auto mr-auto 480px:w-full text-center leading-[2rem] 1366px:leading-4 992px:text-left font-normal font-montserrat mb-[24px]">
+            </Typography>
+
+            <Typography
+              as="p"
+              fontFamily="font-montserrat"
+              className="text-inherit text-center text-[16px] leading-[2rem] mb-[24px] w-4/5 ml-auto mr-auto 480px:w-full 1366px:leading-4 992px:text-left"
+            >
               SecureCash can serve your specific needs, we provide:
-            </p>
+            </Typography>
+
             <div
               id="content-cash"
               className="relative w-[92%] 414px:w-[88%] mx-auto 992px:absolute mt-[32px] 992px:flex 992px:gap-5 transform 992px:left-1/2 992px:transform 992px:-translate-x-1/2 1200px:left-auto 1200px:transform-none   1366px:gap-10 992px:w-[900px] 1366px:w-[950px] 1366px:left-auto"
@@ -86,9 +119,15 @@ const CardsSection = () =>
         className="bg-[#fff]  1200px:min-h-[195px] clear-both float-none w-full mx-auto my-0 pr-2 1280px:pr-[52px] 992px:pb-[370px] 1366px:pb-0"
       >
         <div className=" w-full max-w-[1366px] mx-auto my-0 z-40">
-          <h5 className="   text-center hidden 1200px:w-full 1200px:right-0 1280px:mr-12 1200px:block text-[16px] text-[#000000] 1200px:text-right pt-[18px] font-montserrat font-normal">
+          <Typography
+            as="h5"
+            fontFamily="font-montserrat"
+            className="hidden text-[16px] text-center text-[#000000] font-normal mt-[18px] 1200px:w-full 1200px:right-0 1280px:mr-12 1200px:block 1200px:text-right"
+          >
             The Team at Our Head Office
-          </h5>
+          </Typography>
+
+
         </div>
       </div>
     </>

@@ -3,7 +3,7 @@ import Container from "../layout/Container";
 import Divider from "../common/Divider";
 import ScrollableSection from "../layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
-import Heading from "../common/Heading";
+import Heading from "../common/Typography";
 
 const ReusableSection = ({
     title,

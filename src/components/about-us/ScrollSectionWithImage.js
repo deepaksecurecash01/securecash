@@ -3,7 +3,7 @@ import Container from "../layout/Container";
 import Divider from "../common/Divider";
 import ScrollableSection from "../layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
-import Heading from "../common/Heading";
+import Heading from "../common/Typography";
 
 export const ScrollSectionWithImage = ({
     title,
@@ -74,7 +74,7 @@ export const ScrollSectionWithImage = ({
                                 marginBottom="8px"
                                 textAlign="center"
                                 className=""
-                                responsiveClassName="text-[32px] 768px:text-right 1200px:pl-[46px] 1366px:pl-[56px] 768px:text-[40px] 1200px:mt-6 1200px:mb-2"
+                                responsiveClassName="text-[32px] 768px:text-right 1200px:pl-[46px] 1366px:pl-[56px] 768px:text-[40px] 1200px:mt-6  1200px:mb-2"
                             >
                                 {title}
                             </Heading>
