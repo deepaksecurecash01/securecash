@@ -29,6 +29,7 @@ module.exports = {
 
       fontFamily: {
         montserrat: ['"Montserrat"'],
+        times: ['"Times New Roman"', "Times", "serif"],
         prata: ["var(--font-prata)"], // Ensure exact font name here
         'prata-regular': ['"Prata Regular"', "serif"], // Ensure exact font name here
       },

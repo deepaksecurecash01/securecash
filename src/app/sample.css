@@ -1293,36 +1293,6 @@ h3.prata2 {
     background-position: center
 }
 
-#hero-image {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 80vh;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center
-}
-
-#hero-image h1 {
-    text-align: center;
-    line-height: 61px;
-    font-size: 50px;
-    text-shadow: 0.01em 0.05em 0.08em rgba(12, 12, 12, 0.23);
-    padding: 0 25px
-}
-
-#hero-image .center-content-divider {
-    background: #fff
-}
-
-#hero-image .cta-box {
-    margin-top: 80px;
-    width: 545px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between
-}
 
 .webp #banner-mid-content:before {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../images/team.webp) center -300px !important
@@ -3067,40 +3037,6 @@ div.callback-button:hover {
 
 .section-content::-webkit-scrollbar {
     width: 10px
-}
-
-#hero-image .wrapper {
-    width: 75%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    color: white
-}
-
-#hero-image .wrapper h3 {
-    font-family: "Montserrat";
-    font-size: 40px;
-    line-height: 1.4em;
-    margin-bottom: 13px
-}
-
-#hero-image .wrapper h1 {
-    font-size: 56px;
-    line-height: 1.4em
-}
-
-#hero-image .wrapper p {
-    font-family: "Montserrat";
-    text-align: center;
-    width: 55%;
-    line-height: 2;
-    font-size: 16px
-}
-
-#hero-image .wrapper hr {
-    margin-top: 21px;
-    margin-bottom: 24px
 }
 
 .form-panel {
@@ -5000,13 +4936,6 @@ i.fa.fa-long-arrow-down {
         justify-content: center
     }
 
-    #hero-image {
-        min-height: 40vh
-    }
-
-    #hero-image .wrapper p {
-        margin-bottom: 0
-    }
 
     #header-image-wrapper {
         width: 613px;
@@ -5061,22 +4990,10 @@ i.fa.fa-long-arrow-down {
     }
 }
 
-@media only screen and (max-width: 1024px) and (orientation: landscape) {
-    #hero-image {
-        min-height: 60vh
-    }
-}
+
 
 @media only screen and (max-width: 992px) {
-    #hero-image {
-        margin-top: 40px;
-        background-position: 50%
-    }
 
-    #hero-image h1 {
-        font-size: 40px;
-        line-height: 48px
-    }
 
     #pitch .cta-overlay {
         width: 60%
@@ -6166,17 +6083,7 @@ i.fa.fa-long-arrow-down {
         margin-left: 1px
     }
 
-    #hero-image {
-        margin-top: 12px
-    }
 
-    #hero-image .wrapper {
-        width: 95%
-    }
-
-    #hero-image .wrapper p {
-        width: 80%
-    }
 
     #testimonial-header-wrapper {
         width: 80%
@@ -6257,10 +6164,6 @@ i.fa.fa-long-arrow-down {
         margin-top: 0
     }
 
-    #hero-image .cta-box {
-        width: 60%;
-        margin-top: 50px
-    }
 
     #video-section h2 {
         margin: 10px auto 0 auto;
@@ -7014,10 +6917,7 @@ i.fa.fa-long-arrow-down {
 }
 
 @media only screen and (max-width: 736px) {
-    #hero-image h1 {
-        font-size: 38px;
-        line-height: 46px
-    }
+
 
     .p-header {
         margin-top: 30px
@@ -7131,30 +7031,7 @@ i.fa.fa-long-arrow-down {
         line-height: 24px
     }
 
-    .spacer-lg {
-        height: 30px
-    }
 
-    #hero-image {
-        background-position: 40%;
-        background-size: 1100px;
-        min-height: 50vh
-    }
-
-    #hero-image h1 {
-        font-size: 30px;
-        line-height: 36px
-    }
-
-    #hero-image .center-content-divider {
-        margin-top: 10px;
-        width: 16%
-    }
-
-    #hero-image .cta-box {
-        width: 80%;
-        justify-content: space-evenly
-    }
 
     h2,
     h3,
@@ -7409,9 +7286,6 @@ i.fa.fa-long-arrow-down {
         margin-top: -12px
     }
 
-    #hero-image {
-        min-height: 100vh
-    }
 }
 
 @media only screen and (max-device-width: 670px) and (orientation: landscape) {
@@ -7440,11 +7314,6 @@ i.fa.fa-long-arrow-down {
 }
 
 @media only screen and (max-width: 570px) {
-    #hero-image {
-        background-position: 45%;
-        background-size: 900px;
-        min-height: 40vh
-    }
 
     .teamslideshow {
         min-height: 450px
@@ -7470,13 +7339,7 @@ i.fa.fa-long-arrow-down {
     }
 }
 
-@media only screen and (max-width: 570px) and (orientation: landscape) {
-    #hero-image {
-        min-height: auto;
-        height: 520px;
-        background-size: cover
-    }
-}
+
 
 @media only screen and (max-width: 450px) {
     #video-section h2 {
@@ -7484,26 +7347,6 @@ i.fa.fa-long-arrow-down {
         line-height: 22px;
         margin: 4px auto 0 auto;
         width: 90%
-    }
-
-    #hero-image {
-        background-position: 45%;
-        background-size: cover
-    }
-
-    #hero-image h1 {
-        font-size: 30px;
-        line-height: 36px
-    }
-
-    #hero-image .center-content-divider {
-        margin-top: 10px;
-        width: 16%
-    }
-
-    #hero-image .cta-box {
-        width: 90%;
-        justify-content: space-evenly
     }
 
     .btn {
@@ -7779,9 +7622,7 @@ i.fa.fa-long-arrow-down {
         padding-top: 35px !important
     }
 
-    #hero-image .cta-box {
-        margin-top: 0 !important
-    }
+
 
     .video iframe {
         height: 230px
@@ -8149,28 +7990,9 @@ i.fa.fa-long-arrow-down {
         padding-bottom: 0px
     }
 
-    #hero-image {
-        height: 70vh
-    }
 
-    #hero-image .wrapper h1 {
-        font-size: 32px
-    }
 
-    #hero-image .wrapper h3 {
-        font-size: 24px;
-        margin-bottom: 22px
-    }
 
-    #hero-image .wrapper p {
-        line-height: 1.6em;
-        margin-bottom: 0
-    }
-
-    #hero-image .wrapper hr {
-        margin-top: 26px;
-        margin-bottom: 28px
-    }
 
     #contact-form-info-panel .content h3 {
         font-size: 24px;
@@ -8531,9 +8353,7 @@ i.fa.fa-long-arrow-down {
         background-size: auto 210px
     }
 
-    #hero-image {
-        height: 100vh
-    }
+
 
     #testimonial-carousel .item .photo-section .quote {
         font-size: 80px;
@@ -12761,9 +12581,7 @@ html {
     margin: 30px 0 24px 0
 }
 
-#hero-image .cta-box .btn {
-    padding: 2px 24px
-}
+
 
 .quote-callback-cta-mobile {
     display: none
@@ -13945,58 +13763,6 @@ body.quiz-modal-on .site-modal-outer {
     outline: none
 }
 
-#Secure {
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: 200;
-    font-size: 140px;
-}
-
-#Cash {
-    color: #c5a452;
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: 200;
-    font-size: 140px;
-}
-
-#Franchises {
-    font-size: 80px;
-    line-height: 100px;
-}
-
-
-#NowAvailable {
-    font-size: 40px;
-    color: white;
-}
-
-@media (max-width: 480px) {
-    #Secure {
-        font-family: 'Times New Roman', Times, serif;
-        font-weight: 200;
-        font-size: 70px;
-    }
-
-    #Cash {
-        color: #c5a452;
-        font-family: 'Times New Roman', Times, serif;
-        font-weight: 200;
-        font-size: 70px;
-    }
-
-    #Franchises {
-        font-size: 50px;
-    }
-
-
-    #NowAvailable {
-        font-size: 40px;
-        color: white;
-    }
-
-    #intro-text {
-        background-color: white;
-    }
-}
 
 @media (max-width: 1024px) {
     #franchise-header {

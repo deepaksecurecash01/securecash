@@ -17,7 +17,7 @@ const BlogIndex = () =>
     return (
         <section className="blog-index-main mb-[90px] mt-[84px]">
             <Container className="inner-grid w-full max-[1366px]:max-w-[1280px]">
-                <div className="blog-index-main--content flex flex-wrap p-0 mx-[15px] 1280px:mx-0 px-[60px] 768px:px-[12px] 1280px:px-0">
+                <div className="blog-index-main--content flex flex-wrap p-0 mx-[15px] 1280px:mx-0  768px:px-[12px] 1280px:px-0">
                     {sortedPosts.map((item, index) => (
                         <div key={index} className="blog-index-main--content-item w-full 768px:w-1/3 px-2 mb-[38px] 1024px:px-[12px]">
                             <Link href={`/blog/${item.id}`} className="flex flex-wrap justify-center transition-all duration-200 ease-in">

@@ -1,4 +1,4 @@
-import { Montserrat, Prata } from "next/font/google";
+import { Montserrat, Prata,  } from "next/font/google";
 import "./globals.css";
 
 import Header from "@/components/common/Header";
@@ -16,6 +16,7 @@ const prata = Prata({
   variable: "--font-prata",
   weight: [ "400"],
 });
+
 
 
 export const metadata = {

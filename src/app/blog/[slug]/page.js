@@ -7,14 +7,21 @@ import { FaTwitter, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import Container from "@/components/layout/Container";
 import BlogLatestPost from "@/components/blog/BlogLatestPost";
 import BottomBanner from "@/components/about-us/BottomBanner";
+import './blog-single.css';
 
-export async function generateStaticParams() {
+export async function generateStaticParams()
+{
   return blogPosts.map((post) => ({
     slug: post.id.toString(),
   }));
 }
-export async function generateMetadata({ params }) {
-  const { slug } = params;
+
+export async function generateMetadata({ params })
+{
+  // Await params before destructuring
+  const paramsData = await params;
+  const { slug } = paramsData;
+
   const blog = blogPosts.find((post) => post.id.toString() === slug);
 
   if (!blog) {
@@ -29,9 +36,12 @@ export async function generateMetadata({ params }) {
     description: blog.title,
   };
 }
-export default async function BlogPost({ params }) {
-  // Make the component async
-  const { slug } = params; // Destructure params first
+
+export default async function BlogPost({ params })
+{
+  // Also await params here for consistency
+  const paramsData = await params;
+  const { slug } = paramsData;
 
   const blog = blogPosts.find((post) => post.id.toString() === slug);
 
@@ -46,33 +56,38 @@ export default async function BlogPost({ params }) {
       <section className="blog-single-main">
         <Container className="inner w-full">
           <div className="blog-single-main--wrap">
-            <div className="blog-single-main--social">
-              <ul className="blog-single-main--social__list">
-                <li>
+            <div className="blog-single-main--social mb-[60px] 480px:mb-0 top-[10px] w-full 1024px:w-[18%]  1024px:top-[58px] absolute z-[10]">
+              <ul className="blog-single-main--social__list list-none flex-row w-[200px] 1024px:w-auto justify-around 1024px:justify-normal mx-auto 1024px:mx-0 flex items-center  1024px:flex-col">
+                <li className="mb-[26px]">
                   <a
                     target="_blank"
                     href={blog.socialLinks.twitter}
                     rel="noopener"
+                    className="group bg-[#f2f2f2] rounded-full h-[36px] w-[36px] flex justify-center items-center transition-all duration-150 ease-in hover:bg-black hover:text-white hover:no-underline"
                   >
-                    <FaTwitter size={20} className=" text-primary" />
+                    <FaTwitter size={20} className=" text-primary group-hover:text-white" />
                   </a>
                 </li>
-                <li>
+                <li className="mb-[26px]">
                   <a
                     target="_blank"
                     href={blog.socialLinks.facebook}
                     rel="noopener"
+                    className="group bg-[#f2f2f2] rounded-full h-[36px] w-[36px] flex justify-center items-center transition-all duration-150 ease-in hover:bg-black hover:text-white hover:no-underline"
+
                   >
-                    <FaFacebookF size={20} className=" text-primary" />
+                    <FaFacebookF size={20} className=" text-primary  group-hover:text-white" />
                   </a>
                 </li>
-                <li>
+                <li className="mb-[26px]">
                   <a
                     target="_blank"
                     href={blog.socialLinks.linkedin}
                     rel="noopener"
+                    className="group bg-[#f2f2f2] rounded-full h-[36px] w-[36px] flex justify-center items-center transition-all duration-150 ease-in hover:bg-black hover:text-white hover:no-underline"
+
                   >
-                    <FaLinkedinIn size={20} className=" text-primary" />
+                    <FaLinkedinIn size={20} className=" text-primary  group-hover:text-white" />
                   </a>
                 </li>
               </ul>
@@ -96,12 +111,10 @@ export default async function BlogPost({ params }) {
             </div>
           </div>
           {/* This is where you'd render latest posts component */}
-            <BlogLatestPost/>
+          <BlogLatestPost />
         </Container>
-
       </section>
       <BottomBanner />
-
     </>
   );
 }

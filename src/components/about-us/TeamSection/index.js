@@ -24,7 +24,7 @@ const teamMembers = [
   },
   {
     name: "Beth Bacchus",
-    position: "Chief Operating Officer",
+    position: "Chief Business Officer",
     email: "beth@securecash.com.au",
     image: "https://www.securecash.com.au/images/team/beth.png",
     socialLinks: {

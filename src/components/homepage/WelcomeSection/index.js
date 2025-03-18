@@ -7,6 +7,7 @@ import Paragraph from "@/components/common/Paragraph";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "@/components/homepage/WelcomeSection/ContentScroll";
 import VimeoLite from "@/components/VimeoLite";
+import Container from "@/components/layout/Container";
 
 const servicesData = [
   {
@@ -43,7 +44,7 @@ const Welcome = () =>
 
   return (
     <div className=" w-full bg-content-bg bg-no-repeat bg-center inline-block mt-10 992px:mt-[47px]">
-      <div className="w-full max-w-[1366px] mx-auto">
+      <Container className="max-[1366px]:max-w-[1280px]">
         <div
           id="content"
           className=" min-h-[400px] w-full 992px:w-auto mx-auto pt-0"
@@ -142,7 +143,7 @@ const Welcome = () =>
             </div>
           </div>
         </div>
-      </div>
+      </Container>
     </div>
   );
 };

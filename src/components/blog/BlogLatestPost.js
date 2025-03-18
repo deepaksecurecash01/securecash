@@ -16,21 +16,22 @@ const BlogLatestPost = () => {
   const limitedPosts = sortedPosts.slice(0, 3);
 
   return (
-      <div className="blog-single-main--footer">
-          <Typography
-              as="h4"
-              fontFamily="montserrat"
-              className=" font-bold leading-[2rem] text-center max-[414px]:text-[36px] text-[30px] z-30 mb-[20px]"
-          >
-Latest post          </Typography>
+    <div className="blog-single-main--footer">
+      <Typography
+        as="h4"
+        fontFamily="montserrat"
+        className=" font-bold leading-[2rem] text-center max-[414px]:text-[36px] text-[30px] z-30 mb-[20px]"
+      >
+        Latest post{" "}
+      </Typography>
       <Divider
         color="primary"
         margin="mt-[6px] mb-[16px]"
         alignment="left"
         responsiveClassName="992px:mx-0 992px:text-left"
       />
-      <div class="inner-grid">
-        <section class="blog-index-main blog-index-footer">
+      <div className="inner-grid">
+        <section className="blog-index-main blog-index-footer">
           <Container className="inner-grid w-full max-[1366px]:max-w-[1280px]">
             <div className="blog-index-main--content flex flex-wrap p-0 mx-[15px] 1280px:mx-0 px-[60px] 768px:px-[12px] 1280px:px-0">
               {limitedPosts.map((item, index) => (

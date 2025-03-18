@@ -47,7 +47,7 @@ const Carousel = () =>
 
   const CustomPrevArrow = ({ currentSlide, slideCount, onClick }) => (
     <div
-      className={`  absolute  1024px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer z-10 top-1/2  transform -translate-y-1/2 992px:-right-3  992px:top-[38%] hover:opacity-100 text-[50px] text-white `}
+      className={`  absolute  992px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer z-10 top-1/2  transform -translate-y-1/2 992px:-right-6  992px:top-[38%] hover:opacity-100 text-[50px] text-white `}
       onClick={() =>
       {
         if (onClick) {
@@ -61,7 +61,7 @@ const Carousel = () =>
 
   const CustomNextArrow = ({ currentSlide, slideCount, onClick }) => (
     <div
-      className={`  absolute  1024px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer top-1/2 z-10 right-0   992px:-right-3 transform -translate-y-1/2  992px:top-[62%] hover:opacity-100 text-[50px] text-white `}
+      className={`  absolute  992px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer top-1/2 z-10 right-0   992px:-right-6 transform -translate-y-1/2  992px:top-[62%] hover:opacity-100 text-[50px] text-white `}
       onClick={() =>
       {
         if (onClick) {
@@ -142,8 +142,8 @@ const Carousel = () =>
               as="p"
               fontFamily="montserrat"
               className="text-[14px] leading-[1.6em] text-center font-light mb-0 
-             w-[70%] 992px:w-[95%] 992px:leading-[1.6em] 
-             1024px:leading-[2em] mx-auto whitespace-normal 992px:text-center"
+             w-[70%] 992px:w-[95%]
+             992px:leading-[2em] mx-auto whitespace-normal 992px:text-center"
             >
               {slide.description}
             </Typography>

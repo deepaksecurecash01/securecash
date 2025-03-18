@@ -40,8 +40,8 @@ const TeamSlider = ({ member }) =>
     return (
       <div
         className={`absolute  1024px:px-5 transition-opacity duration-200 z-10 text-primary text-[50px] top-1/2 transform -translate-y-1/2 ${isPrev
-            ? " -left-[3%] 768px:left-0  768px:top-[42%]"
-            : "-right-[3%]  768px:left-0  768px:top-[58%]"
+            ? " -left-[3%] 768px:-left-3 1366px:left-0  768px:top-[42%]"
+            : "-right-[3%]  768px:-left-3 1366px:left-0  768px:top-[58%]"
           } ${isDisabled
             ? "opacity-50 pointer-events-none cursor-not-allowed no-underline"
             : ""
