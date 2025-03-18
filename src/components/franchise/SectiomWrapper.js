@@ -12,9 +12,9 @@ const SectionWrapper = () => {
           <div id="intro-text">
             <p>
               Here at <strong>SecureCash</strong> we are extremely excited to
-              grow our family and offer the opportunity to{" "}
+              grow our family and offer the opportunity to
               <strong>
-                join Australia and New Zealand's largest banking courier
+                join Australia and New Zealand&#39;s largest banking courier
                 network, with your very own Franchise!
               </strong>
             </p>
@@ -123,7 +123,7 @@ const SectionWrapper = () => {
                 </em>
               </p>
               <p style={{ fontSize: "medium" }}>
-                Want to learn more about what it's like being a part of the
+                Want to learn more about what it&#39;s like being a part of the
                 SecureCash team? Check out our blog post on{" "}
                 <a href="https://www.securecash.com.au/blog/office-culture/">
                   Office Culture
