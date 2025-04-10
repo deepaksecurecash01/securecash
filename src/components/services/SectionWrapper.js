@@ -190,10 +190,11 @@ const SectionWrapper = ({
                   fontFamily="font-montserrat"
                   className="text-[18px] 768px:text-[26px] 768px:leading-[1.4em] font-medium text-white text-center 992px:text-left mt-4 pb-3"
                 >
-                  Let's start discussing
+                  Let&apos;s start discussing
                   <br />
                   your options.
                 </Typography>
+
                 <Typography
                   as="p"
                   fontFamily="font-montserrat"

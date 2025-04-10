@@ -96,10 +96,11 @@ const GuaranteeSection = ({ guaranteeContent, imageUrl }) =>
                                     Secure<span className="text-primary">Cash</span>
                                 </h3>
                                 <h3 className="font-bold text-[20px] leading-[27px] mb-4 w-full text-center">
-                                    Don't take the risk.
+                                    Don&apos;t take the risk.
                                     <br />
                                     Let us do your banking!
                                 </h3>
+
                             </div>
                         </div>
 

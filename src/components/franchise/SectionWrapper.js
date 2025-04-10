@@ -164,8 +164,7 @@ const SectionWrapper = () => {
                         <span style={{ fontSize: "medium" }}>
                           <em>
                             <span style={{ fontSize: "medium" }}>
-                              Want to learn more about what it's like being a
-                              part of the SecureCash team? Check out our blog
+                              Want to learn more about what it&apos;s like being a part of the SecureCash team? Check out our blog
                               post on{" "}
                               <Link
                                 className="text-link hover:underline"
@@ -174,6 +173,7 @@ const SectionWrapper = () => {
                                 Office Culture
                               </Link>
                             </span>
+
                           </em>
                         </span>
                         <span style={{ fontSize: "medium" }}>.</span>

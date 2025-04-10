@@ -36,10 +36,11 @@ const ImageSection = ({ imgSrc, imagePosition = 'left' }) =>
                         fontFamily="font-montserrat"
                         className="text-[18px] font-medium text-white text-center mt-4 pb-3"
                     >
-                        Let's start discussing
+                        Let&apos;s start discussing
                         <br />
                         your options.
                     </Typography>
+
                     <Typography
                         as="p"
                         fontFamily="font-montserrat"

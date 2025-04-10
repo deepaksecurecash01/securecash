@@ -101,9 +101,10 @@ const HeroSection = () =>
                 </h3>
 
                 <p className="text-center leading-[2em]  414px:mb-3 768px:mb-9">
-                    We are proud to say that we are partners of some of the world's most
+                    We are proud to say that we are partners of some of the world&apos;s most
                     renowned security agencies and security service providers!
                 </p>
+
 
                 <div className="partners-hero--header__img">
                     <img
