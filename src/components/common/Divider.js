@@ -28,13 +28,10 @@ const Divider = ({
     colorClass = `bg-${color}`;
   }
 
-  // Handle width
-  customStyles.width = width;
-  customStyles.maxWidth = width;
 
   return (
     <hr
-      className={`h-[4px] rounded-[5px] border-0 ${colorClass} ${margin} ${padding} mx-auto text-center 1024px:${alignmentClass} ${responsiveClassName}`}
+      className={`h-[4px] w-[${width}] rounded-[5px] border-0 ${colorClass} ${margin} ${padding} mx-auto text-center 1024px:${alignmentClass} ${responsiveClassName}`}
       style={customStyles}
     />
   );

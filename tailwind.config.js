@@ -35,6 +35,7 @@ module.exports = {
       },
       colors: {
         primary: "#c7a652", // Primary background color
+        "link": "#957433", // Link color
         "light-border": "#E9E9E9", // Light border color
         "active-text": "#C5A44B", // Text color on hover or active
         "dark-border": "#636363", // Dark border color
@@ -51,6 +52,9 @@ module.exports = {
         "team-bg": "url('/images/team.webp')",
         "brown-overlay": "url('/images/brown-overlay.png')",
         'quote-header': "url('/images/bg-quote-header-left.png'), url('/images/bg-quote-header-right.png')",
+        'quote-header-right': "url('/images/bg-quote-header-right.png')",
+        'quote-header-left': "url('/images/bg-quote-header-left.png')",
+
 
       }),
       backgroundPosition: {

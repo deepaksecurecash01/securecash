@@ -81,7 +81,7 @@ const MidBanner = () => {
     <div>
       <CounterSection stats={stats} />
       <ContentSection />
-      <VideoSection />
+      <VideoSection  height={`630px`}/>
     </div>
   );
 };

@@ -12,8 +12,10 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@slightlyoff/lite-vimeo": "^0.1.2",
+    "html-react-parser": "^5.2.3",
     "next": "15.0.2",
     "react": "19.0.0-rc-02c0e824-20241028",
+    "react-calendly": "^4.3.1",
     "react-countup": "^6.5.3",
     "react-dom": "19.0.0-rc-02c0e824-20241028",
     "react-headroom": "^3.2.1",

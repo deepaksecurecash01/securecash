@@ -1,34 +1,49 @@
-import React from "react";
-import Divider from "../common/Divider";
-import Heading from "../common/Heading";
-
-const BottomBanner = () =>
+const replaceLinks = (node) =>
 {
-    return (
-        <div id="about-us-banner-bottom" className="">
-            <div className="inner">
-                <Heading
-                    as="h2"
-                    color="white"
-                    fontWeight="medium"
-                    fontSize="40px"
-                    lineHeight="1.25em"
-                    marginBottom="0px"
-                    textAlign="center"
-                    className="font-medium max-[414px]:text-[36px]"
-                    responsiveClassName="text-[32px] z-30 py-0   1024px:leading-[2em]"
-                >
-                    Let us do the banking for you
-                </Heading>
-                <Divider
-                    color="primary"
-                    alignment="left"
-                    margin="m-0"
-                    responsiveClassName="768px:text-left 768px:mx-0 divider-gold divider-2 z-20"
-                />
-            </div>
-        </div>
-    );
-};
+    if (node.type === 'tag' && node.name === 'a') {
+        const { href, class: className, target, rel, ...rest } = node.attribs;
 
-export default BottomBanner;
+        // For tel: links or external links, we can keep using the <a> tag
+        if (href.startsWith('tel:') || href.startsWith('http') || href.startsWith('https')) {
+            return (
+                <a
+                    href={href}
+                    className={className}
+                    target={target}
+                    rel={rel}
+                    {...rest}
+                >
+                    {node.children && node.children.map((child, i) =>
+                    {
+                        if (child.type === 'text') {
+                            return child.data;
+                        } else {
+                            return parse(child.toString(), { replace: replaceLinks });
+                        }
+                    })}
+                </a>
+            );
+        }
+
+        // For internal links, use Next.js Link component
+        return (
+            <Link
+                href={href}
+                className={className}
+                target={target}
+                rel={rel}
+                {...rest}
+            >
+                {node.children && node.children.map((child, i) =>
+                {
+                    if (child.type === 'text') {
+                        return child.data;
+                    } else {
+                        return parse(child.toString(), { replace: replaceLinks });
+                    }
+                })}
+            </Link>
+        );
+    }
+};
+{ parse(paragraph, { replace: replaceLinks }); }
