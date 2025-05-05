@@ -10,7 +10,8 @@ const ContentScroll = ({ scrollData }) =>
         <ul className="list-none w-full  ">
             {scrollData.map((item, index) => (
                 <li key={index}>
-                    <div className=" flex items-center mt-[30px] 1024px:mt-[50px] mb-[12px] gap-3">
+                    <div className={`flex items-center mt-[30px] ${index === 0 ? '1024px:mt-0' : ' 1024px:mt-[50px]'
+                            } mb-[12px] gap-3`}>
                         <Image
                             className="inline-block bg-contain bg-no-repeat  992px:w-[40px]"
                             src="https://www.securecash.com.au/images/icons/tick.png"

@@ -13,7 +13,7 @@ const BlogLatestPost = () => {
   });
 
   // Limit to only 3 posts
-  const limitedPosts = sortedPosts.slice(0, 3);
+  const limitedPosts = sortedPosts.slice(0, 2);
 
   return (
     <div className="blog-single-main--footer">
@@ -33,11 +33,11 @@ const BlogLatestPost = () => {
       <div className="inner-grid">
         <section className="blog-index-main blog-index-footer">
           <Container className="inner-grid w-full max-[1366px]:max-w-[1280px]">
-            <div className="blog-index-main--content flex flex-wrap p-0 mx-[15px] 1280px:mx-0 px-[60px] 768px:px-[12px] 1280px:px-0">
+            <div className="blog-index-main--content flex flex-wrap p-0 mx-[15px] 1280px:mx-0 768px:px-[12px] 1280px:px-0">
               {limitedPosts.map((item, index) => (
                 <div
                   key={index}
-                  className="blog-index-main--content-item w-full 768px:w-1/3 px-2 mb-[38px] 1024px:px-[12px]"
+                  className="blog-index-main--content-item w-full 768px:w-1/2 1024px:w-1/3 px-2 mb-[38px] 1024px:px-[12px]"
                 >
                   <Link
                     href={`/blog/${item.id}`}
@@ -54,7 +54,7 @@ const BlogLatestPost = () => {
                   <Typography
                     as="h4"
                     fontFamily="font-montserrat"
-                    className="text-[22px] font-bold text-primary text-left pb-5"
+                    className="text-[22px] font-bold text-primary text-center 768px:text-left pb-5"
                   >
                     <Link
                       href={`/blog/${item.id}`}

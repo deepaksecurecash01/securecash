@@ -95,14 +95,13 @@ const Page = () =>
   return (
     <div className="bg-slate-900 w-full p-6">
       <ul className="space-y-4 text-white">
-        {services.map((slug, index) => (
+        {[...services].sort().map((slug, index) => (
           <li key={index} className="flex flex-wrap items-center gap-4">
             <span>{index + 1}. {slug}</span>
             <a
               href={`/services/${slug}`}
               target="_blank"
-          
-              className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 transition"
+              className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 "
             >
               Relative
             </a>
@@ -110,12 +109,13 @@ const Page = () =>
               href={`https://www.securecash.com.au/${slug}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-green-600 px-3 py-1 rounded hover:bg-green-700 transition"
+              className="bg-green-600 px-3 py-1 rounded hover:bg-green-700 "
             >
               External
             </a>
           </li>
         ))}
+
       </ul>
     </div>
   );

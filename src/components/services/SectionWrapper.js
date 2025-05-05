@@ -120,7 +120,7 @@ const SectionWrapper = ({
           {/* Scrollable Content Area */}
           <div className="flex flex-grow justify-center items-center w-full 480px:w-full 992px:w-1/2 mx-auto 992px:mx-0 pt-0 [flex:1]">
             <ScrollableSection
-              className="h-auto w-[82%] 992px:w-full p-0 mx-auto 992px:h-full bg-white leading-[2] 992px:px-[10%]"
+              className="h-auto w-[82%] 992px:w-full p-0 mx-auto 992px:h-full backdrop-blur-sm leading-[2] 992px:px-[10%]"
               style={{ direction: "rtl" }}
             >
               <div style={{ direction: "ltr" }}>
@@ -128,7 +128,7 @@ const SectionWrapper = ({
                   {contentItems.map((item, index) => (
                     <li key={index}>
                       {item.title && (
-                        <div className=" flex flex-row justify-start items-center gap-3">
+                        <div className=" flex flex-row justify-start items-center gap-4">
                           {item.icon && (
                             <Image
                               className="icon-data h-[40px] pr-2.5 480px:pr-[16px] w-auto"
@@ -141,7 +141,8 @@ const SectionWrapper = ({
                           <Typography
                             as="h4"
                             fontFamily="font-montserrat"
-                            className="text-[22px] 600px:text-[26px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left 768px:mt-2.5 mb-[20px] 992px:w-full"
+                            className={`text-[22px] ${item.icon ? "600px:text-[20px]" : "600px:text-[26px]"} leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left 768px:mt-2.5 mb-[20px] 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' 768px:mt-8'
+                            }`}
                           >
                             {item.title}
                           </Typography>
@@ -151,11 +152,13 @@ const SectionWrapper = ({
                       {item.details.map((paragraph, paragraphIndex) => (
                         <div
                           key={paragraphIndex}
-                          className="text-justify 768px:text-start font-light leading-[2rem] mt-2.5 414px:pr-0 mb-8"
+                          className={`text-justify 768px:text-start font-light leading-[2rem] mt-2.5 414px:pr-0 ${paragraphIndex === item.details.length - 1 ? 'mb-0' : 'mb-8'
+                            }`}
                         >
                           {parse(paragraph, { replace: replaceLinks })}
                         </div>
                       ))}
+
                     </li>
                   ))}
                 </ul>
@@ -171,7 +174,7 @@ const SectionWrapper = ({
                 src={imageUrl}
                 alt="Australia Cash in Transit Services"
               />
-              <div className="absolute top-0 left-0 w-[70%] 480px:w-[60%] h-full bg-black px-[30px] flex flex-col justify-center">
+              <div className="absolute top-0 left-0 w-[70%] 480px:w-[60%] 1366px:w-[55%] h-full 1366px:h-auto 1366px:py-[60px] bg-black px-[30px] flex flex-col justify-center">
                 <Typography
                   as="h4"
                   fontFamily="font-montserrat"

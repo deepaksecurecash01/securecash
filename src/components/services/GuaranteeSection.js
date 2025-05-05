@@ -86,12 +86,12 @@ const GuaranteeSection = ({ guaranteeContent, imageUrl }) =>
                                 alt="Australia Cash in Transit Services | SecureCash Guaranteed Seal"
                                 width="95%"
                                 height="auto"
-                                className="w-[50%] h-[50%] mx-auto 768px:w-[300px] 768px:h-[230px] 992px:w-1/2 992px:h-1/2"
+                                className="w-[50%] h-[50%] mx-auto 768px:w-[300px] 768px:h-[230px]"
                             />
-                            <div className="flex flex-col items-center justify-center">
+                            <div className="flex flex-col items-center justify-center w-full">
                                 <h3
                                     id="logo-text"
-                                    className="text-[40px] font-medium font-times text-center mb-4 w-full"
+                                    className="text-[40px] font-medium font-times text-center w-full"
                                 >
                                     Secure<span className="text-primary">Cash</span>
                                 </h3>
@@ -121,10 +121,10 @@ const GuaranteeSection = ({ guaranteeContent, imageUrl }) =>
                 </div>
 
                 {/* Right Side - Image with CTA Overlay */}
-                <div className="float-none w-full mx-auto 992px:w-1/2 relative left-0 flex-1 flex justify-center items-center 992px:float-right">
-                    <div className="relative w-[95%]">
+                <div className="float-none w-full mx-auto 992px:w-1/2 relative left-0 flex-1 flex justify-center items-center 992px:justify-end 992px:float-right">
+                    <div className="relative w-[95%] 1024px:w-[90%]">
                         <img
-                            className="backdraft my-auto w-full h-[740px] object-cover object-[30%]"
+                            className="backdraft my-auto w-full h-[740px] 1024px:h-auto object-cover object-[30%]"
                             src={imageUrl}
                             alt="Australia Cash in Transit Services"
                         />

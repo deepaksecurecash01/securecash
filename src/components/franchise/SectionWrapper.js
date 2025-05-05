@@ -6,7 +6,8 @@ import ContentScroll from "./ContentScroll";
 import Typography from "../common/Typography";
 import Link from "next/link";
 
-const SectionWrapper = () => {
+const SectionWrapper = () =>
+{
   const contentItems = [
     {
       title: "Full Time Franchise From Day One",
@@ -50,10 +51,10 @@ const SectionWrapper = () => {
           color="primary"
           margin="my-[24px]"
           alignment="left"
-          responsiveClassName="992px:mx-0 992px:text-left w-[100px]"
+          responsiveClassName="992px:mx-0 992px:text-left w-[100px] "
         />
-        <div className="content-wrapper w-4/5  768px:mt-12 p-0">
-          <div id="intro-text" className="bg-white 768px:bg-inherit">
+        <div className="content-wrapper w-4/5  768px:mt-12 p-0 bg-white/70 ">
+          <div id="intro-text" className="">
             <p className="text-[16px] font-light leading-[2em] text-center  768px:mt-4 m-0 text-black">
               Here at <strong>SecureCash</strong> we are extremely excited to
               grow our family and offer the opportunity to
@@ -81,6 +82,88 @@ const SectionWrapper = () => {
       <div className="spacer-lg h-[30px] 768px:h-[80px] 1024px:h-[100px]"></div>
       <div id="faq" className="  inline-block w-full ">
         <div className=" inner-big w-full 992px:w-[95%] max-w-[1366px] mx-auto my-0 h-auto  992px:flex  992px:h-[545px]">
+          <div className="flex flex-grow justify-center items-center  w-[96%] 480px:w-full 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1]">
+            <ScrollableSection style={{ direction: "rtl" }}
+              className=" h-auto w-[85%] 992px:w-full p-0 mx-auto   992px:h-full bg-white leading-[2] 1024px:px-[10%]">
+              <div style={{ direction: "ltr" }}>
+                <ContentScroll scrollData={contentItems} />
+
+                <Typography
+                  as="h3"
+                  fontFamily="font-montserrat"
+                  className="text-[26px] font-bold text-[#000] text-left my-[28px]"
+                >
+                  GET IN TOUCH TODAY!{" "}
+                </Typography>
+                <Typography
+                  as="div"
+                  fontFamily="font-montserrat"
+                  className="text-left font-light leading-[2rem] mt-4  414px:pr-0 "
+                >
+                  <em>
+                    <strong>
+                      <span style={{ fontSize: "medium" }}>
+                        You can call us on{" "}
+                      </span>
+                      <a
+                        className="text-link hover:underline"
+                        href="tel:1300732873"
+                      >
+                        1300 732 873
+                      </a>{" "}
+                      <span style={{ fontSize: "medium" }}>
+                        <em>
+                          <strong>
+                            <span style={{ fontSize: "medium" }} />
+                            or email{" "}
+                            <a
+                              className="text-link hover:underline"
+                              href="mailto:franchise@securecash.com.au"
+                            >
+                              franchise@securecash.com.au
+                            </a>
+                            . Our friendly staff would be more than happy to
+                            discuss how we can help your Franchise queries!
+                          </strong>
+                        </em>
+                        <br />
+                      </span>
+                    </strong>
+                  </em>{" "}
+                </Typography>
+                <Typography
+                  as="div"
+                  fontFamily="font-montserrat"
+                  className="text-left font-light leading-[2rem] mt-4  414px:pr-0 "
+                >
+                  <em>
+                    <strong>
+                      <p style={{ fontSize: "medium" }}>
+                        <em>
+                          <span style={{ fontSize: "medium" }}>
+                            <em>
+                              <span style={{ fontSize: "medium" }}>
+                                Want to learn more about what it&apos;s like being a part of the SecureCash team? Check out our blog
+                                post on{" "}
+                                <Link
+                                  className="text-link hover:underline"
+                                  href="/blog/office-culture/"
+                                >
+                                  Office Culture
+                                </Link>
+                              </span>
+
+                            </em>
+                          </span>
+                          <span style={{ fontSize: "medium" }}>.</span>
+                        </em>
+                      </p>
+                    </strong>{" "}
+                  </em>
+                </Typography>
+</div>
+            </ScrollableSection>
+          </div>
           <div className="float-none w-full mx-auto 992px:w-1/2 992px:float-left relative left-0 flex-1 flex justify-start">
             <div className="cta-box relative  992px:w-[90%]">
               <img
@@ -88,7 +171,7 @@ const SectionWrapper = () => {
                 src="https://www.securecash.com.au/images/franchise-square-car.jpg"
                 alt="Australia Cash in Transit: Services, Business, Delivery, and Provider Australia Wide"
               />
-              <div className="flex flex-col absolute top-0 right-0 h-[80%] w-[70%] bg-black px-[30px] justify-center content-center"> 
+              <div className="flex flex-col absolute top-0 left-0 h-[80%] w-[70%] bg-black px-[30px] justify-center content-center">
                 <Typography
                   as="h4"
                   fontFamily="font-montserrat"
@@ -105,85 +188,7 @@ const SectionWrapper = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-grow justify-center items-center  w-[96%] 480px:w-full 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1]">
-            <ScrollableSection className=" h-auto w-[85%] 992px:w-full p-0 mx-auto   992px:h-full bg-white leading-[2] 1024px:pr-[90px]">
-              <ContentScroll scrollData={contentItems} />
 
-              <Typography
-                as="h3"
-                fontFamily="font-montserrat"
-                className="text-[26px] font-bold text-[#000] text-left my-[28px]"
-              >
-                GET IN TOUCH TODAY!{" "}
-              </Typography>
-              <Typography
-                as="div"
-                fontFamily="font-montserrat"
-                className="text-left font-light leading-[2rem] mt-4  414px:pr-0 "
-              >
-                <em>
-                  <strong>
-                    <span style={{ fontSize: "medium" }}>
-                      You can call us on{" "}
-                    </span>
-                    <a
-                      className="text-link hover:underline"
-                      href="tel:1300732873"
-                    >
-                      1300 732 873
-                    </a>{" "}
-                    <span style={{ fontSize: "medium" }}>
-                      <em>
-                        <strong>
-                          <span style={{ fontSize: "medium" }} />
-                          or email{" "}
-                          <a
-                            className="text-link hover:underline"
-                            href="mailto:franchise@securecash.com.au"
-                          >
-                            franchise@securecash.com.au
-                          </a>
-                          . Our friendly staff would be more than happy to
-                          discuss how we can help your Franchise queries!
-                        </strong>
-                      </em>
-                      <br />
-                    </span>
-                  </strong>
-                </em>{" "}
-              </Typography>
-              <Typography
-                as="div"
-                fontFamily="font-montserrat"
-                className="text-left font-light leading-[2rem] mt-4  414px:pr-0 "
-              >
-                <em>
-                  <strong>
-                    <p style={{ fontSize: "medium" }}>
-                      <em>
-                        <span style={{ fontSize: "medium" }}>
-                          <em>
-                            <span style={{ fontSize: "medium" }}>
-                              Want to learn more about what it&apos;s like being a part of the SecureCash team? Check out our blog
-                              post on{" "}
-                              <Link
-                                className="text-link hover:underline"
-                                href="/blog/office-culture/"
-                              >
-                                Office Culture
-                              </Link>
-                            </span>
-
-                          </em>
-                        </span>
-                        <span style={{ fontSize: "medium" }}>.</span>
-                      </em>
-                    </p>
-                  </strong>{" "}
-                </em>
-              </Typography>
-            </ScrollableSection>
-          </div>
         </div>
       </div>
     </div>

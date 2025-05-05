@@ -36,7 +36,7 @@ const InputField = ({
 
     return (
         <div className="relative">
-            <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left">
+            <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                 {label}
             </label>
             <div className="relative w-full flex items-center bg-white rounded-[2px] border">
@@ -206,7 +206,7 @@ const FranchiseForm = () =>
     return (
         <div className="float-none 992px:w-[60%] 992px:float-left relative left-0 flex justify-center  414px:mx-4 992px:mx-0">
             <form
-                className="forms-franchise-v2 rounded-r-[8px] shadow-[3px_3px_10px_0px_rgba(0,0,0,0.2)] h-auto 992px:mx-0 px-[30px] 1366px:h-full submit-status  992px:mt-4 992px:mt-0 992px:mb-16 w-full lg:mt-0 lg:mb-0 text-center py-8 bg-[#f1f1f1] relative"
+                className="forms-franchise-v2 rounded-r-[8px] shadow-[3px_3px_10px_0px_rgba(0,0,0,0.2)] h-auto 992px:mx-0 px-8 480px:px-[5%] 1366px:h-full submit-status  992px:mt-4 992px:mt-0 992px:mb-16 w-full lg:mt-0 lg:mb-0 text-center py-8 bg-[#f1f1f1] relative"
                 data-formid="Franchise"
                 style={{ background: "#f1f1f1" }}
                 onSubmit={handleSubmit(handleFormSubmit)}
@@ -225,7 +225,7 @@ const FranchiseForm = () =>
                             />
                         ))}
 
-                        <div className="text-primary-text text-[14px] font-medium mt-4 mb-2 w-full text-left">
+                        <div className="text-primary-text text-[14px] font-medium mt-4 mb-2 w-full text-left px-2 768px:px-0">
                             After submitting the form, please pick a time from the popup
                             screen for a video meeting.
                         </div>

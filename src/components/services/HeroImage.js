@@ -17,10 +17,10 @@ const HeroImage = ({ title, imgSrc }) =>
             <h1
                 className="text-white font-bold text-center text-[30px] leading-[36px]  768px:text-[40px]  768px:leading-[48px]  992px:leading-[61px]  992px:text-[50px] [text-shadow:2px_2px_6px_#111111] px-[25px] 1070px:mt-0"
                 id="franchise-header"
-            >
+                dangerouslySetInnerHTML={{ __html: title }}
+            />
 
-                {title}
-            </h1>
+
 
             <Divider
                 color="white"

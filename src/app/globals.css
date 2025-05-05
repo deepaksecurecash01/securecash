@@ -227,13 +227,13 @@ html {
 /* Apply styles for screens 768px and above */
 @media (min-width: 992px) {
   .scroll-height {
-  
+
     height: var(--scroll-height);
     /* Apply desktop width */
   }
 }
 
-#faq a {
+.service-page a {
   color: #957433;
   font-weight: 500;
   font-family: "Montserrat";
@@ -259,7 +259,7 @@ html {
   padding-right: 34px;
 }
 
-.services-list  {
+.services-list {
   width: 430.719px;
   margin: 0 auto;
 }
@@ -267,3 +267,19 @@ html {
 .services-list li {
   text-indent: -2.2em;
 }
+
+.services-content li::before {
+  content: "";
+  display: inline-block;
+  height: 15px;
+  width: 20px;
+  background-image: url(../../public/images/icons/check.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  padding-right: 34px;
+  margin-top: 10px;
+}
+
+
+.services-content li {
+display: flex;}

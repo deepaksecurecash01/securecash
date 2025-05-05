@@ -11,6 +11,7 @@ const ScrollSectionWithImage = ({
   imageUrl,
   height,
   contactInfo,
+  ctaText,
 }) =>
 {
   // This is the key function that needs fixing
@@ -26,7 +27,7 @@ const ScrollSectionWithImage = ({
         linkText = node.children
           .map(child =>
           {
-            if (child.type === "text") {
+            if (child.type === "text") { 
               return child.data;
             } else if (child.type === "tag") {
               // For tags like <strong>, <em>, etc.
@@ -96,7 +97,7 @@ const ScrollSectionWithImage = ({
                 fontFamily="font-montserrat"
                 className="text-[22px] 480px:text-[26px] 768px:text-[28px] 992px:text-[33px] leading-[32px] 480px:leading-[36px] 768px:leading-[43px]  992px:leading-[48px] font-bold text-white text-center 992px:text-left mb-0"
               >
-                Why Choose SecureCash for Your Business?
+                {ctaText ? ctaText : "Why Choose SecureCash for Your Business?"} 
               </Typography>
               <Divider
                 color="white"
@@ -116,10 +117,10 @@ const ScrollSectionWithImage = ({
                 {contentItems.map((item, index) => (
                   <li key={index}>
                     {item.title && (
-                      <div className=" flex flex-row justify-start items-center gap-3">
+                      <div className=" flex flex-row justify-start items-center gap-4">
                         {item.icon && (
                           <Image
-                            className="icon-data h-[40px] pr-2.5 480px:pr-[16px] w-auto"
+                            className="icon-data h-[40px] w-auto"
                             src={item.icon}
                             alt={item.title.toLowerCase()}
                             width={40}
@@ -129,7 +130,8 @@ const ScrollSectionWithImage = ({
                         <Typography
                           as="h4"
                           fontFamily="font-montserrat"
-                          className="text-[22px] 600px:text-[26px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left 768px:mt-2.5 mb-[20px] 992px:w-full"
+                          className={`text-[22px] ${item.icon ? "600px:text-[20px]" : "600px:text-[26px]"} leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left 768px:mt-2.5 mb-[20px] 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' 768px:mt-8'
+                            }`}
                         >
                           {item.title}
                         </Typography>
@@ -139,10 +141,13 @@ const ScrollSectionWithImage = ({
                     {item.details.map((paragraph, paragraphIndex) => (
                       <div
                         key={paragraphIndex}
-                        className="text-justify 768px:text-start font-light leading-[2rem] mt-2.5 414px:pr-0 mb-8"
-                      >{parse(paragraph, { replace: replaceLinks }) }
-                        </div>
+                        className={`text-justify 768px:text-start font-light leading-[2rem] mt-2.5 414px:pr-0 ${paragraphIndex === item.details.length - 1 ? 'mb-0' : 'mb-8'
+                          }`}
+                      >
+                        {parse(paragraph, { replace: replaceLinks })}
+                      </div>
                     ))}
+
                   </li>
                 ))}
               </ul>

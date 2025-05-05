@@ -274,7 +274,8 @@
 
 @media (max-width: 480px) {
     .blog-single-main--content__feature-img {
-        height: 300px
+        height: auto;
+        object-fit: contain;
     }
 }
 
