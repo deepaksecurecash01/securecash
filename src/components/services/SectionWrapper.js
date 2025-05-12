@@ -95,10 +95,10 @@ const SectionWrapper = ({
           alignment="left"
           responsiveClassName="992px:mx-0 992px:text-left w-[100px] 480px:mb-0 480px:mt-5"
         />
-        <div className="content-wrapper w-4/5 768px:mt-12 p-0">
-          <div id="intro-text" className="bg-white 768px:bg-inherit">
+        <div className="content-wrapper   768px:w-4/5 768px:mt-12 p-0">
+          <div id="intro-text" className="w-[90%] 768px:w-full mx-auto 768px:bg-inherit">
             <p
-              className="text-[16px] font-light leading-[2em] text-center 768px:mt-4 m-0 text-black "
+              className="text-[16px] bg-white/90 font-light leading-[2em] text-center py-4 px-2 m-0 text-black "
             >
               {parse(description, { replace: replaceLinks })}
             </p>
@@ -120,7 +120,7 @@ const SectionWrapper = ({
           {/* Scrollable Content Area */}
           <div className="flex flex-grow justify-center items-center w-full 480px:w-full 992px:w-1/2 mx-auto 992px:mx-0 pt-0 [flex:1]">
             <ScrollableSection
-              className="h-auto w-[82%] 992px:w-full p-0 mx-auto 992px:h-full backdrop-blur-sm leading-[2] 992px:px-[10%]"
+              className="h-auto w-[82%] 992px:w-full p-0 mx-auto 992px:h-full bg-white leading-[2] 992px:px-[10%]"
               style={{ direction: "rtl" }}
             >
               <div style={{ direction: "ltr" }}>
@@ -128,8 +128,13 @@ const SectionWrapper = ({
                   {contentItems.map((item, index) => (
                     <li key={index}>
                       {item.title && (
-                        <div className=" flex flex-row justify-start items-center gap-4">
-                          {item.icon && (
+                          
+                          <Typography
+                            as="h4"
+                            fontFamily="font-montserrat"
+                            className={`text-[22px] ${item.icon ? "600px:text-[20px] flex flex-row justify-start items-center gap-3" : "600px:text-[26px]"} leading-[30px] 600px:leading-[1.6em]  768px:w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' mt-8'
+                            }`}
+                          >{item.icon && (
                             <Image
                               className="icon-data h-[40px] pr-2.5 480px:pr-[16px] w-auto"
                               src={item.icon}
@@ -138,15 +143,8 @@ const SectionWrapper = ({
                               height={40}
                             />
                           )}
-                          <Typography
-                            as="h4"
-                            fontFamily="font-montserrat"
-                            className={`text-[22px] ${item.icon ? "600px:text-[20px]" : "600px:text-[26px]"} leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left 768px:mt-2.5 mb-[20px] 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' 768px:mt-8'
-                            }`}
-                          >
                             {item.title}
                           </Typography>
-                        </div>
                       )}
 
                       {item.details.map((paragraph, paragraphIndex) => (
@@ -167,7 +165,7 @@ const SectionWrapper = ({
           </div>
 
           {/* CTA Image Section */}
-          <div className="float-none w-full mx-auto 992px:w-1/2 relative left-0 flex-1 flex justify-start 992px:float-right pt-6">
+          <div className="float-none w-full mx-auto 992px:w-1/2 relative left-0 flex-1 flex justify-start 992px:float-right mt-12 1024px:mt-0">
             <div className="cta-box relative w-full">
               <img
                 className="backdraft h-[540px] 414px:h-[580px] w-full 992px:h-full object-cover"

@@ -1,6 +1,5 @@
 import React from "react";
 import Divider from "../common/Divider";
-import BannerButton from "../homepage/BannerSection/BannerButton";
 import Link from "next/link";
 
 const HeroImage = ({ title, imgSrc }) =>
@@ -15,19 +14,18 @@ const HeroImage = ({ title, imgSrc }) =>
 
         >
             <h1
-                className="text-white font-bold text-center text-[30px] leading-[36px]  768px:text-[40px]  768px:leading-[48px]  992px:leading-[61px]  992px:text-[50px] [text-shadow:2px_2px_6px_#111111] px-[25px] 1070px:mt-0"
+                className="text-white font-bold text-center text-[30px] leading-[36px]  600px:text-[40px]  768px:leading-[48px]  992px:leading-[61px]  992px:text-[50px] [text-shadow:2px_2px_6px_#111111] px-[25px] 1070px:mt-0"
                 id="franchise-header"
                 dangerouslySetInnerHTML={{ __html: title }}
             />
 
 
-
             <Divider
                 color="white"
                 width="16%"
-                margin="my-[20px]"
+                margin="mt-2.5 mb-5"
                 alignment="center"
-                responsiveClassName="992px:mx-0 992px:text-left w-[16%] 414px:mb-0 768px:w-[100px]"
+                responsiveClassName="992px:mx-0 992px:text-left w-[16%] 768px:mt-5 768px:mb-0 414px:mb-0 600px:w-[100px]"
             />
             <div
                 className="cta-box w-[95%] 480px:w-[80%] 600px:w-[50%] justify-evenly mt-0 414px:mt-[50px] 992px:mt-[80px] relative  992px:w-[545px] flex items-center  768px:justify-between 1070px:mb-0 1070px:mt-[80px]"

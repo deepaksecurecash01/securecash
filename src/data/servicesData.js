@@ -39,18 +39,12 @@ export const servicesData = {
                             `The dangers in <strong>armoured car service</strong> are rampant and unforeseeable. There were news reports regarding shootings of CIT guards, armoured vehicle robberies, which had also affected civilians worldwide.`,
                             `To avoid this, aside from using non-armoured car service, our couriers are advised to wear plain clothes. With this method, our couriers cannot be followed and our collection patterns are much harder to study and analyze. We want to be able to perform our duties in a less noticeable way as possible, with less impact, and no disruptions in your office environment—just smooth hassle-free cash transport solutions.`,
                             `Another plus point in choosing SecureCash is—you won't have to worry about your money while in transit. All cash transports are covered by our nationwide cash-in-transit insurance policy, which guarantees that your banking is insured from the time we moved it outside your premises until it reaches the bank.`,
-                        ],
-                    },
-                    {
-                        details: [
                             `<em><strong>Start protecting your staff and hard-earned takings today! <a href='/quote'  rel='noopener'>Get a quote</a></strong> or call <span style='text-decoration:underline;'><a href='tel:1300732873'>1300 SECURE</a></span> to find out how effective and affordable our non-armoured car service really is.</em>`,
-                        ],
-                    },
-                    {
-                        details: [
                             `<em>Want to read more? Check out our blog post on <a href='/blog/differences-between-cit-models/'>Differences Between... CIT Models</a></em>`,
+
                         ],
                     },
+                
                 ],
                 ctaText: `Why Choose SecureCash for Your Business?`,
                 imageUrl:
@@ -191,7 +185,7 @@ export const servicesData = {
                         title: `CALL US TODAY`,
                         details: [
                             'For your <strong>banking pick up</strong> needs, call <a href="tel:1300732873">1300 732 873</a>. Our operators are standing by and ready to discuss how we can help you with your business in Australia.',
-                            '<em>Want to read more? Check out our blog post on <a href="/history-of-banks-part-1/">History of Banks - Part 1</a></em><em>.</em>',
+                            '<em>Want to read more? Check out our blog post on <a href="/blog/history-of-banks-part-1/">History of Banks - Part 1</a></em><em>.</em>',
                         ],
                     },
                 ],
@@ -3462,25 +3456,25 @@ Insured Services</h4>
     },
     "cash-in-transit-melbourne": {
         metaTitle: `Cash in Transit Melbourne | We Pickup & bank Your Money`,
-        title: `Cash In Transit Services,<br> Melbourne AU`,
+        title: `Banking Courier Services,<br> Melbourne AU`,
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-30.jpg`,
         heading: `Looking For Cash In Transit Services in Melbourne?`,
-        description: `<strong>Cash In Transit</strong> is a secure way of managing your banking by transporting your daily takings from your office location to your bank. <strong><a href="/">SecureCash</a></strong>&rsquo;s operations are discreet so your employees and customers will not notice any cash transactions in the office. Find out how we can help your business in Melbourne by <a href="/quote"><strong>getting a quote</strong></a> now.`,
+        description: `<strong> Cash in Transit</strong></Cash > in the state of Victoria is where a guard provides the service with a firearm.We provide a service without a firearm, so provide a <strong> Banking Courier Service</strong> instead of <strong> Cash in Transit</strong>.<strong> Banking Courier Services</strong> is a secure way of managing your banking by transporting your daily takings from your office location to your bank. <strong> <a href="/">SecureCash</a></strong>'s operations are discreet so your employees and customers will not notice any cash transactions in the office.  Find out how we can help your business in Melbourne by <a href="/quote/"> <strong>getting a quote</strong></a> now.`,
         sections: {
             rightImageSection: {
                 content: [
                     {
-                        title: `Our Cash in Transit Service in Melbourne`,
+                        title: `Our Banking Courier Services in Melbourne`,
                         details: [
-                            '<a href="cash-in-transit-services-melbourne/">Cash in transit</a> helps companies in Melbourne manage their hard-earned money. With trusted cash couriers, there would be no need for you to personally visit the bank and you don&rsquo;t have to pull out one of your staff to do the banking on your behalf.',
-                            'By outsourcing this task to <a href="/"  >SecureCash</a>, we can guarantee that your money reaches your bank safely and on time.',
+                            '<a href="/services/banking-services-melbourne/">Banking Services</a> helps companies in Melbourne manage their hard-earned money. With trusted cash couriers, there would be no need for you to personally visit the bank and you don&rsquo;t have to pull out one of your staff to do the banking on your behalf.',
+                            'By outsourcing this task to <a href="/" target="_blank" rel="noopener">SecureCash</a>, we can guarantee that your money reaches your bank safely and on time.',
                             `<strong>SecureCash</strong> has helped many businesses in Melbourne. From Mount Martha to Cranbourne and back to the CBD straight to your banking institution, we have got your banking needs covered.`,
-                            '<strong>We offer covert <a href="cash-in-transit/"  >cash in transit</a> specialising in three core services: <em>cash collection</em>, <em>cash delivery</em>, and <em>cash counting</em>.</strong>',
+                            '<strong>We offer covert <a href="/services/cash-in-transit/" target="_blank" rel="noopener">Banking Services</a> specialising in three core services: <em>cash collection</em>, <em>cash delivery</em>, and <em>cash counting</em>.<br></strong>',
                         ],
                     },
                     {
-                        title: `Our Melbourne Cash In Transit Services`,
+                        title: `Our Melbourne Banking Courier Services`,
                         details: [],
                     },
                     {
@@ -3593,11 +3587,11 @@ Insured Services</h4>
                     {
                         title: `Call Us Today`,
                         details: [
-                            '<em style="font-size:medium;"><strong>You can reach us at&nbsp;<span style="text-decoration:underline;"><a href="tel:1300732873">1300 SECURE</a></span>. Our operators are standing by for your cash in transit&nbsp;</strong></em><span style="font-size:medium;"><b><i>Melbourne</i></b></span><em style="font-size:medium;"><strong>&nbsp;inquiries. We&rsquo;re excited to let you know exactly how we can help your business.</strong></em>',
+                            '<em style="font-size:medium;"><strong>You can reach us at&nbsp;<span style="text-decoration:underline;"><a href="tel:1300732873">1300 SECURE</a></span>. Our operators are standing by for your Banking Services&nbsp;</strong></em><span style="font-size:medium;"><b><i>Melbourne</i></b></span><em style="font-size:medium;"><strong>&nbsp;inquiries. We&rsquo;re excited to let you know exactly how we can help your business.</strong></em>',
                         ],
                     },
                 ],
-                overlayTitle: `Why Should You Hire a Banking Courier Services Provider for Your Business in Melbourne?`,
+                ctaText: `Why Should You Hire a Banking Courier Services Provider for Your Business in Melbourne?`,
                 imageUrl:
                     `https://www.securecash.com.au/images/securecash-services-melbourne-australia-006.jpg`,
             },
@@ -3605,7 +3599,7 @@ Insured Services</h4>
                 content: [
                     {
                         details: [
-                            'SecureCash is available 24 hours a day - anywhere in Australia. We provide <em><strong>cash in transit services</strong></em> in Melbourne. We have branches in <a href="cash-in-transit-adelaide/">Adelaide AU</a>, <a href="cash-in-transit-perth/">Perth AU</a>, <a href="cash-in-transit-sydney/">Sydney AU</a>, <a href="cash-in-transit-brisbane/">Brisbane AU</a>, <a href="cash-in-transit-newcastle/">Newcastle AU</a>, <a href="cash-in-transit-canberra/">Canberra AU</a>, <a href="cash-in-transit-cairns/">Cairns AU</a>, <a href="cash-in-transit-warrawong/">Warrawong AU</a>, <a href="cash-in-transit-toowoomba/">Toowoomba AU</a>, <a href="cash-in-transit-maitland/">Maitland AU</a>, <a href="cash-in-transit-central-coast/">Central Coast AU</a>, and <a href="/">Melbourne Banking Courier</a>, and a network of licensed contractors covering the rest of the country. Contact us today for more information about how we can help your business in Australia.',
+                            'SecureCash is available 24 hours a day - anywhere in Australia. We provide <em><strong>Banking services</strong></em> in Melbourne. We have branches in <a href="/services/cash-in-transit-adelaide/">Adelaide AU</a>, <a href="/services/cash-in-transit-perth/">Perth AU</a>, <a href="/services/cash-in-transit-sydney/">Sydney AU</a>, <a href="/services/cash-in-transit-brisbane/">Brisbane AU</a>, <a href="/services/cash-in-transit-newcastle/">Newcastle AU</a>, <a href="/services/cash-in-transit-canberra/">Canberra AU</a>, <a href="/services/cash-in-transit-cairns/">Cairns AU</a>, <a href="/services/cash-in-transit-warrawong/">Warrawong AU</a>, <a href="/services/cash-in-transit-toowoomba/">Toowoomba AU</a>, <a href="/services/cash-in-transit-maitland/">Maitland AU</a>, <a href="/services/cash-in-transit-central-coast/">Central Coast AU</a>, and <a href="/">Melbourne Banking Courier</a>, and a network of licensed contractors covering the rest of the country. Contact us today for more information about how we can help your business in Australia.',
                             `<strong>SecureCash</strong>&nbsp;guarantees the safest handling of your business takings. In case we miss your bank's cut-off time, your money will be kept in a protected and undisclosed location until it's delivered to your bank the next business day.`,
                             `<strong>Your daily takings&rsquo; safety is our top priority.</strong> It is important to us that our services are delivered in a professional and timely manner, no matter what your business is&mdash;no matter where you are located.`,
                         ],
@@ -3959,7 +3953,7 @@ Insured Services</h4>
                         title: `Call Us Today`,
                         details: [
                             'If you need reliable <strong>cash in transit security provider</strong>, call us at <a href="tel:1300732873">1300 732 873</a>. Our friendly staff are standing by and ready to discuss how we can help your business here in Australia.',
-                            '<em>Want to read more? Check out our blog post on <a href="/terminology-of-cash-in-transit/">Terminology of Cash in Transit</a></em><em>.</em>',
+                            '<em>Want to read more? Check out our blog post on <a href="/blog/terminology-of-cash-in-transit/">Terminology of Cash in Transit</a></em><em>.</em>',
                         ],
                     },
                 ],
@@ -4584,7 +4578,7 @@ Insured Services</h4>
                             `Whether you need a <em>cash collection</em>, <em>delivery</em>, or <em>cash counting</em>, we will be more than happy to talk to you about how affordable our cash logistics services are. We&rsquo;d be very pleased to provide you with options where we can work around your organisation's budget.`,
                             `<strong>SecureCash</strong> is proud to deliver world-class logistics services that are affordable and client-friendly. As a leader in the cash-in-transit industry, we aim to provide you with complete peace of mind and a sense of security for your whole company.`,
                             '<em><strong>If you need a reliable cash logistics service for your business, start by getting a </strong><a href="/quote" target="_blank" rel="noopener">quote here</a><strong> or call <a href="tel:1300732873">1300 SECURE</a> today!</strong></em>',
-                            '<em></em><i>Want to read more? Check out our blog post on <a href="/differences-between-banks/">Differences Between... Banks</a>.</i>',
+                            '<em></em><i>Want to read more? Check out our blog post on <a href="/blog/differences-between-banks/">Differences Between... Banks</a>.</i>',
                         ],
                     },
                 ],
@@ -4810,7 +4804,7 @@ Insured Services</h4>
                         details: [
                             '<strong>SecureCash</strong> is a government-licensed and security-accredited cash security firm that offers practical <a href="cash-logistics/"  >cash logistics solutions</a> to any organisation. Established in 1992, we have since made a reputation as the most reliable cash-in-transit service provider in Australia.',
                             '<em><strong><span style="text-decoration:underline;"><a href="tel:1300732873">Call us today</a></span> for your cash pick up needs. We are available 24 hours a day, seven days a week including holidays.</strong></em>',
-                            '<em>Want to read more? Check out our blog post on <a href="/the-relevance-of-cash/">The Relevance of Cash</a></em><em>.</em>',
+                            '<em>Want to read more? Check out our blog post on <a href="/blog/the-relevance-of-cash/">The Relevance of Cash</a></em><em>.</em>',
                         ],
                     },
                 ],
@@ -6321,7 +6315,7 @@ Insured Services</h4>
                     },
                     {
                         details: [
-                            '<em>Want to read more? Check out our blog post on <a href="/merry-christmas-2020/">Merry Christmas 2020</a></em><em>.</em>',
+                            '<em>Want to read more? Check out our blog post on <a href="/blog/merry-christmas-2020/">Merry Christmas 2020</a></em><em>.</em>',
                         ],
                     },
                 ],
@@ -7123,7 +7117,7 @@ Insured Services</h4>
                     },
                     {
                         details: [
-                            '<em>Want to read more? Check out our blog post on <a href="/office-culture/">Office Culture</a></em><em>.</em>',
+                            '<em>Want to read more? Check out our blog post on <a href="/blog/office-culture/">Office Culture</a></em><em>.</em>',
                         ],
                     },
                 ],

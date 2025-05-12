@@ -76,7 +76,9 @@ const ScrollSectionWithImage = ({
     }
   };
   return (
-    <div id="faq" className="inline-block w-full">
+    <div id="faq" className="inline-block w-full relative">
+      <div className="absolute inset-0 bg-quote-header-left bg-left-top bg-no-repeat -z-10"></div>
+      <div className="absolute inset-0 bg-quote-header-right bg-right-top bg-no-repeat -z-10"></div>
       <div
         className="scroll-height w-full 992px:w-[95%] max-w-[1366px] mx-auto my-0 h-auto 992px:flex"
         style={{
@@ -95,7 +97,7 @@ const ScrollSectionWithImage = ({
               <Typography
                 as="h4"
                 fontFamily="font-montserrat"
-                className="text-[22px] 480px:text-[26px] 768px:text-[28px] 992px:text-[33px] leading-[32px] 480px:leading-[36px] 768px:leading-[43px]  992px:leading-[48px] font-bold text-white text-center 992px:text-left mb-0"
+                className="text-[22px] 480px:text-[26px] 768px:text-[28px] 992px:text-[33px] leading-[32px] 480px:leading-[36px] 768px:leading-[43px]  992px:leading-[48px] font-bold text-white 992px:text-left mb-0"
               >
                 {ctaText ? ctaText : "Why Choose SecureCash for Your Business?"} 
               </Typography>
@@ -111,14 +113,19 @@ const ScrollSectionWithImage = ({
 
         {/* Right Side - Scrollable Content */}
         <div className="flex flex-grow justify-center items-center w-full 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1]">
-          <ScrollableSection className="h-auto w-[82%] 992px:w-full p-0 mx-auto 992px:h-full bg-white leading-[2] 992px:pr-[90px]">
+          <ScrollableSection className="h-auto w-[82%] 992px:w-full p-0 mx-auto 992px:h-full bg-white leading-[2] 992px:pr-[60px]">
             <div style={{ direction: "ltr" }}>
               <ul className="list-none w-full" id="scroll-content">
                 {contentItems.map((item, index) => (
                   <li key={index}>
                     {item.title && (
-                      <div className=" flex flex-row justify-start items-center gap-4">
-                        {item.icon && (
+                       
+                        <Typography
+                          as="h4"
+                          fontFamily="font-montserrat"
+                          className={`text-[22px] ${item.icon ? "600px:text-[20px]  flex flex-row justify-start items-center gap-4" : "600px:text-[26px]"} leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full ${index === 0 ? '768px:mt-0' : 'mt-8'
+                            }`}
+                        > {item.icon && (
                           <Image
                             className="icon-data h-[40px] w-auto"
                             src={item.icon}
@@ -127,15 +134,8 @@ const ScrollSectionWithImage = ({
                             height={40}
                           />
                         )}
-                        <Typography
-                          as="h4"
-                          fontFamily="font-montserrat"
-                          className={`text-[22px] ${item.icon ? "600px:text-[20px]" : "600px:text-[26px]"} leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left 768px:mt-2.5 mb-[20px] 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' 768px:mt-8'
-                            }`}
-                        >
                           {item.title}
                         </Typography>
-                      </div>
                     )}
 
                     {item.details.map((paragraph, paragraphIndex) => (

@@ -261,11 +261,12 @@ html {
 
 .services-list {
   width: 430.719px;
-  margin: 0 auto;
+  margin: 0 auto 32px;
 }
 
 .services-list li {
   text-indent: -2.2em;
+  margin: 10px 0;
 }
 
 .services-content li::before {
@@ -282,4 +283,5 @@ html {
 
 
 .services-content li {
-display: flex;}
+display: flex;
+}

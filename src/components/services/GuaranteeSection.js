@@ -122,14 +122,14 @@ const GuaranteeSection = ({ guaranteeContent, imageUrl }) =>
 
                 {/* Right Side - Image with CTA Overlay */}
                 <div className="float-none w-full mx-auto 992px:w-1/2 relative left-0 flex-1 flex justify-center items-center 992px:justify-end 992px:float-right">
-                    <div className="relative w-[95%] 1024px:w-[90%]">
+                    <div className="relative  600px:w-[95%] 1024px:w-[90%]">
                         <img
-                            className="backdraft my-auto w-full h-[740px] 1024px:h-auto object-cover object-[30%]"
+                            className="backdraft my-auto w-full h-auto  600px:h-[740px] 1280px:h-auto object-cover object-[30%]"
                             src={imageUrl}
                             alt="Australia Cash in Transit Services"
                         />
 
-                        <div className="absolute top-0 992px:left-0 w-[70%] h-full 768px:h-[70%] bg-black/60 flex flex-col justify-center py-[30px] px-[10px] 768px:py-[60px] 768px:px-[50px]">
+                        <div className="absolute top-0 992px:left-0 w-[70%] h-full 768px:h-[70%] bg-black/60 flex flex-col justify-center py-[30px] px-[10px] 768px:py-0 768px:px-[50px]">
                             <Typography
                                 as="h4"
                                 fontFamily="font-montserrat"
