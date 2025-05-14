@@ -78,8 +78,8 @@ const SectionWrapper = ({
 
   return (
     <div className="w-full relative">
-      <div className="absolute inset-0 bg-quote-header-left bg-left-top bg-no-repeat -z-10"></div>
-      <div className="absolute inset-0 bg-quote-header-right bg-right-top bg-no-repeat -z-10"></div>
+      <div className="absolute opacity-20 480px:opacity-30 1024px:opacity-50 1366px:opacity-60 1600px:opacity-100 inset-0 bg-quote-header-left bg-left-top bg-no-repeat -z-10"></div>
+      <div className="absolute opacity-20 480px:opacity-30 1024px:opacity-50 1366px:opacity-60 1600px:opacity-100 inset-0 bg-quote-header-right bg-right-top bg-no-repeat -z-10"></div>
 
       {/* Header Section */}
       <div
@@ -93,12 +93,12 @@ const SectionWrapper = ({
           color="primary"
           margin="my-[24px]"
           alignment="left"
-          responsiveClassName="992px:mx-0 992px:text-left w-[100px] 480px:mb-0 480px:mt-5"
+          responsiveClassName="992px:mx-0 992px:text-left w-[100px] 768px:mb-0 768px:mt-5"
         />
         <div className="content-wrapper   768px:w-4/5 768px:mt-12 p-0">
           <div id="intro-text" className="w-[90%] 768px:w-full mx-auto 768px:bg-inherit">
             <p
-              className="text-[16px] bg-white/90 font-light leading-[2em] text-center py-4 px-2 m-0 text-black "
+              className="text-[16px] font-light leading-[2em] text-center m-0 text-black "
             >
               {parse(description, { replace: replaceLinks })}
             </p>
@@ -132,7 +132,7 @@ const SectionWrapper = ({
                           <Typography
                             as="h4"
                             fontFamily="font-montserrat"
-                            className={`text-[22px] ${item.icon ? "600px:text-[20px] flex flex-row justify-start items-center gap-3" : "600px:text-[26px]"} leading-[30px] 600px:leading-[1.6em]  768px:w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' mt-8'
+                          className={` ${item.icon ? "600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-3 1366px:gap-4 text-[20px]" : " 768px:w-[80%] 600px:text-[26px] text-center text-[22px]"} leading-[30px] 600px:leading-[1.6em]  mx-auto font-bold text-[#000] 992px:text-left mb-[20px] 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' mt-8'
                             }`}
                           >{item.icon && (
                             <Image

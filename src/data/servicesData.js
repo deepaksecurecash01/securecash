@@ -152,7 +152,7 @@ export const servicesData = {
         imageUrl:
             `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
         heading: `Looking For Banking Pickups?`,
-        description: `A <b>Banking Pickup</b> is the process where a courier collects your business' takings, brings it to the bank, and deposits the money directly into your account. <a href="/" target="_blank" ><strong>SecureCash</strong></a> provides cash collection services across Australia. It offers the convenience of securing your money without you having to leave your workplace. <a href="quote/" target="_blank" ><strong>Get a quote</strong></a> today!`,
+        description: `A <b>Banking Pickup</b> is the process where a courier collects your business' takings, brings it to the bank, and deposits the money directly into your account. <a href="/" target="_blank" ><strong>SecureCash</strong></a> provides cash collection services across Australia. It offers the convenience of securing your money without you having to leave your workplace. <a href="/quote" target="_blank" ><strong>Get a quote</strong></a> today!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -356,7 +356,7 @@ export const servicesData = {
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-4.jpg`,
         heading: `Looking For Banking Services in Melbourne?`,
-        description: `<strong>Banking Services</strong> is a secure way of managing your banking by transporting your daily takings from your office location to your bank. <strong>SecureCash</strong>&rsquo;s operations are discreet so your employees and customers will not notice any cash transactions in the office. Find out how we can help your business in Melbourne by <a href="quote/"><strong>getting a quote</strong></a> now.`,
+        description: `<strong>Banking Services</strong> is a secure way of managing your banking by transporting your daily takings from your office location to your bank. <strong>SecureCash</strong>&rsquo;s operations are discreet so your employees and customers will not notice any cash transactions in the office. Find out how we can help your business in Melbourne by <a href="/quote"><strong>getting a quote</strong></a> now.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -516,7 +516,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
             href="/"  ><strong>SecureCash</strong></a>
           provides cash collection services across
           Australia. It offers the convenience of securing your money without you having to leave your
-          workplace. <a href="quote/"  ><strong>Get
+          workplace. <a href="/quote"  ><strong>Get
               a quote</strong></a> today!
     `,
         sections: {
@@ -526,7 +526,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
                         title: `Our Cash Collection Services`,
                         details: [
                             `Our <strong>cash collection service</strong> is straightforward and easy to use. You can
-              simply<span style="text-align:center;"> </span><a href="quote/"
+              simply<span style="text-align:center;"> </span><a href="/quote"
                  ><span style="text-align:center;">get a quote </span></a>or call <a
                 href="tel:1300732873"  >1300 SECURE</a> to process a request. After we have
               confirmed your booking, a <strong>plain-clothed cash collection courier</strong>&nbsp;will
@@ -598,7 +598,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
                 providing you with the most substantial security <strong>cash collection
                   solutions</strong> for the benefit of your business here in Australia.</span>`,
                             `<em><strong>If you are interested in our cash collection service, simply <span
-                    style="text-decoration:underline;"><a href="quote/" 
+                    style="text-decoration:underline;"><a href="/quote" 
                       >request a quote</a></span> and one of our friendly staff will
                   get back to you as soon as possible.</strong></em>`,
                             `<em>Want to read more? Check out our blog post on <a
@@ -648,7 +648,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-collection-services-adelaide-australia-featured-1.jpg`,
         heading: `Looking For Cash Collection Services in Adelaide?`,
-        description: `<strong>Cash collection</strong> is the process of picking up any amount of money from your business location and transporting it to the bank in a safe, discreet, and timely manner. <a href="quote/" target="_blank" ><strong>Get a quote now</strong></a> to find out how <strong>SecureCash</strong>&rsquo;s cash collection services in Adelaide can help you and your business save time, effort and money.`,
+        description: `<strong>Cash collection</strong> is the process of picking up any amount of money from your business location and transporting it to the bank in a safe, discreet, and timely manner. <a href="/quote" target="_blank" ><strong>Get a quote now</strong></a> to find out how <strong>SecureCash</strong>&rsquo;s cash collection services in Adelaide can help you and your business save time, effort and money.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -1105,7 +1105,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
   <li>
     <span class="inline-block">
       <h4
-        class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+        class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
 Convenience At Your Fingertips</h4>
       <p class="mb-5"><span style="font-size: medium;">Make sure your funds are safe with your assigned cash couriers. For your peace of mind,
         you may verify the courier\'s identity by logging in to our website\'s <a
@@ -1126,7 +1126,7 @@ Convenience At Your Fingertips</h4>
   <li class=" mt-[32px]">
     <span class="inline-block">
       <h4
-        class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+        class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
 Insured Services</h4>
       <p class="mb-5"><span style="font-size: medium;">With <strong>SecureCash</strong>, you don't have to worry about your money during cash transports. Our services are
       covered by a nationwide cash-in-transit insurance policy, which ensures the safety of your funds from the time it leaves
@@ -1313,7 +1313,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-1.jpg`,
         heading: `Looking For Cash Collection Services in Melbourne?`,
-        description: `<strong>Cash collection</strong> is a cost-effective service that assists your business in moving any amount of cash, making sure your money reaches its destination swiftly, safely, and on time. Find out how <strong><a href="/">SecureCash</a></strong>&rsquo;s world-class services can help you save the time and hassle of going to and from the bank in Melbourne. <a href="quote/" target="_blank" ><strong>Request for a quote</strong></a> now!`,
+        description: `<strong>Cash collection</strong> is a cost-effective service that assists your business in moving any amount of cash, making sure your money reaches its destination swiftly, safely, and on time. Find out how <strong><a href="/">SecureCash</a></strong>&rsquo;s world-class services can help you save the time and hassle of going to and from the bank in Melbourne. <a href="/quote" target="_blank" ><strong>Request for a quote</strong></a> now!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -1613,7 +1613,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-collection-services-adelaide-australia-featured-1.jpg`,
         heading: `Looking For Cash Collection Services in Adelaide?`,
-        description: `<strong>Cash collection</strong> is the process of picking up any amount of money from your business location and transporting it to the bank in a safe, discreet, and timely manner. <a href="quote/" target="_blank" ><strong>Get a quote now</strong></a> to find out how <strong>SecureCash</strong>&rsquo;s cash collection services in Adelaide can help you and your business save time, effort and money.`,
+        description: `<strong>Cash collection</strong> is the process of picking up any amount of money from your business location and transporting it to the bank in a safe, discreet, and timely manner. <a href="/quote" target="_blank" ><strong>Get a quote now</strong></a> to find out how <strong>SecureCash</strong>&rsquo;s cash collection services in Adelaide can help you and your business save time, effort and money.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -1752,7 +1752,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-28.jpg`,
         heading: `Looking For Cash Collection Services in Melbourne?`,
-        description: `<strong>Cash collection</strong> is a cost-effective service that assists your business in moving any amount of cash, making sure your money reaches its destination swiftly, safely, and on time. Find out how <strong>SecureCash</strong>&rsquo;s world-class services can help you save the time and hassle of going to and from the bank in Melbourne. <a href="quote/" target="_blank" ><strong>Request for a quote</strong></a> now!`,
+        description: `<strong>Cash collection</strong> is a cost-effective service that assists your business in moving any amount of cash, making sure your money reaches its destination swiftly, safely, and on time. Find out how <strong>SecureCash</strong>&rsquo;s world-class services can help you save the time and hassle of going to and from the bank in Melbourne. <a href="/quote" target="_blank" ><strong>Request for a quote</strong></a> now!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -1895,7 +1895,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
         heading: `Looking For Cash Collection Services?`,
-        description: `A <strong>Cash Collection Service</strong> is the process where a courier collects your business' takings, brings it to the bank, and deposits the money directly into your account. <a href="/" target="_blank" ><strong>SecureCash</strong></a> provides cash collection services across Australia. It offers the convenience of securing your money without you having to leave your workplace. <a href="quote/" target="_blank" ><strong>Get a quote</strong></a> today!`,
+        description: `A <strong>Cash Collection Service</strong> is the process where a courier collects your business' takings, brings it to the bank, and deposits the money directly into your account. <a href="/" target="_blank" ><strong>SecureCash</strong></a> provides cash collection services across Australia. It offers the convenience of securing your money without you having to leave your workplace. <a href="/quote" target="_blank" ><strong>Get a quote</strong></a> today!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -1951,7 +1951,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-collection-sydney-australia-featured-7.jpg`,
         heading: `Looking For Cash Collection Services in Sydney?`,
-        description: `A <strong>cash collection service</strong>&nbsp;is the safest way to transport your daily takings from your business location to the bank. <strong>SecureCash</strong> can collect your money right from your store or office and we'll deposit it to the bank for you. <a href="tel:1300732873"><strong>Call us now</strong></a> or <a href="quote/" target="_blank" rel="noopener"><strong>get a quote</strong></a> to find out how we can help your company in Sydney.`,
+        description: `A <strong>cash collection service</strong>&nbsp;is the safest way to transport your daily takings from your business location to the bank. <strong>SecureCash</strong> can collect your money right from your store or office and we'll deposit it to the bank for you. <a href="tel:1300732873"><strong>Call us now</strong></a> or <a href="/quote" target="_blank" rel="noopener"><strong>get a quote</strong></a> to find out how we can help your company in Sydney.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -2245,7 +2245,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-32.jpg`,
         heading: `Looking For Cash Collection Services on the Gold Coast?`,
-        description: `<strong>Cash collection</strong> is a cash management service that helps companies secure their business takings. <strong>SecureCash</strong> provides cash collection services in the Gold Coast. We can pick up your money right from where you are, take it to the bank, and deposit it for you. Find out how we can help your business by <a href="quote/" target="_blank" rel="noopener"><strong>getting a quote today</strong></a>!`,
+        description: `<strong>Cash collection</strong> is a cash management service that helps companies secure their business takings. <strong>SecureCash</strong> provides cash collection services in the Gold Coast. We can pick up your money right from where you are, take it to the bank, and deposit it for you. Find out how we can help your business by <a href="/quote" target="_blank" rel="noopener"><strong>getting a quote today</strong></a>!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -2381,7 +2381,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
         heading: `Looking For Cash Couriers Services?`,
-        description: `<strong>Cash couriers</strong> are cash security professionals sent to pick up your money from your location and deposit it to the bank on your behalf. <strong><a href="/">SecureCash</a> </strong>couriers are plainclothes officers who are trained to collect your money in a discreet way. <a href="/quote/"  ><strong>Get a quote today</strong></a> so our couriers can do the banking for your business!`,
+        description: `<strong>Cash couriers</strong> are cash security professionals sent to pick up your money from your location and deposit it to the bank on your behalf. <strong><a href="/">SecureCash</a> </strong>couriers are plainclothes officers who are trained to collect your money in a discreet way. <a href="/quote"  ><strong>Get a quote today</strong></a> so our couriers can do the banking for your business!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -2736,7 +2736,7 @@ Insured Services</h4>
   <li>
     <span class="inline-block">
       <h4
-        class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+        class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         How Much Notice?</h4>
       <p class="mb-5"><b>How Early Should I Request for Cash Delivery So It Would Reach My Location On Time?</b>&nbsp;</p>
       <p>Please process your cash delivery request as early as 2 business days. A 2-day notice will allow your bank to arrange
@@ -2754,7 +2754,7 @@ Insured Services</h4>
   <li>
     <span class="inline-block">
       <h4
-        class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+        class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
       Short-Changed?</h4>
       <p class="mb-5"><b>What Happens If the Cash You Deliver is Less Than What I Ordered?</b>&nbsp;</p>
       <p>We only collect the money that is sealed in your bank&rsquo;s tamper-evident satchels. If a shortfall may occur, we can
@@ -2772,7 +2772,7 @@ Insured Services</h4>
   <li>
     <span class="inline-block">
       <h4
-        class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+        class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
       References?</h4>
       <p class="mb-5"><b>Can you supply references from previous customers?</b>&nbsp;</p>
       <p>Certainly. We&rsquo;d be happy to present references from different SecureCash customers. We also have a comprehensive
@@ -2789,7 +2789,7 @@ Insured Services</h4>
   <li>
     <span class="inline-block">
       <h4
-        class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+        class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
     Proof of Banking?</h4>
       <p class="mb-5"><b>How do I get my receipts, filings, dockets, and other banking paperwork as proof of the deposits?</b>&nbsp;</p>
       <p>We can collect these from the bank and deliver them during our next collection with no extra charge.</p>
@@ -2881,7 +2881,7 @@ Insured Services</h4>
   <li>
     <span class="inline-block">
       <h4
-        class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+        class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
     Coins from vending & parking machines?</h4>
       <p class="mb-5"><b>Do you collect and count coins from parking meters and vending machines?</b>&nbsp;</p>
       <p>Certainly. We can empty any machine on a regular basis, count the notes and coins, and update you with the total amount collected.</p>
@@ -2896,7 +2896,7 @@ Insured Services</h4>
   <li>
     <span class="inline-block">
       <h4
-        class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+        class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
     Charity boxes?</h4>
       <p class="mb-5"><b>Do you handle collections from charity tins and collection boxes?</b></p>
       <p>Yes, indeed. Let us know when you have a tin or charity box that is full or nearly full, and we will pick it up on your behalf. We will count it and send you a detailed report of the total amount. We can bank the money for you or wire transfer it to your account, whichever feels convenient for you.</p>
@@ -2911,7 +2911,7 @@ Insured Services</h4>
   <li>
     <span class="inline-block">
       <h4
-        class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+        class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
     Delivery only?</h4>
       <p class="mb-5"><b>Can we use cash delivery as a stand-alone service? Do we have to sign up for the other services to be able to use it?</b></p>
       <p>Yes, cash delivery can be used as a separate service. You may also have it in conjunction with cash collection. You are free to choose the service you want, we&rsquo;d be happy to customize it according to your needs.</p>
@@ -2925,7 +2925,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         How long?
       </h4>
       <p class="mb-5"><b>For your cash counting service, how long will it take to collect, count, and deposit the money into my bank account?</b></p>
@@ -2969,7 +2969,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-20.jpg`,
         heading: `Looking For Cash In Transit Services in Cairns?`,
-        description: `<strong>Cash In Transit</strong> is the most convenient way of managing the cash flow in your company. <strong>SecureCash</strong> specializes in picking up your business takings and transporting them to the bank. We guarantee a fast and secure collection wherever your business is located in Cairns. <a href="quote/" target="_blank" rel="noopener"><strong>Get a quote now</strong></a> for a convenient and hassle-free transaction!`,
+        description: `<strong>Cash In Transit</strong> is the most convenient way of managing the cash flow in your company. <strong>SecureCash</strong> specializes in picking up your business takings and transporting them to the bank. We guarantee a fast and secure collection wherever your business is located in Cairns. <a href="/quote" target="_blank" rel="noopener"><strong>Get a quote now</strong></a> for a convenient and hassle-free transaction!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -3057,7 +3057,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-collection-services-canberra-australia-featured-2.jpg`,
         heading: `Looking For Cash In Transit Services in Canberra?`,
-        description: `<strong>Cash in Transit</strong> is the physical transfer of funds, which is done in a secure and covert manner by <strong>SecureCash</strong>'s professional team. <strong><a href="quote/" target="_blank" rel="noopener">Get a quote now</a></strong> so we can offer your business a partnership with the most trusted <strong>cash-in-transit company in Canberra</strong> that specializes in getting your cash 100% right where it should be - to the bank.`,
+        description: `<strong>Cash in Transit</strong> is the physical transfer of funds, which is done in a secure and covert manner by <strong>SecureCash</strong>'s professional team. <strong><a href="/quote" target="_blank" rel="noopener">Get a quote now</a></strong> so we can offer your business a partnership with the most trusted <strong>cash-in-transit company in Canberra</strong> that specializes in getting your cash 100% right where it should be - to the bank.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -3236,7 +3236,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         How Much Notice?
       </h4>
       <p class="mb-5"><strong>If I want a cash order (where you deliver cash to my location), how long in advance do I need to give you the booking?</strong></p>
@@ -3251,7 +3251,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Short-Changed?
       </h4>
       <p class="mb-5"><strong>What happens if the cash you deliver is less than we ordered?</strong></p>
@@ -3266,7 +3266,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         References?
       </h4>
       <p class="mb-5"><strong>Can you supply references from previous customers?</strong></p>
@@ -3281,7 +3281,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Proof of Banking?
       </h4>
       <p class="mb-5"><strong>How do I get my banking paperwork such as receipts etc as proof of the deposits?</strong></p>
@@ -3395,7 +3395,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-4.jpg`,
         heading: `Looking For Cash In Transit Services in Maitland?`,
-        description: `<strong>Cash In Transit</strong> is a swift and secure transport of cash, coins, credit cards, and cheques. <strong><a href="/">SecureCash</a></strong>&nbsp;offers convenience to businesses in Maitland by picking up their takings and transporting it to the bank. Find out why we are the largest and the most trusted cash-in-transit provider in Maitland. <a href="quote/"><strong>Get a quote</strong></a> now!`,
+        description: `<strong>Cash In Transit</strong> is a swift and secure transport of cash, coins, credit cards, and cheques. <strong><a href="/">SecureCash</a></strong>&nbsp;offers convenience to businesses in Maitland by picking up their takings and transporting it to the bank. Find out why we are the largest and the most trusted cash-in-transit provider in Maitland. <a href="/quote"><strong>Get a quote</strong></a> now!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -3460,7 +3460,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-30.jpg`,
         heading: `Looking For Cash In Transit Services in Melbourne?`,
-        description: `<strong> Cash in Transit</strong></Cash > in the state of Victoria is where a guard provides the service with a firearm.We provide a service without a firearm, so provide a <strong> Banking Courier Service</strong> instead of <strong> Cash in Transit</strong>.<strong> Banking Courier Services</strong> is a secure way of managing your banking by transporting your daily takings from your office location to your bank. <strong> <a href="/">SecureCash</a></strong>'s operations are discreet so your employees and customers will not notice any cash transactions in the office.  Find out how we can help your business in Melbourne by <a href="/quote/"> <strong>getting a quote</strong></a> now.`,
+        description: `<strong> Cash in Transit</strong></Cash > in the state of Victoria is where a guard provides the service with a firearm.We provide a service without a firearm, so provide a <strong> Banking Courier Service</strong> instead of <strong> Cash in Transit</strong>.<strong> Banking Courier Services</strong> is a secure way of managing your banking by transporting your daily takings from your office location to your bank. <strong> <a href="/">SecureCash</a></strong>'s operations are discreet so your employees and customers will not notice any cash transactions in the office.  Find out how we can help your business in Melbourne by <a href="/quote"> <strong>getting a quote</strong></a> now.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -3514,7 +3514,7 @@ Insured Services</h4>
   <li>
     <span class="inline-block">
       <h4
-        class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+        class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Proof of Banking?</h4>
       <p class="mb-5"><b>How will I know that my funds were successfully deposited in the
           bank?</b>&nbsp;</p>
@@ -3535,7 +3535,7 @@ Insured Services</h4>
   <li class=" mt-[20px]">
     <span class="inline-block">
       <h4
-        class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+        class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Contract?</h4>
       <p class="mb-5"><b>Tell me more about your contract. How long are we locked-in
           for?</b>&nbsp;</p>
@@ -3555,7 +3555,7 @@ Insured Services</h4>
     <li class=" mt-[20px]">
       <span class="inline-block">
         <h4
-          class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+          class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
           Insured?</h4>
         <p class="mb-5"><b>Is my money insured during the transport process?</b>&nbsp;</p>
         <p>Yes, our
@@ -3573,7 +3573,7 @@ Insured Services</h4>
       <li class=" mt-[20px]">
         <span class="inline-block">
           <h4
-            class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+            class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
             What Denominations?</h4>
           <p class="mb-5"><b>I want cash to be delivered to my shop. Can you bring me banknotes and coins in
               various denominations?</b>&nbsp;</p>
@@ -3665,7 +3665,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Uniforms?
       </h4>
       <p class="mb-5"><b>Do your cash-in-transit officers wear uniforms?</b>&nbsp;</p>
@@ -3680,7 +3680,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Ordering change?
       </h4>
       <p class="mb-5"><b>Can you supply change for tills and floats?</b>&nbsp;</p>
@@ -3695,7 +3695,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         How often?
       </h4>
       <p class="mb-5"><b>How frequently can I request a cash collection service for my business?</b>&nbsp;</p>
@@ -3710,7 +3710,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Minimums?
       </h4>
       <p class="mb-5"><b>Is there a minimum amount of cash to be collected before you'll accept a job?</b>&nbsp;</p>
@@ -3803,7 +3803,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Multiple floats?
       </h4>
       <p class="mb-5"><b>Are you able to help if we need to top-up our floats in various denominations?</b>&nbsp;</p>
@@ -3818,7 +3818,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         I don&rsquo;t use the internet. How can I contact you?
       </h4>
       <p>No problem. You can reach us at <a href="tel:1300732873">1300 732 873</a> to process your cash collection, cash counting, or cash delivery requests. We are available 24/7.</p>
@@ -3832,7 +3832,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Foreign coins?
       </h4>
       <p class="mb-5"><b>Are you able to separate foreign coins that are mixed in with the Australian currency?</b>&nbsp;</p>
@@ -3847,7 +3847,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Delivery times?
       </h4>
       <p class="mb-5"><b>When can you deliver cash to our business?</b>&nbsp;</p>
@@ -4046,7 +4046,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-4.jpg`,
         heading: `Looking For Cash In Transit Services in Melbourne?`,
-        description: `<strong>Cash In Transit</strong> is a secure way of managing your banking by transporting your daily takings from your office location to your bank. <strong>SecureCash</strong>&rsquo;s operations are discreet so your employees and customers will not notice any cash transactions in the office. Find out how we can help your business in Melbourne by <a href="quote/"><strong>getting a quote</strong></a> now.`,
+        description: `<strong>Cash In Transit</strong> is a secure way of managing your banking by transporting your daily takings from your office location to your bank. <strong>SecureCash</strong>&rsquo;s operations are discreet so your employees and customers will not notice any cash transactions in the office. Find out how we can help your business in Melbourne by <a href="/quote"><strong>getting a quote</strong></a> now.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -4295,7 +4295,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Foreign exchange?
       </h4>
       <p class="mb-5"><b>Do you accept and count foreign currencies?</b>&nbsp;</p>
@@ -4312,7 +4312,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         After business hours?
       </h4>
       <p class="mb-5"><b>Do you offer your cash collection service outside of business hours?</b>&nbsp;</p>
@@ -4327,7 +4327,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Denominations?
       </h4>
       <p class="mb-5"><b>Can you count any denominations?</b>&nbsp;</p>
@@ -4342,7 +4342,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Anywhere?
       </h4>
       <p class="mb-5"><strong>Where do you deliver to?</strong> </p>
@@ -4357,7 +4357,7 @@ Insured Services</h4>
                             `<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Maximum?
       </h4>
       <p class="mb-5"><b>How much is the maximum amount of cash that you can collect?</b>&nbsp;</p>
@@ -4469,7 +4469,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-14.jpg`,
         heading: `Looking For Cash In Transit Services in Warrawong?`,
-        description: `<strong>Cash in Transit</strong> is the secure way of transferring cash, coins, and cheques from one location to another. We have <strong><a href="/">SecureCash</a></strong>&nbsp;couriers in <strong>Warrawong</strong> who can collect your money from your place of business, bring it to the bank, and deposit it directly to your account. <a href="quote/" target="_blank" rel="noopener"><strong>Get a quote</strong></a> to find out more about our services today!`,
+        description: `<strong>Cash in Transit</strong> is the secure way of transferring cash, coins, and cheques from one location to another. We have <strong><a href="/">SecureCash</a></strong>&nbsp;couriers in <strong>Warrawong</strong> who can collect your money from your place of business, bring it to the bank, and deposit it directly to your account. <a href="/quote" target="_blank" rel="noopener"><strong>Get a quote</strong></a> to find out more about our services today!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -4720,7 +4720,7 @@ Insured Services</h4>
                             `<strong>SecureCash</strong> employs only the best people for the job. Our couriers are highly-trained in handling and transporting large volumes of cash. We constantly innovate using the latest cash-in-transit technologically to be able to provide advanced <strong>cash logistics management service</strong>.`,
                             `<strong>Our cash logistics services</strong> are designed to help you save time, effort, and money, which can help increase your company productivity, effectively manage your cash flow, and promote growth in your organisation.`,
                             `Our services are fast, flexible, and affordable. We do not lock you in lengthy and binding contracts, so you are free to use our services anytime you need them.`,
-                            '<em><strong>Do you need help in moving your money? <span style="text-decoration:underline;"><a href="/quote/"  >Request a free quote today</a></span> to know how you can benefit from our services at a very competitive rate.<br></strong></em>',
+                            '<em><strong>Do you need help in moving your money? <span style="text-decoration:underline;"><a href="/quote"  >Request a free quote today</a></span> to know how you can benefit from our services at a very competitive rate.<br></strong></em>',
                         ],
                     },
                     {
@@ -4901,7 +4901,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-18.jpg`,
         heading: `Looking For Cash Pickup Services in Bendigo?`,
-        description: `<strong>Cash pickup</strong> is a safe and cost-effective service that benefits all types of businesses. <a href="/"><strong>SecureCash</strong></a>&nbsp;has banking couriers in Bendigo who can collect any amount of cash from your company's location and transport it to the bank in a timely manner. <strong><a href="quote/">Get a quote now</a></strong>&nbsp;or <a href="tel:1300732873"><strong>call us</strong></a> today to find out how our services can help your company.`,
+        description: `<strong>Cash pickup</strong> is a safe and cost-effective service that benefits all types of businesses. <a href="/"><strong>SecureCash</strong></a>&nbsp;has banking couriers in Bendigo who can collect any amount of cash from your company's location and transport it to the bank in a timely manner. <strong><a href="/quote">Get a quote now</a></strong>&nbsp;or <a href="tel:1300732873"><strong>call us</strong></a> today to find out how our services can help your company.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -4973,7 +4973,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-pickup-services-brisbane-australia-featured-15.jpg`,
         heading: `Looking For Cash Pickup Services in Brisbane?`,
-        description: `<strong>Cash pickups</strong> are the safest way to transfer your hard-earned takings from your business location to your banking institution in Brisbane. <strong>SecureCash</strong> guarantees hassle-free transports and a direct credit into your account. <strong><a href="quote/" target="_blank" rel="noopener">Find out more</a></strong> about why we are the most reliable cash security provider in the country. <strong><a href="tel:1300732873" target="_blank" rel="noopener">Call us now</a></strong>!`,
+        description: `<strong>Cash pickups</strong> are the safest way to transfer your hard-earned takings from your business location to your banking institution in Brisbane. <strong>SecureCash</strong> guarantees hassle-free transports and a direct credit into your account. <strong><a href="/quote" target="_blank" rel="noopener">Find out more</a></strong> about why we are the most reliable cash security provider in the country. <strong><a href="tel:1300732873" target="_blank" rel="noopener">Call us now</a></strong>!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -5034,7 +5034,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-23.jpg`,
         heading: `Looking For Cash Pickup Services in Cairns?`,
-        description: `<strong>Cash pickup</strong> is the most convenient way of managing your company&rsquo;s cash flow and security. <strong>SecureCash</strong> specializes in picking up your business takings, transporting it to the bank, and depositing it to your account. We guarantee a fast and secure collection wherever your business is located in Cairns. <a href="quote/" target="_blank" rel="noopener"><strong>Get a quote</strong></a> now!`,
+        description: `<strong>Cash pickup</strong> is the most convenient way of managing your company&rsquo;s cash flow and security. <strong>SecureCash</strong> specializes in picking up your business takings, transporting it to the bank, and depositing it to your account. We guarantee a fast and secure collection wherever your business is located in Cairns. <a href="/quote" target="_blank" rel="noopener"><strong>Get a quote</strong></a> now!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -5102,7 +5102,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-collection-services-canberra-australia-featured-6.jpg`,
         heading: `Looking For Cash Pickup Services in Canberra?`,
-        description: `A <strong>cash pickup</strong> is a process of collecting physical cash from a business and transporting it to the bank on their behalf. <strong>SecureCash</strong> provides a fast, secure, and strategic transport of your money (cash, coins, and cheques) from your location to the bank. <a href="quote/" target="_blank" rel="noopener"><strong>Get a quote</strong></a> to find out why we are the most trusted cash-in-transit company in Canberra.`,
+        description: `A <strong>cash pickup</strong> is a process of collecting physical cash from a business and transporting it to the bank on their behalf. <strong>SecureCash</strong> provides a fast, secure, and strategic transport of your money (cash, coins, and cheques) from your location to the bank. <a href="/quote" target="_blank" rel="noopener"><strong>Get a quote</strong></a> to find out why we are the most trusted cash-in-transit company in Canberra.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -5162,7 +5162,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-4.jpg`,
         heading: `Looking For Cash Pickup Services on the Gold Coast?`,
-        description: `Cash pickup services help companies secure their business takings by collecting their money from the business premises and covertly transporting it to the bank. <strong><a href="/">SecureCash</a></strong>&nbsp;couriers can pick up your money wherever you are in the Gold Coast. Our services are available 24 hours a day, 7 days a week. <a href="quote/" target="_blank" rel="noopener"><strong>Get a quote</strong></a> now!`,
+        description: `Cash pickup services help companies secure their business takings by collecting their money from the business premises and covertly transporting it to the bank. <strong><a href="/">SecureCash</a></strong>&nbsp;couriers can pick up your money wherever you are in the Gold Coast. Our services are available 24 hours a day, 7 days a week. <a href="/quote" target="_blank" rel="noopener"><strong>Get a quote</strong></a> now!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -5222,7 +5222,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-collection-services-hobart-australia-featured-3.jpg`,
         heading: `Looking For Cash Pickup Services in Hobart?`,
-        description: `<strong>Cash pickup</strong> is a security service that prevents your funds from going to the wrong hands. <strong>SecureCash</strong> has bank couriers to pick up your banking from your business location and take it to the bank safely and on time. <a href="quote/" target="_blank" rel="noopener"><strong>Get a quote now</strong></a> to find out how we can exactly help your business in Hobart. <a href="tel:1300732873"><strong>Call us</strong></a> today!`,
+        description: `<strong>Cash pickup</strong> is a security service that prevents your funds from going to the wrong hands. <strong>SecureCash</strong> has bank couriers to pick up your banking from your business location and take it to the bank safely and on time. <a href="/quote" target="_blank" rel="noopener"><strong>Get a quote now</strong></a> to find out how we can exactly help your business in Hobart. <a href="tel:1300732873"><strong>Call us</strong></a> today!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -5288,7 +5288,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
         heading: `Looking For Cash Pickup Services in Kadina?`,
-        description: `<strong>Cash pickup</strong> is a cash management service that gives convenience to companies. <strong>SecureCash's</strong> professional couriers are available in Kadina to collect your banking wherever your office is located. We can discreetly bring it to the bank, making sure it is directly deposited into your account. <a href="quote/" target="_blank" rel="noopener"><strong>Get a quote now</strong></a>!`,
+        description: `<strong>Cash pickup</strong> is a cash management service that gives convenience to companies. <strong>SecureCash's</strong> professional couriers are available in Kadina to collect your banking wherever your office is located. We can discreetly bring it to the bank, making sure it is directly deposited into your account. <a href="/quote" target="_blank" rel="noopener"><strong>Get a quote now</strong></a>!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -5351,7 +5351,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-3.jpg`,
         heading: `Looking For Cash Pickup Services in Melbourne?`,
-        description: `<strong>Cash pickup</strong> is the process of collecting your business&rsquo; daily takings and sending it to the bank in a covert method. <a href="/" target="_blank" rel="noopener"><strong>SecureCash</strong></a> provides cash pickup in Melbourne. Our couriers are trained to blend in with the crowd and create no disruptions in your workplace. Find out how we can help your business by <a href="quote/" target="_blank" rel="noopener"><strong>getting a quote now</strong></a>.`,
+        description: `<strong>Cash pickup</strong> is the process of collecting your business&rsquo; daily takings and sending it to the bank in a covert method. <a href="/" target="_blank" rel="noopener"><strong>SecureCash</strong></a> provides cash pickup in Melbourne. Our couriers are trained to blend in with the crowd and create no disruptions in your workplace. Find out how we can help your business by <a href="/quote" target="_blank" rel="noopener"><strong>getting a quote now</strong></a>.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -5486,7 +5486,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/securecash-cash-pickup-sydney-australia-featured-13.jpg`,
         heading: `Looking For Cash Pickup Services in Sydney?`,
-        description: `<strong>Cash pickup couriers</strong> can safely move your banknotes, coins, and cheques from your business location to your bank in Sydney. We can set up an ad hoc collection or a regular pick up for you, depending on what your company requires. Find out more by <a href="quote/" target="_blank" rel="noopener"><strong>getting a quote now</strong></a> to discover how we can exactly help your business.`,
+        description: `<strong>Cash pickup couriers</strong> can safely move your banknotes, coins, and cheques from your business location to your bank in Sydney. We can set up an ad hoc collection or a regular pick up for you, depending on what your company requires. Find out more by <a href="/quote" target="_blank" rel="noopener"><strong>getting a quote now</strong></a> to discover how we can exactly help your business.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -5845,7 +5845,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/21-australia-securecash-services-featured.jpg`,
         heading: `Looking For Cash Security Services?`,
-        description: `Having a <strong>cash security service</strong> improves company efficiency and enhances business security. <a href="/"  ><strong>SecureCash</strong></a> collects your cash in unarmored ordinary-looking vehicles to avoid public attention, keeping you safe and your money secure throughout the cash handling process. <a href="/quote/"><strong>Get a quote now</strong></a> to find out how we can help you improve your company&rsquo;s security.`,
+        description: `Having a <strong>cash security service</strong> improves company efficiency and enhances business security. <a href="/"  ><strong>SecureCash</strong></a> collects your cash in unarmored ordinary-looking vehicles to avoid public attention, keeping you safe and your money secure throughout the cash handling process. <a href="/quote"><strong>Get a quote now</strong></a> to find out how we can help you improve your company&rsquo;s security.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -5985,7 +5985,7 @@ Insured Services</h4>
                         details: [`<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         We deploy plainclothes officers.
       </h4>
       <p>This is to prevent unnecessary public attention. We meet up with a member of your staff in a discreet manner, away from the general public&rsquo;s view. Our <a href="security-officers/">cash couriers</a> blend in with the crowd to be able to transport your cash in a more discreet, efficient and secure manner.</p>
@@ -5997,7 +5997,7 @@ Insured Services</h4>
                         details: [`<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         We do not use armoured vehicles.
       </h4>
       <p>This is to draw less attention during the cash handling process. An armoured vehicle on your premises will only advertise the idea that you have money on site. This is why we prefer our couriers to drive unmarked and soft-skinned vehicles that are equipped with the latest monitoring and anti-theft security features necessary for money transport.</p>
@@ -6009,7 +6009,7 @@ Insured Services</h4>
                         details: [`<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         We are available to serve you any time and any day,
       </h4>
       <p><strong>...including weekends and holidays.</strong> Our website&rsquo;s online chat service is available 24/7 to assist you with your cash security services inquiries. For your comments, suggestions, and other concerns, our customer service team is reachable anytime by calling 1300 SECURE. Using our website, you may cancel bookings, verify the IDs of our couriers, and download copies of our cash in transit security insurance policy online.</p>
@@ -6021,7 +6021,7 @@ Insured Services</h4>
                         details: [`<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Our services are fast and flexible.
       </h4>
       <p>You can opt-in for a daily, weekly, fortnightly, or monthly cash collection. We do not require you to sign a binding contract so you can opt-out anytime. If you are unhappy with our service, you can always reach out to us. As a cash security specialist, we can come up with a custom solution that works best with your organization.</p>
@@ -6033,7 +6033,7 @@ Insured Services</h4>
                         details: [`<ul class="services-content">
   <li>
     <span class="inline-block">
-      <h4 class="text-[22px] 600px:text-[20px] leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full">
+      <h4 class="text-[20px] leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] text-left mb-[20px] 992px:w-full">
         Having a cash security provider prevents internal..
       </h4>
       <p><strong>...and external theft in the company.</strong> With your money being collected by a reliable cash courier, there would be no money left to steal inside your building. Also, you won&rsquo;t have to go outside the office to deposit the money with the possibility of getting robbed along the way. By entrusting the task to us, we can guarantee a fast, safe, and covert transport of your funds from your location to the bank.</p>
@@ -6157,7 +6157,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-15.jpg`,
         heading: `Looking For Security Guards Services in Newcastle?`,
-        description: `<strong>Cash security services</strong> keep your business funds secure, away from theft and robbery. SecureCash has professional bank couriers who can safely pick up your money and transport it to the bank. <a href="quote/" target="_blank" rel="noopener"><strong>Get a quote now</strong></a> to find out how we can exactly secure your business takings in Newcastle. <a href="tel:1300732873"><strong>Call us</strong></a> today!`,
+        description: `<strong>Cash security services</strong> keep your business funds secure, away from theft and robbery. SecureCash has professional bank couriers who can safely pick up your money and transport it to the bank. <a href="/quote" target="_blank" rel="noopener"><strong>Get a quote now</strong></a> to find out how we can exactly secure your business takings in Newcastle. <a href="tel:1300732873"><strong>Call us</strong></a> today!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -6567,7 +6567,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-3.jpg`,
         heading: `Looking For Cash Security Services on the Central Coast?`,
-        description: `<strong>Security</strong> is essential in keeping your people and your company assets safe. <strong>SecureCash</strong> provides cash security and transport solutions that can be tailored according to your business demands. <strong><a href="quote/" target="_blank" rel="noopener">Get a quote</a> </strong>to know how our cash-in-transit strategies helped most organisations in the Central Coast. <a href="tel:1300732873"><strong>Call us today</strong></a>!`,
+        description: `<strong>Security</strong> is essential in keeping your people and your company assets safe. <strong>SecureCash</strong> provides cash security and transport solutions that can be tailored according to your business demands. <strong><a href="/quote" target="_blank" rel="noopener">Get a quote</a> </strong>to know how our cash-in-transit strategies helped most organisations in the Central Coast. <a href="tel:1300732873"><strong>Call us today</strong></a>!`,
         sections: {
             rightImageSection: {
                 content: [
@@ -6981,7 +6981,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/21-australia-securecash-services-featured.jpg`,
         heading: `Looking For Cash Security Officer Services?`,
-        description: `<strong>Security officers</strong> are essential in keeping banking collections safe. <strong>SecureCash</strong> has plain clothed security officers who will collect your daily takings and discreetly transport it to the bank. For over 25 years, we have carried out careful and efficient banking collections for companies across Australia. <a href="quote/" target="_blank" rel="noopener"><strong>Get a quote</strong></a> today!`,
+        description: `<strong>Security officers</strong> are essential in keeping banking collections safe. <strong>SecureCash</strong> has plain clothed security officers who will collect your daily takings and discreetly transport it to the bank. For over 25 years, we have carried out careful and efficient banking collections for companies across Australia. <a href="/quote" target="_blank" rel="noopener"><strong>Get a quote</strong></a> today!`,
         sections: {
             rightImageSection: {
                 content: [

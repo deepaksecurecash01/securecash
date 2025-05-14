@@ -77,8 +77,8 @@ const ScrollSectionWithImage = ({
   };
   return (
     <div id="faq" className="inline-block w-full relative">
-      <div className="absolute inset-0 bg-quote-header-left bg-left-top bg-no-repeat -z-10"></div>
-      <div className="absolute inset-0 bg-quote-header-right bg-right-top bg-no-repeat -z-10"></div>
+      <div className="absolute opacity-20 480px:opacity-30 1024px:opacity-50 1366px:opacity-60 1600px:opacity-100 inset-0 bg-quote-header-left bg-left-top bg-no-repeat -z-10"></div>
+      <div className="absolute opacity-20 480px:opacity-30 1024px:opacity-50 1366px:opacity-60 1600px:opacity-100 inset-0 bg-quote-header-right bg-right-top bg-no-repeat -z-10"></div>
       <div
         className="scroll-height w-full 992px:w-[95%] max-w-[1366px] mx-auto my-0 h-auto 992px:flex"
         style={{
@@ -86,7 +86,7 @@ const ScrollSectionWithImage = ({
         }}
       >
         {/* Left Side - Image with Overlay */}
-        <div className="float-none w-full mx-auto 992px:w-1/2 relative left-0 flex-1 flex justify-start 992px:float-left">
+        <div className="float-none w-full mx-auto 992px:w-1/2 relative left-0 flex-1  992px:flex justify-start 992px:float-left">
           <div className="cta-box relative  992px:w-[90%]">
             <img
               className="backdraft h-full w-full object-cover object-left"
@@ -112,8 +112,8 @@ const ScrollSectionWithImage = ({
         </div>
 
         {/* Right Side - Scrollable Content */}
-        <div className="flex flex-grow justify-center items-center w-full 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1]">
-          <ScrollableSection className="h-auto w-[82%] 992px:w-full p-0 mx-auto 992px:h-full bg-white leading-[2] 992px:pr-[60px]">
+        <div className="flex flex-grow justify-center items-center w-full 992px:w-1/2  1024px:bg-white mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1]">
+          <ScrollableSection className="h-auto w-[82%] 992px:w-full p-0 mx-auto 992px:h-full leading-[2] 992px:pr-[60px]">
             <div style={{ direction: "ltr" }}>
               <ul className="list-none w-full" id="scroll-content">
                 {contentItems.map((item, index) => (
@@ -123,8 +123,8 @@ const ScrollSectionWithImage = ({
                         <Typography
                           as="h4"
                           fontFamily="font-montserrat"
-                          className={`text-[22px] ${item.icon ? "600px:text-[20px]  flex flex-row justify-start items-center gap-4" : "600px:text-[26px]"} leading-[30px] 600px:leading-[1.6em] w-[80%] mx-auto font-bold text-[#000] text-center 992px:text-left mb-[20px] 992px:w-full ${index === 0 ? '768px:mt-0' : 'mt-8'
-                            }`}
+                        className={` ${item.icon ? "600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-3 1366px:gap-4 text-[20px]" : "768px:w-[80%] 600px:text-[26px] text-center text-[22px]"} leading-[30px] 600px:leading-[1.6em]   mx-auto font-bold text-[#000] 992px:text-left mb-[20px] 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' mt-8'
+                          }`}
                         > {item.icon && (
                           <Image
                             className="icon-data h-[40px] w-auto"

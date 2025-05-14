@@ -239,6 +239,10 @@ html {
   font-family: "Montserrat";
 }
 
+.service-page a:hover {
+ text-decoration: underline;
+}
+
 /* Apply styles for screens 768px and above */
 @media (min-width: 1024px) {
   #video-section {
@@ -260,8 +264,8 @@ html {
 }
 
 .services-list {
-  width: 430.719px;
   margin: 0 auto 32px;
+  margin-left: 40px;
 }
 
 .services-list li {

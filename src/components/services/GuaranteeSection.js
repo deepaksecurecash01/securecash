@@ -86,7 +86,7 @@ const GuaranteeSection = ({ guaranteeContent, imageUrl }) =>
                                 alt="Australia Cash in Transit Services | SecureCash Guaranteed Seal"
                                 width="95%"
                                 height="auto"
-                                className="w-[50%] h-[50%] mx-auto 768px:w-[300px] 768px:h-[230px]"
+                                className="w-[50%] h-[50%] mx-auto 1024px:w-[300px] 1024px:h-[230px]"
                             />
                             <div className="flex flex-col items-center justify-center w-full">
                                 <h3
@@ -129,7 +129,7 @@ const GuaranteeSection = ({ guaranteeContent, imageUrl }) =>
                             alt="Australia Cash in Transit Services"
                         />
 
-                        <div className="absolute top-0 992px:left-0 w-[70%] h-full 768px:h-[70%] bg-black/60 flex flex-col justify-center py-[30px] px-[10px] 768px:py-0 768px:px-[50px]">
+                        <div className="absolute top-0 992px:left-0 w-[70%] h-full 768px:h-[80%] bg-black/60 flex flex-col justify-center py-[30px] px-[10px] 768px:py-0 768px:px-[50px]">
                             <Typography
                                 as="h4"
                                 fontFamily="font-montserrat"
