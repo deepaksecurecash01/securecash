@@ -124,7 +124,9 @@ const FreeChangeOrderService = () => (
         <h3 className="content-wrapper w-4/5 mt-[50px] p-0 text-[26px] text-primary" style={{ textAlign: "center" }}>
            <Link className="!text-[#957433] font-medium hover:underline" href="/quote/">GET A QUOTE HERE</Link>
         </h3>
-        <p className="mb-4 mt-2 text-center text-[#000]">provide the codeword "FreeChange2021"</p>
+        <p className="mb-4 mt-2 text-center text-[#000]">
+          provide the codeword &quot;FreeChange2021&quot;
+        </p>
         <Spacer />
       </div>
     </div>

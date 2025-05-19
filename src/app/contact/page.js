@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 
 const services = [
@@ -99,13 +100,12 @@ const Page = () =>
         {[...services].sort().map((slug, index) => (
           <li key={index} className="flex flex-wrap items-center gap-4">
             <span>{index + 1}. {slug}</span>
-            <a
+            <Link
               href={`/services/${slug}`}
-              target="_blank"
               className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 "
             >
               Relative
-            </a>
+            </Link>
             <a
               href={`https://www.securecash.com.au/${slug}`}
               target="_blank"
