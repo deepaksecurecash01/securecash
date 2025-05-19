@@ -31,14 +31,14 @@ const HeroImage = ({ title, imgSrc }) =>
                 className="cta-box w-[95%] 480px:w-[80%] 600px:w-[50%] justify-evenly mt-0 414px:mt-[50px] 992px:mt-[80px] relative  992px:w-[545px] flex items-center  768px:justify-between 1070px:mb-0 1070px:mt-[80px]"
                 id="franchis-cta"
             >
-                <Link href={"/quote"} className="mx-[10px] 992px:mx-0">
+                <Link href={"/quote"} className="mx-[10px] 992px:mx-0 button">
                     <div className="flex flex-row justify-center items-center w-[150px] 414px:w-[170px] min-h-[45px] min-w-[130px] px-5 py-0  rounded-full bg-[#c7a652] btn-learn-more hover:bg-white 992px:min-w-[253px] 992px:min-h-[73px] max-h-[73px] group  768px:mx-auto 992px:mx-0">
                         <p className="m-0 p-0 text-[14px]  768px:text-base  992px:text-[20px] font-semibold w-full text-[#ffffff] group-hover:text-[#000] hover:no-underline text-center">
                             Get a Quote
                         </p>
                     </div>
                 </Link>
-                <Link href={"#read-more"} className="mx-[10px] 992px:mx-0">
+                <Link href={"#read-more"} className="mx-[10px] 992px:mx-0 button">
                     <div className="flex flex-row justify-center items-center w-[150px] 414px:w-[170px] min-h-[45px] min-w-[130px] px-5 py-0 rounded-full bg-white 992px:min-w-[253px] 992px:min-h-[73px] max-h-[73px] group  768px:mx-auto 992px:mx-0">
                         <p className="m-0 p-0 text-[14px]  768px:text-base  992px:text-[20px] font-semibold w-full  group-hover:text-[#c7a652] text-[#000] hover:no-underline text-center">
                             Read More

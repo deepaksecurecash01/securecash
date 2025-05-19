@@ -25,6 +25,7 @@ const services = [
   "cash-delivery",
   "cash-in-transit-central-coast",
   "cash-in-transit-couriers",
+ "cash-in-transit-services-adelaide",
   "cash-in-transit-maitland",
   "cash-in-transit-melbourne",
   "cash-in-transit-security",

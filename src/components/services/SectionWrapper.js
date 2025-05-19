@@ -128,23 +128,23 @@ const SectionWrapper = ({
                   {contentItems.map((item, index) => (
                     <li key={index}>
                       {item.title && (
-                          
-                          <Typography
-                            as="h4"
-                            fontFamily="font-montserrat"
+
+                        <Typography
+                          as="h4"
+                          fontFamily="font-montserrat"
                           className={` ${item.icon ? "600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-3 1366px:gap-4 text-[20px]" : " 768px:w-[80%] 600px:text-[26px] text-center text-[22px]"} leading-[30px] 600px:leading-[1.6em]  mx-auto font-bold text-[#000] 992px:text-left mb-[20px] 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' mt-8'
                             }`}
-                          >{item.icon && (
-                            <Image
-                              className="icon-data h-[40px] pr-2.5 480px:pr-[16px] w-auto"
-                              src={item.icon}
-                              alt={item.title.toLowerCase()}
-                              width={40}
-                              height={40}
-                            />
-                          )}
-                            {item.title}
-                          </Typography>
+                        >{item.icon && (
+                          <Image
+                            className="icon-data h-[40px] pr-2.5 480px:pr-[16px] w-auto"
+                            src={item.icon}
+                            alt={item.title.toLowerCase()}
+                            width={40}
+                            height={40}
+                          />
+                        )}
+                          {item.title}
+                        </Typography>
                       )}
 
                       {item.details.map((paragraph, paragraphIndex) => (
@@ -216,7 +216,7 @@ const SectionWrapper = ({
                 >
                   or
                 </Typography>
-                <Link href="/quote" className="w-full mt-[18px]">
+                <Link href="/quote" className="w-full mt-[18px] button">
                   <div className="flex flex-row justify-center items-center min-h-[45px] min-w-[130px] px-5 py-0 rounded-full bg-white 768px:w-full 768px:min-h-[55px] 1070px:mt-0 max-h-[73px] group 768px:mx-auto 992px:mx-0">
                     <p className="m-0 p-0 text-[14px] 768px:text-base font-semibold w-full group-hover:text-[#c7a652] text-[#000] hover:no-underline text-center">
                       Get a Quote Now!

@@ -233,14 +233,14 @@ html {
   }
 }
 
-.service-page a {
-  color: #957433;
+.service-page a:not(.button) {
+  color: #957433 !important;
   font-weight: 500;
   font-family: "Montserrat";
 }
 
-.service-page a:hover {
- text-decoration: underline;
+.service-page a:not(.button):hover {
+  text-decoration: underline;
 }
 
 /* Apply styles for screens 768px and above */
@@ -289,3 +289,6 @@ html {
 .services-content li {
 display: flex;
 }
+
+
+

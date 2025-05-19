@@ -2305,8 +2305,35 @@ hr.divider-centered {
     color: #000
 }
 
+#intro {
+    max-width: 1366px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+    padding-right: 20px;
+    justify-content: center;
+    align-items: center
+}
 
+#intro h2 {
+    text-align: center;
+    margin: 0 auto;
+    line-height: 45px;
+    max-width: 80%;
+    color: #000
+}
 
+#intro .content-wrapper {
+    width: 80%;
+    margin-top: 50px;
+    padding: 0
+}
+
+#intro .content-wrapper p {
+    text-align: center;
+    color: #000
+}
 
 #pitch {
     max-width: 1366px;
@@ -3867,7 +3894,11 @@ i.fa.fa-long-arrow-down {
     text-shadow: none
 }
 
-
+#intro hr.center-content-divider {
+    height: 4px;
+    border: none;
+    border-radius: 5px
+}
 
 #guarantee-seal-wrapper {
     margin: 0
@@ -7617,7 +7648,10 @@ i.fa.fa-long-arrow-down {
         font-size: 18px
     }
 
- 
+    #intro .content-wrapper {
+        margin-top: 0px
+    }
+
     #content h3.header-times {
         font-size: 26px
     }
@@ -7631,7 +7665,10 @@ i.fa.fa-long-arrow-down {
         margin: 24px auto 24px auto
     }
 
- 
+    #intro .content-wrapper p {
+        padding: 0;
+        margin: 0
+    }
 
     .left-row-content-middle .service-container h3 {
         font-size: 24px !important;
@@ -12996,7 +13033,97 @@ html {
     width: 95% !important
 }
 
+.partners-hero {
+    padding-top: 70px
+}
 
+.partners-hero--header hr {
+    margin: 30px auto 60px
+}
+
+.partners-hero--header h3 {
+    margin-bottom: 40px
+}
+
+.partners-hero--header p {
+    line-height: 2em;
+    margin-bottom: 36px;
+    text-align: left
+}
+
+.partners {
+    margin-top: 78px
+}
+
+.partners--flag-wrap {
+    margin-top: 52px;
+    padding: 0 80px;
+    text-align: center
+}
+
+.partners--item {
+    margin-top: 48px
+}
+
+.partners--item__header {
+    align-items: center;
+    display: flex
+}
+
+.partners--item__header img {
+    margin-right: 20px
+}
+
+.partners--item__header h3 {
+    color: #0000a0;
+    font-weight: bolder;
+    font-size: 27px
+}
+
+.partners--item__header h3 .title-em {
+    font-style: italic
+}
+
+.partners--item__partner h4 {
+    margin: 40px 0 30px
+}
+
+.partners--item__partner--article-head {
+    text-align: left;
+    line-height: 2em;
+    margin-right: 20px
+}
+
+.partners--item__partner img {
+    float: right;
+    margin-bottom: 30px !important;
+    margin-left: 24px !important
+}
+
+.partners--item__partner p {
+    text-align: left !important;
+    line-height: 2em
+}
+
+.partners--item__partner ul {
+    margin: 34px 0;
+    padding-left: 50px
+}
+
+.partners--item__partner ul li {
+    line-height: 1.8em
+}
+
+.partners--item__partner hr {
+    margin-bottom: 44px
+}
+
+.partners--item__hr {
+    background-color: #000;
+    height: 2px;
+    border: none;
+    margin: 30px 0 24px 0
+}
 
 #hero-image .cta-box .btn {
     padding: 2px 24px
@@ -17171,6 +17298,70 @@ body.quiz-modal-on .site-modal-outer {
     }
 }
 
+@media (max-width: 768px) {
+    .partners-hero--header h1 {
+        padding: 0 30px
+    }
+}
+
+@media (max-width: 375px) {
+    .partners-hero--header h1 {
+        padding: 0
+    }
+}
+
+@media (max-width: 768px) {
+    .partners-hero--header h3 {
+        text-align: center
+    }
+}
+
+@media (max-width: 480px) {
+    .partners-section-wrapper .content-wrapper {
+        width: 100% !important
+    }
+}
+
+@media (max-width: 480px) {
+    .partners--flag-wrap {
+        padding: 0
+    }
+}
+
+@media (max-width: 768px) {
+    .partners--item__partner img {
+        float: none;
+        display: block;
+        margin: 30px 0
+    }
+}
+
+@media (max-width: 480px) {
+    .partners--item__partner img {
+        margin: 30px auto !important
+    }
+}
+
+@media (max-width: 768px) {
+
+    .partners--item__partner .rowluk-img,
+    .partners--item__partner .abir-img,
+    .partners--item__partner .corporate-uk-img,
+    .partners--item__partner .protective-img {
+        width: 90% !important
+    }
+
+    .partners--item__partner .avertic_img {
+        width: 60% !important
+    }
+}
+
+@media (max-width: 375px) {
+    .partners--item__partner ul {
+        font-size: 14px;
+        padding-left: 20px
+    }
+}
 
 @media (max-width: 480px) {
     #video-section div.video-container .video-player {

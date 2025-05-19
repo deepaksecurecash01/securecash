@@ -44,7 +44,7 @@ export const servicesData = {
 
                         ],
                     },
-                
+
                 ],
                 ctaText: `Why Choose SecureCash for Your Business?`,
                 imageUrl:
@@ -138,6 +138,89 @@ export const servicesData = {
                             `SecureCash is available 24 hours a day, serving <em><strong>bank runs services</strong></em> — anywhere in Australia. We provide other services such as <a href="cash-in-transit/">Cash In Transit services</a>, <a href="cash-pickups/">Cash Pickup services</a>, <a href="cash-logistics/">Cash Logistic services</a>, <a href="cash-security/">Cash Security services</a>, <a href="banking-collection/">Bank Collection services</a>, <a href="cash-delivery/">Cash Delivery services</a>, and <a href="cash-couriers/">Cash Courier services</a>, plus a network of licensed contractors to cover the rest of the country. Contact us today for more information about how we can help your business in Australia.`,
                             `<strong>SecureCash</strong> guarantees the safest handling of your business takings. In case we miss your bank's cut-off time, your money will be kept in a protected and undisclosed location until it's delivered to the bank the next business day.`,
                             `<strong>Your daily takings' safety is our top priority</strong>. It is important to us that our services are delivered in a professional and timely manner, no matter what your business is—no matter where you are located.`,
+                        ],
+                    },
+                ],
+                imageUrl:
+                    `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+            },
+        },
+    },
+    "banking-collection": {
+        metaTitle: `A Leader in Banking Collections | SecureCash`,
+        title: `Banking Collection Services`,
+        imageUrl:
+            `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+        heading: `Looking For Banking Collection Services?`,
+        description: `<strong>Banking collection</strong> services provide secure transportation of your daily takings directly to the bank. <strong><a href="/">SecureCash</a></strong> specialists are trained to collect your funds discreetly and deposit them safely, reducing the risk of theft or robbery. <a href="/quote"><strong>Get a quote today</strong></a> and let our banking collection team handle your business deposits with utmost security!`,
+        sections: {
+            rightImageSection: {
+                content: [
+                    {
+                        title: `Our Banking Collection Service`,
+                        details: [
+                            `Crimes like robbery and theft are random. It knows no location, time, or type of business. This is one of the few reasons why it's never advisable to keep your funds inside your building. Always make time to have it taken to the bank despite a busy schedule.`,
+                            `Avert potential risks by handing over your banking responsibility to <strong>SecureCash</strong>.`,
+                            `<a href="/"  ><strong>SecureCash</strong></a> is a cash-in-transit company that provides exceptional <a href="/services/banking-collection"><strong>banking collection service</strong></a>. We specialize in the covert collection of funds and discreet transport to the bank. For over 25 years, we have helped small and big organizations in securing their business takings to major and local banks.`,
+                            `A banking collection service is the most practical way of keeping your funds in the right place. It's more secure than hiding your money in a cash safe. Having someone do the deposit for you limit any possible exposure to robbery and theft.`,
+                            `All our cash transports are carefully planned. We assess the vicinity and your working environment first before we proceed with the transfer of funds. This allows us to efficiently move around the area and leave your premises without causing any distraction to your work.`,
+                            `<strong>SecureCash</strong> employs a straightforward method in all our cash-in-transit services. To request for a banking collection, you may get a quote through our website or call us directly at <a href="tel:1300732873">1300 SECURE</a>. Our cash courier team will be sent to your location to secure your funds (cash, coins, and cheques). They will meet up with your assigned staff to collect the money which will then be placed in your tamper-evident satchels.`,
+                            `Once everything is set, our banking collection couriers will exit your premises, drive to the bank, and deposit your money. You can be sure that your cash remains untouched while in transit. Your teller's receipt will be provided on your next banking collection schedule.`,
+                            `<strong>SecureCash</strong> focuses on covert and discreet cash transport. During the banking collection process, our couriers wear plain clothes and drive unarmoured vehicles. This is for us to easily blend in with the crowd allowing us to move more efficiently.`,
+                            `For your peace of mind, you may verify the identity of our banking collection couriers through our website at any time.`
+                        ],
+                    },
+                ],
+                imageUrl:
+                    `https://www.securecash.com.au/images/5-australia-securecash-services-005.jpg`,
+            },
+            leftImageSection: {
+                content: [
+                    {
+                        details: [
+                            `Aside from banking collection, <strong>SecureCash</strong> also provides other cash security services including Cash Delivery and Cash Counting.`,
+                        ],
+                    },
+                    {
+                        title: `Cash Delivery`,
+                        icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+                        details: [
+                            `Cash Delivery is the process of delivering money to your location upon your request. We can also sort out various denominations that your store may need for the day. We can liaise with your bank, collect the funds, and deliver it right to where you are.`,
+                        ],
+                    },
+                    {
+                        title: `Cash Counting`,
+                        icon: `https://www.securecash.com.au/images/cashcounting.png`,
+                        details: [
+                            `Cash Counting is highly-recommended for coin-operated businesses and is available in all major cities. We can pick up the money, count it, and verify its total amount before we transfer it to your bank account.`,
+                        ],
+                    },
+                    {
+                        details: [
+                            `<strong>SecureCash</strong> is a government-licensed and security-accredited firm with depots in Adelaide, Brisbane, Canberra, Melbourne, Perth, and Sydney. Established in 1992, we have grown as one of the biggest <strong>banking collection companies</strong> in Australia.`,
+                            `We can schedule a daily, weekly, fortnightly, or even a monthly banking collection. If you want to, you can simply book a one-time or an ad-hoc pickup, whichever works best for you.`,
+                            `We do not let you sign binding contracts so you are free to try our services for a week. If you think that our methods didn't work out for you, we can tailor-fit our services according to your needs and your budget.`,
+                            `If you're confused about what service to get, you can reach out to us anytime. We are reachable 24 hours a day, seven days a week, including weekends and holidays.`,
+                        ],
+                    },
+                    {
+                        title: `Call Us Today`,
+                        details: [
+                            '<em><strong><span style="font-size: medium;">For your banking collection needs, call us at </span><span style="font-size: medium; text-decoration-line: underline;"><a href="tel:1300732873">1300 SECURE</a></span><span style="font-size: medium;">. Our operators are standing by and ready to discuss how we can help secure your business in Australia.</span></strong></em>',
+                        ],
+                    },
+                ],
+                ctaText: `How Can We Benefit Your Business?`,
+                imageUrl:
+                    `https://www.securecash.com.au/images/18-australia-securecash-services-18.jpg`,
+            },
+            guaranteeSection: {
+                content: [
+                    {
+                        details: [
+                            'SecureCash is available 24 hours a day, serving <strong>banking collection services</strong> - anywhere in Australia. We provide other services such as <a href="cash-in-transit/">Cash In Transit services</a>, <a href="cash-collection/">Cash Collection services</a>, <a href="cash-logistics/">Cash Logistic services</a>, <a href="cash-security/">Cash Security services</a>, <a href="cash-pickups/">Cash Pickup services</a>, <a href="cash-delivery/">Cash Delivery services</a>, and <a href="cash-couriers/">Cash Couriers services</a>. Contact us today for more information about how we can help your business in Australia.',
+                            `<strong>SecureCash</strong>&nbsp;guarantees the safest handling of your business takings. In case we miss your bank's cut-off time, your money will be kept in a protected and undisclosed location until it's delivered to your bank the next business day.`,
+                            `<strong>Your financial security is our top priority.</strong> Our banking collection services are designed to give you complete peace of mind, allowing you to focus on running your business while we take care of the secure transportation and deposit of your funds. Trust us with your banking needs, no matter the size of your business or your location.`,
                         ],
                     },
                 ],
@@ -419,7 +502,7 @@ export const servicesData = {
             `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-3.jpg`,
         heading: `Looking For Banking Services in Newcastle?`,
         description:
-            '<strong>Banking services</strong> is a cash management service that safely transports any amount of cash for any type of business. <strong>SecureCash</strong> has drivers and couriers who can discreetly collect the money and bring it to the bank on your behalf. <br><strong><a href="contact/">Contact us today</a></strong> to find out how we can greatly benefit your business in Newcastle.',
+            '<strong>Banking services</strong> is a cash management service that safely transports any amount of cash for any type of business. <strong>SecureCash</strong> has drivers and couriers who can discreetly collect the money and bring it to the bank on your behalf. <br><strong><a href="/contact/">Contact us today</a></strong> to find out how we can greatly benefit your business in Newcastle.',
         sections: {
             rightImageSection: {
                 content: [
@@ -1424,7 +1507,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-2.jpg`,
         heading: `Looking For Cash Collection Services in Newcastle?`,
-        description: `<strong>Cash Collection</strong> is a security service that collects and transports any amount of cash for businesses. Our <strong>SecureCash</strong> couriers and drivers are well-trained professionals in the field of cash security, management, and transport. <a href="contact/"><strong>Contact us today</strong></a> to find out how we can safely move your money around Newcastle.`,
+        description: `<strong>Cash Collection</strong> is a security service that collects and transports any amount of cash for businesses. Our <strong>SecureCash</strong> couriers and drivers are well-trained professionals in the field of cash security, management, and transport. <a href="/contact/"><strong>Contact us today</strong></a> to find out how we can safely move your money around Newcastle.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -1623,7 +1706,7 @@ Insured Services</h4>
                             `<strong>Do you need help in managing your business takings in Adelaide?</strong> Do you need someone who can take care of your banking?`,
                             '<strong><a href="/" target="_blank" rel="noopener">SecureCash</a></strong> provides professional cash collection services to business industries located throughout Adelaide. Whether you run a small retail shop or a major company, we provide the same quality service that is dependable, flexible, and affordable.',
                             'Our <strong><a href="cash-collection-services/" target="_blank" rel="noopener">cash collection</a>&nbsp;in Adelaide</strong> provides a convenient collection of your daily takings and safe transport to the bank. We can help you move huge amounts of cash, making sure your money reaches its destination safely and in a timely manner.',
-                            'To avail our services, simply <a href="/" target="_blank" rel="noopener">get a quote</a> online or call <strong>1300 SECURE</strong>. Our representatives are available 24 hours a day, seven days a week so feel free to talk to us anytime.',
+                            'To avail our services, simply <a href="/quote" target="_blank" rel="noopener">get a quote</a> online or call <strong>1300 SECURE</strong>. Our representatives are available 24 hours a day, seven days a week so feel free to talk to us anytime.',
                             `Once we have confirmed your booking, we will send a cash collection team to pick up your funds. Before taking it to the bank, your money will be secured inside your bank&rsquo;s tamper-evident satchel. The barcodes of the satchel will be scanned and registered using our eDocket System, an advanced software application that&rsquo;s unique only to <strong>SecureCash</strong>. Once all the information is gathered, your funds will be taken to the bank for deposit. Real-time updates and notifications will be sent to you via email.`,
                         ],
                     },
@@ -1835,7 +1918,7 @@ Insured Services</h4>
         imageUrl:
             `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-3.jpg`,
         heading: `Looking For Cash Collection Services in Newcastle?`,
-        description: `<strong>Cash Collection</strong> is a security service that collects and transports any amount of cash for businesses. Our <strong>SecureCash</strong> couriers and drivers are well-trained professionals in the field of cash security, management, and transport. <a href="contact/" target="_blank" ><strong>Contact us today</strong></a> to find out how we can safely move your money around Newcastle.`,
+        description: `<strong>Cash Collection</strong> is a security service that collects and transports any amount of cash for businesses. Our <strong>SecureCash</strong> couriers and drivers are well-trained professionals in the field of cash security, management, and transport. <a href="/contact/" target="_blank" ><strong>Contact us today</strong></a> to find out how we can safely move your money around Newcastle.`,
         sections: {
             rightImageSection: {
                 content: [
@@ -3294,7 +3377,7 @@ Insured Services</h4>
                     {
                         title: `Call Us Today`,
                         details: [
-                            `Give us a call, we look forward to discussing exactly how we can help you with your <strong style=\"font-family: 'Montserrat Light'; font-size: 16px;\">cash in transit Central Coast</strong> needs.`,
+                            `Give us a call, we look forward to discussing exactly how we can help you with your <strong style="font-family: 'Montserrat Light'; font-size: 16px;">cash in transit Central Coast</strong> needs.`,
                             'Our number is <a href="tel:1300732873">1300 SECURE</a>.',
                         ],
                     },
@@ -3966,8 +4049,70 @@ Insured Services</h4>
                     {
                         details: [
                             'SecureCash provides <em><strong>cash in transit security services</strong></em> &mdash; 24 hours a day, seven days a week. We have branches in <a href="cash-in-transit-adelaide/">Adelaide AU</a>, <a href="cash-in-transit-perth/">Perth AU</a>, <a href="cash-in-transit-melbourne/">Melbourne AU</a>, <a href="cash-in-transit-sydney/">Sydney AU</a>, <a href="cash-in-transit-brisbane/">Brisbane AU</a>, <a href="cash-in-transit-newcastle/">Newcastle AU</a>, <a href="cash-in-transit-canberra/">Cairns AU</a>, <a href="cash-in-transit-cairns/">Canberra AU</a>, <a href="cash-in-transit-warrawong/">Warrawong AU</a>, <a href="cash-in-transit-maitland/">Maitland AU</a>, and <a href="cash-in-transit-central-coast/">Central Coast AU</a>, plus a network of licensed contractors to cover the rest of the country. Contact us today for more information about how we can help your business in Australia.',
-                            `<strong>SecureCash</strong> guarantees the <a href=\"https://www.securecash.com.au/covid-cash-handling-training/\">safest handling of your business takings</a>. In case we miss your bank's cut-off time, your money will be kept in a protected and undisclosed location until it's delivered to the bank the next business day.`,
+                            `<strong>SecureCash</strong> guarantees the <a href="https://www.securecash.com.au/covid-cash-handling-training/">safest handling of your business takings</a>. In case we miss your bank's cut-off time, your money will be kept in a protected and undisclosed location until it's delivered to the bank the next business day.`,
                             `<strong>Your daily takings&rsquo; safety is our top priority</strong>. It is important to us that our services are delivered in a professional and timely manner, no matter what your business is&mdash;no matter where you are located.`,
+                        ],
+                    },
+                ],
+                imageUrl:
+                    `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+            },
+        },
+    },
+    "cash-in-transit-services-adelaide": {
+        metaTitle: `First Class Cash in Transit Services Adelaide | SecureCash`,
+        title: `Cash In Transit Services,<br> Adelaide AU`,
+        imageUrl:
+            `https://www.securecash.com.au/images/securecash-cash-collection-services-adelaide-australia-featured-2.jpg`,
+        heading: `Looking For Cash In Transit Services in Adelaide?`,
+        description: `<strong>Cash In Transit</strong> is the process of collecting your business' daily takings, transporting these funds in a secure method and depositing it at the bank on your behalf. Find out more on how <strong><a href="/">SecureCash</a></strong>&nbsp;can provide you with cash in transit solutions that are straightforward and cost-efficient in Adelaide without having to leave the office.`,
+        sections: {
+            rightImageSection: {
+                content: [
+                    {
+                        title: `Our Cash in Transit Services in Adelaide`,
+                        details: [
+                            `<a href="/" target="_blank" rel="noopener"><strong>SecureCash</strong></a> is the largest <strong>cash in transit provider</strong> in Adelaide. Through the years, we have helped many companies in managing and transporting their business takings.`,
+                            `We have serviced <em><span style="text-decoration: underline;">retail stores</span></em>, <em><span style="text-decoration: underline;">pet shops</span></em>, <em><span style="text-decoration: underline;">hotels</span></em>, <em><span style="text-decoration: underline;">restaurants</span></em>, <em><span style="text-decoration: underline;">private schools</span></em> and <em><span style="text-decoration: underline;">universities</span></em>. We also provide <a href="/services/cash-in-transit/" target="_blank" rel="noopener">cash in transit services</a> to <span style="text-decoration: underline;"><em>veterinary centres</em></span>, <span style="text-decoration: underline;"><em>government facilities</em></span>, <span style="text-decoration: underline;"><em>healthcare clinics</em></span>, <span style="text-decoration: underline;"><em>financial firms</em></span>, <span style="text-decoration: underline;"><em>medical and dental offices</em></span>, and <span style="text-decoration: underline;"><em>other organizations</em></span> here in Adelaide. No matter the size of your business, we promise to offer only the best cash security solutions for you.`,
+                            `<a href="/">SecureCash</a> is Australia&rsquo;s <strong>most reliable cash in transit company</strong> that provides top-class cash management, security, and logistics solutions. We have branches in Adelaide, Brisbane, Canberra, Melbourne, Perth, Darwin, and Sydney.`,
+                            `From Gawler to Aldinga, Mt Barker to Glenelg, and to all the neighbouring suburbs in Adelaide, we got you covered at a very affordable price.`,
+                            `Our <strong>Adelaide cash in transit</strong> team is mostly from Adelaide. To organize an effective team, we hire people who have a great knowledge of the capital city&rsquo;s history, culture, and industry. This way, our operations can run smoothly as they mostly know the streets and company locations like the back of their hand.`
+                        ],
+                    },
+                ],
+                imageUrl:
+                    `https://www.securecash.com.au/images/25-australia-securecash-services-0025-f.jpg`,
+            },
+            leftImageSection: {
+                content: [
+                    {
+                        title: `What Is Cash In Transit Adelaide?`,
+                        details: [
+                            `<strong>Cash in transit</strong> is the physical collection and transport of cash. This is an essential service for all businesses, to reduce the risk of any incident happening to themselves or their employees. Any <strong>reliable Adelaide cash in transit provider</strong> will also hold an insurance policy for if an incident was to occur, providing peace of mind.`
+                        ],
+                    },
+                    {
+                        title: `Why Choose SecureCash?`,
+                        details: [
+                            `<strong>Our couriers</strong> are well-vetted and are professionally trained in covert cash handling procedures. During cash in transit operations, we deploy plainclothes officers who drive non-armoured vehicles to stay undercover, even customers and employees wouldn&rsquo;t notice that money is being moved around.`,
+                            `<strong>Established in 1992, SecureCash</strong> is an Australian owned and operated company that is fully licensed to provide <a href="/services/cash-in-transit-security/" target="_blank" rel="noopener">affordable cash in transit solutions</a><strong> in Adelaide</strong>. It currently holds a security license with the South Australia Consumer and Business Affairs, you can request our license at any time.`,
+                            `<strong>With SecureCash</strong>, you won't have to worry about your money while in transit. All cash transport operations are covered by our nationwide CIT insurance policy, which guarantees that your money is safe and insured from the time it left your building until it reaches the bank.`,
+                            `Getting our services is fast and easy. If you&rsquo;re not sure about what service to get, talk to us by calling <span style="text-decoration: underline;"><a href="tel:1300732873"><strong>1300 SECURE</strong></a></span>.`,
+                            `<em><strong>If you would like to know how much our cash in transit services in Adelaide costs, feel free to <span style="text-decoration: underline;"><a href="/quote/" target="_blank" rel="noopener">get a quote</a></span> and we&rsquo;ll get back to you right away.</strong></em>`
+                        ],
+                    },
+                ],
+                ctaText: `Why Should You Hire an Adelaide Cash In Transit Provider for Your Business?`,
+                imageUrl:
+                    `https://www.securecash.com.au/images/securecash-services-adelaide-australia-0015.jpg`,
+            },
+            guaranteeSection: {
+                content: [
+                    {
+                        details: [
+                            `SecureCash provides <em><strong>cash in transit services</strong></em> in Adelaide&mdash;24 hours a day, seven days a week. We have branches in <a href="/services/cash-in-transit-perth/">Perth AU</a>, <a href="/services/cash-in-transit-melbourne/">Melbourne AU</a>, <a href="/services/cash-in-transit-sydney/">Sydney AU</a>, <a href="/services/cash-in-transit-brisbane/">Brisbane AU</a>, <a href="/services/cash-in-transit-newcastle/">Newcastle AU</a>, <a href="/services/cash-in-transit-canberra/">Cairns AU</a>, <a href="/services/cash-in-transit-cairns/">Canberra AU</a>, <a href="/services/cash-in-transit-warrawong/">Warrawong AU</a>, <a href="/services/cash-in-transit-toowoomba/">Toowoomba AU</a>, <a href="/services/cash-in-transit-maitland/">Maitland AU</a>, <a href="/services/cash-in-transit-central-coast/">Central Coast AU</a>, and <a href="/">Adelaide Banking Courier</a>, plus a network of licensed contractors to cover the rest of the country. Contact us today for more information about how we can help your business in Australia.`,
+                            `<strong>SecureCash</strong>&nbsp;guarantees the safest handling of your business takings. In case we miss your bank's cut-off time, your money will be kept in a protected and undisclosed location until it's delivered to the bank the next business day.`,
+                            `<strong>Your daily takings&rsquo; safety is our top priority</strong>. It is important to us that our services are delivered in a professional and timely manner, no matter what your business is&mdash;no matter where you are located.`
                         ],
                     },
                 ],
@@ -4011,7 +4156,7 @@ Insured Services</h4>
                             `Our contractors in Brisbane are experienced couriers who have worked with some of the largest cash in transit companies. They have a vast knowledge regarding the industry and have developed natural skills in providing covert cash transport.`,
                             `<strong>SecureCash</strong> is licensed by the Queensland Department of Justice &amp; Attorney General as a cash in transit Brisbane provider, under security license number 3348566.`,
                             `<strong>SecureCash</strong> is accredited by the <strong>Australian Security Industry Association Limited (ASIAL)</strong>, the peak national body for Australian Security providers, to operate in Brisbane and all across Australia.`,
-                            'For your peace of mind, you may <a href="contact/" target="_blank" rel="noopener">contact us</a> for a copy of the licenses and accreditation documents.',
+                            'For your peace of mind, you may <a href="/contact/" target="_blank" rel="noopener">contact us</a> for a copy of the licenses and accreditation documents.',
                         ],
                     },
                     {
@@ -4770,7 +4915,7 @@ Insured Services</h4>
                         title: `Why are Cash Pickups Essential for Business?`,
                         details: [
                             `Here the known benefits of choosing SecureCash for your company:`,
-                            '<ul class="services-list"><li>Prevents future risks for your business</li><li>Protects your staff and location from potential crimes</li><li>Discreet cash counting and safekeeping</li><li>Reliable and round-the-clock service</li></ul><ul class="services-list" style="width:430.719px;"><li>Fast and easy online access</li><li>Nationwide coverage with depots in Brisbane, Perth, Sydney, Adelaide, and Melbourne</li><li>Available 24 hours a day, 7 days a week&mdash;Australia wide</li></ul>',
+                            '<ul class="services-list"><li>Prevents future risks for your business</li><li>Protects your staff and location from potential crimes</li><li>Discreet cash counting and safekeeping</li><li>Reliable and round-the-clock service</li><li>Fast and easy online access</li><li>Nationwide coverage with depots in Brisbane, Perth, Sydney, Adelaide, and Melbourne</li><li>Available 24 hours a day, 7 days a week&mdash;Australia wide</li></ul>',
                             '<img src="https://www.securecash.com.au/images/provider-comparison.jpg" alt="SecureCash Benefits | #1 Reliable Australia Cash Pickup Service Provider" width="99%" height="auto">',
                         ],
                     },
@@ -5546,7 +5691,7 @@ Insured Services</h4>
             `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-11.jpg`,
         heading: `Looking For Cash Pickup Services in Toowoomba?`,
         description:
-            'A <strong>cash pickup service</strong> is the physical collection of banknotes, coins, and cheques from a business location. <strong>SecureCash</strong> offers discreet and covert cash pickups to all stores, cafes, and offices located in and around Toowoomba.<br><a href="tel:1300732873"><strong>Call us now</strong></a> to find out how we can help you and your business. <a href="/"><strong>Get a quote</strong></a> now!',
+            'A <strong>cash pickup service</strong> is the physical collection of banknotes, coins, and cheques from a business location. <strong>SecureCash</strong> offers discreet and covert cash pickups to all stores, cafes, and offices located in and around Toowoomba.<br><a href="tel:1300732873"><strong>Call us now</strong></a> to find out how we can help you and your business. <a href="/quote/"><strong>Get a quote</strong></a> now!',
         sections: {
             rightImageSection: {
                 content: [
@@ -5958,7 +6103,7 @@ Insured Services</h4>
                         title: `Cash Collection`,
                         icon: `https://www.securecash.com.au/images/contentpageicons/cashcollection.png`,
                         details: [
-                            `<a href=\"https://www.securecash.com.au/secure-cash-collection-service/\">Cash collection</a> is the strategic process of picking up your business' daily takings (cash, coins, and cheques) and transporting them to your bank for deposit. Having a professional cash courier enhances your company's cash security, giving you more time to focus on other things that matter.`,
+                            `<a href="https://www.securecash.com.au/secure-cash-collection-service/">Cash collection</a> is the strategic process of picking up your business' daily takings (cash, coins, and cheques) and transporting them to your bank for deposit. Having a professional cash courier enhances your company's cash security, giving you more time to focus on other things that matter.`,
                         ],
                     },
                     {
@@ -6062,7 +6207,7 @@ Insured Services</h4>
                     {
                         details: [
                             'SecureCash provides <em><strong>cash security services</strong></em> 24 hours a day, 7 days a week&mdash;anywhere in Australia. Our services include&nbsp;<a href="cash-in-transit/">Cash In Transit services</a>, <a href="cash-collection/">Cash Collection services</a>, <a href="cash-pickups/">Cash Pickup services</a>, <a href="cash-logistics/">Cash Logistic services</a>, <a href="cash-delivery/">Cash Delivery services</a>, <a href="cash-couriers/">Cash Courier services</a>. We have branches in Adelaide, Brisbane, Canberra, Melbourne, Perth, and Sydney plus a network of licensed contractors to cover the rest of the country. Contact us today for more information about how we can help your business in Australia.',
-                            `<strong>SecureCash</strong> guarantees the <a href=\"https://www.securecash.com.au/covid-cash-handling-training/\">safest handling</a> of your business takings. In case we miss your bank's cut-off time, your money will be kept in a protected and undisclosed location until it's delivered to your bank the next business day.`,
+                            `<strong>SecureCash</strong> guarantees the <a href="https://www.securecash.com.au/covid-cash-handling-training/">safest handling</a> of your business takings. In case we miss your bank's cut-off time, your money will be kept in a protected and undisclosed location until it's delivered to your bank the next business day.`,
                             `<strong>Your daily takings&rsquo; safety is our top priority.</strong>&nbsp;It is important to us that our services are delivered in a professional and timely manner, no matter what your business is&mdash;no matter where you are located.`,
                         ],
                     },
@@ -6295,7 +6440,7 @@ Insured Services</h4>
                         title: `Fast & Reliable Services`,
                         details: [
                             `SecureCash ensures same-day pickups and deposits. In the case of an unforeseen circumstance where we do miss the bank&rsquo;s cutoff time, we&rsquo;ll secure the money in our depot, at an undisclosed location and deliver it to the bank first thing the next business day.`,
-                            'Our cash transport team is available 24 hours a day, seven days a week&mdash;even during holidays. Whether you own multiple companies in Perth, Adelaide, or Canberra, you can rely on us to get your schedules in order. If you have any concerns, our team is always reachable on <a href="tel:1300732873">1300 SECURE</a> or you can <a href="contact/">contact us via email</a>.',
+                            'Our cash transport team is available 24 hours a day, seven days a week&mdash;even during holidays. Whether you own multiple companies in Perth, Adelaide, or Canberra, you can rely on us to get your schedules in order. If you have any concerns, our team is always reachable on <a href="tel:1300732873">1300 SECURE</a> or you can <a href="/contact/">contact us via email</a>.',
                         ],
                     },
                     {
@@ -6720,7 +6865,7 @@ Insured Services</h4>
             `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-21.jpg`,
         heading: `Looking For Cash Security Company Services in Melbourne?`,
         description:
-            '<strong>Security</strong> is vital in keeping your business and your company assets safe. <strong><a href="https://www.securecash.com.au/">SecureCash</a></strong>&nbsp;is one of the largest and most trusted <strong>security companies</strong> in Melbourne that provides professional <strong>cash security solutions</strong> to various organisations.<br><a href="https://www.securecash.com.au/contact/"><strong>Talk to us today</strong></a> so we can discuss how we can improve your company&rsquo;s safety and security. Call us now!',
+            '<strong>Security</strong> is vital in keeping your business and your company assets safe. <strong><a href="/">SecureCash</a></strong>&nbsp;is one of the largest and most trusted <strong>security companies</strong> in Melbourne that provides professional <strong>cash security solutions</strong> to various organisations.<br><a href="/contact/"><strong>Talk to us today</strong></a> so we can discuss how we can improve your company&rsquo;s safety and security. Call us now!',
         sections: {
             rightImageSection: {
                 content: [
@@ -6728,11 +6873,11 @@ Insured Services</h4>
                         title: `Security Companies In Melbourne`,
                         details: [
                             `Are you a business owner? Do you need help in managing and moving your cash around? Are you looking for a practical way to secure your assets?&nbsp;`,
-                            '<a href="https://www.securecash.com.au">SecureCash</a> is one of the biggest and most trusted <strong>security companies in Melbourne</strong>. We provide professional cash-in-transit services to businesses from any industry. We specialize in moving huge amounts of cash, making sure it reaches its destination safely and on time.&nbsp;',
+                            '<a href="/">SecureCash</a> is one of the biggest and most trusted <strong>security companies in Melbourne</strong>. We provide professional cash-in-transit services to businesses from any industry. We specialize in moving huge amounts of cash, making sure it reaches its destination safely and on time.&nbsp;',
                             `Established in 1992, <strong>SecureCash</strong> has focused on these 3 core services that helped many companies.&nbsp;`,
-                            '<a href="https://www.securecash.com.au/cash-collection/">Cash Collection</a> is the process where we collect the funds from your location and transport it to the bank on your behalf.',
-                            '<a href="https://www.securecash.com.au/cash-delivery/">Cash Delivery</a> allows us to deliver money to your location. You may specify your needed denominations and we&rsquo;ll arrange it for you.',
-                            '<a href="https://www.securecash.com.au/cash-counting/">Cash Counting</a> is a convenient solution if you need someone to count your daily takings. We can collect the money, bring it to our depot for counting, and deposit it to your account.',
+                            '<a href="/services/cash-collection/">Cash Collection</a> is the process where we collect the funds from your location and transport it to the bank on your behalf.',
+                            '<a href="/services/cash-delivery/">Cash Delivery</a> allows us to deliver money to your location. You may specify your needed denominations and we&rsquo;ll arrange it for you.',
+                            '<a href="/services/cash-counting/">Cash Counting</a> is a convenient solution if you need someone to count your daily takings. We can collect the money, bring it to our depot for counting, and deposit it to your account.',
                             `<strong>SecureCash</strong> offers high-level cash security solutions at an affordable rate. Our strategic and flexible services made us one of the leaders among other security companies in Australia.`,
                         ],
                     },
@@ -6755,7 +6900,7 @@ Insured Services</h4>
                             `Once you opt for our services, you don&rsquo;t have to sign any binding contract so you are free to use our services when you need it. If you think that we are not the right fit, let us know so we can make better options that suit your needs.`,
                             `We also have depots in <strong>Adelaide</strong>, <strong>Brisbane</strong>, <strong>Canberra</strong>, <strong>Sydney</strong>, and <strong>Perth</strong>. All our cash-in-transit services are covered by a nationwide CIT policy which keeps your hard-earned money secure while in transit.&nbsp;`,
                             `<strong>SecureCash</strong> is an Australian-owned and government-licensed security services company that is accredited by the <strong>Australian Security Industry Association Limited (ASIAL)</strong> to operate in Melbourne.`,
-                            'All our services can be booked online by <a href="https://www.securecash.com.au/quote/">getting a quote</a> through our website. Our security team is available 24 hours a day, seven days a week. We work on weekends and holidays so you may reach out to us anytime.',
+                            'All our services can be booked online by <a href="/quote/">getting a quote</a> through our website. Our security team is available 24 hours a day, seven days a week. We work on weekends and holidays so you may reach out to us anytime.',
                             `Regardless of your company&rsquo;s size and line of business, we provide the same quality and trusted solutions that are beneficial for the success of your organization.`,
                         ],
                     },
@@ -6774,7 +6919,7 @@ Insured Services</h4>
                 content: [
                     {
                         details: [
-                            'SecureCash provides <em><strong>cash security companies</strong></em> in Melbourne &mdash; 24 hours a day, seven days a week. We have branches in <a href="https://www.securecash.com.au/cash-security/">Cash Security Services</a>, <a href="https://www.securecash.com.au/cash-in-transit-security/">Security AU</a>, <a href="https://www.securecash.com.au/security-guards-newcastle/">Security Guards Newcastle AU</a>, <a href="https://www.securecash.com.au/security-guards-maitland/">Security Guards Maitland AU</a>, <a href="https://www.securecash.com.au/security-guards-central-coast/">Central Coast AU</a>, <a href="https://www.securecash.com.au/security-services-company/">Security Company</a>, <a href="https://www.securecash.com.au/cash-security-services-hunter-valley/">Cash Security Hunter Valley AU</a>, <a href="https://www.securecash.com.au/cash-security-services-newcastle/">Cash Security Newcastle AU</a>, <a href="https://www.securecash.com.au/cash-in-transit-maitland/">Cash in Transit Maitland AU</a>, <a href="https://www.securecash.com.au/security-central-coast/">Security Central Coast AU</a>, and <a href="https://www.securecash.com.au/cash-collection-melbourne/">Melbourne Banking Courier</a>, plus a network of licensed contractors to cover the rest of the country. Contact us today for more information about how we can help your business in Australia.',
+                            'SecureCash provides <em><strong>cash security companies</strong></em> in Melbourne &mdash; 24 hours a day, seven days a week. We have branches in <a href="/services/cash-security/">Cash Security Services</a>, <a href="/services/cash-in-transit-security/">Security AU</a>, <a href="/services/security-guards-newcastle/">Security Guards Newcastle AU</a>, <a href="/services/security-guards-maitland/">Security Guards Maitland AU</a>, <a href="/services/security-guards-central-coast/">Central Coast AU</a>, <a href="/services/security-services-company/">Security Company</a>, <a href="/services/cash-security-services-hunter-valley/">Cash Security Hunter Valley AU</a>, <a href="/services/cash-security-services-newcastle/">Cash Security Newcastle AU</a>, <a href="/services/cash-in-transit-maitland/">Cash in Transit Maitland AU</a>, <a href="/services/security-central-coast/">Security Central Coast AU</a>, and <a href="/services/cash-collection-melbourne/">Melbourne Banking Courier</a>, plus a network of licensed contractors to cover the rest of the country. Contact us today for more information about how we can help your business in Australia.',
                             `<strong>SecureCash</strong>&nbsp;guarantees the safest handling of your business takings. In case we miss your bank's cut-off time, your money will be kept in a protected and undisclosed location until it's delivered to your bank the next business day.`,
                             `<strong>Your daily takings&rsquo; safety is our top priority.</strong>&nbsp;It is important to us that our services are delivered in a professional and timely manner, no matter what your business is&mdash;no matter where you are located.`,
                         ],
