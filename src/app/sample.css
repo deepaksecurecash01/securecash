@@ -1293,36 +1293,7 @@ h3.prata2 {
     background-position: center
 }
 
-#hero-image {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 80vh;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center
-}
 
-#hero-image h1 {
-    text-align: center;
-    line-height: 61px;
-    font-size: 50px;
-    text-shadow: 0.01em 0.05em 0.08em rgba(12, 12, 12, 0.23);
-    padding: 0 25px
-}
-
-#hero-image .center-content-divider {
-    background: #fff
-}
-
-#hero-image .cta-box {
-    margin-top: 80px;
-    width: 545px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between
-}
 
 .webp #banner-mid-content:before {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../images/team.webp) center -300px !important
@@ -3220,13 +3191,7 @@ div.callback-button:hover {
     height: 100%
 }
 
-#contact-form-form-panel .select-box-section .input-select-department-wrapper .ic-carret {
-    background-image: url("https://securecash.com.au/images/contact-page/select-box-cerret-down.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    width: 14px;
-    margin-left: -24px
-}
+
 
 #contact-form-form-panel .select-box-section {
     width: 100%;
@@ -15728,18 +15693,7 @@ body.quiz-modal-on .site-modal-outer {
     }
 }
 
-@media (max-width: 768px) {
-    .contact-page {
-        padding: 60px 0
-    }
-}
 
-@media (max-width: 480px) {
-    .contact-page {
-        background-position: 60% !important;
-        background-size: cover !important
-    }
-}
 
 @media (max-width: 480px) {
     #contact-form-form-panel .content {

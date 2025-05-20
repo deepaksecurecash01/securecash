@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
+    "@react-google-maps/api": "^2.20.6",
     "@slightlyoff/lite-vimeo": "^0.1.2",
     "html-react-parser": "^5.2.3",
     "next": "15.0.2",

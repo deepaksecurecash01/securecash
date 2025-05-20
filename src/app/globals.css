@@ -290,5 +290,28 @@ html {
 display: flex;
 }
 
+#mapContainer {
+  width: 100%;
+  height: 500px
+}
 
+#contact-form-form-panel .select-box-section .input-select-department-wrapper .ic-carret {
+  background-image: url("https://securecash.com.au/images/contact-page/select-box-cerret-down.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  width: 14px;
+  margin-left: -24px
+}
 
+@media (max-width: 768px) {
+  .contact-page {
+    padding: 60px 0
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-page {
+    background-position: 60% !important;
+    background-size: cover !important
+  }
+}
