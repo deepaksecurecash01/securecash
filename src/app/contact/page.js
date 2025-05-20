@@ -208,8 +208,8 @@ const ContactPage = () =>
                         <h3>Testimonials</h3>
                         <hr className="divider-2 divider-gold" />
                         <p>
-                            Don't just take our word for it. <br />
-                            Hear what our customers have to say about our services!
+                          {`  Don't just take our word for it. <br />
+                            Hear what our customers have to say about our services!`}
                         </p>
                     </div>
                     <div className="contact-testimonial--carousel">
