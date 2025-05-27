@@ -1293,7 +1293,36 @@ h3.prata2 {
     background-position: center
 }
 
+#hero-image {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center
+}
 
+#hero-image h1 {
+    text-align: center;
+    line-height: 61px;
+    font-size: 50px;
+    text-shadow: 0.01em 0.05em 0.08em rgba(12, 12, 12, 0.23);
+    padding: 0 25px
+}
+
+#hero-image .center-content-divider {
+    background: #fff
+}
+
+#hero-image .cta-box {
+    margin-top: 80px;
+    width: 545px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between
+}
 
 .webp #banner-mid-content:before {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../images/team.webp) center -300px !important
@@ -3191,7 +3220,13 @@ div.callback-button:hover {
     height: 100%
 }
 
-
+#contact-form-form-panel .select-box-section .input-select-department-wrapper .ic-carret {
+    background-image: url("https://securecash.com.au/images/contact-page/select-box-cerret-down.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    width: 14px;
+    margin-left: -24px
+}
 
 #contact-form-form-panel .select-box-section {
     width: 100%;
@@ -4700,9 +4735,7 @@ i.fa.fa-long-arrow-down {
         margin-right: auto
     }
 
-    #headline-content {
-        height: 300px
-    }
+   
 
     #quote-content-left>img {
         height: 234px
@@ -4743,9 +4776,7 @@ i.fa.fa-long-arrow-down {
         font-size: 32px
     }
 
-    .bg-dots {
-        background-size: contain
-    }
+   
 
     #quote-content-left {
         flex: 1
@@ -4908,9 +4939,6 @@ i.fa.fa-long-arrow-down {
         background-position: center
     }
 
-    .bg-dots {
-        background-size: 50%, 50%
-    }
 
     #testimonial-carousel .item .content .wrapper .excerpt {
         height: 112px;
@@ -6787,9 +6815,7 @@ i.fa.fa-long-arrow-down {
         margin-bottom: 40px
     }
 
-    .bg-dots {
-        background-size: 75%, 75%
-    }
+   
 
     div.callback-button {
         margin-left: auto;
@@ -7828,10 +7854,7 @@ i.fa.fa-long-arrow-down {
         margin-right: auto
     }
 
-    #headline-content {
-        padding-top: 40px;
-        padding-bottom: 40px
-    }
+   
 
     #headline-wrapper h1 {
         line-height: 1.2em
@@ -7882,10 +7905,7 @@ i.fa.fa-long-arrow-down {
         width: 90%
     }
 
-    .bg-dots {
-        background-size: 50%, 50%;
-        background-position: left center, right center
-    }
+ 
 
     #quote-content-left #frm-contact-mobile .chkbox-container-cash {
         grid-template-rows: repeat(5, 1fr)
@@ -15693,7 +15713,18 @@ body.quiz-modal-on .site-modal-outer {
     }
 }
 
+@media (max-width: 768px) {
+    .contact-page {
+        padding: 60px 0
+    }
+}
 
+@media (max-width: 480px) {
+    .contact-page {
+        background-position: 60% !important;
+        background-size: cover !important
+    }
+}
 
 @media (max-width: 480px) {
     #contact-form-form-panel .content {
@@ -16949,29 +16980,7 @@ body.quiz-modal-on .site-modal-outer {
     }
 }
 
-@media (max-width: 1024px) {
-    #headline-content {
-        height: 454px
-    }
-}
 
-@media (max-width: 768px) {
-    #headline-content {
-        height: 412px
-    }
-}
-
-@media (max-width: 720px) {
-    #headline-content {
-        height: 377px
-    }
-}
-
-@media (max-width: 480px) {
-    #headline-content {
-        height: 406px
-    }
-}
 
 @media (max-width: 480px) {
     .about-hero .bg-dots {

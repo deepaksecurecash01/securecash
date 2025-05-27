@@ -1,214 +1,165 @@
-import { Metadata } from "next";
-import BottomBanner from "@/components/about-us/BottomBanner";
-import SectionWrapper from "@/components/services/SectionWrapper";
-import HeroImage from "@/components/services/HeroImage";
-import { servicesData } from "@/data/servicesData";
-import VideoSection from "@/components/common/VideoSection";
-import ScrollSectionWithImage from "@/components/services/ScrollSectionWithImage";
-import GuaranteeSection from "@/components/services/GuaranteeSection";
-import Head from "next/head";
+"use client";
+import Typography from "@/components/common/Typography";
 import Divider from "@/components/common/Divider";
+import React, { useState } from "react";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+import Slider from "react-slick";
+import Image from "next/image";
+
 import Link from "next/link";
 
-// Spacer Component - reusable UI element for consistent spacing
-const Spacer = () => (
-  <div className="spacer-lg h-[30px] md:h-[100px]" id="read-more"></div>
-);
 
-// Generate metadata for the page
-export async function generateMetadata({ params })
+const TESTIMONIALS = [
+  "It makes sense for us to use SecureCash for our cash floats, cash pick-up and cash counting needs during the adelaide festival. It allowed us to concentrate on our core business in the midst of the Festival.",
+  "The service is extremely discreet, punctual, safe and above all courteous. We wish we had switched to SecureCash years ago, and I would have no hesitation in recommending their services to anyone looking for an efficient banking solution.",
+  "Having used SecureCash at a number of sites for banking collections, I would thoroughly recommend them. The other advantage is that we gain our working days back by not travelling to and from the bank or waiting in queues - that alone is worth it.",
+  "I am very happy with the service provided by SecureCash; I find the staff to be helpful and courteous at all times and I would highly recommend their organisation to anyone who is looking for a good cash in transit service.",
+  "We are very happy with the service, it's always on time and the friendly staff go out of their way to give great service. SecureCash saves our company a lot of time by going to the bank for us, and they even take our cheques to the bank to deposit them for us.",
+  "Councils don't normally give testimonials, however I would like to advise that I have always found SecureCash staff to be very accommodating and professional and that our current arrangement is working well.",
+  "We were unsure we even needed this type of service, as we did our own banking. We used the code J9#FREEMONEY, and we received 2 weeks free, just to try out the service and see if it was for us. We never looked back and 6 years on we are still with SecureCash",
+  "We are extremely satisfied with our change to SecureCash. They are always willing to oblige, and using this service ensures safe banking and saves us a lot of valuable time. We would recommend them to any prospective client.",
+];
+
+const TeamSlider = ({ TESTIMONIALS }) =>
 {
-  const { service } = params;
+  const CustomArrow = ({
+    direction,
+    currentSlide,
+    slideCount,
+    slidesToShow,
+    onClick,
+  }) =>
+  {
+    const isPrev = direction === "prev";
+    const isDisabled = isPrev
+      ? currentSlide === 0
+      : currentSlide >= slideCount - slidesToShow;
 
-  // Special case for free change order service
-  if (service === "free-change-order-service") {
-    return {
-      title: "Free Change Order Service | SecureCash Australia",
-      description: "SecureCash offers a free change order service for your business."
-    };
-  }
-
-  const serviceDetails = servicesData[service];
-
-  // Handle case when service is not found
-  if (!serviceDetails) {
-    return {
-      title: "Service Not Found | SecureCash Australia",
-      description: "The requested service could not be found."
-    };
-  }
-
-  return {
-    title: serviceDetails.metaTitle || serviceDetails.title,
-    description: serviceDetails.description ||
-      `Learn about SecureCash ${serviceDetails.title} solutions for your business across Australia.`
-  };
-}
-
-// Free Change Order Service Component
-const FreeChangeOrderService = () => (
-  <>
-    <div>
-      <h1 className="
-                montBold 
-                text-[42px] 
-                leading-[45px] 
-                768px:px-[30px] 
-                font-semibold 
-                text-center 
-                mx-auto 
-                768px:leading-[60px] 
-                text-black
-            ">
-        <br />
-        <strong>Free Change Order Service</strong>
-      </h1>
-
-      <Divider
-        color="primary"
-        margin="mt-[20px]"
-        alignment="center"
-        responsiveClassName="w-[100px]"
-      />
-    </div>
-    <div className="relaitive">
-      <div className="absolute opacity-20 480px:opacity-30 1024px:opacity-50 1366px:opacity-60 1600px:opacity-100 inset-0 bg-quote-header-left bg-left-top bg-no-repeat -z-10"></div>
-      <div className="absolute opacity-20 480px:opacity-30 1024px:opacity-50 1366px:opacity-60 1600px:opacity-100 inset-0 bg-quote-header-right bg-right-top bg-no-repeat -z-10"></div>
-      <div className="max-w-[1366px] mx-[auto] my-[0] flex flex-col pl-[20px] pr-[20px] justify-center items-center">
-        <div className="content-wrapper w-4/5 mt-[50px] p-0">
-          <br />
-          <p className="mb-4 text-center text-[#000]" style={{ textAlign: "left" }}>
-            <strong>SecureCash</strong> can provide a{" "}
-            <em>
-              <strong>FREE </strong>
-            </em>
-            <strong>
-              <Link className="!text-[#957433] font-medium hover:underline" href="/services/cash-delivery/">
-                change order service
-              </Link>
-            </strong>{" "}
-            to your organisation for the next 2 months, given that it is made in
-            conjunction with a paying{" "}
-            <strong>
-              <Link className="!text-[#957433] font-medium hover:underline" href="/services/cash-in-transit/">
-                cash-in-transit service
-              </Link>
-            </strong>{" "}
-            and subject to the following;
-            <br />
-            <br />
-            <strong>To utilise our free change order service:</strong>
-          </p>
-          <ul className=" 768px:pl-[50px]" >
-            <li style={{ listStyle: "none", marginBottom: "1.5rem" }}>
-              A. Your change orders can be no more than $1,000 in cash.
-            </li>
-            <li style={{ listStyle: "none", marginBottom: "1.5rem" }}>
-              B. You must request your <strong>change order service</strong> via
-              our{" "}
-              <strong>
-                <Link className="!text-[#957433] font-medium hover:underline" href="https://service.securecash.com.au/">online services</Link>
-              </strong>{" "}
-              48hrs prior to delivery.
-            </li>
-            <li style={{ listStyle: "none", marginBottom: "1.5rem" }}>
-              C. Change orders can only be delivered on the same day as your cash
-              collection service.
-            </li>
-            <li style={{ listStyle: "none", marginBottom: "1.5rem" }}>
-              D. You will be required to reimburse the change order (in cash only,
-              no cheques) upon delivery.
-            </li>
-          </ul>
+    return (
+      <div
+        className={`absolute  1024px:px-5 transition-opacity duration-200 z-10 text-primary text-[50px] top-1/2 transform -translate-y-1/2 ${isPrev
+          ? " -left-[3%] 768px:-left-3 1366px:left-0  768px:top-[42%]"
+          : "-right-[3%]  768px:-left-3 1366px:left-0  768px:top-[58%]"
+          } ${isDisabled
+            ? "opacity-50 pointer-events-none cursor-not-allowed no-underline"
+            : ""
+          }`}
+      >
+        <div
+          className={` 768px:w-16 cursor-pointer flex justify-center items-center`}
+          onClick={!isDisabled ? onClick : undefined}
+          aria-label={isPrev ? "Previous Slide" : "Next Slide"}
+        >
+          {isPrev ? "❮" : "❯"}
         </div>
-        <h3 className="content-wrapper w-4/5 mt-[50px] p-0 text-[26px] text-primary" style={{ textAlign: "center" }}>
-          <Link className="!text-[#957433] font-medium hover:underline" href="/quote/">GET A QUOTE HERE</Link>
-        </h3>
-        <p className="mb-4 mt-2 text-center text-[#000]">provide the codeword "FreeChange2021"</p>
-        <Spacer />
       </div>
-    </div>
-  </>
-);
+    );
+  };
 
-// Not Found Component
-const ServiceNotFound = () => (
-  <div className="container mx-auto py-20 text-center min-h-[50vh] flex flex-col items-center justify-center">
-    <h1 className="text-2xl font-bold mb-4">Service Not Found</h1>
-    <p>The requested service information could not be found.</p>
-  </div>
-);
-
-// Standard Service Component
-const StandardService = ({ serviceDetails }) =>
-{
-  const {
-    title,
-    imageUrl,
-    heading,
-    description,
-    sections
-  } = serviceDetails;
-
-  const {
-    rightImageSection,
-    leftImageSection,
-    guaranteeSection
-  } = sections;
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 800,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    nextArrow: <CustomArrow direction="next" slidesToShow={4} />,
+    prevArrow: <CustomArrow direction="prev" slidesToShow={4} />,
+    responsive: [
+      {
+        breakpoint: 1366,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          nextArrow: <CustomArrow direction="next" slidesToShow={4} />,
+          prevArrow: <CustomArrow direction="prev" slidesToShow={4} />,
+        },
+      },
+      {
+        breakpoint: 1140,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          nextArrow: <CustomArrow direction="next" slidesToShow={3} />,
+          prevArrow: <CustomArrow direction="prev" slidesToShow={3} />,
+        },
+      },
+      {
+        breakpoint: 992,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          nextArrow: <CustomArrow direction="next" slidesToShow={2} />,
+          prevArrow: <CustomArrow direction="prev" slidesToShow={2} />,
+        },
+      },
+      {
+        breakpoint: 767,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          fade: true,
+          speed: 800,
+          nextArrow: <CustomArrow direction="next" slidesToShow={1} />,
+          prevArrow: <CustomArrow direction="prev" slidesToShow={1} />,
+        },
+      },
+    ],
+  };
 
   return (
-    <div className="service-page">
-      <HeroImage title={title} imgSrc={imageUrl} />
+    <Slider {...settings}>
+      {TESTIMONIALS.map((testimonial, index) => (
+        <div className="contact-testimonial--carousel-container">
+          <div className="contact-testimonial--carousel__items">
+            <div className="carousel-item">
+              <div className="excerpt">
+                <p>{testimonial}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </Slider>
+  );
+};
 
-      <Spacer />
+// components/TeamContent.js
+const TeamContent = () =>
+{
+  return (
+    <div
+      id="contact-testimonial"
+      className=" inline-block w-full px-[10px] py-[24px] 414px:pt-[100px] 414px:px-0 414px:py mt-0 768px:p-[50px] 992px:mt-[100px] 992px:px-2 992px:pt-[100px]"
+    >
+      <div className="w-full max-w-[1366px] mx-[auto] my-[0]">
+        <Typography
+          as="h2"
+          fontFamily="font-montserrat"
+          className=" text-center font-bold text-[32px] leading-[64px] mt-[18px] mb-[24px] mx-auto montSemiBold 414px:leading-[1.4em] "
+        >
+          Testimonials
+        </Typography>
 
-      <SectionWrapper
-        heading={heading}
-        description={description}
-        imageUrl={rightImageSection.imageUrl}
-        contentItems={rightImageSection.content}
-      />
 
-      <Spacer />
+        <Divider
+          color="#c7a652"
+          alignment="center"
+          margin="mb-10 mt-4"
+        />
 
-      <VideoSection service={true} height="690px" />
-
-      <Spacer />
-
-      <ScrollSectionWithImage
-        imageUrl={leftImageSection.imageUrl}
-        contentItems={leftImageSection.content}
-        ctaText={leftImageSection.ctaText}
-      />
-
-      <Spacer />
-
-      <GuaranteeSection
-        guaranteeContent={guaranteeSection.content[0].details}
-        imageUrl={guaranteeSection.imageUrl}
-      />
-
-      <BottomBanner />
+        <div className="members-slider relative select-none block w-full float-left mb-[100px]">
+          <div
+            className="team-slider w-[90%] mx-auto  1024px:w-full "
+            aria-label="Team Members"
+          >
+            <TeamSlider TESTIMONIALS={TESTIMONIALS} />
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
 
-// Main ServicePage Component
-const ServicePage = async ({ params }) =>
-{
-  const { service } = params;
-
-  if (service === "free-change-order-service") {
-    return <FreeChangeOrderService />;
-  }
-
-  const serviceDetails = servicesData[service];
-
-  if (!serviceDetails) {
-    return <ServiceNotFound />;
-  }
-
-  return <StandardService serviceDetails={serviceDetails} />;
-};
-
-export default ServicePage;
+export default TeamContent;

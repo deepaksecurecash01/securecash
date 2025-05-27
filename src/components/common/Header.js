@@ -35,7 +35,7 @@ const MENU_ITEMS = [
       { text: "Cash Logistics Management", href: "/services/cash-logistics-management" },
     ],
   },
-  { name: "Online Services", href: "/services" },
+  { name: "Online Services", href: "https://service.securecash.com.au/" },
   { name: "Contact Us", href: "/contact" },
   { name: "Get A Quote", href: "/quote" },
 ];

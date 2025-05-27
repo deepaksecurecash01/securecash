@@ -41,8 +41,10 @@ const Slide = ({ src, alt }) => (
   </div>
 );
 
-const CompaniesSlider = () => {
-  const extendedSlides = useMemo(() => {
+const CompaniesSlider = ({ className }) =>
+{
+  const extendedSlides = useMemo(() =>
+  {
     const sliceCount = 3;
     return [
       ...slideData.slice(-sliceCount), // Append last 3 slides to the beginning
@@ -52,8 +54,8 @@ const CompaniesSlider = () => {
   }, []);
 
   return (
-    <div id="companies1" className="px-0 py-[30px] 992px:py-[65px]">
-      <div className="bg-[#fff] h-full m-auto overflow-hidden w-full">
+    <div id="companies1" className={`px-0 py-[30px] 992px:py-[65px] ${className} `}>
+      <div className=" h-full m-auto overflow-hidden w-full">
         <div className="animate-[scrollright_60s_linear_infinite] flex w-[calc(300px * 36)]">
           {extendedSlides.map((slide, index) => (
             <Slide key={index} src={slide.src} alt={slide.alt} />

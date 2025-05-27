@@ -54,6 +54,7 @@ module.exports = {
         'quote-header': "url('/images/bg-quote-header-left.png'), url('/images/bg-quote-header-right.png')",
         'quote-header-right': "url('/images/bg-quote-header-right.png')",
         'quote-header-left': "url('/images/bg-quote-header-left.png')",
+        'contact-bg': "url('/images/mainbg-contact.jpg')",
 
 
       }),
