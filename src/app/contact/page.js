@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
+import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 import HeroImage from '@/components/contact/HeroImage';
 import CompaniesSlider from '@/components/common/CompaniesSlider';
 import FormSection from '@/components/contact/FormSection';
@@ -8,7 +8,10 @@ import { AUSTRALIA_COORDINATES, NEW_ZEALAND_COORDINATES } from './mapCoordinates
 import TestimonialsSection from '@/components/contact/TestimonialsSection';
 
 // Constants
-const GOOGLE_MAPS_API_KEY = 'AIzaSyAoDwTTSDtafFJrNeRrb75k8WXBrYzJX38';
+const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+
+// Libraries needed for AdvancedMarkerElement
+const libraries = ['marker'];
 
 const ContactPage = () =>
 {
@@ -16,6 +19,7 @@ const ContactPage = () =>
     const { isLoaded } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: GOOGLE_MAPS_API_KEY,
+        libraries: libraries,
     });
 
     // Combine all coordinates
@@ -35,7 +39,53 @@ const ContactPage = () =>
 // Map component
 const MapSection = ({ isLoaded, coordinates }) =>
 {
-    if (!isLoaded) return <div id="map-section"><div id="mapContainer">Loading map...</div></div>;
+    const [map, setMap] = useState(null);
+    const [markers, setMarkers] = useState([]);
+
+    const onLoad = React.useCallback((map) =>
+    {
+        setMap(map);
+
+        // Create AdvancedMarkerElements
+        const newMarkers = coordinates.map((position, index) =>
+        {
+            return new window.google.maps.marker.AdvancedMarkerElement({
+                position: position,
+                map: map,
+                title: `Location ${index + 1}`, // Optional: add titles for accessibility
+            });
+        });
+
+        setMarkers(newMarkers);
+    }, [coordinates]);
+
+    const onUnmount = React.useCallback(() =>
+    {
+        // Clean up markers
+        markers.forEach(marker =>
+        {
+            if (marker.map) {
+                marker.map = null;
+            }
+        });
+        setMarkers([]);
+        setMap(null);
+    }, [markers]);
+
+    if (!isLoaded) return (<div id="map-section">
+        <div id="mapContainer">
+            <div style={{
+                height: '500px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                backgroundColor: '#f5f5f5',
+                color: '#666'
+            }}>
+                Loading map...
+            </div>
+        </div>
+    </div>);
 
     return (
         <div id="map-section">
@@ -46,10 +96,10 @@ const MapSection = ({ isLoaded, coordinates }) =>
                         height: '500px',
                     }}
                     options={getDefaultMapOptions()}
+                    onLoad={onLoad}
+                    onUnmount={onUnmount}
                 >
-                    {coordinates.map((position, index) => (
-                        <Marker key={index} position={position} />
-                    ))}
+                    {/* No need for JSX markers anymore - they're created in onLoad */}
                 </GoogleMap>
             </div>
         </div>
@@ -65,31 +115,37 @@ const getDefaultMapOptions = () =>
         return {
             zoom: 2.7,
             center: { lat: -31, lng: 146 },
+            mapId: 'DEMO_MAP_ID', // Required for AdvancedMarkerElement
         };
     } else if (detectWidth <= 414) {
         return {
             zoom: 3,
             center: { lat: -31, lng: 146 },
+            mapId: 'DEMO_MAP_ID',
         };
     } else if (detectWidth <= 667) {
         return {
             zoom: 3,
             center: { lat: -31, lng: 146 },
+            mapId: 'DEMO_MAP_ID',
         };
     } else if (detectWidth <= 768) {
         return {
             zoom: 4,
             center: { lat: -31, lng: 146 },
+            mapId: 'DEMO_MAP_ID',
         };
     } else if (detectWidth <= 1024) {
         return {
             zoom: 4,
             center: { lat: -31, lng: 145 },
+            mapId: 'DEMO_MAP_ID',
         };
     } else {
         return {
             zoom: 4,
             center: { lat: -31, lng: 153 },
+            mapId: 'DEMO_MAP_ID',
         };
     }
 };
