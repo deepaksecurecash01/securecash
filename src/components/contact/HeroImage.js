@@ -8,7 +8,7 @@ const HeroImage = () => {
   return (
     <div
       id="hero-image"
-      className="flex flex-col justify-center items-center bg-[60%] bg-cover  768px:min-h-[50vh]  h-[70vh]  480px:bg-[position:50%] min-h-[40vh]  1024px:min-h-[40vh]  600px:bg-cover bg-no-repeat  992px:bg-center 1070px:min-h-[80vh]"
+      className="flex flex-col justify-center items-center bg-[60%] bg-cover  768px:min-h-[50vh]  h-[70vh]  480px:bg-[position:50%] min-h-[40vh]  1024px:min-h-[40vh]  600px:bg-cover bg-no-repeat  992px:bg-center 1070px:h-[55vh]"
       style={{
         backgroundImage:
           "-webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url('https://www.securecash.com.au/images/contact-page/Header-Image.png')",

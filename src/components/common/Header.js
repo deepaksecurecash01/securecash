@@ -91,7 +91,8 @@ const DesktopMenu = ({ onMenuClick }) => (
   >
     <ul className="m-0 p-0 bg-white list-none flex flex-row justify-between items-center ml-auto w-[97%] 1200px:w-[90%]">
       {MENU_ITEMS.filter((item) => item.name !== "Get A Quote").map(
-        (item, index) => {
+        (item, index) =>
+        {
           const hasSubMenu = Boolean(item.submenuId);
 
           return (
@@ -123,9 +124,8 @@ const DesktopMenu = ({ onMenuClick }) => (
 // Mobile Submenu Component
 const MobileSubmenu = ({ subMenuId, links, isActive, onMenuClick }) => (
   <ul
-    className={`overflow-hidden bg-white text-[#808080] ${
-      isActive ? "opacity-100 visible h-auto mt-5" : "opacity-0 invisible h-0"
-    }`}
+    className={`overflow-hidden bg-white text-[#808080] ${isActive ? "opacity-100 visible h-auto mt-5" : "opacity-0 invisible h-0"
+      }`}
   >
     {links.map((link, index) => (
       <li
@@ -153,9 +153,8 @@ const MobileMenu = ({
 }) => (
   <div
     id="mobile-menu"
-    className={`block ${
-      isVisible ? "h-screen" : ""
-    }  bg-white 1024px:hidden w-full`}
+    className={`block ${isVisible ? "h-screen" : ""
+      }  bg-white 1024px:hidden w-full`}
   >
     <button
       className="bg-primary w-full py-[15px] px-2.5 text-white pl-7"
@@ -167,25 +166,22 @@ const MobileMenu = ({
       </span>
     </button>
     <ul
-      className={`transition-all duration-100 ${
-        isVisible ? "h-[70vh] opacity-100" : "max-h-0 opacity-0"
-      } overflow-auto`}
+      className={`transition-all duration-100 ${isVisible ? "h-[70vh] opacity-100" : "max-h-0 opacity-0"
+        } overflow-auto`}
     >
       {MENU_ITEMS.map((item, index) => (
         <li
           key={index}
-          className={`border-b border-light-border py-5 ${
-            item.submenuId && activeSubMenu === item.submenuId
+          className={`border-b border-light-border py-5 ${item.submenuId && activeSubMenu === item.submenuId
               ? "bg-black pb-0"
               : "text-black"
-          }`}
+            }`}
         >
           {item.submenuId ? (
             <>
               <button
-                className={`ml-[20%] flex items-center gap-4 ${
-                  activeSubMenu === item.submenuId && "text-active-text"
-                }`}
+                className={`ml-[20%] flex items-center gap-4 ${activeSubMenu === item.submenuId && "text-active-text"
+                  }`}
                 onClick={() => onToggleSubmenu(item.submenuId)}
               >
                 <i className="rotate-45 border-dark-border border-r-2 border-b-2 w-2 h-2" />
@@ -214,16 +210,19 @@ const MobileMenu = ({
 );
 
 // Main Navbar Component
-const Navbar = () => {
+const Navbar = () =>
+{
   const [mobileNavVisible, setMobileNavVisible] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState(null);
 
-  const toggleMobileMenu = () => {
+  const toggleMobileMenu = () =>
+  {
     setMobileNavVisible((prev) => !prev);
     setActiveSubMenu(null);
   };
 
-  const toggleMobileSubMenu = (subMenuId) => {
+  const toggleMobileSubMenu = (subMenuId) =>
+  {
     setActiveSubMenu((prev) => (prev === subMenuId ? null : subMenuId));
   };
 
@@ -232,9 +231,8 @@ const Navbar = () => {
   return (
     <Headroom className="z-50 relative ">
       <header
-        className={`bg-white  w-full h-auto transition-all duration-500 shadow-[0_1px_6px_0_rgba(32,33,36,.28)] ${
-          mobileNavVisible ? "fixed no-doc-scroll" : ""
-        }`}
+        className={`bg-white  w-full h-auto transition-all duration-500 shadow-[0_1px_6px_0_rgba(32,33,36,.28)] ${mobileNavVisible ? "fixed no-doc-scroll" : ""
+          }`}
       >
         <div className="w-full max-w-[1366px] mx-auto pt-2.5 1024px:pb-2.5 flex justify-evenly items-center">
           <div className="w-full 1024px:w-[95%] 1440px:w-full flex 1024px:flex-row flex-col justify-center items-center">

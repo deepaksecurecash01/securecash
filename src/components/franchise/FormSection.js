@@ -33,7 +33,6 @@ const FormSection = () =>
 ];
     return (
         <div
-            id="contact-form-section"
             className=" bg-content-bg bg-center bg-no-repeat inline-block w-full "
         >
             <div className="inner-big w-[95%] max-w-[1366px] mx-auto my-0  992px:flex ">

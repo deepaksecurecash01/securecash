@@ -8,13 +8,13 @@ const links = [
     columns: [
       [
         { href: "/", text: "Home" },
-        { href: "/cash-in-transit", text: "Services" },
+        { href: "/services/cash-in-transit", text: "Services" },
         { href: "/quote", text: "Get a Quote" },
         { href: "/contact-us", text: "Contact Us" },
       ],
       [
-        { href: "/online-services", text: "Online Services" },
-        { href: "/edocket-app", text: "eDocket App" },
+        { href: "https://service.securecash.com.au/", text: "Online Services" },
+        { href: "https://www.edockets.app/", text: "eDocket App" },
         { href: "/blog", text: "Blog" },
         { href: "/franchise", text: "SecureCash Franchises" },
       ],

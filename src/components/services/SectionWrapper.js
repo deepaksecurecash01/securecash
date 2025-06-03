@@ -125,40 +125,51 @@ const SectionWrapper = ({
             >
               <div style={{ direction: "ltr" }}>
                 <ul className="list-none w-full" id="scroll-content">
-                  {contentItems.map((item, index) => (
-                    <li key={index}>
-                      {item.title && (
-
-                        <Typography
-                          as="h4"
-                          fontFamily="font-montserrat"
-                          className={` ${item.icon ? "600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-3 1366px:gap-4 text-[20px]" : " 768px:w-[80%] 600px:text-[26px] text-center text-[22px]"} leading-[30px] 600px:leading-[1.6em]  mx-auto font-bold text-[#000] 992px:text-left mb-[20px] 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' mt-8'
-                            }`}
-                        >{item.icon && (
-                          <Image
-                            className="icon-data h-[40px] pr-2.5 480px:pr-[16px] w-auto"
-                            src={item.icon}
-                            alt={item.title.toLowerCase()}
-                            width={40}
-                            height={40}
-                          />
+                  {contentItems.map((item, index) =>
+                  {
+                    return (
+                      <li key={index}>
+                        {item.title && (
+                          <Typography
+                            as="h4"
+                            fontFamily="font-montserrat"
+                            className={`${item.icon
+                                ? "600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-2 text-[20px] mb-4"
+                                : "mb-5 768px:w-[80%] 600px:text-[26px] text-center text-[22px]"
+                              } leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] 992px:text-left 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' mt-6'
+                              }`}
+                          >
+                            {item.icon && (
+                              <Image
+                                className="icon-data h-[40px] pr-2 w-auto"
+                                src={item.icon}
+                                alt={item.title.toLowerCase()}
+                                width={40}
+                                height={40}
+                              />
+                            )}
+                            {item.title}
+                          </Typography>
                         )}
-                          {item.title}
-                        </Typography>
-                      )}
 
-                      {item.details.map((paragraph, paragraphIndex) => (
-                        <div
-                          key={paragraphIndex}
-                          className={`text-justify 768px:text-start font-light leading-[2rem] mt-2.5 414px:pr-0 ${paragraphIndex === item.details.length - 1 ? 'mb-0' : 'mb-8'
-                            }`}
-                        >
-                          {parse(paragraph, { replace: replaceLinks })}
-                        </div>
-                      ))}
+                        {item.details.map((paragraph, paragraphIndex) =>
+                        {
+                          const isLastParagraph = index === contentItems.length - 1 &&
+                            paragraphIndex === item.details.length - 1;
 
-                    </li>
-                  ))}
+                          return (
+                            <div
+                              key={paragraphIndex}
+                              className={`text-justify 768px:text-start font-light leading-[2rem] 414px:pr-0 ${isLastParagraph ? 'mb-0' : 'mb-4'
+                                }`}
+                            >
+                              {parse(paragraph, { replace: replaceLinks })}
+                            </div>
+                          );
+                        })}
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
             </ScrollableSection>

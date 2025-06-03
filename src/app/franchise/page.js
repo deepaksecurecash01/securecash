@@ -11,7 +11,7 @@ const page = () => {
       <div className="spacer-lg h-[30px] 768px:h-[100px]" id="read-more"></div>
       <SectionWrapper />
     </div>
-      <div className="spacer-lg h-[30px] 768px:h-[80px] 1024px:h-[100px]"></div>
+      <div className="spacer-lg h-[30px] 768px:h-[80px] 1024px:h-[100px]" id="franchise-form"></div>
 
       <FranchiseForm />
       <CompaniesSlider />

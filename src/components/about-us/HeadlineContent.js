@@ -12,7 +12,7 @@ const HeadlineContent = () =>
         <section className=" overflow-hidden">
             <div
                 id="headline-content"
-                className=" bg-[#dfdfdf]  768px:bg-[linear-gradient(90deg,_#dfdfdf_50%,_#fff_50%)]  w-full h-[404px]  414px:h-[412px]  768px:h-[454] 1024px:h-[572px]  flex justify-center items-center flex-col"
+                className=" bg-[#dfdfdf]  768px:bg-[linear-gradient(90deg,_#dfdfdf_50%,_#fff_50%)]  w-full h-[404px]  414px:h-[412px]  768px:h-[454px] 1024px:h-[572px]  flex justify-center items-center flex-col"
             >
                 <div className=" bg-quote-header bg-no-repeat bg-cover 480px:bg-contain w-full h-full ">
                     <Container className=" about-hero--wrapper flex relative h-full w-full">

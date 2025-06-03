@@ -227,7 +227,7 @@ html {
 }
 
 .services-list {
-  margin: 0 auto 32px;
+  margin: 0 auto 16px;
   margin-left: 40px;
 }
 
@@ -236,21 +236,7 @@ html {
   margin: 10px 0;
 }
 
-.services-content li::before {
-  content: "";
-  display: inline-block;
-  height: 15px;
-  width: 20px;
-  background-image: url(../../public/images/icons/check.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  padding-right: 34px;
-  margin-top: 10px;
-}
 
-.services-content li {
-  display: flex;
-}
 
 #mapContainer {
   width: 100%;
@@ -389,62 +375,77 @@ input[type="radio"] {
 
 @media screen and (max-width: 1366px) {
   #quote-content {
-      background-position: -moz-calc(50% - (567px/2.75)) 41px, left top, left bottom, right bottom;
-      background-position: -webikit-calc(50% - (567px/2.75)) 41px, left top, left bottom, right bottom;
-      background-position: calc(50% - (567px / 2.75)) 41px, left top, left bottom, right bottom
-    }
+    background-position: -moz-calc(50% - (567px/2.75)) 41px, left top, left bottom, right bottom;
+    background-position: -webikit-calc(50% - (567px/2.75)) 41px, left top, left bottom, right bottom;
+    background-position: calc(50% - (567px / 2.75)) 41px, left top, left bottom, right bottom
+  }
 }
 
 @media screen and (max-width: 1024px) {
   #quote-content {
-      background-size: auto 209px, 100% 250px, 50%, 50%;
-      background-position: -moz-calc(50% - (567px/2.5)) 41px, left top, left bottom, right bottom;
-      background-position: -webikit-calc(50% - (567px/2.5)) 41px, left top, left bottom, right bottom;
-      background-position: calc(50% - (567px / 2.5)) 41px, left top, left bottom, right bottom
-    }
+    background-size: auto 209px, 100% 250px, 50%, 50%;
+    background-position: -moz-calc(50% - (567px/2.5)) 41px, left top, left bottom, right bottom;
+    background-position: -webikit-calc(50% - (567px/2.5)) 41px, left top, left bottom, right bottom;
+    background-position: calc(50% - (567px / 2.5)) 41px, left top, left bottom, right bottom
+  }
 }
+
 @media screen and (max-width: 768px) {
   #quote-content {
-      background-size: auto 300px
-    }  #quote-content {
-        background-size: auto 209px, 100% 250px, 50%, 50%;
-        background-position: center 41px, left top, left bottom, right bottom;
-        background-position: center 41px, left top, left bottom, right bottom;
-        background-position: center 41px, left top, left bottom, right bottom
-      }
+    background-size: auto 300px
+  }
+
+  #quote-content {
+    background-size: auto 209px, 100% 250px, 50%, 50%;
+    background-position: center 41px, left top, left bottom, right bottom;
+    background-position: center 41px, left top, left bottom, right bottom;
+    background-position: center 41px, left top, left bottom, right bottom
+  }
 }
+
 @media screen and (max-width: 414px) {
   #quote-content {
-      background-size: auto 209px, 100% 250px, 50%, 50%
-    } #headline-content {
-       padding-top: 40px;
-       padding-bottom: 40px
-     }
+    background-size: auto 209px, 100% 250px, 50%, 50%
+  }
+
+  #headline-content {
+    padding-top: 40px;
+    padding-bottom: 40px
+  }
 }
+
 @media screen and (max-width: 320px) {
   #quote-content {
-      background-size: auto 210px
-    }
+    background-size: auto 210px
+  }
 }
 
 @media (max-width: 1024px) {
   #headline-content {
     height: 454px
   }
-    #headline-content {
-      height: 300px
-    } .bg-dots {
-       background-size: contain
-     }.bg-dots {
-      background-size: 50%, 50%}
+
+  #headline-content {
+    height: 300px
+  }
+
+  .bg-dots {
+    background-size: contain
+  }
+
+  .bg-dots {
+    background-size: 50%, 50%
+  }
 }
 
 @media (max-width: 768px) {
   #headline-content {
     height: 412px
-  } .bg-dots {
-     background-size: 75%, 75%
-   }
+  }
+
+  .bg-dots {
+    background-size: 75%, 75%
+  }
 }
 
 @media (max-width: 720px) {
@@ -457,4 +458,62 @@ input[type="radio"] {
   #headline-content {
     height: 406px
   }
+}
+
+
+
+.services-content li::before {
+  content: "" !important;
+  display: inline-block !important;
+  height: 15px !important;
+  width: 20px !important;
+  background-image: url(../../public/images/icons/check.png) !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  padding-right: 34px !important;
+  margin-top: 10px !important;
+}
+
+ .services-content li {
+  display: flex !important;
+}
+
+ .services-content li:first-child {
+}
+
+.services-content li:last-child {
+}
+
+.services-content li span h4 {
+  font-size: 20px;
+  line-height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  font-weight: bold;
+  color: #000;
+  text-align: left;
+  margin-bottom: 12px;
+}
+
+.services-content li:not(:first-child)::before {
+  margin-top: 26px !important;
+}
+@media (min-width: 600px) {
+  .your-element {
+    line-height: 1.6em;
+  }
+}
+
+@media (min-width: 992px) {
+  .your-element {
+    width: 100%;
+  }
+}
+
+.services-content li span p:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.services-content li:not(:first-child) span h4 {
+  margin-top: 16px;
 }

@@ -53,7 +53,7 @@ const SectionWrapper = () =>
           alignment="left"
           responsiveClassName="992px:mx-0 992px:text-left w-[100px] "
         />
-        <div className="content-wrapper w-4/5  768px:mt-12 p-0 bg-white/70 ">
+        <div className="content-wrapper w-4/5  768px:mt-2 p-0 bg-white/70 ">
           <div id="intro-text" className="">
             <p className="text-[16px] font-light leading-[2em] text-center  768px:mt-4 m-0 text-black">
               Here at <strong>SecureCash</strong> we are extremely excited to

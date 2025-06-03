@@ -1,4 +1,5 @@
-import React from "react";
+'use client';
+import React, { useEffect } from "react";
 import ScrollableSection from "../layout/ScrollbarSection";
 import Typography from "../common/Typography";
 import Divider from "../common/Divider";
@@ -75,7 +76,8 @@ const ScrollSectionWithImage = ({
       );
     }
   };
-  return (
+
+    return (
     <div id="faq" className="inline-block w-full relative">
       <div className="absolute opacity-20 480px:opacity-30 1024px:opacity-50 1366px:opacity-60 1600px:opacity-100 inset-0 bg-quote-header-left bg-left-top bg-no-repeat -z-10"></div>
       <div className="absolute opacity-20 480px:opacity-30 1024px:opacity-50 1366px:opacity-60 1600px:opacity-100 inset-0 bg-quote-header-right bg-right-top bg-no-repeat -z-10"></div>
@@ -115,42 +117,55 @@ const ScrollSectionWithImage = ({
         <div className="flex flex-grow justify-center items-center w-full 992px:w-1/2  1024px:bg-white mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1]">
           <ScrollableSection className="h-auto w-[82%] 992px:w-full p-0 mx-auto 992px:h-full leading-[2] 992px:pr-[60px]">
             <div style={{ direction: "ltr" }}>
-              <ul className="list-none w-full" id="scroll-content">
-                {contentItems.map((item, index) => (
-                  <li key={index}>
-                    {item.title && (
-                       
-                        <Typography
-                          as="h4"
-                          fontFamily="font-montserrat"
-                        className={` ${item.icon ? "600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-3 1366px:gap-4 text-[20px]" : "768px:w-[80%] 600px:text-[26px] text-center text-[22px]"} leading-[30px] 600px:leading-[1.6em]   mx-auto font-bold text-[#000] 992px:text-left mb-[20px] 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' mt-8'
-                          }`}
-                        > {item.icon && (
-                          <Image
-                            className="icon-data h-[40px] w-auto"
-                            src={item.icon}
-                            alt={item.title.toLowerCase()}
-                            width={40}
-                            height={40}
-                          />
+                <ul className="list-none w-full" id="scroll-content">
+                  {contentItems.map((item, index) =>
+                  {
+                    return (
+                      <li key={index}>
+                        {item.title && (
+                          <Typography
+                            as="h4"
+                            fontFamily="font-montserrat"
+                            className={`${item.icon
+                                ? "600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-2 text-[20px] mb-4"
+                                : "mb-5 768px:w-[80%] 600px:text-[26px] text-center text-[22px]"
+                              } leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] 992px:text-left 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' mt-6'
+                              }`}
+                          >
+                            {item.icon && (
+                              <Image
+                                className="icon-data h-[40px] pr-2 w-auto"
+                                src={item.icon}
+                                alt={item.title.toLowerCase()}
+                                width={40}
+                                height={40}
+                              />
+                            )}
+                            {item.title}
+                          </Typography>
                         )}
-                          {item.title}
-                        </Typography>
-                    )}
 
-                    {item.details.map((paragraph, paragraphIndex) => (
-                      <div
-                        key={paragraphIndex}
-                        className={`text-justify 768px:text-start font-light leading-[2rem] mt-2.5 414px:pr-0 ${paragraphIndex === item.details.length - 1 ? 'mb-0' : 'mb-8'
-                          }`}
-                      >
-                        {parse(paragraph, { replace: replaceLinks })}
-                      </div>
-                    ))}
+                        <div className="">
+                          {item.details.map((paragraph, paragraphIndex) =>
+                          {
+                            const isLastParagraph = index === contentItems.length - 1 &&
+                              paragraphIndex === item.details.length - 1;
 
-                  </li>
-                ))}
-              </ul>
+                            return (
+                              <div
+                                key={paragraphIndex}
+                                className={`text-justify 768px:text-start font-light leading-[2rem] 414px:pr-0 ${isLastParagraph ? 'mb-0' : 'mb-4'
+                                  } testing`}
+                              >
+                                {parse(paragraph, { replace: replaceLinks })}
+                              </div>
+                            );
+                          })}
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
             </div>
           </ScrollableSection>
         </div>

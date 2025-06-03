@@ -55,10 +55,10 @@ const TeamSlider = ({ TESTIMONIALS }) =>
         <>
             <Slider ref={sliderRef} {...settings}>
                 {TESTIMONIALS.map((testimonial, index) => (
-                    <div className="h-[290px] 414px:h-[260px] 480:h-[220px] 1024px:h-[176px] relative overflow-hidden" key={index}>
+                    <div className="h-[330px] 414px:h-[260px] 480:h-[220px] 1024px:h-[176px] relative overflow-hidden" key={index}>
                         <div className="contact-testimonial--carousel__items h-full flex justify-center items-center">
                             <div className="carousel-item">
-                                <div className="excerpt my-[24px] mx-auto text-center w-1/2">
+                                <div className="excerpt my-[24px] mx-auto text-center w-[65%] 480px:w-1/2">
                                     <Typography
                                         as="p"
                                         fontFamily="font-montserrat"
