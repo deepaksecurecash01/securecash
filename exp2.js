@@ -1,159 +1,307 @@
-'use client';
-import React from "react";
-import ScrollableSection from "../layout/ScrollbarSection";
-import Typography from "../common/Typography";
-import Divider from "../common/Divider";
-import Image from "next/image";
-import Link from "next/link";
-import parse from 'html-react-parser';
-
-const ScrollSectionWithImage = ({
-    contentItems = [],
-    imageUrl,
-    ctaText = "Why Choose SecureCash for Your Business?",
-}) =>
-{
-
-    // Simple text extraction utility
-    const extractTextContent = (children) =>
+"use client";
+import React, { useState, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import
     {
-        if (!children?.length) return "";
+        FaUser,
+        FaUsers,
+        FaPhone,
+        FaComments,
+        FaEnvelope,
+        FaHome,
+        FaMapMarkerAlt,
+    } from "react-icons/fa";
+import { QuoteFormSchema } from "@/zod/QuoteFormSchema";
+import BankingSchema from "@/zod/BankingSchema";
+import ChangeSchema from "@/zod/ChangeSchema";
+import Quote from "./Quote";
+import Banking from "./Banking";
+import Change from "./Change";
 
-        return children
-            .map(child =>
-            {
-                if (child.type === "text") return child.data;
-                if (child.type === "tag" && child.children) {
-                    return child.children.filter(c => c.type === "text").map(c => c.data).join("");
-                }
-                return "";
-            })
-            .join("");
+const QuoteForm = ({ className }) =>
+{
+    const [currentStep, setCurrentStep] = useState(0);
+    const [selectedServices, setSelectedServices] = useState([
+        "Banking",
+        "Change",
+    ]);
+    const [currentErrorField, setCurrentErrorField] = useState(null);
+    const [formData, setFormData] = useState({});
+
+    const schemas = [QuoteFormSchema, BankingSchema, ChangeSchema];
+
+    const methods = useForm({
+        resolver: zodResolver(schemas[currentStep]),
+        defaultValues: {
+            Service: [],
+            BankingDays: [],
+            ChangeDays: [],
+        },
+    });
+
+    const {
+        register,
+        handleSubmit,
+        trigger,
+        setValue,
+        getValues,
+        formState: { errors },
+    } = methods;
+
+    const inputFields = [
+        {
+            label: "Full Name",
+            name: "Name",
+            placeholder: "Enter your full name",
+            Icon: FaUser,
+            errorMessage: "Please enter your full name.",
+        },
+        {
+            label: "Organisation Name",
+            name: "Organisation",
+            placeholder: "Enter your organisation's name",
+            Icon: FaUsers,
+            errorMessage: "Please enter your organisation's name.",
+        },
+        {
+            label: "Phone Number",
+            name: "Phone",
+            placeholder: "Enter your phone number",
+            Icon: FaPhone,
+            errorMessage: "Please enter your phone number.",
+        },
+        {
+            label: "Where Did You Hear About Us?",
+            name: "Referrer",
+            placeholder: "Enter where did you hear about us",
+            Icon: FaComments,
+            errorMessage: "Please enter where did you hear about us.",
+        },
+        {
+            label: "Email Address",
+            name: "Email",
+            type: "email",
+            placeholder: "Your email address",
+            Icon: FaEnvelope,
+            errorMessage: "Please enter your email address.",
+        },
+        {
+            label: "Postal Address",
+            name: "Address",
+            placeholder: "Enter your postal address",
+            Icon: FaHome,
+            errorMessage: "Please enter your postal address.",
+        },
+        {
+            label: "Location/s For Service",
+            name: "Locations",
+            placeholder: "Enter location/s for the service (Suburb, State, Postcode)",
+            Icon: FaMapMarkerAlt,
+            errorMessage:
+                "Please enter the location/s at where you require services.",
+        },
+    ];
+
+    const frequencyOptions = [
+        { value: "", label: "Please select..." },
+        { value: "Weekly", label: "Weekly" },
+        { value: "Fortnightly", label: "Fortnightly" },
+        { value: "Ad Hoc", label: "Ad Hoc" },
+        { value: "Special Event (once off)", label: "Special Event (once off)" },
+    ];
+
+    const amountOptions = [
+        { value: "", label: "Select Amount:" },
+        { value: "$0 - $1000", label: "$0 - $1000" },
+        { value: "$1000 - $5000", label: "$1000 - $5000" },
+        { value: "$5000 - $20,000", label: "$5000 - $20,000" },
+        { value: "$20,000 - $50,000", label: "$20,000 - $50,000" },
+        { value: "over $50,000", label: "over $50,000" },
+    ];
+
+    const daysOptions = {
+        standard: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+            "Ad Hoc",
+        ],
+        withBanking: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+            "Ad Hoc",
+            "Banking",
+        ],
     };
 
-    // Link replacement for html-react-parser
-    const replaceLinks = (node) =>
+    const handleFormSubmit = async (data) =>
     {
-        if (node.type !== "tag" || node.name !== "a") return;
+        try {
+            if (currentStep === 0) {
+                const services = getValues("Service");
+                setSelectedServices(services);
 
-        const { href, class: className, target, rel, ...rest } = node.attribs;
-        const linkText = extractTextContent(node.children);
-        const isExternal = href.startsWith("tel:") || href.startsWith("http");
+                // Save base form data
+                setFormData({
+                    Name: data.Name,
+                    Organisation: data.Organisation,
+                    Phone: data.Phone,
+                    Referrer: data.Referrer,
+                    Email: data.Email,
+                    Address: data.Address,
+                    Locations: data.Locations,
+                    Service: services,
+                });
 
-        const LinkComponent = isExternal ? "a" : Link;
+                if (services.includes("Banking")) {
+                    setCurrentStep(1);
+                } else if (services.includes("Change")) {
+                    setCurrentStep(2);
+                } else {
+                    await submitFormData({
+                        Name: data.Name,
+                        Organisation: data.Organisation,
+                        Phone: data.Phone,
+                        Referrer: data.Referrer,
+                        Email: data.Email,
+                        Address: data.Address,
+                        Locations: data.Locations,
+                        Service: services,
+                    });
+                }
+            } else if (currentStep === 1) {
+                // Add Banking data
+                const updatedFormData = {
+                    ...formData,
+                    Banking: {
+                        BankingFrequency: data.BankingFrequency,
+                        BankingAmount: data.BankingAmount,
+                        BankingDays: data.BankingDays,
+                        BankingBank: data.BankingBank,
+                        BankingComments: data?.BankingComments,
+                    },
+                };
+                setFormData(updatedFormData);
 
-        return (
-            <LinkComponent
-                href={href}
-                className={className}
-                target={target}
-                rel={rel}
-                {...rest}
-            >
-                {linkText}
-            </LinkComponent>
-        );
+                if (selectedServices.includes("Change")) {
+                    setCurrentStep(2);
+                } else {
+                    await submitFormData(updatedFormData);
+                }
+            } else if (currentStep === 2) {
+                // Add Change data and submit final form
+                const finalFormData = {
+                    ...formData,
+                    Change: {
+                        ChangeFrequency: data.ChangeFrequency,
+                        ChangeNotesAmount: data.ChangeNotesAmount,
+                        ChangeCoinsAmount: data.ChangeCoinsAmount,
+                        ChangeDays: data.ChangeDays,
+                        ChangeComments: data?.ChangeComments,
+                    },
+                };
+                await submitFormData(finalFormData);
+            }
+        } catch (error) {
+            console.error("Form submission error:", error);
+        }
+    };
+
+    const submitFormData = async (data) =>
+    {
+        try {
+            // Add timestamp
+            const finalData = {
+                ...data,
+                timestamp: new Date().toISOString(),
+                formId: "Quote",
+            };
+
+            console.log("Final form data:", finalData);
+            // Your API call here
+            // await api.submitForm(finalData);
+        } catch (error) {
+            console.error("API submission error:", error);
+        }
+    };
+
+    const renderFormStep = () =>
+    {
+        switch (currentStep) {
+            case 0:
+                return (
+                    <Quote
+                        inputFields={inputFields}
+                        register={register}
+                        errors={errors}
+                        currentErrorField={currentErrorField}
+                        setCurrentErrorField={setCurrentErrorField}
+                    />
+                );
+            case 1:
+                return selectedServices.includes("Banking") ? (
+                    <Banking
+                        frequencyOptions={frequencyOptions}
+                        amountOptions={amountOptions}
+                        daysOfWeek={daysOptions.standard}
+                        register={register}
+                        errors={errors}
+                        setValue={setValue}
+                        currentErrorField={currentErrorField}
+                        setCurrentErrorField={setCurrentErrorField}
+                    />
+                ) : null;
+            case 2:
+                return selectedServices.includes("Change") ? (
+                    <Change
+                        frequencyOptions={frequencyOptions}
+                        amountOptions={amountOptions}
+                        daysOfWeek={daysOptions.withBanking}
+                        register={register}
+                        errors={errors}
+                        setValue={setValue}
+                        currentErrorField={currentErrorField}
+                        setCurrentErrorField={setCurrentErrorField}
+                    />
+                ) : null;
+            default:
+                return null;
+        }
     };
 
     return (
-        <div id="faq" className="inline-block w-full relative">
-            {/* Background Elements */}
-            <div className="absolute opacity-20 480px:opacity-30 1024px:opacity-50 1366px:opacity-60 1600px:opacity-100 inset-0 bg-quote-header-left bg-left-top bg-no-repeat -z-10" />
-            <div className="absolute opacity-20 480px:opacity-30 1024px:opacity-50 1366px:opacity-60 1600px:opacity-100 inset-0 bg-quote-header-right bg-right-top bg-no-repeat -z-10" />
-
-            <div
-                className="scroll-height w-full 992px:w-[95%] max-w-[1366px] mx-auto my-0 h-auto 992px:flex"
-                style={{ "--scroll-height": "545px" }}
+        <div className={`float-none w-full mx-auto  relative left-0 flex-1 flex justify-center ${className}`}>
+            <form
+                className="forms-quote-v2 h-auto mx-2.5 992px:mx-0 px-[30px] 1366px:h-full forms-quote submit-status mt-4 992px:mt-0 992px:mb-16 w-full lg:mt-0 lg:mb-0 992px:w-[450px] 1100px:w-[480px] 1200px:w-[500px] 1280px:w-[546px] shadow-[3px_3px_5px_0px_rgba(0,0,0,0.75)] text-center py-8 rounded-[6px] bg-[#1a1a1a]"
+                data-formid="Quote"
+                onSubmit={handleSubmit(handleFormSubmit)}
+                noValidate
             >
-                {/* Image Section */}
-                <div className="float-none w-full mx-auto 992px:w-1/2 relative left-0 flex-1 992px:flex justify-start 992px:float-left">
-                    <div className="cta-box relative 992px:w-[90%]">
-                        <img
-                            className="backdraft h-full w-full object-cover object-left"
-                            src={imageUrl}
-                            alt="Australia Cash in Transit Services"
-                        />
-                        <div className="absolute top-0 right-0 h-[80%] w-[70%] bg-black px-[30px] flex flex-col justify-center py-[30px]">
-                            <Typography
-                                as="h4"
-                                fontFamily="font-montserrat"
-                                className="text-[22px] 480px:text-[26px] 768px:text-[28px] 992px:text-[33px] leading-[32px] 480px:leading-[36px] 768px:leading-[43px] 992px:leading-[48px] font-bold text-white 992px:text-left mb-0"
-                            >
-                                {ctaText}
-                            </Typography>
-                            <Divider
-                                color="white"
-                                margin="mt-[20px]"
-                                alignment="left"
-                                responsiveClassName="992px:mx-0 992px:text-left w-[100px] ml-0"
-                            />
-                        </div>
+                {renderFormStep()}
+
+                <div className="button-controls-container w-[80%] mx-auto mt-7">
+                    <div className="button-section relative">
+                        <button
+                            type="submit"
+                            className="nextBtn bg-[#c6a54b] text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat"
+                        >
+                            {currentStep === schemas.length - 1 ? "Submit" : "Next"}
+                        </button>
                     </div>
                 </div>
-
-                {/* Content Section */}
-                <div className="flex flex-grow justify-center items-center w-full 992px:w-1/2 1024px:bg-white mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1]">
-                    <ScrollableSection className="h-auto w-[82%] 992px:w-full p-0 mx-auto 992px:h-full leading-[2] 992px:pr-[60px]">
-                        <div style={{ direction: "ltr" }}>
-                            <ul className="list-none w-full" id="scroll-content">
-                                {contentItems.map((item, index) => (
-                                    <li key={index}>
-                                        {item.title && (
-                                            <Typography
-                                                as="h4"
-                                                fontFamily="font-montserrat"
-                                                className={`
-                          ${item.icon
-                                                        ? "600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-2 text-[20px] mb-4"
-                                                        : "mb-5 768px:w-[80%] 600px:text-[26px] text-center text-[22px]"
-                                                    }
-                          leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] 992px:text-left 992px:w-full
-                          ${index === 0 ? '768px:mt-2.5' : 'mt-7'}
-                        `}
-                                            >
-                                                {item.icon && (
-                                                    <Image
-                                                        className="icon-data h-[40px] w-auto"
-                                                        src={item.icon}
-                                                        alt={item.title.toLowerCase()}
-                                                        width={40}
-                                                        height={40}
-                                                    />
-                                                )}
-                                                {item.title}
-                                            </Typography>
-                                        )}
-
-                                        {item.details?.map((paragraph, paragraphIndex) =>
-                                        {
-                                            // SOLUTION: Add first/last classes directly here
-                                            const isFirst = index === 0 && paragraphIndex === 0;
-                                            const isLast = index === contentItems.length - 1 &&
-                                                paragraphIndex === item.details.length - 1;
-
-                                            return (
-                                                <div
-                                                    key={paragraphIndex}
-                                                    className={`
-                            text-justify 768px:text-start font-light leading-[2rem] 414px:pr-0 testing
-                            ${paragraphIndex === item.details.length - 1 ? 'mb-0' : 'mb-5'}
-                            ${isFirst ? 'first-services-content' : ''}
-                            ${isLast ? 'last-services-content' : ''}
-                          `}
-                                                >
-                                                    {parse(paragraph, { replace: replaceLinks })}
-                                                </div>
-                                            );
-                                        })}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </ScrollableSection>
-                </div>
-            </div>
+            </form>
         </div>
     );
 };
 
-export default ScrollSectionWithImage;
+export default QuoteForm;

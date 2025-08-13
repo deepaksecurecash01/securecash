@@ -26,7 +26,7 @@ const services = [
   "cash-delivery",
   "cash-in-transit-central-coast",
   "cash-in-transit-couriers",
- "cash-in-transit-services-adelaide",
+  "cash-in-transit-services-adelaide",
   "cash-in-transit-maitland",
   "cash-in-transit-melbourne",
   "cash-in-transit-security",
@@ -92,34 +92,141 @@ const services = [
   "cash-pickups-wollongong"
 ];
 
+const mainPages = [
+  { slug: "", label: "Home" },
+  { slug: "about-us", label: "About Us" },
+  { slug: "austrac", label: "AUSTRAC" },
+  { slug: "blog", label: "Blog" },
+  { slug: "contact", label: "Contact" },
+  { slug: "franchise", label: "Franchise" },
+  { slug: "ica", label: "ICA" },
+  { slug: "partners", label: "Partners" },
+  { slug: "quote", label: "Quote" },
+  { slug: "site-info", label: "Site Info" },
+  { slug: "special-event", label: "Special Event" },
+  { slug: "terms", label: "Terms" },
+  { slug: "welcome", label: "Welcome" },
+  { slug: "free-change-order-service", label: "Free Change Order Service" },
+  { slug: "privacy-policy", label: "Privacy Policy" }
+];
+
+const blogPosts = [
+  "bank-cyber-safety",
+  "banking-updates-april-2021",
+  "creating-online-services",
+  "differences-between-banks",
+  "differences-between-cit-models",
+  "history-of-banks-part-1",
+  "history-of-banks-part-2",
+  "history-of-cash-in-transit",
+  "merry-christmas-2020",
+  "negative-interest-rates",
+  "office-culture",
+  "paradigm-shifts",
+  "terminology-of-cash-in-transit",
+  "the-relevance-of-cash",
+  "what-covid-changes-are-you-keeping"
+];
+
+
+
 const Page = () =>
 {
   return (
     <div className="bg-slate-900 w-full p-6">
-      <ul className="space-y-4 text-white">
-        {[...services].sort().map((slug, index) => (
-          <li key={index} className="flex flex-wrap items-center gap-4">
-            <span>{index + 1}. {slug}</span>
-            <Link
-              href={`/services/${slug}`}
-              target='_blank'
-              className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700 "
-            >
-              Relative
-            </Link>
-            <a
-              href={`https://www.securecash.com.au/${slug}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-green-600 px-3 py-1 rounded hover:bg-green-700 "
-            >
-              External
-            </a>
-          </li>
-        ))}
 
-      </ul>
-    
+      {/* Main Pages Section */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold text-white mb-4">Main Pages ({mainPages.length})</h2>
+        <ul className="space-y-4 text-white">
+          {mainPages.map((page, index) => (
+            <li key={index} className="flex flex-wrap items-center gap-4">
+              <span>{index + 1}. {page.label}</span>
+              <Link
+                href={`/${page.slug}`}
+                target='_blank'
+                className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700"
+              >
+                Relative
+              </Link>
+              <a
+                href={`https://www.securecash.com.au/${page.slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-600 px-3 py-1 rounded hover:bg-green-700"
+              >
+                External
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Services Section */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold text-white mb-4">Service Pages ({services.length})</h2>
+        <ul className="space-y-4 text-white">
+          {[...services].sort().map((slug, index) => (
+            <li key={index} className="flex flex-wrap items-center gap-4">
+              <span>{index + 1}. {slug}</span>
+              <Link
+                href={`/services/${slug}`}
+                target='_blank'
+                className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700"
+              >
+                Relative
+              </Link>
+              <a
+                href={`https://www.securecash.com.au/${slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-600 px-3 py-1 rounded hover:bg-green-700"
+              >
+                External
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Blog Posts Section */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-bold text-white mb-4">Blog Posts ({blogPosts.length})</h2>
+        <ul className="space-y-4 text-white">
+          {blogPosts.map((slug, index) => (
+            <li key={index} className="flex flex-wrap items-center gap-4">
+              <span>{index + 1}. {slug}</span>
+              <Link
+                href={`/blog/${slug}`}
+                target='_blank'
+                className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700"
+              >
+                Relative
+              </Link>
+              <a
+                href={`https://www.securecash.com.au/blog/${slug}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-green-600 px-3 py-1 rounded hover:bg-green-700"
+              >
+                External
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+
+      {/* Summary */}
+      <div className="bg-slate-800 p-4 rounded">
+        <h2 className="text-xl font-bold text-white mb-2">Summary</h2>
+        <div className="text-white space-y-1">
+          <p>✅ Main Pages: {mainPages.length}</p>
+          <p>✅ Service Pages: {services.length}</p>
+          <p>✅ Blog Posts: {blogPosts.length}</p>
+          <p className="font-bold">Total Built: {mainPages.length + services.length + blogPosts.length}</p>
+        </div>
+      </div>
     </div>
   );
 };

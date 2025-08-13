@@ -4,58 +4,48 @@ import Divider from '../common/Divider';
 const PARTNER_FLAGS = [
     {
         country: 'New Zealand',
-        src: 'https://www.securecash.com.au/images/partners/new-zealand.png',
+        countryCode: 'nz',
         href: '#new-zealand'
     },
     {
         country: 'Singapore',
-        src: 'https://www.securecash.com.au/images/partners/singapore.png',
+        countryCode: 'sg',
         href: '#singapore'
     },
     {
         country: 'Sweden',
-        src: 'https://www.securecash.com.au/images/partners/sweden.png',
+        countryCode: 'se',
         href: '#sweden'
     },
     {
         country: 'India',
-        src: 'https://www.securecash.com.au/images/partners/india.png',
-        href: '#india',
-        width: 70,
-        height: 70
+        countryCode: 'in',
+        href: '#india'
     },
     {
         country: 'Thailand',
-        src: 'https://www.securecash.com.au/images/partners/thailand.png',
-        href: '#thailand',
-        width: 70,
-        height: 70
+        countryCode: 'th',
+        href: '#thailand'
     },
     {
         country: 'Malaysia',
-        src: 'https://www.securecash.com.au/images/partners/malaysia.png',
-        href: '#malaysia',
-        width: 69,
-        height: 69
+        countryCode: 'my',
+        href: '#malaysia'
     },
     {
         country: 'United Kingdom',
-        src: 'https://www.securecash.com.au/images/partners/uk.png',
+        countryCode: 'gb',
         href: '#united-kingdom'
     },
     {
         country: 'Israel',
-        src: 'https://www.securecash.com.au/images/partners/israel.png',
-        href: '#israel',
-        width: 74,
-        height: 72
+        countryCode: 'il',
+        href: '#israel'
     },
     {
         country: 'Nigeria',
-        src: 'https://www.securecash.com.au/images/partners/nigeria.png',
-        href: '#nigeria',
-        width: 75,
-        height: 75
+        countryCode: 'ng',
+        href: '#nigeria'
     }
 ];
 
@@ -127,7 +117,7 @@ const HeroSection = () =>
                 gap-[5px] 
                 flex-wrap
             ">
-                {PARTNER_FLAGS.map(({ country, src, href, width, height }) => (
+                {PARTNER_FLAGS.map(({ country, countryCode, href }) => (
                     <a
                         key={country}
                         href={href}
@@ -135,10 +125,11 @@ const HeroSection = () =>
                         aria-label={`${country} Flag`}
                     >
                         <img
-                            src={src}
-                            alt={`Flag of ${country}`}
-                            width={width || 'auto'}
-                            height={height || 'auto'}
+                            src={`https://flagcdn.com/80x60/${countryCode}.png`}
+                            srcSet={`https://flagcdn.com/160x120/${countryCode}.png 2x, https://flagcdn.com/240x180/${countryCode}.png 3x`}
+                            width="60"
+                            height="48"
+                            alt={country}
                         />
                     </a>
                 ))}

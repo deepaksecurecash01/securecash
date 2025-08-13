@@ -39,7 +39,8 @@ video {
 }
 
 @keyframes scrollleft {
-  0% {}
+  0% {
+  }
 
   100% {
     transform: translateX(calc(-250px * 18));
@@ -67,7 +68,7 @@ video {
   margin: 0 auto !important;
 }
 
-#team .slick-slide>div {
+#team .slick-slide > div {
   margin: 0 !important;
 }
 
@@ -100,30 +101,38 @@ video {
   }
 }
 
-@media only screen and (max-width: 320px) {}
+@media only screen and (max-width: 320px) {
+}
 
 #content-middle .slick-list {
   width: 90% !important;
   margin: 0 auto !important;
 }
 
-@media (max-width: 1024px) {}
+@media (max-width: 1024px) {
+}
 
-@media (max-width: 414px) {}
+@media (max-width: 414px) {
+}
 
-@media only screen and (max-width: 992px) {}
+@media only screen and (max-width: 992px) {
+}
 
-@media only screen and (max-width: 736px) {}
+@media only screen and (max-width: 736px) {
+}
 
-@media only screen and (max-width: 450px) {}
+@media only screen and (max-width: 450px) {
+}
 
 .section-wrapper {
-  background: url("../../public/images/bg-quote-header-left.webp") left top no-repeat,
+  background: url("../../public/images/bg-quote-header-left.webp") left top
+      no-repeat,
     url("../../public/images/bg-quote-header-right.webp") right top no-repeat;
   width: 100%;
 }
 
-@media (max-width: 480px) {}
+@media (max-width: 480px) {
+}
 
 strong {
   font-weight: 500;
@@ -131,10 +140,9 @@ strong {
 
 html {
   scroll-behavior: smooth;
-}
+} 
 
 @media (max-width: 768px) {
-
   .partners--item__partner .rowluk-img,
   .partners--item__partner .abir-img,
   .partners--item__partner .corporate-uk-img,
@@ -236,14 +244,15 @@ html {
   margin: 10px 0;
 }
 
-
-
 #mapContainer {
   width: 100%;
   height: 500px;
 }
 
-#contact-form-form-panel .select-box-section .input-select-department-wrapper .ic-carret {
+#contact-form-form-panel
+  .select-box-section
+  .input-select-department-wrapper
+  .ic-carret {
   background-image: url("https://securecash.com.au/images/contact-page/select-box-cerret-down.png");
   background-repeat: no-repeat;
   background-position: center center;
@@ -273,7 +282,7 @@ html {
   stroke: #9e8034 !important;
 }
 
-.react-date-picker__inputGroup>input::placeholder {
+.react-date-picker__inputGroup > input::placeholder {
   color: #333333;
 }
 
@@ -312,6 +321,7 @@ input[type="radio"] {
 
 .react-date-picker {
   border: 1px solid #e5e7eb;
+  /* border: 1px solid rgb(99 99 99 / 0.5); */
   border-radius: 2px;
 }
 
@@ -340,11 +350,9 @@ input[type="radio"] {
   bottom: -68px;
 }
 
-
-
-
 .bg-dots {
-  background: url("../../public/images/bg-quote-header-left.png") left center no-repeat,
+  background: url("../../public/images/bg-quote-header-left.png") left center
+      no-repeat,
     url("../../public/images/bg-quote-header-right.png") right center no-repeat;
   width: 100%;
 }
@@ -352,8 +360,6 @@ input[type="radio"] {
 .bg-gray {
   background-color: #f4f3f2;
 }
-
-
 
 #quote-content {
   background: url("https://securecash.com.au/images/secure-cash-head-office-2.png"),
@@ -371,96 +377,74 @@ input[type="radio"] {
     left bottom, right bottom;
 }
 
-
-
 @media screen and (max-width: 1366px) {
   #quote-content {
-    background-position: -moz-calc(50% - (567px/2.75)) 41px, left top, left bottom, right bottom;
-    background-position: -webikit-calc(50% - (567px/2.75)) 41px, left top, left bottom, right bottom;
-    background-position: calc(50% - (567px / 2.75)) 41px, left top, left bottom, right bottom
+    background-position: -moz-calc(50% - (567px/2.75)) 41px, left top,
+      left bottom, right bottom;
+    background-position: -webikit-calc(50% - (567px/2.75)) 41px, left top,
+      left bottom, right bottom;
+    background-position: calc(50% - (567px / 2.75)) 41px, left top, left bottom,
+      right bottom;
   }
 }
 
 @media screen and (max-width: 1024px) {
   #quote-content {
     background-size: auto 209px, 100% 250px, 50%, 50%;
-    background-position: -moz-calc(50% - (567px/2.5)) 41px, left top, left bottom, right bottom;
-    background-position: -webikit-calc(50% - (567px/2.5)) 41px, left top, left bottom, right bottom;
-    background-position: calc(50% - (567px / 2.5)) 41px, left top, left bottom, right bottom
+    background-position: -moz-calc(50% - (567px/2.5)) 41px, left top,
+      left bottom, right bottom;
+    background-position: -webikit-calc(50% - (567px/2.5)) 41px, left top,
+      left bottom, right bottom;
+    background-position: calc(50% - (567px / 2.5)) 41px, left top, left bottom,
+      right bottom;
   }
 }
 
 @media screen and (max-width: 768px) {
   #quote-content {
-    background-size: auto 300px
+    background-size: auto 300px;
   }
 
   #quote-content {
     background-size: auto 209px, 100% 250px, 50%, 50%;
     background-position: center 41px, left top, left bottom, right bottom;
     background-position: center 41px, left top, left bottom, right bottom;
-    background-position: center 41px, left top, left bottom, right bottom
+    background-position: center 41px, left top, left bottom, right bottom;
   }
 }
 
 @media screen and (max-width: 414px) {
   #quote-content {
-    background-size: auto 209px, 100% 250px, 50%, 50%
+    background-size: auto 209px, 100% 250px, 50%, 50%;
   }
 
-  #headline-content {
-    padding-top: 40px;
-    padding-bottom: 40px
-  }
 }
 
 @media screen and (max-width: 320px) {
   #quote-content {
-    background-size: auto 210px
+    background-size: auto 210px;
   }
 }
 
 @media (max-width: 1024px) {
-  #headline-content {
-    height: 454px
-  }
 
-  #headline-content {
-    height: 300px
+
+  .bg-dots {
+    background-size: contain;
   }
 
   .bg-dots {
-    background-size: contain
-  }
-
-  .bg-dots {
-    background-size: 50%, 50%
+    background-size: 50%, 50%;
   }
 }
 
 @media (max-width: 768px) {
-  #headline-content {
-    height: 412px
-  }
+
 
   .bg-dots {
-    background-size: 75%, 75%
+    background-size: 75%, 75%;
   }
 }
-
-@media (max-width: 720px) {
-  #headline-content {
-    height: 377px
-  }
-}
-
-@media (max-width: 480px) {
-  #headline-content {
-    height: 406px
-  }
-}
-
-
 
 .services-content li::before {
   content: "" !important;
@@ -474,14 +458,8 @@ input[type="radio"] {
   margin-top: 10px !important;
 }
 
- .services-content li {
+.services-content li {
   display: flex !important;
-}
-
- .services-content li:first-child {
-}
-
-.services-content li:last-child {
 }
 
 .services-content li span h4 {
@@ -492,12 +470,21 @@ input[type="radio"] {
   font-weight: bold;
   color: #000;
   text-align: left;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+}
+
+.services-content li span p {
+  font-size: 16px;
+  line-height: 2rem;
+  color: #000;
+  text-align: left;
+  font-weight: 300;
 }
 
 .services-content li:not(:first-child)::before {
   margin-top: 26px !important;
 }
+
 @media (min-width: 600px) {
   .your-element {
     line-height: 1.6em;
@@ -516,4 +503,368 @@ input[type="radio"] {
 
 .services-content li:not(:first-child) span h4 {
   margin-top: 16px;
+}
+
+#content-contact .services-content li:not(:first-child) span h4 {
+  margin-top: 20px;
+}
+
+.testing {
+  background: linear-gradient(
+    90deg,
+    #000 50%,
+    url("/public/images/welcome/identify-business-hero-img.jpg") 50%
+  );
+}
+
+.section-wrapper {
+  background: url("../../public/images/bg-quote-header-left.webp") left top
+      no-repeat,
+    url("../../public/images/bg-quote-header-right.webp") right top no-repeat;
+  width: 100%;
+}
+
+/* for privacy policy and terms of service pages */
+#intro {
+  max-width: 1366px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+  padding-right: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+#intro h2 {
+  text-align: center;
+  margin: 0 auto;
+  line-height: 45px;
+  max-width: 80%;
+  color: #000;
+}
+
+#intro .content-wrapper {
+  width: 80%;
+  margin-top: 50px;
+  padding: 0;
+}
+
+#intro .content-wrapper p {
+  text-align: center;
+  color: #000;
+}
+
+@media screen and (min-width: 1366px) {
+  #instruction-box {
+    margin-right: calc((100% - 1366px) / 2);
+  }
+
+}
+
+
+/* Updated modal CSS to prevent scroll jump */
+.site-modal-outer {
+  display: flex;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  opacity: 1;
+  pointer-events: all;
+  transition: opacity 0.2s;
+}
+
+.site-modal-outer .site-modal-inner {
+  background: #fff;
+  border-radius: 3px;
+  width: 824px;
+  height: 470px;
+  pointer-events: all;
+}
+
+body.modal-on {
+  position: fixed !important;
+  top: 0;
+  /* This will be overridden by JavaScript */
+  left: 0;
+  width: 100% !important;
+  overflow-y: scroll !important;
+}
+
+
+body.ty-modal-on {
+  overflow: hidden !important;
+}
+
+body.modal-on .site-info-modal {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* Rest of your existing CSS remains the same */
+.business-type-dailog-box--card {
+  background: #f2f2f2;
+  margin: auto;
+  max-width: 824px;
+  padding: 74px 116px;
+  box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
+  -webkit-box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26)
+}
+
+.business-type-dailog-box--card p {
+  font-size: 20px;
+  line-height: 26px;
+  text-align: center
+}
+
+.business-type-dailog-box--card span {
+  color: #c7a652;
+  font-size: 26px;
+  font-weight: 600
+}
+
+.business-type-dailog-box--card__text-strong {
+  font-weight: 700
+}
+
+.business-type-dailog-box--card__text {
+  margin-bottom: 26px
+}
+
+.business-type-dailog-box--card__btn-wrap {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px 22px 0
+}
+
+.btn-gold-alt {
+  background: #c7a652;
+  border: 2px solid #c7a652;
+  color: #fff
+}
+
+.btn-black {
+  background: #000;
+  border: 2px solid #000;
+  color: #fff
+}
+
+.btn-location-submit {
+  border: none;
+  border-radius: 4px;
+  font-family: "Montserrat";
+  font-size: 16px;
+  padding: 20px 24px;
+  height: 60px;
+  width: 182px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  line-height: 1.5;
+  pointer-events: all;
+}
+
+/* Media queries remain the same */
+@media (max-width: 768px) {
+
+  body.modal-on .site-modal-outer .site-modal-inner,
+  body.modal-on .site-modal-outer .ty-site-innner,
+  body.ty-modal-on .site-modal-outer .site-modal-inner,
+  body.ty-modal-on .site-modal-outer .ty-site-innner {
+    width: 700px;
+    height: 452px
+  }
+
+  .business-type-dailog-box--card {
+    padding: 76px 60px
+  }
+
+  .business-type-dailog-box--card__btn-wrap {
+    padding: 22px 22px 0
+  }
+}
+
+@media (max-width: 480px) {
+
+  body.modal-on .site-modal-outer .site-modal-inner,
+  body.modal-on .site-modal-outer .ty-site-innner,
+  body.ty-modal-on .site-modal-outer .site-modal-inner,
+  body.ty-modal-on .site-modal-outer .ty-site-innner {
+    width: 460px;
+    height: 452px
+  }
+
+  .business-type-dailog-box--card {
+    padding: 50px 24px
+  }
+
+  .business-type-dailog-box--card__btn-wrap {
+    padding: 18px 12px 0
+  }
+}
+
+@media (max-width: 425px) {
+
+  body.modal-on .site-modal-outer .site-modal-inner,
+  body.modal-on .site-modal-outer .ty-site-innner,
+  body.ty-modal-on .site-modal-outer .site-modal-inner,
+  body.ty-modal-on .site-modal-outer .ty-site-innner {
+    width: 403px;
+    height: 452px
+  }
+
+  .business-type-dailog-box--card__btn-wrap {
+    padding: 6px 20px 0
+  }
+
+  .business-type-dailog-box--card__btn-wrap .btn-location-submit {
+    height: 54px;
+    width: 144px
+  }
+}
+
+@media (max-width: 375px) {
+
+  body.modal-on .site-modal-outer .site-modal-inner,
+  body.modal-on .site-modal-outer .ty-site-innner,
+  body.ty-modal-on .site-modal-outer .site-modal-inner,
+  body.ty-modal-on .site-modal-outer .ty-site-innner {
+    width: 350px;
+    height: 452px
+  }
+
+  .business-type-dailog-box--card {
+    padding: 46px 20px
+  }
+
+  .business-type-dailog-box--card__btn-wrap {
+    padding: 6px 4px 0
+  }
+}
+
+.business-type-thank-you--card {
+  background: #f2f2f2;
+  margin: auto;
+  max-width: 824px;
+  padding: 74px 116px;
+  box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
+  -webkit-box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
+  -moz-box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
+  text-align: center;
+  position: relative
+}
+
+.business-type-thank-you--card .icon-large {
+  color: #4bb543;
+  font-size: 84px;
+  margin-bottom: 16px
+}
+
+.business-type-thank-you--card__text-strong {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 30px;
+  text-align: center
+}
+
+.business-type-thank-you--card__text {
+  font-size: 20px;
+  line-height: 30px;
+  text-align: center
+}
+
+.business-type-thank-you--card__btn-wrap {
+  display: flex;
+  justify-content: space-around;
+  padding: 34px 22px 0
+}
+
+.business-type-thank-you--card .ty-modal-close-btn {
+  background: transparent;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 28px;
+  position: absolute;
+  top: -13px;
+  right: -11px
+}
+
+.business-type-thank-you--card .ty-modal-close-btn::after {
+  content: "";
+  height: 17px;
+  width: 17px;
+  background: #fff;
+  display: block;
+  border-radius: 8px;
+  position: absolute;
+  top: 8px;
+  right: 4px;
+  z-index: -3
+}
+
+.business-type-thank-you--card .ty-modal-close-btn:hover {
+  color: #2d2d2d;
+  opacity: 1
+}
+
+.business-type-thank-you--card .ty-modal-close-btn:focus {
+  outline: none
+}
+
+@media (max-width: 768px) {
+  .business-type-thank-you--card {
+    padding: 54px 60px
+  }
+}
+
+@media (max-width: 480px) {
+  .business-type-thank-you--card {
+    padding: 38px 30px
+  }
+}
+
+@media (max-width: 425px) {
+  .business-type-thank-you--card {
+    padding: 30px 20px
+  }
+}
+
+@media (max-width: 375px) {
+  .business-type-thank-you--card {
+    padding: 34px 16px
+  }
+}
+
+@media (max-width: 375px) {
+  .business-type-thank-you--card__text-strong {
+    font-size: 20px;
+    line-height: 24px
+  }
+}
+
+@media (max-width: 375px) {
+  .business-type-thank-you--card__text {
+    font-size: 16px
+  }
+}
+
+.business-type-thank-you--card__btn-wrap {
+  padding: 20px 22px 0
+}
+
+.btn-ty-note-submit {
+  border: none;
+  border-radius: 4px;
+  font-family: "Montserrat";
+  font-size: 16px;
+  padding: 20px 24px;
+  cursor: pointer;
+  text-decoration: none;
 }

@@ -12,7 +12,7 @@ const Divider = ({
   // Determine alignment classes
   const alignmentClass =
     alignment === "left"
-      ? "mx-0 text-left"
+      ? " text-left"
       : alignment === "right"
         ? "ml-auto mr-0"
         : "";
@@ -31,7 +31,7 @@ const Divider = ({
 
   return (
     <hr
-      className={`h-[4px] w-[${width}] rounded-[5px] border-0 ${colorClass} ${margin} ${padding} mx-auto text-center 1024px:${alignmentClass} ${responsiveClassName}`}
+      className={`h-[4px] w-[${width}] rounded-[5px] mx-auto border-0 ${colorClass} ${margin} ${padding} text-center 1024px:${alignmentClass} ${responsiveClassName}`}
       style={customStyles}
     />
   );

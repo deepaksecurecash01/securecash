@@ -52,7 +52,7 @@ const Banking = ({
 
 
       <Divider
-        color="primary" // Custom gold color
+        color="primary" 
         margin="mt-4" // Margin-top 4
         alignment="center" // Center alignment
       />

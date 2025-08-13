@@ -13,6 +13,7 @@ module.exports = {
         "414px": "414px", // Small devices
         "480px": "480px", // Small devices
         "600px": "600px", // Medium devices (large small devices)
+        "720px": "720px", // Medium devices (tablets portrait)
         "768px": "768px", // Large small devices (tablets portrait)
         "800px": "800px", // Medium-large devices (tablets landscape)
         "992px": "992px", // Small laptops

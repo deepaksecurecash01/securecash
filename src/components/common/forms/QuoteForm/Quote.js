@@ -81,7 +81,7 @@ const Quote = ({
       />
 
       <div className="form-tab  480px:w-[90%] mx-auto">
-        {inputFields.map((field, index) => (
+        {inputFields?.map((field, index) => (
           <InputField
             key={index}
             {...field}

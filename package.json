@@ -12,7 +12,9 @@
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
     "@react-google-maps/api": "^2.20.6",
+    "@sendgrid/mail": "^8.1.5",
     "@slightlyoff/lite-vimeo": "^0.1.2",
+    "browser-image-compression": "^2.0.2",
     "html-react-parser": "^5.2.3",
     "next": "15.0.2",
     "react": "19.0.0-rc-02c0e824-20241028",

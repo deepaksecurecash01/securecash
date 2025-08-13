@@ -1,53 +1,519 @@
-<div id="headline-content" class="in-full bg-dots bg-gray">
-    <div id="headline-wrapper">
-        <h3 class="prata">Start Taking Advantage Of</h3>
-        <h1>Our Services Today&nbsp;</h1>
-        <hr class="divider-2 divider-gold divider-bottom">
-        <p>Get a quote email within 45 minutes.</p>
-    </div>
-</div>
-<div id="quote-content">
-    <div id="quote-content-container" class="inner">
-        <div id="quote-content-left">
-            <div id="left-content-text-wrapper">
-                <div id="left-content-header-wrapper">
-                    <h3>Get in touch with our <br>Business Development Team</h3>
-                    <hr class="divider-2 divider-gold divider-bottom">
-                </div>
-                <div id="contact-info-wrapper">
-                    <div class="contact-info-item">
-                        <h4 class="icon icon-address">Address</h4>
-                        <p>Anywhere, Anytime, Australia Wide! No matter where you are located in Australia we will be
-                            able to organise someone to service your location.</p>
-                    </div>
-                    <div class="mid-row-divider-wrapper">
-                        <div class="mid-row-divider"></div>
-                    </div>
-                    <div class="contact-info-item">
-                        <h4 class="icon icon-email">Email Us</h4>
-                        <p>You can reach our Business Development&nbsp; Team directly by emailing; <strong><a
-                                    href="mailto:sales@securecash.com.au">sales@securecash.com.au</a></strong></p>
-                    </div>
-                </div>
-                <div class="qoute-callback-cta-desktop">
-                    <div id="note-wrapper">
-                        <h4>Would You Rather Talk To Us Over The Phone?</h4>
-                        <p>Request a call back at a time which is convenient for you!</p>
-                    </div>
-                    <div class="callback-button"><a
-                            href="https://www.securecash.com.au/contact/#contact-form-form-panel"> Request a Call Back
-                        </a></div>
-                </div>
-            </div>
-        </div>
-        <div id="quote-content-right">%%Form--Quote%%</div>
-    </div>
-</div>
-<div class="quote-callback-cta-mobile">
-    <div id="note-wrapper">
-        <h4>Would You Rather Talk To Us Over The Phone?</h4>
-        <p>Request a call back at a time which is convenient for you!</p>
-    </div>
-    <div class="callback-button"><a href="https://securecash.com.au/contact#contact-form-form-panel"> Request a Call
-            Back </a></div>
-</div>
+I have 7 Next.js API routes (App Router) in app/api/[formName]/route.js that handle different forms (Terms, Special
+Event, Site Info, Home/Quote, Franchise, Contact, Austrac, and ICA).
+
+Each form’s API route currently:
+• Receives JSON form data via POST request.
+• Uses SendGrid to send an email.
+• Email options (to, from, subject, html, attachments, etc.) are different per form but the sending logic is the same.
+• Each API route contains its own email HTML template and recipients.
+• Attachments, if any, are included directly in the template code.
+
+Goal:
+• Merge all these APIs into one clean API endpoint (app/api/forms/route.js).
+• Identify the form type via a formType field sent from the client.
+• Based on formType, load the correct HTML template, subject, recipients, and any attachments from separate files (one
+template file per form, exactly as they are now).
+• Do not change anything in the templates — not even a single line of HTML, recipient list, or attachment.
+• Keep the same behavior for all existing forms, just centralize the sending logic.
+• Make it easy to add new forms later by simply adding a new template file and updating the mapping.
+
+Structure:
+• Folder: app/api/forms/route.js → main API handler.
+• Templates folder: /emailTemplates/[formType].js — each exports { subject, to, from, html, attachments }.
+• route.js imports all templates and uses them based on formType in request body.
+• Use the same SendGrid sending code, just once, in the central API.
+
+Notes:
+• Site Info and Special Event can share the same API logic, but still have their own templates if needed.
+• This should remain compatible with Next.js App Router conventions.
+• All email-sending logic stays in the main API, templates remain purely for data/HTML.
+• formType can be values like "terms", "specialEvent", "siteInfo", "quote", "franchise", "contact", "austrac", "ica".
+
+⸻
+
+Sample Code
+
+import { NextResponse } from "next/server";
+import sendgrid from "@sendgrid/mail";
+import fs from "fs";
+import path from "path";
+
+// Import templates
+import austracTemplate from './templates/austracTemplate.js';
+import contactTemplate from './templates/contactTemplate.js';
+import franchiseTemplate from './templates/franchiseTemplate.js';
+
+// Helper function to read PDF files from the public/upload directory
+const readPdfFile = (filename) =>
+{
+try {
+const filePath = path.join(process.cwd(), "public", "upload", filename);
+
+if (!fs.existsSync(filePath)) {
+console.warn(`PDF file not found: ${filePath}`);
+return null;
+}
+
+const fileBuffer = fs.readFileSync(filePath);
+return fileBuffer.toString("base64");
+} catch (error) {
+console.error(`Error reading PDF file ${filename}:`, error);
+return null;
+}
+};
+
+// Helper function to prepare PDF attachments for franchise emails
+const preparePdfAttachments = () =>
+{
+const attachmentConfigs = [
+{
+filename: "ACCC-Information-Statement.pdf",
+displayName: "ACCC - 2023 Information Statement for Prospective Franchisees.pdf",
+},
+{
+filename: "SecureCash-Franchise-Prospectus.pdf",
+displayName: "SecureCash Franchise Prospectus.pdf",
+},
+{
+filename: "SecureCash-DL-Flyer.pdf",
+displayName: "SecureCash Flyer.pdf",
+},
+{
+filename: "eDockets-DL-Flyer.pdf",
+displayName: "eDockets Flyer.pdf",
+},
+];
+
+const attachments = [];
+
+for (const config of attachmentConfigs) {
+const pdfContent = readPdfFile(config.filename);
+if (pdfContent) {
+attachments.push({
+content: pdfContent,
+filename: config.displayName,
+type: "application/pdf",
+disposition: "attachment",
+});
+}
+}
+
+return attachments;
+};
+
+const getCurrentDate = () =>
+{
+const today = new Date();
+const day = String(today.getDate()).padStart(2, '0');
+const month = String(today.getMonth() + 1).padStart(2, '0');
+const year = today.getFullYear();
+return `${day}/${month}/${year}`;
+};
+
+const getCurrentDateTime = () =>
+{
+const now = new Date();
+const day = String(now.getDate()).padStart(2, '0');
+const month = String(now.getMonth() + 1).padStart(2, '0');
+const year = now.getFullYear();
+const hours = String(now.getHours()).padStart(2, '0');
+const minutes = String(now.getMinutes()).padStart(2, '0');
+const seconds = String(now.getSeconds()).padStart(2, '0');
+return `${day}/${month}/${year} ${hours}:${minutes}:${seconds}`;
+};
+
+const templates = {
+austrac: austracTemplate,
+contact: contactTemplate,
+franchise: franchiseTemplate,
+// Will add more templates as you provide the other API routes
+};
+
+// Helper function to format callback date for display
+const formatCallbackDate = (callbackDate) =>
+{
+if (!callbackDate) return 'Not requested';
+
+try {
+const date = new Date(callbackDate);
+if (isNaN(date.getTime())) return 'Not requested';
+
+return date.toLocaleDateString('en-AU', {
+weekday: 'long',
+year: 'numeric',
+month: 'long',
+day: 'numeric'
+});
+} catch (error) {
+return 'Not requested';
+}
+};
+
+// Set the SendGrid API key
+sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
+
+export async function POST(req)
+{
+try {
+// Parse incoming request body
+const body = await req.json();
+const { formType, ...formData } = body;
+
+console.log('Form submission received:', { formType, ...formData });
+
+// Validate form type
+if (!formType || !templates[formType]) {
+return NextResponse.json(
+{ error: 'Invalid or missing form type' },
+{ status: 400 }
+);
+}
+
+// Form-specific validation
+if (formType === 'contact') {
+// Basic validation for contact form
+if (!formData.Department || !formData.FullName || !formData.Email || !formData.Message) {
+return NextResponse.json(
+{
+error: "Missing required fields",
+details: "Department, Full Name, Email, and Message are required."
+},
+{ status: 400 }
+);
+}
+
+// Check honeypot field (bot detection)
+if (formData.BotField && formData.BotField.length > 0) {
+console.log("Bot detected - submission rejected");
+return NextResponse.json(
+{
+error: "Invalid submission detected",
+details: "Automated submission rejected"
+},
+{ status: 400 }
+);
+}
+
+// Validate email format
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(formData.Email)) {
+return NextResponse.json(
+{
+error: "Invalid email format",
+details: "Please provide a valid email address."
+},
+{ status: 400 }
+);
+}
+
+// Validate department
+const validDepartments = ['customers', 'sales', 'operations'];
+if (!validDepartments.includes(formData.Department)) {
+return NextResponse.json(
+{
+error: "Invalid department",
+details: "Please select a valid department."
+},
+{ status: 400 }
+);
+}
+
+// Validate callback fields if callback is requested
+if (formData.ChkCallBack === 'Yes, please.') {
+if (!formData.CallbackDate || !formData.CallbackTime || !formData.CallbackState) {
+return NextResponse.json(
+{
+error: "Incomplete callback information",
+details: "When requesting a callback, please provide date, time, and state."
+},
+{ status: 400 }
+);
+}
+}
+} else if (formType === 'franchise') {
+// Basic validation for franchise form
+if (!formData.FullName || !formData.Email || !formData.Phone || !formData.Address ||
+!formData.InterestedArea || !formData.ReasonForInterest || !formData.ReferralSource) {
+return NextResponse.json(
+{
+error: "Missing required fields",
+details: "All fields are required for franchise enquiry."
+},
+{ status: 400 }
+);
+}
+
+// Check honeypot field (bot detection)
+if (formData.BotField && formData.BotField.length > 0) {
+console.log("Bot detected - submission rejected");
+return NextResponse.json(
+{
+error: "Invalid submission detected",
+details: "Automated submission rejected"
+},
+{ status: 400 }
+);
+}
+
+// Validate email format
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+if (!emailRegex.test(formData.Email)) {
+return NextResponse.json(
+{
+error: "Invalid email format",
+details: "Please provide a valid email address."
+},
+{ status: 400 }
+);
+}
+
+// Validate phone number format
+const phoneRegex = /^[0-9\s\-\+\(\)]+$/;
+if (!phoneRegex.test(formData.Phone) || formData.Phone.length < 8) { return NextResponse.json( {
+    error: "Invalid phone number" , details: "Please provide a valid phone number." }, { status: 400 } ); } } // Get the
+    email options from the template const emailOptions=templates[formType](formData, { getCurrentDate,
+    getCurrentDateTime, formatCallbackDate, preparePdfAttachments }); // Send email(s) via SendGrid // Handle multiple
+    emails if returned as array, single email if object if (Array.isArray(emailOptions)) { // Send multiple emails (like
+    contact form: admin + confirmation) for (const email of emailOptions) { await sendgrid.send(email); } } else { //
+    Send single email (like austrac) await sendgrid.send(emailOptions); } // Form-specific success logging let logData={
+    timestamp: new Date().toISOString() }; let successMessage="Form submitted and email sent successfully!" ; if
+    (formType==='austrac' ) { logData={ organisation: formData.Organisation, abn: formData.ABN, email:
+    formData.OrganisationEmail, submissionDate: getCurrentDateTime(), timestamp: new Date().toISOString() };
+    successMessage="AUSTRAC information submitted and emails sent successfully!" ; } else if (formType==='contact' ) {
+    logData={ department: formData.Department, fullName: formData.FullName, organisation: formData.Organisation, email:
+    formData.Email, hasCallback: formData.ChkCallBack==='Yes, please.' , submissionDate: getCurrentDateTime(),
+    timestamp: new Date().toISOString() }; successMessage="Contact request submitted and emails sent successfully!" ; }
+    else if (formType==='franchise' ) { logData={ fullName: formData.FullName, email: formData.Email, phone:
+    formData.Phone, interestedArea: formData.InterestedArea, submissionDate: getCurrentDateTime(), timestamp: new
+    Date().toISOString() }; successMessage="Franchise enquiry submitted and emails sent successfully!" ; }
+    console.log(`${formType} form submitted successfully:`, logData); // Return success response const responseData={
+    message: successMessage, timestamp: new Date().toISOString(), submissionDate: getCurrentDateTime() }; // Add
+    form-specific response data if (formType==='contact' ) { responseData.submissionId=formData.submissionId ||
+    `contact_${Date.now()}`; } else if (formType==='franchise' ) { responseData.submissionId=formData.submissionId ||
+    `franchise_${Date.now()}`; } return NextResponse.json(responseData, { status: 200 }); } catch (error) {
+    console.error("Form submission error:", error); // Return error response return NextResponse.json( {
+    error: "Failed to process form submission" , details: error.message }, { status: 500 } ); } }
+
+⸻
+
+Example Template File:
+export default function franchiseTemplate(formData, { getCurrentDateTime, preparePdfAttachments }) {
+    const currentDateTime = getCurrentDateTime();
+
+    // Admin notification email
+    const adminEmail = {
+        to: "deepak@securecash.com.au",
+        from: "SecureCash Franchise <franchise@securecash.com.au>",
+        replyTo: formData.Email,
+        subject: `SecureCash - Franchise Expression of Interest - ${formData.FullName || 'Unknown'}`,
+        text: "Please enable HTML emails in your email client to view the contents of this email.",
+        html: `
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        </head>
+        <body style="margin:0;padding:0;">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                    <td style="padding:12px;">
+                        <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse:collapse;">
+                            <tr>
+                                <td style="padding:0 0 12px 0;">
+                                    <img src="https://service.securecash.com.au/branded/logo.jpg">
+                                </td>
+                                <td valign="middle" style="color:#bbbbbb;text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;">
+                                    SecureCash Franchise Expression of Interest
+                                </td>
+                            </tr> 
+                            <tr style="border:1px solid #dddddd;border-width:1px 0 1px 0;">
+                                <td colspan="2" style="padding:18px 12px 18px 12px;color:#222222;line-height:160%;text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;">
+                                    <h1 style="font-size:24px;font-weight:bold;">Franchise Expression of Interest</h1>
+                                    <p>A website visitor submitted the following details through the <strong>Franchise Expression of Interest form</strong>:</p>
+                                    <table>
+                                        <tr>
+                                            <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px;width:160px;"><strong>Sent To:</strong></td>
+                                            <td style="padding:5px 9px 5px 9px;">${formData.FullName || ''}</td>
+                                        </tr>
+                                        <tr><td colspan="2" style="height:2px;"></tr>
+                                        <tr>
+                                            <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px;width:160px;"><strong>Phone #:</strong></td>
+                                            <td style="padding:5px 9px 5px 9px;">${formData.Phone || ''}</td>
+                                        </tr>
+                                        <tr><td colspan="2" style="height:2px;"></tr>
+                                        <tr>
+                                            <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px;"><strong>Email:</strong></td>
+                                            <td style="padding:5px 9px 5px 9px;">${formData.Email || ''}</td>
+                                        </tr>
+                                        <tr><td colspan="2" style="height:2px;"></tr>
+                                        <tr>
+                                            <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px;"><strong>Postal Address:</strong></td>
+                                            <td style="padding:5px 9px 5px 9px;">${formData.Address || ''}</td>
+                                        </tr>
+                                        <tr><td colspan="2" style="height:2px;"></tr>
+                                        <tr>
+                                            <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px;"><strong>Territory:</strong></td>
+                                            <td style="padding:5px 9px 5px 9px;">${formData.InterestedArea || ''}</td>
+                                        </tr>
+                                        <tr><td colspan="2" style="height:2px;"></tr>
+                                        <tr>
+                                            <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px"><strong>Message:</strong></td>
+                                            <td style="padding:5px 9px 5px 9px;">${formData.ReasonForInterest || ''}</td>
+                                        </tr>
+                                        <tr><td colspan="2" style="height:2px;"></tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="border:1px solid #dddddd;border-width:0 0 1px 0;">
+                                    <table align="left" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                                        <tr>
+                                            <td width="240" style="padding:12px 0 12px 0;color:#222222;line-height:160%;text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;">
+                                                <img src="https://service.securecash.com.au/branded/logo.jpg" width="240">
+                                                <span><strong>SecureCash eDocket System</strong></span>
+                                                <br /><span><em>"We Pickup &amp; Bank Your Money!"</em></span>
+                                            </td>
+                                            <td style="padding:16px 0 12px 40px;color:#222222;line-height:160%;text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;">
+                                                <table align="left" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                                                    <tr>
+                                                        <td width="30"><img src="https://service.securecash.com.au/branded/email.png" style="margin:4px 0 0 0;"></td>
+                                                        <td>franchise@securecash.com.au</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="30"><img src="https://service.securecash.com.au/branded/phone.png" style="margin:4px 0 0 0;"></td>
+                                                        <td>1300 SECURE</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td width="30"><img src="https://service.securecash.com.au/branded/website.png" style="margin:4px 0 0 0;"></td>
+                                                        <td><a href="https://www.securecash.com.au/" target="_blank" style="color:blue;">securecash.com.au</a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            Take 30 seconds to <a href="https://www.securecash.com.au/performance/" target="_blank">rate our performance</a>.
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="color:#666666;line-height:160%;text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;padding:12px 0 0 0;">
+                                    &copy; 2005 Sky Wallet Pty Ltd ABN 39 668 299 027 Trading (Under License) as Secure Cash.
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </body>
+    </html>`
+    };
+
+    // Customer confirmation email with PDF attachments
+    const pdfAttachments = preparePdfAttachments();
+    const confirmationEmail = {
+        to: formData.Email,
+        from: "SecureCash Franchise <franchise@securecash.com.au>",
+        subject: "SecureCash Franchise Enquiry",
+        text: "Please enable HTML emails in your email client to view the contents of this email.",
+        html: `
+    <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        </head>
+        <body style="margin:0;padding:0;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+            <tr>
+                <td style="padding:12px;">
+                    <table align="left" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse:collapse;">
+                        <tr>
+                            <td style="padding:0 0 12px 0;">
+                                <img src="https://service.securecash.com.au/branded/logo.jpg">
+                            </td>
+                            <td valign="middle" style="color:#bbbbbb;text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;">
+                                SecureCash Franchise Enquiry
+                            </td>
+                        </tr>
+                        <tr style="border:1px solid #dddddd;border-width:1px 0 1px 0;">
+                            <td colspan="2" style="padding:18px 12px 18px 12px;color:#222222;line-height:160%;text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;">
+                                <p>Hi,</p>
+                                <p>Thank you for enquiring about a SecureCash Franchise!</p>
+                                <p>Your email has been received, and we will be in touch with you shortly.</p>
+                                <p>Below is attached some reading material for you to go through in the meantime, this includes the ACCC Information Statement which needs to be understood before proceeding.</p>
+                                <p>If we can be of any assistance in the meantime, then please do not hesitate to call us on <a href="tel:1300732873">1300 SECURE</a> (1300 732 873), or simply reply to this email.</p>
+                                <p>Kind regards,</p>
+                                <p>
+                                    <strong>
+                                        The SecureCash Franchise Team
+                                    </strong>
+                                </p>
+                                <p>
+                                    Email: <a href="mailto:franchise@securecash.com.au">franchise@securecash.com.au</a><br>
+                                    Phone: <a href="tel:1300732873">1300 SECURE</a>
+                                </p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="border:1px solid #dddddd;border-width:0 0 1px 0;">
+                                <table align="left" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                                    <tr>
+                                        <td width="240" style="padding:12px 0 12px 0;color:#222222;line-height:160%;text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;">
+                                            <img src="https://service.securecash.com.au/branded/logo.jpg" width="240">
+                                            <span><strong>SecureCash eDocket System</strong></span>
+                                            <br /><span><em>"We Pickup &amp; Bank Your Money!"</em></span>
+                                        </td>
+                                        <td style="padding:16px 0 12px 40px;color:#222222;line-height:160%;text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;">
+                                            <table align="left" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;">
+                                                <tr>
+                                                    <td width="30"><img src="https://service.securecash.com.au/branded/email.png" style="margin:4px 0 0 0;"></td>
+                                                    <td>franchise@securecash.com.au</td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="30"><img src="https://service.securecash.com.au/branded/phone.png" style="margin:4px 0 0 0;"></td>
+                                                    <td>1300 SECURE</td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="30"><img src="https://service.securecash.com.au/branded/website.png" style="margin:4px 0 0 0;"></td>
+                                                    <td><a href="https://www.securecash.com.au/" target="_blank" style="color:blue;">securecash.com.au</a></td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" style="color:#666666;line-height:160%;text-align:center;font-family:Helvetica,Arial,sans-serif;font-size:15px;padding:12px 0 0 0;">
+                                &copy; 2005 Sky Wallet Pty Ltd ABN 39 668 299 027 Trading (Under License) as Secure Cash.
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+        </body>
+    </html>`,
+        attachments: pdfAttachments
+    };
+
+    // Return array of emails to send both admin notification and customer confirmation
+    return [adminEmail, confirmationEmail];
+}
+
+
+⸻
+
+This ensures:
+• One central API route.
+• Templates remain untouched except wrapping them in a function.
+• SendGrid logic stays identical.
+• Adding new forms is just adding a new template + updating the templates map.
+
+I’ll provide you real code one by one you just need to add it, also modify the api/forms code and any logic in template
+code accordingly if needed or missing anything

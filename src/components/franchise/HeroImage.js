@@ -1,10 +1,11 @@
 import React from "react";
 import Divider from "../common/Divider";
-import BannerButton from "../homepage/BannerSection/BannerButton";
+import BannerButton from "../../app/home/components/banner-section/BannerButton";
 import Link from "next/link";
 import DoubleButton from "../common/DoubleButton";
 
-const HeroImage = () => {
+const HeroImage = () =>
+{
   return (
     <div
       id="hero-image"
@@ -52,10 +53,10 @@ const HeroImage = () => {
       />
       <DoubleButton
         primaryButton={{ text: "Register Now", href: "#franchise-form" }}
-        secondaryButton={{ text: "Read More", href: "#read-more" }} 
-        
-        />
-    
+        secondaryButton={{ text: "Read More", href: "#read-more" }}
+
+      />
+
     </div>
   );
 };

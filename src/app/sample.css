@@ -4735,7 +4735,9 @@ i.fa.fa-long-arrow-down {
         margin-right: auto
     }
 
-   
+    #headline-content {
+        height: 300px
+    }
 
     #quote-content-left>img {
         height: 234px
@@ -4776,7 +4778,9 @@ i.fa.fa-long-arrow-down {
         font-size: 32px
     }
 
-   
+    .bg-dots {
+        background-size: contain
+    }
 
     #quote-content-left {
         flex: 1
@@ -4939,6 +4943,9 @@ i.fa.fa-long-arrow-down {
         background-position: center
     }
 
+    .bg-dots {
+        background-size: 50%, 50%
+    }
 
     #testimonial-carousel .item .content .wrapper .excerpt {
         height: 112px;
@@ -6815,7 +6822,9 @@ i.fa.fa-long-arrow-down {
         margin-bottom: 40px
     }
 
-   
+    .bg-dots {
+        background-size: 75%, 75%
+    }
 
     div.callback-button {
         margin-left: auto;
@@ -7854,7 +7863,10 @@ i.fa.fa-long-arrow-down {
         margin-right: auto
     }
 
-   
+    #headline-content {
+        padding-top: 40px;
+        padding-bottom: 40px
+    }
 
     #headline-wrapper h1 {
         line-height: 1.2em
@@ -7905,7 +7917,10 @@ i.fa.fa-long-arrow-down {
         width: 90%
     }
 
- 
+    .bg-dots {
+        background-size: 50%, 50%;
+        background-position: left center, right center
+    }
 
     #quote-content-left #frm-contact-mobile .chkbox-container-cash {
         grid-template-rows: repeat(5, 1fr)
@@ -9920,17 +9935,9 @@ html {
     border-radius: 5px !important
 }
 
-.btn-black {
-    background: #000;
-    border: 2px solid #000;
-    color: #fff
-}
 
-.btn-gold-alt {
-    background: #c7a652;
-    border: 2px solid #c7a652;
-    color: #fff
-}
+
+
 
 .btn-location-submit {
     border: none;
@@ -11579,121 +11586,11 @@ html {
 
 
 
-.site-modal-outer {
-    display: flex;
-    background: rgba(0, 0, 0, 0.6);
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-    top: 0;
-    left: 0;
-    z-index: 999999999;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.2s;
-    overflow: hidden
-}
-
-.site-modal-outer .site-modal-inner {
-    background: #fff;
-    border-radius: 3px;
-    width: 824px;
-    height: 470px
-}
-
-body.modal-on {
-    overflow: hidden
-}
-
-body.modal-on .site-info-modal {
-    opacity: 1;
-    pointer-events: all
-}
-
-body.ty-modal-on {
-    overflow: hidden
-}
-
-body.ty-modal-on .site-modal-outer {
-    opacity: 1;
-    pointer-events: all
-}
 
 .business-type-thank-you {
     width: 100%
 }
 
-.business-type-thank-you--card {
-    background: #f2f2f2;
-    margin: auto;
-    max-width: 824px;
-    padding: 74px 116px;
-    box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
-    -webkit-box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
-    -moz-box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
-    text-align: center;
-    position: relative
-}
-
-.business-type-thank-you--card .icon-large {
-    color: #4bb543;
-    font-size: 84px;
-    margin-bottom: 16px
-}
-
-.business-type-thank-you--card__text-strong {
-    font-size: 20px;
-    font-weight: 600;
-    line-height: 30px;
-    text-align: center
-}
-
-.business-type-thank-you--card__text {
-    font-size: 20px;
-    line-height: 30px;
-    text-align: center
-}
-
-.business-type-thank-you--card__btn-wrap {
-    display: flex;
-    justify-content: space-around;
-    padding: 34px 22px 0
-}
-
-.business-type-thank-you--card .ty-modal-close-btn {
-    background: transparent;
-    border: none;
-    color: #000;
-    cursor: pointer;
-    font-size: 28px;
-    position: absolute;
-    top: -13px;
-    right: -11px
-}
-
-.business-type-thank-you--card .ty-modal-close-btn::after {
-    content: "";
-    height: 17px;
-    width: 17px;
-    background: #fff;
-    display: block;
-    border-radius: 8px;
-    position: absolute;
-    top: 8px;
-    right: 4px;
-    z-index: -3
-}
-
-.business-type-thank-you--card .ty-modal-close-btn:hover {
-    color: #2d2d2d;
-    opacity: 1
-}
-
-.business-type-thank-you--card .ty-modal-close-btn:focus {
-    outline: none
-}
 
 .forms-quote .banking p {
     line-height: 24px;
@@ -12309,42 +12206,6 @@ body.ty-modal-on .site-modal-outer {
 .business-type-dailog-box {
     margin: 140px 0 168px;
     width: 100%
-}
-
-.business-type-dailog-box--card {
-    background: #f2f2f2;
-    margin: auto;
-    max-width: 824px;
-    padding: 74px 116px;
-    box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
-    -webkit-box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
-    -moz-box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26)
-}
-
-.business-type-dailog-box--card p {
-    font-size: 20px;
-    line-height: 26px;
-    text-align: center
-}
-
-.business-type-dailog-box--card span {
-    color: #c7a652;
-    font-size: 26px;
-    font-weight: 600
-}
-
-.business-type-dailog-box--card__text-strong {
-    font-weight: 700
-}
-
-.business-type-dailog-box--card__text {
-    margin-bottom: 26px
-}
-
-.business-type-dailog-box--card__btn-wrap {
-    display: flex;
-    justify-content: space-around;
-    padding: 40px 22px 0
 }
 
 .site-info-form {
@@ -13563,10 +13424,7 @@ body.quiz-modal-on {
     overflow: hidden
 }
 
-body.quiz-modal-on .site-modal-outer {
-    opacity: 1;
-    pointer-events: all
-}
+
 
 .quiz-mistake-d {
     display: none
@@ -16376,139 +16234,8 @@ body.quiz-modal-on .site-modal-outer {
     }
 }
 
-@media (max-width: 768px) {
-    .business-type-dailog-box--card {
-        padding: 76px 60px
-    }
-}
 
-@media (max-width: 480px) {
-    .business-type-dailog-box--card {
-        padding: 50px 24px
-    }
-}
 
-@media (max-width: 375px) {
-    .business-type-dailog-box--card {
-        padding: 46px 20px
-    }
-}
-
-@media (max-width: 768px) {
-    .business-type-dailog-box--card__btn-wrap {
-        padding: 22px 22px 0
-    }
-}
-
-@media (max-width: 480px) {
-    .business-type-dailog-box--card__btn-wrap {
-        padding: 18px 12px 0
-    }
-}
-
-@media (max-width: 425px) {
-    .business-type-dailog-box--card__btn-wrap {
-        padding: 6px 20px 0
-    }
-}
-
-@media (max-width: 375px) {
-    .business-type-dailog-box--card__btn-wrap {
-        padding: 6px 4px 0
-    }
-}
-
-@media (max-width: 425px) {
-    .business-type-dailog-box--card__btn-wrap .btn-location-submit {
-        height: 54px;
-        width: 144px
-    }
-}
-
-@media (max-width: 768px) {
-    .business-type-thank-you--card {
-        padding: 54px 60px
-    }
-}
-
-@media (max-width: 480px) {
-    .business-type-thank-you--card {
-        padding: 38px 30px
-    }
-}
-
-@media (max-width: 425px) {
-    .business-type-thank-you--card {
-        padding: 30px 20px
-    }
-}
-
-@media (max-width: 375px) {
-    .business-type-thank-you--card {
-        padding: 34px 16px
-    }
-}
-
-@media (max-width: 375px) {
-    .business-type-thank-you--card__text-strong {
-        font-size: 20px;
-        line-height: 24px
-    }
-}
-
-@media (max-width: 375px) {
-    .business-type-thank-you--card__text {
-        font-size: 16px
-    }
-}
-
-.business-type-thank-you--card__btn-wrap {
-    padding: 20px 22px 0
-}
-
-@media (max-width: 768px) {
-
-    body.modal-on .site-modal-outer .site-modal-inner,
-    body.modal-on .site-modal-outer .ty-site-innner,
-    body.ty-modal-on .site-modal-outer .site-modal-inner,
-    body.ty-modal-on .site-modal-outer .ty-site-innner {
-        width: 700px;
-        height: 452px
-    }
-}
-
-@media (max-width: 480px) {
-
-    body.modal-on .site-modal-outer .site-modal-inner,
-    body.modal-on .site-modal-outer .ty-site-innner,
-    body.ty-modal-on .site-modal-outer .site-modal-inner,
-    body.ty-modal-on .site-modal-outer .ty-site-innner {
-        width: 460px;
-        height: 452px
-    }
-}
-
-@media (max-width: 425px) {
-
-    body.modal-on .site-modal-outer .site-modal-inner,
-    body.modal-on .site-modal-outer .ty-site-innner,
-    body.ty-modal-on .site-modal-outer .site-modal-inner,
-    body.ty-modal-on .site-modal-outer .ty-site-innner {
-        width: 403px;
-        height: 452px
-    }
-}
-
-@media (max-width: 375px) {
-
-    body.modal-on .site-modal-outer .site-modal-inner,
-    body.modal-on .site-modal-outer .ty-site-innner,
-    body.ty-modal-on .site-modal-outer .site-modal-inner,
-    body.ty-modal-on .site-modal-outer .ty-site-innner {
-        width: 350px;
-        height: 452px
-    }
-}
 
 @media (max-width: 480px) {
     #content-middle {
@@ -16980,7 +16707,29 @@ body.quiz-modal-on .site-modal-outer {
     }
 }
 
+@media (max-width: 1024px) {
+    #headline-content {
+        height: 454px
+    }
+}
 
+@media (max-width: 768px) {
+    #headline-content {
+        height: 412px
+    }
+}
+
+@media (max-width: 720px) {
+    #headline-content {
+        height: 377px
+    }
+}
+
+@media (max-width: 480px) {
+    #headline-content {
+        height: 406px
+    }
+}
 
 @media (max-width: 480px) {
     .about-hero .bg-dots {

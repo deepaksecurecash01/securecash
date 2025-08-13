@@ -70,8 +70,6 @@ const FormSection = () =>
                             </li>
                         ))}
                     </ul>
-
-
                 </div>
                 <FranchiseForm />
 

@@ -1,10 +1,11 @@
 import React from "react";
 import Divider from "../common/Divider";
-import BannerButton from "../homepage/BannerSection/BannerButton";
+import BannerButton from "../../app/home/components/banner-section/BannerButton";
 import Link from "next/link";
 import Typography from "../common/Typography";
 
-const HeroImage = () => {
+const HeroImage = () =>
+{
   return (
     <div
       id="hero-image"
@@ -29,22 +30,22 @@ const HeroImage = () => {
         margin="mt-[21px] mb-[24px]"
         alignment="center"
         responsiveClassName="992px:mx-0 992px:text-left 768px:w-[100px]"
-          />   <div
-              className=" w-4/5 768px:w-[75%] mx-auto"
-          >
-              <Typography
-                  as="p"
-                  className="text-[16px] text-white font-normal leading-[32px] text-center mb-0 
+      />   <div
+        className=" w-4/5 768px:w-[75%] mx-auto"
+      >
+        <Typography
+          as="p"
+          className="text-[16px] text-white font-normal leading-[32px] text-center mb-0 
               768px:w-[55%] mx-auto 
              [text-shadow:2px_2px_6px_#111111]"
-              >
-                  <strong>
-                      No problem is too big or too small, our team is here to make sure your services go as plan.
-                      Simply select the team you need help from and we will get back to you in a timely manner.
-                      You can always call us on <a className=" text-primary" href="tel:1300732873">1300 SECURE</a> if it is more convenient for you!
-                  </strong>          </Typography>
-          </div>
-        
+        >
+          <strong>
+            No problem is too big or too small, our team is here to make sure your services go as plan.
+            Simply select the team you need help from and we will get back to you in a timely manner.
+            You can always call us on <a className=" text-primary" href="tel:1300732873">1300 SECURE</a> if it is more convenient for you!
+          </strong>          </Typography>
+      </div>
+
     </div>
   );
 };

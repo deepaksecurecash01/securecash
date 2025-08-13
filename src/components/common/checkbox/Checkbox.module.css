@@ -25,7 +25,6 @@
 
 .checkbox input[type="checkbox"]+label span {
   display: inline-block;
-
   margin: 0 10px 0 0;
   vertical-align: middle;
   background: #fff;

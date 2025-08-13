@@ -1,0 +1,178 @@
+<section class="welcome-main-hero austrac-hero">
+    <div class="inner">
+        <div class="welcome-main-hero--wrap">
+            <div class="welcome-main-hero--content-left austrac-hero--content-left">
+                <h2 class="welcome-main-hero--content-left__title-sm">Lets Identify</h2>
+                <h1 class="welcome-main-hero--content-left__title">Your Business</h1>
+                <hr class="divider-2 divider-gold">
+                <p class="welcome-main-hero--content-left__text"></p>
+            </div>
+            <div class="welcome-main-hero--content-right austrac-hero--content-right"></div>
+        </div>
+    </div>
+</section>
+<section class="austrac-main">
+    <div class="inner">
+        <div class="austrac-main--wrap">
+            <div class="austrac-main--content">
+                <h3 class="austrac-main--content__title">Thank you and welcome aboard!</h3>
+                <hr class="divider-2 divider-gold">
+                <p>The next step we require is your personal particulars for our Austrac 'Know Your Customer' (KYC)
+                    compliance. Information required by Austrac includes details like your organisation structure, your
+                    key personnel, and your registration details as recorded with ASIC.</p>
+                <p>This is an automated process that will interact and update the information that you provide with the
+                    information currently stored in our database.</p>
+                <p>We understand that this can be a time consuming exercise, but please be aware that our organisation
+                    has legal obligations under the Australian Transaction Reports and Analysis Centre (AUSTRAC)
+                    legislation and this information is required.</p>
+                <h3 class="austrac-main--content__title">Who is <span>Austrac?</span></h3>
+                <hr class="divider-2 divider-gold">
+                <p>Austrac is Australia's anti money laundering and counter-terrorism financing regulator and specialist
+                    financial intelligence unit. Austrac works collaboratively with Australian industries and businesses
+                    in their compliance with anti-money laundering and counter-terrorism financing legislation.</p>
+                <p>As Australia's financial intelligence unit, Austrac contributes to investigative and law enforcement
+                    work to combat financial crime and prosecute criminals in Australia and overseas.</p>
+                <p>All cash in transit business must have internal AML compliance programs (such as ours below) that
+                    verify the identity of customers. Businesses that breach the laws can be fined $11 million, while
+                    individuals within the company can face penalties of up to $2.2 million.</p>
+                <p>For more information on Austrac and the Anti Money Laundering &amp; Counter Terrorism Financing Act
+                    2006, please visit their website by clicking www.austrac.gov.au (a separate window will open so you
+                    will not loose this page).</p>
+                <p>To learn more about how we manage information provided you can view our <a
+                        href="https://www.securecash.com.au/privacy-policy/">Privacy Policy</a>.<br><br><strong><a
+                            href="https://www.securecash.com.au/terms/">&lt;&lt; Previous</a></strong></p>
+            </div>
+            <div class="austrac-main--form">
+                <div class="austrac-main--form--wrapper">
+                    <form id="welcome-form--austrac" class="austrac-form welcome-form" data-formid="AUSTRAC"
+                        onsubmit="Dispatch.Validate('form.austrac-form')" novalidate>
+                        <div class="welcome-form--form-control">
+                            <label for="">What is your organisation's name?</label>
+                            <div class="input-container">
+                                <input type="text" name="Organisation" data-validate="Inline*"
+                                    placeholder="e.g. Smith Holdings Pty Ltd or South Park Primary School">
+                                <div class="form-notification dispatch-error Organisation"><i
+                                        class="fa fa-exclamation-circle"></i><span>Please enter your organisations full name.</span></div>
+                            </div>
+                        </div>
+                        <div class="welcome-form--form-control">
+                            <label for="">What is your organisation's ABN number?</label>
+                            <div class="input-container">
+                                <input type="text" name="ABN" data-validate="ABN*"
+                                    placeholder="as per the ASIC register. Eg 45 567 678 901">
+                                <div class="form-notification dispatch-error ABN"><i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter your organisation's ABN number.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="welcome-form--form-control">
+                            <label for="">What is the organisation's main website?</label>
+                            <div class="input-container">
+                                <input type="text" name="Website" data-validate="Inline*" placeholder="e.g. www.smithholdings.com.au">
+                                <div class="form-notification dispatch-error Website"><i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter your organisation's main website.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="welcome-form--form-control">
+                            <label for="">What is the organisation's main email address?</label>
+                            <div class="input-container">
+                                <input type="text" name="OrganisationEmail" data-validate="Email*"
+                                    placeholder="e.g. admin@smithholdings.com.au">
+                                <div class="form-notification dispatch-error OrganisationEmail"><i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter your organisation's main email address.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="welcome-form--form-control">
+                            <label for="">What is the organisation's structure type?</label>
+                            <div class="input-container">
+                                <div class="select-wrap">
+                                    <select name="OrganisationType" data-validate="Inline*">
+                                        <option value="">Please Select</option>
+                                        <option value="Individual (Sole Trader)">Individual (Sole Trader)</option>
+                                        <option value="Trustees &amp; Beneficiaries">Trustees &amp; Beneficiaries</option>
+                                        <option value="Domestic Pty Ltd or Ltd Company">Domestic Pty Ltd or Ltd Company</option>
+                                        <option value="Registered Foreign Company">Registered Foreign Company</option>
+                                        <option value="Foreign Company Not Registered in Australia">Foreign Company Not Registered in
+                                            Australia</option>
+                                        <option value="Partners &amp; Partnerships">Partners &amp; Partnerships</option>
+                                        <option value="Associations">Associations</option>
+                                        <option value="Registered Co-Operatives">Registered Co-Operatives</option>
+                                        <option value="Government Body">Government Body</option>
+                                        <option value="School or Education Institute">School or Education Institute</option>
+                                        <option value="Church or Religious Organisation">Church or Religious Organisation</option>
+                                    </select>
+                                </div>
+                                <div class="form-notification dispatch-error OrganisationType"><i class="fa fa-exclamation-circle"></i>
+                                    <span>Please provide us with your organisation's structure type.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="welcome-form--form-control">
+                            <label for="">What is the address of the head office?</label>
+                            <div class="input-container">
+                                <input type="text" name="Address" data-validate="Inline*"
+                                    placeholder="e.g. 38 Main South Road Blacktown QLD 6987">
+                                <div class="form-notification dispatch-error Address"><i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter the address of your head office.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="welcome-form--form-control">
+                            <label for="">In which state is the head office?</label>
+                            <div class="input-container">
+                                <div class="select-wrap">
+                                    <select name="State" data-validate="State*">
+                                        <option value="">Please Select</option>
+                                        <option value="NSW">New South Wales</option>
+                                        <option value="VIC">Victoria</option>
+                                        <option value="QLD">Queensland</option>
+                                        <option value="WA">Western Australia</option>
+                                        <option value="SA">South Australia</option>
+                                        <option value="TAS">Tasmania</option>
+                                        <option value="ACT">Australian Capital Territory</option>
+                                        <option value="NT">Northern Territory</option>
+                                        <option value="NZ">New Zealand</option>
+                                    </select>
+                                </div>
+                                <div class="form-notification dispatch-error State"><i class="fa fa-exclamation-circle"></i>
+                                    <span>Please enter in which state your head office is located.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="welcome-form--form-control">
+                            <label for="">Please provide the full names &amp; positions of all the key people within the organisation
+                                structure;</label>
+                            <div class="input-container">
+                                <textarea name="Personnel" data-validate="Multiline*" placeholder="Directors, Chairperson, Secretary etc."
+                                    cols="30" rows="10"></textarea>
+                                <div class="form-notification form-notification-text-area dispatch-error Personnel"><i
+                                        class="fa fa-exclamation-circle"></i>
+                                    <span>Please provide the full names and positions of all the key people within the organisation
+                                        structure.</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="welcome-form--btn-wrap">
+                            <input type="submit" class="btn-step dispatch-submit btn-wf-submit" value="Continue to Next Step"
+                                onsubmit="Dispatch.Validate('form.austrac-form')">
+                            <span class="submit-notif-submitting ">
+                                <i class="fa fa-spinner"></i> Submitting... Please Wait.
+                            </span>
+                            <span class="submit-notif-success ">
+                                <i class="fa fa-check-circle"></i> Thank you. We received your submission!
+                            </span>
+                        </div>             </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="about-us-banner-bottom">
+    <div class="inner">
+        <h2>Let us do the Banking for you!</h2>
+        <hr class="divider-2 divider-gold divider-bottom">
+    </div>
+</section>
+<div>%%Footer%%</div>

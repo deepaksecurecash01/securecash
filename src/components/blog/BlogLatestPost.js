@@ -13,7 +13,7 @@ const BlogLatestPost = () => {
   });
 
   // Limit to only 3 posts
-  const limitedPosts = sortedPosts.slice(0, 2);
+  const limitedPosts = sortedPosts.slice(0, 3);
 
   return (
     <div className="blog-single-main--footer">
