@@ -3,24 +3,28 @@ import { NextResponse } from "next/server";
 import sendgrid from "@sendgrid/mail";
 import { getCurrentDateTime } from "../utils/Helpers";
 import
-{
-    prepareAUSTRACEmail,
-    prepareContactAdminEmail,
-    prepareContactConfirmationEmail,
-    prepareFranchiseAdminEmail,
-    prepareFranchiseConfirmationEmail,
-    prepareCustomerEmail,
-    prepareInternalNotificationEmail,
-    prepareOperationsEmail,
-    prepareQuoteAdminEmail,
-    prepareQuoteConfirmationEmail,
-    prepareSiteInfoEmail,
-    prepareSiteInfoConfirmationEmail,
-    prepareTermsEmail
-} from "../services/emailService";
+    {
+        prepareAUSTRACEmail,
+        prepareContactAdminEmail,
+        prepareContactConfirmationEmail,
+        prepareFranchiseAdminEmail,
+        prepareFranchiseConfirmationEmail,
+        prepareCustomerEmail,
+        prepareInternalNotificationEmail,
+        prepareOperationsEmail,
+        prepareQuoteAdminEmail,
+        prepareQuoteConfirmationEmail,
+        prepareSiteInfoEmail,
+        prepareSiteInfoConfirmationEmail,
+        prepareTermsEmail
+    } from "../services/emailService";
 
 // Set SendGrid API key once
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
+
+// Environment detection - Use sync emails on Vercel, async queue on your own server
+const IS_VERCEL = process.env.VERCEL_ENV || process.env.VERCEL || process.env.VERCEL_URL;
+const USE_SYNC_EMAILS = IS_VERCEL;
 
 // Ultra-fast XSS sanitization - only for critical fields
 const fastSanitize = (str) =>
@@ -32,7 +36,7 @@ const fastSanitize = (str) =>
         .replace(/on\w+\s*=/gi, ''); // Remove event handlers
 };
 
-// Background email queue - process emails after response
+// Background email queue - process emails after response (Production only)
 const emailQueue = [];
 let processing = false;
 
@@ -78,7 +82,7 @@ const formatFileSize = (bytes) =>
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 };
 
-// Enhanced email processing with detailed logging
+// Enhanced email processing with detailed logging (Production only)
 const processEmailQueue = async () =>
 {
     if (processing || emailQueue.length === 0) return;
@@ -174,9 +178,10 @@ const sendEmailWithDetails = async (emailData) =>
     }
 };
 
-// Optimized form handlers with detailed email processing
+// Universal form handlers with both async (production) and sync (Vercel) modes
 const FORM_HANDLERS = {
     austrac: {
+        // Async queue method (Production)
         queueEmails: (data) =>
         {
             emailQueue.push({
@@ -193,6 +198,17 @@ const FORM_HANDLERS = {
                     };
                 }
             });
+        },
+        // Sync method (Vercel Development)
+        executeEmailsSync: async (data) =>
+        {
+            const emailData = prepareAUSTRACEmail(data);
+            const emailDetails = [await sendEmailWithDetails(emailData)];
+
+            return {
+                emailsSent: emailDetails.length,
+                emailDetails
+            };
         },
         response: "AUSTRAC information submitted successfully!",
         logData: (data) => ({ org: data.Organisation, email: data.OrganisationEmail })
@@ -221,6 +237,21 @@ const FORM_HANDLERS = {
                 }
             });
         },
+        executeEmailsSync: async (data) =>
+        {
+            const adminEmail = prepareContactAdminEmail(data);
+            const confirmationEmail = prepareContactConfirmationEmail(data);
+
+            const emailDetails = await Promise.all([
+                sendEmailWithDetails(adminEmail),
+                sendEmailWithDetails(confirmationEmail)
+            ]);
+
+            return {
+                emailsSent: emailDetails.length,
+                emailDetails
+            };
+        },
         response: "Contact request submitted successfully!",
         logData: (data) => ({ name: data.FullName, dept: data.Department })
     },
@@ -247,6 +278,21 @@ const FORM_HANDLERS = {
                     };
                 }
             });
+        },
+        executeEmailsSync: async (data) =>
+        {
+            const adminEmail = prepareFranchiseAdminEmail(data);
+            const confirmationEmail = prepareFranchiseConfirmationEmail(data);
+
+            const emailDetails = await Promise.all([
+                sendEmailWithDetails(adminEmail),
+                sendEmailWithDetails(confirmationEmail)
+            ]);
+
+            return {
+                emailsSent: emailDetails.length,
+                emailDetails
+            };
         },
         response: "Franchise enquiry submitted successfully!",
         logData: (data) => ({ name: data.FullName, area: data.InterestedArea })
@@ -276,6 +322,23 @@ const FORM_HANDLERS = {
                     };
                 }
             });
+        },
+        executeEmailsSync: async (data) =>
+        {
+            const operationsEmail = prepareOperationsEmail(data);
+            const customerEmail = prepareCustomerEmail(data);
+            const internalEmail = prepareInternalNotificationEmail(data);
+
+            const emailDetails = await Promise.all([
+                sendEmailWithDetails(operationsEmail),
+                sendEmailWithDetails(customerEmail),
+                sendEmailWithDetails(internalEmail)
+            ]);
+
+            return {
+                emailsSent: emailDetails.length,
+                emailDetails
+            };
         },
         response: "ICA form submitted successfully!",
         logData: (data) => ({ name: data.Name, business: data.BusinessName })
@@ -311,6 +374,29 @@ const FORM_HANDLERS = {
                     };
                 }
             });
+        },
+        executeEmailsSync: async (data) =>
+        {
+            // Minimal sanitization - only dangerous fields
+            const clean = {
+                ...data,
+                Name: fastSanitize(data.Name),
+                Organisation: fastSanitize(data.Organisation),
+                FormID: data.FormID || "quote"
+            };
+
+            const adminEmail = prepareQuoteAdminEmail(clean);
+            const confirmationEmail = prepareQuoteConfirmationEmail(clean);
+
+            const emailDetails = await Promise.all([
+                sendEmailWithDetails(adminEmail),
+                sendEmailWithDetails(confirmationEmail)
+            ]);
+
+            return {
+                emailsSent: emailDetails.length,
+                emailDetails
+            };
         },
         response: "Quote request submitted successfully!",
         logData: (data) => ({ org: data.Organisation, name: data.Name })
@@ -348,6 +434,30 @@ const FORM_HANDLERS = {
                 }
             });
         },
+        executeEmailsSync: async (data) =>
+        {
+            // Minimal sanitization + array normalization
+            const clean = {
+                ...data,
+                BusinessName: fastSanitize(data.BusinessName),
+                Contact: fastSanitize(data.Contact),
+                Type: data.Type || "Regular Service",
+                Services: Array.isArray(data.Services) ? data.Services : [data.Services].filter(Boolean)
+            };
+
+            const siteInfoEmail = prepareSiteInfoEmail(clean);
+            const confirmationEmail = prepareSiteInfoConfirmationEmail(clean);
+
+            const emailDetails = await Promise.all([
+                sendEmailWithDetails(siteInfoEmail),
+                sendEmailWithDetails(confirmationEmail)
+            ]);
+
+            return {
+                emailsSent: emailDetails.length,
+                emailDetails
+            };
+        },
         response: "Site info submitted successfully!",
         logData: (data) => ({ business: data.BusinessName, contact: data.Contact })
     },
@@ -383,6 +493,29 @@ const FORM_HANDLERS = {
                 }
             });
         },
+        executeEmailsSync: async (data) =>
+        {
+            // Reuse siteinfo logic - same structure
+            const clean = {
+                ...data,
+                BusinessName: fastSanitize(data.BusinessName),
+                Contact: fastSanitize(data.Contact),
+                Type: data.Type || "Special Event"
+            };
+
+            const siteInfoEmail = prepareSiteInfoEmail(clean);
+            const confirmationEmail = prepareSiteInfoConfirmationEmail(clean);
+
+            const emailDetails = await Promise.all([
+                sendEmailWithDetails(siteInfoEmail),
+                sendEmailWithDetails(confirmationEmail)
+            ]);
+
+            return {
+                emailsSent: emailDetails.length,
+                emailDetails
+            };
+        },
         response: "Special event info submitted successfully!",
         logData: (data) => ({ business: data.BusinessName, type: "special" })
     },
@@ -404,6 +537,16 @@ const FORM_HANDLERS = {
                     };
                 }
             });
+        },
+        executeEmailsSync: async (data) =>
+        {
+            const emailData = prepareTermsEmail(data);
+            const emailDetails = [await sendEmailWithDetails(emailData)];
+
+            return {
+                emailsSent: emailDetails.length,
+                emailDetails
+            };
         },
         response: "Terms & Conditions accepted successfully!",
         logData: (data) => ({ org: data["Organisation Name"], name: data["Full Name"] })
@@ -434,48 +577,106 @@ export async function POST(req)
             return NextResponse.json({ error: "Invalid form type" }, { status: 400 });
         }
 
-        // Queue emails for background processing - NO waiting!
-        handler.queueEmails(formData);
+        let emailProcessingTime = 0;
+        let emailResult = null;
 
-        // Start processing queue in background (non-blocking)
-        setImmediate(() => processEmailQueue());
+        if (USE_SYNC_EMAILS) {
+            // 🔄 SYNCHRONOUS MODE (Vercel Development)
+            console.log(`🔄 Processing ${formType} emails synchronously (Vercel mode)`);
+
+            const emailStartTime = performance.now();
+            emailResult = await handler.executeEmailsSync(formData);
+            emailProcessingTime = performance.now() - emailStartTime;
+
+            // Log email results immediately
+            console.log(`\n✅ ${formType.toUpperCase()} emails sent synchronously:`);
+            console.log(`   └─ Emails Sent: ${emailResult.emailsSent}`);
+            console.log(`   └─ Processing Time: ${emailProcessingTime.toFixed(2)}ms`);
+
+            // Log individual email details for heavy forms (ICA)
+            if (formType.toLowerCase() === 'ica' || emailResult.emailDetails.length > 2) {
+                emailResult.emailDetails.forEach((email, index) =>
+                {
+                    console.log(`   └─ Email ${index + 1}: ${email.to} - ${email.sendTime}ms - ${email.success ? '✓' : '✗'}`);
+                    if (email.attachments.count > 0) {
+                        console.log(`      └─ Attachments: ${email.attachments.count} files (${email.attachments.totalSizeFormatted})`);
+                    }
+                });
+            }
+
+        } else {
+            // ⚡ ASYNC MODE (Production Server)
+            console.log(`⚡ Queuing ${formType} emails for background processing (Production mode)`);
+
+            handler.queueEmails(formData);
+
+            // Start processing queue in background (non-blocking)
+            setImmediate(() => processEmailQueue());
+
+            emailProcessingTime = 0; // Queued
+        }
 
         const totalTime = performance.now() - startTime;
         const parseTimeMs = parseTime - startTime;
+        const processingTimeMs = totalTime - parseTimeMs - emailProcessingTime;
 
-        // Async logging - don't wait for it
-        setImmediate(() =>
-        {
-            const logData = handler.getLogData ? handler.getLogData(formData) : handler.logData(formData);
-            console.log(`${formType} submitted:`, {
-                ...logData,
-                timestamp: new Date().toISOString(),
-                performance: {
-                    totalTime: `${totalTime.toFixed(2)}ms`,
-                    emailTime: '0ms (queued)',
-                    parseTime: `${parseTimeMs.toFixed(2)}ms`,
-                    processingTime: `${(totalTime - parseTimeMs).toFixed(2)}ms`,
-                    emailsQueued: true
-                }
+        // Async logging for production, sync for development
+        const logData = handler.logData(formData);
+        const performanceData = {
+            ...logData,
+            timestamp: new Date().toISOString(),
+            environment: USE_SYNC_EMAILS ? 'vercel-dev' : 'production',
+            performance: {
+                totalTime: `${totalTime.toFixed(2)}ms`,
+                emailTime: USE_SYNC_EMAILS ? `${emailProcessingTime.toFixed(2)}ms` : '0ms (queued)',
+                parseTime: `${parseTimeMs.toFixed(2)}ms`,
+                processingTime: `${processingTimeMs.toFixed(2)}ms`,
+                emailsQueued: !USE_SYNC_EMAILS,
+                emailsSentSync: USE_SYNC_EMAILS
+            }
+        };
+
+        if (USE_SYNC_EMAILS) {
+            console.log(`📊 ${formType} Performance:`, performanceData);
+        } else {
+            setImmediate(() =>
+            {
+                console.log(`📊 ${formType} Performance:`, performanceData);
             });
-        });
+        }
 
-        // Return immediately - emails processing in background
-        return NextResponse.json({
+        // Return response with environment-specific data
+        const response = {
             message: handler.response,
             responseTime: `${totalTime.toFixed(2)}ms`,
-            emailsQueued: true
-        }, { status: 200 });
+            environment: USE_SYNC_EMAILS ? 'development' : 'production',
+            emailsQueued: !USE_SYNC_EMAILS,
+            emailsSentSync: USE_SYNC_EMAILS
+        };
+
+        // Add email processing details for synchronous mode
+        if (USE_SYNC_EMAILS && emailResult) {
+            response.emailProcessingTime = `${emailProcessingTime.toFixed(2)}ms`;
+            response.emailsSent = emailResult.emailsSent;
+            response.emailSuccessRate = emailResult.emailDetails.filter(e => e.success).length / emailResult.emailDetails.length;
+        }
+
+        return NextResponse.json(response, { status: 200 });
 
     } catch (error) {
         const errorTime = performance.now() - startTime;
 
         // Fast error response
-        console.error("Form error:", error.message, `Time: ${errorTime.toFixed(2)}ms`);
+        console.error(`❌ ${USE_SYNC_EMAILS ? 'Vercel' : 'Production'} form error:`, {
+            error: error.message,
+            time: `${errorTime.toFixed(2)}ms`,
+            stack: error.stack
+        });
 
         return NextResponse.json(
             {
                 error: "Submission failed",
+                environment: USE_SYNC_EMAILS ? 'development' : 'production',
                 responseTime: `${errorTime.toFixed(2)}ms`
             },
             { status: error.message?.includes('JSON') ? 400 : 500 }
@@ -483,12 +684,15 @@ export async function POST(req)
     }
 }
 
-// Optional: Add a health check endpoint to monitor email queue
+// Health check endpoint with environment info
 export async function GET()
 {
     return NextResponse.json({
-        emailQueueLength: emailQueue.length,
-        processing: processing,
-        timestamp: new Date().toISOString()
+        environment: USE_SYNC_EMAILS ? 'development (vercel)' : 'production (server)',
+        emailMode: USE_SYNC_EMAILS ? 'synchronous' : 'asynchronous',
+        emailQueueLength: USE_SYNC_EMAILS ? 'N/A (sync mode)' : emailQueue.length,
+        processing: USE_SYNC_EMAILS ? 'N/A (sync mode)' : processing,
+        timestamp: new Date().toISOString(),
+        vercelEnv: process.env.VERCEL_ENV || 'not-vercel'
     });
 }
