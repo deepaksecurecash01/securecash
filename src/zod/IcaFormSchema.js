@@ -43,7 +43,7 @@ export const IcaFormSchema = z.object({
     GovernmentID: z
         .instanceof(File, "Government ID file is required")
         .refine((file) => file.size > 0, "Please upload a government ID file")
-        .refine((file) => file.size <= 5 * 1024 * 1024, "File size must be less than 5MB")
+        .refine((file) => file.size <= 10 * 1024 * 1024, "File size must be less than 10MB")
         .refine(
             (file) => file.type.startsWith("image/"),
             "Only image files are allowed for government ID"
@@ -57,7 +57,7 @@ export const IcaFormSchema = z.object({
     WitnessID: z
         .instanceof(File, "Witness ID file is required")
         .refine((file) => file.size > 0, "Please upload a witness ID file")
-        .refine((file) => file.size <= 5 * 1024 * 1024, "File size must be less than 5MB")
+        .refine((file) => file.size <= 10 * 1024 * 1024, "File size must be less than 10MB")
         .refine(
             (file) => file.type.startsWith("image/"),
             "Only image files are allowed for witness ID"

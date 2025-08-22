@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState , forwardRef} from "react";
 import WarningPopup from "./WarningPopup";
 
-export const InputField = ({
+export const InputField = forwardRef(({
   label,
   name,
   placeholder,
@@ -14,7 +14,7 @@ export const InputField = ({
   setCurrentErrorField,
   textarea = false,
 
-}) => {
+}, ref) => {
   const hasError = errors[name] && currentErrorField === name;
   const [isFocused, setIsFocused] = useState(false);
   return (
@@ -38,7 +38,8 @@ export const InputField = ({
         <input
           className={`w-full text-sm py-2 px-3 shadow-none font-montserrat border-none rounded-sm  ${
             hasError ? "focus:outline-red-600" : "focus:outline-primary"
-          }`}
+            }`}
+          ref={ref}
           type={type}
           name={name}
           {...register(name)}
@@ -72,4 +73,4 @@ export const InputField = ({
       </div>
     </div>
   );
-};
+});

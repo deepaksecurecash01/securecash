@@ -2,114 +2,33 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import
-    {
-        FaUser,
-        FaPhone,
-        FaEnvelope,
-        FaInfoCircle,
-        FaQuestionCircle,
-        FaBuilding,
-        FaUsers,
-        FaClock,
-        FaMapMarkerAlt,
-        FaSpinner,
-        FaCheckCircle,
-    } from "react-icons/fa";
+{
+    FaUser,
+    FaPhone,
+    FaEnvelope,
+    FaInfoCircle,
+    FaQuestionCircle,
+    FaBuilding,
+    FaUsers,
+    FaClock,
+    FaMapMarkerAlt,
+    FaSpinner,
+    FaCheckCircle,
+} from "react-icons/fa";
 
-import
-    {
-        FaCalendarAlt,
-        FaMoneyBillAlt,
-        FaUniversity,
-        FaExclamationCircle,
-    } from "react-icons/fa";
 
 import WarningPopup from "@/components/common/forms/elements/WarningPopup";
 import Typography from "@/components/common/Typography";
 import styles from "@/components/common/checkbox/Checkbox.module.css";
 import DatePickerFieldWithRef from "../common/forms/elements/DatePickerField";
+import { useFormSubmission } from '@/hooks/useFormSubmission';
+import { useFormErrors } from '@/hooks/useFormErrors';
+import { formatDateForAPI } from '@/utils/formHelpers';
+import ContactFormSchema, { formConfig, defaultValues } from '@/zod/ContactFormSchema';
 
-const ContactFormSchema = z.object({
-    Department: z
-        .string()
-        .min(1, "Please select a department."),
-    FullName: z
-        .string()
-        .min(1, "Full name is required.")
-        .min(2, "Full name must be at least 2 characters long."),
-    Organisation: z
-        .string()
-        .min(1, "Organisation name is required.")
-        .min(2, "Organisation name must be at least 2 characters long."),
-    Phone: z
-        .string()
-        .min(1, "Phone number is required.")
-        .regex(/^[0-9\s\-\+\(\)]+$/, "Please enter a valid phone number.")
-        .min(8, "Phone number must be at least 8 digits."),
-    Email: z
-        .string()
-        .min(1, "Email is required.")
-        .email("Please enter a valid email address."),
-    ChkCallBack: z
-        .string()
-        .optional(),
-    CallbackDate: z
-        .any()
-        .optional(),
-    CallbackTime: z
-        .string()
-        .optional(),
-    CallbackState: z
-        .string()
-        .optional(),
-    Message: z
-        .string()
-        .min(1, "Please tell us how we can help you.")
-        .min(10, "Please provide more details about how we can help."),
-    BotField: z.string().max(0, "Bot detected!").optional(),
-}).refine((data) =>
-{
-    // Check if callback is requested (checkbox is checked)
-    const callbackRequested = data.ChkCallBack === 'Yes, please.';
 
-    if (callbackRequested) {
-        // If callback is requested, all callback fields must be filled
-        return data.CallbackDate &&
-            data.CallbackTime &&
-            data.CallbackTime !== '' &&
-            data.CallbackState &&
-            data.CallbackState !== '';
-    }
 
-    return true; // If no callback requested, validation passes
-}, {
-    message: "When requesting a callback, please select a date, time, and state.",
-    path: ["CallbackDate"],
-}).refine((data) =>
-{
-    const callbackRequested = data.ChkCallBack === 'Yes, please.';
-
-    if (callbackRequested && (!data.CallbackTime || data.CallbackTime === '')) {
-        return false;
-    }
-    return true;
-}, {
-    message: "Please select a callback time.",
-    path: ["CallbackTime"],
-}).refine((data) =>
-{
-    const callbackRequested = data.ChkCallBack === 'Yes, please.';
-
-    if (callbackRequested && (!data.CallbackState || data.CallbackState === '')) {
-        return false;
-    }
-    return true;
-}, {
-    message: "Please select your state.",
-    path: ["CallbackState"],
-});
 
 const Checkbox = ({
     value,
@@ -364,24 +283,12 @@ const SelectOption = ({
     );
 };
 
-const focusInput = (ref) =>
-{
-    if (ref && ref.current) {
-        ref.current.focus();
-    }
-};
+
 
 const FranchiseForm = () =>
 {
-    const [currentErrorField, setCurrentErrorField] = useState(null);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-    const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
-    const [submissionStatus, setSubmissionStatus] = useState(null);
-    const [formData, setFormData] = useState(null);
 
-    // Create refs for focus management
+    // Create refs for focus management - same as before
     const fullNameRef = useRef(null);
     const organisationRef = useRef(null);
     const phoneRef = useRef(null);
@@ -389,7 +296,16 @@ const FranchiseForm = () =>
     const messageRef = useRef(null);
     const CallbackDateRef = useRef(null);
 
-    const calendlyURL = "https://calendly.com/jo_securecash?hide_gdpr_banner=1&primary_color=c7a652";
+    // Create the focus map - same as your existing logic
+    const fieldRefs = {
+        FullName: fullNameRef,
+        Organisation: organisationRef,
+        Phone: phoneRef,
+        Email: emailRef,
+        Message: messageRef,
+        CallbackDate: CallbackDateRef,
+    };
+
 
     const {
         register,
@@ -400,26 +316,34 @@ const FranchiseForm = () =>
         formState: { errors },
     } = useForm({
         resolver: ContactFormSchema ? zodResolver(ContactFormSchema) : undefined,
-        defaultValues: {
-            Department: "",
-            FullName: "",
-            Organisation: "",
-            Phone: "",
-            Email: "",
-            ChkCallBack: "", // Explicitly set to empty string
-            CallbackDate: "",
-            CallbackTime: "",
-            CallbackState: "",
-            Message: "",
-            BotField: "",
-        },
+        defaultValues,
     });
 
-    const formatDate = (date) =>
-    {
-        const unixTimestamp = Math.floor(new Date(date).getTime());
-        return unixTimestamp;
-    };
+    const { currentErrorField, setCurrentErrorField, handleFieldErrors, handleSubmissionError } = useFormErrors(fieldRefs);
+
+
+    const { isSubmitting, isSubmitted, submissionError, handleSubmission } = useFormSubmission({
+        formType: 'contact',
+        formId: 'Contact',
+        onSuccess: (result, finalData) =>
+        {
+            console.log("Form submitted successfully!");
+            // Form will show success state via isSubmitted
+        },
+        onError: (error) =>
+        {
+            // Error is automatically handled by the hook
+            console.error("Submission failed:", error);
+        },
+        prepareData: async (data) =>
+        {
+            if (data.CallbackDate) {
+                const formattedDate = formatDateForAPI(data.CallbackDate);
+                return { ...data, CallbackDate: formattedDate };
+            }
+            return data;
+        }
+    });
 
     const selectedCallbackDate = watch("CallbackDate");
     const needsCallback = watch("ChkCallBack");
@@ -430,131 +354,8 @@ const FranchiseForm = () =>
         setValue(e.target.name, value, { shouldValidate: true, shouldDirty: true });
     };
 
-    // Function to get device information
-    const getDeviceInfo = () =>
-    {
-        const userAgent = navigator.userAgent;
 
-        // Parse browser and version
-        let browserInfo = 'Unknown';
-        let browserVersion = '';
 
-        if (/Chrome\/([0-9.]+)/.test(userAgent)) {
-            const match = userAgent.match(/Chrome\/([0-9.]+)/);
-            browserInfo = 'Chrome';
-            browserVersion = match[1];
-        } else if (/Firefox\/([0-9.]+)/.test(userAgent)) {
-            const match = userAgent.match(/Firefox\/([0-9.]+)/);
-            browserInfo = 'Firefox';
-            browserVersion = match[1];
-        } else if (/Version\/([0-9.]+).*Safari/.test(userAgent)) {
-            const match = userAgent.match(/Version\/([0-9.]+)/);
-            browserInfo = 'Safari';
-            browserVersion = match[1];
-        } else if (/Edge\/([0-9.]+)/.test(userAgent)) {
-            const match = userAgent.match(/Edge\/([0-9.]+)/);
-            browserInfo = 'Edge';
-            browserVersion = match[1];
-        }
-
-        // Parse OS information
-        let osInfo = 'Unknown';
-        if (/Windows NT ([0-9._]+)/.test(userAgent)) {
-            const match = userAgent.match(/Windows NT ([0-9._]+)/);
-            osInfo = `Windows NT ${match[1]}`;
-        } else if (/Mac OS X ([0-9._]+)/.test(userAgent)) {
-            const match = userAgent.match(/Mac OS X ([0-9._]+)/);
-            osInfo = `Mac OS X ${match[1].replace(/_/g, '.')}`;
-        } else if (/Android ([0-9.]+)/.test(userAgent)) {
-            const match = userAgent.match(/Android ([0-9.]+)/);
-            osInfo = `Android ${match[1]}`;
-        } else if (/OS ([0-9._]+)/.test(userAgent) && /iPhone|iPad/.test(userAgent)) {
-            const match = userAgent.match(/OS ([0-9._]+)/);
-            osInfo = `iOS ${match[1].replace(/_/g, '.')}`;
-        } else if (/Linux/.test(userAgent)) {
-            osInfo = 'Linux';
-        }
-
-        return {
-            fullUserAgent: userAgent,
-            browser: browserInfo,
-            browserVersion: browserVersion,
-            os: osInfo,
-        };
-    };
-
-    // Function to get IP address
-    const getIPAddress = async () =>
-    {
-        try {
-            // Try multiple IP services for reliability
-            const ipServices = [
-                'https://api.ipify.org?format=json',
-                'https://ipapi.co/json/',
-                'https://api.ip.sb/jsonip',
-            ];
-
-            for (const service of ipServices) {
-                try {
-                    const response = await fetch(service);
-                    const data = await response.json();
-
-                    // Different services return IP in different formats
-                    if (data.ip) return data.ip;
-                    if (data.query) return data.query;
-
-                } catch (error) {
-                    console.log(`IP service ${service} failed:`, error);
-                    continue;
-                }
-            }
-
-            return 'Unable to detect';
-        } catch (error) {
-            console.error('Error fetching IP:', error);
-            return 'Unable to detect';
-        }
-    };
-
-    // Focus management effect
-    useEffect(() =>
-    {
-        if (errors && Object.keys(errors).length > 0) {
-            const errorField = Object.keys(errors)[0]; // Get the first error field
-            setCurrentErrorField(errorField);
-
-            const focusMap = {
-                FullName: fullNameRef,
-                Organisation: organisationRef,
-                Phone: phoneRef,
-                Email: emailRef,
-                Message: messageRef,
-                CallbackDate: CallbackDateRef,
-            };
-
-            const refToFocus = focusMap[errorField];
-            if (refToFocus) {
-                focusInput(refToFocus);
-            }
-        } else {
-            setCurrentErrorField(null);
-        }
-    }, [errors]);
-
-    useEffect(() =>
-    {
-        if (submissionStatus) {
-            const timer = setTimeout(() =>
-            {
-                // dispatch(setPopupForm("")); // Uncomment if using Redux
-                setTimeout(() =>
-                {
-                    setSubmissionStatus(null);
-                }, 1000);
-            }, 6000);
-            return () => clearTimeout(timer);
-        }
-    }, [submissionStatus]);
 
     const inputFields = [
         {
@@ -592,159 +393,25 @@ const FranchiseForm = () =>
         },
     ];
 
-    const departmentOptions = [
-        { value: "", label: "Please select a department..." },
-        { value: "customers", label: "Customer Service" },
-        { value: "sales", label: "Sales" },
-        { value: "operations", label: "Operations" },
-    ];
 
-    const bestTimeOptions = [
-        { value: "", label: "Please Select" },
-        { value: "9:30am", label: "9:30am" },
-        { value: "10:00am", label: "10:00am" },
-        { value: "10:30am", label: "10:30am" },
-        { value: "11:00am", label: "11:00am" },
-        { value: "11:30am", label: "11:30am" },
-        { value: "12:00pm", label: "12:00pm" },
-        { value: "12:30pm", label: "12:30pm" },
-        { value: "1:00pm", label: "1:00pm" },
-        { value: "1:30pm", label: "1:30pm" },
-        { value: "2:00pm", label: "2:00pm" },
-        { value: "2:30pm", label: "2:30pm" },
-        { value: "3:00pm", label: "3:00pm" },
-        { value: "3:30pm", label: "3:30pm" },
-        { value: "4:00pm", label: "4:00pm" },
-        { value: "4:30pm", label: "4:30pm" },
-        { value: "5:00pm", label: "5:00pm" },
-        { value: "5:30pm", label: "5:30pm" },
-        { value: "6:00pm", label: "6:00pm" },
-        { value: "6:30pm", label: "6:30pm" },
-        { value: "7:00pm", label: "7:00pm" },
-    ];
 
-    const stateOptions = [
-        { value: "", label: "Please Select" },
-        { value: "NSW", label: "NSW" },
-        { value: "VIC", label: "VIC" },
-        { value: "QLD", label: "QLD" },
-        { value: "WA", label: "WA" },
-        { value: "SA", label: "SA" },
-        { value: "TAS", label: "TAS" },
-        { value: "ACT", label: "ACT" },
-        { value: "NT", label: "NT" },
-        { value: "NZ", label: "NZ" },
-    ];
+    const { departments, callBackTimes, states } = formConfig;
 
-    const handleFormSubmit = async (data) =>
+    const onSubmit = async (data) =>
     {
-   
-        try {
-            // Basic validation
-            if (!data.Department || !data.FullName || !data.Email || !data.Message) {
-                console.log("Missing required fields:");
-                console.log("Department:", data.Department);
-                console.log("FullName:", data.FullName);
-                console.log("Email:", data.Email);
-                console.log("Message:", data.Message);
-                alert("Please fill in all required fields.");
-                return;
-            }
-
-            // Check honeypot field
-            if (data.BotField) {
-                console.log("Bot detected.");
-                return;
-            }
-
-            console.log("All validations passed, proceeding with submission...");
-
-            setIsSubmitting(true);
-
-            // Get device information
-            const deviceInfo = getDeviceInfo();
-
-            // Get IP address
-            const ipAddress = await getIPAddress();
-
-            // Format date of submission
-            const now = new Date();
-            const dateOfSubmission = now.toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            }).replace(/(\d+)/, (match) =>
-            {
-                const day = parseInt(match);
-                const suffix = day === 1 || day === 21 || day === 31 ? 'st' :
-                    day === 2 || day === 22 ? 'nd' :
-                        day === 3 || day === 23 ? 'rd' : 'th';
-                return day + suffix;
-            }) + ', ' + now.toLocaleTimeString('en-US', {
-                hour12: true,
-                hour: 'numeric',
-                minute: '2-digit',
-                second: '2-digit'
-            });
-
-            // Add timestamp, form ID, and device info
-            const finalData = {
-                "formType": "contact",
-                ...data,
-                timestamp: new Date().toISOString(),
-                formId: "Contact",
-                submissionId: `contact_${Date.now()}`,
-                "IP Address": ipAddress,
-                "Device": deviceInfo.fullUserAgent,
-                "Browser": `${deviceInfo.browser} ${deviceInfo.browserVersion}`,
-                "Operating System": deviceInfo.os,
-                dateOfSubmission: dateOfSubmission,
-            };
-
-            console.log("Final contact form data:", finalData);
-
-            // Uncomment this section when you want to make the actual API call
-            const response = await fetch("/api/forms", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(finalData),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || "Failed to submit the form");
-            }
-
-            const result = await response.json();
-
-            // Store form data for use in Calendly
-            setFormData(finalData);
-
-            // Set form as submitted
-            setIsFormSubmitted(true);
-            setIsSubmitted(true);
-            setIsSubmitting(false);
-
-            console.log("Form submitted successfully!");
-
-            // Reset form after successful submission
-            // setTimeout(() =>
-            // {
-            //     reset();
-            //     setIsSubmitted(false);
-            //     setIsFormSubmitted(false);
-            // }, 3000);
-
-        } catch (error) {
-            console.error("Form submission error:", error);
-            setIsSubmitting(false);
-
-            // Show error message to user
-            alert("There was an error submitting your form. Please try again.");
+        // Validate all fields first
+        if (!handleFieldErrors(errors)) {
+            return; // Stop if validation fails
         }
+
+        // Check required fields manually (can be removed if schema handles this)
+        if (!data.Department || !data.FullName || !data.Email || !data.Message) {
+            console.log("Missing required fields");
+            return;
+        }
+
+        console.log("All validations passed, proceeding with submission...");
+        await handleSubmission(data);
     };
 
     return (
@@ -753,7 +420,7 @@ const FranchiseForm = () =>
                 className="forms-franchise-v2 rounded-r-[8px] shadow-[3px_3px_10px_0px_rgba(0,0,0,0.2)] h-auto 992px:mx-0 px-8 480px:px-[5%] 1366px:h-full submit-status 992px:mt-4 992px:mt-0 992px:mb-16 w-full lg:mt-0 lg:mb-0 text-center py-8 bg-[#f1f1f1] relative"
                 data-formid="Contact"
                 style={{ background: "#f1f1f1" }}
-                onSubmit={handleSubmit(handleFormSubmit)}
+                onSubmit={handleSubmit(onSubmit)}
                 noValidate
                 autoComplete="off"
             >
@@ -775,7 +442,7 @@ const FranchiseForm = () =>
                             register={register}
                             Icon={FaBuilding}
                             setValue={setValue}
-                            options={departmentOptions}
+                            options={departments}
                             errors={errors}
                             currentErrorField={currentErrorField}
                             setCurrentErrorField={setCurrentErrorField}
@@ -840,7 +507,7 @@ const FranchiseForm = () =>
                                     register={register}
                                     Icon={FaClock}
                                     setValue={setValue}
-                                    options={bestTimeOptions}
+                                    options={callBackTimes}
                                     errors={errors}
                                     currentErrorField={currentErrorField}
                                     setCurrentErrorField={setCurrentErrorField}
@@ -854,7 +521,7 @@ const FranchiseForm = () =>
                                     register={register}
                                     Icon={FaMapMarkerAlt}
                                     setValue={setValue}
-                                    options={stateOptions}
+                                    options={states}
                                     errors={errors}
                                     currentErrorField={currentErrorField}
                                     setCurrentErrorField={setCurrentErrorField}
@@ -880,7 +547,7 @@ const FranchiseForm = () =>
                     </>
                 </div>
 
-               
+
 
                 <div className="button-controls-container w-[80%] mx-auto mt-7">
                     <div className="button-section relative">
@@ -898,7 +565,7 @@ const FranchiseForm = () =>
                             ) : isSubmitted ? (
                                 <div className="flex items-center justify-center">
                                     <FaCheckCircle className="text-white mr-2" />
-                                        Thank you, we received your message!
+                                    Thank you, we received your message!
                                 </div>
                             ) : (
                                 "Send Message"

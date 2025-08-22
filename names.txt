@@ -1,0 +1,964 @@
+// /hooks/useFileUpload.js
+import { useState, useCallback } from 'react';
+import imageCompression from 'browser-image-compression';
+import { fileToBase64 } from '@/utils/apiClient';
+
+export const useFileUpload = ({
+    compression = {
+        targetSizeKB: 400,
+        maxSizeMB: 5,
+        allowedTypes: ['image/jpeg', 'image/png', 'image/jpg']
+    },
+    concurrencyLimit = 2
+} = {}) =>
+{
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [fileErrors, setFileErrors] = useState([]);
+    const [processingProgress, setProcessingProgress] = useState(0);
+
+    // Progressive image compression
+    const compressImageFile = useCallback(async (file) =>
+    {
+        const targetSizeBytes = compression.targetSizeKB * 1024;
+
+        const compressionLevels = [
+            { quality: 0.8, maxWidthOrHeight: 1920 },
+            { quality: 0.6, maxWidthOrHeight: 1280 },
+            { quality: 0.4, maxWidthOrHeight: 800 },
+            { quality: 0.2, maxWidthOrHeight: 600 }
+        ];
+
+        console.log(`Compressing ${file.name} (${(file.size / 1024).toFixed(2)}KB)`);
+
+        for (let i = 0; i < compressionLevels.length; i++) {
+            const options = {
+                maxSizeMB: compression.targetSizeKB / 1024,
+                maxWidthOrHeight: compressionLevels[i].maxWidthOrHeight,
+                useWebWorker: true,
+                quality: compressionLevels[i].quality
+            };
+
+            try {
+                const compressedFile = await imageCompression(file, options);
+                console.log(`Level ${i + 1}: ${(compressedFile.size / 1024).toFixed(2)}KB`);
+
+                if (compressedFile.size <= targetSizeBytes || i === compressionLevels.length - 1) {
+                    console.log(`Final: ${(compressedFile.size / 1024).toFixed(2)}KB`);
+                    return compressedFile;
+                }
+            } catch (error) {
+                console.error(`Compression level ${i + 1} failed:`, error);
+                continue;
+            }
+        }
+
+        console.warn('All compression failed, using original');
+        return file;
+    }, [compression]);
+
+    // Process multiple files
+    const processFiles = useCallback(async (formData, fileFieldsConfig) =>
+    {
+        setIsProcessing(true);
+        setFileErrors([]);
+        setProcessingProgress(0);
+
+        const attachments = [];
+        const errors = [];
+
+        try {
+            // Process files in batches
+            for (let i = 0; i < fileFieldsConfig.length; i += concurrencyLimit) {
+                const batch = fileFieldsConfig.slice(i, i + concurrencyLimit);
+
+                const batchPromises = batch.map(async ({ field, prefix }) =>
+                {
+                    if (formData[field]) {
+                        try {
+                            const compressedFile = await compressImageFile(formData[field]);
+                            const base64File = await fileToBase64(compressedFile);
+                            if (base64File) {
+                                return {
+                                    filename: `${prefix}.${formData[field].name.split('.').pop()}`,
+                                    data: base64File
+                                };
+                            }
+                        } catch (error) {
+                            errors.push(`${field}: ${error.message}`);
+                            return null;
+                        }
+                    }
+                    return null;
+                });
+
+                const batchResults = await Promise.all(batchPromises);
+                attachments.push(...batchResults.filter(Boolean));
+
+                // Update progress
+                setProcessingProgress(Math.round(((i + concurrencyLimit) / fileFieldsConfig.length) * 100));
+            }
+
+            if (errors.length > 0) {
+                setFileErrors(errors);
+                throw new Error(`File processing errors: ${errors.join(', ')}`);
+            }
+
+            setProcessingProgress(100);
+            return attachments;
+
+        } catch (error) {
+            setFileErrors(prev => [...prev, error.message]);
+            throw error;
+        } finally {
+            setIsProcessing(false);
+        }
+    }, [compressImageFile, concurrencyLimit]);
+
+    // Validate single file
+    const validateFile = useCallback((file) =>
+    {
+        if (!file) return { valid: true };
+
+        const errors = [];
+
+        // Size validation
+        if (file.size > compression.maxSizeMB * 1024 * 1024) {
+            errors.push(`File too large. Max ${compression.maxSizeMB}MB allowed.`);
+        }
+
+        // Type validation
+        if (!compression.allowedTypes.includes(file.type)) {
+            errors.push(`Invalid file type. Allowed: ${compression.allowedTypes.join(', ')}`);
+        }
+
+        return {
+            valid: errors.length === 0,
+            errors
+        };
+    }, [compression]);
+
+    // Clear errors
+    const clearFileErrors = useCallback(() =>
+    {
+        setFileErrors([]);
+    }, []);
+
+    return {
+        // Processing state
+        isProcessing,
+        processingProgress,
+        fileErrors,
+
+        // Main functions
+        processFiles,
+        compressImageFile,
+        validateFile,
+
+        // Utilities
+        clearFileErrors
+    };
+};// /hooks/useFormErrors.js
+import { useState } from 'react';
+import { focusInput } from '@/utils/formHelpers';
+
+export const useFormErrors = (fieldRefs) =>
+{
+    const [currentErrorField, setCurrentErrorField] = useState(null);
+    const [submissionError, setSubmissionError] = useState(null);
+    // Handle field validation errors and focus management
+    const handleFieldErrors = (validationErrors) =>
+    {
+        if (validationErrors && Object.keys(validationErrors).length > 0) {
+            const errorField = Object.keys(validationErrors)[0];
+            setCurrentErrorField(errorField);
+
+            // Focus the field if ref is available
+            const refToFocus = fieldRefs[errorField];
+            if (refToFocus) {
+                focusInput(refToFocus);
+            }
+            return false; // Validation failed
+        } else {
+            setCurrentErrorField(null);
+            return true; // Validation passed
+        }
+    };
+
+    // Handle API/network submission errors
+    const handleSubmissionError = (error) =>
+    {
+        const errorMessage = error?.message || error || 'An error occurred during submission';
+        setSubmissionError(errorMessage);
+    };
+
+    // Clear submission errors (useful for retry scenarios)
+    const clearSubmissionError = () => setSubmissionError(null);
+
+    // Clear all errors
+    const clearAllErrors = () =>
+    {
+        setCurrentErrorField(null);
+        setSubmissionError(null);
+    };
+
+    return {
+        // Field error state
+        currentErrorField,
+        setCurrentErrorField,
+        handleFieldErrors,
+
+        // Submission error state  
+        submissionError,
+        handleSubmissionError,
+        clearSubmissionError,
+
+        // Utilities
+        clearAllErrors
+    };
+};// /hooks/useFormSubmission.js
+import { useState } from 'react';
+import { submitForm } from '@/utils/apiClient';
+import { prepareFormMetadata } from '@/utils/formHelpers';
+
+export const useFormSubmission = ({
+    formType,
+    formId,
+    onSuccess,
+    onError,
+    prepareData, // Optional data transformation function
+    enableHoneypot = true,
+    submitEndpoint = "/api/forms" // Allow custom endpoints
+}) =>
+{
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [submissionError, setSubmissionError] = useState(null);
+
+    const handleSubmission = async (formData) =>
+    {
+        try {
+            // Reset previous states
+            setSubmissionError(null);
+
+            // Check honeypot field if enabled
+            if (enableHoneypot && formData.BotField) {
+                console.log("Bot detected, ignoring submission");
+                return;
+            }
+
+            setIsSubmitting(true);
+
+            // Prepare metadata
+            const metadata = await prepareFormMetadata(formType, formId);
+
+            // Prepare final data
+            let finalData = {
+                ...formData,
+                ...metadata
+            };
+
+            // Apply custom data preparation if provided
+            if (prepareData && typeof prepareData === 'function') {
+                finalData = await prepareData(finalData);
+            }
+
+            console.log(`${formType} form submission:`, finalData);
+
+            // Submit to API
+            const result = await submitForm(finalData, submitEndpoint);
+            console.log("API Response:", result);
+
+            setIsSubmitted(true);
+            setIsSubmitting(false);
+
+            // Call success handler
+            if (onSuccess) {
+                onSuccess(result, finalData);
+            }
+
+            return result;
+
+        } catch (error) {
+            console.error("Form submission error:", error);
+            setIsSubmitting(false);
+            setSubmissionError(error.message);
+
+            // Call error handler
+            if (onError) {
+                onError(error, formData);
+            }
+
+            throw error; // Re-throw so caller can handle if needed
+        }
+    };
+
+    const resetSubmission = () =>
+    {
+        setIsSubmitting(false);
+        setIsSubmitted(false);
+        setSubmissionError(null);
+    };
+
+    return {
+        isSubmitting,
+        isSubmitted,
+        submissionError,
+        handleSubmission,
+        resetSubmission
+    };
+};// /hooks/useMultiFormCoordinator.js
+import { useState, useCallback, useMemo } from 'react';
+
+export const useMultiFormCoordinator = ({
+    formConfig,
+    initialData = {},
+    onFormTransition,
+    onFinalSubmission
+}) =>
+{
+    // Core state management
+    const [activeFormId, setActiveFormId] = useState(null);
+    const [activeStepId, setActiveStepId] = useState(null);
+    const [combinedFormData, setCombinedFormData] = useState(initialData);
+    const [completedSteps, setCompletedSteps] = useState(new Set());
+
+    // Initialize if not already set
+    const initializeIfNeeded = useCallback(() =>
+    {
+        if (!activeFormId && formConfig.flow.length > 0) {
+            const firstStep = formConfig.flow[0];
+            const [formId, stepId] = firstStep.includes('.') ? firstStep.split('.') : [firstStep, null];
+            setActiveFormId(formId);
+            setActiveStepId(stepId);
+        }
+    }, [activeFormId, formConfig.flow]);
+
+    // Always ensure initialization
+    if (!activeFormId && formConfig.flow.length > 0) {
+        const firstStep = formConfig.flow[0];
+        const [formId, stepId] = firstStep.includes('.') ? firstStep.split('.') : [firstStep, null];
+        setActiveFormId(formId);
+        setActiveStepId(stepId);
+    }
+
+    // Get current position in flow
+    const getCurrentFlowPosition = useMemo(() =>
+    {
+        if (!activeFormId) return 0;
+
+        const currentFlowStep = activeStepId
+            ? `${activeFormId}.${activeStepId}`
+            : activeFormId;
+
+        return formConfig.flow.findIndex(step => step === currentFlowStep);
+    }, [activeFormId, activeStepId, formConfig.flow]);
+
+    // Get current form configuration
+    const getCurrentFormConfig = useMemo(() =>
+    {
+        if (!activeFormId) return null;
+        return formConfig.forms[activeFormId];
+    }, [activeFormId, formConfig.forms]);
+
+    // Get current schema
+    const getCurrentSchema = useCallback(() =>
+    {
+        const currentFormConfig = getCurrentFormConfig;
+        if (!currentFormConfig) return null;
+
+        if (currentFormConfig.type === 'multi-step' && activeStepId) {
+            return currentFormConfig.schemas[activeStepId];
+        } else if (currentFormConfig.type === 'simple') {
+            return currentFormConfig.schema;
+        }
+
+        return null;
+    }, [getCurrentFormConfig, activeStepId]);
+
+    // Get progress information
+    const getProgress = useMemo(() =>
+    {
+        const currentPosition = getCurrentFlowPosition + 1;
+        const totalSteps = formConfig.flow.length;
+
+        return {
+            currentPosition,
+            totalSteps,
+            percentage: Math.round((currentPosition / totalSteps) * 100),
+            completedSteps: completedSteps.size,
+            isOnFinalForm: currentPosition === totalSteps,
+            isOnFirstStep: currentPosition === 1
+        };
+    }, [getCurrentFlowPosition, formConfig.flow.length, completedSteps.size]);
+
+    // Check if ready for final submission
+    const canSubmit = useMemo(() =>
+    {
+        return getProgress.isOnFinalForm;
+    }, [getProgress.isOnFinalForm]);
+
+    // Move to next step/form
+    const moveToNext = useCallback(async (stepData = {}) =>
+    {
+        // Update combined data
+        const updatedData = { ...combinedFormData, ...stepData };
+        setCombinedFormData(updatedData);
+
+        // Mark current step as completed
+        const currentFlowStep = activeStepId
+            ? `${activeFormId}.${activeStepId}`
+            : activeFormId;
+        setCompletedSteps(prev => new Set([...prev, currentFlowStep]));
+
+        // Check if this is final submission
+        if (canSubmit) {
+            if (onFinalSubmission) {
+                await onFinalSubmission(updatedData);
+            }
+            return { isFinalSubmission: true, data: updatedData };
+        }
+
+        // Move to next step in flow
+        const nextPosition = getCurrentFlowPosition + 1;
+        if (nextPosition < formConfig.flow.length) {
+            const nextFlowStep = formConfig.flow[nextPosition];
+            const [nextFormId, nextStepId] = nextFlowStep.includes('.')
+                ? nextFlowStep.split('.')
+                : [nextFlowStep, null];
+
+            setActiveFormId(nextFormId);
+            setActiveStepId(nextStepId);
+
+            // Call transition callback
+            if (onFormTransition) {
+                onFormTransition({
+                    from: { formId: activeFormId, stepId: activeStepId },
+                    to: { formId: nextFormId, stepId: nextStepId },
+                    data: updatedData,
+                    progress: getProgress
+                });
+            }
+        }
+
+        return { isFinalSubmission: false, data: updatedData };
+    }, [
+        combinedFormData,
+        activeFormId,
+        activeStepId,
+        canSubmit,
+        getCurrentFlowPosition,
+        formConfig.flow,
+        onFinalSubmission,
+        onFormTransition,
+        getProgress
+    ]);
+
+    // Navigate to specific step (for back navigation)
+    const navigateToStep = useCallback((targetFlowStep) =>
+    {
+        const [formId, stepId] = targetFlowStep.includes('.')
+            ? targetFlowStep.split('.')
+            : [targetFlowStep, null];
+
+        setActiveFormId(formId);
+        setActiveStepId(stepId);
+    }, []);
+
+    // Go back to previous step
+    const moveToPrevious = useCallback(() =>
+    {
+        const prevPosition = getCurrentFlowPosition - 1;
+        if (prevPosition >= 0) {
+            const prevFlowStep = formConfig.flow[prevPosition];
+            navigateToStep(prevFlowStep);
+        }
+    }, [getCurrentFlowPosition, formConfig.flow, navigateToStep]);
+
+    // Reset all forms to initial state
+    const resetAllForms = useCallback(() =>
+    {
+        const firstStep = formConfig.flow[0];
+        const [formId, stepId] = firstStep.includes('.') ? firstStep.split('.') : [firstStep, null];
+
+        setActiveFormId(formId);
+        setActiveStepId(stepId);
+        setCombinedFormData(initialData);
+        setCompletedSteps(new Set());
+    }, [formConfig.flow, initialData]);
+
+    // Validate current step
+    const validateCurrentStep = useCallback((data) =>
+    {
+        const schema = getCurrentSchema();
+        if (!schema) return { success: true };
+
+        return schema.safeParse(data);
+    }, [getCurrentSchema]);
+
+    // Get form-specific data for rendering
+    const getFormProps = useCallback((formId) =>
+    {
+        const isActive = activeFormId === formId;
+        const currentFormConfig = formConfig.forms[formId];
+
+        if (currentFormConfig.type === 'multi-step') {
+            // For multi-step forms like QuoteForm
+            return {
+                isActive,
+                currentStep: isActive ? (currentFormConfig.steps.findIndex(step => step === activeStepId) || 0) : 0,
+                formData: combinedFormData,
+                activeStepId: isActive ? activeStepId : null
+            };
+        } else {
+            // For simple forms like FranchiseForm  
+            return {
+                isActive,
+                formData: combinedFormData,
+                canSubmit: canSubmit && isActive
+            };
+        }
+    }, [activeFormId, activeStepId, combinedFormData, canSubmit, formConfig.forms]);
+
+    return {
+        // Current state
+        activeFormId,
+        activeStepId,
+        combinedFormData,
+
+        // Navigation
+        moveToNext,
+        moveToPrevious,
+        navigateToStep,
+
+        // State checks
+        canSubmit,
+        progress: getProgress,
+
+        // Validation
+        getCurrentSchema,
+        validateCurrentStep,
+
+        // Component integration
+        getFormProps,
+
+        // Utilities
+        resetAllForms,
+        completedSteps
+    };
+};// /hooks/useMultiStepForm.js
+import { useState, useCallback } from 'react';
+
+export const useMultiStepForm = ({
+    steps = [], // Array of step identifiers ['quote', 'banking', 'change']
+    schemas = {}, // Map of step schemas { quote: QuoteSchema, banking: BankingSchema }
+    conditional = false, // Whether steps can be skipped based on conditions
+    initialData = {}
+}) =>
+{
+    const [currentStep, setCurrentStep] = useState(0);
+    const [stepData, setStepData] = useState(initialData);
+    const [completedSteps, setCompletedSteps] = useState(new Set());
+
+    // Get current step info
+    const getCurrentStepId = () => steps[currentStep];
+    const isFirstStep = currentStep === 0;
+    const isLastStep = currentStep === steps.length - 1;
+    const totalSteps = steps.length;
+
+    // Validate current step data
+    const validateCurrentStep = useCallback((data) =>
+    {
+        const stepId = getCurrentStepId();
+        const stepSchema = schemas[stepId];
+
+        if (!stepSchema) {
+            console.warn(`No schema found for step: ${stepId}`);
+            return { success: true };
+        }
+
+        return stepSchema.safeParse(data);
+    }, [currentStep, schemas, steps]);
+
+    // Check if a step should be shown based on conditions
+    const shouldShowStep = useCallback((stepId, data = stepData) =>
+    {
+        if (!conditional) return true;
+
+        // Custom logic based on step type
+        switch (stepId) {
+            case 'banking':
+                return data.Service?.includes('Banking');
+            case 'change':
+                return data.Service?.includes('Change');
+            default:
+                return true;
+        }
+    }, [conditional, stepData]);
+
+    // Get next valid step index (considering conditional steps)
+    const getNextValidStep = useCallback((data = stepData) =>
+    {
+        if (!conditional) return currentStep + 1;
+
+        for (let i = currentStep + 1; i < steps.length; i++) {
+            if (shouldShowStep(steps[i], data)) {
+                return i;
+            }
+        }
+        return steps.length; // No more valid steps
+    }, [conditional, currentStep, steps.length, shouldShowStep, stepData]);
+
+    // Move to next step with conditional logic
+    const nextStep = useCallback((data = {}) =>
+    {
+        // Merge new data with existing step data
+        const updatedStepData = { ...stepData, ...data };
+        setStepData(updatedStepData);
+
+        // Mark current step as completed
+        setCompletedSteps(prev => new Set([...prev, currentStep]));
+
+        // Find next valid step
+        if (conditional) {
+            const nextValidStep = getNextValidStep(updatedStepData);
+            if (nextValidStep < steps.length) {
+                setCurrentStep(nextValidStep);
+            }
+        } else {
+            // Move to next step if not last
+            if (!isLastStep) {
+                setCurrentStep(prev => prev + 1);
+            }
+        }
+
+        return updatedStepData;
+    }, [currentStep, isLastStep, stepData, conditional, getNextValidStep, steps.length]);
+
+    // Move to previous step
+    const prevStep = useCallback(() =>
+    {
+        if (!isFirstStep) {
+            setCurrentStep(prev => prev - 1);
+        }
+    }, [isFirstStep]);
+
+    // Jump to specific step (useful for navigation)
+    const goToStep = useCallback((stepIndex) =>
+    {
+        if (stepIndex >= 0 && stepIndex < steps.length) {
+            setCurrentStep(stepIndex);
+        }
+    }, [steps.length]);
+
+    // Validate all collected data (for final submission)
+    const validateAllSteps = useCallback((allData) =>
+    {
+        // If there's a combined schema, use it
+        if (schemas.combined && typeof schemas.combined === 'function') {
+            const combinedSchema = schemas.combined(stepData);
+            return combinedSchema.safeParse(allData);
+        }
+
+        // Otherwise, validate against all individual schemas
+        for (const [stepId, schema] of Object.entries(schemas)) {
+            if (stepId === 'combined') continue;
+
+            const validation = schema.safeParse(allData);
+            if (!validation.success) {
+                return validation;
+            }
+        }
+
+        return { success: true };
+    }, [schemas, stepData]);
+
+    // Reset form to initial state
+    const resetSteps = useCallback(() =>
+    {
+        setCurrentStep(0);
+        setStepData(initialData);
+        setCompletedSteps(new Set());
+    }, [initialData]);
+
+    // Get progress information
+    const getProgress = () => ({
+        current: currentStep + 1,
+        total: totalSteps,
+        percentage: Math.round(((currentStep + 1) / totalSteps) * 100),
+        completed: completedSteps.size
+    });
+
+    return {
+        // Current state
+        currentStep,
+        getCurrentStepId,
+        stepData,
+
+        // Navigation
+        nextStep,
+        prevStep,
+        goToStep,
+
+        // Validation
+        validateCurrentStep,
+        validateAllSteps,
+
+        // State checks
+        isFirstStep,
+        isLastStep,
+        shouldShowStep,
+        getNextValidStep,
+
+        // Utilities
+        resetSteps,
+        getProgress,
+        completedSteps
+    };
+};// /utils/apiClient.js
+// Standard API client for form submissions
+
+export const submitForm = async (formData, endpoint = "/api/forms") =>
+{
+    try {
+        const response = await fetch(endpoint, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || "Failed to submit the form");
+        }
+
+        return await response.json();
+    } catch (error) {
+        console.error("API submission error:", error);
+        throw error;
+    }
+};
+
+// File processing utilities (for ICA form)
+export const fileToBase64 = async (file) =>
+{
+    return new Promise((resolve, reject) =>
+    {
+        if (!file) {
+            resolve(null);
+            return;
+        }
+
+        // File size validation - 5MB max
+        if (file.size > 5 * 1024 * 1024) {
+            reject(new Error(`File ${file.name} is too large. Max 5MB allowed.`));
+            return;
+        }
+
+        // File type validation - only images
+        const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
+        if (!allowedTypes.includes(file.type)) {
+            reject(new Error(`File ${file.name} type not allowed. Only JPEG and PNG images allowed.`));
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = error => reject(error);
+        reader.readAsDataURL(file);
+    });
+};
+
+// Process multiple attachments with compression (for ICA form)
+export const processAttachments = async (fileFields, data, compressImageFile) =>
+{
+    const attachments = [];
+    const errors = [];
+
+    // Process files concurrently but with limit
+    const concurrencyLimit = 2;
+
+    for (let i = 0; i < fileFields.length; i += concurrencyLimit) {
+        const batch = fileFields.slice(i, i + concurrencyLimit);
+
+        const batchPromises = batch.map(async ({ field, prefix }) =>
+        {
+            if (data[field]) {
+                try {
+                    const compressedFile = await compressImageFile(data[field]);
+                    const base64File = await fileToBase64(compressedFile);
+                    if (base64File) {
+                        return {
+                            filename: `${prefix}.${data[field].name.split('.').pop()}`,
+                            data: base64File
+                        };
+                    }
+                } catch (error) {
+                    errors.push(`${field}: ${error.message}`);
+                    return null;
+                }
+            }
+            return null;
+        });
+
+        const batchResults = await Promise.all(batchPromises);
+        attachments.push(...batchResults.filter(Boolean));
+    }
+
+    if (errors.length > 0) {
+        throw new Error(`File processing errors: ${errors.join(', ')}`);
+    }
+
+    return attachments;
+};// /utils/formHelpers.js
+// Device and IP detection utilities
+
+export const getDeviceInfo = () =>
+{
+    const userAgent = navigator.userAgent;
+
+    // Parse browser and version
+    let browserInfo = 'Unknown';
+    let browserVersion = '';
+
+    const browserPatterns = [
+        { name: 'Chrome', pattern: /Chrome\/([0-9.]+)/ },
+        { name: 'Firefox', pattern: /Firefox\/([0-9.]+)/ },
+        { name: 'Safari', pattern: /Version\/([0-9.]+).*Safari/ },
+        { name: 'Edge', pattern: /Edge\/([0-9.]+)/ }
+    ];
+
+    for (const { name, pattern } of browserPatterns) {
+        const match = userAgent.match(pattern);
+        if (match) {
+            browserInfo = name;
+            browserVersion = match[1];
+            break;
+        }
+    }
+
+    // Parse OS information
+    let osInfo = 'Unknown';
+    const osPatterns = [
+        { name: 'Windows NT', pattern: /Windows NT ([0-9._]+)/, format: (v) => `Windows NT ${v}` },
+        { name: 'Mac OS X', pattern: /Mac OS X ([0-9._]+)/, format: (v) => `Mac OS X ${v.replace(/_/g, '.')}` },
+        { name: 'Android', pattern: /Android ([0-9.]+)/, format: (v) => `Android ${v}` },
+        { name: 'iOS', pattern: /OS ([0-9._]+)/, format: (v) => `iOS ${v.replace(/_/g, '.')}`, condition: /iPhone|iPad/.test(userAgent) },
+        { name: 'Linux', pattern: /Linux/, format: () => 'Linux' }
+    ];
+
+    for (const { pattern, format, condition } of osPatterns) {
+        if (condition && !condition) continue;
+        const match = userAgent.match(pattern);
+        if (match) {
+            osInfo = format(match[1] || '');
+            break;
+        }
+    }
+
+    return {
+        fullUserAgent: userAgent,
+        browser: browserInfo,
+        browserVersion: browserVersion,
+        os: osInfo
+    };
+};
+
+export const getIPAddress = async () =>
+{
+    const ipServices = [
+        'https://api.ipify.org?format=json',
+        'https://ipapi.co/json/',
+        'https://api.ip.sb/jsonip',
+    ];
+
+    for (const service of ipServices) {
+        try {
+            const response = await fetch(service);
+            const data = await response.json();
+            if (data.ip || data.query) return data.ip || data.query;
+        } catch (error) {
+            console.log(`IP service ${service} failed:`, error);
+        }
+    }
+    return 'Unable to detect';
+};
+
+// Date formatting utilities
+export const formatSubmissionDate = () =>
+{
+    const now = new Date();
+    return now.toLocaleDateString('en-US', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    }).replace(/(\d+)/, (match) =>
+    {
+        const day = parseInt(match);
+        const suffix = day === 1 || day === 21 || day === 31 ? 'st' :
+            day === 2 || day === 22 ? 'nd' :
+                day === 3 || day === 23 ? 'rd' : 'th';
+        return day + suffix;
+    }) + ', ' + now.toLocaleTimeString('en-US', {
+        hour12: true,
+        hour: 'numeric',
+        minute: '2-digit',
+        second: '2-digit'
+    });
+};
+
+export const formatDateForAPI = (date) =>
+{
+    if (!date) return '';
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
+};
+
+export const formatBirthdayForAPI = (date) =>
+{
+    if (!date) return '';
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+};
+
+// Focus utility
+export const focusInput = (ref) =>
+{
+    if (ref && ref.current) {
+        try {
+            ref.current.focus();
+            ref.current.scrollIntoView({
+                behavior: 'smooth',
+                block: 'center'
+            });
+        } catch (error) {
+            console.error('Error focusing field:', error);
+        }
+    }
+};
+
+// Common form data preparation
+export const prepareFormMetadata = async (formType, formId) =>
+{
+    const deviceInfo = getDeviceInfo();
+    const ipAddress = await getIPAddress();
+    const submissionDate = formatSubmissionDate();
+
+    return {
+        formType,
+        timestamp: new Date().toISOString(),
+        formId,
+        submissionId: `${formType}_${Date.now()}`,
+        "IP Address": ipAddress,
+        "Device": deviceInfo.fullUserAgent,
+        "Browser": `${deviceInfo.browser} ${deviceInfo.browserVersion}`,
+        "Operating System": deviceInfo.os,
+        dateOfSubmission: submissionDate,
+    };
+};

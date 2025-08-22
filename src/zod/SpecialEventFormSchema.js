@@ -1,9 +1,9 @@
-// /schemas/SiteInfoFormSchema.js
+// /schemas/SpecialEventFormSchema.js
 import { z } from "zod";
 
 // Individual step schemas
 export const BusinessInfoSchema = z.object({
-    Type: z.string().default("Regular Service"),
+    Type: z.string().default("Special Event"),
     BusinessName: z.string().min(1, "Please enter the business name of this location."),
     Address: z.string().min(1, "Please enter the number & street for this location."),
     Suburb: z.string().min(1, "Please enter the suburb for this location."),
@@ -28,7 +28,6 @@ export const ContactInfoSchema = z.object({
 export const ServiceInfoSchema = z.object({
     Services: z.array(z.string()).min(1, "Please select what services you require."),
     Dates: z.string().min(1, "Please enter the date you would like to commence this service."),
-    Schedule: z.array(z.string()).min(1, "Please select your preferred schedule."),
     Bank: z.string().min(1, "Please enter the bank this location uses."),
 });
 
@@ -55,7 +54,7 @@ export const RiskAssessmentSchema = z.object({
 });
 
 // Step configuration
-export const SITE_INFO_STEPS = {
+export const SPECIAL_EVENT_STEPS = {
     BUSINESS: 'business',
     CONTACT: 'contact',
     SERVICE: 'service',
@@ -63,15 +62,15 @@ export const SITE_INFO_STEPS = {
 };
 
 export const STEP_SCHEMAS = {
-    [SITE_INFO_STEPS.BUSINESS]: BusinessInfoSchema,
-    [SITE_INFO_STEPS.CONTACT]: ContactInfoSchema,
-    [SITE_INFO_STEPS.SERVICE]: ServiceInfoSchema,
-    [SITE_INFO_STEPS.RISK]: RiskAssessmentSchema,
+    [SPECIAL_EVENT_STEPS.BUSINESS]: BusinessInfoSchema,
+    [SPECIAL_EVENT_STEPS.CONTACT]: ContactInfoSchema,
+    [SPECIAL_EVENT_STEPS.SERVICE]: ServiceInfoSchema,
+    [SPECIAL_EVENT_STEPS.RISK]: RiskAssessmentSchema,
 };
 
-// Default values for the entire form
-export const SITE_INFO_DEFAULT_VALUES = {
-    Type: "Regular Service",
+// Default values for the entire form - Note: Special Event specific defaults
+export const SPECIAL_EVENT_DEFAULT_VALUES = {
+    Type: "Special Event", // This is the key difference from Site-Info
     BusinessName: "",
     Address: "",
     Suburb: "",
@@ -84,7 +83,7 @@ export const SITE_INFO_DEFAULT_VALUES = {
     Accounts: "",
     Services: [],
     Dates: "",
-    Schedule: [],
+    Schedule: [], // Not used in Special Events but kept for compatibility
     Bank: "",
     Amount: "",
     Parking: [],
@@ -97,11 +96,12 @@ export const SITE_INFO_DEFAULT_VALUES = {
 export const createStepSchema = (currentStep) =>
 {
     const baseFields = {
-        Type: z.string().default("Regular Service"),
+        Type: z.string().default("Special Event"), // Special Event specific
         Parking: z.array(z.string()).optional(),
         Security: z.array(z.string()).optional(),
         External: z.array(z.string()).optional(),
         Internal: z.array(z.string()).optional(),
+        Schedule: z.array(z.string()).optional(), // Not used but kept for compatibility
     };
 
     // Define which fields are required for each step
@@ -126,10 +126,9 @@ export const createStepSchema = (currentStep) =>
                 .email("Please enter a valid email address.")
                 .min(1, "Please enter the email address to send accounts."),
         },
-        2: { // Service Info
+        2: { // Service Info - Different from Site-Info (no Schedule field)
             Services: z.array(z.string()).min(1, "Please select what services you require."),
             Dates: z.string().min(1, "Please enter the date you would like to commence this service."),
-            Schedule: z.array(z.string()).min(1, "Please select your preferred schedule."),
             Bank: z.string().min(1, "Please enter the bank this location uses."),
         },
         3: { // Risk Assessment
@@ -167,8 +166,8 @@ export const createStepSchema = (currentStep) =>
 };
 
 // Complete form schema for final validation
-export const SiteInfoCompleteSchema = z.object({
-    Type: z.string().default("Regular Service"),
+export const SpecialEventCompleteSchema = z.object({
+    Type: z.string().default("Special Event"),
     BusinessName: z.string().min(1, "Please enter the business name of this location."),
     Address: z.string().min(1, "Please enter the number & street for this location."),
     Suburb: z.string().min(1, "Please enter the suburb for this location."),
@@ -187,7 +186,6 @@ export const SiteInfoCompleteSchema = z.object({
         .min(1, "Please enter the email address to send accounts."),
     Services: z.array(z.string()).min(1, "Please select what services you require."),
     Dates: z.string().min(1, "Please enter the date you would like to commence this service."),
-    Schedule: z.array(z.string()).min(1, "Please select your preferred schedule."),
     Bank: z.string().min(1, "Please enter the bank this location uses."),
     Amount: z.enum([
         "$100 to $500", "$500 to $1,000", "$1,000 to 5,000", "$5,000 to $10,000",
@@ -202,4 +200,4 @@ export const SiteInfoCompleteSchema = z.object({
     Internal: z.array(z.string()).optional(),
 });
 
-export default SiteInfoCompleteSchema;
+export default SpecialEventCompleteSchema;

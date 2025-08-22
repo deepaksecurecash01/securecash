@@ -1,28 +1,48 @@
+// /zod/FranchiseFormSchema.js
 import { z } from "zod";
 
-export const FranchiseFormSchema = z.object({
+const FranchiseFormSchema = z.object({
     FullName: z
         .string()
-        .nonempty("Full Name is required.")
-        .regex(/^[A-Za-z\s]+$/, "Name must only contain letters and spaces.")
-        .regex(/^\S+\s\S+$/, "Name must include both first and last name."),
+        .min(1, "Full name is required.")
+        .min(2, "Full name must be at least 2 characters long."),
     Phone: z
         .string()
-        .nonempty("Phone Number is required.")
-        .regex(/^\d+$/, "Phone Number must contain only digits."),
+        .min(1, "Phone number is required.")
+        .regex(/^[0-9\s\-\+\(\)]+$/, "Please enter a valid phone number.")
+        .min(8, "Phone number must be at least 8 digits."),
     Email: z
         .string()
-        .nonempty("Email is required.")
+        .min(1, "Email is required.")
         .email("Please enter a valid email address."),
     Address: z
         .string()
-        .nonempty("Please enter your address."),
+        .min(1, "Address is required.")
+        .min(5, "Please enter a complete address."),
     InterestedArea: z
         .string()
-        .nonempty("Please specify what territory/area/suburb you are interested in."),
+        .min(1, "Territory/area/suburb of interest is required.")
+        .min(2, "Please specify the area you're interested in."),
     ReasonForInterest: z
         .string()
-        .nonempty("Please briefly tell us why you're interested in a SecureCash franchise.")
-        .max(500, "Please keep your response under 500 characters."),
-    ReferralSource: z.string().nonempty("Please let us know how you heard about this opportunity."),
+        .min(1, "Please tell us what interests you in a SecureCash franchise.")
+        .min(20, "Please provide more details about your interest."),
+    ReferralSource: z
+        .string()
+        .min(1, "Please tell us how you heard about this opportunity.")
+        .min(2, "Please provide details about how you heard about us."),
+    BotField: z.string().max(0, "Bot detected!").optional(),
 });
+
+export const FRANCHISE_DEFAULT_VALUES = {
+    FullName: "",
+    Phone: "",
+    Email: "",
+    Address: "",
+    InterestedArea: "",
+    ReasonForInterest: "",
+    ReferralSource: "",
+    BotField: "",
+};
+
+export default FranchiseFormSchema;

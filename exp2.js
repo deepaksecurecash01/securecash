@@ -1,568 +1,525 @@
-// app/api/forms/route.js - Optimized Professional Email System
-import { NextResponse } from "next/server";
-import sendgrid from "@sendgrid/mail";
-import { getCurrentDateTime } from "../utils/Helpers";
+"use client";
+import React, { useRef } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import
-    {
-        prepareAUSTRACEmail,
-        prepareContactAdminEmail,
-        prepareContactConfirmationEmail,
-        prepareFranchiseAdminEmail,
-        prepareFranchiseConfirmationEmail,
-        prepareCustomerEmail,
-        prepareInternalNotificationEmail,
-        prepareOperationsEmail,
-        prepareQuoteAdminEmail,
-        prepareQuoteConfirmationEmail,
-        prepareSiteInfoEmail,
-        prepareSiteInfoConfirmationEmail,
-        prepareTermsEmail
-    } from "../services/emailService";
-
-// Set SendGrid API key
-sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
-
-// Fast XSS sanitization for critical fields
-const fastSanitize = (str) =>
 {
-    if (typeof str !== 'string') return str;
-    return str
-        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove script tags
-        .replace(/javascript:/gi, '') // Remove javascript: urls
-        .replace(/on\w+\s*=/gi, ''); // Remove event handlers
-};
+    FaUser,
+    FaUsers,
+    FaPhone,
+    FaComments,
+    FaEnvelope,
+    FaHome,
+    FaMapMarkerAlt,
+    FaSpinner,
+    FaCheckCircle,
+} from "react-icons/fa";
+import Quote from "./Quote";
+import Banking from "./Banking";
+import Change from "./Change";
+import { useFormErrors } from '@/hooks/useFormErrors';
+import { useFormSubmission } from '@/hooks/useFormSubmission';
+import { useMultiStepForm } from '@/hooks/useMultiStepForm';
 
-// Helper function to calculate attachment sizes
-const calculateAttachmentSizes = (emailData) =>
+// Validation Schemas
+const createValidationSchemas = () =>
 {
-    if (!emailData.attachments || !Array.isArray(emailData.attachments)) {
-        return { count: 0, totalSize: 0, details: [] };
-    }
-
-    const details = emailData.attachments.map(attachment =>
-    {
-        const size = attachment.content ?
-            (typeof attachment.content === 'string' ?
-                Buffer.byteLength(attachment.content, 'base64') :
-                attachment.content.length) : 0;
-
-        return {
-            filename: attachment.filename || 'unknown',
-            size: size,
-            sizeFormatted: formatFileSize(size),
-            type: attachment.type || 'unknown'
-        };
+    const QuoteFormSchema = z.object({
+        Name: z
+            .string()
+            .min(1, "Full Name is required.")
+            .regex(/^[A-Za-z\s]+$/, "Name must only contain letters and spaces.")
+            .regex(/^\S+\s\S+$/, "Name must include both first and last name."),
+        Organisation: z.string().min(1, "Please enter your organisation's name."),
+        Phone: z
+            .string()
+            .min(1, "Phone Number is required.")
+            .regex(/^\d+$/, "Phone Number must contain only digits."),
+        Referrer: z.string().min(1, "Please enter where you heard about us."),
+        Email: z
+            .string()
+            .min(1, "Email is required.")
+            .email("Please enter a valid email address."),
+        Address: z.string().min(1, "Please enter your postal address."),
+        Locations: z.string().min(1, "Please enter locations for the service."),
+        Service: z
+            .array(z.enum(["Banking", "Change"]))
+            .min(1, "Please select at least one service."),
     });
 
-    const totalSize = details.reduce((sum, att) => sum + att.size, 0);
+    const BankingSchema = z.object({
+        BankingFrequency: z.enum(
+            ["Weekly", "Fortnightly", "Ad Hoc", "Special Event (once off)"],
+            {
+                errorMap: () => ({ message: "Please select a collection frequency." }),
+            }
+        ),
+        BankingAmount: z.enum(
+            [
+                "$0 - $1000",
+                "$1000 - $5000",
+                "$5000 - $20,000",
+                "$20,000 - $50,000",
+                "over $50,000",
+            ],
+            {
+                errorMap: () => ({
+                    message: "Please select an average collection amount.",
+                }),
+            }
+        ),
+        BankingBank: z.string().min(1, "Please enter who you bank with."),
+        BankingDays: z
+            .array(
+                z.enum([
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday",
+                    "Ad Hoc",
+                    "Banking",
+                ])
+            )
+            .min(1, "Please select at least one day for collection."),
+        BankingComments: z.string().optional(),
+    });
 
-    return {
-        count: details.length,
-        totalSize,
-        totalSizeFormatted: formatFileSize(totalSize),
-        details
+    const ChangeSchema = z.object({
+        ChangeFrequency: z.enum(
+            ["Weekly", "Fortnightly", "Ad Hoc", "Special Event (once off)"],
+            {
+                errorMap: () => ({ message: "Please select a frequency for change." }),
+            }
+        ),
+        ChangeNotesAmount: z.enum(
+            [
+                "$0 - $1000",
+                "$1000 - $5000",
+                "$5000 - $20,000",
+                "$20,000 - $50,000",
+                "over $50,000",
+            ],
+            {
+                errorMap: () => ({
+                    message: "Please select an average notes value.",
+                }),
+            }
+        ),
+        ChangeCoinsAmount: z
+            .string()
+            .regex(/^\d+(\.\d{1,2})?$/, "Please enter a valid amount for coins.")
+            .min(1, "Please enter the average coins value."),
+        ChangeDays: z
+            .array(
+                z.enum([
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday",
+                    "Friday",
+                    "Saturday",
+                    "Sunday",
+                    "Ad Hoc",
+                    "Banking",
+                ])
+            )
+            .min(1, "Please select at least one usual day for delivery."),
+        ChangeComments: z.string().optional(),
+    });
+
+    return { QuoteFormSchema, BankingSchema, ChangeSchema };
+};
+
+const QuoteForm = ({ className }) =>
+{
+    // Create field references for focus management
+    const fieldRefs = {
+        Name: useRef(null),
+        Organisation: useRef(null),
+        Phone: useRef(null),
+        Referrer: useRef(null),
+        Email: useRef(null),
+        Address: useRef(null),
+        Locations: useRef(null),
+        // Banking fields
+        BankingFrequency: useRef(null),
+        BankingAmount: useRef(null),
+        BankingBank: useRef(null),
+        BankingDays: useRef(null),
+        BankingComments: useRef(null),
+        // Change fields
+        ChangeFrequency: useRef(null),
+        ChangeNotesAmount: useRef(null),
+        ChangeCoinsAmount: useRef(null),
+        ChangeDays: useRef(null),
+        ChangeComments: useRef(null),
     };
-};
 
-// Helper function to format file sizes
-const formatFileSize = (bytes) =>
-{
-    if (bytes === 0) return '0 B';
-    const k = 1024;
-    const sizes = ['B', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-};
+    // Get validation schemas
+    const { QuoteFormSchema, BankingSchema, ChangeSchema } = createValidationSchemas();
 
-// Optimized email sending with shorter retry logic
-const sendEmailWithRetry = async (emailData, maxRetries = 2) =>
-{
-    for (let attempt = 1; attempt <= maxRetries; attempt++) {
-        const startTime = performance.now();
+    // Initialize form error handling
+    const { currentErrorField, setCurrentErrorField, handleFieldErrors, submissionError } = useFormErrors(fieldRefs);
 
-        try {
-            console.log(`Sending email (attempt ${attempt}/${maxRetries}):`, {
-                to: emailData.to,
-                subject: emailData.subject,
-                attachments: emailData.attachments?.length || 0
-            });
-
-            // Reduced timeout from 30s to 15s
-            const timeoutPromise = new Promise((_, reject) =>
-                setTimeout(() => reject(new Error('Request timeout after 15 seconds')), 15000)
-            );
-
-            const sendPromise = sendgrid.send(emailData);
-            const result = await Promise.race([sendPromise, timeoutPromise]);
-
-            const sendTime = performance.now() - startTime;
-            const attachmentInfo = calculateAttachmentSizes(emailData);
-
-            console.log(`Email sent successfully (attempt ${attempt}):`, {
-                to: emailData.to,
-                statusCode: result[0]?.statusCode,
-                messageId: result[0]?.headers['x-message-id'],
-                sendTime: `${sendTime.toFixed(2)}ms`
-            });
-
-            return {
-                success: true,
-                attempt,
-                sendTime: sendTime.toFixed(2),
-                statusCode: result[0]?.statusCode,
-                messageId: result[0]?.headers['x-message-id'],
-                to: Array.isArray(emailData.to) ? emailData.to.join(', ') : emailData.to,
-                subject: emailData.subject,
-                attachments: attachmentInfo
-            };
-
-        } catch (error) {
-            const sendTime = performance.now() - startTime;
-            const attachmentInfo = calculateAttachmentSizes(emailData);
-
-            console.warn(`Email attempt ${attempt} failed:`, {
-                to: emailData.to,
-                error: error.message,
-                code: error.code,
-                statusCode: error.response?.status,
-                sendTime: `${sendTime.toFixed(2)}ms`
-            });
-
-            // Don't retry for certain errors
-            const nonRetryableErrors = [400, 401, 403, 413]; // Bad request, auth, forbidden, payload too large
-            if (error.response?.status && nonRetryableErrors.includes(error.response.status)) {
-                console.error(`Non-retryable error (${error.response.status}), aborting retries`);
-                return {
-                    success: false,
-                    attempt,
-                    sendTime: sendTime.toFixed(2),
-                    error: error.message,
-                    statusCode: error.response?.status,
-                    finalAttempt: true,
-                    to: Array.isArray(emailData.to) ? emailData.to.join(', ') : emailData.to,
-                    subject: emailData.subject,
-                    attachments: attachmentInfo
-                };
-            }
-
-            // If this was the last attempt, return failure
-            if (attempt === maxRetries) {
-                console.error(`All ${maxRetries} attempts failed for email:`, {
-                    to: emailData.to,
-                    finalError: error.message
-                });
-
-                return {
-                    success: false,
-                    attempt,
-                    sendTime: sendTime.toFixed(2),
-                    error: error.message,
-                    statusCode: error.response?.status,
-                    finalAttempt: true,
-                    to: Array.isArray(emailData.to) ? emailData.to.join(', ') : emailData.to,
-                    subject: emailData.subject,
-                    attachments: attachmentInfo
-                };
-            }
-
-            // Reduced retry delay from 5s max to 2s max
-            const delay = Math.min(500 * Math.pow(2, attempt - 1), 2000); // Max 2 seconds
-            console.log(`Waiting ${delay}ms before retry...`);
-            await new Promise(resolve => setTimeout(resolve, delay));
+    // Initialize multi-step form management
+    const {
+        currentStep,
+        getCurrentStepId,
+        stepData,
+        nextStep,
+        isLastStep,
+        validateCurrentStep,
+        resetSteps
+    } = useMultiStepForm({
+        steps: ['quote', 'banking', 'change'],
+        schemas: {
+            quote: QuoteFormSchema,
+            banking: BankingSchema,
+            change: ChangeSchema,
+        },
+        conditional: true,
+        initialData: {
+            Name: "",
+            Organisation: "",
+            Phone: "",
+            Referrer: "",
+            Email: "",
+            Address: "",
+            Locations: "",
+            Service: [],
+            BankingFrequency: "",
+            BankingAmount: "",
+            BankingBank: "",
+            BankingDays: [],
+            BankingComments: "",
+            ChangeFrequency: "",
+            ChangeNotesAmount: "",
+            ChangeCoinsAmount: "",
+            ChangeDays: [],
+            ChangeComments: "",
         }
-    }
-};
+    });
 
-// Optimized parallel email sending - NO MORE SEQUENTIAL PROCESSING!
-const sendMultipleEmails = async (emails, formType) =>
-{
-    console.log(`Starting ${formType} email processing - ${emails.length} emails to send`);
-    const startTime = performance.now();
+    // Initialize form submission
+    const { isSubmitting, isSubmitted, handleSubmission } = useFormSubmission({
+        formType: 'quote',
+        formId: 'Quote',
+        onSuccess: (result, finalData) =>
+        {
+            console.log("Quote form submitted successfully!");
+            // Reset steps after successful submission
+            setTimeout(() => resetSteps(), 3000);
+        },
+        onError: (error) =>
+        {
+            console.error("Quote submission failed:", error);
+        },
+        prepareData: async (data) =>
+        {
+            return { ...data, formType: "quote" };
+        }
+    });
 
-    // Send all emails in parallel using Promise.all
-    const emailPromises = emails.map((email, index) =>
-        sendEmailWithRetry(email)
-            .then(result => ({ ...result, index }))
-            .catch(error => ({
-                success: false,
-                error: error.message,
-                index,
-                attempt: 1,
-                sendTime: '0.00',
-                to: Array.isArray(email.to) ? email.to.join(', ') : email.to,
-                subject: email.subject,
-                attachments: calculateAttachmentSizes(email)
-            }))
-    );
+    // Dynamic schema creation based on current step and selected services
+    const getCurrentSchema = () =>
+    {
+        const stepId = getCurrentStepId();
+        const services = stepData.Service || [];
 
-    console.log(`Sending ${emails.length} emails in parallel...`);
-
-    // Wait for all emails to complete (parallel execution)
-    const results = await Promise.all(emailPromises);
-
-    // Sort results by original index to maintain order
-    results.sort((a, b) => a.index - b.index);
-
-    // Calculate summary statistics
-    const successCount = results.filter(r => r.success).length;
-    const failureCount = results.length - successCount;
-    const totalTime = performance.now() - startTime;
-    const successRate = emails.length > 0 ? Math.round((successCount / emails.length) * 100) : 0;
-
-    console.log(`${formType} Email Summary:`);
-    console.log(`   Successful: ${successCount}/${emails.length}`);
-    console.log(`   Failed: ${failureCount}/${emails.length}`);
-    console.log(`   Success Rate: ${successRate}%`);
-    console.log(`   Total Time: ${totalTime.toFixed(2)}ms (PARALLEL)`);
-
-    return {
-        results,
-        summary: {
-            total: emails.length,
-            successful: successCount,
-            failed: failureCount,
-            successRate,
-            totalTime: totalTime.toFixed(2)
+        switch (stepId) {
+            case 'quote':
+                return QuoteFormSchema;
+            case 'banking':
+                return services.includes('Banking') ? BankingSchema : z.object({});
+            case 'change':
+                return services.includes('Change') ? ChangeSchema : z.object({});
+            default:
+                return z.object({});
         }
     };
-};
 
-// Alternative batch sending for maximum performance (when possible)
-const sendEmailsBatch = async (emails, formType) =>
-{
-    console.log(`Attempting ${formType} batch email processing - ${emails.length} emails`);
-    const startTime = performance.now();
+    // Initialize react-hook-form with current schema
+    const {
+        register,
+        handleSubmit,
+        setValue,
+        getValues,
+        formState: { errors },
+    } = useForm({
+        resolver: zodResolver(getCurrentSchema()),
+        defaultValues: stepData,
+    });
 
-    try {
-        // SendGrid supports sending multiple emails in one API call
-        // This is the fastest possible method
-        const result = await sendgrid.send(emails);
+    // Determine next steps based on selected services
+    const getNextSteps = (services) =>
+    {
+        const steps = [];
+        if (services.includes('Banking')) steps.push('banking');
+        if (services.includes('Change')) steps.push('change');
+        return steps;
+    };
 
-        const totalTime = performance.now() - startTime;
-        console.log(`${formType} Batch Email Complete: ${totalTime.toFixed(2)}ms (BATCH)`);
-
-        return {
-            results: emails.map((email, i) => ({
-                success: true,
-                to: Array.isArray(email.to) ? email.to.join(', ') : email.to,
-                subject: email.subject,
-                statusCode: result[i]?.statusCode || 202,
-                messageId: result[i]?.headers?.['x-message-id'] || 'batch-' + i,
-                attempt: 1,
-                sendTime: (totalTime / emails.length).toFixed(2),
-                attachments: calculateAttachmentSizes(email)
-            })),
-            summary: {
-                total: emails.length,
-                successful: emails.length,
-                failed: 0,
-                successRate: 100,
-                totalTime: totalTime.toFixed(2)
-            }
-        };
-    } catch (error) {
-        const totalTime = performance.now() - startTime;
-        console.error(`Batch email failed: ${error.message}, falling back to parallel...`);
-
-        // Fallback to parallel individual sends
-        return await sendMultipleEmails(emails, formType);
-    }
-};
-
-// Smart email processor that chooses the best method
-const processEmailsSmart = async (emails, formType) =>
-{
-    // For single emails, just send directly
-    if (emails.length === 1) {
-        return await sendMultipleEmails(emails, formType);
-    }
-
-    // For multiple emails, try batch first, then parallel
-    try {
-        return await sendEmailsBatch(emails, formType);
-    } catch (error) {
-        console.log(`Batch method failed, using parallel method for ${formType}`);
-        return await sendMultipleEmails(emails, formType);
-    }
-};
-
-// Form handlers with optimized email processing
-const FORM_HANDLERS = {
-    austrac: {
-        processEmails: async (data) =>
-        {
-            const emailData = prepareAUSTRACEmail(data);
-            return await processEmailsSmart([emailData], 'AUSTRAC');
-        },
-        successMessage: "AUSTRAC information submitted successfully!",
-        logData: (data) => ({ org: data.Organisation, email: data.OrganisationEmail })
-    },
-
-    contact: {
-        processEmails: async (data) =>
-        {
-            const adminEmail = prepareContactAdminEmail(data);
-            const confirmationEmail = prepareContactConfirmationEmail(data);
-            return await processEmailsSmart([adminEmail, confirmationEmail], 'Contact');
-        },
-        successMessage: "Contact request submitted successfully!",
-        logData: (data) => ({ name: data.FullName, dept: data.Department })
-    },
-
-    franchise: {
-        processEmails: async (data) =>
-        {
-            const adminEmail = prepareFranchiseAdminEmail(data);
-            const confirmationEmail = prepareFranchiseConfirmationEmail(data);
-            return await processEmailsSmart([adminEmail, confirmationEmail], 'Franchise');
-        },
-        successMessage: "Franchise enquiry submitted successfully!",
-        logData: (data) => ({ name: data.FullName, area: data.InterestedArea })
-    },
-
-    ica: {
-        processEmails: async (data) =>
-        {
-            const operationsEmail = prepareOperationsEmail(data);
-            const customerEmail = prepareCustomerEmail(data);
-            const internalEmail = prepareInternalNotificationEmail(data);
-
-            // This will now process all 3 emails in parallel instead of sequential
-            return await processEmailsSmart([
-                operationsEmail,
-                customerEmail,
-                internalEmail
-            ], 'ICA');
-        },
-        successMessage: "ICA form submitted successfully!",
-        logData: (data) => ({ name: data.Name, business: data.BusinessName })
-    },
-
-    quote: {
-        processEmails: async (data) =>
-        {
-            // Basic sanitization
-            const clean = {
-                ...data,
-                Name: fastSanitize(data.Name),
-                Organisation: fastSanitize(data.Organisation),
-                FormID: data.FormID || "quote"
-            };
-
-            const adminEmail = prepareQuoteAdminEmail(clean);
-            const confirmationEmail = prepareQuoteConfirmationEmail(clean);
-            return await processEmailsSmart([adminEmail, confirmationEmail], 'Quote');
-        },
-        successMessage: "Quote request submitted successfully!",
-        logData: (data) => ({ org: data.Organisation, name: data.Name })
-    },
-
-    siteinfo: {
-        processEmails: async (data) =>
-        {
-            const clean = {
-                ...data,
-                BusinessName: fastSanitize(data.BusinessName),
-                Contact: fastSanitize(data.Contact),
-                Type: data.Type || "Regular Service",
-                Services: Array.isArray(data.Services) ? data.Services : [data.Services].filter(Boolean)
-            };
-
-            const siteInfoEmail = prepareSiteInfoEmail(clean);
-            const confirmationEmail = prepareSiteInfoConfirmationEmail(clean);
-            return await processEmailsSmart([siteInfoEmail, confirmationEmail], 'Site Info');
-        },
-        successMessage: "Site info submitted successfully!",
-        logData: (data) => ({ business: data.BusinessName, contact: data.Contact })
-    },
-
-    specialevent: {
-        processEmails: async (data) =>
-        {
-            const clean = {
-                ...data,
-                BusinessName: fastSanitize(data.BusinessName),
-                Contact: fastSanitize(data.Contact),
-                Type: data.Type || "Special Event"
-            };
-
-            const siteInfoEmail = prepareSiteInfoEmail(clean);
-            const confirmationEmail = prepareSiteInfoConfirmationEmail(clean);
-            return await processEmailsSmart([siteInfoEmail, confirmationEmail], 'Special Event');
-        },
-        successMessage: "Special event info submitted successfully!",
-        logData: (data) => ({ business: data.BusinessName, type: "special" })
-    },
-
-    terms: {
-        processEmails: async (data) =>
-        {
-            const emailData = prepareTermsEmail(data);
-            return await processEmailsSmart([emailData], 'Terms');
-        },
-        successMessage: "Terms & Conditions accepted successfully!",
-        logData: (data) => ({ org: data["Organisation Name"], name: data["Full Name"] })
-    }
-};
-
-// Main POST handler with performance optimizations
-export async function POST(req)
-{
-    const startTime = performance.now();
-
-    try {
-        // Validate SendGrid configuration
-        if (!process.env.SENDGRID_API_KEY) {
-            console.error('SendGrid API key not configured');
-            return NextResponse.json({
-                error: "Email service not configured",
-                details: "Missing SendGrid API key"
-            }, { status: 500 });
+    // Main form submission handler
+    const handleFormSubmit = async (data) =>
+    {
+        // Validate current step
+        const validation = validateCurrentStep(data);
+        if (!validation.success) {
+            handleFieldErrors(validation.error.flatten().fieldErrors);
+            return;
         }
 
-        // Parse request
-        const { formType, ...formData } = await req.json();
-        const parseTime = performance.now();
+        if (currentStep === 0) {
+            // First step - determine next steps based on services
+            const services = data.Service || [];
+            const nextSteps = getNextSteps(services);
 
-        if (!formType) {
-            return NextResponse.json({
-                error: "formType is required"
-            }, { status: 400 });
-        }
-
-        const handler = FORM_HANDLERS[formType.toLowerCase()];
-        if (!handler) {
-            return NextResponse.json({
-                error: "Invalid form type",
-                validTypes: Object.keys(FORM_HANDLERS)
-            }, { status: 400 });
-        }
-
-        console.log(`Processing ${formType} form submission:`, handler.logData(formData));
-
-        // Process emails with optimized parallel/batch processing
-        const emailResults = await handler.processEmails(formData);
-        const processingTime = performance.now() - parseTime;
-        const totalTime = performance.now() - startTime;
-
-        // Log detailed results
-        console.log(`Final Results for ${formType}:`);
-        emailResults.results.forEach((result, index) =>
-        {
-            const status = result.success ? 'SUCCESS' : 'FAILED';
-            console.log(`   Email ${index + 1}: ${status}`);
-            console.log(`      To: ${result.to}`);
-            console.log(`      Subject: ${result.subject}`);
-            console.log(`      Time: ${result.sendTime}ms`);
-            console.log(`      Attempts: ${result.attempt}`);
-            if (result.attachments && result.attachments.count > 0) {
-                console.log(`      Attachments: ${result.attachments.count} files (${result.attachments.totalSizeFormatted})`);
-                result.attachments.details.forEach((att, attIndex) =>
-                {
-                    console.log(`         ${attIndex + 1}. ${att.filename} - ${att.sizeFormatted} (${att.type})`);
-                });
+            if (nextSteps.length === 0) {
+                // No services selected, submit immediately
+                const finalData = { ...stepData, ...data };
+                await handleSubmission(finalData);
             } else {
-                console.log(`      Attachments: None`);
+                // Move to next service step
+                nextStep(data);
             }
-            if (!result.success) {
-                console.log(`      Error: ${result.error}`);
-                if (result.statusCode) {
-                    console.log(`      Status Code: ${result.statusCode}`);
-                }
-            }
-        });
-
-        // Determine response based on results
-        const { summary } = emailResults;
-        const allSuccess = summary.failed === 0;
-        const partialSuccess = summary.successful > 0 && summary.failed > 0;
-
-        // Log completion status with performance metrics
-        console.log(`${formType} form processing completed:`, {
-            timestamp: new Date().toISOString(),
-            performance: {
-                totalTime: `${totalTime.toFixed(2)}ms`,
-                emailTime: `${(totalTime - processingTime).toFixed(2)}ms`,
-                parseTime: `${(parseTime - startTime).toFixed(2)}ms`,
-                processingTime: `${processingTime.toFixed(2)}ms`
-            },
-            results: {
-                successful: summary.successful,
-                failed: summary.failed,
-                total: summary.total,
-                successRate: `${summary.successRate}%`
-            },
-            optimization: "PARALLEL/BATCH processing enabled"
-        });
-
-        if (allSuccess) {
-            // All emails sent successfully
-            console.log(`${formType} form completed successfully - all emails sent`);
-
-            return NextResponse.json({
-                message: handler.successMessage,
-                success: true,
-                emailResults: {
-                    sent: summary.successful,
-                    total: summary.total,
-                    successRate: summary.successRate,
-                    processingTime: `${processingTime.toFixed(2)}ms`,
-                    totalTime: `${totalTime.toFixed(2)}ms`,
-                    optimization: "parallel"
-                }
-            }, { status: 200 });
-
-        } else if (partialSuccess) {
-            // Some emails failed
-            console.log(`${formType} form partially completed - ${summary.successful}/${summary.total} emails sent`);
-
-            return NextResponse.json({
-                message: `Form submitted with partial email delivery (${summary.successful}/${summary.total} sent)`,
-                success: true,
-                warning: "Some emails failed to send",
-                emailResults: {
-                    sent: summary.successful,
-                    failed: summary.failed,
-                    total: summary.total,
-                    successRate: summary.successRate,
-                    processingTime: `${processingTime.toFixed(2)}ms`,
-                    totalTime: `${totalTime.toFixed(2)}ms`,
-                    optimization: "parallel"
-                }
-            }, { status: 207 }); // 207 = Multi-Status
-
         } else {
-            // All emails failed
-            console.error(`${formType} form submission failed - no emails sent`);
+            // Service steps - check if this is the last step
+            const services = stepData.Service || [];
+            const currentStepId = getCurrentStepId();
 
-            return NextResponse.json({
-                error: "Form submission failed - email delivery unsuccessful",
-                success: false,
-                emailResults: {
-                    sent: 0,
-                    failed: summary.failed,
-                    total: summary.total,
-                    successRate: 0,
-                    processingTime: `${processingTime.toFixed(2)}ms`,
-                    totalTime: `${totalTime.toFixed(2)}ms`
-                }
-            }, { status: 500 });
+            if (isLastStep ||
+                (currentStepId === 'banking' && !services.includes('Change')) ||
+                (currentStepId === 'change' && !services.includes('Banking'))) {
+                // Final submission
+                const finalData = { ...stepData, ...data };
+                await handleSubmission(finalData);
+            } else {
+                // Move to next step
+                nextStep(data);
+            }
+        }
+    };
+
+    // Configuration objects
+    const inputFields = [
+        {
+            label: "Full Name",
+            name: "Name",
+            placeholder: "Enter your full name",
+            Icon: FaUser,
+            ref: fieldRefs.Name,
+        },
+        {
+            label: "Organisation Name",
+            name: "Organisation",
+            placeholder: "Enter your organisation's name",
+            Icon: FaUsers,
+            ref: fieldRefs.Organisation,
+        },
+        {
+            label: "Phone Number",
+            name: "Phone",
+            placeholder: "Enter your phone number",
+            Icon: FaPhone,
+            ref: fieldRefs.Phone,
+        },
+        {
+            label: "Where Did You Hear About Us?",
+            name: "Referrer",
+            placeholder: "Enter where did you hear about us",
+            Icon: FaComments,
+            ref: fieldRefs.Referrer,
+        },
+        {
+            label: "Email Address",
+            name: "Email",
+            type: "email",
+            placeholder: "Your email address",
+            Icon: FaEnvelope,
+            ref: fieldRefs.Email,
+        },
+        {
+            label: "Postal Address",
+            name: "Address",
+            placeholder: "Enter your postal address",
+            Icon: FaHome,
+            ref: fieldRefs.Address,
+        },
+        {
+            label: "Location/s For Service",
+            name: "Locations",
+            placeholder: "Enter location/s for the service (Suburb, State, Postcode)",
+            Icon: FaMapMarkerAlt,
+            ref: fieldRefs.Locations,
+        },
+    ];
+
+    const frequencyOptions = [
+        { value: "", label: "Please select..." },
+        { value: "Weekly", label: "Weekly" },
+        { value: "Fortnightly", label: "Fortnightly" },
+        { value: "Ad Hoc", label: "Ad Hoc" },
+        { value: "Special Event (once off)", label: "Special Event (once off)" },
+    ];
+
+    const amountOptions = [
+        { value: "", label: "Select Amount:" },
+        { value: "$0 - $1000", label: "$0 - $1000" },
+        { value: "$1000 - $5000", label: "$1000 - $5000" },
+        { value: "$5000 - $20,000", label: "$5000 - $20,000" },
+        { value: "$20,000 - $50,000", label: "$20,000 - $50,000" },
+        { value: "over $50,000", label: "over $50,000" },
+    ];
+
+    const daysOptions = {
+        standard: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+            "Ad Hoc",
+        ],
+        withBanking: [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday",
+            "Saturday",
+            "Sunday",
+            "Ad Hoc",
+            "Banking",
+        ],
+    };
+
+    // Render current form step
+    const renderFormStep = () =>
+    {
+        const stepId = getCurrentStepId();
+        const services = stepData.Service || [];
+
+        switch (stepId) {
+            case 'quote':
+                return (
+                    <Quote
+                        inputFields={inputFields}
+                        register={register}
+                        errors={errors}
+                        currentErrorField={currentErrorField}
+                        setCurrentErrorField={setCurrentErrorField}
+                    />
+                );
+            case 'banking':
+                return services.includes("Banking") ? (
+                    <Banking
+                        frequencyOptions={frequencyOptions}
+                        amountOptions={amountOptions}
+                        daysOfWeek={daysOptions.standard}
+                        register={register}
+                        errors={errors}
+                        setValue={setValue}
+                        currentErrorField={currentErrorField}
+                        setCurrentErrorField={setCurrentErrorField}
+                    />
+                ) : null;
+            case 'change':
+                return services.includes("Change") ? (
+                    <Change
+                        frequencyOptions={frequencyOptions}
+                        amountOptions={amountOptions}
+                        daysOfWeek={daysOptions.withBanking}
+                        register={register}
+                        errors={errors}
+                        setValue={setValue}
+                        currentErrorField={currentErrorField}
+                        setCurrentErrorField={setCurrentErrorField}
+                    />
+                ) : null;
+            default:
+                return null;
+        }
+    };
+
+    // Determine button text
+    const getButtonText = () =>
+    {
+        if (isSubmitting) return "Submitting...";
+        if (isSubmitted) return "Thank you! Form submitted successfully.";
+
+        const services = stepData.Service || [];
+        const stepId = getCurrentStepId();
+
+        if (stepId === 'quote') {
+            return services.length === 0 ? "Submit" : "Next";
         }
 
-    } catch (error) {
-        const errorTime = performance.now() - startTime;
+        if (stepId === 'banking' && !services.includes('Change')) return "Submit";
+        if (stepId === 'change') return "Submit";
 
-        console.error('Form processing error:', {
-            error: error.message,
-            stack: error.stack,
-            processingTime: `${errorTime.toFixed(2)}ms`
-        });
+        return "Next";
+    };
 
-        return NextResponse.json({
-            error: "Form submission failed",
-            details: error.message,
-            success: false,
-            processingTime: `${errorTime.toFixed(2)}ms`
-        }, { status: 500 });
-    }
-}
+    return (
+        <div className={`float-none w-full mx-auto relative left-0 flex-1 flex justify-center ${className}`}>
+            <form
+                className="forms-quote-v2 h-auto mx-2.5 992px:mx-0 px-[30px] 1366px:h-full forms-quote submit-status mt-4 992px:mt-0 992px:mb-16 w-full lg:mt-0 lg:mb-0 992px:w-[450px] 1100px:w-[480px] 1200px:w-[500px] 1280px:w-[546px] shadow-[3px_3px_5px_0px_rgba(0,0,0,0.75)] text-center py-8 rounded-[6px] bg-[#1a1a1a]"
+                data-formid="Quote"
+                onSubmit={handleSubmit(handleFormSubmit)}
+                noValidate
+            >
+                {/* Bot field (honeypot) */}
+                <input
+                    type="text"
+                    {...register("BotField")}
+                    style={{ display: "none" }}
+                    tabIndex={-1}
+                    autoComplete="off"
+                />
+
+                {renderFormStep()}
+
+                {/* Display submission error */}
+                {submissionError && (
+                    <div className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded">
+                        {submissionError}
+                    </div>
+                )}
+
+                <div className="button-controls-container w-[80%] mx-auto mt-7">
+                    <div className="button-section relative">
+                        <button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className={`nextBtn ${isSubmitted ? 'bg-[#4bb543]' : 'bg-[#c6a54b]'
+                                } text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
+                        >
+                            {isSubmitting ? (
+                                <div className="flex items-center justify-center">
+                                    <FaSpinner className="animate-spin mr-2" />
+                                    Submitting...
+                                </div>
+                            ) : isSubmitted ? (
+                                <div className="flex items-center justify-center">
+                                    <FaCheckCircle className="mr-2" />
+                                    Thank you! Form submitted successfully.
+                                </div>
+                            ) : (
+                                getButtonText()
+                            )}
+                        </button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    );
+};
+
+export default QuoteForm;

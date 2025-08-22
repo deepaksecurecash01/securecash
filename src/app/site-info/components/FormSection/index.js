@@ -1,8 +1,7 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
 import QuoteForm from "../QuoteForm";
@@ -10,260 +9,97 @@ import FranchiseForm from "../FranchiseForm";
 import Image from "next/image";
 import Link from "next/link";
 import ThankYouModal from "../ThankYouModal";
-
-// Validation Schemas
-const createValidationSchemas = () =>
-{
-  const BusinessInfoSchema = z.object({
-    Type: z.string().default("Regular Service"),
-    BusinessName: z.string().min(1, "Please enter the business name of this location."),
-    Address: z.string().min(1, "Please enter the number & street for this location."),
-    Suburb: z.string().min(1, "Please enter the suburb for this location."),
-    State: z.string()
-      .min(1, "Please enter the state this is located in.")
-      .refine((val) => val !== "select", "Please select a state."),
-    Postcode: z.string().min(1, "Please enter the post code for this location."),
-  });
-
-  const ContactInfoSchema = z.object({
-    Contact: z.string().min(1, "Please enter the main contact person at this location."),
-    Position: z.string().min(1, "Please enter the main contact person position or role at this location."),
-    Phone: z.string().min(1, "Please enter their best contact number."),
-    Email: z.string()
-      .email("Please enter a valid email address.")
-      .min(1, "Please enter the email address at this location."),
-    Accounts: z.string()
-      .email("Please enter a valid email address.")
-      .min(1, "Please enter the email address to send accounts."),
-  });
-
-  const OtherInfoSchema = z.object({
-    Services: z.array(z.string()).min(1, "Please select what services you require."),
-    Dates: z.string().min(1, "Please enter the date you would like to commence this service."),
-    Schedule: z.array(z.string()).min(1, "Please select your preferred schedule."),
-    Bank: z.string().min(1, "Please enter the bank this location uses."),
-  });
-
-  const SiteRiskFormSchema = z.object({
-    Amount: z.enum([
-      "$100 to $500",
-      "$500 to $1,000",
-      "$1,000 to 5,000",
-      "$5,000 to $10,000",
-      "$10,000 to $20,000",
-      "$20,000 to $25,000",
-      "$25,000 to $50,000",
-      "$50,000 to $100,000",
-      "$100,000+",
-    ], {
-      errorMap: () => ({ message: "Please select an average notes value." })
-    }).refine((val) => val !== "" && val !== undefined, {
-      message: "Please select an average notes value.",
-    }),
-    Parking: z.array(z.string()).optional(),
-    Security: z.array(z.string()).optional(),
-    External: z.array(z.string()).optional(),
-    Internal: z.array(z.string()).optional(),
-  });
-
-  return { BusinessInfoSchema, ContactInfoSchema, OtherInfoSchema, SiteRiskFormSchema };
-};
-
-// Device and IP utilities
-const getDeviceInfo = () =>
-{
-  const userAgent = navigator.userAgent;
-  let browserInfo = 'Unknown';
-  let browserVersion = '';
-
-  const browserPatterns = [
-    { name: 'Chrome', pattern: /Chrome\/([0-9.]+)/ },
-    { name: 'Firefox', pattern: /Firefox\/([0-9.]+)/ },
-    { name: 'Safari', pattern: /Version\/([0-9.]+).*Safari/ },
-    { name: 'Edge', pattern: /Edge\/([0-9.]+)/ }
-  ];
-
-  for (const { name, pattern } of browserPatterns) {
-    const match = userAgent.match(pattern);
-    if (match) {
-      browserInfo = name;
-      browserVersion = match[1];
-      break;
-    }
-  }
-
-  let osInfo = 'Unknown';
-  const osPatterns = [
-    { name: 'Windows NT', pattern: /Windows NT ([0-9._]+)/, format: (v) => `Windows NT ${v}` },
-    { name: 'Mac OS X', pattern: /Mac OS X ([0-9._]+)/, format: (v) => `Mac OS X ${v.replace(/_/g, '.')}` },
-    { name: 'Android', pattern: /Android ([0-9.]+)/, format: (v) => `Android ${v}` },
-    { name: 'iOS', pattern: /OS ([0-9._]+)/, format: (v) => `iOS ${v.replace(/_/g, '.')}`, condition: /iPhone|iPad/.test(userAgent) },
-    { name: 'Linux', pattern: /Linux/, format: () => 'Linux' }
-  ];
-
-  for (const { pattern, format, condition } of osPatterns) {
-    if (condition && !condition) continue;
-    const match = userAgent.match(pattern);
-    if (match) {
-      osInfo = format(match[1] || '');
-      break;
-    }
-  }
-
-  return {
-    fullUserAgent: userAgent,
-    browser: browserInfo,
-    browserVersion: browserVersion,
-    os: osInfo
-  };
-};
-
-const getIPAddress = async () =>
-{
-  const ipServices = [
-    'https://api.ipify.org?format=json',
-    'https://ipapi.co/json/',
-    'https://api.ip.sb/jsonip',
-  ];
-
-  for (const service of ipServices) {
-    try {
-      const response = await fetch(service);
-      const data = await response.json();
-      if (data.ip || data.query) return data.ip || data.query;
-    } catch (error) {
-      console.log(`IP service ${service} failed:`, error);
-    }
-  }
-  return 'Unable to detect';
-};
+import { useFormErrors } from '@/hooks/useFormErrors';
+import { useFormSubmission } from '@/hooks/useFormSubmission';
+import
+  {
+    createStepSchema,
+    SITE_INFO_DEFAULT_VALUES,
+    BusinessInfoSchema,
+    ContactInfoSchema,
+    ServiceInfoSchema,
+    RiskAssessmentSchema
+  } from '@/zod/SiteRiskFormSchema';
 
 const FormSection = () =>
 {
-  // State management
+  // Create field references for focus management
+  const fieldRefs = useRef({
+    BusinessName: useRef(null),
+    Address: useRef(null),
+    Suburb: useRef(null),
+    State: useRef(null),
+    Postcode: useRef(null),
+    Contact: useRef(null),
+    Position: useRef(null),
+    Phone: useRef(null),
+    Email: useRef(null),
+    Accounts: useRef(null),
+    Services: useRef(null),
+    Dates: useRef(null),
+    Schedule: useRef(null),
+    Bank: useRef(null),
+    Amount: useRef(null),
+    Parking: useRef(null),
+    Security: useRef(null),
+    External: useRef(null),
+    Internal: useRef(null),
+  });
+
+  // State management - exactly like original
   const [formData, setFormData] = useState({});
   const [showThankYou, setShowThankYou] = useState(false);
   const [quoteFormStep, setQuoteFormStep] = useState(0);
   const [schemaStep, setSchemaStep] = useState(0);
-
-  // Form submission states
-  const [currentErrorField, setCurrentErrorField] = useState(null);
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const [submissionStatus, setSubmissionStatus] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitButton, setSubmitButton] = useState(false);
 
-  // Get schemas
-  const { BusinessInfoSchema, ContactInfoSchema, OtherInfoSchema, SiteRiskFormSchema } = createValidationSchemas();
-  const schemas = [BusinessInfoSchema, ContactInfoSchema, OtherInfoSchema, SiteRiskFormSchema];
-  const quoteFormSchemas = [BusinessInfoSchema, ContactInfoSchema, OtherInfoSchema];
+  // Step schemas array for reference
+  const stepSchemas = [BusinessInfoSchema, ContactInfoSchema, ServiceInfoSchema, RiskAssessmentSchema];
+  const quoteFormSchemas = [BusinessInfoSchema, ContactInfoSchema, ServiceInfoSchema];
 
-  // Create dynamic schema based on current step
-  const createCombinedSchema = (currentStep) =>
-  {
-    const fieldConfig = {
-      0: {
-        BusinessName: z.string().min(1, "Please enter the business name of this location."),
-        Address: z.string().min(1, "Please enter the number & street for this location."),
-        Suburb: z.string().min(1, "Please enter the suburb for this location."),
-        State: z.string().min(1, "Please enter the state this is located in.").refine((val) => val !== "select", "Please select a state."),
-        Postcode: z.string().min(1, "Please enter the post code for this location."),
-      },
-      1: {
-        Contact: z.string().min(1, "Please enter the main contact person at this location."),
-        Position: z.string().min(1, "Please enter the main contact person position or role at this location."),
-        Phone: z.string().min(1, "Please enter their best contact number."),
-        Email: z.string().email("Please enter a valid email address.").min(1, "Please enter the email address at this location."),
-        Accounts: z.string().email("Please enter a valid email address.").min(1, "Please enter the email address to send accounts."),
-      },
-      2: {
-        Services: z.array(z.string()).min(1, "Please select what services you require."),
-        Dates: z.string().min(1, "Please enter the date you would like to commence this service."),
-        Schedule: z.array(z.string()).min(1, "Please select your preferred schedule."),
-        Bank: z.string().min(1, "Please enter the bank this location uses."),
-      },
-      3: {
-        Amount: z.enum([
-          "$100 to $500", "$500 to $1,000", "$1,000 to 5,000", "$5,000 to $10,000",
-          "$10,000 to $20,000", "$20,000 to $25,000", "$25,000 to $50,000",
-          "$50,000 to $100,000", "$100,000+",
-        ], {
-          errorMap: () => ({ message: "Please select an average notes value." })
-        }).refine((val) => val !== "" && val !== undefined, {
-          message: "Please select an average notes value.",
-        }),
-      }
-    };
+  // Initialize hooks
+  const { currentErrorField, setCurrentErrorField, handleFieldErrors } = useFormErrors(fieldRefs.current);
 
-    const baseFields = {
-      Type: z.string().default("Regular Service"),
-      Parking: z.array(z.string()).optional(),
-      Security: z.array(z.string()).optional(),
-      External: z.array(z.string()).optional(),
-      Internal: z.array(z.string()).optional(),
-    };
-
-    // Add optional fields for all other steps
-    Object.keys(fieldConfig).forEach(step =>
+  const { isSubmitting, isSubmitted, submissionError, handleSubmission } = useFormSubmission({
+    formType: 'siteinfo',
+    formId: 'SiteInfo',
+    onSuccess: (result, finalData) =>
     {
-      if (parseInt(step) !== currentStep) {
-        Object.keys(fieldConfig[step]).forEach(field =>
-        {
-          if (field === 'Services' || field === 'Schedule' || field === 'Parking' || field === 'Security' || field === 'External' || field === 'Internal') {
-            baseFields[field] = z.array(z.string()).optional();
-          } else {
-            baseFields[field] = z.string().optional();
-          }
-        });
-      }
-    });
+      console.log("Site info form submitted successfully!");
+      setShowThankYou(true);
+    },
+    onError: (error) =>
+    {
+      console.error("Site info submission failed:", error);
+    },
+    prepareData: async (data) =>
+    {
+      return { ...data, formType: "siteinfo" };
+    }
+  });
 
-    // Add required fields for current step
-    const currentStepFields = fieldConfig[currentStep] || {};
-
-    return z.object({ ...baseFields, ...currentStepFields });
-  };
-
-  // FIXED: Get default values with proper empty state
+  // Get default values with proper empty state - exactly like original
   const getDefaultValues = () => ({
-    Type: "Regular Service",
-    BusinessName: "",
-    Address: "",
-    Suburb: "",
-    Postcode: "",
-    Contact: "",
-    Position: "",
-    Phone: "",
-    Email: "",
-    Accounts: "",
-    Services: [],
-    Dates: "",
-    Schedule: [],
-    Bank: "",
-    Amount: "",
-    Parking: [],
-    Security: [],
-    External: [],
-    Internal: [],
+    ...SITE_INFO_DEFAULT_VALUES,
     ...formData,
   });
 
   const methods = useForm({
-    resolver: zodResolver(createCombinedSchema(schemaStep)),
+    resolver: zodResolver(createStepSchema(schemaStep)),
     defaultValues: getDefaultValues(),
   });
 
-  const { register, handleSubmit, trigger, setValue, getValues, reset, formState: { errors } } = methods;
+  const { register, handleSubmit, setValue, getValues, reset, formState: { errors } } = methods;
 
-  // Update resolver when schema step changes
+  // Update resolver when schema step changes - exactly like original
   useEffect(() =>
   {
-    const newSchema = createCombinedSchema(schemaStep);
+    const newSchema = createStepSchema(schemaStep);
     methods.resolver = zodResolver(newSchema);
     reset(getDefaultValues());
   }, [schemaStep, formData]);
 
-  // Step navigation handler
+  // Step navigation handler - exactly like original
   const handleStepNavigation = (targetStep) =>
   {
     const currentFormData = getValues();
@@ -275,7 +111,7 @@ const FormSection = () =>
     }
   };
 
-  // Focus on franchise form when transitioning
+  // Focus on franchise form when transitioning - exactly like original
   const focusOnFranchiseForm = () =>
   {
     setTimeout(() =>
@@ -291,78 +127,25 @@ const FormSection = () =>
     }, 100);
   };
 
-  // API submission handler
-  const submitToAPI = async (finalData) =>
-  {
-    const deviceInfo = getDeviceInfo();
-    const ipAddress = await getIPAddress();
-
-    const payload = {
-      ...finalData,
-      deviceInfo: deviceInfo.fullUserAgent,
-      ipAddress: ipAddress,
-      timestamp: new Date().toISOString(),
-    };
-
-    const response = await fetch("/api/forms", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'API request failed');
-    }
-
-    return response.json();
-  };
-
-  // FIXED: Complete form reset function
+  // Complete form reset function - exactly like original
   const resetFormState = () =>
   {
-    // Reset all form data to empty state
-    const emptyFormData = {
-      Type: "Regular Service",
-      BusinessName: "",
-      Address: "",
-      Suburb: "",
-      State: "",
-      Postcode: "",
-      Contact: "",
-      Position: "",
-      Phone: "",
-      Email: "",
-      Accounts: "",
-      Services: [],
-      Dates: "",
-      Schedule: [],
-      Bank: "",
-      Amount: "",
-      Parking: [],
-      Security: [],
-      External: [],
-      Internal: [],
-    };
-
-    setFormData(emptyFormData);
-    reset(emptyFormData);
+    setFormData({ ...SITE_INFO_DEFAULT_VALUES });
+    reset(SITE_INFO_DEFAULT_VALUES);
     setQuoteFormStep(0);
     setSchemaStep(0);
     setSubmitButton(false);
     setCurrentErrorField(null);
-    setSubmissionStatus(null);
   };
 
-  // FIXED: Modal close handler that properly resets form
+  // Modal close handler that properly resets form - exactly like original
   const handleModalClose = () =>
   {
     setShowThankYou(false);
-    setIsFormSubmitted(false);
-    resetFormState();
+    // resetFormState();
   };
 
-  // Main form submission handler
+  // Main form submission handler - restored original logic with new hooks
   const handleFormSubmit = async (data) =>
   {
     try {
@@ -381,35 +164,17 @@ const FormSection = () =>
         }
       } else {
         // Final submission
-        setIsSubmitting(true);
-
-        try {
-          const result = await submitToAPI(updatedFormData);
-          console.log('API Response:', result);
-
-          setIsSubmitting(false);
-          setIsFormSubmitted(true);
-          setSubmissionStatus('success');
-
-          // FIXED: Don't reset form state here, let modal handle it
-          setShowThankYou(true);
-
-        } catch (apiError) {
-          console.error('API submission error:', apiError);
-          setIsSubmitting(false);
-          setSubmissionStatus('error');
-        }
+        await handleSubmission(updatedFormData);
       }
     } catch (error) {
       console.error("Form submission error:", error);
-      setIsSubmitting(false);
-      setSubmissionStatus('error');
+      handleFieldErrors({ general: [error.message] });
     }
   };
 
   return (
     <>
-      {/* Contact Content Section */}
+      {/* Contact Content Section - EXACT original UI */}
       <div
         id="content-contact"
         className="bg-content-bg bg-center bg-no-repeat inline-block w-full 992px:my-[40px] 1280px:my-[120px]"
@@ -482,6 +247,7 @@ const FormSection = () =>
 
           <div className="[flex:1]">
             <QuoteForm
+              className=""
               formData={formData}
               setFormData={setFormData}
               handleSubmit={handleSubmit}
@@ -501,7 +267,7 @@ const FormSection = () =>
         </div>
       </div>
 
-      {/* Form Section */}
+      {/* Form Section - EXACT original UI */}
       <div id="contact-form-section" className="inline-block w-full mb-12 480px:mb-[120px]">
         <div className="inner-big w-[95%] max-w-[1366px] mx-auto my-0 992px:flex">
           <div className="414px:mx-4 hidden 992px:block 992px:w-[50%] 992px:mx-0 py-8 px-10 480px:px-[5%] 992px:pl-8 1280px:pl-24 992px:pt-32 shadow-[3px_3px_10px_0px_rgba(0,0,0,0.2)] rounded-t-[8px] 992px:rounded-l-[8px] 992px:rounded-tr-none relative">
@@ -523,10 +289,10 @@ const FormSection = () =>
             setValue={setValue}
             currentErrorField={currentErrorField}
             setCurrentErrorField={setCurrentErrorField}
-            isFormSubmitted={isFormSubmitted}
-            setIsFormSubmitted={setIsFormSubmitted}
-            submissionStatus={submissionStatus}
-            setSubmissionStatus={setSubmissionStatus}
+            isFormSubmitted={isSubmitted}
+            setIsFormSubmitted={() => { }} // Handled by submission hook
+            submissionStatus={isSubmitted ? 'success' : submissionError ? 'error' : null}
+            setSubmissionStatus={() => { }} // Handled by submission hook
             isSubmitting={isSubmitting}
             getValues={getValues}
             handleStepNavigation={handleStepNavigation}
@@ -534,11 +300,26 @@ const FormSection = () =>
             submitButton={submitButton}
           />
         </div>
+
+        {/* Display submission error if any */}
+        {submissionError && (
+          <div className="max-w-[1366px] mx-auto mt-4">
+            <div className="text-red-600 text-center mb-4 p-4 bg-red-50 border border-red-200 rounded mx-4">
+              <strong>Submission Error:</strong> {submissionError}
+              <button
+                onClick={() => window.location.reload()}
+                className="ml-4 text-blue-600 hover:underline"
+              >
+                Retry
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       <ThankYouModal
         showThankYou={showThankYou}
-        setIsFormSubmitted={setIsFormSubmitted}
+        setIsFormSubmitted={() => { }} // Handled by submission hook
         onClose={handleModalClose}
         type={'Thankyou'}
       />

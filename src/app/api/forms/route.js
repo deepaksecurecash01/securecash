@@ -1,46 +1,307 @@
 // app/api/forms/route.js
 import { NextResponse } from "next/server";
 import sendgrid from "@sendgrid/mail";
-import { getCurrentDateTime } from "../utils/Helpers";
+import fs from "fs";
+import path from "path";
 import
     {
-        prepareAUSTRACEmail,
-        prepareContactAdminEmail,
-        prepareContactConfirmationEmail,
-        prepareFranchiseAdminEmail,
-        prepareFranchiseConfirmationEmail,
-        prepareCustomerEmail,
-        prepareInternalNotificationEmail,
-        prepareOperationsEmail,
-        prepareQuoteAdminEmail,
-        prepareQuoteConfirmationEmail,
-        prepareSiteInfoEmail,
-        prepareSiteInfoConfirmationEmail,
-        prepareTermsEmail
-    } from "../services/emailService";
+        prepareContactAdminNotificationEmail,
+        prepareContactUserConfirmationEmail,
+        prepareFranchiseAdminInquiryEmail,
+        prepareFranchiseUserWelcomeEmail,
+        prepareICAContractorWelcomeEmail,
+        prepareICAEdocketsIntroductionEmail,
+        prepareICAOperationsReviewEmail,
+        prepareQuoteAdminRequestEmail,
+        prepareQuoteUserConfirmationEmail,
+        prepareSiteInfoAdminNotificationEmail,
+        prepareSiteInfoUserConfirmationEmail,
+        prepareTermsAgreementEmail,
+        prepareAustracSubmissionEmail
+    } from "./services/emailService";
 
 // Set SendGrid API key once
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
-// Environment detection - Use sync emails on Vercel, async queue on your own server
-const IS_VERCEL = process.env.VERCEL_ENV || process.env.VERCEL || process.env.VERCEL_URL;
+// Environment detection - moved to startup (Performance Optimization)
+const IS_VERCEL = !!(process.env.VERCEL_ENV || process.env.VERCEL || process.env.VERCEL_URL);
 const USE_SYNC_EMAILS = IS_VERCEL;
 
-// Ultra-fast XSS sanitization - only for critical fields
+// PDF Cache for performance optimization
+const PDF_CACHE = new Map();
+const PDF_CACHE_INITIALIZED = { value: false };
+
+// Initialize PDF cache at startup
+const initializePdfCache = () =>
+{
+    if (PDF_CACHE_INITIALIZED.value) return;
+
+    console.log('🔄 Initializing PDF cache...');
+    const startTime = performance.now();
+
+    const pdfFiles = [
+        // Franchise PDFs
+        "ACCC-Information-Statement.pdf",
+        "SecureCash-Franchise-Prospectus.pdf",
+        "SecureCash-DL-Flyer.pdf",
+        "eDockets-DL-Flyer.pdf",
+        // ICA PDFs
+        "Independant Contractors Agreement - Courier Lab.pdf",
+        "SecureCash Deed - Courier Lab.pdf",
+        // Site Info PDFs
+        "SecureCash-Online-Services-Flyer.pdf",
+        "How-to-Prepare-Your-Banking.pdf",
+        // Terms PDFs
+        "Terms & Conditions.pdf"
+    ];
+
+    let cachedCount = 0;
+    let totalSize = 0;
+
+    pdfFiles.forEach(filename =>
+    {
+        try {
+            const filePath = path.join(process.cwd(), "public", "upload", filename);
+            if (fs.existsSync(filePath)) {
+                const fileBuffer = fs.readFileSync(filePath);
+                const base64Content = fileBuffer.toString("base64");
+                PDF_CACHE.set(filename, base64Content);
+                cachedCount++;
+                totalSize += base64Content.length;
+            } else {
+                console.warn(`⚠️ PDF not found for caching: ${filename}`);
+            }
+        } catch (error) {
+            console.error(`❌ Error caching PDF ${filename}:`, error.message);
+        }
+    });
+
+    const initTime = performance.now() - startTime;
+    const sizeMB = (totalSize / (1024 * 1024)).toFixed(2);
+
+    console.log(`✅ PDF cache initialized: ${cachedCount}/${pdfFiles.length} files cached`);
+    console.log(`📊 Cache size: ${sizeMB}MB, Init time: ${initTime.toFixed(2)}ms`);
+
+    PDF_CACHE_INITIALIZED.value = true;
+};
+
+// Initialize cache immediately
+initializePdfCache();
+
+// Enhanced PDF reading with cache
+const readPdfFile = (filename) =>
+{
+    // Return cached version if available
+    if (PDF_CACHE.has(filename)) {
+        return PDF_CACHE.get(filename);
+    }
+
+    // Fallback to file system read (shouldn't happen after init)
+    console.warn(`⚠️ PDF cache miss for: ${filename}, reading from disk`);
+    try {
+        const filePath = path.join(process.cwd(), "public", "upload", filename);
+        if (!fs.existsSync(filePath)) {
+            console.warn(`PDF file not found: ${filePath}`);
+            return null;
+        }
+        const fileBuffer = fs.readFileSync(filePath);
+        const base64Content = fileBuffer.toString("base64");
+        // Cache it for next time
+        PDF_CACHE.set(filename, base64Content);
+        return base64Content;
+    } catch (error) {
+        console.error(`Error reading PDF file ${filename}:`, error);
+        return null;
+    }
+};
+
+// Rate limiting storage (IP-based)
+const RATE_LIMIT_MAP = new Map();
+const RATE_LIMIT_WINDOW = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX = 10; // 10 submissions per minute
+
+// Rate limiting function
+const checkRateLimit = (req) =>
+{
+    const forwarded = req.headers.get('x-forwarded-for');
+    const ip = forwarded ? forwarded.split(',')[0].trim() : 'unknown';
+
+    const now = Date.now();
+    const windowStart = now - RATE_LIMIT_WINDOW;
+
+    // Get or create rate limit entry
+    if (!RATE_LIMIT_MAP.has(ip)) {
+        RATE_LIMIT_MAP.set(ip, []);
+    }
+
+    const requests = RATE_LIMIT_MAP.get(ip);
+
+    // Remove old requests outside the window
+    while (requests.length > 0 && requests[0] < windowStart) {
+        requests.shift();
+    }
+
+    // Check if limit exceeded
+    if (requests.length >= RATE_LIMIT_MAX) {
+        return { allowed: false, remaining: 0 };
+    }
+
+    // Add current request
+    requests.push(now);
+
+    return { allowed: true, remaining: RATE_LIMIT_MAX - requests.length };
+};
+
+// Clean up old rate limit entries periodically
+setInterval(() =>
+{
+    const now = Date.now();
+    const windowStart = now - RATE_LIMIT_WINDOW;
+
+    for (const [ip, requests] of RATE_LIMIT_MAP.entries()) {
+        // Remove old requests
+        while (requests.length > 0 && requests[0] < windowStart) {
+            requests.shift();
+        }
+        // Remove empty entries
+        if (requests.length === 0) {
+            RATE_LIMIT_MAP.delete(ip);
+        }
+    }
+}, RATE_LIMIT_WINDOW); // Run cleanup every minute
+
+// Server-side validation backup
+const validateFormData = (formType, formData) =>
+{
+    const errors = [];
+
+    // Basic required field validation based on form type
+    const validations = {
+        contact: ['FullName', 'Email', 'Department'],
+        franchise: ['FullName', 'Email', 'InterestedArea'],
+        ica: ['Name', 'Email', 'BusinessName'],
+        quote: ['Name', 'Email', 'Organisation'],
+        siteinfo: ['BusinessName', 'Email', 'Contact'],
+        specialevent: ['BusinessName', 'Email', 'Contact'],
+        terms: ['Full Name', 'Email', 'Organisation Name'],
+        austrac: ['Organisation', 'OrganisationEmail']
+    };
+
+    const requiredFields = validations[formType.toLowerCase()] || [];
+
+    requiredFields.forEach(field =>
+    {
+        const value = formData[field];
+        if (!value || (typeof value === 'string' && value.trim().length === 0)) {
+            errors.push(`Missing required field: ${field}`);
+        }
+    });
+
+    // Email format validation
+    const emailFields = ['Email', 'OrganisationEmail'];
+    emailFields.forEach(field =>
+    {
+        const email = formData[field];
+        if (email && typeof email === 'string') {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email.trim())) {
+                errors.push(`Invalid email format: ${field}`);
+            }
+        }
+    });
+
+    // File size validation (5MB limit)
+    if (formData.attachments && Array.isArray(formData.attachments)) {
+        formData.attachments.forEach((attachment, index) =>
+        {
+            if (attachment.content) {
+                const size = Buffer.byteLength(attachment.content, 'base64');
+                if (size > 5 * 1024 * 1024) { // 5MB
+                    errors.push(`Attachment ${index + 1} exceeds 5MB limit`);
+                }
+            }
+        });
+    }
+
+    return errors;
+};
+
+// Enhanced sanitization
 const fastSanitize = (str) =>
 {
     if (typeof str !== 'string') return str;
     return str
-        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove script tags
-        .replace(/javascript:/gi, '') // Remove javascript: urls
-        .replace(/on\w+\s*=/gi, ''); // Remove event handlers
+        .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+        .replace(/javascript:/gi, '')
+        .replace(/on\w+\s*=/gi, '')
+        .replace(/data:text\/html/gi, '')
+        .trim();
 };
 
-// Background email queue - process emails after response (Production only)
+// Failed email storage
+const FAILED_EMAILS_DIR = path.join(process.cwd(), 'failed-emails');
+
+const ensureFailedEmailsDir = () =>
+{
+    try {
+        if (!fs.existsSync(FAILED_EMAILS_DIR)) {
+            fs.mkdirSync(FAILED_EMAILS_DIR, { recursive: true });
+        }
+    } catch (error) {
+        console.error('Failed to create failed-emails directory:', error);
+    }
+};
+
+const saveFailedEmail = (emailData, error, formType) =>
+{
+    try {
+        ensureFailedEmailsDir();
+        const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+        const filename = `${formType}-${timestamp}.json`;
+        const filepath = path.join(FAILED_EMAILS_DIR, filename);
+
+        const failedEmailRecord = {
+            timestamp: new Date().toISOString(),
+            formType,
+            error: error.message,
+            emailData: {
+                to: emailData.to,
+                subject: emailData.subject,
+                from: emailData.from,
+                // Don't save full content to avoid large files
+                hasAttachments: !!(emailData.attachments && emailData.attachments.length > 0),
+                attachmentCount: emailData.attachments ? emailData.attachments.length : 0
+            },
+            retryable: !error.message.includes('Invalid email') // Mark if worth retrying
+        };
+
+        fs.writeFileSync(filepath, JSON.stringify(failedEmailRecord, null, 2));
+        console.log(`💾 Failed email saved: ${filename}`);
+    } catch (saveError) {
+        console.error('Failed to save failed email:', saveError);
+    }
+};
+
+// Background email queue with enhanced resilience
 const emailQueue = [];
 let processing = false;
 
-// Helper function to calculate attachment sizes
+// Retry configuration
+const RETRY_CONFIG = {
+    maxRetries: 3,
+    baseDelay: 1000, // 1 second
+    maxDelay: 16000, // 16 seconds
+    backoffFactor: 4
+};
+
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+const calculateRetryDelay = (attempt) =>
+{
+    const delay = RETRY_CONFIG.baseDelay * Math.pow(RETRY_CONFIG.backoffFactor, attempt - 1);
+    return Math.min(delay, RETRY_CONFIG.maxDelay);
+};
+
 const calculateAttachmentSizes = (emailData) =>
 {
     if (!emailData.attachments || !Array.isArray(emailData.attachments)) {
@@ -82,7 +343,71 @@ const formatFileSize = (bytes) =>
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 };
 
-// Enhanced email processing with detailed logging (Production only)
+// Enhanced email sending with retry logic
+const sendEmailWithRetry = async (emailData, formType, maxRetries = RETRY_CONFIG.maxRetries) =>
+{
+    let lastError;
+
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+            const startTime = performance.now();
+            const response = await sendgrid.send(emailData);
+            const sendTime = performance.now() - startTime;
+
+            return {
+                success: true,
+                attempt,
+                to: Array.isArray(emailData.to) ? emailData.to.join(', ') : emailData.to,
+                subject: emailData.subject || 'No Subject',
+                sendTime: sendTime.toFixed(2),
+                response: `${response[0]?.statusCode || 'Unknown'} ${response[0]?.statusMessage || ''}`.trim(),
+                attachments: calculateAttachmentSizes(emailData)
+            };
+        } catch (error) {
+            lastError = error;
+            const sendTime = performance.now();
+
+            console.error(`❌ Email attempt ${attempt}/${maxRetries} failed:`, {
+                to: emailData.to,
+                subject: emailData.subject,
+                error: error.message,
+                sendTime: sendTime.toFixed(2)
+            });
+            if (error.code === 429 || error.message.toLowerCase().includes('rate limit')) {
+                console.warn(`🚨 SENDGRID RATE LIMIT HIT: ${error.message}`);
+            }
+            // Don't retry on certain errors
+            if (error.message.includes('Invalid email') ||
+                error.message.includes('Unsubscribed Address') ||
+                error.response?.status === 400) {
+                console.log(`🚫 Not retrying due to permanent error: ${error.message}`);
+                break;
+            }
+
+            // If not the last attempt, wait before retrying
+            if (attempt < maxRetries) {
+                const delayMs = calculateRetryDelay(attempt);
+                console.log(`⏱️ Retrying in ${delayMs}ms... (attempt ${attempt + 1}/${maxRetries})`);
+                await delay(delayMs);
+            }
+        }
+    }
+
+    // All retries failed - save for manual inspection
+    saveFailedEmail(emailData, lastError, formType);
+
+    return {
+        success: false,
+        attempt: maxRetries,
+        to: Array.isArray(emailData.to) ? emailData.to.join(', ') : emailData.to,
+        subject: emailData.subject || 'No Subject',
+        sendTime: '0',
+        response: lastError.message || 'Unknown error',
+        attachments: calculateAttachmentSizes(emailData)
+    };
+};
+
+// Enhanced email processing with all-or-nothing retry logic
 const processEmailQueue = async () =>
 {
     if (processing || emailQueue.length === 0) return;
@@ -95,45 +420,85 @@ const processEmailQueue = async () =>
     while (emailQueue.length > 0) {
         const emailTask = emailQueue.shift();
         const taskStartTime = performance.now();
+        let success = false;
+        let retryCount = 0;
+        const maxTaskRetries = 2; // Retry entire email batch if any email fails
 
-        try {
-            // Execute the email task and get detailed results
-            const result = await emailTask.executeWithDetails();
-            const taskTime = performance.now() - taskStartTime;
+        // Retry entire email batch logic
+        while (!success && retryCount <= maxTaskRetries) {
+            try {
+                const result = await emailTask.executeWithResilience();
+                const taskTime = performance.now() - taskStartTime;
 
-            console.log(`\n✅ Successfully processed ${emailTask.type.toUpperCase()} emails:`);
-            console.log(`   └─ Form Type: ${emailTask.formType}`);
-            console.log(`   └─ Processing Time: ${taskTime.toFixed(2)}ms`);
-            console.log(`   └─ Emails Sent: ${result.emailsSent}`);
+                // Check if all emails succeeded
+                const allSuccessful = result.emailDetails.every(email => email.success);
 
-            // Log individual email details
-            result.emailDetails.forEach((email, index) =>
-            {
-                console.log(`   └─ Email ${index + 1}:`);
-                console.log(`      ├─ To: ${email.to}`);
-                console.log(`      ├─ Subject: ${email.subject}`);
-                console.log(`      ├─ Send Time: ${email.sendTime}ms`);
-                console.log(`      ├─ Response: ${email.response}`);
+                if (allSuccessful) {
+                    success = true;
+                    console.log(`\n✅ Successfully processed ${emailTask.type.toUpperCase()} emails:`);
+                    console.log(`   └─ Form Type: ${emailTask.formType}`);
+                    console.log(`   └─ Processing Time: ${taskTime.toFixed(2)}ms`);
+                    console.log(`   └─ Emails Sent: ${result.emailsSent}`);
+                    console.log(`   └─ Retry Count: ${retryCount}`);
 
-                if (email.attachments.count > 0) {
-                    console.log(`      ├─ Attachments: ${email.attachments.count} files (${email.attachments.totalSizeFormatted})`);
-                    email.attachments.details.forEach((att, attIndex) =>
+                    // Log individual email details
+                    result.emailDetails.forEach((email, index) =>
                     {
-                        console.log(`      │  └─ ${attIndex + 1}. ${att.filename} - ${att.sizeFormatted} (${att.type})`);
+                        console.log(`   └─ Email ${index + 1}:`);
+                        console.log(`      ├─ To: ${email.to}`);
+                        console.log(`      ├─ Subject: ${email.subject}`);
+                        console.log(`      ├─ Send Time: ${email.sendTime}ms`);
+                        console.log(`      ├─ Attempts: ${email.attempt}`);
+                        console.log(`      ├─ Response: ${email.response}`);
+
+                        if (email.attachments.count > 0) {
+                            console.log(`      ├─ Attachments: ${email.attachments.count} files (${email.attachments.totalSizeFormatted})`);
+                            email.attachments.details.forEach((att, attIndex) =>
+                            {
+                                console.log(`      │  └─ ${attIndex + 1}. ${att.filename} - ${att.sizeFormatted} (${att.type})`);
+                            });
+                        } else {
+                            console.log(`      ├─ Attachments: None`);
+                        }
+                        console.log(`      └─ Status: ✓ Delivered`);
                     });
                 } else {
-                    console.log(`      ├─ Attachments: None`);
-                }
-                console.log(`      └─ Status: ${email.success ? '✓ Delivered' : '✗ Failed'}`);
-            });
+                    // Some emails failed - retry entire batch
+                    retryCount++;
+                    const failedEmails = result.emailDetails.filter(email => !email.success);
 
-        } catch (error) {
-            const taskTime = performance.now() - taskStartTime;
-            console.error(`\n❌ Failed to process ${emailTask.type.toUpperCase()} emails:`);
-            console.error(`   └─ Form Type: ${emailTask.formType}`);
-            console.error(`   └─ Error Time: ${taskTime.toFixed(2)}ms`);
-            console.error(`   └─ Error: ${error.message}`);
-            console.error(`   └─ Stack: ${error.stack}`);
+                    if (retryCount <= maxTaskRetries) {
+                        const retryDelay = calculateRetryDelay(retryCount);
+                        console.warn(`⚠️ Batch retry ${retryCount}/${maxTaskRetries} for ${emailTask.formType} - ${failedEmails.length} emails failed`);
+                        console.log(`⏱️ Retrying entire batch in ${retryDelay}ms...`);
+                        await delay(retryDelay);
+                    } else {
+                        console.error(`❌ Final batch failure for ${emailTask.formType} after ${maxTaskRetries} retries`);
+                        break;
+                    }
+                }
+
+            } catch (error) {
+                retryCount++;
+                const taskTime = performance.now() - taskStartTime;
+
+                if (retryCount <= maxTaskRetries) {
+                    const retryDelay = calculateRetryDelay(retryCount);
+                    console.error(`❌ Batch error retry ${retryCount}/${maxTaskRetries}:`, {
+                        formType: emailTask.formType,
+                        error: error.message,
+                        retryDelay: `${retryDelay}ms`
+                    });
+                    await delay(retryDelay);
+                } else {
+                    console.error(`❌ Final batch error for ${emailTask.formType}:`, {
+                        errorTime: `${taskTime.toFixed(2)}ms`,
+                        error: error.message,
+                        stack: error.stack
+                    });
+                    break;
+                }
+            }
         }
     }
 
@@ -143,54 +508,216 @@ const processEmailQueue = async () =>
     processing = false;
 };
 
-// Enhanced send function with detailed logging
-const sendEmailWithDetails = async (emailData) =>
+// Process attachments sequentially for better memory management
+const processAttachmentsSequentially = (attachmentMappings, formData) =>
 {
-    const startTime = performance.now();
+    const attachments = [];
+
+    // Process one attachment at a time to reduce memory pressure
+    for (const mapping of attachmentMappings) {
+        if (formData[mapping.field]) {
+            try {
+                const mimeType = getMimeType(mapping.filename);
+                const processedAttachment = processAttachment(
+                    formData[mapping.field],
+                    mapping.filename,
+                    mimeType
+                );
+                if (processedAttachment) {
+                    attachments.push(processedAttachment);
+                }
+                // Force garbage collection hint
+                if (global.gc) {
+                    global.gc();
+                }
+            } catch (error) {
+                console.error(`Error processing attachment ${mapping.filename}:`, error);
+            }
+        }
+    }
+
+    return attachments;
+};
+
+// Helper functions (moved from helper file for better organization)
+const getMimeType = (filename) =>
+{
+    const extension = filename.toLowerCase().split(".").pop();
+    const mimeTypes = {
+        pdf: "application/pdf",
+        jpg: "image/jpeg",
+        jpeg: "image/jpeg",
+        png: "image/png",
+        gif: "image/gif",
+        doc: "application/msword",
+        docx: "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    };
+    return mimeTypes[extension] || "application/octet-stream";
+};
+
+const processAttachment = (attachment, filename, mimeType = "application/pdf") =>
+{
+    if (!attachment) return null;
 
     try {
-        // Calculate attachment information
-        const attachmentInfo = calculateAttachmentSizes(emailData);
-
-        // Send the email
-        const response = await sendgrid.send(emailData);
-        const sendTime = performance.now() - startTime;
+        let base64Content = attachment;
+        if (attachment.includes(",")) {
+            base64Content = attachment.split(",")[1];
+        }
 
         return {
-            success: true,
-            to: Array.isArray(emailData.to) ? emailData.to.join(', ') : emailData.to,
-            subject: emailData.subject || 'No Subject',
-            sendTime: sendTime.toFixed(2),
-            response: `${response[0]?.statusCode || 'Unknown'} ${response[0]?.statusMessage || ''}`.trim(),
-            attachments: attachmentInfo
+            filename: filename,
+            type: mimeType,
+            disposition: "attachment",
+            content: base64Content,
         };
     } catch (error) {
-        const sendTime = performance.now() - startTime;
-
-        return {
-            success: false,
-            to: Array.isArray(emailData.to) ? emailData.to.join(', ') : emailData.to,
-            subject: emailData.subject || 'No Subject',
-            sendTime: sendTime.toFixed(2),
-            response: error.message || 'Unknown error',
-            attachments: calculateAttachmentSizes(emailData)
-        };
+        console.error(`Error processing attachment ${filename}:`, error);
+        return null;
     }
 };
 
-// Universal form handlers with both async (production) and sync (Vercel) modes
+// ADD THIS NEW FUNCTION - Place it after your helper functions but before FORM_HANDLERS
+// Universal multi-email batch executor with individual tracking
+const executeMultiEmailBatch = async (emailTasks, formType) =>
+{
+    // Initialize all tasks as unsent
+    emailTasks.forEach(task => { task.sent = false; });
+
+    let retryCount = 0;
+    const maxRetries = 2;
+    const emailDetails = [];
+
+    while (retryCount <= maxRetries) {
+        // Only process emails that haven't been sent successfully
+        const pendingTasks = emailTasks.filter(task => !task.sent);
+
+        if (pendingTasks.length === 0) {
+            console.log(`✅ All ${formType} emails successfully sent (retry ${retryCount})`);
+            break;
+        }
+
+        console.log(`📧 ${formType} batch attempt ${retryCount + 1}: ${pendingTasks.length}/${emailTasks.length} emails to send`);
+
+        // Send all pending emails in parallel
+        const batchResults = await Promise.all(
+            pendingTasks.map(async (task) =>
+            {
+                try {
+                    const emailData = task.prepare();
+                    const result = await sendEmailWithRetry(emailData, task.type, 1); // Single attempt per batch retry
+
+                    // Mark as sent if successful
+                    if (result.success) {
+                        task.sent = true;
+                        console.log(`✅ ${formType} ${task.id} email sent successfully`);
+                    } else {
+                        console.warn(`❌ ${formType} ${task.id} email failed: ${result.response}`);
+                    }
+
+                    return { ...result, taskId: task.id, recipient: task.recipient };
+                } catch (error) {
+                    console.error(`❌ ${formType} ${task.id} email error:`, error.message);
+                    return {
+                        success: false,
+                        taskId: task.id,
+                        recipient: task.recipient,
+                        to: 'unknown',
+                        subject: task.id,
+                        sendTime: '0',
+                        response: error.message,
+                        attempt: 1,
+                        attachments: { count: 0, totalSize: 0, details: [] }
+                    };
+                }
+            })
+        );
+
+        // Add results to collection
+        emailDetails.push(...batchResults);
+
+        // Check if all emails are now sent
+        const allSent = emailTasks.every(task => task.sent);
+
+        if (allSent) {
+            console.log(`✅ All ${formType} emails sent successfully on attempt ${retryCount + 1}`);
+            break;
+        }
+
+        // Prepare for retry if not all sent and retries remaining
+        if (retryCount < maxRetries) {
+            const failedTasks = emailTasks.filter(task => !task.sent);
+            const successfulTasks = emailTasks.filter(task => task.sent);
+            const retryDelay = calculateRetryDelay(retryCount + 1);
+
+            console.warn(`⏱️ ${formType} batch retry ${retryCount + 2}/${maxRetries + 1} in ${retryDelay}ms`);
+            console.warn(`   └─ Failed emails (will retry): ${failedTasks.map(t => `${t.id}(${t.recipient})`).join(', ')}`);
+
+            if (successfulTasks.length > 0) {
+                console.log(`   └─ Successful emails (won't resend): ${successfulTasks.map(t => `${t.id}(${t.recipient})`).join(', ')}`);
+            }
+
+            await delay(retryDelay);
+        }
+
+        retryCount++;
+    }
+
+    // Create final summary with latest results for each task
+    const sentCount = emailTasks.filter(task => task.sent).length;
+    const finalDetails = emailTasks.map(task =>
+    {
+        // Get the latest result for this task
+        const latestResult = emailDetails
+            .filter(detail => detail.taskId === task.id)
+            .pop(); // Get the most recent attempt
+
+        return {
+            taskId: task.id,
+            recipient: task.recipient,
+            success: task.sent,
+            to: latestResult?.to || 'unknown',
+            subject: latestResult?.subject || task.id,
+            attempts: retryCount + 1,
+            sendTime: latestResult?.sendTime || '0',
+            response: task.sent ? 'Success' : (latestResult?.response || 'Failed after retries'),
+            attachments: latestResult?.attachments || { count: 0, totalSize: 0, details: [] }
+        };
+    });
+
+    // Log final summary
+    if (sentCount === emailTasks.length) {
+        console.log(`\n✅ ${formType} COMPLETE: All ${emailTasks.length} emails sent successfully`);
+    } else {
+        console.warn(`\n⚠️ ${formType} PARTIAL SUCCESS: ${sentCount}/${emailTasks.length} emails sent`);
+        const failedEmails = finalDetails.filter(d => !d.success);
+        failedEmails.forEach(failed =>
+        {
+            console.warn(`   └─ Failed: ${failed.taskId} (${failed.recipient}) - ${failed.response}`);
+        });
+    }
+
+    return {
+        emailsSent: sentCount,
+        emailDetails: finalDetails,
+        partialSuccess: sentCount > 0 && sentCount < emailTasks.length,
+        totalAttempts: retryCount + 1
+    };
+};
+
+// Universal form handlers with enhanced resilience
 const FORM_HANDLERS = {
+    // Single email forms (no changes needed)
     austrac: {
-        // Async queue method (Production)
         queueEmails: (data) =>
         {
             emailQueue.push({
                 type: 'austrac',
                 formType: 'AUSTRAC',
-                executeWithDetails: async () =>
+                executeWithResilience: async () =>
                 {
-                    const emailData = prepareAUSTRACEmail(data);
-                    const emailDetails = [await sendEmailWithDetails(emailData)];
+                    const emailData = prepareAustracSubmissionEmail(data, readPdfFile);
+                    const emailDetails = [await sendEmailWithRetry(emailData, 'austrac')];
 
                     return {
                         emailsSent: emailDetails.length,
@@ -199,11 +726,10 @@ const FORM_HANDLERS = {
                 }
             });
         },
-        // Sync method (Vercel Development)
         executeEmailsSync: async (data) =>
         {
-            const emailData = prepareAUSTRACEmail(data);
-            const emailDetails = [await sendEmailWithDetails(emailData)];
+            const emailData = prepareAustracSubmissionEmail(data, readPdfFile);
+            const emailDetails = [await sendEmailWithRetry(emailData, 'austrac')];
 
             return {
                 emailsSent: emailDetails.length,
@@ -214,21 +740,16 @@ const FORM_HANDLERS = {
         logData: (data) => ({ org: data.Organisation, email: data.OrganisationEmail })
     },
 
-    contact: {
+    terms: {
         queueEmails: (data) =>
         {
             emailQueue.push({
-                type: 'contact',
-                formType: 'Contact',
-                executeWithDetails: async () =>
+                type: 'terms',
+                formType: 'Terms',
+                executeWithResilience: async () =>
                 {
-                    const adminEmail = prepareContactAdminEmail(data);
-                    const confirmationEmail = prepareContactConfirmationEmail(data);
-
-                    const emailDetails = await Promise.all([
-                        sendEmailWithDetails(adminEmail),
-                        sendEmailWithDetails(confirmationEmail)
-                    ]);
+                    const emailData = prepareTermsAgreementEmail(data, readPdfFile);
+                    const emailDetails = [await sendEmailWithRetry(emailData, 'terms')];
 
                     return {
                         emailsSent: emailDetails.length,
@@ -239,18 +760,61 @@ const FORM_HANDLERS = {
         },
         executeEmailsSync: async (data) =>
         {
-            const adminEmail = prepareContactAdminEmail(data);
-            const confirmationEmail = prepareContactConfirmationEmail(data);
-
-            const emailDetails = await Promise.all([
-                sendEmailWithDetails(adminEmail),
-                sendEmailWithDetails(confirmationEmail)
-            ]);
+            const emailData = prepareTermsAgreementEmail(data, readPdfFile);
+            const emailDetails = [await sendEmailWithRetry(emailData, 'terms')];
 
             return {
                 emailsSent: emailDetails.length,
                 emailDetails
             };
+        },
+        response: "Terms & Conditions accepted successfully!",
+        logData: (data) => ({ org: data["Organisation Name"], name: data["Full Name"] })
+    },
+
+    // MULTI-EMAIL FORMS - Enhanced with individual tracking
+
+    contact: {
+        queueEmails: (data) =>
+        {
+            emailQueue.push({
+                type: 'contact',
+                formType: 'Contact',
+                executeWithResilience: async () =>
+                {
+                    return await executeMultiEmailBatch([
+                        {
+                            id: 'admin-notification',
+                            type: 'contact-admin',
+                            prepare: () => prepareContactAdminNotificationEmail(data, readPdfFile),
+                            recipient: 'admin'
+                        },
+                        {
+                            id: 'user-confirmation',
+                            type: 'contact-user',
+                            prepare: () => prepareContactUserConfirmationEmail(data, readPdfFile),
+                            recipient: 'customer'
+                        }
+                    ], 'Contact');
+                }
+            });
+        },
+        executeEmailsSync: async (data) =>
+        {
+            return await executeMultiEmailBatch([
+                {
+                    id: 'admin-notification',
+                    type: 'contact-admin',
+                    prepare: () => prepareContactAdminNotificationEmail(data, readPdfFile),
+                    recipient: 'admin'
+                },
+                {
+                    id: 'user-confirmation',
+                    type: 'contact-user',
+                    prepare: () => prepareContactUserConfirmationEmail(data, readPdfFile),
+                    recipient: 'customer'
+                }
+            ], 'Contact');
         },
         response: "Contact request submitted successfully!",
         logData: (data) => ({ name: data.FullName, dept: data.Department })
@@ -262,37 +826,41 @@ const FORM_HANDLERS = {
             emailQueue.push({
                 type: 'franchise',
                 formType: 'Franchise',
-                executeWithDetails: async () =>
+                executeWithResilience: async () =>
                 {
-                    const adminEmail = prepareFranchiseAdminEmail(data);
-                    const confirmationEmail = prepareFranchiseConfirmationEmail(data);
-
-                    const emailDetails = await Promise.all([
-                        sendEmailWithDetails(adminEmail),
-                        sendEmailWithDetails(confirmationEmail)
-                    ]);
-
-                    return {
-                        emailsSent: emailDetails.length,
-                        emailDetails
-                    };
+                    return await executeMultiEmailBatch([
+                        {
+                            id: 'admin-inquiry',
+                            type: 'franchise-admin',
+                            prepare: () => prepareFranchiseAdminInquiryEmail(data, readPdfFile),
+                            recipient: 'admin'
+                        },
+                        {
+                            id: 'user-welcome',
+                            type: 'franchise-user',
+                            prepare: () => prepareFranchiseUserWelcomeEmail(data, readPdfFile),
+                            recipient: 'customer'
+                        }
+                    ], 'Franchise');
                 }
             });
         },
         executeEmailsSync: async (data) =>
         {
-            const adminEmail = prepareFranchiseAdminEmail(data);
-            const confirmationEmail = prepareFranchiseConfirmationEmail(data);
-
-            const emailDetails = await Promise.all([
-                sendEmailWithDetails(adminEmail),
-                sendEmailWithDetails(confirmationEmail)
-            ]);
-
-            return {
-                emailsSent: emailDetails.length,
-                emailDetails
-            };
+            return await executeMultiEmailBatch([
+                {
+                    id: 'admin-inquiry',
+                    type: 'franchise-admin',
+                    prepare: () => prepareFranchiseAdminInquiryEmail(data, readPdfFile),
+                    recipient: 'admin'
+                },
+                {
+                    id: 'user-welcome',
+                    type: 'franchise-user',
+                    prepare: () => prepareFranchiseUserWelcomeEmail(data, readPdfFile),
+                    recipient: 'customer'
+                }
+            ], 'Franchise');
         },
         response: "Franchise enquiry submitted successfully!",
         logData: (data) => ({ name: data.FullName, area: data.InterestedArea })
@@ -304,41 +872,53 @@ const FORM_HANDLERS = {
             emailQueue.push({
                 type: 'ica',
                 formType: 'ICA',
-                executeWithDetails: async () =>
+                executeWithResilience: async () =>
                 {
-                    const operationsEmail = prepareOperationsEmail(data);
-                    const customerEmail = prepareCustomerEmail(data);
-                    const internalEmail = prepareInternalNotificationEmail(data);
-
-                    const emailDetails = await Promise.all([
-                        sendEmailWithDetails(operationsEmail),
-                        sendEmailWithDetails(customerEmail),
-                        sendEmailWithDetails(internalEmail)
-                    ]);
-
-                    return {
-                        emailsSent: emailDetails.length,
-                        emailDetails
-                    };
+                    return await executeMultiEmailBatch([
+                        {
+                            id: 'operations-review',
+                            type: 'ica-operations',
+                            prepare: () => prepareICAOperationsReviewEmail(data, readPdfFile, processAttachmentsSequentially),
+                            recipient: 'admin'
+                        },
+                        {
+                            id: 'contractor-welcome',
+                            type: 'ica-contractor',
+                            prepare: () => prepareICAContractorWelcomeEmail(data, readPdfFile),
+                            recipient: 'customer'
+                        },
+                        {
+                            id: 'edockets-intro',
+                            type: 'ica-edockets',
+                            prepare: () => prepareICAEdocketsIntroductionEmail(data, readPdfFile),
+                            recipient: 'customer'
+                        }
+                    ], 'ICA');
                 }
             });
         },
         executeEmailsSync: async (data) =>
         {
-            const operationsEmail = prepareOperationsEmail(data);
-            const customerEmail = prepareCustomerEmail(data);
-            const internalEmail = prepareInternalNotificationEmail(data);
-
-            const emailDetails = await Promise.all([
-                sendEmailWithDetails(operationsEmail),
-                sendEmailWithDetails(customerEmail),
-                sendEmailWithDetails(internalEmail)
-            ]);
-
-            return {
-                emailsSent: emailDetails.length,
-                emailDetails
-            };
+            return await executeMultiEmailBatch([
+                {
+                    id: 'operations-review',
+                    type: 'ica-operations',
+                    prepare: () => prepareICAOperationsReviewEmail(data, readPdfFile, processAttachmentsSequentially),
+                    recipient: 'admin'
+                },
+                {
+                    id: 'contractor-welcome',
+                    type: 'ica-contractor',
+                    prepare: () => prepareICAContractorWelcomeEmail(data, readPdfFile),
+                    recipient: 'customer'
+                },
+                {
+                    id: 'edockets-intro',
+                    type: 'ica-edockets',
+                    prepare: () => prepareICAEdocketsIntroductionEmail(data, readPdfFile),
+                    recipient: 'customer'
+                }
+            ], 'ICA');
         },
         response: "ICA form submitted successfully!",
         logData: (data) => ({ name: data.Name, business: data.BusinessName })
@@ -347,7 +927,6 @@ const FORM_HANDLERS = {
     quote: {
         queueEmails: (data) =>
         {
-            // Minimal sanitization - only dangerous fields
             const clean = {
                 ...data,
                 Name: fastSanitize(data.Name),
@@ -358,26 +937,27 @@ const FORM_HANDLERS = {
             emailQueue.push({
                 type: 'quote',
                 formType: 'Quote',
-                executeWithDetails: async () =>
+                executeWithResilience: async () =>
                 {
-                    const adminEmail = prepareQuoteAdminEmail(clean);
-                    const confirmationEmail = prepareQuoteConfirmationEmail(clean);
-
-                    const emailDetails = await Promise.all([
-                        sendEmailWithDetails(adminEmail),
-                        sendEmailWithDetails(confirmationEmail)
-                    ]);
-
-                    return {
-                        emailsSent: emailDetails.length,
-                        emailDetails
-                    };
+                    return await executeMultiEmailBatch([
+                        {
+                            id: 'admin-request',
+                            type: 'quote-admin',
+                            prepare: () => prepareQuoteAdminRequestEmail(clean, readPdfFile),
+                            recipient: 'admin'
+                        },
+                        {
+                            id: 'user-confirmation',
+                            type: 'quote-user',
+                            prepare: () => prepareQuoteUserConfirmationEmail(clean, readPdfFile),
+                            recipient: 'customer'
+                        }
+                    ], 'Quote');
                 }
             });
         },
         executeEmailsSync: async (data) =>
         {
-            // Minimal sanitization - only dangerous fields
             const clean = {
                 ...data,
                 Name: fastSanitize(data.Name),
@@ -385,18 +965,20 @@ const FORM_HANDLERS = {
                 FormID: data.FormID || "quote"
             };
 
-            const adminEmail = prepareQuoteAdminEmail(clean);
-            const confirmationEmail = prepareQuoteConfirmationEmail(clean);
-
-            const emailDetails = await Promise.all([
-                sendEmailWithDetails(adminEmail),
-                sendEmailWithDetails(confirmationEmail)
-            ]);
-
-            return {
-                emailsSent: emailDetails.length,
-                emailDetails
-            };
+            return await executeMultiEmailBatch([
+                {
+                    id: 'admin-request',
+                    type: 'quote-admin',
+                    prepare: () => prepareQuoteAdminRequestEmail(clean, readPdfFile),
+                    recipient: 'admin'
+                },
+                {
+                    id: 'user-confirmation',
+                    type: 'quote-user',
+                    prepare: () => prepareQuoteUserConfirmationEmail(clean, readPdfFile),
+                    recipient: 'customer'
+                }
+            ], 'Quote');
         },
         response: "Quote request submitted successfully!",
         logData: (data) => ({ org: data.Organisation, name: data.Name })
@@ -405,7 +987,6 @@ const FORM_HANDLERS = {
     siteinfo: {
         queueEmails: (data) =>
         {
-            // Minimal sanitization + array normalization
             const clean = {
                 ...data,
                 BusinessName: fastSanitize(data.BusinessName),
@@ -417,26 +998,27 @@ const FORM_HANDLERS = {
             emailQueue.push({
                 type: 'siteinfo',
                 formType: 'Site Info',
-                executeWithDetails: async () =>
+                executeWithResilience: async () =>
                 {
-                    const siteInfoEmail = prepareSiteInfoEmail(clean);
-                    const confirmationEmail = prepareSiteInfoConfirmationEmail(clean);
-
-                    const emailDetails = await Promise.all([
-                        sendEmailWithDetails(siteInfoEmail),
-                        sendEmailWithDetails(confirmationEmail)
-                    ]);
-
-                    return {
-                        emailsSent: emailDetails.length,
-                        emailDetails
-                    };
+                    return await executeMultiEmailBatch([
+                        {
+                            id: 'admin-notification',
+                            type: 'siteinfo-admin',
+                            prepare: () => prepareSiteInfoAdminNotificationEmail(clean, readPdfFile),
+                            recipient: 'admin'
+                        },
+                        {
+                            id: 'user-confirmation',
+                            type: 'siteinfo-user',
+                            prepare: () => prepareSiteInfoUserConfirmationEmail(clean, readPdfFile),
+                            recipient: 'customer'
+                        }
+                    ], 'Site Info');
                 }
             });
         },
         executeEmailsSync: async (data) =>
         {
-            // Minimal sanitization + array normalization
             const clean = {
                 ...data,
                 BusinessName: fastSanitize(data.BusinessName),
@@ -445,18 +1027,20 @@ const FORM_HANDLERS = {
                 Services: Array.isArray(data.Services) ? data.Services : [data.Services].filter(Boolean)
             };
 
-            const siteInfoEmail = prepareSiteInfoEmail(clean);
-            const confirmationEmail = prepareSiteInfoConfirmationEmail(clean);
-
-            const emailDetails = await Promise.all([
-                sendEmailWithDetails(siteInfoEmail),
-                sendEmailWithDetails(confirmationEmail)
-            ]);
-
-            return {
-                emailsSent: emailDetails.length,
-                emailDetails
-            };
+            return await executeMultiEmailBatch([
+                {
+                    id: 'admin-notification',
+                    type: 'siteinfo-admin',
+                    prepare: () => prepareSiteInfoAdminNotificationEmail(clean, readPdfFile),
+                    recipient: 'admin'
+                },
+                {
+                    id: 'user-confirmation',
+                    type: 'siteinfo-user',
+                    prepare: () => prepareSiteInfoUserConfirmationEmail(clean, readPdfFile),
+                    recipient: 'customer'
+                }
+            ], 'Site Info');
         },
         response: "Site info submitted successfully!",
         logData: (data) => ({ business: data.BusinessName, contact: data.Contact })
@@ -465,7 +1049,6 @@ const FORM_HANDLERS = {
     specialevent: {
         queueEmails: (data) =>
         {
-            // Reuse siteinfo logic - same structure
             const clean = {
                 ...data,
                 BusinessName: fastSanitize(data.BusinessName),
@@ -476,26 +1059,27 @@ const FORM_HANDLERS = {
             emailQueue.push({
                 type: 'specialevent',
                 formType: 'Special Event',
-                executeWithDetails: async () =>
+                executeWithResilience: async () =>
                 {
-                    const siteInfoEmail = prepareSiteInfoEmail(clean);
-                    const confirmationEmail = prepareSiteInfoConfirmationEmail(clean);
-
-                    const emailDetails = await Promise.all([
-                        sendEmailWithDetails(siteInfoEmail),
-                        sendEmailWithDetails(confirmationEmail)
-                    ]);
-
-                    return {
-                        emailsSent: emailDetails.length,
-                        emailDetails
-                    };
+                    return await executeMultiEmailBatch([
+                        {
+                            id: 'admin-notification',
+                            type: 'specialevent-admin',
+                            prepare: () => prepareSiteInfoAdminNotificationEmail(clean, readPdfFile),
+                            recipient: 'admin'
+                        },
+                        {
+                            id: 'user-confirmation',
+                            type: 'specialevent-user',
+                            prepare: () => prepareSiteInfoUserConfirmationEmail(clean, readPdfFile),
+                            recipient: 'customer'
+                        }
+                    ], 'Special Event');
                 }
             });
         },
         executeEmailsSync: async (data) =>
         {
-            // Reuse siteinfo logic - same structure
             const clean = {
                 ...data,
                 BusinessName: fastSanitize(data.BusinessName),
@@ -503,55 +1087,26 @@ const FORM_HANDLERS = {
                 Type: data.Type || "Special Event"
             };
 
-            const siteInfoEmail = prepareSiteInfoEmail(clean);
-            const confirmationEmail = prepareSiteInfoConfirmationEmail(clean);
-
-            const emailDetails = await Promise.all([
-                sendEmailWithDetails(siteInfoEmail),
-                sendEmailWithDetails(confirmationEmail)
-            ]);
-
-            return {
-                emailsSent: emailDetails.length,
-                emailDetails
-            };
+            return await executeMultiEmailBatch([
+                {
+                    id: 'admin-notification',
+                    type: 'specialevent-admin',
+                    prepare: () => prepareSiteInfoAdminNotificationEmail(clean, readPdfFile),
+                    recipient: 'admin'
+                },
+                {
+                    id: 'user-confirmation',
+                    type: 'specialevent-user',
+                    prepare: () => prepareSiteInfoUserConfirmationEmail(clean, readPdfFile),
+                    recipient: 'customer'
+                }
+            ], 'Special Event');
         },
         response: "Special event info submitted successfully!",
         logData: (data) => ({ business: data.BusinessName, type: "special" })
-    },
-
-    terms: {
-        queueEmails: (data) =>
-        {
-            emailQueue.push({
-                type: 'terms',
-                formType: 'Terms',
-                executeWithDetails: async () =>
-                {
-                    const emailData = prepareTermsEmail(data);
-                    const emailDetails = [await sendEmailWithDetails(emailData)];
-
-                    return {
-                        emailsSent: emailDetails.length,
-                        emailDetails
-                    };
-                }
-            });
-        },
-        executeEmailsSync: async (data) =>
-        {
-            const emailData = prepareTermsEmail(data);
-            const emailDetails = [await sendEmailWithDetails(emailData)];
-
-            return {
-                emailsSent: emailDetails.length,
-                emailDetails
-            };
-        },
-        response: "Terms & Conditions accepted successfully!",
-        logData: (data) => ({ org: data["Organisation Name"], name: data["Full Name"] })
     }
 };
+
 
 export async function POST(req)
 {
@@ -563,10 +1118,19 @@ export async function POST(req)
             return NextResponse.json({ error: "Email service not configured" }, { status: 500 });
         }
 
+        // Rate limiting check
+        const rateLimit = checkRateLimit(req);
+        if (!rateLimit.allowed) {
+            return NextResponse.json({
+                error: "Rate limit exceeded",
+                retryAfter: 60,
+                remaining: rateLimit.remaining
+            }, { status: 429 });
+        }
+
         // Parse JSON - let it throw if invalid
         const { formType, ...formData } = await req.json();
         const parseTime = performance.now();
-
         // Quick validation
         if (!formType) {
             return NextResponse.json({ error: "formType required" }, { status: 400 });
@@ -575,6 +1139,15 @@ export async function POST(req)
         const handler = FORM_HANDLERS[formType.toLowerCase()];
         if (!handler) {
             return NextResponse.json({ error: "Invalid form type" }, { status: 400 });
+        }
+
+        // Server-side validation backup
+        const validationErrors = validateFormData(formType, formData);
+        if (validationErrors.length > 0) {
+            return NextResponse.json({
+                error: "Validation failed",
+                details: validationErrors
+            }, { status: 400 });
         }
 
         let emailProcessingTime = 0;
@@ -597,7 +1170,7 @@ export async function POST(req)
             if (formType.toLowerCase() === 'ica' || emailResult.emailDetails.length > 2) {
                 emailResult.emailDetails.forEach((email, index) =>
                 {
-                    console.log(`   └─ Email ${index + 1}: ${email.to} - ${email.sendTime}ms - ${email.success ? '✓' : '✗'}`);
+                    console.log(`   └─ Email ${index + 1}: ${email.to} - ${email.sendTime}ms - Attempts: ${email.attempt} - ${email.success ? '✓' : '✗'}`);
                     if (email.attachments.count > 0) {
                         console.log(`      └─ Attachments: ${email.attachments.count} files (${email.attachments.totalSizeFormatted})`);
                     }
@@ -626,6 +1199,10 @@ export async function POST(req)
             ...logData,
             timestamp: new Date().toISOString(),
             environment: USE_SYNC_EMAILS ? 'vercel-dev' : 'production',
+            rateLimit: {
+                remaining: rateLimit.remaining,
+                windowMinutes: RATE_LIMIT_WINDOW / 60000
+            },
             performance: {
                 totalTime: `${totalTime.toFixed(2)}ms`,
                 emailTime: USE_SYNC_EMAILS ? `${emailProcessingTime.toFixed(2)}ms` : '0ms (queued)',
@@ -651,7 +1228,11 @@ export async function POST(req)
             responseTime: `${totalTime.toFixed(2)}ms`,
             environment: USE_SYNC_EMAILS ? 'development' : 'production',
             emailsQueued: !USE_SYNC_EMAILS,
-            emailsSentSync: USE_SYNC_EMAILS
+            emailsSentSync: USE_SYNC_EMAILS,
+            rateLimit: {
+                remaining: rateLimit.remaining,
+                resetIn: `${RATE_LIMIT_WINDOW / 1000}s`
+            }
         };
 
         // Add email processing details for synchronous mode
@@ -659,6 +1240,11 @@ export async function POST(req)
             response.emailProcessingTime = `${emailProcessingTime.toFixed(2)}ms`;
             response.emailsSent = emailResult.emailsSent;
             response.emailSuccessRate = emailResult.emailDetails.filter(e => e.success).length / emailResult.emailDetails.length;
+            response.emailRetryInfo = emailResult.emailDetails.map(e => ({
+                to: e.to.substring(0, 20) + '...',
+                attempts: e.attempt,
+                success: e.success
+            }));
         }
 
         return NextResponse.json(response, { status: 200 });
@@ -684,7 +1270,7 @@ export async function POST(req)
     }
 }
 
-// Health check endpoint with environment info
+// Health check endpoint with environment info and queue status
 export async function GET()
 {
     return NextResponse.json({
@@ -692,6 +1278,16 @@ export async function GET()
         emailMode: USE_SYNC_EMAILS ? 'synchronous' : 'asynchronous',
         emailQueueLength: USE_SYNC_EMAILS ? 'N/A (sync mode)' : emailQueue.length,
         processing: USE_SYNC_EMAILS ? 'N/A (sync mode)' : processing,
+        pdfCacheStatus: {
+            initialized: PDF_CACHE_INITIALIZED.value,
+            cachedFiles: PDF_CACHE.size,
+            cacheSize: `${(Array.from(PDF_CACHE.values()).join('').length / (1024 * 1024)).toFixed(2)}MB`
+        },
+        rateLimitInfo: {
+            windowMinutes: RATE_LIMIT_WINDOW / 60000,
+            maxPerWindow: RATE_LIMIT_MAX,
+            activeIPs: RATE_LIMIT_MAP.size
+        },
         timestamp: new Date().toISOString(),
         vercelEnv: process.env.VERCEL_ENV || 'not-vercel'
     });

@@ -1,316 +1,516 @@
-// app/api/forms/route.js
-import { NextResponse } from "next/server";
-import sendgrid from "@sendgrid/mail";
-import { getCurrentDateTime } from "../utils/Helpers";
+"use client";
+import React, { useState, useRef, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import
 {
-	prepareAUSTRACEmail,
-	prepareContactAdminEmail,
-	prepareContactConfirmationEmail,
-	prepareFranchiseAdminEmail,
-	prepareFranchiseConfirmationEmail,
-	prepareCustomerEmail,
-	prepareInternalNotificationEmail,
-	prepareOperationsEmail,
-	prepareQuoteAdminEmail,
-	prepareQuoteConfirmationEmail,
-	prepareSiteInfoEmail,
-	prepareSiteInfoConfirmationEmail,
-	prepareTermsEmail
-} from "../services/emailService";
+	FaUser,
+	FaBriefcase,
+	FaEnvelope,
+	FaCalendarAlt,
+	FaUsers,
+	FaIdCard,
+	FaSpinner,
+	FaCheckCircle,
+} from "react-icons/fa";
+import Typography from "@/components/common/Typography";
+import Divider from "@/components/common/Divider";
+import DatePickerFieldWithRef from "@/components/common/forms/elements/DatePickerField";
+import WarningPopup from "../elements/WarningPopup";
+import { useRouter } from 'next/navigation';
+import { useFormErrors } from '@/hooks/useFormErrors';
+import { useFormSubmission } from '@/hooks/useFormSubmission';
+import { formatBirthdayForAPI } from '@/utils/formHelpers';
+import TermsFormSchema, { TERMS_DEFAULT_VALUES } from '@/zod/TermsFormSchema';
 
-// Set SendGrid API key with optimized timeout for attachments
-sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
-sendgrid.setTimeout(15000); // 15 seconds for attachment-heavy emails
-
-// Ultra-fast XSS sanitization - only for critical fields
-const fastSanitize = (str) =>
+// Enhanced ABN InputField Component
+const ABNInputField = ({
+	label,
+	name,
+	placeholder,
+	Icon,
+	register,
+	errors,
+	currentErrorField,
+	setCurrentErrorField,
+	setValue,
+	abnValue,
+	abnRef
+}) =>
 {
-	if (typeof str !== 'string') return str;
-	return str
-		.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '') // Remove script tags
-		.replace(/javascript:/gi, '') // Remove javascript: urls
-		.replace(/on\w+\s*=/gi, ''); // Remove event handlers
+	const hasError = errors[name] && currentErrorField === name;
+	const [isFocused, setIsFocused] = useState(false);
+
+	// ABN input handler to limit to 11 digits and format
+	const handleABNChange = (e) =>
+	{
+		const value = e.target.value;
+		// Remove all non-digit characters
+		const digitsOnly = value.replace(/\D/g, '');
+
+		// Limit to 11 digits
+		const limitedDigits = digitsOnly.slice(0, 11);
+
+		// Format with spaces for display (XX XXX XXX XXX)
+		let formattedValue = limitedDigits;
+		if (limitedDigits.length > 2) {
+			formattedValue = limitedDigits.slice(0, 2) + ' ' + limitedDigits.slice(2);
+		}
+		if (limitedDigits.length > 5) {
+			formattedValue = limitedDigits.slice(0, 2) + ' ' + limitedDigits.slice(2, 5) + ' ' + limitedDigits.slice(5);
+		}
+		if (limitedDigits.length > 8) {
+			formattedValue = limitedDigits.slice(0, 2) + ' ' + limitedDigits.slice(2, 5) + ' ' + limitedDigits.slice(5, 8) + ' ' + limitedDigits.slice(8);
+		}
+
+		setValue("ABN", formattedValue, { shouldValidate: true });
+	};
+
+	return (
+		<div className="relative">
+			<label className="text-white text-base inline-block mt-4 mb-2 w-full text-left">
+				{label}
+			</label>
+			<div className="relative w-full flex items-center bg-white rounded-[2px] border">
+				<input
+					className={`w-full text-sm py-2 px-3 shadow-none font-montserrat border-none rounded-sm ${hasError ? "focus:outline-red-600" : "focus:outline-primary"
+						}`}
+					type="text"
+					name={name}
+					ref={abnRef}
+					value={abnValue || ""}
+					onChange={handleABNChange}
+					onFocus={() =>
+					{
+						setCurrentErrorField(name);
+						setIsFocused(true);
+					}}
+					onBlur={() =>
+					{
+						setCurrentErrorField(null);
+						setIsFocused(false);
+					}}
+					placeholder={placeholder}
+					maxLength={14}
+					autoComplete="new-password"
+					required
+				/>
+				<Icon
+					className={`min-w-[50px] text-[18px] text-[#999] ${hasError
+						? "text-red-500"
+						: isFocused
+							? "text-primary"
+							: "text-[#999]"
+						}`}
+				/>
+				{errors[name] && (
+					<WarningPopup
+						error={errors[name]?.message}
+						isFirstError={currentErrorField === name}
+					/>
+				)}
+			</div>
+		</div>
+	);
 };
 
-// Lightning-fast form handlers - minimal processing
-const FORM_HANDLERS = {
-	austrac: {
-		processEmails: async (data) =>
-		{
-			await sendgrid.send(prepareAUSTRACEmail(data));
-		},
-		response: "AUSTRAC information submitted successfully!",
-		logData: (data) => ({ org: data.Organisation, email: data.OrganisationEmail })
-	},
+const InputField = ({
+	label,
+	name,
+	placeholder,
+	type = "text",
+	Icon,
+	Icon2,
+	register,
+	errors,
+	ref,
+	currentErrorField,
+	setCurrentErrorField,
+	textarea = false,
 
-	contact: {
-		processEmails: async (data) =>
-		{
-			// Fire-and-forget email sending with timeout
-			const emailPromises = [
-				sendgrid.send(prepareContactAdminEmail(data)),
-				sendgrid.send(prepareContactConfirmationEmail(data))
-			];
+}) =>
+{
+	const hasError = errors[name] && currentErrorField === name;
+	const [isFocused, setIsFocused] = useState(false);
+	return (
+		<div className="relative">
+			<label className="text-white text-base inline-block mt-4 mb-2 w-full text-left">
+				{label}
+			</label>
+			<div className="relative w-full flex items-center bg-white rounded-[2px] border">
+				{Icon2 && (
+					<Icon2
+						className={`min-w-[50px] text-[18px] text-[#999] ${hasError
+							? "text-red-500"
+							: isFocused
+								? "text-primary"
+								: "text-[#999]"
+							}`}
+					/>
+				)}
 
-			// Timeout after 3 seconds
-			await Promise.race([
-				Promise.all(emailPromises),
-				new Promise((_, reject) =>
-					setTimeout(() => reject(new Error('Email timeout')), 3000)
-				)
-			]);
-		},
-		response: "Contact request submitted successfully!",
-		logData: (data) => ({ name: data.FullName, dept: data.Department })
-	},
+				<input
+					className={`w-full text-sm py-2 px-3 shadow-none font-montserrat border-none rounded-sm  ${hasError ? "focus:outline-red-600" : "focus:outline-primary"
+						}`}
+					type={type}
+					name={name}
+					ref={ref}
+					{...register(name)}
+					onFocus={() =>
+					{
+						setCurrentErrorField(name);
+						setIsFocused(true);
+					}}
+					onBlur={() =>
+					{
+						setCurrentErrorField(null);
+						setIsFocused(false);
+					}}
+					placeholder={placeholder}
+					required
+				/>
+				<Icon
+					className={`min-w-[50px] text-[18px] text-[#999] ${hasError
+						? "text-red-500"
+						: isFocused
+							? "text-primary"
+							: "text-[#999]"
+						}`}
+				/>
 
-	franchise: {
-		processEmails: async (data) =>
-		{
-			await Promise.all([
-				sendgrid.send(prepareFranchiseAdminEmail(data)),
-				sendgrid.send(prepareFranchiseConfirmationEmail(data))
-			]);
-		},
-		response: "Franchise enquiry submitted successfully!",
-		logData: (data) => ({ name: data.FullName, area: data.InterestedArea })
-	},
-
-	ica: {
-		processEmails: async (data) =>
-		{
-			const attachmentCount = data.attachments?.length || 0;
-			console.log(`📧 Processing ICA emails with ${attachmentCount} attachments`);
-
-			if (attachmentCount === 0) {
-				// No attachments - send normally
-				await Promise.all([
-					sendgrid.send(prepareOperationsEmail(data)),
-					sendgrid.send(prepareCustomerEmail(data)),
-					sendgrid.send(prepareInternalNotificationEmail(data))
-				]);
-				return;
-			}
-
-			// For heavy attachments: send sequentially to avoid SendGrid limits
-			const emails = [
-				{ email: prepareOperationsEmail(data), type: 'operations' },
-				{ email: prepareCustomerEmail(data), type: 'customer' },
-				{ email: prepareInternalNotificationEmail(data), type: 'internal' }
-			];
-
-			console.log(`📤 Sending ${emails.length} emails sequentially...`);
-
-			for (let i = 0; i < emails.length; i++) {
-				try {
-					const startTime = performance.now();
-					await sendgrid.send(emails[i].email);
-					const sendTime = performance.now() - startTime;
-					console.log(`✅ ${emails[i].type} email sent in ${sendTime.toFixed(2)}ms`);
-
-					// Small delay between emails to avoid rate limiting
-					if (i < emails.length - 1) {
-						await new Promise(resolve => setTimeout(resolve, 500));
-					}
-				} catch (error) {
-					console.error(`❌ Failed to send ${emails[i].type} email:`, error.message);
-					throw error; // Re-throw to maintain "all must succeed" behavior
-				}
-			}
-		},
-		response: "ICA form submitted successfully!",
-		logData: (data) => ({
-			name: data.Name,
-			business: data.BusinessName,
-			attachmentCount: data.attachments?.length || 0,
-			attachmentSizes: data.attachments?.map(a => `${a.filename}: ${(a.data?.length || 0 / 1024).toFixed(1)}KB`).join(', ') || 'none'
-		})
-	},
-
-	quote: {
-		processEmails: async (data) =>
-		{
-			// Minimal sanitization - only dangerous fields
-			const clean = {
-				...data,
-				Name: fastSanitize(data.Name),
-				Organisation: fastSanitize(data.Organisation),
-				FormID: data.FormID || "quote"
-			};
-
-			await Promise.all([
-				sendgrid.send(prepareQuoteAdminEmail(clean)),
-				sendgrid.send(prepareQuoteConfirmationEmail(clean))
-			]);
-		},
-		response: "Quote request submitted successfully!",
-		logData: (data) => ({ org: data.Organisation, name: data.Name })
-	},
-
-	siteinfo: {
-		processEmails: async (data) =>
-		{
-			// Minimal sanitization + array normalization
-			const clean = {
-				...data,
-				BusinessName: fastSanitize(data.BusinessName),
-				Contact: fastSanitize(data.Contact),
-				Type: data.Type || "Regular Service",
-				Services: Array.isArray(data.Services) ? data.Services : [data.Services].filter(Boolean)
-			};
-
-			await Promise.all([
-				sendgrid.send(prepareSiteInfoEmail(clean)),
-				sendgrid.send(prepareSiteInfoConfirmationEmail(clean))
-			]);
-		},
-		response: "Site info submitted successfully!",
-		logData: (data) => ({ business: data.BusinessName, contact: data.Contact })
-	},
-
-	specialevent: {
-		processEmails: async (data) =>
-		{
-			// Reuse siteinfo logic - same structure
-			const clean = {
-				...data,
-				BusinessName: fastSanitize(data.BusinessName),
-				Contact: fastSanitize(data.Contact),
-				Type: data.Type || "Special Event"
-			};
-
-			await Promise.all([
-				sendgrid.send(prepareSiteInfoEmail(clean)),
-				sendgrid.send(prepareSiteInfoConfirmationEmail(clean))
-			]);
-		},
-		response: "Special event info submitted successfully!",
-		logData: (data) => ({ business: data.BusinessName, type: "special" })
-	},
-
-	terms: {
-		processEmails: async (data) =>
-		{
-			await sendgrid.send(prepareTermsEmail(data));
-		},
-		response: "Terms & Conditions accepted successfully!",
-		logData: (data) => ({ org: data["Organisation Name"], name: data["Full Name"] })
-	}
+				{errors[name] && (
+					<WarningPopup
+						error={errors[name]?.message}
+						isFirstError={currentErrorField === name}
+					/>
+				)}
+			</div>
+		</div>
+	);
 };
 
-export async function POST(req)
+
+const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
 {
-	const startTime = performance.now();
+	const router = useRouter();
 
-	try {
-		// Fast-fail checks
-		if (!process.env.SENDGRID_API_KEY) {
-			return NextResponse.json({ error: "Email service not configured" }, { status: 500 });
-		}
+	// Create field references for focus management
+	const fieldRefs = {
+		Name: useRef(null),
+		Position: useRef(null),
+		Email: useRef(null),
+		Birthdate: useRef(null),
+		Organisation: useRef(null),
+		ABN: useRef(null),
+	};
 
-		// Parse JSON - let it throw if invalid
-		const { formType, ...formData } = await req.json();
-		const parseTime = performance.now();
+	// Initialize form hooks
+	const { currentErrorField, setCurrentErrorField, handleFieldErrors } = useFormErrors(fieldRefs);
 
-		// Quick validation
-		if (!formType) {
-			return NextResponse.json({ error: "formType required" }, { status: 400 });
-		}
-
-		const handler = FORM_HANDLERS[formType.toLowerCase()];
-		if (!handler) {
-			return NextResponse.json({ error: "Invalid form type" }, { status: 400 });
-		}
-
-		// Handle attachment-heavy forms differently
-		const isHeavyForm = ['ica'].includes(formType.toLowerCase());
-
-		if (isHeavyForm) {
-			// For heavy forms: ALWAYS async processing, immediate response
-			const requestId = `${formType}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-
-			setImmediate(async () =>
-			{
-				try {
-					const emailStartTime = performance.now();
-					await handler.processEmails(formData);
-					const emailTime = performance.now() - emailStartTime;
-					console.log(`✅ ${formType} emails sent successfully in ${emailTime.toFixed(2)}ms [RequestID: ${requestId}]`);
-				} catch (emailError) {
-					console.error(`❌ ${formType} email failed [RequestID: ${requestId}]:`, {
-						error: emailError.message,
-						attachmentCount: formData.attachments?.length || 0,
-						timestamp: new Date().toISOString()
-					});
-				}
-			});
-
-			const totalTime = performance.now() - startTime;
-
-			// Log immediate response
-			setImmediate(() =>
-			{
-				const logData = handler.getLogData ? handler.getLogData(formData) : handler.logData(formData);
-				console.log(`🚀 ${formType} submitted (immediate response):`, {
-					...logData,
-					requestId,
-					timestamp: new Date().toISOString(),
-					performance: {
-						responseTime: `${totalTime.toFixed(2)}ms`,
-						emailStatus: "processing_in_background"
-					}
-				});
-			});
-
-			return NextResponse.json({
-				message: handler.response,
-				responseTime: `${totalTime.toFixed(2)}ms`,
-				emailStatus: "processing",
-				requestId: requestId
-			}, { status: 200 });
-		}
-
-		// For light forms: wait for email completion
-		const emailStartTime = performance.now();
-		await handler.processEmails(formData);
-		const emailEndTime = performance.now();
-
-		const totalTime = performance.now() - startTime;
-		const emailTime = emailEndTime - emailStartTime;
-
-		// Async logging - don't wait for it
-		setImmediate(() =>
+	const { isSubmitting, isSubmitted, submissionError, handleSubmission } = useFormSubmission({
+		formType: 'terms',
+		formId: 'Terms',
+		onSuccess: (result, finalData) =>
 		{
-			const logData = handler.getLogData ? handler.getLogData(formData) : handler.logData(formData);
-			console.log(`${formType} submitted:`, {
-				...logData,
-				timestamp: new Date().toISOString(),
-				performance: {
-					totalTime: `${totalTime.toFixed(2)}ms`,
-					emailTime: `${emailTime.toFixed(2)}ms`
-				}
-			});
-		});
+			console.log("Terms form submitted successfully!");
+			// Redirect to /austrac on successful submission
+			// router.push("/austrac");
+		},
+		onError: (error) =>
+		{
+			console.error("Terms submission failed:", error);
+		},
+		prepareData: async (data) =>
+		{
+			// Format birthday as YYYY-MM-DD
+			const birthdayFormatted = formatBirthdayForAPI(data.Birthdate);
 
-		// Return with timing info for light forms
-		return NextResponse.json({
-			message: handler.response,
-			responseTime: `${totalTime.toFixed(2)}ms`
-		}, { status: 200 });
-
-	} catch (error) {
-		const errorTime = performance.now() - startTime;
-
-		// Fast error response
-		console.error("Form error:", error.message, `Time: ${errorTime.toFixed(2)}ms`);
-
-		return NextResponse.json(
+			// Format date of acceptance
+			const now = new Date();
+			const dateOfAcceptance = now.toLocaleDateString('en-US', {
+				weekday: 'long',
+				year: 'numeric',
+				month: 'long',
+				day: 'numeric'
+			}).replace(/(\d+)/, (match) =>
 			{
-				error: "Submission failed",
-				responseTime: `${errorTime.toFixed(2)}ms`
-			},
-			{ status: error.message?.includes('JSON') ? 400 : 500 }
-		);
-	}
-}
+				const day = parseInt(match);
+				const suffix = day === 1 || day === 21 || day === 31 ? 'st' :
+					day === 2 || day === 22 ? 'nd' :
+						day === 3 || day === 23 ? 'rd' : 'th';
+				return day + suffix;
+			}) + ', ' + now.toLocaleTimeString('en-US', {
+				hour12: true,
+				hour: 'numeric',
+				minute: '2-digit',
+				second: '2-digit'
+			});
+
+			// Format agreement commencement date as DD / MM / YYYY
+			const agreementDate = now.toLocaleDateString('en-GB', {
+				day: '2-digit',
+				month: '2-digit',
+				year: 'numeric'
+			}).replace(/\//g, ' / ');
+
+			return {
+				...data,
+				// Form data mapped to email structure
+				"Organisation Name": data.Organisation,
+				"Organisation Role": data.Position,
+				"Organisation ABN": data.ABN,
+				"Full Name": data.Name,
+				"Birthday": birthdayFormatted,
+				"Email": data.Email,
+				"formType": "terms",
+				"Date of Acceptance": dateOfAcceptance,
+				"Agreement Commencement": `**THIS AGREEMENT COMMENCES ON THE:** ${agreementDate} and will be ongoing unless either party terminates this Agreement in accordance with the termination provisions herein ("Expiry").`,
+			};
+		}
+	});
+
+	const {
+		register,
+		handleSubmit,
+		setValue,
+		watch,
+		reset,
+		trigger, // Add this line
+		formState: { errors },
+	} = useForm({
+		resolver: zodResolver(TermsFormSchema), // or AustracFormSchema
+		defaultValues: TERMS_DEFAULT_VALUES,   // or AUSTRAC_DEFAULT_VALUES
+	});
+
+	const nameValue = watch("Name");
+	const positionValue = watch("Position");
+	const organisationValue = watch("Organisation");
+	const abnValue = watch("ABN");
+	const birthdateValue = watch("Birthdate");
+
+	// Pass values to parent component props (maintaining original functionality)
+	useEffect(() =>
+	{
+		if (nameValue && setName) setName(nameValue);
+	}, [nameValue, setName]);
+
+	useEffect(() =>
+	{
+		if (positionValue && setPosition) setPosition(positionValue);
+	}, [positionValue, setPosition]);
+
+	useEffect(() =>
+	{
+		if (organisationValue && setOrganisation) setOrganisation(organisationValue);
+	}, [organisationValue, setOrganisation]);
+
+	useEffect(() =>
+	{
+		if (abnValue && setAbn) setAbn(abnValue);
+	}, [abnValue, setAbn]);
+
+	const inputFields = [
+		{
+			label: "What is your full name?",
+			name: "Name",
+			placeholder: "Enter your full name",
+			Icon: FaUser,
+			ref: fieldRefs.Name,
+		},
+		{
+			label: "What is your position in the organisation?",
+			name: "Position",
+			placeholder: "Enter your position in the organisation",
+			Icon: FaBriefcase,
+			ref: fieldRefs.Position,
+		},
+		{
+			label: "What is your email address?",
+			name: "Email",
+			type: "email",
+			placeholder: "Enter your email address",
+			Icon: FaEnvelope,
+			ref: fieldRefs.Email,
+		},
+		{
+			label: "What is your organisation's name?",
+			name: "Organisation",
+			placeholder: "Enter your organisation's name",
+			Icon: FaUsers,
+			ref: fieldRefs.Organisation,
+		},
+	];
+
+
+	const onSubmit = async (data) =>
+	{
+		
+
+		// Test handleFieldErrors directly
+		const validationResult = handleFieldErrors(errors);
+		console.log("handleFieldErrors returned:", validationResult);
+
+		if (!validationResult) {
+			console.log("Validation failed - stopping submission");
+			return;
+		}
+
+		console.log("All validations passed, proceeding with submission...");
+		await handleSubmission(data);
+	};
+
+
+	return (
+		<div className={`float-none w-full mx-auto relative left-0 flex-1 flex justify-center `}>
+			<div className="forms-quote-v2 h-auto 768px:mx-2.5 992px:mx-0 px-6 1366px:h-full forms-quote submit-status mt-4 992px:mt-0 992px:mb-16 w-full lg:mt-0 lg:mb-0 992px:w-[450px] 1100px:w-[480px] 1200px:w-[500px] 1280px:w-[600px] shadow-[3px_3px_5px_0px_rgba(0,0,0,0.75)] text-center py-16 rounded-[6px] bg-[#1a1a1a]">
+				<form
+					className="text-center"
+					data-formid="Terms"
+					onSubmit={handleSubmit(onSubmit, onInvalid)} // Add the second parameter
+					noValidate
+					autoComplete="off"
+				>
+					<div className="form-page terms">
+						<Typography
+							as="h3"
+							fontFamily="montserrat"
+							className="text-white font-normal text-center capitalize pb-4 text-[26px] leading-[30px]"
+						>
+							Service Agreement
+						</Typography>
+
+						<Divider
+							color="primary"
+							margin="mt-2.5 mb-4"
+							alignment="center"
+							responsiveClassName="mx-auto"
+						/>
+
+						<div className="form-tab 480px:w-[90%] mx-auto">
+								{/* Bot field (honeypot) - hidden */}
+								<input
+									type="text"
+									{...register("BotField")}
+									style={{ display: "none" }}
+									tabIndex={-1}
+									autoComplete="off"
+								/>
+
+								{/* Hidden ABN field for form validation */}
+								<input
+									type="hidden"
+									{...register("ABN")}
+									value={abnValue || ""}
+								/>
+
+								{inputFields.slice(0, 3).map((field, index) => (
+									<div key={index} className="relative">
+										<InputField
+											{...field}
+											register={register}
+											errors={errors}
+											currentErrorField={currentErrorField}
+											setCurrentErrorField={setCurrentErrorField}
+											ref={field.ref}
+											autoComplete="new-password"
+											onFocus={() => setCurrentErrorField(field.name)}
+											onBlur={() => setCurrentErrorField(null)}
+										/>
+									</div>
+								))}
+
+								{/* DatePickerField for Birthdate at 4th position */}
+								<div className="relative">
+									<DatePickerFieldWithRef
+										label="What is your date of birth?"
+										name="Birthdate"
+										value={birthdateValue}
+										onChange={(date) =>
+										{
+											setValue("Birthdate", date, { shouldValidate: true });
+										}}
+										onFocus={() => setCurrentErrorField("Birthdate")}
+										onBlur={() => setCurrentErrorField(null)}
+										errors={errors}
+										currentErrorField={currentErrorField}
+										dayPlaceholder="DD"
+										monthPlaceholder="MM"
+										yearPlaceholder="YYYY"
+										format="dd/MM/yyyy"
+										containerClassName=""
+										labelClassName="text-white text-base inline-block mt-4 mb-2 w-full text-left"
+										ref={fieldRefs.Birthdate}
+										autoComplete="new-password"
+									/>
+								</div>
+
+								{/* Organisation field */}
+								<div className="relative">
+									<InputField
+										{...inputFields[3]}
+										register={register}
+										errors={errors}
+										currentErrorField={currentErrorField}
+										setCurrentErrorField={setCurrentErrorField}
+										ref={fieldRefs.Organisation}
+										autoComplete="new-password"
+										onFocus={() => setCurrentErrorField("Organisation")}
+										onBlur={() => setCurrentErrorField(null)}
+									/>
+								</div>
+
+								{/* ABN field with custom handling using the enhanced ABNInputField */}
+								<ABNInputField
+									label="What is your organisation's ABN number?"
+									name="ABN"
+									placeholder="Enter your organisation's ABN number (11 digits)"
+									Icon={FaIdCard}
+									register={register}
+									errors={errors}
+									currentErrorField={currentErrorField}
+									setCurrentErrorField={setCurrentErrorField}
+									setValue={setValue}
+									abnValue={abnValue}
+									abnRef={fieldRefs.ABN}
+								/>
+													</div>
+					</div>
+
+					{/* Display submission error if any */}
+					{submissionError && (
+						<div className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded mx-4">
+							<strong>Submission Error:</strong> {submissionError}
+						</div>
+					)}
+
+					<div className="button-controls-container 480px:w-[80%] mx-auto mt-12">
+						<div className="button-section relative">
+							<button
+								type="submit"
+								disabled={isSubmitting}
+								className={`nextBtn ${isSubmitted ? 'bg-[#4bb543]' : 'bg-[#c6a54b]'
+									} text-white border-none py-[15px] 768px:px-0 text-[16px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
+							>
+								{isSubmitting ? (
+									<div className="flex items-center justify-center">
+										<FaSpinner className="animate-spin mr-2" />
+										Submitting, please wait...
+									</div>
+								) : isSubmitted ? (
+									<div className="flex items-center justify-center">
+										<FaCheckCircle className="text-white mr-2" />
+										Thank you, we received your submission!
+									</div>
+								) : (
+									"I agree with the above Terms & Conditions"
+								)}
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	);
+};
+
+export default TermsForm;

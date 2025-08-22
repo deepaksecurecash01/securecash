@@ -2,7 +2,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
 import
     {
         FaUser,
@@ -17,42 +16,11 @@ import
     } from "react-icons/fa";
 import { PopupModal } from "react-calendly";
 
-import WarningPopup from "@/components/common/forms/elements/WarningPopup";
 import Typography from "@/components/common/Typography";
-
-// Zod Schema for Franchise Form
-const FranchiseFormSchema = z.object({
-    FullName: z
-        .string()
-        .min(1, "Full name is required.")
-        .min(2, "Full name must be at least 2 characters long."),
-    Phone: z
-        .string()
-        .min(1, "Phone number is required.")
-        .regex(/^[0-9\s\-\+\(\)]+$/, "Please enter a valid phone number.")
-        .min(8, "Phone number must be at least 8 digits."),
-    Email: z
-        .string()
-        .min(1, "Email is required.")
-        .email("Please enter a valid email address."),
-    Address: z
-        .string()
-        .min(1, "Address is required.")
-        .min(5, "Please enter a complete address."),
-    InterestedArea: z
-        .string()
-        .min(1, "Territory/area/suburb of interest is required.")
-        .min(2, "Please specify the area you're interested in."),
-    ReasonForInterest: z
-        .string()
-        .min(1, "Please tell us what interests you in a SecureCash franchise.")
-        .min(20, "Please provide more details about your interest."),
-    ReferralSource: z
-        .string()
-        .min(1, "Please tell us how you heard about this opportunity.")
-        .min(2, "Please provide details about how you heard about us."),
-    BotField: z.string().max(0, "Bot detected!").optional(),
-});
+import { useFormErrors } from '@/hooks/useFormErrors';
+import { useFormSubmission } from '@/hooks/useFormSubmission';
+import FranchiseFormSchema, { FRANCHISE_DEFAULT_VALUES } from '@/zod/FranchiseFormSchema';
+import WarningPopup from "@/components/common/forms/elements/WarningPopup";
 
 const InputField = ({
     label,
@@ -125,10 +93,10 @@ const InputField = ({
                         />
                         <Icon
                             className={`min-w-[50px] text-[18px] ${hasError
-                                    ? "text-red-500"
-                                    : isFocused
-                                        ? "text-primary"
-                                        : "text-[#999]"
+                                ? "text-red-500"
+                                : isFocused
+                                    ? "text-primary"
+                                    : "text-[#999]"
                                 }`}
                         />
                     </>
@@ -145,33 +113,53 @@ const InputField = ({
     );
 };
 
-const focusInput = (ref) =>
-{
-    if (ref && ref.current) {
-        ref.current.focus();
-    }
-};
-
 const FranchiseForm = () =>
 {
-    const [currentErrorField, setCurrentErrorField] = useState(null);
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
     const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
-    const [submissionStatus, setSubmissionStatus] = useState(null);
     const [formData, setFormData] = useState(null);
 
-    // Create refs for focus management
-    const fullNameRef = useRef(null);
-    const phoneRef = useRef(null);
-    const emailRef = useRef(null);
-    const addressRef = useRef(null);
-    const interestedAreaRef = useRef(null);
-    const reasonForInterestRef = useRef(null);
-    const referralSourceRef = useRef(null);
-
     const calendlyURL = "https://calendly.com/jo_securecash?hide_gdpr_banner=1&primary_color=c7a652";
+
+    // Create field references for focus management
+    const fieldRefs = {
+        FullName: useRef(null),
+        Phone: useRef(null),
+        Email: useRef(null),
+        Address: useRef(null),
+        InterestedArea: useRef(null),
+        ReasonForInterest: useRef(null),
+        ReferralSource: useRef(null),
+    };
+
+    // Initialize form hooks
+    const { currentErrorField, setCurrentErrorField, handleFieldErrors } = useFormErrors(fieldRefs);
+
+    const { isSubmitting, isSubmitted, submissionError, handleSubmission } = useFormSubmission({
+        formType: 'franchise',
+        formId: 'Franchise',
+        onSuccess: (result, finalData) =>
+        {
+            console.log("Franchise form submitted successfully!");
+
+            // Store form data for Calendly prefill
+            setFormData(finalData);
+            setIsFormSubmitted(true);
+            setIsCalendlyOpen(true);
+        },
+        onError: (error) =>
+        {
+            console.error("Franchise submission failed:", error);
+        },
+        prepareData: async (data) =>
+        {
+            // Return data as expected by the API
+            return {
+                ...data,
+                formType: "franchise",
+            };
+        }
+    });
 
     const {
         register,
@@ -182,144 +170,8 @@ const FranchiseForm = () =>
         formState: { errors },
     } = useForm({
         resolver: zodResolver(FranchiseFormSchema),
-        defaultValues: {
-            FullName: "",
-            Phone: "",
-            Email: "",
-            Address: "",
-            InterestedArea: "",
-            ReasonForInterest: "",
-            ReferralSource: "",
-            BotField: "",
-        },
+        defaultValues: FRANCHISE_DEFAULT_VALUES,
     });
-
-    // Function to get device information
-    const getDeviceInfo = () =>
-    {
-        const userAgent = navigator.userAgent;
-
-        // Parse browser and version
-        let browserInfo = 'Unknown';
-        let browserVersion = '';
-
-        if (/Chrome\/([0-9.]+)/.test(userAgent)) {
-            const match = userAgent.match(/Chrome\/([0-9.]+)/);
-            browserInfo = 'Chrome';
-            browserVersion = match[1];
-        } else if (/Firefox\/([0-9.]+)/.test(userAgent)) {
-            const match = userAgent.match(/Firefox\/([0-9.]+)/);
-            browserInfo = 'Firefox';
-            browserVersion = match[1];
-        } else if (/Version\/([0-9.]+).*Safari/.test(userAgent)) {
-            const match = userAgent.match(/Version\/([0-9.]+)/);
-            browserInfo = 'Safari';
-            browserVersion = match[1];
-        } else if (/Edge\/([0-9.]+)/.test(userAgent)) {
-            const match = userAgent.match(/Edge\/([0-9.]+)/);
-            browserInfo = 'Edge';
-            browserVersion = match[1];
-        }
-
-        // Parse OS information
-        let osInfo = 'Unknown';
-        if (/Windows NT ([0-9._]+)/.test(userAgent)) {
-            const match = userAgent.match(/Windows NT ([0-9._]+)/);
-            osInfo = `Windows NT ${match[1]}`;
-        } else if (/Mac OS X ([0-9._]+)/.test(userAgent)) {
-            const match = userAgent.match(/Mac OS X ([0-9._]+)/);
-            osInfo = `Mac OS X ${match[1].replace(/_/g, '.')}`;
-        } else if (/Android ([0-9.]+)/.test(userAgent)) {
-            const match = userAgent.match(/Android ([0-9.]+)/);
-            osInfo = `Android ${match[1]}`;
-        } else if (/OS ([0-9._]+)/.test(userAgent) && /iPhone|iPad/.test(userAgent)) {
-            const match = userAgent.match(/OS ([0-9._]+)/);
-            osInfo = `iOS ${match[1].replace(/_/g, '.')}`;
-        } else if (/Linux/.test(userAgent)) {
-            osInfo = 'Linux';
-        }
-
-        return {
-            fullUserAgent: userAgent,
-            browser: browserInfo,
-            browserVersion: browserVersion,
-            os: osInfo,
-        };
-    };
-
-    // Function to get IP address
-    const getIPAddress = async () =>
-    {
-        try {
-            // Try multiple IP services for reliability
-            const ipServices = [
-                'https://api.ipify.org?format=json',
-                'https://ipapi.co/json/',
-                'https://api.ip.sb/jsonip',
-            ];
-
-            for (const service of ipServices) {
-                try {
-                    const response = await fetch(service);
-                    const data = await response.json();
-
-                    // Different services return IP in different formats
-                    if (data.ip) return data.ip;
-                    if (data.query) return data.query;
-
-                } catch (error) {
-                    console.log(`IP service ${service} failed:`, error);
-                    continue;
-                }
-            }
-
-            return 'Unable to detect';
-        } catch (error) {
-            console.error('Error fetching IP:', error);
-            return 'Unable to detect';
-        }
-    };
-
-    // Focus management effect
-    useEffect(() =>
-    {
-        if (errors && Object.keys(errors).length > 0) {
-            const errorField = Object.keys(errors)[0]; // Get the first error field
-            setCurrentErrorField(errorField);
-
-            const focusMap = {
-                FullName: fullNameRef,
-                Phone: phoneRef,
-                Email: emailRef,
-                Address: addressRef,
-                InterestedArea: interestedAreaRef,
-                ReasonForInterest: reasonForInterestRef,
-                ReferralSource: referralSourceRef,
-            };
-
-            const refToFocus = focusMap[errorField];
-            if (refToFocus) {
-                focusInput(refToFocus);
-            }
-        } else {
-            setCurrentErrorField(null);
-        }
-    }, [errors]);
-
-    useEffect(() =>
-    {
-        if (submissionStatus) {
-            const timer = setTimeout(() =>
-            {
-                // dispatch(setPopupForm("")); // Uncomment if using Redux
-                setTimeout(() =>
-                {
-                    setSubmissionStatus(null);
-                }, 1000);
-            }, 6000);
-            return () => clearTimeout(timer);
-        }
-    }, [submissionStatus]);
 
     const inputFields = [
         {
@@ -327,16 +179,14 @@ const FranchiseForm = () =>
             name: "FullName",
             placeholder: "Enter your full name",
             Icon: FaUser,
-            errorMessage: "Please enter your full name.",
-            ref: fullNameRef,
+            ref: fieldRefs.FullName,
         },
         {
             label: "Phone Number",
             name: "Phone",
             placeholder: "Enter your phone number",
             Icon: FaPhone,
-            errorMessage: "Please enter your phone number.",
-            ref: phoneRef,
+            ref: fieldRefs.Phone,
         },
         {
             label: "Email Address",
@@ -344,152 +194,85 @@ const FranchiseForm = () =>
             type: "email",
             placeholder: "Your email address",
             Icon: FaEnvelope,
-            errorMessage: "Please enter your email address.",
-            ref: emailRef,
+            ref: fieldRefs.Email,
         },
         {
             label: "Address",
             name: "Address",
             placeholder: "Enter your address",
             Icon: FaHome,
-            errorMessage: "Please enter your address.",
-            ref: addressRef,
+            ref: fieldRefs.Address,
         },
         {
             label: "Territory/Area/Suburb of Interest",
             name: "InterestedArea",
             placeholder: "What territory/area/suburb are you interested in?",
             Icon: FaMapMarkerAlt,
-            errorMessage: "Please specify what territory/area/suburb you are interested in.",
-            ref: interestedAreaRef,
+            ref: fieldRefs.InterestedArea,
         },
         {
             label: "What interests you in a SecureCash Franchise?",
             name: "ReasonForInterest",
             placeholder: "Briefly tell us why you're interested in a SecureCash franchise",
             Icon: FaInfoCircle,
-            errorMessage: "Please tell us why you're interested in a franchise.",
             textarea: true,
-            ref: reasonForInterestRef,
+            ref: fieldRefs.ReasonForInterest,
         },
         {
             label: "How did you hear about this Opportunity?",
             name: "ReferralSource",
             placeholder: "E.g., Google, Social Media, Referral",
             Icon: FaQuestionCircle,
-            errorMessage: "Please let us know how you heard about this opportunity.",
-            ref: referralSourceRef,
+            ref: fieldRefs.ReferralSource,
         },
     ];
 
+    // Main form submission handler
     const handleFormSubmit = async (data) =>
     {
-        try {
-            // Basic validation
-            if (!data.FullName || !data.Email || !data.Phone || !data.Address ||
-                !data.InterestedArea || !data.ReasonForInterest || !data.ReferralSource) {
-                console.log("Missing required fields");
-                alert("Please fill in all required fields.");
-                return;
-            }
-
-            // Check honeypot field
-            if (data.BotField) {
-                console.log("Bot detected.");
-                return;
-            }
-
-            console.log("All validations passed, proceeding with submission...");
-
-            setIsSubmitting(true);
-
-            // Get device information
-            const deviceInfo = getDeviceInfo();
-
-            // Get IP address
-            const ipAddress = await getIPAddress();
-
-            // Format date of submission
-            const now = new Date();
-            const dateOfSubmission = now.toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            }).replace(/(\d+)/, (match) =>
-            {
-                const day = parseInt(match);
-                const suffix = day === 1 || day === 21 || day === 31 ? 'st' :
-                    day === 2 || day === 22 ? 'nd' :
-                        day === 3 || day === 23 ? 'rd' : 'th';
-                return day + suffix;
-            }) + ', ' + now.toLocaleTimeString('en-US', {
-                hour12: true,
-                hour: 'numeric',
-                minute: '2-digit',
-                second: '2-digit'
-            });
-
-            // Add timestamp, form ID, and device info
-            const finalData = {
-                ...data,
-                "formType": "franchise",
-                timestamp: new Date().toISOString(),
-                formId: "Franchise",
-                submissionId: `franchise_${Date.now()}`,
-                "IP Address": ipAddress,
-                "Device": deviceInfo.fullUserAgent,
-                "Browser": `${deviceInfo.browser} ${deviceInfo.browserVersion}`,
-                "Operating System": deviceInfo.os,
-                dateOfSubmission: dateOfSubmission,
-            };
-
-            console.log("Final franchise form data:", finalData);
-
-            // Uncomment this section when you want to make the actual API call
-            const response = await fetch("/api/forms", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(finalData),
-            });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || "Failed to submit the form");
-            }
-
-            const result = await response.json();
-
-            // Store form data for use in Calendly
-            setFormData(finalData);
-
-            // Set form as submitted
-            setIsFormSubmitted(true);
-            setIsSubmitted(true);
-            setIsSubmitting(false);
-
-            console.log("Form submitted successfully!");
-
-            // Open Calendly popup
-            setIsCalendlyOpen(true);
-
-            // Reset form after successful submission (optional)
-            // setTimeout(() => {
-            //     reset();
-            //     setIsSubmitted(false);
-            //     setIsFormSubmitted(false);
-            // }, 3000);
-
-        } catch (error) {
-            console.error("Form submission error:", error);
-            setIsSubmitting(false);
-
-            // Show error message to user
-            alert("There was an error submitting your form. Please try again.");
+        // Validate all fields first
+        if (!handleFieldErrors(errors)) {
+            return; // Stop if validation fails
         }
+
+        console.log("All validations passed, proceeding with submission...");
+        await handleSubmission(data);
     };
+
+    const renderFormFields = () => (
+        <>
+            {/* Bot field (honeypot) - hidden */}
+            <input
+                type="text"
+                {...register("BotField")}
+                style={{ display: "none" }}
+                tabIndex={-1}
+                autoComplete="off"
+            />
+
+            {inputFields.map((field, index) => (
+                <div key={index} className="relative">
+                    <InputField
+                        {...field}
+                        register={register}
+                        errors={errors}
+                        currentErrorField={currentErrorField}
+                        setCurrentErrorField={setCurrentErrorField}
+                        ref={field.ref}
+                        autoComplete="new-password"
+                        onFocus={() => setCurrentErrorField(field.name)}
+                        onBlur={() => setCurrentErrorField(null)}
+                        labelClassName="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0"
+                    />
+                </div>
+            ))}
+
+            <div className="text-primary-text text-[14px] font-medium mt-4 mb-2 w-full text-left px-2 768px:px-0">
+                After submitting the form, please pick a time from the popup
+                screen for a video meeting.
+            </div>
+        </>
+    );
 
     return (
         <div className="float-none 992px:w-[60%] 992px:float-left relative left-0 flex justify-center 414px:mx-4 992px:mx-0">
@@ -501,34 +284,8 @@ const FranchiseForm = () =>
                 noValidate
                 autoComplete="off"
             >
-                {/* Bot field (honeypot) - hidden */}
-                <input
-                    type="text"
-                    {...register("BotField")}
-                    style={{ display: "none" }}
-                    tabIndex={-1}
-                    autoComplete="off"
-                />
-
                 <div className="form-tab 480px:w-[90%] mx-auto">
-                    <>
-                        {inputFields.map((field, index) => (
-                            <InputField
-                                key={index}
-                                {...field}
-                                register={register}
-                                errors={errors}
-                                currentErrorField={currentErrorField}
-                                setCurrentErrorField={setCurrentErrorField}
-                                autoComplete="new-password"
-                            />
-                        ))}
-
-                        <div className="text-primary-text text-[14px] font-medium mt-4 mb-2 w-full text-left px-2 768px:px-0">
-                            After submitting the form, please pick a time from the popup
-                            screen for a video meeting.
-                        </div>
-                    </>
+                    {renderFormFields()}
                 </div>
 
                 {isFormSubmitted && (
@@ -550,6 +307,13 @@ const FranchiseForm = () =>
                                 should appear shortly.
                             </p>
                         </div>
+                    </div>
+                )}
+
+                {/* Display submission error if any */}
+                {submissionError && (
+                    <div className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded mx-4">
+                        <strong>Submission Error:</strong> {submissionError}
                     </div>
                 )}
 

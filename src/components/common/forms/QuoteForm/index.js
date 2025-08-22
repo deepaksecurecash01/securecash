@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -12,10 +12,15 @@ import
   FaEnvelope,
   FaHome,
   FaMapMarkerAlt,
+  FaSpinner,
+  FaCheckCircle,
 } from "react-icons/fa";
 import Quote from "./Quote";
 import Banking from "./Banking";
 import Change from "./Change";
+import { useFormErrors } from '@/hooks/useFormErrors';
+import { useFormSubmission } from '@/hooks/useFormSubmission';
+import { useMultiStepForm } from '@/hooks/useMultiStepForm';
 
 // Validation Schemas
 const createValidationSchemas = () =>
@@ -83,12 +88,9 @@ const createValidationSchemas = () =>
     BankingComments: z.string().optional(),
   });
 
-
-  // Fix 1: Update the ChangeSchema frequency options to match the frequencyOptions array
   const ChangeSchema = z.object({
     ChangeFrequency: z.enum(
-      ["Weekly", "Fortnightly", "Monthly", "Ad Hoc"], // Remove this line
-      ["Weekly", "Fortnightly", "Ad Hoc", "Special Event (once off)"], // Add this line
+      ["Weekly", "Fortnightly", "Ad Hoc", "Special Event (once off)"],
       {
         errorMap: () => ({ message: "Please select a frequency for change." }),
       }
@@ -109,7 +111,7 @@ const createValidationSchemas = () =>
     ),
     ChangeCoinsAmount: z
       .string()
-      .regex(/^\d+(\.\d{1,2})?$/, "Please enter a valid amount for coins.") // Fix regex pattern
+      .regex(/^\d+(\.\d{1,2})?$/, "Please enter a valid amount for coins.")
       .min(1, "Please enter the average coins value."),
     ChangeDays: z
       .array(
@@ -132,219 +134,205 @@ const createValidationSchemas = () =>
   return { QuoteFormSchema, BankingSchema, ChangeSchema };
 };
 
-// Device and IP utilities
-const getDeviceInfo = () =>
-{
-  const userAgent = navigator.userAgent;
-  let browserInfo = 'Unknown';
-  let browserVersion = '';
-
-  const browserPatterns = [
-    { name: 'Chrome', pattern: /Chrome\/([0-9.]+)/ },
-    { name: 'Firefox', pattern: /Firefox\/([0-9.]+)/ },
-    { name: 'Safari', pattern: /Version\/([0-9.]+).*Safari/ },
-    { name: 'Edge', pattern: /Edge\/([0-9.]+)/ }
-  ];
-
-  for (const { name, pattern } of browserPatterns) {
-    const match = userAgent.match(pattern);
-    if (match) {
-      browserInfo = name;
-      browserVersion = match[1];
-      break;
-    }
-  }
-
-  let osInfo = 'Unknown';
-  const osPatterns = [
-    { name: 'Windows NT', pattern: /Windows NT ([0-9._]+)/, format: (v) => `Windows NT ${v}` },
-    { name: 'Mac OS X', pattern: /Mac OS X ([0-9._]+)/, format: (v) => `Mac OS X ${v.replace(/_/g, '.')}` },
-    { name: 'Android', pattern: /Android ([0-9.]+)/, format: (v) => `Android ${v}` },
-    { name: 'iOS', pattern: /OS ([0-9._]+)/, format: (v) => `iOS ${v.replace(/_/g, '.')}`, condition: /iPhone|iPad/.test(userAgent) },
-    { name: 'Linux', pattern: /Linux/, format: () => 'Linux' }
-  ];
-
-  for (const { pattern, format, condition } of osPatterns) {
-    if (condition && !condition) continue;
-    const match = userAgent.match(pattern);
-    if (match) {
-      osInfo = format(match[1] || '');
-      break;
-    }
-  }
-
-  return {
-    fullUserAgent: userAgent,
-    browser: browserInfo,
-    browserVersion: browserVersion,
-    os: osInfo
-  };
-};
-
-const getIPAddress = async () =>
-{
-  const ipServices = [
-    'https://api.ipify.org?format=json',
-    'https://ipapi.co/json/',
-    'https://api.ip.sb/jsonip',
-  ];
-
-  for (const service of ipServices) {
-    try {
-      const response = await fetch(service);
-      const data = await response.json();
-      if (data.ip || data.query) return data.ip || data.query;
-    } catch (error) {
-      console.log(`IP service ${service} failed:`, error);
-    }
-  }
-  return 'Unable to detect';
-};
-
 const QuoteForm = ({ className }) =>
 {
-  // State management
-  const [formData, setFormData] = useState({});
-  const [showThankYou, setShowThankYou] = useState(false);
-  const [currentStep, setCurrentStep] = useState(0);
-  const [selectedServices, setSelectedServices] = useState([]);
+  // Create field references for focus management
+  const fieldRefs = {
+    Name: useRef(null),
+    Organisation: useRef(null),
+    Phone: useRef(null),
+    Referrer: useRef(null),
+    Email: useRef(null),
+    Address: useRef(null),
+    Locations: useRef(null),
+    // Banking fields
+    BankingFrequency: useRef(null),
+    BankingAmount: useRef(null),
+    BankingBank: useRef(null),
+    BankingDays: useRef(null),
+    BankingComments: useRef(null),
+    // Change fields
+    ChangeFrequency: useRef(null),
+    ChangeNotesAmount: useRef(null),
+    ChangeCoinsAmount: useRef(null),
+    ChangeDays: useRef(null),
+    ChangeComments: useRef(null),
+  };
 
-  // Form submission states
-  const [currentErrorField, setCurrentErrorField] = useState(null);
-  const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-  const [submissionStatus, setSubmissionStatus] = useState(null);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Get schemas
+  // Get validation schemas
   const { QuoteFormSchema, BankingSchema, ChangeSchema } = createValidationSchemas();
 
-  // Create dynamic schema based on current step and selected services
-  const createCombinedSchema = (step, services) =>
-  {
-    const baseFields = {
-      Service: z.array(z.string()).optional(),
-      BankingFrequency: z.string().optional(),
-      BankingAmount: z.string().optional(),
-      BankingBank: z.string().optional(),
-      BankingDays: z.array(z.string()).optional(),
-      BankingComments: z.string().optional(),
-      ChangeFrequency: z.string().optional(),
-      ChangeNotesAmount: z.string().optional(),
-      ChangeCoinsAmount: z.string().optional(),
-      ChangeDays: z.array(z.string()).optional(),
-      ChangeComments: z.string().optional(),
-    };
+  // Initialize form error handling
+  const { currentErrorField, setCurrentErrorField, handleFieldErrors, submissionError } = useFormErrors(fieldRefs);
 
-    switch (step) {
-      case 0:
-        return QuoteFormSchema.extend(baseFields);
-      case 1:
-        if (services.includes("Banking")) {
-          return BankingSchema.extend({
-            ...baseFields,
-            // Override with optional fields for non-Banking fields
-            ChangeFrequency: z.string().optional(),
-            ChangeNotesAmount: z.string().optional(),
-            ChangeCoinsAmount: z.string().optional(),
-            ChangeDays: z.array(z.string()).optional(),
-            ChangeComments: z.string().optional(),
-          });
-        }
-        return z.object(baseFields);
-      case 2:
-        if (services.includes("Change")) {
-          return ChangeSchema.extend({
-            ...baseFields,
-            // Override with optional fields for non-Change fields
-            BankingFrequency: z.string().optional(),
-            BankingAmount: z.string().optional(),
-            BankingBank: z.string().optional(),
-            BankingDays: z.array(z.string()).optional(),
-            BankingComments: z.string().optional(),
-          });
-        }
-        return z.object(baseFields);
+  // Initialize multi-step form management
+  const {
+    currentStep,
+    getCurrentStepId,
+    stepData,
+    nextStep,
+    isLastStep,
+    validateCurrentStep,
+    resetSteps
+  } = useMultiStepForm({
+    steps: ['quote', 'banking', 'change'],
+    schemas: {
+      quote: QuoteFormSchema,
+      banking: BankingSchema,
+      change: ChangeSchema,
+    },
+    conditional: true,
+    initialData: {
+      Name: "",
+      Organisation: "",
+      Phone: "",
+      Referrer: "",
+      Email: "",
+      Address: "",
+      Locations: "",
+      Service: [],
+      BankingFrequency: "",
+      BankingAmount: "",
+      BankingBank: "",
+      BankingDays: [],
+      BankingComments: "",
+      ChangeFrequency: "",
+      ChangeNotesAmount: "",
+      ChangeCoinsAmount: "",
+      ChangeDays: [],
+      ChangeComments: "",
+    }
+  });
+
+  // Initialize form submission
+  const { isSubmitting, isSubmitted, handleSubmission } = useFormSubmission({
+    formType: 'quote',
+    formId: 'Quote',
+    onSuccess: (result, finalData) =>
+    {
+      console.log("Quote form submitted successfully!");
+      // Reset steps after successful submission
+      setTimeout(() => resetSteps(), 3000);
+    },
+    onError: (error) =>
+    {
+      console.error("Quote submission failed:", error);
+    },
+    prepareData: async (data) =>
+    {
+      return { ...data, formType: "quote" };
+    }
+  });
+
+  // Dynamic schema creation based on current step and selected services
+  const getCurrentSchema = () =>
+  {
+    const stepId = getCurrentStepId();
+    const services = stepData.Service || [];
+
+    switch (stepId) {
+      case 'quote':
+        return QuoteFormSchema;
+      case 'banking':
+        return services.includes('Banking') ? BankingSchema : z.object({});
+      case 'change':
+        return services.includes('Change') ? ChangeSchema : z.object({});
       default:
-        return z.object(baseFields);
+        return z.object({});
     }
   };
 
-  // Get default values
-  const getDefaultValues = () => ({
-    Name: "",
-    Organisation: "",
-    Phone: "",
-    Referrer: "",
-    Email: "",
-    Address: "",
-    Locations: "",
-    Service: [],
-    BankingFrequency: "",
-    BankingAmount: "",
-    BankingBank: "",
-    BankingDays: [],
-    BankingComments: "",
-    ChangeFrequency: "",
-    ChangeNotesAmount: "",
-    ChangeCoinsAmount: "",
-    ChangeDays: [],
-    ChangeComments: "",
-    ...formData,
+  // Initialize react-hook-form with current schema
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(getCurrentSchema()),
+    defaultValues: stepData,
   });
 
-  const methods = useForm({
-    resolver: zodResolver(createCombinedSchema(currentStep, selectedServices)),
-    defaultValues: getDefaultValues(),
-  });
-
-  const { register, handleSubmit, trigger, setValue, getValues, reset, formState: { errors } } = methods;
-
-  // Update resolver when step or services change
-  useEffect(() =>
+  // Determine next steps based on selected services
+  const getNextSteps = (services) =>
   {
-    const newSchema = createCombinedSchema(currentStep, selectedServices);
-    methods.resolver = zodResolver(newSchema);
+    const steps = [];
+    if (services.includes('Banking')) steps.push('banking');
+    if (services.includes('Change')) steps.push('change');
+    return steps;
+  };
 
-    // Don't reset the form data, just update the resolver
-    // This prevents losing the previously entered data
-    const currentValues = getValues();
-    const mergedValues = { ...getDefaultValues(), ...formData, ...currentValues };
-
-    // Only reset with merged values if there's actual data to preserve
-    if (Object.keys(formData).length > 0) {
-      reset(mergedValues);
+  // Main form submission handler
+  const handleFormSubmit = async (data) =>
+  {
+    // Validate current step
+    const validation = validateCurrentStep(data);
+    if (!validation.success) {
+      handleFieldErrors(validation.error.flatten().fieldErrors);
+      return;
     }
-  }, [currentStep, selectedServices]);
 
-  // Input field configurations
+    if (currentStep === 0) {
+      // First step - determine next steps based on services
+      const services = data.Service || [];
+      const nextSteps = getNextSteps(services);
+
+      if (nextSteps.length === 0) {
+        // No services selected, submit immediately
+        const finalData = { ...stepData, ...data };
+        await handleSubmission(finalData);
+      } else {
+        // Move to next service step
+        nextStep(data);
+      }
+    } else {
+      // Service steps - check if this is the last step
+      const services = stepData.Service || [];
+      const currentStepId = getCurrentStepId();
+
+      if (isLastStep ||
+        (currentStepId === 'banking' && !services.includes('Change')) ||
+        (currentStepId === 'change' && !services.includes('Banking'))) {
+        // Final submission
+        const finalData = { ...stepData, ...data };
+        await handleSubmission(finalData);
+      } else {
+        // Move to next step
+        nextStep(data);
+      }
+    }
+  };
+
+  // Configuration objects
   const inputFields = [
     {
       label: "Full Name",
       name: "Name",
       placeholder: "Enter your full name",
       Icon: FaUser,
-      errorMessage: "Please enter your full name.",
+      ref: fieldRefs.Name,
     },
     {
       label: "Organisation Name",
       name: "Organisation",
       placeholder: "Enter your organisation's name",
       Icon: FaUsers,
-      errorMessage: "Please enter your organisation's name.",
+      ref: fieldRefs.Organisation,
     },
     {
       label: "Phone Number",
       name: "Phone",
       placeholder: "Enter your phone number",
       Icon: FaPhone,
-      errorMessage: "Please enter your phone number.",
+      ref: fieldRefs.Phone,
     },
     {
       label: "Where Did You Hear About Us?",
       name: "Referrer",
       placeholder: "Enter where did you hear about us",
       Icon: FaComments,
-      errorMessage: "Please enter where did you hear about us.",
+      ref: fieldRefs.Referrer,
     },
     {
       label: "Email Address",
@@ -352,21 +340,21 @@ const QuoteForm = ({ className }) =>
       type: "email",
       placeholder: "Your email address",
       Icon: FaEnvelope,
-      errorMessage: "Please enter your email address.",
+      ref: fieldRefs.Email,
     },
     {
       label: "Postal Address",
       name: "Address",
       placeholder: "Enter your postal address",
       Icon: FaHome,
-      errorMessage: "Please enter your postal address.",
+      ref: fieldRefs.Address,
     },
     {
       label: "Location/s For Service",
       name: "Locations",
       placeholder: "Enter location/s for the service (Suburb, State, Postcode)",
       Icon: FaMapMarkerAlt,
-      errorMessage: "Please enter the location/s at where you require services.",
+      ref: fieldRefs.Locations,
     },
   ];
 
@@ -376,14 +364,6 @@ const QuoteForm = ({ className }) =>
     { value: "Fortnightly", label: "Fortnightly" },
     { value: "Ad Hoc", label: "Ad Hoc" },
     { value: "Special Event (once off)", label: "Special Event (once off)" },
-  ];
-
-  const changeFrequencyOptions = [
-    { value: "", label: "Please select…" },
-    { value: "Weekly", label: "Weekly" },
-    { value: "Fortnightly", label: "Fortnightly" },
-    { value: "Monthly", label: "Monthly" }, // Remove this if not needed
-    { value: "Ad Hoc", label: "Ad Hoc" },
   ];
 
   const amountOptions = [
@@ -419,157 +399,14 @@ const QuoteForm = ({ className }) =>
     ],
   };
 
-  // API submission handler
-  const submitToAPI = async (finalData) =>
-  {
-    const deviceInfo = getDeviceInfo();
-    const ipAddress = await getIPAddress();
-
-    const payload = {
-      ...finalData,
-      deviceInfo: deviceInfo.fullUserAgent,
-      ipAddress: ipAddress,
-      timestamp: new Date().toISOString(),
-      FormID: "quote",
-    };
-
-    console.log("Submitting to API:", payload);
-
-    const response = await fetch("/api/forms", {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.error || 'API request failed');
-    }
-
-    return response.json();
-  };
-
-  // Complete form reset function
-  const resetFormState = () =>
-  {
-    const emptyFormData = {
-      Name: "",
-      Organisation: "",
-      Phone: "",
-      Referrer: "",
-      Email: "",
-      Address: "",
-      Locations: "",
-      Service: [],
-      BankingFrequency: "",
-      BankingAmount: "",
-      BankingBank: "",
-      BankingDays: [],
-      BankingComments: "",
-      ChangeFrequency: "",
-      ChangeNotesAmount: "",
-      ChangeCoinsAmount: "",
-      ChangeDays: [],
-      ChangeComments: "",
-    };
-
-    setFormData(emptyFormData);
-    reset(emptyFormData);
-    setCurrentStep(0);
-    setSelectedServices([]);
-    setCurrentErrorField(null);
-    setSubmissionStatus(null);
-  };
-
-  // Modal close handler
-  const handleModalClose = () =>
-  {
-    setShowThankYou(false);
-    setIsFormSubmitted(false);
-    resetFormState();
-  };
-
-  const handleFormSubmit = async (data) =>
-  {
-    try {
-      // Get current form values first
-      const currentFormData = getValues();
-      console.log("Current form data:", currentFormData);
-      console.log("Submitted data:", data);
-
-      // Merge the data properly
-      const updatedFormData = {
-        ...formData, ...currentFormData, ...data, "formType": "quote",
- };
-      console.log("Updated form data:", updatedFormData);
-
-      setFormData(updatedFormData);
-
-      if (currentStep === 0) {
-        // First step - capture services and base info
-        const services = data.Service || [];
-        setSelectedServices(services);
-
-        if (services.includes("Banking")) {
-          setCurrentStep(1);
-        } else if (services.includes("Change")) {
-          setCurrentStep(2);
-        } else {
-          // No services selected, submit with base info only
-          await finalSubmission(updatedFormData);
-        }
-      } else if (currentStep === 1) {
-        // Banking step
-        if (selectedServices.includes("Change")) {
-          setCurrentStep(2);
-        } else {
-          // Only Banking service, submit
-          await finalSubmission(updatedFormData);
-        }
-      } else if (currentStep === 2) {
-        // Change step - final submission
-        await finalSubmission(updatedFormData);
-      }
-    } catch (error) {
-      console.error("Form submission error:", error);
-      setSubmissionStatus('error');
-    }
-  };
-
-  const finalSubmission = async (finalData) =>
-  {
-    setIsSubmitting(true);
-
-    console.log("Final submission data:", finalData);
-    console.log("Change fields:", {
-      ChangeFrequency: finalData.ChangeFrequency,
-      ChangeNotesAmount: finalData.ChangeNotesAmount,
-      ChangeCoinsAmount: finalData.ChangeCoinsAmount,
-      ChangeDays: finalData.ChangeDays,
-      ChangeComments: finalData.ChangeComments
-    });
-
-    try {
-      const result = await submitToAPI(finalData);
-      console.log('API Response:', result);
-
-      setIsSubmitting(false);
-      setIsFormSubmitted(true);
-      setSubmissionStatus('success');
-      setShowThankYou(true); // Add this line to show thank you modal
-
-    } catch (apiError) {
-      console.error('API submission error:', apiError);
-      setIsSubmitting(false);
-      setSubmissionStatus('error');
-    }
-  };
-
   // Render current form step
   const renderFormStep = () =>
   {
-    switch (currentStep) {
-      case 0:
+    const stepId = getCurrentStepId();
+    const services = stepData.Service || [];
+
+    switch (stepId) {
+      case 'quote':
         return (
           <Quote
             inputFields={inputFields}
@@ -579,8 +416,8 @@ const QuoteForm = ({ className }) =>
             setCurrentErrorField={setCurrentErrorField}
           />
         );
-      case 1:
-        return selectedServices.includes("Banking") ? (
+      case 'banking':
+        return services.includes("Banking") ? (
           <Banking
             frequencyOptions={frequencyOptions}
             amountOptions={amountOptions}
@@ -592,10 +429,10 @@ const QuoteForm = ({ className }) =>
             setCurrentErrorField={setCurrentErrorField}
           />
         ) : null;
-      case 2:
-        return selectedServices.includes("Change") ? (
+      case 'change':
+        return services.includes("Change") ? (
           <Change
-            frequencyOptions={changeFrequencyOptions} // Use separate options for Change
+            frequencyOptions={frequencyOptions}
             amountOptions={amountOptions}
             daysOfWeek={daysOptions.withBanking}
             register={register}
@@ -610,13 +447,23 @@ const QuoteForm = ({ className }) =>
     }
   };
 
-  // Calculate if this is the final step
-  const isFinalStep = () =>
+  // Determine button text
+  const getButtonText = () =>
   {
-    if (currentStep === 0) return false;
-    if (currentStep === 1 && !selectedServices.includes("Change")) return true;
-    if (currentStep === 2) return true;
-    return false;
+    if (isSubmitting) return "Submitting...";
+    if (isSubmitted) return "Thank you! Form submitted successfully.";
+
+    const services = stepData.Service || [];
+    const stepId = getCurrentStepId();
+
+    if (stepId === 'quote') {
+      return services.length === 0 ? "Submit" : "Next";
+    }
+
+    if (stepId === 'banking' && !services.includes('Change')) return "Submit";
+    if (stepId === 'change') return "Submit";
+
+    return "Next";
   };
 
   return (
@@ -627,22 +474,49 @@ const QuoteForm = ({ className }) =>
         onSubmit={handleSubmit(handleFormSubmit)}
         noValidate
       >
+        {/* Bot field (honeypot) */}
+        <input
+          type="text"
+          {...register("BotField")}
+          style={{ display: "none" }}
+          tabIndex={-1}
+          autoComplete="off"
+        />
+
         {renderFormStep()}
+
+        {/* Display submission error */}
+        {submissionError && (
+          <div className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded">
+            {submissionError}
+          </div>
+        )}
 
         <div className="button-controls-container w-[80%] mx-auto mt-7">
           <div className="button-section relative">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="nextBtn bg-[#c6a54b] text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed"
+              className={`nextBtn ${isSubmitted ? 'bg-[#4bb543]' : 'bg-[#c6a54b]'
+                } text-white border-none py-[15px]  text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
             >
-              {isSubmitting ? "Submitting..." : (isFinalStep() ? "Submit" : "Next")}
+              {isSubmitting ? (
+                <div className="flex items-center justify-center">
+                  <FaSpinner className="animate-spin mr-2" />
+                  Submitting...
+                </div>
+              ) : isSubmitted ? (
+                <div className="flex items-center justify-center">
+                  <FaCheckCircle className="mr-2" />
+                  Thank you! Form submitted successfully.
+                </div>
+              ) : (
+                getButtonText()
+              )}
             </button>
           </div>
         </div>
       </form>
-
-
     </div>
   );
 };

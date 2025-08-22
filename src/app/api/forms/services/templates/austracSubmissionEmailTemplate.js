@@ -1,8 +1,7 @@
-export default function austracTemplate(formData, { getCurrentDateTime }) {
-    const currentDateTime = getCurrentDateTime();
+const austracSubmissionEmailTemplate = (formData, currentDateTime) =>
+{
 
-    // Replace placeholders with actual form data
-    let htmlContent = `
+  return `
     <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
@@ -166,7 +165,7 @@ export default function austracTemplate(formData, { getCurrentDateTime }) {
                                             </td>
                                             <td
                                                 style="padding:5px 9px 5px 9px;">
-                            ${formData["IP Address"]}
+                                                ${formData["IP Address"]}
                                             </td>
                                         </tr>
                                         <tr>
@@ -180,7 +179,7 @@ export default function austracTemplate(formData, { getCurrentDateTime }) {
                                             </td>
                                             <td
                                                 style="padding:5px 9px 5px 9px;">
-                            ${formData.Device}
+                                                ${formData.Device}
                                             </td>
                                         </tr>
                                         <tr>
@@ -283,7 +282,6 @@ export default function austracTemplate(formData, { getCurrentDateTime }) {
                                             </td>
                                         </tr>
                                     </table>
-                                    </p>
                                 </td>
                             </tr>
                             <tr>
@@ -303,12 +301,6 @@ export default function austracTemplate(formData, { getCurrentDateTime }) {
 
     </html>
   `;
+};
 
-    return {
-        to: formData.OrganisationEmail,
-        from: "SecureCash Sign Up <sign-up@securecash.com.au>",
-        subject: `AUSTRAC - ${formData.Organisation || 'Unknown Organisation'}`,
-        text: "Please enable HTML emails in your email client to view the contents of this email.",
-        html: htmlContent
-    };
-}
+export default austracSubmissionEmailTemplate;
