@@ -1,5 +1,7 @@
 
-const contactAdminNotificationEmailTemplate = (formData, currentDateTime, formattedCallbackDate) => {
+const contactAdminNotificationEmailTemplate = (formData, currentDateTime, formattedCallbackDate) =>
+{
+    console.log(formData)
   return `
     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <html xmlns="http://www.w3.org/1999/xhtml">
@@ -73,7 +75,7 @@ const contactAdminNotificationEmailTemplate = (formData, currentDateTime, format
                                     </table>
                                 </td>
                             </tr>
-                            ${formData.ChkCallBack === 'Yes, please.' ? `
+                            ${formData.ChkCallBack && formData.ChkCallBack.includes('Yes, please.') ? `
                             <tr style="border:1px solid #dddddd;border-width:1px 0 1px 0;">
                                 <td colspan="2" style="padding:18px 12px 18px 12px;color:#222222;line-height:160%;text-align:left;font-family:Helvetica,Arial,sans-serif;font-size:15px;">
                                     <h1 style="font-size:24px;font-weight:bold;">Callback</h1>

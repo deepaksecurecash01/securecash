@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
+import
+{
   FaUser,
   FaUsers,
   FaPhone,
@@ -118,7 +119,8 @@ const BusinessInfo = ({
   setValue,
   currentErrorField,
   setCurrentErrorField,
-}) => {
+}) =>
+{
   const stateOptions = [
     { value: "select", label: "Please Select" },
     { value: "VIC", label: "Victoria" },
@@ -218,7 +220,8 @@ const ContactInfo = ({
   errors,
   currentErrorField,
   setCurrentErrorField,
-}) => {
+}) =>
+{
   return (
     <div className="form-page contact-info mt-[40px]">
       <Typography
@@ -298,7 +301,8 @@ const OtherInfo = ({
   errors,
   currentErrorField,
   setCurrentErrorField,
-}) => {
+}) =>
+{
   const serviceOptions = [
     { label: "Banking", value: "Banking Courier Service" },
     { label: "Change", value: "Change Order Service" },
@@ -474,11 +478,11 @@ const QuoteForm = ({
               as="h4"
               fontFamily="montserrat"
               className="text-white font-normal text-center capitalize pb-4 text-[26px] leading-[30px]"
-              >
+            >
               Review & Edit Previous Steps
             </Typography>
             <div className="">
-            
+
               <button
                 type="button"
                 onClick={() => handleStepNavigation(2)}

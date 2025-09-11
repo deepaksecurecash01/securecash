@@ -4,6 +4,7 @@ import Typography from "@/components/common/Typography";
 import Container from "@/components/layout/Container";
 import QuoteForm from "../components/QuoteForm";
 import Link from 'next/link';
+import TermsFormControllerVersion from '@/components/common/forms-new/forms/TermsForm';
 
 const FormSection = () =>
 {
@@ -83,7 +84,7 @@ const FormSection = () =>
                           <span className="text-primary italic">I agree with the above Terms &amp; Conditions.</span>&apos; to move
                           on the next step.&apos;
                       </p>
-                        <QuoteForm setName={setName} setPosition={setPosition} setOrganisation={setOrganisation} setAbn={setAbn} />
+                        <TermsFormControllerVersion setName={setName} setPosition={setPosition} setOrganisation={setOrganisation} setAbn={setAbn} />
                     </div>
                 </div>
             </Container>

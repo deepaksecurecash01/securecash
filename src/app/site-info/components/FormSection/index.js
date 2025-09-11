@@ -8,18 +8,18 @@ import QuoteForm from "../QuoteForm";
 import FranchiseForm from "../FranchiseForm";
 import Image from "next/image";
 import Link from "next/link";
-import ThankYouModal from "../ThankYouModal";
+import ThankYouModal from "../../../../components/common/forms-new/forms/ThankYouModal";
 import { useFormErrors } from '@/hooks/useFormErrors';
 import { useFormSubmission } from '@/hooks/useFormSubmission';
 import
-  {
-    createStepSchema,
-    SITE_INFO_DEFAULT_VALUES,
-    BusinessInfoSchema,
-    ContactInfoSchema,
-    ServiceInfoSchema,
-    RiskAssessmentSchema
-  } from '@/zod/SiteRiskFormSchema';
+{
+  createStepSchema,
+  SITE_INFO_DEFAULT_VALUES,
+  BusinessInfoSchema,
+  ContactInfoSchema,
+  ServiceInfoSchema,
+  RiskAssessmentSchema
+} from '@/zod/SiteRiskFormSchema';
 
 const FormSection = () =>
 {

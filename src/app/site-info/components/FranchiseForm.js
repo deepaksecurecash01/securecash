@@ -2,16 +2,17 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
+import
+{
   FaMoneyBillAlt,
-    FaUser,
-    FaBriefcase,
-    FaEnvelope,
-    FaCalendarAlt,
-    FaUsers,
-    FaIdCard,
-    FaSpinner,
-    FaCheckCircle,
+  FaUser,
+  FaBriefcase,
+  FaEnvelope,
+  FaCalendarAlt,
+  FaUsers,
+  FaIdCard,
+  FaSpinner,
+  FaCheckCircle,
   FaCircle,
 } from "react-icons/fa";
 
@@ -31,7 +32,8 @@ const Checkbox = ({
   name,
   currentErrorField,
   setCurrentErrorField,
-}) => {
+}) =>
+{
   const checkboxProps = register ? register(name) : {};
 
   return (
@@ -59,100 +61,100 @@ const Checkbox = ({
 };
 
 const SelectionBox = ({
-    label,
-    name,
-    setValue,
-    Icon,
-    options,
-    register,
-    errors,
-    currentErrorField,
-    setCurrentErrorField,
-    footnote,
+  label,
+  name,
+  setValue,
+  Icon,
+  options,
+  register,
+  errors,
+  currentErrorField,
+  setCurrentErrorField,
+  footnote,
 }) =>
 {
-    const hasError = errors[name] && currentErrorField === name;
-    const [isFocused, setIsFocused] = useState(false);
+  const hasError = errors[name] && currentErrorField === name;
+  const [isFocused, setIsFocused] = useState(false);
 
-   
-    
-    return (
-        <div className="relative">
-            <FaCircle className="text-primary text-[8px] mt-3 mr-3 flex-shrink-0 absolute top-3 " />
 
-            <div className="pl-4 ">
-                <div className="flex items-start mb-2">
-                    <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
-                        {label}
-                    </label>
-                </div>
-                <div className="input-container input-container-select w-full mx-auto text-left flex items-center relative rounded-[2px] border">
-                    <Icon
-                        className={`icon absolute text-[18px] rounded-l min-w-[20px] text-center ml-4 ${hasError
-                                ? "text-red-500"
-                                : isFocused
-                                    ? "text-primary"
-                                    : "text-[#999]"
-                            }`}
-                    />
-                    <select
-                        className={`w-full text-sm rounded-sm border border-white pl-12 shadow-none leading-6 h-9 appearance-none ${hasError
-                                ? "focus:outline-red-600 focus:border-none focus:ring-0"
-                                : "focus:outline-primary"
-                            }`}
-                        {...register(name, {
-                            required: "This field is required" // Add validation rule
-                        })}
-                        onChange={(e) =>
-                        {
-                            setValue(name, e.target.value, {
-                                shouldValidate: true,
-                                shouldDirty: true, // Mark field as dirty
-                            });
-                            setCurrentErrorField(null);
-                        }}
-                        onFocus={() =>
-                        {
-                            setCurrentErrorField(name);
-                            setIsFocused(true);
-                        }}
-                        onBlur={() =>
-                        {
-                            setCurrentErrorField(null);
-                            setIsFocused(false);
-                        }}
-                        name={name}
-                        data-validate="Inline"
-                    >
-                        {options.map((option, index) => (
-                            <option key={index} value={option.value}>
-                                {option.label}
-                            </option>
-                        ))}
-                    </select>
-                    <i
-                        className={`rotate-45 inline-block border-solid border-dark-border border-t-0 border-l-0 border-r-2 border-b-2 p-[3px] absolute right-5 top-1/2 transform -translate-y-1/2 group-hover:border-active-text`}
-                    />
 
-                    {errors[name] && (
-                        <WarningPopup
-                            error={errors[name]?.message}
-                            isFirstError={currentErrorField === name}
-                        />
-                    )}
-                </div>
-                {footnote && (
-                    <p
-                        className="text-sm text-gray-600 mt-2 italic"
-                        style={{ textAlign: "left" }}
-                    >
-                        {footnote}
-                    </p>
-                )}
-            </div>
+  return (
+    <div className="relative">
+      <FaCircle className="text-primary text-[8px] mt-3 mr-3 flex-shrink-0 absolute top-3 " />
+
+      <div className="pl-4 ">
+        <div className="flex items-start mb-2">
+          <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
+            {label}
+          </label>
         </div>
-    );
-  };
+        <div className="input-container input-container-select w-full mx-auto text-left flex items-center relative rounded-[2px] border">
+          <Icon
+            className={`icon absolute text-[18px] rounded-l min-w-[20px] text-center ml-4 ${hasError
+              ? "text-red-500"
+              : isFocused
+                ? "text-primary"
+                : "text-[#999]"
+              }`}
+          />
+          <select
+            className={`w-full text-sm rounded-sm border border-white pl-12 shadow-none leading-6 h-9 appearance-none ${hasError
+              ? "focus:outline-red-600 focus:border-none focus:ring-0"
+              : "focus:outline-primary"
+              }`}
+            {...register(name, {
+              required: "This field is required" // Add validation rule
+            })}
+            onChange={(e) =>
+            {
+              setValue(name, e.target.value, {
+                shouldValidate: true,
+                shouldDirty: true, // Mark field as dirty
+              });
+              setCurrentErrorField(null);
+            }}
+            onFocus={() =>
+            {
+              setCurrentErrorField(name);
+              setIsFocused(true);
+            }}
+            onBlur={() =>
+            {
+              setCurrentErrorField(null);
+              setIsFocused(false);
+            }}
+            name={name}
+            data-validate="Inline"
+          >
+            {options.map((option, index) => (
+              <option key={index} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+          <i
+            className={`rotate-45 inline-block border-solid border-dark-border border-t-0 border-l-0 border-r-2 border-b-2 p-[3px] absolute right-5 top-1/2 transform -translate-y-1/2 group-hover:border-active-text`}
+          />
+
+          {errors[name] && (
+            <WarningPopup
+              error={errors[name]?.message}
+              isFirstError={currentErrorField === name}
+            />
+          )}
+        </div>
+        {footnote && (
+          <p
+            className="text-sm text-gray-600 mt-2 italic"
+            style={{ textAlign: "left" }}
+          >
+            {footnote}
+          </p>
+        )}
+      </div>
+    </div>
+  );
+};
 
 const CheckboxGroup = ({
   label,
@@ -163,7 +165,8 @@ const CheckboxGroup = ({
   currentErrorField,
   setCurrentErrorField,
   footnote,
-}) => {
+}) =>
+{
   return (
     <div className="relative mt-4">
       <FaCircle className="text-primary text-[8px] mt-3 mr-3 flex-shrink-0 absolute top-3 " />
@@ -211,21 +214,22 @@ const CheckboxGroup = ({
 const SiteRiskForm = ({
   register,
   errors,
-    setValue,
-    getValues,
-    handleSubmit,
-    handleFormSubmit,
+  setValue,
+  getValues,
+  handleSubmit,
+  handleFormSubmit,
   currentErrorField,
   setCurrentErrorField,
-  isFormSubmitted, 
+  isFormSubmitted,
   setIsFormSubmitted,
   submissionStatus,
-    setSubmissionStatus,
+  setSubmissionStatus,
   isSubmitting,
   handleStepNavigation, // New prop
   schemaStep, // New prop
   submitButton
-}) => {
+}) =>
+{
   const amountOptions = [
     { value: "", label: "Select Amount:" },
     { value: "$100 to $500", label: "$100 to $500" },
@@ -370,10 +374,11 @@ const SiteRiskForm = ({
     },
   ];
 
- 
 
 
-  useEffect(() => {
+
+  useEffect(() =>
+  {
     if (errors) {
       const errorField = Object.keys(errors)[0];
       setCurrentErrorField(errorField);
@@ -382,16 +387,18 @@ const SiteRiskForm = ({
     }
   }, [errors]);
 
-  useEffect(() => {
+  useEffect(() =>
+  {
     if (submissionStatus) {
-      const timer = setTimeout(() => {
+      const timer = setTimeout(() =>
+      {
         setSubmissionStatus(null);
       }, 6000);
       return () => clearTimeout(timer);
     }
   }, [submissionStatus]);
 
- 
+
 
 
   return (
@@ -492,7 +499,7 @@ const SiteRiskForm = ({
               footnote="Please tick what is applicable at this location."
             />
 
-                      
+
             {submitButton && ( // Only show button if submitButton is true
               <div className="button-controls-container 480px:w-[80%] mx-auto mt-12">
                 <div className="button-section relative">
@@ -521,7 +528,7 @@ const SiteRiskForm = ({
           </ScrollableSection>
         </div>
 
-       
+
       </form>
     </div>
   );

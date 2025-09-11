@@ -1,6 +1,6 @@
 import React from 'react';
 import DatePicker from "react-date-picker";
-import WarningPopup from './WarningPopup'; // Adjust import path as needed
+import WarningPopup from '../elements/WarningPopup'; // Adjust import path as needed
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
 
@@ -76,7 +76,7 @@ const DatePickerField = ({
                     monthPlaceholder={monthPlaceholder}
                     yearPlaceholder={yearPlaceholder}
                     errors={errors}
-                    ref={forwardedRef}
+                    inputRef={forwardedRef}
                     format={format}
                     autoComplete={autoComplete}
                     className={finalClassName}
@@ -90,8 +90,8 @@ const DatePickerField = ({
                         isFirstError={isFirstError}
                     />
                 )}
-</div>
-        
+            </div>
+
         </div>
     );
 };

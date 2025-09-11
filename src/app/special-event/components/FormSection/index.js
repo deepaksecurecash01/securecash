@@ -8,18 +8,18 @@ import QuoteForm from "../QuoteForm";
 import SiteRiskForm from "@/app/site-info/components/FranchiseForm";
 import Image from "next/image";
 import Link from "next/link";
-import ThankYouModal from "@/app/site-info/components/ThankYouModal";
+import ThankYouModal from "@/components/common/forms-new/forms/ThankYouModal";
 import { useFormErrors } from '@/hooks/useFormErrors';
 import { useFormSubmission } from '@/hooks/useFormSubmission';
 import
-  {
-    createStepSchema,
-    SPECIAL_EVENT_DEFAULT_VALUES,
-    BusinessInfoSchema,
-    ContactInfoSchema,
-    ServiceInfoSchema,
-    RiskAssessmentSchema
-  } from '@/zod/SpecialEventFormSchema';
+{
+  createStepSchema,
+  SPECIAL_EVENT_DEFAULT_VALUES,
+  BusinessInfoSchema,
+  ContactInfoSchema,
+  ServiceInfoSchema,
+  RiskAssessmentSchema
+} from '@/zod/SpecialEventFormSchema';
 
 const FormSection = () =>
 {

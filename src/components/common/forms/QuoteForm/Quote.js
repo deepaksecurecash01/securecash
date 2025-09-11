@@ -26,6 +26,7 @@ const CheckboxGroup = ({
           value={option.value}
           name={name}
           register={register}
+          
           currentErrorField={currentErrorField}
           setCurrentErrorField={setCurrentErrorField}
           className="chkbox float-left text-left relative  "

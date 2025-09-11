@@ -1,516 +1,577 @@
-"use client";
-import React, { useState, useRef, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import
-{
-	FaUser,
-	FaBriefcase,
-	FaEnvelope,
-	FaCalendarAlt,
-	FaUsers,
-	FaIdCard,
-	FaSpinner,
-	FaCheckCircle,
-} from "react-icons/fa";
-import Typography from "@/components/common/Typography";
-import Divider from "@/components/common/Divider";
-import DatePickerFieldWithRef from "@/components/common/forms/elements/DatePickerField";
-import WarningPopup from "../elements/WarningPopup";
-import { useRouter } from 'next/navigation';
-import { useFormErrors } from '@/hooks/useFormErrors';
-import { useFormSubmission } from '@/hooks/useFormSubmission';
-import { formatBirthdayForAPI } from '@/utils/formHelpers';
-import TermsFormSchema, { TERMS_DEFAULT_VALUES } from '@/zod/TermsFormSchema';
+// /hooks/useFormManager.js - UPDATED TO PASS FORM TYPE TO FOCUS MANAGER
+// Replace the relevant parts in your useFormManager.js
 
-// Enhanced ABN InputField Component
-const ABNInputField = ({
-	label,
-	name,
-	placeholder,
-	Icon,
-	register,
-	errors,
-	currentErrorField,
-	setCurrentErrorField,
-	setValue,
-	abnValue,
-	abnRef
+export const useFormManager = ({
+	// Core form configuration
+	schema,
+	defaultValues = {},
+	formType,
+	formId,
+	onSuccess,
+	onError,
+	prepareData,
+	theme = 'dark',
+
+	// Multi-step configuration
+	multiStep = null,
+
+	// Hybrid form configuration for Site Info pattern
+	hybrid = null,
+
+	// File upload configuration
+	fileUpload = null,
 }) =>
 {
-	const hasError = errors[name] && currentErrorField === name;
-	const [isFocused, setIsFocused] = useState(false);
+	// Multi-step state management
+	const [currentStep, setCurrentStep] = useState(0);
+	const [stepData, setStepData] = useState(defaultValues);
+	const [completedSteps, setCompletedSteps] = useState(new Set());
 
-	// ABN input handler to limit to 11 digits and format
-	const handleABNChange = (e) =>
+	// Hybrid form state management
+	const [submitButtonEnabled, setSubmitButtonEnabled] = useState(
+		hybrid?.submitEnabled ?? false
+	);
+	const [showReviewStep, setShowReviewStep] = useState(false);
+
+	// Form type detection
+	const isMultiStep = !!multiStep && multiStep.steps && multiStep.steps.length > 1;
+	const isHybrid = !!hybrid && hybrid.enabled;
+	const hasFileUpload = !!fileUpload && fileUpload.enabled;
+
+	// Initialize file upload hook if needed
+	const fileUploadHook = useFileUpload(
+		hasFileUpload ? {
+			compression: fileUpload.compression || {
+				targetSizeKB: 400,
+				maxSizeMB: 5,
+				allowedTypes: ['image/jpeg', 'image/png', 'image/jpg']
+			},
+			concurrencyLimit: fileUpload.concurrencyLimit || 2
+		} : {
+			compression: {
+				targetSizeKB: 400,
+				maxSizeMB: 5,
+				allowedTypes: ['image/jpeg', 'image/png', 'image/jpg']
+			},
+			concurrencyLimit: 2
+		}
+	);
+
+	// Get current step information
+	const getCurrentStep = useCallback(() =>
 	{
-		const value = e.target.value;
-		// Remove all non-digit characters
-		const digitsOnly = value.replace(/\D/g, '');
-
-		// Limit to 11 digits
-		const limitedDigits = digitsOnly.slice(0, 11);
-
-		// Format with spaces for display (XX XXX XXX XXX)
-		let formattedValue = limitedDigits;
-		if (limitedDigits.length > 2) {
-			formattedValue = limitedDigits.slice(0, 2) + ' ' + limitedDigits.slice(2);
-		}
-		if (limitedDigits.length > 5) {
-			formattedValue = limitedDigits.slice(0, 2) + ' ' + limitedDigits.slice(2, 5) + ' ' + limitedDigits.slice(5);
-		}
-		if (limitedDigits.length > 8) {
-			formattedValue = limitedDigits.slice(0, 2) + ' ' + limitedDigits.slice(2, 5) + ' ' + limitedDigits.slice(5, 8) + ' ' + limitedDigits.slice(8);
+		if (!isMultiStep) {
+			return { currentStep: 0, stepId: 'single', isFirst: true, isLast: true };
 		}
 
-		setValue("ABN", formattedValue, { shouldValidate: true });
-	};
+		const stepId = multiStep.steps[currentStep];
+		const isFirst = currentStep === 0;
+		const isLast = currentStep === multiStep.steps.length - 1;
 
-	return (
-		<div className="relative">
-			<label className="text-white text-base inline-block mt-4 mb-2 w-full text-left">
-				{label}
-			</label>
-			<div className="relative w-full flex items-center bg-white rounded-[2px] border">
-				<input
-					className={`w-full text-sm py-2 px-3 shadow-none font-montserrat border-none rounded-sm ${hasError ? "focus:outline-red-600" : "focus:outline-primary"
-						}`}
-					type="text"
-					name={name}
-					ref={abnRef}
-					value={abnValue || ""}
-					onChange={handleABNChange}
-					onFocus={() =>
-					{
-						setCurrentErrorField(name);
-						setIsFocused(true);
-					}}
-					onBlur={() =>
-					{
-						setCurrentErrorField(null);
-						setIsFocused(false);
-					}}
-					placeholder={placeholder}
-					maxLength={14}
-					autoComplete="new-password"
-					required
-				/>
-				<Icon
-					className={`min-w-[50px] text-[18px] text-[#999] ${hasError
-						? "text-red-500"
-						: isFocused
-							? "text-primary"
-							: "text-[#999]"
-						}`}
-				/>
-				{errors[name] && (
-					<WarningPopup
-						error={errors[name]?.message}
-						isFirstError={currentErrorField === name}
-					/>
-				)}
-			</div>
-		</div>
-	);
-};
+		// Hybrid-specific logic
+		const isReviewStep = isHybrid && stepId === 'review';
+		const isSubmitStep = isHybrid && currentStep >= (hybrid.reviewStep || 3);
 
-const InputField = ({
-	label,
-	name,
-	placeholder,
-	type = "text",
-	Icon,
-	Icon2,
-	register,
-	errors,
-	ref,
-	currentErrorField,
-	setCurrentErrorField,
-	textarea = false,
+		return {
+			currentStep,
+			stepId,
+			isFirst,
+			isLast,
+			isReviewStep,
+			isSubmitStep,
+			submitButtonEnabled,
+		};
+	}, [isMultiStep, currentStep, multiStep, isHybrid, submitButtonEnabled, hybrid]);
 
-}) =>
-{
-	const hasError = errors[name] && currentErrorField === name;
-	const [isFocused, setIsFocused] = useState(false);
-	return (
-		<div className="relative">
-			<label className="text-white text-base inline-block mt-4 mb-2 w-full text-left">
-				{label}
-			</label>
-			<div className="relative w-full flex items-center bg-white rounded-[2px] border">
-				{Icon2 && (
-					<Icon2
-						className={`min-w-[50px] text-[18px] text-[#999] ${hasError
-							? "text-red-500"
-							: isFocused
-								? "text-primary"
-								: "text-[#999]"
-							}`}
-					/>
-				)}
-
-				<input
-					className={`w-full text-sm py-2 px-3 shadow-none font-montserrat border-none rounded-sm  ${hasError ? "focus:outline-red-600" : "focus:outline-primary"
-						}`}
-					type={type}
-					name={name}
-					ref={ref}
-					{...register(name)}
-					onFocus={() =>
-					{
-						setCurrentErrorField(name);
-						setIsFocused(true);
-					}}
-					onBlur={() =>
-					{
-						setCurrentErrorField(null);
-						setIsFocused(false);
-					}}
-					placeholder={placeholder}
-					required
-				/>
-				<Icon
-					className={`min-w-[50px] text-[18px] text-[#999] ${hasError
-						? "text-red-500"
-						: isFocused
-							? "text-primary"
-							: "text-[#999]"
-						}`}
-				/>
-
-				{errors[name] && (
-					<WarningPopup
-						error={errors[name]?.message}
-						isFirstError={currentErrorField === name}
-					/>
-				)}
-			</div>
-		</div>
-	);
-};
-
-
-const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
-{
-	const router = useRouter();
-
-	// Create field references for focus management
-	const fieldRefs = {
-		Name: useRef(null),
-		Position: useRef(null),
-		Email: useRef(null),
-		Birthdate: useRef(null),
-		Organisation: useRef(null),
-		ABN: useRef(null),
-	};
-
-	// Initialize form hooks
-	const { currentErrorField, setCurrentErrorField, handleFieldErrors } = useFormErrors(fieldRefs);
-
-	const { isSubmitting, isSubmitted, submissionError, handleSubmission } = useFormSubmission({
-		formType: 'terms',
-		formId: 'Terms',
-		onSuccess: (result, finalData) =>
-		{
-			console.log("Terms form submitted successfully!");
-			// Redirect to /austrac on successful submission
-			// router.push("/austrac");
-		},
-		onError: (error) =>
-		{
-			console.error("Terms submission failed:", error);
-		},
-		prepareData: async (data) =>
-		{
-			// Format birthday as YYYY-MM-DD
-			const birthdayFormatted = formatBirthdayForAPI(data.Birthdate);
-
-			// Format date of acceptance
-			const now = new Date();
-			const dateOfAcceptance = now.toLocaleDateString('en-US', {
-				weekday: 'long',
-				year: 'numeric',
-				month: 'long',
-				day: 'numeric'
-			}).replace(/(\d+)/, (match) =>
-			{
-				const day = parseInt(match);
-				const suffix = day === 1 || day === 21 || day === 31 ? 'st' :
-					day === 2 || day === 22 ? 'nd' :
-						day === 3 || day === 23 ? 'rd' : 'th';
-				return day + suffix;
-			}) + ', ' + now.toLocaleTimeString('en-US', {
-				hour12: true,
-				hour: 'numeric',
-				minute: '2-digit',
-				second: '2-digit'
-			});
-
-			// Format agreement commencement date as DD / MM / YYYY
-			const agreementDate = now.toLocaleDateString('en-GB', {
-				day: '2-digit',
-				month: '2-digit',
-				year: 'numeric'
-			}).replace(/\//g, ' / ');
-
-			return {
-				...data,
-				// Form data mapped to email structure
-				"Organisation Name": data.Organisation,
-				"Organisation Role": data.Position,
-				"Organisation ABN": data.ABN,
-				"Full Name": data.Name,
-				"Birthday": birthdayFormatted,
-				"Email": data.Email,
-				"formType": "terms",
-				"Date of Acceptance": dateOfAcceptance,
-				"Agreement Commencement": `**THIS AGREEMENT COMMENCES ON THE:** ${agreementDate} and will be ongoing unless either party terminates this Agreement in accordance with the termination provisions herein ("Expiry").`,
-			};
+	// Get current schema
+	const getCurrentSchema = useCallback(() =>
+	{
+		if (!isMultiStep) {
+			return schema;
 		}
+
+		const { stepId } = getCurrentStep();
+
+		if (typeof schema === 'object' && schema[stepId]) {
+			return schema[stepId];
+		}
+
+		return z.object({});
+	}, [schema, isMultiStep, getCurrentStep]);
+
+	// Initialize React Hook Form
+	const form = useForm({
+		resolver: zodResolver(getCurrentSchema()),
+		defaultValues: stepData,
+		mode: 'onSubmit',
+		reValidateMode: 'onChange',
+		shouldFocusError: false,
 	});
 
 	const {
-		register,
-		handleSubmit,
+		control,
+		handleSubmit: rhfHandleSubmit,
+		formState: { errors },
 		setValue,
 		watch,
+		getValues,
 		reset,
-		trigger, // Add this line
-		formState: { errors },
-	} = useForm({
-		resolver: zodResolver(TermsFormSchema), // or AustracFormSchema
-		defaultValues: TERMS_DEFAULT_VALUES,   // or AUSTRAC_DEFAULT_VALUES
+		setFocus
+	} = form;
+
+	// FIXED: Pass formType to focus manager for proper field ordering
+	const focus = useFocusManager(control, formType);
+
+	// Enhanced submission with file processing
+	const submission = useFormSubmission({
+		formType,
+		formId,
+		onSuccess,
+		onError,
+		prepareData: async (data) =>
+		{
+			let processedData = data;
+
+			// UPDATED: File processing now happens at selection time, not submission time
+			if (hasFileUpload && fileUpload.fields && fileUpload.fields.length > 0) {
+				// Files are already processed and stored in form state
+				// Just need to extract them for final submission
+				const attachments = [];
+
+				for (const { field, prefix } of fileUpload.fields) {
+					const fieldValue = data[field];
+					if (fieldValue) {
+						if (fieldValue instanceof File) {
+							// If still a File object, process it now (fallback)
+							try {
+								const compressedFile = await fileUploadHook.compressImageFile(fieldValue);
+								const base64File = await fileToBase64(compressedFile);
+								if (base64File) {
+									attachments.push({
+										filename: `${prefix}.${fieldValue.name.split('.').pop()}`,
+										data: base64File
+									});
+								}
+							} catch (error) {
+								console.error(`File processing failed for ${field}:`, error);
+								throw error;
+							}
+						} else if (fieldValue.base64Data) {
+							// File already processed, use stored data
+							attachments.push({
+								filename: fieldValue.filename,
+								data: fieldValue.base64Data
+							});
+						}
+					}
+				}
+
+				if (attachments.length > 0) {
+					processedData = { ...data, attachments };
+				}
+			}
+
+			// Apply custom prepareData if provided
+			if (prepareData) {
+				return await prepareData(processedData);
+			}
+
+			return processedData;
+		}
 	});
 
-	const nameValue = watch("Name");
-	const positionValue = watch("Position");
-	const organisationValue = watch("Organisation");
-	const abnValue = watch("ABN");
-	const birthdateValue = watch("Birthdate");
-
-	// Pass values to parent component props (maintaining original functionality)
-	useEffect(() =>
+	// Manual step navigation for hybrid forms
+	const goToStep = useCallback((targetStep) =>
 	{
-		if (nameValue && setName) setName(nameValue);
-	}, [nameValue, setName]);
+		if (!isMultiStep) return;
 
-	useEffect(() =>
+		// Save current form data
+		const currentFormData = getValues();
+		const updatedStepData = { ...stepData, ...currentFormData };
+		setStepData(updatedStepData);
+
+		// Navigate to target step
+		setCurrentStep(targetStep);
+
+		// Reset form with updated data
+		reset(updatedStepData);
+
+		// Clear focus
+		focus.clearFocus();
+
+		console.log(`Manual navigation to step ${targetStep}`, updatedStepData);
+	}, [isMultiStep, getValues, stepData, reset, focus]);
+
+	// Go back one step
+	const goBack = useCallback(() =>
 	{
-		if (positionValue && setPosition) setPosition(positionValue);
-	}, [positionValue, setPosition]);
+		if (currentStep > 0) {
+			goToStep(currentStep - 1);
+		}
+	}, [currentStep, goToStep]);
 
-	useEffect(() =>
+	// Enhanced step navigation with hybrid support
+	const moveToNextStep = useCallback((stepDataUpdate = {}) =>
 	{
-		if (organisationValue && setOrganisation) setOrganisation(organisationValue);
-	}, [organisationValue, setOrganisation]);
+		const updatedStepData = { ...stepData, ...stepDataUpdate };
+		setStepData(updatedStepData);
+		setCompletedSteps(prev => new Set([...prev, currentStep]));
 
-	useEffect(() =>
-	{
-		if (abnValue && setAbn) setAbn(abnValue);
-	}, [abnValue, setAbn]);
+		if (!isMultiStep) return updatedStepData;
 
-	const inputFields = [
-		{
-			label: "What is your full name?",
-			name: "Name",
-			placeholder: "Enter your full name",
-			Icon: FaUser,
-			ref: fieldRefs.Name,
-		},
-		{
-			label: "What is your position in the organisation?",
-			name: "Position",
-			placeholder: "Enter your position in the organisation",
-			Icon: FaBriefcase,
-			ref: fieldRefs.Position,
-		},
-		{
-			label: "What is your email address?",
-			name: "Email",
-			type: "email",
-			placeholder: "Enter your email address",
-			Icon: FaEnvelope,
-			ref: fieldRefs.Email,
-		},
-		{
-			label: "What is your organisation's name?",
-			name: "Organisation",
-			placeholder: "Enter your organisation's name",
-			Icon: FaUsers,
-			ref: fieldRefs.Organisation,
-		},
-	];
+		// Hybrid form logic for Site Info pattern
+		if (isHybrid) {
+			const reviewStep = hybrid.reviewStep || 3;
 
+			if (currentStep === reviewStep - 1) {
+				// Moving from last multi-step to review section
+				setCurrentStep(reviewStep);
+				setSubmitButtonEnabled(true);
 
-	const onSubmit = async (data) =>
-	{
-		
-
-		// Test handleFieldErrors directly
-		const validationResult = handleFieldErrors(errors);
-		console.log("handleFieldErrors returned:", validationResult);
-
-		if (!validationResult) {
-			console.log("Validation failed - stopping submission");
-			return;
+				console.log('Hybrid transition: Enabling submit section');
+				return updatedStepData;
+			}
 		}
 
-		console.log("All validations passed, proceeding with submission...");
-		await handleSubmission(data);
+		// Standard multi-step navigation
+		const { stepId } = getCurrentStep();
+
+		if (multiStep.conditional && stepId === 'quote') {
+			const services = updatedStepData.Service || [];
+			const nextSteps = getNextValidSteps(services);
+
+			if (nextSteps.length === 0) {
+				return updatedStepData;
+			}
+
+			const nextStepId = nextSteps[0];
+			const nextStepIndex = multiStep.steps.findIndex(step => step === nextStepId);
+			if (nextStepIndex !== -1) {
+				setCurrentStep(nextStepIndex);
+			}
+		} else {
+			const nextStep = currentStep + 1;
+			if (nextStep < multiStep.steps.length) {
+				setCurrentStep(nextStep);
+			}
+		}
+
+		return updatedStepData;
+	}, [stepData, currentStep, isMultiStep, isHybrid, hybrid, getCurrentStep, multiStep]);
+
+	// Enhanced last step detection with hybrid support
+	const isLastStep = useCallback((formDataOverride = null) =>
+	{
+		if (!isMultiStep) return true;
+
+		// Hybrid form logic - allow actual last step to submit
+		if (isHybrid) {
+			const actualLastStep = currentStep === multiStep.steps.length - 1;
+
+			if (actualLastStep) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		// Standard multi-step logic
+		const { stepId } = getCurrentStep();
+		const dataToCheck = formDataOverride || stepData;
+
+		if (multiStep.conditional) {
+			const services = dataToCheck.Service || [];
+
+			if (stepId === 'quote') {
+				return services.length === 0;
+			}
+
+			if (stepId === 'banking') {
+				return !services.includes('Change');
+			}
+
+			if (stepId === 'change') {
+				return true;
+			}
+		}
+
+		return currentStep === multiStep.steps.length - 1;
+	}, [isMultiStep, isHybrid, getCurrentStep, stepData, currentStep, multiStep]);
+
+	// Enhanced validation
+	const validateCurrentStep = useCallback((data) =>
+	{
+		const currentSchema = getCurrentSchema();
+		if (!currentSchema) return { success: true };
+
+		return currentSchema.safeParse(data);
+	}, [getCurrentSchema]);
+
+	// Enhanced field focus management
+	const handleFieldFocus = (fieldName) =>
+	{
+		console.log(`Enhanced Form Manager: Field focus initiated by ${fieldName}`);
+		focus.setFocusField(fieldName);
 	};
 
+	const handleFieldBlur = () =>
+	{
+		console.log(`Enhanced Form Manager: Field blur - clearing focus`);
+		focus.clearFocus();
+	};
 
-	return (
-		<div className={`float-none w-full mx-auto relative left-0 flex-1 flex justify-center `}>
-			<div className="forms-quote-v2 h-auto 768px:mx-2.5 992px:mx-0 px-6 1366px:h-full forms-quote submit-status mt-4 992px:mt-0 992px:mb-16 w-full lg:mt-0 lg:mb-0 992px:w-[450px] 1100px:w-[480px] 1200px:w-[500px] 1280px:w-[600px] shadow-[3px_3px_5px_0px_rgba(0,0,0,0.75)] text-center py-16 rounded-[6px] bg-[#1a1a1a]">
-				<form
-					className="text-center"
-					data-formid="Terms"
-					onSubmit={handleSubmit(onSubmit, onInvalid)} // Add the second parameter
-					noValidate
-					autoComplete="off"
-				>
-					<div className="form-page terms">
-						<Typography
-							as="h3"
-							fontFamily="montserrat"
-							className="text-white font-normal text-center capitalize pb-4 text-[26px] leading-[30px]"
-						>
-							Service Agreement
-						</Typography>
+	// Enhanced validation error handler
+	const handleValidationError = (validationErrors) =>
+	{
+		console.log('Step validation failed:', validationErrors);
 
-						<Divider
-							color="primary"
-							margin="mt-2.5 mb-4"
-							alignment="center"
-							responsiveClassName="mx-auto"
-						/>
+		const focusSuccess = focus.focusFirstError(validationErrors);
 
-						<div className="form-tab 480px:w-[90%] mx-auto">
-								{/* Bot field (honeypot) - hidden */}
-								<input
-									type="text"
-									{...register("BotField")}
-									style={{ display: "none" }}
-									tabIndex={-1}
-									autoComplete="off"
-								/>
+		if (!focusSuccess) {
+			const firstErrorField = Object.keys(validationErrors)[0];
+			console.log(`Fallback: Using setFocus for ${firstErrorField}`);
+			try {
+				setFocus(firstErrorField);
+			} catch (error) {
+				console.warn(`setFocus fallback failed for ${firstErrorField}:`, error);
+			}
+		}
+	};
 
-								{/* Hidden ABN field for form validation */}
-								<input
-									type="hidden"
-									{...register("ABN")}
-									value={abnValue || ""}
-								/>
+	// Enhanced form submission handler with file processing
+	const handleSubmit = rhfHandleSubmit(
+		async (formData) =>
+		{
+			console.log('Step validation passed:', formData);
 
-								{inputFields.slice(0, 3).map((field, index) => (
-									<div key={index} className="relative">
-										<InputField
-											{...field}
-											register={register}
-											errors={errors}
-											currentErrorField={currentErrorField}
-											setCurrentErrorField={setCurrentErrorField}
-											ref={field.ref}
-											autoComplete="new-password"
-											onFocus={() => setCurrentErrorField(field.name)}
-											onBlur={() => setCurrentErrorField(null)}
-										/>
-									</div>
-								))}
+			const validation = validateCurrentStep(formData);
+			if (!validation.success) {
+				console.log('Validation failed, staying on current step');
+				handleValidationError(validation.error.flatten().fieldErrors);
+				return false;
+			}
 
-								{/* DatePickerField for Birthdate at 4th position */}
-								<div className="relative">
-									<DatePickerFieldWithRef
-										label="What is your date of birth?"
-										name="Birthdate"
-										value={birthdateValue}
-										onChange={(date) =>
-										{
-											setValue("Birthdate", date, { shouldValidate: true });
-										}}
-										onFocus={() => setCurrentErrorField("Birthdate")}
-										onBlur={() => setCurrentErrorField(null)}
-										errors={errors}
-										currentErrorField={currentErrorField}
-										dayPlaceholder="DD"
-										monthPlaceholder="MM"
-										yearPlaceholder="YYYY"
-										format="dd/MM/yyyy"
-										containerClassName=""
-										labelClassName="text-white text-base inline-block mt-4 mb-2 w-full text-left"
-										ref={fieldRefs.Birthdate}
-										autoComplete="new-password"
-									/>
-								</div>
+			const isCurrentlyLastStep = isLastStep(formData);
 
-								{/* Organisation field */}
-								<div className="relative">
-									<InputField
-										{...inputFields[3]}
-										register={register}
-										errors={errors}
-										currentErrorField={currentErrorField}
-										setCurrentErrorField={setCurrentErrorField}
-										ref={fieldRefs.Organisation}
-										autoComplete="new-password"
-										onFocus={() => setCurrentErrorField("Organisation")}
-										onBlur={() => setCurrentErrorField(null)}
-									/>
-								</div>
-
-								{/* ABN field with custom handling using the enhanced ABNInputField */}
-								<ABNInputField
-									label="What is your organisation's ABN number?"
-									name="ABN"
-									placeholder="Enter your organisation's ABN number (11 digits)"
-									Icon={FaIdCard}
-									register={register}
-									errors={errors}
-									currentErrorField={currentErrorField}
-									setCurrentErrorField={setCurrentErrorField}
-									setValue={setValue}
-									abnValue={abnValue}
-									abnRef={fieldRefs.ABN}
-								/>
-													</div>
-					</div>
-
-					{/* Display submission error if any */}
-					{submissionError && (
-						<div className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded mx-4">
-							<strong>Submission Error:</strong> {submissionError}
-						</div>
-					)}
-
-					<div className="button-controls-container 480px:w-[80%] mx-auto mt-12">
-						<div className="button-section relative">
-							<button
-								type="submit"
-								disabled={isSubmitting}
-								className={`nextBtn ${isSubmitted ? 'bg-[#4bb543]' : 'bg-[#c6a54b]'
-									} text-white border-none py-[15px] 768px:px-0 text-[16px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
-							>
-								{isSubmitting ? (
-									<div className="flex items-center justify-center">
-										<FaSpinner className="animate-spin mr-2" />
-										Submitting, please wait...
-									</div>
-								) : isSubmitted ? (
-									<div className="flex items-center justify-center">
-										<FaCheckCircle className="text-white mr-2" />
-										Thank you, we received your submission!
-									</div>
-								) : (
-									"I agree with the above Terms & Conditions"
-								)}
-							</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
+			if (isCurrentlyLastStep) {
+				// Final submission with file processing
+				const finalStepData = { ...stepData, ...formData };
+				console.log('Final submission with data:', finalStepData);
+				focus.clearFocus();
+				return await submission.handleSubmission(finalStepData);
+			} else {
+				// Step progression - only if validation passed
+				console.log('Moving to next step');
+				const updatedStepData = moveToNextStep(formData);
+				focus.clearFocus();
+				reset(updatedStepData);
+				return true;
+			}
+		},
+		(validationErrors) =>
+		{
+			console.log('React Hook Form validation failed:', validationErrors);
+			handleValidationError(validationErrors);
+			return false;
+		}
 	);
-};
 
-export default TermsForm;
+	// Enhanced field props helper with file upload support
+	const getFieldProps = useCallback((fieldConfig) =>
+	{
+		const { name, type = 'text', ...otherConfig } = fieldConfig;
+
+		const baseProps = {
+			...otherConfig,
+			name,
+			type,
+			control,
+			currentFocusField: focus.currentFocusField,
+			onFieldFocus: handleFieldFocus,
+			onFieldBlur: handleFieldBlur,
+		};
+
+		// Add file upload specific props
+		if (type === 'file' && hasFileUpload) {
+			return {
+				...baseProps,
+				fileUploadState: {
+					isProcessing: fileUploadHook.isProcessing,
+					processingProgress: fileUploadHook.processingProgress,
+					fileErrors: fileUploadHook.fileErrors,
+					validateFile: fileUploadHook.validateFile,
+					clearFileErrors: fileUploadHook.clearFileErrors,
+					compressImageFile: fileUploadHook.compressImageFile // Add compression function
+				}
+			};
+		}
+
+		return baseProps;
+	}, [control, focus.currentFocusField, handleFieldFocus, handleFieldBlur, hasFileUpload, fileUploadHook]);
+
+	// Get current step data
+	const getStepData = useCallback(() =>
+	{
+		return stepData;
+	}, [stepData]);
+
+	// Enhanced reset form with hybrid and file upload support
+	const resetForm = useCallback(() =>
+	{
+		setCurrentStep(0);
+		setStepData(defaultValues);
+		setCompletedSteps(new Set());
+
+		// Reset hybrid state
+		if (isHybrid) {
+			setSubmitButtonEnabled(hybrid?.submitEnabled ?? false);
+			setShowReviewStep(false);
+		}
+
+		// Clear file upload errors
+		if (hasFileUpload) {
+			fileUploadHook.clearFileErrors();
+		}
+
+		reset(defaultValues);
+		focus.clearFocus();
+		submission.resetSubmission();
+	}, [defaultValues, reset, focus, submission, isHybrid, hybrid, hasFileUpload, fileUploadHook]);
+
+	// Enhanced progress information with hybrid support
+	const getProgress = useMemo(() =>
+	{
+		if (!isMultiStep) return { current: 1, total: 1, percentage: 100 };
+
+		// Hybrid progress calculation
+		if (isHybrid) {
+			const reviewStep = hybrid.reviewStep || 3;
+			const total = reviewStep + 1;
+			const current = currentStep >= reviewStep ? total : currentStep + 1;
+
+			return {
+				current,
+				total,
+				percentage: Math.round((current / total) * 100),
+				completed: completedSteps.size,
+				isInSubmitSection: currentStep >= reviewStep
+			};
+		}
+
+		return {
+			current: currentStep + 1,
+			total: multiStep.steps.length,
+			percentage: Math.round(((currentStep + 1) / multiStep.steps.length) * 100),
+			completed: completedSteps.size
+		};
+	}, [isMultiStep, currentStep, multiStep, completedSteps.size, isHybrid, hybrid]);
+
+	// Get next valid steps helper
+	const getNextValidSteps = useCallback((services) =>
+	{
+		if (!isMultiStep || !multiStep.conditional || !multiStep.getNextSteps) {
+			return [];
+		}
+		return multiStep.getNextSteps({ Service: services });
+	}, [isMultiStep, multiStep]);
+
+	// Enhanced debug information
+	const getDebugInfo = () =>
+	{
+		return {
+			errors: Object.keys(errors),
+			currentFocus: focus.currentFocusField,
+			isSubmitting: submission.isSubmitting,
+			isSubmitted: submission.isSubmitted,
+			currentStep,
+			stepId: getCurrentStep().stepId,
+			stepData: Object.keys(stepData),
+			isMultiStep,
+			isHybrid,
+			isLastStep: isLastStep(),
+			submitButtonEnabled,
+			showReviewStep,
+			// File upload debug info
+			hasFileUpload,
+			fileProcessing: hasFileUpload ? fileUploadHook.isProcessing : false,
+			fileErrors: hasFileUpload ? fileUploadHook.fileErrors : [],
+			formType, // Add form type for debugging
+			...focus.getFocusDebugInfo()
+		};
+	};
+
+	return {
+		// Core form control
+		control,
+		handleSubmit,
+		errors,
+
+		// Form state
+		isSubmitting: submission.isSubmitting,
+		isSubmitted: submission.isSubmitted,
+		submissionError: submission.submissionError,
+
+		// Focus management
+		currentFocusField: focus.currentFocusField,
+		focusField: focus.focusField,
+		clearFocus: focus.clearFocus,
+		isFieldFocused: focus.isFieldFocused,
+		handleFieldFocus,
+		handleFieldBlur,
+
+		// Form utilities
+		setValue,
+		watch,
+		getValues,
+		reset,
+
+		// Helper functions
+		getFieldProps,
+		hasFieldError: (fieldName) => !!errors[fieldName],
+		getFieldError: (fieldName) => errors[fieldName]?.message || null,
+
+		// Multi-step methods
+		getCurrentStep,
+		getCurrentSchema,
+		getStepData,
+		isLastStep,
+		validateCurrentStep,
+		moveToNextStep,
+		resetForm,
+		getProgress,
+
+		// Manual navigation methods for hybrid forms
+		goToStep,
+		goBack,
+
+		// Hybrid-specific state
+		submitButtonEnabled,
+		showReviewStep,
+
+		// Validation error handling
+		handleValidationError,
+
+		// File upload methods (only if enabled)
+		...(hasFileUpload && {
+			fileUpload: {
+				isProcessing: fileUploadHook.isProcessing,
+				processingProgress: fileUploadHook.processingProgress,
+				fileErrors: fileUploadHook.fileErrors,
+				validateFile: fileUploadHook.validateFile,
+				clearFileErrors: fileUploadHook.clearFileErrors,
+				compressImageFile: fileUploadHook.compressImageFile
+			}
+		}),
+
+		// Debug utilities
+		getDebugInfo,
+
+		// Direct access to hooks
+		formMethods: form,
+		submissionMethods: submission,
+		focusMethods: focus,
+
+		// Theme
+		theme
+	};
+};

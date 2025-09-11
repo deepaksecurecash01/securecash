@@ -3,14 +3,14 @@ import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import
-    {
-        FaMoneyBillAlt,
-        FaCar,
-        FaShieldAlt,
-        FaExclamationTriangle,
-        FaBuilding,
-        FaCircle,
-    } from "react-icons/fa";
+{
+    FaMoneyBillAlt,
+    FaCar,
+    FaShieldAlt,
+    FaExclamationTriangle,
+    FaBuilding,
+    FaCircle,
+} from "react-icons/fa";
 
 import { SiteRiskFormSchema } from "@/zod/SiteRiskFormSchema"; // You'll need to create this
 import WarningPopup from "@/components/common/forms/elements/WarningPopup";
@@ -137,8 +137,8 @@ const SelectionBox = ({
                 {footnote && (
                     <p className="text-sm text-gray-600 mt-2 italic" style={{ textAlign: 'left' }}>{footnote}</p>
                 )}
-</div>
-        
+            </div>
+
         </div>
     );
 };

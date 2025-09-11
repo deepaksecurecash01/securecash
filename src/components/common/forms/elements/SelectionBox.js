@@ -12,7 +12,8 @@ export const SelectionBox = ({
   errors,
   currentErrorField,
   setCurrentErrorField,
-}) => {
+}) =>
+{
   const hasError = errors[name] && currentErrorField === name;
   const [isFocused, setIsFocused] = useState(false);
   return (
@@ -22,13 +23,12 @@ export const SelectionBox = ({
       </label>
       <div className="input-container input-container-select w-full mx-auto text-left flex items-center relative">
         <Icon
-          className={`icon absolute text-[22px] rounded-l bg-black min-w-[20px] text-center ml-4 ${
-            hasError
-              ? "text-red-500"
-              : isFocused
+          className={`icon absolute text-[22px] rounded-l bg-black min-w-[20px] text-center ml-4 ${hasError
+            ? "text-red-500"
+            : isFocused
               ? "text-primary"
               : "text-white"
-          }`}
+            }`}
         />
 
         <SelectOption

@@ -2,26 +2,24 @@
 import React, { useState, useRef, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
 import
-  {
-    FaUser,
-    FaBriefcase,
-    FaEnvelope,
-    FaCalendarAlt,
-    FaUsers,
-    FaIdCard,
-    FaSpinner,
-    FaCheckCircle,
-  } from "react-icons/fa";
+{
+  FaUser,
+  FaBriefcase,
+  FaEnvelope,
+  FaCalendarAlt,
+  FaUsers,
+  FaIdCard,
+  FaSpinner,
+  FaCheckCircle,
+} from "react-icons/fa";
+import { InputField } from "../elements/InputField";
 import Typography from "@/components/common/Typography";
 import Divider from "@/components/common/Divider";
-import DatePickerFieldWithRef from "@/components/common/forms/elements/DatePickerField";
 import WarningPopup from "../elements/WarningPopup";
 import { useRouter } from 'next/navigation';
-import { useFormErrors } from '@/hooks/useFormErrors';
-import { useFormSubmission } from '@/hooks/useFormSubmission';
-import { formatBirthdayForAPI } from '@/utils/formHelpers';
-import TermsFormSchema, { TERMS_DEFAULT_VALUES } from '@/zod/TermsFormSchema';
+import DatePickerFieldWithRef from "@/components/common/forms/QuoteForm/DatePickerField";
 
 // Enhanced ABN InputField Component
 const ABNInputField = ({
@@ -97,10 +95,10 @@ const ABNInputField = ({
         />
         <Icon
           className={`min-w-[50px] text-[18px] text-[#999] ${hasError
-              ? "text-red-500"
-              : isFocused
-                ? "text-primary"
-                : "text-[#999]"
+            ? "text-red-500"
+            : isFocused
+              ? "text-primary"
+              : "text-[#999]"
             }`}
         />
         {errors[name] && (
@@ -114,117 +112,320 @@ const ABNInputField = ({
   );
 };
 
-const InputField = ({
-  label,
-  name,
-  placeholder,
-  type = "text",
-  Icon,
-  Icon2,
-  register,
-  errors,
-  ref,
-  currentErrorField,
-  setCurrentErrorField,
-  textarea = false,
-}) =>
+// Enhanced Zod schema for Terms form validation
+const TermsFormSchema = z.object({
+  Name: z
+    .string()
+    .nonempty("Full Name is required.")
+    .regex(/^[A-Za-z\s]+$/, "Name must only contain letters and spaces.")
+    .regex(/^\S+\s\S+$/, "Name must include both first and last name."),
+  Position: z
+    .string()
+    .nonempty("Position is required.")
+    .min(2, "Position must be at least 2 characters long."),
+  Email: z
+    .string()
+    .nonempty("Email is required.")
+    .email("Please enter a valid email address."),
+  Birthdate: z
+    .date({
+      required_error: "Date of Birth is required",
+      invalid_type_error: "Date of Birth is required",
+    })
+    .refine((date) => date <= new Date(), {
+      message: "Date of Birth must be in the past or today",
+    }),
+  Organisation: z
+    .string()
+    .nonempty("Organisation name is required.")
+    .min(2, "Organisation name must be at least 2 characters long."),
+  ABN: z
+    .string()
+    .nonempty("ABN number is required.")
+    .regex(/^[0-9\s]+$/, "ABN must contain only digits and spaces.")
+    .refine((abn) =>
+    {
+      // Remove spaces and check if it's 11 digits
+      const cleanABN = abn.replace(/\s/g, '');
+      return cleanABN.length === 11;
+    }, {
+      message: "ABN must be exactly 11 digits.",
+    }),
+  BotField: z.string().max(0, "Bot detected!"), // honeypot field must be empty
+});
+
+// Focus utility function
+const focusInput = (ref) =>
 {
-  const hasError = errors[name] && currentErrorField === name;
-  const [isFocused, setIsFocused] = useState(false);
-
-  return (
-    <div className="relative">
-      <label className="text-white text-base inline-block mt-4 mb-2 w-full text-left">
-        {label}
-      </label>
-      <div className="relative w-full flex items-center bg-white rounded-[2px] border">
-        {Icon2 && (
-          <Icon2
-            className={`min-w-[50px] text-[18px] text-[#999] ${hasError
-                ? "text-red-500"
-                : isFocused
-                  ? "text-primary"
-                  : "text-[#999]"
-              }`}
-          />
-        )}
-
-        <input
-          className={`w-full text-sm py-2 px-3 shadow-none font-montserrat border-none rounded-sm ${hasError ? "focus:outline-red-600" : "focus:outline-primary"
-            }`}
-          type={type}
-          name={name}
-          ref={ref}
-          {...register(name)}
-          onFocus={() =>
-          {
-            setCurrentErrorField(name);
-            setIsFocused(true);
-          }}
-          onBlur={() =>
-          {
-            setCurrentErrorField(null);
-            setIsFocused(false);
-          }}
-          placeholder={placeholder}
-          required
-        />
-        <Icon
-          className={`min-w-[50px] text-[18px] text-[#999] ${hasError
-              ? "text-red-500"
-              : isFocused
-                ? "text-primary"
-                : "text-[#999]"
-            }`}
-        />
-
-        {errors[name] && (
-          <WarningPopup
-            error={errors[name]?.message}
-            isFirstError={currentErrorField === name}
-          />
-        )}
-      </div>
-    </div>
-  );
+  if (ref && ref.current) {
+    ref.current.focus();
+  }
 };
 
 const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
 {
+  const [currentErrorField, setCurrentErrorField] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
   const router = useRouter();
 
-  // Create field references for focus management
-  const fieldRefs = {
-    Name: useRef(null),
-    Position: useRef(null),
-    Email: useRef(null),
-    Birthdate: useRef(null),
-    Organisation: useRef(null),
-    ABN: useRef(null),
+  // Create refs for focus management
+  const nameRef = useRef(null);
+  const positionRef = useRef(null);
+  const emailRef = useRef(null);
+  const birthdateRef = useRef(null);
+  const organisationRef = useRef(null);
+  const abnRef = useRef(null);
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(TermsFormSchema),
+  });
+
+  const nameValue = watch("Name");
+  const positionValue = watch("Position");
+  const organisationValue = watch("Organisation");
+  const abnValue = watch("ABN");
+  const birthdateValue = watch("Birthdate");
+
+  useEffect(() =>
+  {
+    if (nameValue && setName) {
+      setName(nameValue);
+    }
+  }, [nameValue, setName]);
+
+  useEffect(() =>
+  {
+    if (positionValue && setPosition) {
+      setPosition(positionValue);
+    }
+  }, [positionValue, setPosition]);
+
+  useEffect(() =>
+  {
+    if (organisationValue && setOrganisation) {
+      setOrganisation(organisationValue);
+    }
+  }, [organisationValue, setOrganisation]);
+
+  useEffect(() =>
+  {
+    if (abnValue && setAbn) {
+      setAbn(abnValue);
+    }
+  }, [abnValue, setAbn]);
+
+  const inputFields = [
+    {
+      label: "What is your full name?",
+      name: "Name",
+      placeholder: "Enter your full name",
+      Icon: FaUser,
+      errorMessage: "Please enter your full name.",
+      ref: nameRef,
+    },
+    {
+      label: "What is your position in the organisation?",
+      name: "Position",
+      placeholder: "Enter your position in the organisation",
+      Icon: FaBriefcase,
+      errorMessage: "Please enter your position in the organisation.",
+      ref: positionRef,
+    },
+    {
+      label: "What is your email address?",
+      name: "Email",
+      type: "email",
+      placeholder: "Enter your email address",
+      Icon: FaEnvelope,
+      errorMessage: "Please enter your work email address.",
+      ref: emailRef,
+    },
+    {
+      label: "What is your organisation's name?",
+      name: "Organisation",
+      placeholder: "Enter your organisation's name",
+      Icon: FaUsers,
+      errorMessage: "Please enter your organisations full name.",
+      ref: organisationRef,
+    },
+  ];
+
+  // Focus management effect
+  useEffect(() =>
+  {
+    if (errors && Object.keys(errors).length > 0) {
+      const errorField = Object.keys(errors)[0]; // Get the first error field
+      setCurrentErrorField(errorField);
+
+      const focusMap = {
+        Name: nameRef,
+        Position: positionRef,
+        Email: emailRef,
+        Birthdate: birthdateRef,
+        Organisation: organisationRef,
+        ABN: abnRef,
+      };
+
+      const refToFocus = focusMap[errorField];
+      if (refToFocus) {
+        focusInput(refToFocus);
+      } else {
+        console.warn(`Unhandled error field: ${errorField}`);
+      }
+    } else {
+      setCurrentErrorField(null);
+    }
+  }, [errors]);
+
+  // Function to get device information in the exact format needed
+  const getDeviceInfo = () =>
+  {
+    const userAgent = navigator.userAgent;
+
+    // Parse browser and version
+    let browserInfo = 'Unknown';
+    let browserVersion = '';
+
+    if (/Chrome\/([0-9.]+)/.test(userAgent)) {
+      const match = userAgent.match(/Chrome\/([0-9.]+)/);
+      browserInfo = 'Chrome';
+      browserVersion = match[1];
+    } else if (/Firefox\/([0-9.]+)/.test(userAgent)) {
+      const match = userAgent.match(/Firefox\/([0-9.]+)/);
+      browserInfo = 'Firefox';
+      browserVersion = match[1];
+    } else if (/Version\/([0-9.]+).*Safari/.test(userAgent)) {
+      const match = userAgent.match(/Version\/([0-9.]+)/);
+      browserInfo = 'Safari';
+      browserVersion = match[1];
+    } else if (/Edge\/([0-9.]+)/.test(userAgent)) {
+      const match = userAgent.match(/Edge\/([0-9.]+)/);
+      browserInfo = 'Edge';
+      browserVersion = match[1];
+    }
+
+    // Parse OS information
+    let osInfo = 'Unknown';
+    if (/Windows NT ([0-9._]+)/.test(userAgent)) {
+      const match = userAgent.match(/Windows NT ([0-9._]+)/);
+      osInfo = `Windows NT ${match[1]}`;
+    } else if (/Mac OS X ([0-9._]+)/.test(userAgent)) {
+      const match = userAgent.match(/Mac OS X ([0-9._]+)/);
+      osInfo = `Mac OS X ${match[1].replace(/_/g, '.')}`;
+    } else if (/Android ([0-9.]+)/.test(userAgent)) {
+      const match = userAgent.match(/Android ([0-9.]+)/);
+      osInfo = `Android ${match[1]}`;
+    } else if (/OS ([0-9._]+)/.test(userAgent) && /iPhone|iPad/.test(userAgent)) {
+      const match = userAgent.match(/OS ([0-9._]+)/);
+      osInfo = `iOS ${match[1].replace(/_/g, '.')}`;
+    } else if (/Linux/.test(userAgent)) {
+      osInfo = 'Linux';
+    }
+
+    // Parse WebKit version if present
+    let webkitVersion = '';
+    if (/WebKit\/([0-9.]+)/.test(userAgent)) {
+      const match = userAgent.match(/WebKit\/([0-9.]+)/);
+      webkitVersion = match[1];
+    }
+
+    // Format device info similar to the email example
+    let deviceString = '';
+    if (browserInfo === 'Chrome') {
+      deviceString = `${browserInfo}/${browserVersion}`;
+    } else if (browserInfo === 'Safari') {
+      deviceString = `${browserInfo}/${browserVersion}`;
+    } else if (browserInfo === 'Firefox') {
+      deviceString = `${browserInfo}/${browserVersion}`;
+    } else {
+      deviceString = `${browserInfo}/${browserVersion}`;
+    }
+
+    // Add additional browser engine info
+    if (webkitVersion) {
+      deviceString += ` (WebKit/${webkitVersion})`;
+    }
+
+    if (osInfo !== 'Unknown') {
+      deviceString += ` ${osInfo}`;
+    }
+
+    return {
+      deviceString,
+      fullUserAgent: userAgent,
+    };
   };
 
-  // Initialize form hooks
-  const { currentErrorField, setCurrentErrorField, handleFieldErrors } = useFormErrors(fieldRefs);
+  // Function to get IP address
+  const getIPAddress = async () =>
+  {
+    try {
+      // Try multiple IP services for reliability
+      const ipServices = [
+        'https://api.ipify.org?format=json',
+        'https://ipapi.co/json/',
+        'https://api.ip.sb/jsonip',
+      ];
 
-  const { isSubmitting, isSubmitted, submissionError, handleSubmission } = useFormSubmission({
-    formType: 'terms',
-    formId: 'Terms',
-    onSuccess: (result, finalData) =>
-    {
-      console.log("Terms form submitted successfully!");
-      // Redirect to /austrac on successful submission
-      // router.push("/austrac");
-    },
-    onError: (error) =>
-    {
-      console.error("Terms submission failed:", error);
-    },
-    prepareData: async (data) =>
-    {
+      for (const service of ipServices) {
+        try {
+          const response = await fetch(service);
+          const data = await response.json();
+
+          // Different services return IP in different formats
+          if (data.ip) return data.ip;
+          if (data.query) return data.query;
+
+        } catch (error) {
+          console.log(`IP service ${service} failed:`, error);
+          continue;
+        }
+      }
+
+      return 'Unable to detect';
+    } catch (error) {
+      console.error('Error fetching IP:', error);
+      return 'Unable to detect';
+    }
+  };
+
+  const handleFormSubmit = async (data) =>
+  {
+    try {
+      // Check honeypot field
+      if (data.BotField) {
+        console.log("Bot detected.");
+        return;
+      }
+
+      setIsSubmitting(true);
+
+      // Get device information
+      const deviceInfo = getDeviceInfo();
+
+      // Get IP address
+      const ipAddress = await getIPAddress();
+
       // Format birthday as YYYY-MM-DD
-      const birthdayFormatted = formatBirthdayForAPI(data.Birthdate);
+      const birthdayFormatted = (() =>
+      {
+        const date = new Date(data.Birthdate);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+      })();
 
-      // Format date of acceptance
+
+      // Format date of acceptance as "Wednesday, July 9th 2025, 6:48:31 am"
       const now = new Date();
       const dateOfAcceptance = now.toLocaleDateString('en-US', {
         weekday: 'long',
@@ -252,8 +453,8 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
         year: 'numeric'
       }).replace(/\//g, ' / ');
 
-      return {
-        ...data,
+      // Format the data exactly like the email structure
+      const finalData = {
         // Form data mapped to email structure
         "Organisation Name": data.Organisation,
         "Organisation Role": data.Position,
@@ -262,88 +463,50 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
         "Birthday": birthdayFormatted,
         "Email": data.Email,
         "formType": "terms",
+        "IP Address": ipAddress,
+        "Device": deviceInfo.fullUserAgent, // Use full user agent instead of deviceString
         "Date of Acceptance": dateOfAcceptance,
         "Agreement Commencement": `**THIS AGREEMENT COMMENCES ON THE:** ${agreementDate} and will be ongoing unless either party terminates this Agreement in accordance with the termination provisions herein ("Expiry").`,
+
+        // Additional system data for backend processing
+        timestamp: new Date().toISOString(),
+        formId: "Terms",
+        submissionId: `terms_${Date.now()}`,
+        fullUserAgent: deviceInfo.fullUserAgent,
       };
+
+      // Make the API call
+      const response = await fetch("/api/forms", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(finalData),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to submit the form");
+      }
+
+      const result = await response.json();
+
+      setIsSubmitted(true);
+      setIsSubmitting(false);
+
+      // Reset form
+      reset();
+
+      // Redirect to /austrac on successful submission
+      router.push("/austrac");
+
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setIsSubmitting(false);
+
+      // You might want to show an error message to the user
+      alert("There was an error submitting your form. Please try again.");
     }
-  });
-
-  const {
-    register,
-    handleSubmit,
-    setValue,
-    watch,
-    reset,
-    formState: { errors },
-  } = useForm({
-    resolver: zodResolver(TermsFormSchema),
-    defaultValues: TERMS_DEFAULT_VALUES, // ✅ Fixed: added defaultValues property
-  });
-
-  const nameValue = watch("Name");
-  const positionValue = watch("Position");
-  const organisationValue = watch("Organisation");
-  const abnValue = watch("ABN");
-  const birthdateValue = watch("Birthdate");
-
-  // Pass values to parent component props (maintaining original functionality)
-  useEffect(() =>
-  {
-    if (nameValue && setName) setName(nameValue);
-  }, [nameValue, setName]);
-
-  useEffect(() =>
-  {
-    if (positionValue && setPosition) setPosition(positionValue);
-  }, [positionValue, setPosition]);
-
-  useEffect(() =>
-  {
-    if (organisationValue && setOrganisation) setOrganisation(organisationValue);
-  }, [organisationValue, setOrganisation]);
-
-  useEffect(() =>
-  {
-    if (abnValue && setAbn) setAbn(abnValue);
-  }, [abnValue, setAbn]);
-
-  const inputFields = [
-    {
-      label: "What is your full name?",
-      name: "Name",
-      placeholder: "Enter your full name",
-      Icon: FaUser,
-      ref: fieldRefs.Name,
-    },
-    {
-      label: "What is your position in the organisation?",
-      name: "Position",
-      placeholder: "Enter your position in the organisation",
-      Icon: FaBriefcase,
-      ref: fieldRefs.Position,
-    },
-    {
-      label: "What is your email address?",
-      name: "Email",
-      type: "email",
-      placeholder: "Enter your email address",
-      Icon: FaEnvelope,
-      ref: fieldRefs.Email,
-    },
-    {
-      label: "What is your organisation's name?",
-      name: "Organisation",
-      placeholder: "Enter your organisation's name",
-      Icon: FaUsers,
-      ref: fieldRefs.Organisation,
-    },
-  ];
-
-  // ✅ CLEAN onSubmit - No manual validation, trust React Hook Form
-  const onSubmit = async (data) =>
-  {
-    console.log("All validations passed, proceeding with submission...");
-    await handleSubmission(data);
   };
 
   const renderFormFields = () => (
@@ -357,7 +520,12 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
         autoComplete="off"
       />
 
-     
+      {/* Hidden ABN field for form validation */}
+      <input
+        type="hidden"
+        {...register("ABN")}
+        value={abnValue || ""}
+      />
 
       {inputFields.slice(0, 3).map((field, index) => (
         <div key={index} className="relative">
@@ -369,6 +537,8 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
             setCurrentErrorField={setCurrentErrorField}
             ref={field.ref}
             autoComplete="new-password"
+            onFocus={() => setCurrentErrorField(field.name)}
+            onBlur={() => setCurrentErrorField(null)}
           />
         </div>
       ))}
@@ -393,7 +563,7 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
           format="dd/MM/yyyy"
           containerClassName=""
           labelClassName="text-white text-base inline-block mt-4 mb-2 w-full text-left"
-          ref={fieldRefs.Birthdate}
+          ref={birthdateRef}
           autoComplete="new-password"
         />
       </div>
@@ -406,8 +576,10 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
           errors={errors}
           currentErrorField={currentErrorField}
           setCurrentErrorField={setCurrentErrorField}
-          ref={fieldRefs.Organisation}
+          ref={organisationRef}
           autoComplete="new-password"
+          onFocus={() => setCurrentErrorField("Organisation")}
+          onBlur={() => setCurrentErrorField(null)}
         />
       </div>
 
@@ -423,7 +595,7 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
         setCurrentErrorField={setCurrentErrorField}
         setValue={setValue}
         abnValue={abnValue}
-        abnRef={fieldRefs.ABN}
+        abnRef={abnRef}
       />
     </>
   );
@@ -434,7 +606,7 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
         <form
           className="text-center"
           data-formid="Terms"
-          onSubmit={handleSubmit(onSubmit)} // ✅ Clean handleSubmit call
+          onSubmit={handleSubmit(handleFormSubmit)}
           noValidate
           autoComplete="off"
         >
@@ -459,20 +631,12 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
             </div>
           </div>
 
-          {/* Display submission error if any */}
-          {submissionError && (
-            <div className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded mx-4">
-              <strong>Submission Error:</strong> {submissionError}
-            </div>
-          )}
-
           <div className="button-controls-container 480px:w-[80%] mx-auto mt-12">
             <div className="button-section relative">
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`nextBtn ${isSubmitted ? 'bg-[#4bb543]' : 'bg-[#c6a54b]'
-                  } text-white border-none py-[15px] 768px:px-0 text-[16px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
+                className={`nextBtn  ${isSubmitted ? 'bg-[#4bb543]' : 'bg-[#c6a54b]'} text-white border-none py-[15px] 768px:px-0 text-[16px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
               >
                 {isSubmitting ? (
                   <div className="flex items-center justify-center">

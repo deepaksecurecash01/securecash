@@ -282,9 +282,7 @@ html {
   stroke: #9e8034 !important;
 }
 
-.react-date-picker__inputGroup > input::placeholder {
-  color: #333333;
-}
+
 
 .react-calendar__tile--now {
   background: #000 !important;
@@ -867,4 +865,22 @@ body.modal-on .site-info-modal {
   padding: 20px 24px;
   cursor: pointer;
   text-decoration: none;
+}
+
+.react-date-picker__wrapper{
+  height: 19px !important;
+    align-items: center;
+}
+.react-date-picker__inputGroup {
+  display: flex;
+  align-items: center;
+}
+
+.react-date-picker__calendar{
+  position: absolute !important;
+  bottom: 44px !important;
+  left: -2px !important;
+}
+.react-date-picker__button{
+  padding: 0 !important;
 }

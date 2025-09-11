@@ -2569,7 +2569,7 @@ import QuoteForm from "../QuoteForm";
 import SiteRiskForm from "@/app/site-info/components/FranchiseForm";
 import Image from "next/image";
 import Link from "next/link";
-import ThankYouModal from "@/app/site-info/components/ThankYouModal";
+import ThankYouModal from "@/components/common/forms-new/forms/ThankYouModal";
 import { useFormErrors } from '@/hooks/useFormErrors';
 import { useFormSubmission } from '@/hooks/useFormSubmission';
 import
@@ -2940,7 +2940,7 @@ import
 } from "react-icons/fa";
 import Typography from "@/components/common/Typography";
 import Divider from "@/components/common/Divider";
-import DatePickerFieldWithRef from "@/components/common/forms/elements/DatePickerField";
+import DatePickerFieldWithRef from "@/components/common/forms/QuoteForm/DatePickerField";
 import WarningPopup from "../elements/WarningPopup";
 import { useRouter } from 'next/navigation';
 import { useFormErrors } from '@/hooks/useFormErrors';

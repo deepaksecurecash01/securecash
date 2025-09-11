@@ -2,9 +2,9 @@ import React from "react";
 import Container from "@/components/layout/Container";
 import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
-import QuoteForm from "@/components/common/forms/QuoteForm";
 import { FaPhoneAlt, FaMapMarkerAlt, FaEnvelope, FaStar } from "react-icons/fa";
 import Link from "next/link";
+import QuoteForm from "../common/forms-new/forms/QuoteForm";
 
 const QuoteContent = () => {
   return (

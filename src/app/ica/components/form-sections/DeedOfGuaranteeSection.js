@@ -16,7 +16,7 @@ import
   FaFileSignature,
 } from "react-icons/fa";
 import IcaContractorClauses from "../IcaAgreementClauses";
-import DatePickerFieldWithRef from "@/components/common/forms/elements/DatePickerField";
+import DatePickerFieldWithRef from "@/components/common/forms/QuoteForm/DatePickerField";
 
 const DeedOfGuaranteeSection = ({
   register,

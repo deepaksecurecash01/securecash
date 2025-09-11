@@ -7,6 +7,7 @@ import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
 import Link from "next/link";
 import QuoteForm from "../QuoteForm";
+import TermsFormMigrated from "@/components/common/forms-new/forms/TermsForm";
 
 const FormSection = () =>
 {

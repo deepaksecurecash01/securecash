@@ -2,7 +2,8 @@ import HeadlineContent from "./components/HeadlineContent";
 import FormSection from "./components/FormSection";
 import BottomBanner from "@/components/about-us/BottomBanner";
 import BusinessTypeModal from "./components/BusinessTypeModal";
-import ThankYouModal from "./components/ThankYouModal";
+import ThankYouModal from "../../components/common/forms-new/forms/ThankYouModal";
+import SiteInfoForm from "@/components/common/forms-new/forms/SiteInfoForm";
 
 const Page = () =>
 {
@@ -11,7 +12,7 @@ const Page = () =>
     <div>
       <ThankYouModal type="Business" />
       <HeadlineContent />
-      <FormSection />
+      <SiteInfoForm />
       <BottomBanner />
     </div>
   );

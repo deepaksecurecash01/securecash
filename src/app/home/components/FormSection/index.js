@@ -5,7 +5,7 @@ import Paragraph from "@/components/common/Paragraph";
 import SubHeading from "@/components/common/SubHeading";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
-import QuoteForm from "@/components/common/forms/QuoteForm";
+import QuoteForm from "@/components/common/forms-new/forms/QuoteForm";
 
 const FormSection = () =>
 {

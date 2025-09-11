@@ -1,135 +1,120 @@
-// /schemas/contactFormSchema.js
+// /zod/ContactFormSchema.js
 import { z } from "zod";
 
-// Reusable field validators
-const validators = {
-    // Basic text field with minimum length
-    requiredText: (fieldName, minLength = 2) =>
-        z.string()
-            .min(1, `${fieldName} is required.`)
-            .min(minLength, `${fieldName} must be at least ${minLength} characters long.`)
-            .trim(),
+const ContactFormSchema = z.object({
+    Department: z
+        .string()
+        .min(1, "Please select a department."),
 
-    // Email field with proper validation
-    email: () =>
-        z.string()
-            .min(1, "Email is required.")
-            .email("Please enter a valid email address.")
-            .trim()
-            .toLowerCase(),
+    FullName: z
+        .string()
+        .min(1, "Full name is required.")
+        .min(2, "Full name must be at least 2 characters long."),
 
-    // Phone number with international format support
-    phone: () =>
-        z.string()
-            .min(1, "Phone number is required.")
-            .regex(/^[0-9\s\-\+\(\)]+$/, "Please enter a valid phone number.")
-            .min(8, "Phone number must be at least 8 digits."),
+    Organisation: z
+        .string()
+        .min(1, "Organisation name is required.")
+        .min(2, "Organisation name must be at least 2 characters long."),
 
-    // Department selection
-    department: () =>
-        z.string()
-            .min(1, "Please select a department."),
+    Phone: z
+        .string()
+        .min(1, "Phone number is required.")
+        .min(8, "Phone number must be at least 8 digits."),
 
-    // Message/textarea field
-    message: () =>
-        z.string()
-            .min(1, "Please tell us how we can help you.")
-            .min(10, "Please provide more details about how we can help.")
-            .trim(),
+    Email: z
+        .string()
+        .min(1, "Email address is required.")
+        .email("Please enter a valid email address."),
 
-    // Optional callback checkbox
-    callback: () =>
-        z.string().optional(),
+    ChkCallBack: z
+        .array(z.string())
+        .optional()
+        .default([]),
 
-    // Optional callback date
-    callbackDate: () =>
-        z.any().optional(),
+    CallbackDate: z
+        .date()
+        .optional()
+        .nullable(),
 
-    // Optional callback time
-    callbackTime: () =>
-        z.string().optional(),
+    CallbackTime: z
+        .string()
+        .optional(),
 
-    // Optional callback state
-    callbackState: () =>
-        z.string().optional(),
+    CallbackState: z
+        .string()
+        .optional(),
 
-    // Honeypot field
-    honeypot: () =>
-        z.string().max(0, "Bot detected!").optional(),
-};
+    Message: z
+        .string()
+        .min(1, "Please let us know how we can help.")
+        .min(10, "Please provide more detail (minimum 10 characters)."),
 
-// Base schema without refinements
-const BaseContactFormSchema = z.object({
-    Department: validators.department(),
-    FullName: validators.requiredText("Full name"),
-    Organisation: validators.requiredText("Organisation name"),
-    Phone: validators.phone(),
-    Email: validators.email(),
-    ChkCallBack: validators.callback(),
-    CallbackDate: validators.callbackDate(),
-    CallbackTime: validators.callbackTime(),
-    CallbackState: validators.callbackState(),
-    Message: validators.message(),
-    BotField: validators.honeypot(),
+    BotField: z
+        .string()
+        .max(0, "Bot detected!")
+}).superRefine((data, ctx) =>
+{
+    // If callback is requested, validate callback fields
+    const callbackRequested = data.ChkCallBack && data.ChkCallBack.length > 0;
+
+    if (callbackRequested) {
+        if (!data.CallbackDate) {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                path: ["CallbackDate"],
+                message: "Please select a callback date."
+            });
+        }
+
+        if (!data.CallbackTime || data.CallbackTime === "") {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                path: ["CallbackTime"],
+                message: "Please select a callback time."
+            });
+        }
+
+        if (!data.CallbackState || data.CallbackState === "") {
+            ctx.addIssue({
+                code: z.ZodIssueCode.custom,
+                path: ["CallbackState"],
+                message: "Please select your state."
+            });
+        }
+
+        // Validate date is in future
+        if (data.CallbackDate) {
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const selectedDate = new Date(data.CallbackDate);
+            selectedDate.setHours(0, 0, 0, 0);
+
+            if (selectedDate < today) {
+                ctx.addIssue({
+                    code: z.ZodIssueCode.custom,
+                    path: ["CallbackDate"],
+                    message: "Please select a future date for your callback."
+                });
+            }
+        }
+    }
 });
 
-// Helper function to check if callback is requested
-const isCallbackRequested = (data) => data.ChkCallBack === 'Yes, please.';
+// Default values for the form
+export const CONTACT_DEFAULT_VALUES = {
+    Department: "",
+    FullName: "",
+    Organisation: "",
+    Phone: "",
+    Email: "",
+    ChkCallBack: [],
+    CallbackDate: null,
+    CallbackTime: "",
+    CallbackState: "",
+    Message: "",
+    BotField: "",
+};
 
-// Callback validation refinements
-const callbackRefinements = [
-    // Main callback fields validation
-    {
-        condition: (data) =>
-        {
-            if (isCallbackRequested(data)) {
-                return data.CallbackDate &&
-                    data.CallbackTime &&
-                    data.CallbackTime !== '' &&
-                    data.CallbackState &&
-                    data.CallbackState !== '';
-            }
-            return true;
-        },
-        message: "When requesting a callback, please select a date, time, and state.",
-        path: ["CallbackDate"],
-    },
-
-    // Callback time specific validation
-    {
-        condition: (data) =>
-        {
-            if (isCallbackRequested(data) && (!data.CallbackTime || data.CallbackTime === '')) {
-                return false;
-            }
-            return true;
-        },
-        message: "Please select a callback time.",
-        path: ["CallbackTime"],
-    },
-
-    // Callback state specific validation
-    {
-        condition: (data) =>
-        {
-            if (isCallbackRequested(data) && (!data.CallbackState || data.CallbackState === '')) {
-                return false;
-            }
-            return true;
-        },
-        message: "Please select your state.",
-        path: ["CallbackState"],
-    }
-];
-
-// Apply all refinements to create the final schema
-const ContactFormSchema = callbackRefinements.reduce(
-    (schema, { condition, message, path }) =>
-        schema.refine(condition, { message, path }),
-    BaseContactFormSchema
-);
-
-// Form field configurations
 export const formConfig = {
     departments: [
         { value: "", label: "Please select a department..." },
@@ -176,23 +161,34 @@ export const formConfig = {
     ],
 };
 
-// Default form values
-export const defaultValues = {
-    Department: "",
-    FullName: "",
-    Organisation: "",
-    Phone: "",
-    Email: "",
-    ChkCallBack: "",
-    CallbackDate: "",
-    CallbackTime: "",
-    CallbackState: "",
-    Message: "",
-    BotField: "",
-};
+export const CONTACT_FIELD_PRIORITY = [
+    'Department',
+    'FullName',
+    'Organisation',
+    'Phone',
+    'Email',
+    'ChkCallBack',
+    'CallbackDate',
+    'CallbackTime',
+    'CallbackState',
+    'Message'
+];
 
-// Export the main schema and utilities
+// Create base schema for partial validation
+const BaseSchema = z.object({
+    Department: z.string().optional(),
+    FullName: z.string().optional(),
+    Organisation: z.string().optional(),
+    Phone: z.string().optional(),
+    Email: z.string().optional(),
+    ChkCallBack: z.array(z.string()).optional(),
+    CallbackDate: z.date().optional().nullable(),
+    CallbackTime: z.string().optional(),
+    CallbackState: z.string().optional(),
+    Message: z.string().optional(),
+    BotField: z.string().optional(),
+});
+
+export const ContactPartialSchema = BaseSchema;
+
 export default ContactFormSchema;
-
-// Export validators for reuse in other forms
-export { validators };

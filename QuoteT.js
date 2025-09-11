@@ -930,10 +930,10 @@ export const InputField = ({
                 {Icon2 && (
                     <Icon2
                         className={`min-w-[50px] text-[18px] text-[#999] ${hasError
-                                ? "text-red-500"
-                                : isFocused
-                                    ? "text-primary"
-                                    : "text-[#999]"
+                            ? "text-red-500"
+                            : isFocused
+                                ? "text-primary"
+                                : "text-[#999]"
                             }`}
                     />
                 )}
@@ -959,10 +959,10 @@ export const InputField = ({
                 />
                 <Icon
                     className={`min-w-[50px] text-[18px] text-[#999] ${hasError
-                            ? "text-red-500"
-                            : isFocused
-                                ? "text-primary"
-                                : "text-[#999]"
+                        ? "text-red-500"
+                        : isFocused
+                            ? "text-primary"
+                            : "text-[#999]"
                         }`}
                 />
 
@@ -1002,10 +1002,10 @@ export const SelectionBox = ({
             <div className="input-container input-container-select w-full mx-auto text-left flex items-center relative">
                 <Icon
                     className={`icon absolute text-[22px] rounded-l bg-black min-w-[20px] text-center ml-4 ${hasError
-                            ? "text-red-500"
-                            : isFocused
-                                ? "text-primary"
-                                : "text-white"
+                        ? "text-red-500"
+                        : isFocused
+                            ? "text-primary"
+                            : "text-white"
                         }`}
                 />
 
@@ -1030,71 +1030,74 @@ export const SelectionBox = ({
         </div>
     );
 };
-import React from 'react'
+import React from 'react';
 
 const SelectOption = ({
-  register,
-  setValue,
-  setCurrentErrorField,
-  options,
-  isFocused,
-  hasError,
-  setIsFocused,
-  name,
-}) => {
-  return (
-    <select
-      className={`w-full text-sm rounded-md border border-white pl-12 shadow-none font-[Montserrat] bg-black text-white leading-6 h-9 appearance-none ${
-            hasError ? "focus:outline-red-600 focus:border-none focus:ring-0" : "focus:outline-primary"
-          }`}
-      {...register(name)}
-      onChange={(e) => {
-        setValue(name, e.target.value, {
-          shouldValidate: true,
-        });
+    register,
+    setValue,
+    setCurrentErrorField,
+    options,
+    isFocused,
+    hasError,
+    setIsFocused,
+    name,
+}) =>
+{
+    return (
+        <select
+            className={`w-full text-sm rounded-md border border-white pl-12 shadow-none font-[Montserrat] bg-black text-white leading-6 h-9 appearance-none ${hasError ? "focus:outline-red-600 focus:border-none focus:ring-0" : "focus:outline-primary"
+                }`}
+            {...register(name)}
+            onChange={(e) =>
+            {
+                setValue(name, e.target.value, {
+                    shouldValidate: true,
+                });
 
-        setCurrentErrorField(null); // Reset error field when a selection is made
-      }}
-      onFocus={() => {
-        setCurrentErrorField(name);
-        setIsFocused(true);
-      }}
-      onBlur={() => {
-        setCurrentErrorField(null);
-        setIsFocused(false);
-      }}
-      name={name}
-      data-validate="Inline"
-    >
-      {options.map((option, index) => (
-        <option key={index} value={option.value}>
-          {option.label}
-        </option>
-      ))}
-    </select>
-  );
+                setCurrentErrorField(null); // Reset error field when a selection is made
+            }}
+            onFocus={() =>
+            {
+                setCurrentErrorField(name);
+                setIsFocused(true);
+            }}
+            onBlur={() =>
+            {
+                setCurrentErrorField(null);
+                setIsFocused(false);
+            }}
+            name={name}
+            data-validate="Inline"
+        >
+            {options.map((option, index) => (
+                <option key={index} value={option.value}>
+                    {option.label}
+                </option>
+            ))}
+        </select>
+    );
 };
 
-export default SelectOptionimport { FaExclamation } from "react-icons/fa";
+export default SelectOptionimport { FaExclamation; } from "react-icons/fa";
 
-const WarningPopup = ({ error, isFirstError, className }) => {
-  return (
-    isFirstError && (
-      <span
-        className={`absolute backdrop-blur-lg py-1 px-2 w-auto rounded-md text-[14px] flex items-center bg-white/95 text-black shadow-sm z-10 ${
-          className ? className : " top-12"
-        }`}
-      >
-        {/* Arrow */}
-        <span className="absolute left-2 transform translate-x-1/2 -top-1 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-white"></span>
+const WarningPopup = ({ error, isFirstError, className }) =>
+{
+    return (
+        isFirstError && (
+            <span
+                className={`absolute backdrop-blur-lg py-1 px-2 w-auto rounded-md text-[14px] flex items-center bg-white/95 text-black shadow-sm z-10 ${className ? className : " top-12"
+                    }`}
+            >
+                {/* Arrow */}
+                <span className="absolute left-2 transform translate-x-1/2 -top-1 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-white"></span>
 
-        <span className="bg-red-500 p-1 rounded-sm mr-2">
-          <FaExclamation className="text-[10px] text-white" />
-        </span>
-        {error}
-      </span>
-    )
-  );
+                <span className="bg-red-500 p-1 rounded-sm mr-2">
+                    <FaExclamation className="text-[10px] text-white" />
+                </span>
+                {error}
+            </span>
+        )
+    );
 };
 
 export default WarningPopup;

@@ -1,17 +1,20 @@
-// /hooks/useFileUpload.js
+// /hooks/useFileUpload.js - FIXED VERSION
 import { useState, useCallback } from 'react';
 import imageCompression from 'browser-image-compression';
 import { fileToBase64 } from '@/utils/apiClient';
 
-export const useFileUpload = ({
-    compression = {
-        targetSizeKB: 400,
-        maxSizeMB: 5,
-        allowedTypes: ['image/jpeg', 'image/png', 'image/jpg']
-    },
-    concurrencyLimit = 2
-} = {}) =>
+export const useFileUpload = (config = {}) =>
 {
+    // Provide default configuration if none provided
+    const {
+        compression = {
+            targetSizeKB: 400,
+            maxSizeMB: 5,
+            allowedTypes: ['image/jpeg', 'image/png', 'image/jpg']
+        },
+        concurrencyLimit = 2
+    } = config;
+
     const [isProcessing, setIsProcessing] = useState(false);
     const [fileErrors, setFileErrors] = useState([]);
     const [processingProgress, setProcessingProgress] = useState(0);
