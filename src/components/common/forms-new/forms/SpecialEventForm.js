@@ -173,8 +173,7 @@ const SpecialEventForm = () =>
                         <Typography as="p" fontFamily="montserrat"
                             className="text-[16px] leading-[2rem] text-left mb-4 768px:text-left font-light">
                             You <strong>must</strong> also inform your bank that you are having a banking courier service and
-                            advise them of the approximate amount of money you are expecting to be deposited, please don't
-                            assume that your deposit will be unconditionally accepted by the bank without them being
+                            advise them of the approximate amount of money you are expecting to be deposited, please don&apos;t assume that your deposit will be unconditionally accepted by the bank without them being
                             notified accordingly. If a deposit is not accepted by the bank, then it will need to be returned
                             back to your address at a rate of $275 plus GST.
                         </Typography>
@@ -187,7 +186,7 @@ const SpecialEventForm = () =>
                                     <a href="https://www.securecash.com.au/site-info/">HERE</a>
                                 </strong>
                             </span>{" "}
-                            instead and select "Yes" on the popup.
+                            instead and select &quot;Yes&quot; on the popup.
                         </Typography>
 
                         <Typography as="p" fontFamily="montserrat"

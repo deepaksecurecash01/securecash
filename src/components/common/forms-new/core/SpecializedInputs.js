@@ -1,11 +1,12 @@
-// /components/common/forms-new/core/SpecializedInputs.js - UPDATED WITH FIXED ICA FILE UPLOAD
+// /components/common/forms-new/core/SpecializedInputs.js - FIXED REACT PROP WARNINGS
 import Checkbox from "@/components/common/checkbox/Checkbox";
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect, useCallback } from 'react';
 import DatePicker from "react-date-picker";
 import 'react-date-picker/dist/DatePicker.css';
 import 'react-calendar/dist/Calendar.css';
-import { FaCalendarAlt, FaTimes, FaCircle, FaFileUpload, FaFile } from "react-icons/fa";
+import { FaCalendarAlt, FaTimes, FaCircle, FaFileUpload, FaFile, FaSpinner, FaExclamationTriangle } from "react-icons/fa";
 import styles from "@/components/common/checkbox/Checkbox.module.css";
+import imageCompression from 'browser-image-compression';
 
 // COMPLETE THEMES - Including ICA theme with pixel-perfect styling
 const THEMES = {
@@ -92,13 +93,7 @@ const THEMES = {
     }
 };
 
-// FIXED: FileUploadInput - Replace in your SpecializedInputs.js
-
-// Complete Refined FileUploadInput Component - Replace in your SpecializedInputs.js
-
-
-
-export const FileUploadInput = ({
+export const FileUploadInput = forwardRef(({
     value,
     onChange,
     onFocus,
@@ -113,143 +108,273 @@ export const FileUploadInput = ({
     fileUploadState,
     maxFileSize = 10 * 1024 * 1024, // 10MB default
     allowedTypes = ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf'],
+    // FIXED: Extract non-DOM props to prevent React warnings
+    currentErrorField,
+    setCurrentErrorField,
     ...otherProps
-}) =>
+}, ref) =>
 {
-    const [dragActive, setDragActive] = useState(false);
-    const [uploadedFiles, setUploadedFiles] = useState([]);
-    const [fileErrors, setFileErrors] = useState([]);
+    const containerRef = useRef(null);
+    const hiddenInputRef = useRef(null);
 
-    // Sync uploadedFiles with form value
-    useEffect(() =>
-    {
-        if (!value) {
-            setUploadedFiles([]);
-        } else if (value instanceof FileList) {
-            setUploadedFiles(Array.from(value));
-        } else if (value instanceof File) {
-            setUploadedFiles([value]);
-        } else if (Array.isArray(value)) {
-            setUploadedFiles(value.filter(file => file instanceof File));
-        }
-    }, [value]);
+    const [dragActive, setDragActive] = useState(false);
+    const [fileStates, setFileStates] = useState(new Map()); // Individual file processing states
+
+    // File states: 'idle', 'uploading', 'completed', 'error'
+
+    // Enhanced ref forwarding for RHF
+    useImperativeHandle(ref, () => ({
+        focus: () =>
+        {
+            console.log(`FileUploadInput focus called for ${name}`);
+            if (hiddenInputRef.current) {
+                containerRef.current?.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                setTimeout(() =>
+                {
+                    hiddenInputRef.current.focus();
+                    if (onFocus) {
+                        onFocus({ target: { name } });
+                    }
+                }, 100);
+            }
+        },
+        scrollIntoView: (options) =>
+        {
+            if (containerRef.current) {
+                containerRef.current.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center',
+                    ...options
+                });
+            }
+        },
+        name,
+        type: 'file'
+    }), [onFocus, name]);
 
     // File validation
-    const validateFile = (file) =>
+    const validateFile = useCallback((file) =>
     {
         const errors = [];
-
-        // Size validation
         if (file.size > maxFileSize) {
-            errors.push(`${file.name}: File too large. Maximum ${Math.round(maxFileSize / (1024 * 1024))}MB allowed.`);
+            errors.push(`File too large. Maximum ${Math.round(maxFileSize / (1024 * 1024))}MB allowed.`);
         }
-
-        // Type validation
         if (allowedTypes.length > 0 && !allowedTypes.includes(file.type)) {
-            errors.push(`${file.name}: Invalid file type. Allowed types: ${allowedTypes.join(', ')}`);
+            errors.push(`Invalid file type. Allowed: ${allowedTypes.map(type => type.split('/')[1].toUpperCase()).join(', ')}`);
         }
+        return { valid: errors.length === 0, errors };
+    }, [maxFileSize, allowedTypes]);
 
-        return errors;
-    };
+    // Get unique file identifier
+    const getFileId = useCallback((file) =>
+    {
+        return `${file.name}-${file.size}-${file.lastModified}-${Date.now()}`;
+    }, []);
 
-    const handleFileChange = (files) =>
+    // Process single file with comprehensive error handling
+    const processFile = useCallback(async (file, fileId) =>
+    {
+        console.log(`Processing file: ${file.name}`);
+
+        // Set uploading state
+        setFileStates(prev => new Map(prev.set(fileId, {
+            file,
+            status: 'uploading',
+            message: 'Processing file...',
+            error: null
+        })));
+
+        try {
+            // Validate file first
+            const validation = validateFile(file);
+            if (!validation.valid) {
+                throw new Error(validation.errors[0]);
+            }
+
+            // Update status to compressing
+            setFileStates(prev => new Map(prev.set(fileId, {
+                ...prev.get(fileId),
+                message: 'Uploading image...'
+            })));
+
+            let processedFile = file;
+
+            // Compress if it's an image
+            if (file.type.startsWith('image/')) {
+                const compressionOptions = {
+                    maxSizeMB: 5,
+                    maxWidthOrHeight: 1920,
+                    useWebWorker: true,
+                    quality: 0.8
+                };
+
+                processedFile = await imageCompression(file, compressionOptions);
+                console.log(`Compression complete: ${file.name} (${formatFileSize(file.size)} → ${formatFileSize(processedFile.size)})`);
+            }
+
+            // Convert to base64
+            setFileStates(prev => new Map(prev.set(fileId, {
+                ...prev.get(fileId),
+                message: 'Uploading file...'
+            })));
+
+            const base64Data = await fileToBase64(processedFile);
+
+            // Create result object
+            const result = {
+                filename: `${file.name.split('.')[0]}.${file.name.split('.').pop()}`,
+                data: base64Data,
+                originalFile: file,
+                compressedFile: processedFile,
+                isProcessed: true,
+                processedAt: new Date().toISOString(),
+                fileId
+            };
+
+            // Store result in fileUploadState if available
+            if (fileUploadState?.setUploadResult) {
+                fileUploadState.setUploadResult(fileId, result);
+            }
+
+            // Set completed state
+            setFileStates(prev => new Map(prev.set(fileId, {
+                file,
+                status: 'completed',
+                message: 'Upload complete',
+                error: null,
+                result
+            })));
+
+            console.log(`File processed successfully: ${file.name}`);
+            return result;
+
+        } catch (error) {
+            console.error(`File processing failed for ${file.name}:`, error);
+
+            // Set error state
+            setFileStates(prev => new Map(prev.set(fileId, {
+                file,
+                status: 'error',
+                message: null,
+                error: error.message
+            })));
+
+            return null;
+        }
+    }, [validateFile, fileUploadState]);
+
+    // Handle file selection
+    const handleFileChange = useCallback(async (files) =>
     {
         if (!files || files.length === 0) return;
 
         const fileArray = Array.from(files);
-        const newErrors = [];
 
-        // Validate each file
-        fileArray.forEach(file =>
-        {
-            const fileValidationErrors = validateFile(file);
-            newErrors.push(...fileValidationErrors);
-        });
-
-        if (newErrors.length > 0) {
-            setFileErrors(newErrors);
-            return;
-        }
-
-        // Clear any previous errors
-        setFileErrors([]);
-        setUploadedFiles(fileArray);
-
-        // Update form state
+        // Update form immediately with files
         const fileToSubmit = multiple ? fileArray : fileArray[0];
         onChange(fileToSubmit);
 
-        // Focus management
+        // Notify focus if needed
         if (onFocus) {
             onFocus({ target: { name } });
         }
-    };
 
-    const removeFile = (e, indexToRemove) =>
-    {
-        e.preventDefault();
-        e.stopPropagation();
-
-        const newFiles = uploadedFiles.filter((_, index) => index !== indexToRemove);
-        setUploadedFiles(newFiles);
-
-        // Clear any file errors when removing files
-        setFileErrors([]);
-
-        const fileToSubmit = multiple ? newFiles : (newFiles.length > 0 ? newFiles[0] : null);
-        onChange(fileToSubmit);
-    };
-
-    const handleDragEnter = (e) =>
-    {
-        e.preventDefault();
-        e.stopPropagation();
-        if (!disabled) {
-            setDragActive(true);
+        // Process each file
+        for (const file of fileArray) {
+            const fileId = getFileId(file);
+            await processFile(file, fileId);
         }
-    };
+    }, [multiple, onChange, onFocus, name, getFileId, processFile]);
 
-    const handleDragLeave = (e) =>
+    // Remove file
+    const removeFile = useCallback((e, fileToRemove) =>
     {
         e.preventDefault();
         e.stopPropagation();
-        // Only set drag inactive if we're leaving the drop zone entirely
+
+        console.log(`Removing file: ${fileToRemove.name}`);
+
+        // Find and remove from fileStates
+        const fileId = Array.from(fileStates.keys()).find(id =>
+            fileStates.get(id)?.file?.name === fileToRemove.name &&
+            fileStates.get(id)?.file?.size === fileToRemove.size
+        );
+
+        if (fileId) {
+            // Clean up from local state
+            setFileStates(prev =>
+            {
+                const updated = new Map(prev);
+                updated.delete(fileId);
+                return updated;
+            });
+
+            // Clean up from fileUploadState
+            if (fileUploadState?.clearUploadResult) {
+                fileUploadState.clearUploadResult(fileId);
+            }
+        }
+
+        // Update form value
+        if (multiple && Array.isArray(value)) {
+            const newFiles = value.filter(file =>
+                !(file.name === fileToRemove.name && file.size === fileToRemove.size)
+            );
+            onChange(newFiles.length > 0 ? newFiles : null);
+        } else {
+            onChange(null);
+        }
+    }, [fileStates, fileUploadState, multiple, value, onChange]);
+
+    // Drag and drop handlers
+    const handleDragEnter = useCallback((e) =>
+    {
+        e.preventDefault();
+        e.stopPropagation();
+        if (!disabled) setDragActive(true);
+    }, [disabled]);
+
+    const handleDragLeave = useCallback((e) =>
+    {
+        e.preventDefault();
+        e.stopPropagation();
         if (!e.currentTarget.contains(e.relatedTarget)) {
             setDragActive(false);
         }
-    };
+    }, []);
 
-    const handleDragOver = (e) =>
+    const handleDragOver = useCallback((e) =>
     {
         e.preventDefault();
         e.stopPropagation();
-    };
+    }, []);
 
-    const handleDrop = (e) =>
+    const handleDrop = useCallback((e) =>
     {
         e.preventDefault();
         e.stopPropagation();
         setDragActive(false);
-
         if (disabled) return;
+        handleFileChange(e.dataTransfer.files);
+    }, [disabled, handleFileChange]);
 
-        const files = e.dataTransfer.files;
-        handleFileChange(files);
-    };
-
-    const isImageFile = (file) =>
+    // Focus/blur handlers
+    const handleFocus = useCallback((e) =>
     {
-        return file && file.type && file.type.startsWith('image/');
-    };
+        console.log(`Focus event for ${name}`);
+        if (onFocus) onFocus(e);
+    }, [onFocus, name]);
 
-    const getFilePreview = (file) =>
+    const handleBlur = useCallback((e) =>
     {
-        if (file instanceof File && isImageFile(file)) {
-            return URL.createObjectURL(file);
-        }
-        return null;
-    };
+        console.log(`Blur event for ${name}`);
+        if (onBlur) onBlur(e);
+    }, [onBlur, name]);
 
+    // Helper functions
     const formatFileSize = (bytes) =>
     {
         if (bytes === 0) return '0 Bytes';
@@ -259,25 +384,14 @@ export const FileUploadInput = ({
         return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
     };
 
-    // Dynamic container classes based on state
-    const getContainerClasses = () =>
+    const isImageFile = (file) => file && file.type && file.type.startsWith('image/');
+
+    const getFilePreview = (file) =>
     {
-        const baseClasses = "relative w-full border-2 border-dashed rounded-lg text-center transition-all duration-200 h-[200px] overflow-hidden";
-
-        // Drag state styling
-        let stateClasses = "";
-        if (disabled) {
-            stateClasses = "border-gray-300 bg-gray-50 cursor-not-allowed";
-        } else if (dragActive) {
-            stateClasses = "border-primary bg-primary/10 shadow-lg";
-        } else {
-            stateClasses = "border-dark-border/50 bg-white hover:border-primary/50";
+        if (file instanceof File && isImageFile(file)) {
+            return URL.createObjectURL(file);
         }
-
-        // Error styling - only when field is focused and has error
-        const errorClasses = (hasError && isFocused) ? "border-red-500 bg-red-50/30" : "";
-
-        return `${baseClasses} ${stateClasses} ${errorClasses}`;
+        return null;
     };
 
     const getFileIcon = (file) =>
@@ -302,8 +416,38 @@ export const FileUploadInput = ({
         );
     };
 
+    // Dynamic container classes
+    const getContainerClasses = () =>
+    {
+        const baseClasses = "relative w-full border-2 border-dashed rounded-lg text-center transition-all duration-200 h-[200px] overflow-hidden";
+        let stateClasses = "";
+
+        if (disabled) {
+            stateClasses = "border-gray-300 bg-gray-50 cursor-not-allowed";
+        } else if (dragActive) {
+            stateClasses = "border-primary bg-primary/10 shadow-lg";
+        } else {
+            stateClasses = "border-dark-border/50 bg-white hover:border-primary/50";
+        }
+
+        const errorClasses = (hasError && isFocused) ? "border-red-500 bg-red-50/30" : "";
+        return `${baseClasses} ${stateClasses} ${errorClasses}`;
+    };
+
+    // Get current files array for display
+    const getCurrentFiles = () =>
+    {
+        if (!value) return [];
+        if (value instanceof FileList) return Array.from(value);
+        if (value instanceof File) return [value];
+        if (Array.isArray(value)) return value.filter(file => file instanceof File);
+        return [];
+    };
+
+    const currentFiles = getCurrentFiles();
+
     return (
-        <div className="relative">
+        <div ref={containerRef} className="relative" data-field-name={name}>
             {/* Main upload area */}
             <div
                 className={getContainerClasses()}
@@ -312,9 +456,9 @@ export const FileUploadInput = ({
                 onDragOver={handleDragOver}
                 onDrop={handleDrop}
             >
-                {/* Content overlay - doesn't block clicks */}
+                {/* Content overlay */}
                 <div className="h-full w-full flex flex-col justify-center items-center bg-[rgb(242,242,242,0.3)] p-4 relative pointer-events-none">
-                    {uploadedFiles.length === 0 ? (
+                    {currentFiles.length === 0 ? (
                         // Empty state
                         <div className="flex-1 flex flex-col justify-center items-center">
                             <svg
@@ -332,41 +476,78 @@ export const FileUploadInput = ({
                                     d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
                                 />
                             </svg>
-                            <p className={`text-sm mb-2 ${disabled ? 'text-gray-400' : dragActive ? 'text-primary font-medium' : 'text-gray-600'}`}>
-                                {disabled ? 'File upload disabled' : dragActive ? 'Drop files here' : 'Click to upload or drag and drop'}
+                            <p className={`text-sm mb-2 ${disabled ? 'text-gray-400' :
+                                dragActive ? 'text-primary font-medium' : 'text-gray-600'
+                                }`}>
+                                {disabled ? 'File upload disabled' :
+                                    dragActive ? 'Drop files here' : 'Click to upload or drag and drop'}
                             </p>
                             <p className={`text-xs ${disabled ? 'text-gray-300' : 'text-gray-500'}`}>
                                 PNG, JPG, PDF up to {Math.round(maxFileSize / (1024 * 1024))}MB
                             </p>
                         </div>
                     ) : (
-                        // Files preview
-                        <div className="space-y-3 w-full">
-                            {uploadedFiles.map((file, index) =>
+                        // Files display with states
+                        <div className=" w-full">
+                            {currentFiles.map((file, index) =>
                             {
+                                const fileId = Array.from(fileStates.keys()).find(id =>
+                                    fileStates.get(id)?.file?.name === file.name &&
+                                    fileStates.get(id)?.file?.size === file.size
+                                );
+                                const fileState = fileId ? fileStates.get(fileId) : null;
                                 const previewUrl = getFilePreview(file);
-                                return (
-                                    <div key={index} className="relative bg-white/80 rounded-lg p-3 shadow-sm">
-                                        {/* Remove button - positioned absolutely */}
-                                        <button
-                                            type="button"
-                                            onClick={(e) =>
-                                            {
-                                                e.preventDefault();
-                                                e.stopPropagation();
-                                                removeFile(e, index);
-                                            }}
-                                            onMouseDown={(e) => e.stopPropagation()}
-                                            className="absolute -top-4 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600 transition-colors z-30 shadow-lg border-2 border-white"
-                                            style={{ pointerEvents: 'auto' }}
-                                            disabled={disabled}
-                                            title="Remove file"
-                                        >
-                                            <FaTimes />
-                                        </button>
 
-                                        {previewUrl ? (
-                                            // Image preview
+                                return (
+                                    <div key={`${file.name}-${index}`} className="relative">
+                                        {/* Remove button */}
+                                        {(fileState?.status === 'completed' || fileState?.status === 'error') && (
+                                            <button
+                                                type="button"
+                                                onClick={(e) => removeFile(e, file)}
+                                                onMouseDown={(e) => e.stopPropagation()}
+                                                className="absolute -top-4 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600 transition-colors z-30 shadow-lg border-2 border-white"
+                                                style={{ pointerEvents: 'auto' }}
+                                                disabled={disabled}
+                                                title="Remove file"
+                                            >
+                                                <FaTimes />
+                                            </button>
+                                        )}
+
+                                        {/* File content based on state */}
+                                        {fileState?.status === 'uploading' ? (
+                                            // Uploading state with spinner
+                                            <div className="flex flex-col items-center py-4">
+                                                <div className="flex items-center space-x-3 mb-3">
+                                                    <FaSpinner className="animate-spin text-primary text-2xl" />
+                                                    <div className="text-center">
+                                                        <span className="text-sm text-gray-700 font-medium block truncate max-w-[200px]">
+                                                            {file.name}
+                                                        </span>
+                                                        <span className="text-xs text-primary">
+                                                            {fileState.message}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) : fileState?.status === 'error' ? (
+                                            // Error state
+                                            <div className="flex flex-col items-center py-4">
+                                                <div className="flex items-center space-x-3 mb-3">
+                                                    <FaExclamationTriangle className="text-red-500 text-2xl" />
+                                                    <div className="text-center">
+                                                        <span className="text-sm text-gray-700 font-medium block truncate max-w-[200px]">
+                                                            {file.name}
+                                                        </span>
+                                                        <span className="text-xs text-red-600">
+                                                            {fileState.error}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ) : previewUrl ? (
+                                            // Completed image preview
                                             <div className="flex flex-col items-center">
                                                 <img
                                                     src={previewUrl}
@@ -380,11 +561,16 @@ export const FileUploadInput = ({
                                                 <span className="text-xs text-gray-500">
                                                     {formatFileSize(file.size)}
                                                 </span>
+                                                {fileState?.status === 'completed' && (
+                                                    <span className="text-xs text-green-600 mt-1">
+                                                        Upload complete
+                                                    </span>
+                                                )}
                                             </div>
                                         ) : (
-                                            // Non-image file
-                                            <div className="flex items-center justify-center">
-                                                <div className="flex items-center space-x-3">
+                                            // Completed non-image file
+                                            <div className="flex flex-col items-center">
+                                                <div className="flex items-center space-x-3 mb-2">
                                                     {getFileIcon(file)}
                                                     <div className="text-center">
                                                         <span className="text-sm text-gray-700 font-medium block truncate max-w-[200px]">
@@ -395,6 +581,11 @@ export const FileUploadInput = ({
                                                         </span>
                                                     </div>
                                                 </div>
+                                                {fileState?.status === 'completed' && (
+                                                    <span className="text-xs text-green-600">
+                                                        Upload complete
+                                                    </span>
+                                                )}
                                             </div>
                                         )}
                                     </div>
@@ -404,14 +595,16 @@ export const FileUploadInput = ({
                     )}
                 </div>
 
-                {/* Hidden file input - handles all file selection */}
+                {/* Hidden file input */}
                 <input
+                    ref={hiddenInputRef}
                     type="file"
+                    name={name}
                     accept={accept}
                     multiple={multiple}
                     onChange={(e) => handleFileChange(e.target.files)}
-                    onFocus={onFocus}
-                    onBlur={onBlur}
+                    onFocus={handleFocus}
+                    onBlur={handleBlur}
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-20"
                     disabled={disabled}
                     style={{
@@ -421,51 +614,20 @@ export const FileUploadInput = ({
                     {...otherProps}
                 />
             </div>
-
-            {/* File validation errors */}
-            {fileErrors.length > 0 && (
-                <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-md">
-                    <div className="text-sm text-red-600">
-                        <strong>File Upload Errors:</strong>
-                        <ul className="mt-1 list-disc list-inside">
-                            {fileErrors.map((error, index) => (
-                                <li key={index}>{error}</li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            )}
-
-            {/* File upload progress (for ICA theme with file processing) */}
-            {theme === 'ica' && fileUploadState && fileUploadState.isProcessing && (
-                <div className="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-md">
-                    <div className="flex items-center space-x-2">
-                        <svg className="animate-spin h-4 w-4 text-blue-600" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                        </svg>
-                        <span className="text-sm text-blue-600">
-                            Processing files... {fileUploadState.processingProgress || 0}%
-                        </span>
-                    </div>
-                </div>
-            )}
-
-            {/* File upload processing errors (for ICA theme) */}
-            {theme === 'ica' && fileUploadState && fileUploadState.fileErrors && fileUploadState.fileErrors.length > 0 && (
-                <div className="mt-2 p-3 bg-red-50 border border-red-200 rounded-md">
-                    <div className="text-sm text-red-600">
-                        <strong>Processing Errors:</strong>
-                        <ul className="mt-1 list-disc list-inside">
-                            {fileUploadState.fileErrors.map((error, index) => (
-                                <li key={index}>{error}</li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            )}
         </div>
     );
+});
+
+// Helper function for base64 conversion
+const fileToBase64 = (file) =>
+{
+    return new Promise((resolve, reject) =>
+    {
+        const reader = new FileReader();
+        reader.onload = () => resolve(reader.result.split(',')[1]);
+        reader.onerror = (error) => reject(error);
+        reader.readAsDataURL(file);
+    });
 };
 
 // ABN formatting utility
@@ -537,6 +699,9 @@ export const TextInput = forwardRef(({
     autoComplete = "new-password",
     maxLength,
     hidden = false,
+    // FIXED: Extract non-DOM props to prevent React warnings
+    currentErrorField,
+    setCurrentErrorField,
     ...props
 }, ref) =>
 {
@@ -598,6 +763,9 @@ export const ABNInput = forwardRef(({
     disabled = false,
     required = false,
     autoComplete = "new-password",
+    // FIXED: Extract non-DOM props to prevent React warnings
+    currentErrorField,
+    setCurrentErrorField,
     ...props
 }, ref) =>
 {
@@ -644,7 +812,7 @@ export const ABNInput = forwardRef(({
     );
 });
 
-// Enhanced Select Input with ICA theme support
+// FIXED: Enhanced Select Input with proper prop destructuring
 export const SelectInput = forwardRef(({
     value,
     onChange,
@@ -658,6 +826,9 @@ export const SelectInput = forwardRef(({
     disabled = false,
     label,
     footnote,
+    // FIXED: Extract non-DOM props to prevent React warnings
+    currentErrorField,
+    setCurrentErrorField,
     ...props
 }, ref) =>
 {
@@ -746,6 +917,9 @@ export const TextareaInput = forwardRef(({
     disabled = false,
     required = false,
     autoComplete = "new-password",
+    // FIXED: Extract non-DOM props to prevent React warnings
+    currentErrorField,
+    setCurrentErrorField,
     ...props
 }, ref) =>
 {
@@ -770,10 +944,7 @@ export const TextareaInput = forwardRef(({
     );
 });
 
-
-// /components/common/forms-new/core/SpecializedInputs.js - FIXED DateInput
-// Replace the DateInput export in your SpecializedInputs.js with this complete version
-
+// FIXED: Enhanced DateInput
 export const DateInput = forwardRef(({
     value,
     onChange,
@@ -789,6 +960,9 @@ export const DateInput = forwardRef(({
     format = "dd/MM/yyyy",
     disabled = false,
     autoComplete = "new-password",
+    // FIXED: Extract non-DOM props to prevent React warnings
+    currentErrorField,
+    setCurrentErrorField,
     ...props
 }, ref) =>
 {
@@ -1139,7 +1313,7 @@ export const DateInput = forwardRef(({
     );
 });
 
-// Checkbox Group Input (keeping existing implementation with ICA theme support)
+// FIXED: Checkbox Group Input with proper prop destructuring
 export const CheckboxGroupInput = forwardRef(({
     value,
     onChange,
@@ -1154,6 +1328,7 @@ export const CheckboxGroupInput = forwardRef(({
     label,
     footnote,
     disabled = false,
+    // FIXED: Extract non-DOM props to prevent React warnings
     currentErrorField,
     setCurrentErrorField,
     ...props
@@ -1274,7 +1449,7 @@ export const CheckboxGroupInput = forwardRef(({
     );
 });
 
-// Simplified Legacy Checkbox Component
+// Simplified Legacy Checkbox Component - FIXED to not pass non-DOM props
 const LegacyCheckbox = ({
     value,
     className = "",

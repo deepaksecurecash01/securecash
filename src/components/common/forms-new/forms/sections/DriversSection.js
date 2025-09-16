@@ -2,6 +2,7 @@
 import React from 'react';
 import { FaUsers, FaCircle, FaIdCard, FaArrowRightLong } from "react-icons/fa6";
 import Link from 'next/link';
+import Image from 'next/image';
 import UniversalFormField from '@/components/common/forms-new/core/UniversalFormField';
 
 // Section Title Component - Pixel-perfect match to original
@@ -77,12 +78,12 @@ const DriversSection = ({ formManager }) =>
                 <div className="grid grid-cols-1 lg:grid-cols-3">
                     <div className="lg:col-span-2 gap-4 flex flex-col justify-center mr-2">
                         <SectionTitle position="left" Icon={FaUsers}>
-                            Let's get set up for contracting using eDockets!
+                            Let&apos;s get set up for contracting using eDockets!
                         </SectionTitle>
 
                         <div className="lg:col-span-2 flex flex-col gap-4">
                             <p className="text-gray-700">
-                                To complete the submission of this Independent Contractors Agreement, if you have not done so already, you will need to access the eDockets Contractor Portal where you will be required to <strong>"Register as a Contractor"</strong> and set yourself up as a Contractor in the eDockets system.
+                                To complete the submission of this Independent Contractors Agreement, if you have not done so already, you will need to access the eDockets Contractor Portal where you will be required to <strong>&quot;Register as a Contractor&quot;</strong> and set yourself up as a Contractor in the eDockets system.
                             </p>
 
                             <p className="text-gray-700">
@@ -146,8 +147,10 @@ const DriversSection = ({ formManager }) =>
                     </div>
 
                     <div className="flex justify-center items-center">
-                        <img
-                            src="images/eDockets-Contractor-Register.webp"
+                        <Image
+                            src="/images/eDockets-Contractor-Register.webp"
+                            width={450}
+                            height={450}
                             className="1024px:h-[450px]"
                             alt="Sample passport photo guidelines"
                         />
@@ -156,7 +159,7 @@ const DriversSection = ({ formManager }) =>
 
                 <div className="mt-4">
                     <p className='text-gray-700 font-semibold'>
-                        Once Registered - At the top of the "Assignee" tab you will see "Your code to provide to an eDockets Licensee", copy this code and paste it into the field below so we can get everything ready for you to start servicing the SecureCash clients!
+                        Once Registered - At the top of the &quot;Assignee&quot; tab you will see &quot;Your code to provide to an eDockets Licensee&quot;, copy this code and paste it into the field below so we can get everything ready for you to start servicing the SecureCash clients!
                     </p>
                 </div>
             </div>

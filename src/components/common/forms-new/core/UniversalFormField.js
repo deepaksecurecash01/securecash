@@ -78,7 +78,7 @@ const UniversalFormField = ({
         console.error(`UniversalFormField: 'control' prop is required for field '${name}'`);
         return (
             <div className="text-red-500 p-2 border border-red-500">
-                Error: Missing 'control' prop for field '{name}'
+                Error: Missing &apos;control&apos; prop for field &apos;{name}&apos;
             </div>
         );
     }
@@ -146,7 +146,7 @@ const UniversalFormField = ({
                             // Theme-aware positioning
                             className={
                                 theme === 'legacy-hazard' ? "top-16" :
-                                    theme === 'ica' ? "top-16" :
+                                    theme === 'ica' ? "top-12" :
                                         undefined
                             }
                         />

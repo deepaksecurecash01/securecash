@@ -23,34 +23,31 @@ export const submitForm = async (formData, endpoint = "/api/forms") =>
 };
 
 // File processing utilities (for ICA form)
-export const fileToBase64 = async (file) =>
-{
-    return new Promise((resolve, reject) =>
+export const fileToBase64 = (file, onProgress = null) =>
     {
-        if (!file) {
-            resolve(null);
-            return;
-        }
+        return new Promise((resolve, reject) =>
+        {
+            const reader = new FileReader();
 
-        // File size validation - 5MB max
-        if (file.size > 5 * 1024 * 1024) {
-            reject(new Error(`File ${file.name} is too large. Max 5MB allowed.`));
-            return;
-        }
+            // SOLUTION 2: Track reading progress
+            reader.onprogress = (event) =>
+            {
+                if (onProgress && event.lengthComputable) {
+                    const progress = (event.loaded / event.total) * 100;
+                    onProgress(progress);
+                }
+            };
 
-        // File type validation - only images
-        const allowedTypes = ['image/jpeg', 'image/png', 'image/jpg'];
-        if (!allowedTypes.includes(file.type)) {
-            reject(new Error(`File ${file.name} type not allowed. Only JPEG and PNG images allowed.`));
-            return;
-        }
+            reader.onload = () =>
+            {
+                if (onProgress) onProgress(100);
+                resolve(reader.result.split(',')[1]);
+            };
 
-        const reader = new FileReader();
-        reader.onload = () => resolve(reader.result);
-        reader.onerror = error => reject(error);
-        reader.readAsDataURL(file);
-    });
-};
+            reader.onerror = (error) => reject(error);
+            reader.readAsDataURL(file);
+        });
+    };
 
 // Process multiple attachments with compression (for ICA form)
 export const processAttachments = async (fileFields, data, compressImageFile) =>

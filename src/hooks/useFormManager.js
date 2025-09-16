@@ -1,16 +1,12 @@
-// /hooks/useFormManager.js - ENHANCED WITH FILE UPLOAD SUPPORT
+// Enhanced useFormManager - Replace in your useFormManager.js
+
 import { useState, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { useFocusManager } from './useFocusManager';
 import { useFormSubmission } from './useFormSubmission';
-import { useFileUpload } from './useFileUpload';
 
-/**
- * Enhanced Form Manager with Multi-Step, Hybrid, AND File Upload Support
- * Now includes integrated file processing for complex forms like ICA
- */
 export const useFormManager = ({
     // Core form configuration
     schema,
@@ -28,8 +24,8 @@ export const useFormManager = ({
     // Hybrid form configuration for Site Info pattern
     hybrid = null,
 
-    // NEW: File upload configuration
-    fileUpload = null, // { enabled: true, fields: [...], compression: {...} }
+    // File upload configuration - simplified and robust
+    fileUpload = null,
 }) =>
 {
     // Multi-step state management
@@ -43,29 +39,40 @@ export const useFormManager = ({
     );
     const [showReviewStep, setShowReviewStep] = useState(false);
 
+    // Simplified file upload state management
+    const [fileUploadResults, setFileUploadResults] = useState(new Map());
+
     // Form type detection
     const isMultiStep = !!multiStep && multiStep.steps && multiStep.steps.length > 1;
     const isHybrid = !!hybrid && hybrid.enabled;
     const hasFileUpload = !!fileUpload && fileUpload.enabled;
 
-    // Initialize file upload hook if needed
-    const fileUploadHook = useFileUpload(
-        hasFileUpload ? {
-            compression: fileUpload.compression || {
-                targetSizeKB: 400,
-                maxSizeMB: 5,
-                allowedTypes: ['image/jpeg', 'image/png', 'image/jpg']
-            },
-            concurrencyLimit: fileUpload.concurrencyLimit || 2
-        } : {
-            compression: {
-                targetSizeKB: 400,
-                maxSizeMB: 5,
-                allowedTypes: ['image/jpeg', 'image/png', 'image/jpg']
-            },
-            concurrencyLimit: 2
-        }
-    );
+    // Clean file upload state methods
+    const setUploadResult = useCallback((fileId, result) =>
+    {
+        console.log(`Storing upload result for ${fileId}`);
+        setFileUploadResults(prev => new Map(prev.set(fileId, result)));
+    }, []);
+
+    const clearUploadResult = useCallback((fileId) =>
+    {
+        console.log(`Clearing upload result for ${fileId}`);
+        setFileUploadResults(prev =>
+        {
+            const updated = new Map(prev);
+            updated.delete(fileId);
+            return updated;
+        });
+    }, []);
+
+    const getCompletedUploads = useCallback(() =>
+    {
+        const completed = Array.from(fileUploadResults.values()).filter(
+            result => result?.isProcessed && result.data
+        );
+        console.log(`Found ${completed.length} completed uploads`);
+        return completed;
+    }, [fileUploadResults]);
 
     // Get current step information
     const getCurrentStep = useCallback(() =>
@@ -129,10 +136,10 @@ export const useFormManager = ({
         setFocus
     } = form;
 
-    // Focus and submission management
+    // Enhanced focus management
     const focus = useFocusManager(control);
 
-    // Enhanced submission with file processing
+    // Enhanced submission with clean file handling
     const submission = useFormSubmission({
         formType,
         formId,
@@ -142,15 +149,50 @@ export const useFormManager = ({
         {
             let processedData = data;
 
-            // Process files if file upload is enabled
+            // Process file uploads if configured
             if (hasFileUpload && fileUpload.fields && fileUpload.fields.length > 0) {
-                try {
-                    const attachments = await fileUploadHook.processFiles(data, fileUpload.fields);
-                    processedData = { ...data, attachments };
-                } catch (error) {
-                    console.error('File processing failed:', error);
-                    throw error;
+                console.log('Processing form submission with file uploads');
+
+                const attachments = [];
+                const missingFiles = [];
+
+                // Check each file field
+                for (const { field, prefix } of fileUpload.fields) {
+                    if (data[field]) {
+                        const files = Array.isArray(data[field]) ? data[field] : [data[field]];
+
+                        for (const file of files) {
+                            // Look for processed result by matching file properties
+                            const matchingResult = Array.from(fileUploadResults.values()).find(result =>
+                                result.originalFile &&
+                                result.originalFile.name === file.name &&
+                                result.originalFile.size === file.size &&
+                                result.isProcessed &&
+                                result.data
+                            );
+
+                            if (matchingResult) {
+                                // Use pre-processed file
+                                attachments.push({
+                                    filename: `${prefix || field}.${file.name.split('.').pop()}`,
+                                    data: matchingResult.data
+                                });
+                                console.log(`Using pre-processed file: ${file.name}`);
+                            } else {
+                                // File not processed
+                                missingFiles.push(file.name);
+                                console.error(`File ${file.name} was not processed!`);
+                            }
+                        }
+                    }
                 }
+
+                if (missingFiles.length > 0) {
+                    throw new Error(`File(s) "${missingFiles.join('", "')}" were not processed. Please remove and re-upload the file(s).`);
+                }
+
+                processedData = { ...data, attachments };
+                console.log(`Submission prepared with ${attachments.length} attachments`);
             }
 
             // Apply custom prepareData if provided
@@ -167,24 +209,16 @@ export const useFormManager = ({
     {
         if (!isMultiStep) return;
 
-        // Save current form data
         const currentFormData = getValues();
         const updatedStepData = { ...stepData, ...currentFormData };
         setStepData(updatedStepData);
-
-        // Navigate to target step
         setCurrentStep(targetStep);
-
-        // Reset form with updated data
         reset(updatedStepData);
-
-        // Clear focus
         focus.clearFocus();
 
         console.log(`Manual navigation to step ${targetStep}`, updatedStepData);
     }, [isMultiStep, getValues, stepData, reset, focus]);
 
-    // Go back one step
     const goBack = useCallback(() =>
     {
         if (currentStep > 0) {
@@ -201,21 +235,16 @@ export const useFormManager = ({
 
         if (!isMultiStep) return updatedStepData;
 
-        // Hybrid form logic for Site Info pattern
         if (isHybrid) {
             const reviewStep = hybrid.reviewStep || 3;
-
             if (currentStep === reviewStep - 1) {
-                // Moving from last multi-step to review section
                 setCurrentStep(reviewStep);
                 setSubmitButtonEnabled(true);
-
                 console.log('Hybrid transition: Enabling submit section');
                 return updatedStepData;
             }
         }
 
-        // Standard multi-step navigation
         const { stepId } = getCurrentStep();
 
         if (multiStep.conditional && stepId === 'quote') {
@@ -241,15 +270,12 @@ export const useFormManager = ({
         return updatedStepData;
     }, [stepData, currentStep, isMultiStep, isHybrid, hybrid, getCurrentStep, multiStep]);
 
-    // Enhanced last step detection with hybrid support
     const isLastStep = useCallback((formDataOverride = null) =>
     {
         if (!isMultiStep) return true;
 
-        // Hybrid form logic - allow actual last step to submit
         if (isHybrid) {
             const actualLastStep = currentStep === multiStep.steps.length - 1;
-
             if (actualLastStep) {
                 return true;
             } else {
@@ -257,7 +283,6 @@ export const useFormManager = ({
             }
         }
 
-        // Standard multi-step logic
         const { stepId } = getCurrentStep();
         const dataToCheck = formDataOverride || stepData;
 
@@ -280,47 +305,58 @@ export const useFormManager = ({
         return currentStep === multiStep.steps.length - 1;
     }, [isMultiStep, isHybrid, getCurrentStep, stepData, currentStep, multiStep]);
 
-    // Enhanced validation
     const validateCurrentStep = useCallback((data) =>
     {
         const currentSchema = getCurrentSchema();
         if (!currentSchema) return { success: true };
-
         return currentSchema.safeParse(data);
     }, [getCurrentSchema]);
 
     // Enhanced field focus management
-    const handleFieldFocus = (fieldName) =>
+    const handleFieldFocus = useCallback((fieldName) =>
     {
-        console.log(`Enhanced Form Manager: Field focus initiated by ${fieldName}`);
+        console.log(`Field focus initiated by ${fieldName}`);
         focus.setFocusField(fieldName);
-    };
+    }, [focus]);
 
-    const handleFieldBlur = () =>
+    const handleFieldBlur = useCallback(() =>
     {
-        console.log(`Enhanced Form Manager: Field blur - clearing focus`);
+        console.log(`Field blur - clearing focus`);
         focus.clearFocus();
-    };
+    }, [focus]);
 
     // Enhanced validation error handler
-    const handleValidationError = (validationErrors) =>
+    const handleValidationError = useCallback((validationErrors) =>
     {
         console.log('Step validation failed:', validationErrors);
 
+        // Try enhanced focus management first
         const focusSuccess = focus.focusFirstError(validationErrors);
 
         if (!focusSuccess) {
             const firstErrorField = Object.keys(validationErrors)[0];
-            console.log(`Fallback: Using setFocus for ${firstErrorField}`);
+            console.log(`Fallback - Using setFocus for ${firstErrorField}`);
             try {
                 setFocus(firstErrorField);
             } catch (error) {
                 console.warn(`setFocus fallback failed for ${firstErrorField}:`, error);
+
+                // File field fallback
+                if (hasFileUpload && fileUpload.fields) {
+                    const fileField = fileUpload.fields.find(f => f.field === firstErrorField);
+                    if (fileField) {
+                        console.log(`Attempting scroll to file field: ${firstErrorField}`);
+                        const element = document.querySelector(`[data-field-name="${firstErrorField}"]`);
+                        if (element) {
+                            element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    }
+                }
             }
         }
-    };
+    }, [focus, setFocus, hasFileUpload, fileUpload]);
 
-    // Enhanced form submission handler with file processing
+    // Enhanced form submission handler
     const handleSubmit = rhfHandleSubmit(
         async (formData) =>
         {
@@ -336,13 +372,11 @@ export const useFormManager = ({
             const isCurrentlyLastStep = isLastStep(formData);
 
             if (isCurrentlyLastStep) {
-                // Final submission with file processing
                 const finalStepData = { ...stepData, ...formData };
-                console.log('Final submission with data:', finalStepData);
+                console.log('Final submission:', finalStepData);
                 focus.clearFocus();
                 return await submission.handleSubmission(finalStepData);
             } else {
-                // Step progression - only if validation passed
                 console.log('Moving to next step');
                 const updatedStepData = moveToNextStep(formData);
                 focus.clearFocus();
@@ -358,7 +392,7 @@ export const useFormManager = ({
         }
     );
 
-    // Enhanced field props helper with file upload support
+    // Enhanced field props helper
     const getFieldProps = useCallback((fieldConfig) =>
     {
         const { name, type = 'text', ...otherConfig } = fieldConfig;
@@ -373,58 +407,60 @@ export const useFormManager = ({
             onFieldBlur: handleFieldBlur,
         };
 
-        // Add file upload specific props
+        // Add file upload state for file fields
         if (type === 'file' && hasFileUpload) {
             return {
                 ...baseProps,
                 fileUploadState: {
-                    isProcessing: fileUploadHook.isProcessing,
-                    processingProgress: fileUploadHook.processingProgress,
-                    fileErrors: fileUploadHook.fileErrors,
-                    validateFile: fileUploadHook.validateFile,
-                    clearFileErrors: fileUploadHook.clearFileErrors
+                    // Methods for FileUploadInput
+                    setUploadResult,
+                    clearUploadResult,
+                    getCompletedUploads,
+
+                    // Configuration
+                    compression: fileUpload.compression || {
+                        maxSizeMB: 5,
+                        allowedTypes: ['image/jpeg', 'image/png', 'image/jpg', 'application/pdf']
+                    }
                 }
             };
         }
 
         return baseProps;
-    }, [control, focus.currentFocusField, handleFieldFocus, handleFieldBlur, hasFileUpload, fileUploadHook]);
+    }, [control, focus.currentFocusField, handleFieldFocus, handleFieldBlur, hasFileUpload, setUploadResult, clearUploadResult, getCompletedUploads, fileUpload]);
 
-    // Get current step data
     const getStepData = useCallback(() =>
     {
         return stepData;
     }, [stepData]);
 
-    // Enhanced reset form with hybrid and file upload support
+    // Reset form with complete cleanup
     const resetForm = useCallback(() =>
     {
         setCurrentStep(0);
         setStepData(defaultValues);
         setCompletedSteps(new Set());
 
-        // Reset hybrid state
         if (isHybrid) {
             setSubmitButtonEnabled(hybrid?.submitEnabled ?? false);
             setShowReviewStep(false);
         }
 
-        // Clear file upload errors
+        // Clean file upload state
         if (hasFileUpload) {
-            fileUploadHook.clearFileErrors();
+            setFileUploadResults(new Map());
+            console.log('File upload state reset');
         }
 
         reset(defaultValues);
         focus.clearFocus();
         submission.resetSubmission();
-    }, [defaultValues, reset, focus, submission, isHybrid, hybrid, hasFileUpload, fileUploadHook]);
+    }, [defaultValues, reset, focus, submission, isHybrid, hybrid, hasFileUpload]);
 
-    // Enhanced progress information with hybrid support
     const getProgress = useMemo(() =>
     {
         if (!isMultiStep) return { current: 1, total: 1, percentage: 100 };
 
-        // Hybrid progress calculation
         if (isHybrid) {
             const reviewStep = hybrid.reviewStep || 3;
             const total = reviewStep + 1;
@@ -447,7 +483,6 @@ export const useFormManager = ({
         };
     }, [isMultiStep, currentStep, multiStep, completedSteps.size, isHybrid, hybrid]);
 
-    // Get next valid steps helper
     const getNextValidSteps = useCallback((services) =>
     {
         if (!isMultiStep || !multiStep.conditional || !multiStep.getNextSteps) {
@@ -456,7 +491,6 @@ export const useFormManager = ({
         return multiStep.getNextSteps({ Service: services });
     }, [isMultiStep, multiStep]);
 
-    // Enhanced debug information
     const getDebugInfo = () =>
     {
         return {
@@ -474,8 +508,8 @@ export const useFormManager = ({
             showReviewStep,
             // File upload debug info
             hasFileUpload,
-            fileProcessing: hasFileUpload ? fileUploadHook.isProcessing : false,
-            fileErrors: hasFileUpload ? fileUploadHook.fileErrors : [],
+            fileUploadResults: fileUploadResults.size,
+            completedUploads: getCompletedUploads().length,
             ...focus.getFocusDebugInfo()
         };
     };
@@ -531,14 +565,17 @@ export const useFormManager = ({
         // Validation error handling
         handleValidationError,
 
-        // NEW: File upload methods (only if enabled)
+        // File upload integration
         ...(hasFileUpload && {
             fileUpload: {
-                isProcessing: fileUploadHook.isProcessing,
-                processingProgress: fileUploadHook.processingProgress,
-                fileErrors: fileUploadHook.fileErrors,
-                validateFile: fileUploadHook.validateFile,
-                clearFileErrors: fileUploadHook.clearFileErrors
+                // Methods
+                setUploadResult,
+                clearUploadResult,
+                getCompletedUploads,
+
+                // Status
+                hasCompletedUploads: fileUploadResults.size > 0,
+                uploadCount: fileUploadResults.size
             }
         }),
 

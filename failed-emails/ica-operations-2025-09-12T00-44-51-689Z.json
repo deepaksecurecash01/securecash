@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-09-12T00:44:51.689Z",
+  "formType": "ica-operations",
+  "error": "socket hang up",
+  "emailData": {
+    "to": "deepak@securecash.com.au",
+    "subject": "Independent Contractor Agreement - Deepak Kumar, SecureCash",
+    "from": "operations@securecash.com.au",
+    "hasAttachments": true,
+    "attachmentCount": 6
+  },
+  "retryable": true
+}

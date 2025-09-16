@@ -15,7 +15,6 @@ const Checkbox = ({
 }) =>
 {
   const checkboxProps = register ? register(name) : {};
-  console.log(name);
   // Theme-based label styling
   const getLabelClasses = (theme) =>
   {

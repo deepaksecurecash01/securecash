@@ -74,3 +74,6 @@ export const InputField = forwardRef(({
     </div>
   );
 });
+
+
+InputField.displayName = 'InputField';

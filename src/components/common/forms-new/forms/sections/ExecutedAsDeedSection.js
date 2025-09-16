@@ -144,7 +144,7 @@ const ExecutedAsDeedSection = ({ formManager }) => (
 
             <div className="relative">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
-                    Please upload any government ID unique to the witness (e.g. driver's license):
+                    Please upload any government ID unique to the witness (e.g. driver&apos;s license):
                 </label>
                 <UniversalFormField
                     name="WitnessID"

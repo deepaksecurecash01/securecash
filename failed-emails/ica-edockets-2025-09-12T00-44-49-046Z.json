@@ -1,0 +1,13 @@
+{
+  "timestamp": "2025-09-12T00:44:49.046Z",
+  "formType": "ica-edockets",
+  "error": "socket hang up",
+  "emailData": {
+    "to": "deepak@securecash.com.au",
+    "subject": "eDocket App - Deepak Kumar, SecureCash",
+    "from": "info@edockets.app",
+    "hasAttachments": false,
+    "attachmentCount": 0
+  },
+  "retryable": true
+}

@@ -8,6 +8,7 @@ const WarningPopup = ({ error, isFirstError, className, type }) =>
   const typePosition = {
     
     textarea: "top-[236px]",  // bigger field
+    ica: "top-12",         // dropdown
   };
 
   // Decide which position to use

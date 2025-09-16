@@ -1,3 +1,4 @@
+// /components/common/forms-new/core/FieldRenderer.js - ENHANCED FOR COMPLETE FILE UPLOAD INTEGRATION
 import React, { useState, useEffect } from 'react';
 import
     {
@@ -11,8 +12,8 @@ import
     } from './SpecializedInputs';
 
 /**
- * Enhanced FieldRenderer with Complete Theme Support
- * Handles field rendering for all themes including ICA
+ * Enhanced FieldRenderer with Complete Theme Support and File Upload Integration
+ * Handles field rendering for all themes including ICA with pixel-perfect file upload support
  */
 const FieldRenderer = ({
     type,
@@ -47,7 +48,7 @@ const FieldRenderer = ({
     disabled = false,
     required = false,
     autoComplete = "new-password",
-    // File upload state (from useFormManager)
+    // ENHANCED: File upload state (from useFormManager)
     fileUploadState,
     ...otherProps
 }) =>
@@ -188,10 +189,12 @@ const FieldRenderer = ({
                     maxLength={maxLength}
                 />
             );
+
         case 'file':
             return (
                 <FileUploadInput
-                    // FIXED: Don't pass ref - FileUploadInput manages its own input
+                    // ENHANCED: Complete file upload integration with ref forwarding
+                    ref={ref}
                     value={value}
                     onChange={onChange}
                     onFocus={handleFocus}
@@ -203,6 +206,7 @@ const FieldRenderer = ({
                     disabled={disabled}
                     accept={accept}
                     multiple={multiple}
+                    // ENHANCED: Pass complete file upload state
                     fileUploadState={fileUploadState}
                     {...otherProps}
                 />
