@@ -6,10 +6,7 @@ import UniversalFormField from '@/components/common/forms-new/core/UniversalForm
 import ScrollableSection from '@/components/layout/ScrollbarSection';
 import { FaChevronLeft, FaSpinner, FaCheckCircle } from "react-icons/fa";
 
-/**
- * Simplified Risk Assessment Fields Component
- * Uses the parent form manager instead of creating its own
- */
+
 const SiteRiskFormFields = ({ formManager }) =>
 {
     // Add icons to field configurations

@@ -6,7 +6,7 @@ import SubHeading from "@/components/common/SubHeading";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
 import { FaPhoneAlt, FaMapMarkerAlt, FaEnvelope, FaStar } from "react-icons/fa";
-import FranchiseForm from "./FranchiseForm";
+import FranchiseForm from "../common/forms-new/forms/FranchiseForm";
 
 const FormSection = () =>
 {const contactInfo = [

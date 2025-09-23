@@ -1,5 +1,4 @@
-// Enhanced useFormManager - Replace in your useFormManager.js
-
+// Enhanced useFormManager with Progressive Email Triggers
 import { useState, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -46,6 +45,7 @@ export const useFormManager = ({
     const isMultiStep = !!multiStep && multiStep.steps && multiStep.steps.length > 1;
     const isHybrid = !!hybrid && hybrid.enabled;
     const hasFileUpload = !!fileUpload && fileUpload.enabled;
+    const isQuoteForm = formType === 'quote';
 
     // Clean file upload state methods
     const setUploadResult = useCallback((fileId, result) =>
@@ -73,6 +73,44 @@ export const useFormManager = ({
         console.log(`Found ${completed.length} completed uploads`);
         return completed;
     }, [fileUploadResults]);
+
+    // PROGRESSIVE EMAIL FUNCTIONALITY
+    const sendProgressiveEmail = useCallback(async (stepData, currentStepId) =>
+    {
+        if (!isQuoteForm) return;
+
+        try {
+            console.log(`📧 Sending progressive email for Quote form - Step: ${currentStepId}`);
+
+            const response = await fetch('/api/forms', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    formType: 'quote',
+                    ...stepData,
+                    progressiveStep: currentStepId, // Flag to identify progressive submission
+                    isProgressiveEmail: true
+                }),
+            });
+
+            if (response.ok) {
+                console.log(`✅ Progressive email sent successfully for step: ${currentStepId}`);
+            } else {
+                console.warn(`⚠️ Progressive email failed for step: ${currentStepId}`, await response.text());
+            }
+        } catch (error) {
+            console.error(`❌ Progressive email error for step: ${currentStepId}`, error);
+            // Don't throw - progressive emails shouldn't block form progression
+        }
+    }, [isQuoteForm]);
+
+    // Get accumulated data for progressive emails
+    const getAccumulatedData = useCallback((currentFormData) =>
+    {
+        return { ...stepData, ...currentFormData };
+    }, [stepData]);
 
     // Get current step information
     const getCurrentStep = useCallback(() =>
@@ -226,12 +264,21 @@ export const useFormManager = ({
         }
     }, [currentStep, goToStep]);
 
-    // Enhanced step navigation with hybrid support
-    const moveToNextStep = useCallback((stepDataUpdate = {}) =>
+    // Enhanced step navigation with hybrid support AND progressive emails
+    const moveToNextStep = useCallback(async (stepDataUpdate = {}) =>
     {
         const updatedStepData = { ...stepData, ...stepDataUpdate };
         setStepData(updatedStepData);
         setCompletedSteps(prev => new Set([...prev, currentStep]));
+
+        // PROGRESSIVE EMAIL TRIGGER - Send email after each step completion
+        if (isQuoteForm && multiStep) {
+            const { stepId } = getCurrentStep();
+            const accumulatedData = getAccumulatedData(stepDataUpdate);
+
+            // Send progressive email with accumulated data
+            await sendProgressiveEmail(accumulatedData, stepId);
+        }
 
         if (!isMultiStep) return updatedStepData;
 
@@ -268,7 +315,7 @@ export const useFormManager = ({
         }
 
         return updatedStepData;
-    }, [stepData, currentStep, isMultiStep, isHybrid, hybrid, getCurrentStep, multiStep]);
+    }, [stepData, currentStep, isMultiStep, isHybrid, hybrid, getCurrentStep, multiStep, isQuoteForm, sendProgressiveEmail, getAccumulatedData]);
 
     const isLastStep = useCallback((formDataOverride = null) =>
     {
@@ -378,7 +425,7 @@ export const useFormManager = ({
                 return await submission.handleSubmission(finalStepData);
             } else {
                 console.log('Moving to next step');
-                const updatedStepData = moveToNextStep(formData);
+                const updatedStepData = await moveToNextStep(formData);
                 focus.clearFocus();
                 reset(updatedStepData);
                 return true;
@@ -510,6 +557,9 @@ export const useFormManager = ({
             hasFileUpload,
             fileUploadResults: fileUploadResults.size,
             completedUploads: getCompletedUploads().length,
+            // Progressive email debug
+            isQuoteForm,
+            progressiveEmailEnabled: isQuoteForm && isMultiStep,
             ...focus.getFocusDebugInfo()
         };
     };
@@ -564,6 +614,10 @@ export const useFormManager = ({
 
         // Validation error handling
         handleValidationError,
+
+        // Progressive email methods (for Quote form)
+        sendProgressiveEmail,
+        getAccumulatedData,
 
         // File upload integration
         ...(hasFileUpload && {

@@ -32,7 +32,7 @@ export const prepareContactAdminNotificationEmail = (formData, readPdfFile) =>
 {
     const currentDateTime = getCurrentDateTime();
     const formattedCallbackDate = formatCallbackDate(formData.CallbackDate);
-   
+
     let htmlContent = contactAdminNotificationEmailTemplate(formData, currentDateTime, formattedCallbackDate);
 
     return {
@@ -229,8 +229,10 @@ export const prepareICAEdocketsIntroductionEmail = (formData, readPdfFile) =>
     };
 };
 
+// ENHANCED QUOTE EMAIL FUNCTIONS - Now with conditional logic built-in
 export const prepareQuoteAdminRequestEmail = (formData, readPdfFile) =>
 {
+    // Use the enhanced template with conditional sections
     const htmlTemplate = quoteAdminRequestEmailTemplate(formData);
 
     return {
@@ -246,6 +248,7 @@ export const prepareQuoteUserConfirmationEmail = (formData, readPdfFile) =>
 {
     // Get any attachments if present
     const attachments = prepareAttachments(formData);
+    // Use the clean user confirmation template (no form data sections)
     const htmlTemplate = quoteUserConfirmationEmailTemplate(formData);
 
     return {

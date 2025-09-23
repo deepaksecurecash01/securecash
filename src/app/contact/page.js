@@ -1,11 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-import HeroImage from '@/components/contact/HeroImage';
+import HeroImage from './HeroImage';
 import CompaniesSlider from '@/components/common/CompaniesSlider';
-import FormSection from '@/components/contact/FormSection';
+import FormSection from '@/app/contact/FormSection.js';
 import { AUSTRALIA_COORDINATES, NEW_ZEALAND_COORDINATES } from './mapCoordinates.js';
-import TestimonialsSection from '@/components/contact/TestimonialsSection';
+import TestimonialsSection from '@/app/contact/TestimonialsSection.js';
 
 // Constants
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;

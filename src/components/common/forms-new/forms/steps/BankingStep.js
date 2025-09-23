@@ -10,10 +10,7 @@ import Typography from "@/components/common/Typography";
 import Divider from "@/components/common/Divider";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 
-/**
- * Banking Step Component - Controller-based Architecture
- * Follows the new foundation pattern with UniversalFormField
- */
+
 const BankingStep = ({ formManager, theme = 'dark' }) =>
 {
 

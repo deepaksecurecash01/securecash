@@ -36,12 +36,12 @@ const quoteUserConfirmationEmailTemplate = (formData) => {
                                           <p>If in the meantime, if you need to provide us with any further information
                                               then please feel free to contact me on 0433 251 983, or reply to this email.
                                           </p>
-                                          <p>Thanks again and I will be in touch soon,</p>
+                                          <p>Thanks again and I will be in touch soon.</p>
                                           <p>Kind regards,</p>
                                           <p>
                                               <strong>
                                                   Beth Bacchus<br>
-                                                  General Manager
+                                                  Chief Business Officer
                                               </strong>
                                           </p>
                                           <p>

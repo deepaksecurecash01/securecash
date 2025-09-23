@@ -1,8 +1,8 @@
 import React from "react";
-import Divider from "../common/Divider";
+import Divider from "@/components/common/Divider";
 import BannerButton from "../../app/home/components/banner-section/BannerButton";
 import Link from "next/link";
-import Typography from "../common/Typography";
+import Typography from "@/components/common/Typography";
 
 const HeroImage = () =>
 {

@@ -1,8 +1,74 @@
 // /components/forms/ICA/sections/EDocketSystemSection.js - REFACTORED FOR useFormManager
 import React from 'react';
 import { FaClock } from "react-icons/fa";
-import { IcaSectionTitle } from '../IcaWrapperComponents';
 import VimeoLite from "@/components/VimeoLite";
+const IcaSectionTitle = ({ children, Icon, position = 'center' }) =>
+{
+     const Divider = ({
+    color = "primary",
+    width = "100px",
+    alignment = "center",
+    margin = "my-6",
+    responsiveClassName = "",
+    customStyle = {}, // <--- you can pass extra style here
+  }) => {
+    // normalize width (accept number -> px, or string like '50%' or '120px')
+    const resolvedWidth = typeof width === "number" ? `${width}px` : width;
+
+    const style = {
+      width: resolvedWidth,
+      height: "4px",
+      borderRadius: "5px",
+      ...customStyle, // allow callers to override/add styles
+    };
+
+    // alignment via inline margin
+    if (alignment === "left") {
+      style.marginLeft = 0;
+      style.marginRight = "auto";
+    } else if (alignment === "right") {
+      style.marginLeft = "auto";
+      style.marginRight = 0;
+    } else {
+      // center
+      style.marginLeft = "auto";
+      style.marginRight = "auto";
+    }
+
+    // color handling: if hex -> inline style, else use Tailwind bg class
+    let colorClass = "";
+    if (typeof color === "string" && color.startsWith("#")) {
+      style.backgroundColor = color;
+    } else if (color) {
+      colorClass = `bg-${color}`;
+    }
+
+    // keep Tailwind for border reset / margin utility string, but remove width/align classes
+    return (
+      <hr
+        className={`border-0 ${colorClass} ${margin} ${responsiveClassName}`}
+        style={style}
+      />
+    );
+  };
+
+    return (
+        <div className="mb-2">
+            <div className={`flex items-center gap-3 mb-4 justify-center ${position === 'left' ? ' 1024px:justify-start' : 'justify-center'}`}>
+                {Icon && <Icon className="text-[24px] text-primary" />}
+                <h3 className="text-[26px] font-semibold text-gray-800">
+                    {children}
+                </h3>
+            </div>
+            <Divider
+                color="primary"
+                alignment={position === 'left' ? 'left' : 'center'}
+                margin="mt-[20px]"
+                responsiveClassName="m-0 text-left"
+            />
+        </div>
+    );
+};
 
 const EDocketSystemSection = ({ COMPANY_INFO }) => (
     <div className="space-y-6 border-b border-dark-border/30 pb-12">

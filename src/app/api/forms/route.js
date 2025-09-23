@@ -4,21 +4,21 @@ import sendgrid from "@sendgrid/mail";
 import fs from "fs";
 import path from "path";
 import
-    {
-        prepareContactAdminNotificationEmail,
-        prepareContactUserConfirmationEmail,
-        prepareFranchiseAdminInquiryEmail,
-        prepareFranchiseUserWelcomeEmail,
-        prepareICAContractorWelcomeEmail,
-        prepareICAEdocketsIntroductionEmail,
-        prepareICAOperationsReviewEmail,
-        prepareQuoteAdminRequestEmail,
-        prepareQuoteUserConfirmationEmail,
-        prepareSiteInfoAdminNotificationEmail,
-        prepareSiteInfoUserConfirmationEmail,
-        prepareTermsAgreementEmail,
-        prepareAustracSubmissionEmail
-    } from "./services/emailService";
+{
+    prepareContactAdminNotificationEmail,
+    prepareContactUserConfirmationEmail,
+    prepareFranchiseAdminInquiryEmail,
+    prepareFranchiseUserWelcomeEmail,
+    prepareICAContractorWelcomeEmail,
+    prepareICAEdocketsIntroductionEmail,
+    prepareICAOperationsReviewEmail,
+    prepareQuoteAdminRequestEmail,
+    prepareQuoteUserConfirmationEmail,
+    prepareSiteInfoAdminNotificationEmail,
+    prepareSiteInfoUserConfirmationEmail,
+    prepareTermsAgreementEmail,
+    prepareAustracSubmissionEmail
+} from "./services/emailService";
 
 // Set SendGrid API key once
 sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
@@ -577,7 +577,6 @@ const processAttachment = (attachment, filename, mimeType = "application/pdf") =
     }
 };
 
-// ADD THIS NEW FUNCTION - Place it after your helper functions but before FORM_HANDLERS
 // Universal multi-email batch executor with individual tracking
 const executeMultiEmailBatch = async (emailTasks, formType) =>
 {
@@ -703,6 +702,36 @@ const executeMultiEmailBatch = async (emailTasks, formType) =>
         partialSuccess: sentCount > 0 && sentCount < emailTasks.length,
         totalAttempts: retryCount + 1
     };
+};
+
+// ENHANCED QUOTE FORM FINAL STEP DETECTION HELPER
+const isQuoteFinalStep = (formData) =>
+{
+    // Check if user selected any services that require additional steps
+    const services = formData.Service || [];
+
+    // If no services selected, it's final after main quote step
+    if (services.length === 0) {
+        return true;
+    }
+
+    // Check if all required service data is provided
+    const hasBanking = services.includes('Banking');
+    const hasChange = services.includes('Change');
+
+    // If Banking is selected, check if banking data is provided
+    if (hasBanking) {
+        const bankingComplete = !!(formData.BankingFrequency && formData.BankingAmount);
+        if (!bankingComplete) return false;
+    }
+
+    // If Change is selected, check if change data is provided  
+    if (hasChange) {
+        const changeComplete = !!(formData.ChangeFrequency && formData.ChangeNotesAmount);
+        if (!changeComplete) return false;
+    }
+
+    return true;
 };
 
 // Universal form handlers with enhanced resilience
@@ -924,6 +953,7 @@ const FORM_HANDLERS = {
         logData: (data) => ({ name: data.Name, business: data.BusinessName })
     },
 
+    // ENHANCED QUOTE HANDLER - Progressive Email Logic
     quote: {
         queueEmails: (data) =>
         {
@@ -934,25 +964,38 @@ const FORM_HANDLERS = {
                 FormID: data.FormID || "quote"
             };
 
+            // Determine if this is a progressive email or final submission
+            const isProgressive = data.isProgressiveEmail === true;
+            const isFinalStep = isQuoteFinalStep(clean);
+
             emailQueue.push({
                 type: 'quote',
                 formType: 'Quote',
                 executeWithResilience: async () =>
                 {
-                    return await executeMultiEmailBatch([
+                    const emailTasks = [
                         {
                             id: 'admin-request',
                             type: 'quote-admin',
                             prepare: () => prepareQuoteAdminRequestEmail(clean, readPdfFile),
                             recipient: 'admin'
-                        },
-                        {
+                        }
+                    ];
+
+                    // Only send user confirmation on final step (not progressive)
+                    if (!isProgressive && isFinalStep) {
+                        emailTasks.push({
                             id: 'user-confirmation',
                             type: 'quote-user',
                             prepare: () => prepareQuoteUserConfirmationEmail(clean, readPdfFile),
                             recipient: 'customer'
-                        }
-                    ], 'Quote');
+                        });
+                        console.log('📧 Quote FINAL step: Sending both admin and user emails');
+                    } else {
+                        console.log('📧 Quote PROGRESSIVE step: Sending only admin email');
+                    }
+
+                    return await executeMultiEmailBatch(emailTasks, 'Quote');
                 }
             });
         },
@@ -965,20 +1008,33 @@ const FORM_HANDLERS = {
                 FormID: data.FormID || "quote"
             };
 
-            return await executeMultiEmailBatch([
+            // Determine if this is a progressive email or final submission
+            const isProgressive = data.isProgressiveEmail === true;
+            const isFinalStep = isQuoteFinalStep(clean);
+
+            const emailTasks = [
                 {
                     id: 'admin-request',
                     type: 'quote-admin',
                     prepare: () => prepareQuoteAdminRequestEmail(clean, readPdfFile),
                     recipient: 'admin'
-                },
-                {
+                }
+            ];
+
+            // Only send user confirmation on final step (not progressive)
+            if (!isProgressive && isFinalStep) {
+                emailTasks.push({
                     id: 'user-confirmation',
                     type: 'quote-user',
                     prepare: () => prepareQuoteUserConfirmationEmail(clean, readPdfFile),
                     recipient: 'customer'
-                }
-            ], 'Quote');
+                });
+                console.log('📧 Quote FINAL step: Sending both admin and user emails');
+            } else {
+                console.log('📧 Quote PROGRESSIVE step: Sending only admin email');
+            }
+
+            return await executeMultiEmailBatch(emailTasks, 'Quote');
         },
         response: "Quote request submitted successfully!",
         logData: (data) => ({ org: data.Organisation, name: data.Name })
@@ -1131,6 +1187,7 @@ export async function POST(req)
         // Parse JSON - let it throw if invalid
         const { formType, ...formData } = await req.json();
         const parseTime = performance.now();
+
         // Quick validation
         if (!formType) {
             return NextResponse.json({ error: "formType required" }, { status: 400 });

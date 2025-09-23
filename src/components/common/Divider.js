@@ -10,15 +10,23 @@ const Divider = ({
 }) =>
 {
   // Determine alignment classes
-  const alignmentClass =
-    alignment === "left"
-      ? " text-left"
-      : alignment === "right"
-        ? "ml-auto mr-0"
-        : "";
+  const getAlignmentClasses = () =>
+  {
+    switch (alignment) {
+      case "left":
+        return "ml-0 mr-auto";
+      case "right":
+        return "ml-auto mr-0";
+      case "center":
+      default:
+        return "mx-auto";
+    }
+  };
 
-  // Create the style object for custom values that can't be handled by Tailwind classes
-  const customStyles = {};
+  // Create the style object for custom values
+  const customStyles = {
+    width: width, // Set width via inline style for dynamic values
+  };
 
   // Handle color
   let colorClass = "";
@@ -28,10 +36,11 @@ const Divider = ({
     colorClass = `bg-${color}`;
   }
 
+  const alignmentClasses = getAlignmentClasses();
 
   return (
     <hr
-      className={`h-[4px] w-[${width}] rounded-[5px] mx-auto border-0 ${colorClass} ${margin} ${padding} text-center 1024px:${alignmentClass} ${responsiveClassName}`}
+      className={`h-[4px] rounded-[5px] border-0 ${colorClass} ${margin} ${padding} ${alignmentClasses} ${responsiveClassName}`}
       style={customStyles}
     />
   );

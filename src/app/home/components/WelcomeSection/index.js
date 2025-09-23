@@ -43,7 +43,7 @@ const WelcomeSection = () =>
   };
 
   return (
-    <div className=" w-full bg-content-bg bg-no-repeat bg-center inline-block mt-10">
+    <div className=" w-full bg-content-bg bg-no-repeat bg-center bg-cover inline-block mt-10">
       <Container className="max-[1366px]:max-w-[1280px]">
         <div
           id="content"

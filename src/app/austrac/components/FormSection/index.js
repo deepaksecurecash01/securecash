@@ -6,7 +6,7 @@ import SubHeading from "@/components/common/SubHeading";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
 import Link from "next/link";
-import QuoteForm from "../QuoteForm";
+import AustracForm from "@/components/common/forms-new/forms/AustracForm";
 
 const FormSection = () =>
 {
@@ -172,7 +172,7 @@ const FormSection = () =>
         </div>
 
         <div className="[flex:1] mb-20">
-          <QuoteForm />
+          <AustracForm />
 
 </div>
 
