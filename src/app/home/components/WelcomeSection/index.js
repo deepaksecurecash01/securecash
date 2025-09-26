@@ -6,7 +6,7 @@ import Typography from "@/components/common/Typography";
 import Paragraph from "@/components/common/Paragraph";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
-import VimeoLite from "@/components/VimeoLite";
+import VimeoLite from "@/components/common/VimeoLite";
 import Container from "@/components/layout/Container";
 
 const servicesData = [
@@ -69,10 +69,9 @@ const WelcomeSection = () =>
             />
             <Divider
               color="primary"
-              width="100px"
-              margin="mt-3 mb-6"
+          
               alignment="center"
-              responsiveStyles=""
+              className="w-[100px] mt-3 mb-6" 
             />
             <Typography
               as="p"

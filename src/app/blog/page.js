@@ -1,17 +1,18 @@
-import BottomBanner from '@/components/about-us/BottomBanner';
-import BlogHeroSection from '@/components/blog/BlogHeroSection';
-import BlogIndex from '@/components/blog/BlogIndex';
-import React from 'react'
+import BottomBanner from '@/components/common/BottomBanner';
+import BlogHeroSection from '@/app/blog/components/BlogHeroSection';
+import BlogIndex from '@/app/blog/components/BlogIndex';
+import React from 'react';
 
-const page = () => {
+const page = () =>
+{
   return (
     <div>
       <BlogHeroSection title={'Thanks for being my sounding board'} date={'News, Articles & Updates From Us'} blogIndex={true} />
-      <BlogIndex/>
+      <BlogIndex />
       <BottomBanner />
 
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;

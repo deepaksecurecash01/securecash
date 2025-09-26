@@ -106,7 +106,7 @@ const mainPages = [
   { slug: "special-event", label: "Special Event" },
   { slug: "terms", label: "Terms" },
   { slug: "welcome", label: "Welcome" },
-  { slug: "free-change-order-service", label: "Free Change Order Service" },
+  { slug: "services/free-change-order-service", label: "Free Change Order Service" },
   { slug: "privacy-policy", label: "Privacy Policy" }
 ];
 

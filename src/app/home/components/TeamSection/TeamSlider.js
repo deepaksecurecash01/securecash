@@ -8,6 +8,7 @@ import Image from "next/image";
 import Typography from "@/components/common/Typography";
 
 import Link from "next/link";
+
 const SocialLink = ({ href, icon, alt }) => (
   <li className="float-left pr-[5px]">
     <Link href={href} target="_blank">

@@ -9,7 +9,7 @@ import
   FaLongArrowAltDown,
   FaCircle,
 } from "react-icons/fa";
-import BottomBanner from '@/components/about-us/BottomBanner';
+import BottomBanner from '@/components/common/BottomBanner';
 import { FaArrowDownLong } from "react-icons/fa6";
 
 import Divider from "@/components/common/Divider";
@@ -17,7 +17,6 @@ import Typography from "@/components/common/Typography";
 import Container from "@/components/layout/Container";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import FormSection from './components/FormSection';
-import QuoteForm from "./components/QuoteForm";
 import Link from "next/link";
 import ServiceAgreementClauses from "./components/ServiceAgreementClauses";
 import { HeroSection } from "./components/HeroSection";
@@ -126,7 +125,7 @@ const MainSection = () => (
             as="h4"
             fontFamily="montserrat"
             className=" text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mb-4 mx-auto 992px:text-[26px] 768px:mx-0"
-            >
+          >
             Change Orders
           </Typography>
           <TermsList terms={CHANGE_ORDER_TERMS} />
@@ -144,7 +143,7 @@ const TermsAndConditionsPage = () =>
       <HeroSection />
       <MainSection />
       <ServiceAgreementClauses />
-    <FormSection/>
+      <FormSection />
       <BottomBanner />
 
     </div>

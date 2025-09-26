@@ -1,7 +1,7 @@
 import React from "react";
 import CompaniesSlider from "@/components/common/CompaniesSlider";
-import HeadlineContent from "@/components/quote/HeadlineContent";
-import QuoteContent from "@/components/quote/QuoteContent";
+import HeadlineContent from "./HeadlineContent";
+import QuoteContent from "./QuoteContent";
 
 const page = () =>
 {

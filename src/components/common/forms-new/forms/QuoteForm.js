@@ -150,7 +150,7 @@ const QuoteForm = ({ className }) => {
               We Just Need A Few Details
             </Typography>
 
-            <Divider color="primary" margin="mt-4" alignment="center" />
+            <Divider color="primary" className="mt-4 w-[100px]" alignment="center" />
 
             <div className="form-tab 480px:w-[90%] mx-auto">
               {/* Quote form fields */}

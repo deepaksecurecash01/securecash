@@ -1,12 +1,9 @@
 import React from "react";
 
 const Divider = ({
-  color = "white", // Default color
-  width = "100px", // Default width
-  alignment = "center", // Alignment: 'center', 'left', or 'right'
-  margin = "my-6", // Default margin
-  padding = "", // Padding if needed
-  responsiveClassName = "", // Additional responsive styles
+  color = "white",
+  alignment = "center",
+  className = "",
 }) =>
 {
   // Determine alignment classes
@@ -23,14 +20,11 @@ const Divider = ({
     }
   };
 
-  // Create the style object for custom values
-  const customStyles = {
-    width: width, // Set width via inline style for dynamic values
-  };
-
-  // Handle color
+  // Handle color - support both hex and Tailwind classes
   let colorClass = "";
-  if (color.includes("#")) {
+  let customStyles = {};
+
+  if (color.startsWith("#")) {
     customStyles.backgroundColor = color;
   } else {
     colorClass = `bg-${color}`;
@@ -40,7 +34,7 @@ const Divider = ({
 
   return (
     <hr
-      className={`h-[4px] rounded-[5px] border-0 ${colorClass} ${margin} ${padding} ${alignmentClasses} ${responsiveClassName}`}
+      className={`h-[4px] rounded-[5px] border-0 ${colorClass} ${alignmentClasses} ${className}`}
       style={customStyles}
     />
   );

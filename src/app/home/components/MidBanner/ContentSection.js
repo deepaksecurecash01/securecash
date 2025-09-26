@@ -14,7 +14,7 @@ const ContentSection = () =>
       <div className="inner w-[95%] max-w-[1366px] mx-auto  992px:grid  992px:grid-cols-5 py-[40px]  992px:f  992px:py-[100px] ">
         <div className="w-full text-center pr-0  992px:col-span-2   992px:pr-0 text-white  1024px:flex items-center">
           <div className="service-container p-4 992px:p-0 pt-0 leading-[2em] m-0 text-[16px] text-white">
-            <Divider responsiveClassName="992px:mx-0 992px:text-left 1024px:mt-0" />
+            <Divider className="w-[100px] my-6 992px:mx-0 992px:text-left 1024px:mt-0" />
 
             <Typography
               as="h3"

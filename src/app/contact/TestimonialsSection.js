@@ -96,7 +96,7 @@ const TeamContent = () =>
 {
     return (
         <div
-            className=" inline-block w-full px-[10px] py-[24px] 414px:pt-[100px] 414px:px-0 mt-0  992px:px-2 992px:pt-[130px] bg-contact-bg bg-no-repeat bg-contan"
+            className=" inline-block w-full px-[10px] py-[24px] 414px:pt-[100px] 414px:px-0 mt-0  992px:px-2 992px:pt-[130px] bg-contact-bg bg-no-repeat bg-cover bg-center"
         >
             <div className="w-full max-w-[1366px] mx-[auto] my-[0]">
                 <Typography
@@ -119,7 +119,7 @@ const TeamContent = () =>
                     className="text-center font-light leading-[32px]"
                 >
                     Don&apos;t just take our word for it. <br />Hear what our customers have to say about our services!
-</Typography>
+                </Typography>
                 <div className=" relative select-none block w-full float-left mb-[100px]">
                     <div
                         className=" 768px:w-[90%] mx-auto  1024px:w-full "

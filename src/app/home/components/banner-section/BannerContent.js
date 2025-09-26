@@ -11,7 +11,7 @@ const BannerContent = ({
   buttonLink,
 }) => (
   <div className="absolute w-full text-center text-white 1024px:w-[90%] 1200px:w-[80%] 1024px:pl-[3%] 1200px:pl-[4%] 1440px:pl-0 top-[50%] transform -translate-y-1/2">
-    <Divider alignment="left" responsiveClassName="1024px:mt-0 1024px:mb-6 " />
+    <Divider alignment="left" className="w-[100px] 1024px:mt-0 1024px:mb-6 " />
     <Typography
       fontFamily="prata"
       as="h3"

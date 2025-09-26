@@ -1,7 +1,6 @@
 
 import React from 'react';
-import HeroImage from './components/HeroImage';
-import { HeroSectionWithParagraph } from '@/components/common/HeroSectionWithParagraph';
+import HeroImage from './HeroImage';
 import IndependentContractorsForm from '@/components/common/forms-new/forms/IcaForm';
 
 const page = () =>

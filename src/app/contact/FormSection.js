@@ -5,7 +5,6 @@ import Paragraph from "@/components/common/Paragraph";
 import SubHeading from "@/components/common/SubHeading";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import { FaPhoneAlt, FaMapMarkerAlt, FaEnvelope, FaStar } from "react-icons/fa";
-import FranchiseForm from "../../components/contact/FranchiseForm";
 import ContactForm from "../../components/common/forms-new/forms/ContactForm";
 
 const FormSection = () =>

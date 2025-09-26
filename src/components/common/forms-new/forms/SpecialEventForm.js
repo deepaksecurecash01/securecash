@@ -130,7 +130,7 @@ const SpecialEventForm = () =>
     return (
         <>
             {/* Contact Content Section - Special Events Content */}
-            <div id="content-contact" className="bg-content-bg bg-center bg-no-repeat inline-block w-full 992px:my-[40px] 1280px:my-[120px]">
+            <div id="content-contact" className="bg-content-bg bg-center bg-cover bg-no-repeat inline-block w-full 992px:my-[40px] 1280px:my-[120px]">
                 <div className="inner-big w-[95%] max-w-[1366px] mx-auto my-0 992px:flex items-center">
                     <div className="right-contact-row w-[96%] 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1] 992px:pl-8">
                         <Typography as="h3" fontFamily="montserrat"

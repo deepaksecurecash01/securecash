@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import Typography from "@/components/common/Typography";
 import Container from "@/components/layout/Container";
-import QuoteForm from "../components/QuoteForm";
 import Link from 'next/link';
 import TermsFormControllerVersion from '@/components/common/forms-new/forms/TermsForm';
 

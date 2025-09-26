@@ -1,10 +1,11 @@
 import CompaniesSlider from "@/components/common/CompaniesSlider";
-import FranchiseForm from "@/components/franchise/FormSection";
-import HeroImage from "@/components/franchise/HeroImage";
-import SectionWrapper from "@/components/franchise/SectionWrapper";
+import FranchiseForm from "@/app/franchise/FormSection";
+import HeroImage from "@/app/franchise/HeroImage";
+import SectionWrapper from "@/app/franchise/SectionWrapper";
 import React from "react";
 
-const page = () => {
+const page = () =>
+{
   return (
     <> <div id="content" className="overflow-hidden">
       <HeroImage />

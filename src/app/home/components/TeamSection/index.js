@@ -184,7 +184,7 @@ const TeamContent = () =>
         <Divider
           color="#c7a652"
           alignment="center"
-          margin="mb-10 mt-4"
+          className="w-[100px] mb-10 mt-4"
         />
 
         <div className="members-slider relative select-none block w-full float-left mb-[100px]">

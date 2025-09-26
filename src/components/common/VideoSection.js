@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import VimeoLite from "../VimeoLite";
+import VimeoLite from "./VimeoLite";
 import Typography from "./Typography";
 
 const VideoSection = ({ service = false, height }) =>

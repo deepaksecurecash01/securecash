@@ -1,11 +1,11 @@
 // app/services/[service]/page.jsx
-import BottomBanner from "@/components/about-us/BottomBanner";
-import SectionWrapper from "@/components/services/SectionWrapper";
-import HeroImage from "@/components/services/HeroImage";
+import BottomBanner from "@/components/common/BottomBanner";
+import SectionWrapper from "../components/SectionWrapper";
+import HeroImage from "../components/HeroImage";
 import { servicesData } from "@/data/servicesData";
 import VideoSection from "@/components/common/VideoSection";
-import ScrollSectionWithImage from "@/components/services/ScrollSectionWithImage";
-import GuaranteeSection from "@/components/services/GuaranteeSection";
+import ScrollSectionWithImage from "../components/ScrollSectionWithImage";
+import GuaranteeSection from "../components/GuaranteeSection";
 import Divider from "@/components/common/Divider";
 import Link from "next/link";
 import { notFound } from "next/navigation";

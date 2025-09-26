@@ -4,7 +4,6 @@ import Typography from "@/components/common/Typography";
 import Paragraph from "@/components/common/Paragraph";
 import SubHeading from "@/components/common/SubHeading";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
-import ContentScroll from "./ContentScroll";
 import QuoteForm from "@/components/common/forms-new/forms/QuoteForm";
 
 const FormSection = () =>
@@ -54,7 +53,7 @@ const FormSection = () =>
   return (
     <div
       id="content-contact"
-      className=" bg-content-bg bg-center bg-no-repeat inline-block w-full 992px:mt-[40px]  1280px:mt-[84px]"
+      className=" bg-content-bg bg-center bg-no-repeat bg-cover inline-block w-full 992px:mt-[40px]  1280px:mt-[84px]"
     >
       <div className="inner-big w-[95%] max-w-[1366px] mx-auto my-0  992px:flex">
         <QuoteForm />
@@ -67,7 +66,7 @@ const FormSection = () =>
             Make The Right Choice
           </Typography>
 
-          <Divider color="primary" margin=" mb-[24px]" alignment="left" />
+          <Divider color="primary" className="w-[100px] mb-[24px]" alignment="left" />
           <Typography
             as="h2"
             fontFamily="montserrat"
@@ -85,7 +84,25 @@ const FormSection = () =>
           </Typography>
 
           <ScrollableSection className=" h-auto 414px:w-[85%] 992px:w-full p-0 mx-auto   992px:h-[630px] 1200px:h-[658px] 1366px:h-[740px] bg-white mt-6 leading-[2]">
-            <ContentScroll scrollData={contentItems} />
+            <ul className="list-none w-full  1024px:pr-6 services-content">
+              {contentItems.map((item, index) => (
+                <li key={index}>
+                  <span className="inline-block">
+
+                    <h4
+
+                    >
+                      {item.title}:
+                    </h4>
+                    <p
+                      className="text-light"
+                    >
+                      {item.content}
+                    </p>
+                  </span>
+                </li>
+              ))}
+            </ul>
           </ScrollableSection>
         </div>
       </div>

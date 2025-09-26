@@ -26,7 +26,7 @@ const HeroImage = () =>
 
       <Divider
         color="primary"
-        width="16%"
+        width="100px"
         margin="mt-[21px] mb-[24px]"
         alignment="center"
         responsiveClassName="992px:mx-0 992px:text-left 768px:w-[100px]"

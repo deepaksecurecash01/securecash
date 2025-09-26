@@ -1,69 +1,102 @@
 import Image from "next/image";
 import React, { useMemo } from "react";
 
-const BASE_URL = "https://www.securecash.com.au/images/companies/";
+// Configuration - move to constants file in production
+const LOGO_CONFIG = {
+  baseUrl: "https://www.securecash.com.au/images/companies/",
+  companies: [
+    "dominos",
+    "mcdonalds",
+    "pizzahut",
+    "coffee",
+    "southaus",
+    "muffinbreak",
+    "redrooster",
+    "stratco",
+    "ford",
+    "kathmandu",
+    "nsw",
+    "queens",
+    "takingshape",
+    "tasmanian",
+    "victoria",
+    "ymca",
+    "west",
+    "subway",
+  ],
+  slideWidth: 300,
+  slideHeight: 150,
+  duplicateSlices: 3, // Number of slides to duplicate for seamless loop
+  animationDuration: 60, // seconds
+};
 
-const companyNames = [
-  "dominos",
-  "mcdonalds",
-  "pizzahut",
-  "coffee",
-  "southaus",
-  "muffinbreak",
-  "redrooster",
-  "stratco",
-  "ford",
-  "kathmandu",
-  "nsw",
-  "queens",
-  "takingshape",
-  "tasmanian",
-  "victoria",
-  "ymca",
-  "west",
-  "subway",
-];
-
-const slideData = companyNames.map((name) => ({
-  src: `${BASE_URL}${name}.png`,
-  alt: name,
-}));
-
-const Slide = ({ src, alt }) => (
-  <div className="w-[300px] p-0 mt-auto mb-auto">
+const LogoSlide = ({ src, alt, width, height }) => (
+  <div className="flex-shrink-0 p-0 mt-auto mb-auto" style={{ width: `${width}px` }}>
     <Image
-      className="align-middle filter contrast-0 h-[150px] w-auto hover:cursor-default hover:filter hover:contrast-[100%]"
-      width={300}
-      height={150}
+      className="align-middle filter contrast-0 h-[150px] w-auto hover:cursor-default hover:filter hover:contrast-[100%] transition-all duration-300"
+      width={width}
+      height={height}
       src={src}
-      alt={alt}
+      alt={`${alt} logo`}
+      loading="lazy"
     />
   </div>
 );
 
-const CompaniesSlider = ({ className }) =>
+const ClientLogos = ({ className = "", config = LOGO_CONFIG }) =>
 {
+  const { baseUrl, companies, slideWidth, slideHeight, duplicateSlices, animationDuration } = config;
+
+  // Generate slide data
+  const slideData = useMemo(() =>
+    companies.map((name) => ({
+      src: `${baseUrl}${name}.png`,
+      alt: name,
+    })),
+    [baseUrl, companies]
+  );
+
+  // Create extended slides for seamless infinite scroll
   const extendedSlides = useMemo(() =>
   {
-    const sliceCount = 3;
     return [
-      ...slideData.slice(-sliceCount), // Append last 3 slides to the beginning
+      ...slideData.slice(-duplicateSlices), // Last N slides at the beginning
       ...slideData,
-      ...slideData.slice(0, sliceCount), // Prepend first 3 slides to the end
+      ...slideData.slice(0, duplicateSlices), // First N slides at the end
     ];
-  }, []);
+  }, [slideData, duplicateSlices]);
+
+  // Calculate total width for animation
+  const totalSlides = companies.length + (duplicateSlices * 2);
+  const totalWidth = slideWidth * totalSlides;
 
   return (
-    <div id="companies1" className={`px-0 py-[30px] 992px:py-[65px] ${className} `}>
-      <div className=" h-full m-auto overflow-hidden w-full">
-        <div className="animate-[scrollright_60s_linear_infinite] flex w-[calc(300px * 36)]">
+    <section
+      id="client-logos"
+      className={`px-0 py-[30px] 992px:py-[65px] ${className}`}
+      aria-label="Our clients"
+    >
+      <div className="h-full m-auto overflow-hidden w-full">
+        <div
+          className="flex"
+          style={{
+            width: `${totalWidth}px`,
+            animation: `scrollright ${animationDuration}s linear infinite`,
+          }}
+        >
           {extendedSlides.map((slide, index) => (
-            <Slide key={index} src={slide.src} alt={slide.alt} />
+            <LogoSlide
+              key={`${slide.alt}-${index}`}
+              src={slide.src}
+              alt={slide.alt}
+              width={slideWidth}
+              height={slideHeight}
+            />
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
-export default CompaniesSlider;
+export default ClientLogos;

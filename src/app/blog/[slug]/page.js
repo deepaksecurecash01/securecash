@@ -1,12 +1,12 @@
 import { notFound } from "next/navigation";
-import { blogPosts } from "../../../../blogData";
-import BlogHeroSection from "@/components/blog/BlogHeroSection";
+import { blogPosts } from "../../../data/blogData";
+import BlogHeroSection from "@/app/blog/components/BlogHeroSection";
 import Link from "next/link";
 import Image from "next/image";
 import { FaTwitter, FaFacebookF, FaLinkedinIn } from "react-icons/fa";
 import Container from "@/components/layout/Container";
-import BlogLatestPost from "@/components/blog/BlogLatestPost";
-import BottomBanner from "@/components/about-us/BottomBanner";
+import BlogLatestPost from "@/app/blog/components/BlogLatestPost";
+import BottomBanner from "@/components/common/BottomBanner";
 import './blog-single.css';
 
 export async function generateStaticParams()

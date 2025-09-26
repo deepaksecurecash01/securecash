@@ -1,11 +1,11 @@
-import AboutusSection from '@/components/about-us/AboutusSection';
-import Banner from '@/components/about-us/Banner';
-import HeadlineContent from '@/components/about-us/HeadlineContent';
-import TeamSlider from '@/components/about-us/TeamSection/TeamSlider';
+import AboutusSection from '@/app/about-us/components/AboutusSection';
+import Banner from '@/app/about-us/components/Banner';
+import HeadlineContent from '@/app/about-us/components/HeadlineContent';
+import TeamSlider from '@/app/about-us/components/TeamSection/TeamSlider';
 import React from 'react';
 
-import TeamSection from '@/components/about-us/TeamSection';
-import BottomBanner from '@/components/about-us/BottomBanner';
+import TeamSection from '@/app/about-us/components/TeamSection';
+import BottomBanner from '@/components/common/BottomBanner';
 
 const page = () =>
 {
