@@ -145,8 +145,7 @@ const InstructionSection = () =>
                     <Divider
                         color="#7a7a7a"
                         alignment="left"
-                        margin="mt-[30px] mb-[24px]"
-                        responsiveClassName="768px:text-left 768px:mx-0"
+                        className="mt-[30px] mb-[24px] w-[100px] 768px:text-left 768px:mx-0"
                     />
                     <div className="instruction-wrapper relative mt-[40px] pt-[8px] pb-[8px]">
                         <div className="counter absolute top-0 left-0 z-0 flex justify-center items-center w-[50px] h-[67px]">

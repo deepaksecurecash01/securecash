@@ -45,10 +45,9 @@ const HeroImage = () =>
       </h2>
       <Divider
         color="white"
-        width="16%"
-        margin="mt-2.5 mb-5"
+       
         alignment="center"
-        responsiveClassName="992px:mx-0 992px:text-left w-[16%] 768px:mt-5 768px:mb-0 414px:mb-0 600px:w-[100px]"
+        className="w-[16%] mt-2.5 mb-5 992px:mx-0 992px:text-left 768px:mt-5 768px:mb-0 414px:mb-0 600px:w-[100px]"
       />
       <DoubleButton
         primaryButton={{ text: "Register Now", href: "#franchise-form" }}

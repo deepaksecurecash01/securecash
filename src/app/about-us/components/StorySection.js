@@ -64,8 +64,7 @@ export const StorySection = ({
                   <Divider
                     color="primary"
                     alignment="left"
-                    margin="m-0"
-                    responsiveClassName="768px:text-left 768px:mx-0 hidden 1200px:block divider-gold divider-2"
+                    className="w-[100px] m-0 768px:text-left 768px:mx-0 hidden 1200px:block divider-gold divider-2"
                   />
                   <Typography
                     as="h3"

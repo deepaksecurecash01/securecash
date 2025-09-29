@@ -116,8 +116,7 @@ const MainSection = () => (
         <Divider
           color="primary"
           alignment="left"
-          margin="mt-5 mb-[34px]"
-          responsiveClassName="768px:text-left 768px:mx-0"
+          className="mt-5 mb-[34px] w-[100px] 768px:text-left 768px:mx-0"
         />
         <ScrollableSection className="h-auto w-full p-0 mx-auto 992px:h-[366px]  768px:pb-[18px] bg-[#f7f7f7]">
           <TermsList terms={GENERAL_TERMS} showExtraBreak={true} />

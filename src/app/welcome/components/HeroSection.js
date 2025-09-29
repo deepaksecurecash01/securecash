@@ -27,8 +27,7 @@ const HeroSection = () => {
           <Divider
             color="black"
             alignment="left"
-            margin="mt-[64px] ml-5"
-            responsiveClassName="600px:mt-[96px] 768px:mt-[64px] 1024px:mt-[100px] 1280px:mt-[140px] 768px:text-left 1366px:mt-[182px] 1440px:mt-[200px]"
+            className="mt-[64px] ml-5 w-[100px] 600px:mt-[96px] 768px:mt-[64px] 1024px:mt-[100px] 1280px:mt-[140px] 768px:text-left 1366px:mt-[182px] 1440px:mt-[200px]"
           />
                   <p className="text-black max-h-[160px] 600px:w-[70%] 768px:w-full overflow-auto text-left mb-0 text-[16px] font-light leading-[1.75]   1366px:pr-[72px] p-5 ">
             <strong>

@@ -95,7 +95,7 @@ const BankingStep = ({ formManager, theme = 'dark' }) =>
 
             <Divider
                 color="primary"
-                margin="mt-4"
+                className="w-[100px] mt-4"
                 alignment="center"
             />
 

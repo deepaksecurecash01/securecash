@@ -19,7 +19,7 @@ const HeadlineContent = () =>
 
                     <Container className=" about-hero--wrapper flex relative h-full w-full">
                         <div className=" flex flex-col justify-center gap-3 px-[30px]   768px:w-[38.25%] 1024px:pr-[10px] 1024px:pl-[34px]  1024px:w-[32.5%] 1280px:pl-[34px] 1280px:pr-[24px]  1280px:w-[30%]  1366px:pl-[34px]  1366px:pr-[94px]   1366px:w-[34.4%]  1440px:pl-[0]  1440px:pr-[174px] w-full  1440px:w-[37.7%]">
-                            <Divider color="primary" alignment="left" margin="m-0" responsiveClassName='768px:text-left 768px:mx-0' />
+                            <Divider color="primary" alignment="left"  className='w-[100px] m-0 768px:text-left 768px:mx-0' />
                             <Typography
                                 as="h1"
                                 fontFamily="montserrat"

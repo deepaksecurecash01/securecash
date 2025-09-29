@@ -49,8 +49,7 @@ const PrivacyPolicyPage = () =>
                 <Divider
                     color="primary"
                     alignment="center"
-                    margin="my-5"
-                    responsiveClassName=''
+                    className="my-5 w-[100px]"
                 />            </div>
 
             <div className="section-wrapper">

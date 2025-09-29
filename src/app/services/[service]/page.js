@@ -28,9 +28,8 @@ const FreeChangeOrderService = () => (
 
     <Divider
       color="primary"
-      margin="mt-[20px]"
       alignment="center"
-      responsiveClassName="w-[100px]"
+      className="w-[100px] mt-[20px]"
     />
 
     <div className="relative">

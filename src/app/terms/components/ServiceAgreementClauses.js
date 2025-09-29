@@ -559,8 +559,8 @@ const ServiceAgreementClauses = () =>
                         <Divider
                             color="primary"
                             alignment="left"
-                            margin="mt-5 mb-[34px]"
-                            responsiveClassName="768px:text-left 768px:mx-0"
+                            className="mt-5 mb-[34px] w-[100px] 768px:text-left 768px:mx-0"
+
                         />
                         <ScrollableSection className="h-[652px] 992px:w-full p-0 mx-auto 992px:h-[370px] pb-[18px]">
                             {allSections.map((section, index) => (

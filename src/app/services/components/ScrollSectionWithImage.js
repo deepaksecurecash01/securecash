@@ -105,9 +105,8 @@ const ScrollSectionWithImage = ({
               </Typography>
               <Divider
                 color="white"
-                margin="mt-[20px]"
                 alignment="left"
-                responsiveClassName="992px:mx-0 992px:text-left w-[100px] ml-0"
+                  className="mt-[20px] 992px:mx-0 992px:text-left w-[100px] ml-0"
               />
             </div>
           </div>

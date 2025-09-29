@@ -35,7 +35,7 @@ const SpecialEventServiceStep = ({ formManager, theme = 'dark' }) =>
                 Other Information
             </Typography>
 
-            <Divider color="primary" margin="mt-2.5 mb-4" alignment="center" />
+            <Divider color="primary" className="w-[100px] mt-2.5 mb-4" alignment="center" />
 
             <div className="form-tab 480px:w-[90%] mx-auto">
                 {fieldsWithIcons.map(field =>

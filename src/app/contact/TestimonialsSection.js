@@ -111,7 +111,7 @@ const TeamContent = () =>
                 <Divider
                     color="#c7a652"
                     alignment="center"
-                    margin="mb-6 mt-4"
+                    className="mb-6 mt-4 w-[100px]"
                 />
                 <Typography
                     as="p"

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
 import SubHeading from "@/components/common/SubHeading";
 import Paragraph from "@/components/common/Paragraph";

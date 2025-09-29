@@ -171,8 +171,7 @@ const ConvertedHazardForm = forwardRef(({
                 <Divider
                     color="primary"
                     alignment="left"
-                    margin="my-5"
-                    responsiveClassName="768px:text-left 768px:mx-0"
+                    className="w-[100px] my-5 768px:text-left 768px:mx-0"
                 />
 
                 <Typography

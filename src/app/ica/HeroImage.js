@@ -33,8 +33,7 @@ const HeroLeftContent = () => (
     <Divider
       color="primary"
       alignment="center"
-      margin="mt-[22px]"
-      responsiveClassName="mx-auto  600px:mx-0 1024px:text-left 1024px:mx-0 1366px:mt-[30px]"
+      className="mx-auto mt-[22px] w-[100px] 600px:mx-0 1024px:text-left 1024px:mx-0 1366px:mt-[30px]"
     />
    
   </div>

@@ -14,7 +14,7 @@ const BlogHeroSection = ({title, date, blogIndex}) => {
                 <div className="blog-single-hero--wrap flex items-center relative">
                     <div className="blog-single-hero--head h-[290px] p-0 max-w-[900px] mx-auto flex flex-col justify-center items-center 768px:h-[340px]">
                         <h1 className={titleStyles}>{title}</h1>
-                        <Divider color="primary" margin="mt-[6px] mb-[16px]" alignment="left" responsiveClassName="992px:mx-0 992px:text-left"/>
+                        <Divider color="primary" alignment="left" className="w-[100px] mt-[6px] mb-[16px] 992px:mx-0 992px:text-left"/>
                         <div className="blog-index-hero--content__subtitle italic mb-0">
                             <p className="blog-meta--title">{date}</p>
                         </div>

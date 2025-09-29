@@ -140,7 +140,7 @@ const SiteInfoForm = () =>
                             Thanks for that! This is the final step in order to getting your service setup.
                         </Typography>
 
-                        <Divider color="primary" alignment="left" margin="my-5" responsiveClassName="768px:text-left 768px:mx-0" />
+                        <Divider color="primary" alignment="left" className="w-[100px] my-5 768px:text-left 768px:mx-0" />
 
                         <Typography as="p" fontFamily="montserrat"
                             className="text-[16px] leading-[2rem] text-left mb-4 768px:text-left font-light">
@@ -251,7 +251,7 @@ const SiteInfoForm = () =>
                                     Site Risk Information
                                 </Typography>
 
-                                <Divider color="primary" alignment="left" margin="my-5" responsiveClassName="768px:text-left 768px:mx-0" />
+                                <Divider color="primary" alignment="left" className="w-[100px] my-5 768px:text-left 768px:mx-0" />
 
                                 <Typography as="p" fontFamily="montserrat"
                                     className="text-[16px] leading-[2rem] text-left 768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light">

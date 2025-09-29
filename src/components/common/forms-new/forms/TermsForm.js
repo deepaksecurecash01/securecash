@@ -206,9 +206,8 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
 
                         <Divider
                             color="primary"
-                            margin="mt-2.5 mb-4"
+                            className="w-[100px] mx-auto mt-2.5 mb-4"
                             alignment="center"
-                            responsiveClassName="mx-auto"
                         />
 
                         <div className="form-tab 480px:w-[90%] mx-auto">

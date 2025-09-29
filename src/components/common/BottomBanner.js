@@ -27,8 +27,7 @@ const BottomBanner = () =>
           <Divider
             color="primary"
             alignment="left"
-            margin="mt-[6px] mb-[36px]"
-            responsiveClassName="768px:text-left 768px:mx-0 divider-gold divider-2 z-20"
+            className="w-[100px] mt-[6px] mb-[36px] 768px:text-left 768px:mx-0 divider-gold divider-2 z-20"
           />
         </div>
       </div>

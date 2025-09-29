@@ -27,7 +27,7 @@ const QuoteContent = () => {
               <Divider
                 alignment="center"
                 color="primary"
-                responsiveClassName="1024px:mt-0 1024px:mb-6"
+                className="1024px:mt-0 1024px:mb-6 w-[100px]"
               />
             </div>
             <div id="contact-info-wrapper" className="480px:flex  992px:pb-10">

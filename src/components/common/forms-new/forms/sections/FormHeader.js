@@ -9,8 +9,7 @@ const FormHeader = ({ COMPANY_INFO }) => (
     <Divider
       color="primary"
       alignment="center"
-      margin="mt-5 mb-5"
-      responsiveClassName=""
+      className="mt-5 mb-5 w-[100px]"
     />
     <h2 className="text-xl text-gray-600 mb-4">
       The parties to this agreement are:

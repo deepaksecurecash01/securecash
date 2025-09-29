@@ -45,8 +45,7 @@ const HeadlineContent = () =>
                         <Divider
                             color="primary"
                             alignment="left"
-                            margin="mt-[22px] mb-[34px]"
-                            responsiveClassName='mx-auto 768px:text-left 768px:mx-0'
+                            className='w-[100px] mt-[22px] mb-[34px] mx-auto 768px:text-left 768px:mx-0'
                         />
                     </div>
                 </Container>

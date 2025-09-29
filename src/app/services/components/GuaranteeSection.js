@@ -136,9 +136,8 @@ const GuaranteeSection = ({ guaranteeContent, imageUrl }) =>
                             </Typography>
                             <Divider
                                 color="white"
-                                margin="my-6"
                                 alignment="center"
-                                responsiveClassName="992px:mx-0 992px:text-left w-[100px]"
+                                className="my-6 992px:mx-0 992px:text-left w-[100px]"
                             />
 
                             <Typography

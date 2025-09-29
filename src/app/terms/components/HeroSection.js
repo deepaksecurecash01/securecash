@@ -27,8 +27,7 @@ const HeroLeftContent = () => (
     <Divider
       color="primary"
       alignment="center"
-      margin="my-[22px] mb-[34px]"
-      responsiveClassName="mx-auto  600px:mx-0 1024px:text-left 1024px:mx-0 1366px:mt-[30px] 1024px:mb-[57px]"
+      className="mx-auto my-[22px] mb-[34px] w-[100px] 600px:mx-0 1024px:text-left 1024px:mx-0 1366px:mt-[30px] 1024px:mb-[57px]"
     />
     <a
       className="btn btn-welcome-hero btn-welcome-main text-[14px] px-5 py-3 border border-white   1024px:text-[16px]  1024px:px-[40px]  1024px:py-[20px] mb-[30px] "

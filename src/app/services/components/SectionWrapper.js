@@ -91,9 +91,8 @@ const SectionWrapper = ({
         </h2>
         <Divider
           color="primary"
-          margin="my-[24px]"
           alignment="left"
-          responsiveClassName="992px:mx-0 992px:text-left w-[100px] 768px:mb-0 768px:mt-5"
+          className="w-[100px] my-[24px] 992px:mx-0 992px:text-left 768px:mb-0 768px:mt-5"
         />
         <div className="content-wrapper   768px:w-4/5 768px:mt-12 p-0">
           <div id="intro-text" className="w-[90%] 768px:w-full mx-auto 768px:bg-inherit">
@@ -193,9 +192,8 @@ const SectionWrapper = ({
                 </Typography>
                 <Divider
                   color="white"
-                  margin="my-6"
-                  alignment="center"
-                  responsiveClassName="992px:mx-0 992px:text-left w-[100px]"
+                  alignment="left"
+                  className="w-[100px] my-6 992px:mx-0 992px:text-left "
                 />
                 <Typography
                   as="p"

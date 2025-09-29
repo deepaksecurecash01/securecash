@@ -28,9 +28,8 @@ const BlogLatestPost = () =>
       </Typography>
       <Divider
         color="primary"
-        margin="mt-[6px] mb-[16px]"
         alignment="left"
-        responsiveClassName="992px:mx-0 992px:text-left"
+        className="w-[100px] mt-[6px] mb-[16px] 992px:mx-0 992px:text-left"
       />
       <div className="inner-grid">
         <section className="blog-index-main blog-index-footer">

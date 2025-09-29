@@ -44,7 +44,7 @@ const FormSection = () =>
                         Register Your Interest
                     </Typography>
 
-                    <Divider color="primary" margin=" mb-[24px]" alignment="left" />
+                    <Divider color="primary" className="w-[100px] mb-[24px]" alignment="left" />
                     <ul className="list-none text-center lg:text-left 480px:w-[90%] mx-auto 992px:w-full">
                         {contactInfo.map((info, index) => (
                             <li

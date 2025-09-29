@@ -70,9 +70,8 @@ const HeroSection = () =>
 
                 <Divider
                     color="primary"
-                    margin="mt-[30px] mb-[60px]"
                     alignment="center"
-                    responsiveClassName="w-[100px]"
+                    className="w-[100px] mt-[30px] mb-[60px]"
                 />
 
                 <h3 className="
