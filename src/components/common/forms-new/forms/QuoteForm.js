@@ -1,7 +1,7 @@
-// /components/forms/QuoteForm.js
 "use client";
 import React from "react";
-import {
+import
+{
   FaUser,
   FaUsers,
   FaPhone,
@@ -21,23 +21,19 @@ import ChangeStep from "./steps/ChangeStep";
 import { useFormManager } from "@/hooks/useFormManager";
 import { QUOTE_SCHEMAS, QUOTE_DEFAULT_VALUES } from "@/zod/QuoteFormSchema";
 
-const QuoteForm = ({ className }) => {
-  // ✅ Enhanced form manager with multi-step support
+const QuoteForm = ({ className }) =>
+{
   const formManager = useFormManager({
-    // Core configuration
-    schema: QUOTE_SCHEMAS, // Multi-schema object
+    schema: QUOTE_SCHEMAS,
     defaultValues: QUOTE_DEFAULT_VALUES,
     theme: "dark",
-
-    // Form identification
     formType: "quote",
     formId: "Quote",
-
-    // Multi-step configuration
     multiStep: {
       steps: ["quote", "banking", "change"],
-      conditional: true, // Steps shown based on Service selection
-      getNextSteps: (formData) => {
+      conditional: true,
+      getNextSteps: (formData) =>
+      {
         const services = formData.Service || [];
         const nextSteps = [];
         if (services.includes("Banking")) nextSteps.push("banking");
@@ -45,17 +41,15 @@ const QuoteForm = ({ className }) => {
         return nextSteps;
       },
     },
-
-    // Submission handlers
-    onSuccess: (result, finalData) => {
-      console.log("✅ Quote form submitted successfully!");
+    onSuccess: (result, finalData) =>
+    {
+      //formManager.resetForm();
     },
-    onError: (error) => {
-      console.error("❌ Quote submission failed:", error);
+    onError: (error) =>
+    {
     },
-
-    // Data preparation
-    prepareData: async (data) => {
+    prepareData: async (data) =>
+    {
       return { ...data, formType: "quote" };
     },
   });
@@ -65,7 +59,6 @@ const QuoteForm = ({ className }) => {
     { label: "Change", value: "Change" },
   ];
 
-  // ✅ Step-specific field configurations
   const quoteFields = [
     {
       name: "Name",
@@ -124,10 +117,11 @@ const QuoteForm = ({ className }) => {
       variant: "horizontal",
     },
   ];
+
   const { stepId, currentStep, isFirst } = formManager.getCurrentStep();
 
-  // ✅ Render current step based on form manager state
-  const renderCurrentStep = () => {
+  const renderCurrentStep = () =>
+  {
     const { currentStep, stepId } = formManager.getCurrentStep();
 
     switch (stepId) {
@@ -153,7 +147,6 @@ const QuoteForm = ({ className }) => {
             <Divider color="primary" className="mt-4 w-[100px]" alignment="center" />
 
             <div className="form-tab 480px:w-[90%] mx-auto">
-              {/* Quote form fields */}
               {quoteFields.map((field) => (
                 <div key={field.name} className="relative">
                   <UniversalFormField
@@ -178,23 +171,96 @@ const QuoteForm = ({ className }) => {
     }
   };
 
-  // ✅ Smart button text based on step and services
-  const getButtonText = () => {
-    if (formManager.isSubmitting) return "Submitting...";
-    if (formManager.isSubmitted)
-      return "Thank you! Form submitted successfully.";
+  const renderSuccessMessage = () =>
+  {
+    const userName = formManager.getStepData().Name || "";
+    return (
+      <div className="form-page success text-center flex flex-col justify-center items-center 992px:h-[75%]">
+        <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" />
 
-    const { stepId } = formManager.getCurrentStep();
-    const services = formManager.getStepData().Service || [];
+        <Typography
+          as="h3"
+          fontFamily="montserrat"
+          className="text-white font-montserrat text-center capitalize pb-2 text-[24px] leading-[30px] mt-8"
+        >
+          Thank you{userName && ` ${userName}`}!
+        </Typography>
+        <h5 className="text-white font-montserrat text-center capitalize pb-2 text-[16px]">
+          We received your submission.
+        </h5>
+        <Divider color="primary" className="mt-4 w-[20%]" alignment="center" />
 
-    if (stepId === "quote") {
-      return services.length === 0 && "Next";
-    }
+        <div className="quote-ty-note">
+          <Typography
+            as="p"
+            fontFamily="font-montserrat"
+            className="text-white font-normal text-center pb-4 text-[16px] mt-8"
+          >
+            We will start working on your quote now.
+          </Typography>
+          <Typography
+            as="p"
+            fontFamily="font-montserrat"
+            className="text-white font-normal text-center pb-4 text-[16px]"
+          >
+            While you wait feel free to check out how our services can benefit your organisation:
+          </Typography>
+          <div className="ty-note-list-wrap mt-2">
+            <ul className="list-none p-0 m-0 flex flex-col justify-center items-center gap-1">
+              <li className="cash-collection mb-2 flex items-center">
+                <img
+                  src="/images/contentpageicons/cashcollection.png"
+                  alt="Cash Collection"
+                  className="inline-block mr-2 w-[30px]"
+                />
+                <a
+                  href="https://www.securecash.com.au/cash-collection/"
+                  className="text-[#c6a54b] hover:underline"
+                >
+                  <p className="m-0">Cash Collections</p>
+                </a>
+              </li>
+              <li className="cash-delivery mb-2 flex items-center">
+                <img
+                  src="/images/contentpageicons/cashdelivery.png"
+                  alt="Cash Delivery"
+                  className="inline-block mr-2 w-[30px]"
+                />
+                <a
+                  href="https://www.securecash.com.au/cash-delivery/"
+                  className="text-[#c6a54b] hover:underline"
+                >
+                  <p className="m-0">Cash Deliveries</p>
+                </a>
+              </li>
+              <li className="cash-counting mb-2 flex items-center">
+                <img
+                  src="/images/contentpageicons/cashcounting.png"
+                  alt="Cash Counting"
+                  className="inline-block mr-2 w-[30px]"
+                />
+                <a
+                  href="https://www.securecash.com.au/cash-counting/"
+                  className="text-[#c6a54b] hover:underline"
+                >
+                  <p className="m-0">Cash Counting</p>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-    // Check if this is the final step
-    if (formManager.isLastStep()) return "Submit";
-
-    return "Next";
+        <div className="button-controls-container w-[80%] mx-auto mt-8">
+          <button
+            type="button"
+            onClick={formManager.resetForm}
+            className="bg-[#c6a54b] text-white border-none py-[15px] font-medium cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-[15px] p-2.5 shadow-none font-montserrat"
+          >
+            Want Another Quote?
+          </button>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -202,13 +268,12 @@ const QuoteForm = ({ className }) => {
       className={`float-none w-full mx-auto relative left-0 flex-1 flex justify-center ${className}`}
     >
       <form
-        className="forms-quote-v2 h-auto mx-2.5 992px:mx-0 px-[30px] 1366px:h-full forms-quote submit-status mt-4 992px:mt-0 992px:mb-16 w-full lg:mt-0 lg:mb-0 992px:w-[450px] 1100px:w-[480px] 1200px:w-[500px] 1280px:w-[546px] shadow-[3px_3px_5px_0px_rgba(0,0,0,0.75)] text-center py-8 rounded-[6px] bg-[#1a1a1a]"
+        className="forms-quote-v2 h-auto mx-2.5 992px:mx-0 px-[30px] 1366px:h-full forms-quote submit-status mt-4 992px:mt-0 w-full lg:mt-0 lg:mb-0 992px:w-[450px] 1100px:w-[480px] 1200px:w-[500px] 1280px:w-[546px] shadow-[3px_3px_5px_0px_rgba(0,0,0,0.75)] text-center py-8 rounded-[6px] bg-[#1a1a1a]"
         data-formid="Quote"
         onSubmit={formManager.handleSubmit}
         noValidate
       >
-        {/* Back button */}
-        {!isFirst && stepId !== "risk" && (
+        {!isFirst && stepId !== "risk" && !formManager.isSubmitted && (
           <div className="form-slide-btn-wrap mb-4 absolute">
             <button
               type="button"
@@ -220,7 +285,7 @@ const QuoteForm = ({ className }) => {
             </button>
           </div>
         )}
-        {/* Bot field (honeypot) */}
+
         <input
           type="text"
           name="BotField"
@@ -229,44 +294,39 @@ const QuoteForm = ({ className }) => {
           autoComplete="off"
         />
 
-        {/* Render current step */}
-        {renderCurrentStep()}
+        {formManager.isSubmitted ? renderSuccessMessage() : renderCurrentStep()}
 
-        {/* Submission error display */}
         {formManager.submissionError && (
           <div className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded">
             {formManager.submissionError}
           </div>
         )}
 
-        {/* Submit button */}
-        <div className="button-controls-container w-[80%] mx-auto mt-10">
-          <div className="button-section relative">
-            <button
-              type="submit"
-              disabled={formManager.isSubmitting}
-              className={`nextBtn ${
-                formManager.isSubmitted ? "bg-[#4bb543]" : "bg-[#c6a54b]"
-              } text-white border-none py-[15px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
-            >
-              {formManager.isSubmitting ? (
-                <div className="flex items-center justify-center">
-                  <FaSpinner className="animate-spin mr-2" />
-                  Submitting...
-                </div>
-              ) : formManager.isSubmitted ? (
-                <div className="flex items-center justify-center">
-                  <FaCheckCircle className="mr-2" />
-                  Thank you! Form submitted successfully.
-                </div>
-              ) : formManager.isLastStep() ? (
-                "Submit"
-              ) : (
-                "Next"
-              )}
-            </button>
+        {!formManager.isSubmitted && (
+          <div className="button-controls-container w-[80%] mx-auto mt-10">
+            <div className="button-section relative">
+              <button
+                type="submit"
+                disabled={formManager.isSubmitting}
+                className={`nextBtn ${formManager.isSubmitted ? "bg-[#4bb543]" : "bg-[#c6a54b]"
+                  } text-white border-none py-[15px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
+              >
+                {formManager.isSubmitting ? (
+                  <div className="flex items-center justify-center">
+                    <FaSpinner className="animate-spin mr-2" />
+                    Submitting...
+                  </div>
+                ) : stepId === "quote" ? (
+                  "Next"
+                ) : formManager.isLastStep() ? (
+                  "Submit"
+                ) : (
+                  "Next"
+                )}
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </form>
     </div>
   );

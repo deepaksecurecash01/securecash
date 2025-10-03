@@ -26,7 +26,7 @@ const BottomBanner = () =>
           </Typography>
           <Divider
             color="primary"
-            alignment="left"
+            alignment="center"
             className="w-[100px] mt-[6px] mb-[36px] 768px:text-left 768px:mx-0 divider-gold divider-2 z-20"
           />
         </div>

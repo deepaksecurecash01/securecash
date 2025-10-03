@@ -267,18 +267,7 @@ const SiteInfoForm = () =>
                     </div>
                 </div>
 
-                {/* Error Display */}
-                {formManager.submissionError && (
-                    <div className="max-w-[1366px] mx-auto mt-4">
-                        <div className="text-red-600 text-center mb-4 p-4 bg-red-50 border border-red-200 rounded mx-4">
-                            <strong>Submission Error:</strong> {formManager.submissionError}
-                            <button onClick={() => window.location.reload()}
-                                className="ml-4 text-blue-600 hover:underline">
-                                Retry
-                            </button>
-                        </div>
-                    </div>
-                )}
+          
             </div>
 
             {/* Thank You Modal */}

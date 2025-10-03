@@ -1,7 +1,7 @@
 import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
 import Paragraph from "@/components/common/Paragraph";
-import BannerButton from "./BannerButton";
+import SliderButton from "./SliderButton";
 
 const BannerContent = ({
   heading,
@@ -11,7 +11,7 @@ const BannerContent = ({
   buttonLink,
 }) => (
   <div className="absolute w-full text-center text-white 1024px:w-[90%] 1200px:w-[80%] 1024px:pl-[3%] 1200px:pl-[4%] 1440px:pl-0 top-[50%] transform -translate-y-1/2">
-    <Divider alignment="left" className="w-[100px] 1024px:mt-0 1024px:mb-6 " />
+    <Divider className="w-[100px] mb-6 mx-auto 1024px:ml-0  1024px:mr-auto" />
     <Typography
       fontFamily="prata"
       as="h3"
@@ -45,7 +45,7 @@ const BannerContent = ({
     </Typography>
 
 
-    <BannerButton href={buttonLink} text={buttonText} />
+    <SliderButton href={buttonLink} text={buttonText} />
   </div>
 );
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Divider from "@/components/common/Divider";
-import BannerButton from "../../app/home/components/banner-section/BannerButton";
+import BannerButton from "../home/components/HeroSection/SliderButton";
 import Link from "next/link";
 import Typography from "@/components/common/Typography";
 
@@ -26,7 +26,7 @@ const HeroImage = () =>
 
       <Divider
         color="primary"
-        
+
         alignment="center"
         className="992px:mx-0 992px:text-left mt-[21px] mb-[24px] w-[100px]"
       />   <div

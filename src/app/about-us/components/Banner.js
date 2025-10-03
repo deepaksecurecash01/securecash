@@ -13,8 +13,8 @@ const Banner = () =>
                 >
                     <Divider
                         color="primary"
-                        alignment="left"
-                        className="w-[100px] m-0 768px:text-left 768px:mx-0 hidden 1200px:block divider-gold divider-2 z-20"
+                        alignment="center"
+                        className="w-[100px] divider-gold divider-2 z-20"
 
                     />
                     <Typography

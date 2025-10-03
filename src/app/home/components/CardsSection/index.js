@@ -69,8 +69,8 @@ const CardsSection = () =>
         <div className="bottom-row-left bg-[#c7a652]  w-full mx-auto  1200px:relative">
           <div className="row-container w-[95%] mx-auto py-[40px] 992px:pl-[14px] 992px:w-[490px] mt-[32px] pt-2.5 text-center  1200px:w-[650px] 1366px:w-[683px] 1366px:mr-0 1366px:ml-auto 1024px:mt-10 1366px:mt-[80px] text-[#fff]">
             <Divider
-              alignment="left"
-              className="w-[100px] 1024px:mt-0 1024px:mb-6"
+              
+              className="w-[100px] mb-6 mx-auto 992px:ml-0  992px:mr-auto"
             />
             <Typography
               as="h3"

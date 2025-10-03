@@ -2,7 +2,7 @@ import React from "react";
 
 const Divider = ({
   color = "white",
-  alignment = "center",
+  alignment = "",
   className = "",
 }) =>
 {
@@ -11,9 +11,9 @@ const Divider = ({
   {
     switch (alignment) {
       case "left":
-        return "ml-0 mr-auto";
+        return "mx-auto 768px:ml-0  768px:mr-auto";
       case "right":
-        return "ml-auto mr-0";
+        return "mx-auto 768px:ml-auto 768px:mr-0";
       case "center":
       default:
         return "mx-auto";

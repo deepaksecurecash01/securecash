@@ -43,7 +43,7 @@ const WelcomeSection = () =>
   };
 
   return (
-    <div className=" w-full bg-content-bg bg-no-repeat bg-center bg-cover inline-block mt-10">
+    <div className=" w-full bg-content-bg bg-no-repeat bg-center  1366px:bg-cover inline-block mt-10">
       <Container className="max-[1366px]:max-w-[1280px]">
         <div
           id="content"
@@ -57,15 +57,13 @@ const WelcomeSection = () =>
             >
               Welcome to
             </Typography>
-
-
             <Image
               src="/images/SecureCash.webp"
               alt="SecureCash Logo"
               width={320}
               height={0}
               priority={true}
-              className=" h-auto block mx-auto"
+              className=" max-w-full h-auto block mx-auto"
             />
             <Divider
               color="primary"

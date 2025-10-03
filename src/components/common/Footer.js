@@ -10,7 +10,7 @@ const links = [
         { href: "/", text: "Home" },
         { href: "/services/cash-in-transit", text: "Services" },
         { href: "/quote", text: "Get a Quote" },
-        { href: "/contact-us", text: "Contact Us" },
+        { href: "/contact", text: "Contact Us" },
       ],
       [
         { href: "https://service.securecash.com.au/", text: "Online Services" },

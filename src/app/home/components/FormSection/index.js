@@ -53,7 +53,7 @@ const FormSection = () =>
   return (
     <div
       id="content-contact"
-      className=" bg-content-bg bg-center bg-no-repeat bg-cover inline-block w-full 992px:mt-[40px]  1280px:mt-[84px]"
+      className=" bg-content-bg bg-center bg-no-repeat  1366px:bg-cover inline-block w-full 992px:mt-[40px]  1280px:mt-[84px]"
     >
       <div className="inner-big w-[95%] max-w-[1366px] mx-auto my-0  992px:flex">
         <QuoteForm />
@@ -66,7 +66,7 @@ const FormSection = () =>
             Make The Right Choice
           </Typography>
 
-          <Divider color="primary" className="w-[100px] mb-[24px]" alignment="left" />
+          <Divider color="primary" className="w-[100px] mb-[24px] mx-auto 1024px:ml-0  1024px:mr-auto"  />
           <Typography
             as="h2"
             fontFamily="montserrat"

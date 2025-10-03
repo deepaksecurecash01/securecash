@@ -1,6 +1,6 @@
-import BannerInfo from "@/components/common/BannerInfo";
-import BannerSlide from "./BannerSlide";
-import "./Banner.css";
+import InfoBar from "@/components/common/BannerInfo";
+import Slider from "./Slider";
+import "./Slider.css";
 
 const SLIDES = [
   {
@@ -55,13 +55,13 @@ const SLIDES = [
   },
 ];
 
-const BannerSection = () => {
+const HeroSection = () => {
   return (
     <div id="banner" className="flex flex-col justify-end items-center ">
-      <BannerSlide slides={SLIDES} />
-      <BannerInfo />
+      <Slider slides={SLIDES} />
+      <InfoBar />
     </div>
   );
 };
 
-export default BannerSection;
+export default HeroSection;

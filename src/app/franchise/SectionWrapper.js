@@ -49,8 +49,7 @@ const SectionWrapper = () =>
         </h2>
         <Divider
           color="primary"
-          alignment="left"
-          className="w-[100px] mt-[20px] 992px:mx-0 992px:text-left"
+          className="w-[100px] mt-[20px]"
         />
         <div className="content-wrapper w-4/5  768px:mt-2 p-0 bg-white/70 ">
           <div id="intro-text" className="">
@@ -83,7 +82,7 @@ const SectionWrapper = () =>
         <div className=" inner-big w-full 992px:w-[95%] max-w-[1366px] mx-auto my-0 h-auto  992px:flex  992px:h-[545px]">
           <div className="flex flex-grow justify-center items-center  w-[96%] 480px:w-full 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1]">
             <ScrollableSection style={{ direction: "rtl" }}
-              className=" h-auto w-[85%] 992px:w-full p-0 mx-auto   992px:h-full bg-white leading-[2] 1024px:px-[10%]">
+              className=" h-auto w-[85%] 992px:w-full p-0 mx-auto   992px:h-full bg-white leading-[2] 992px:pl-[10%]">
               <div style={{ direction: "ltr" }}>
                 <ContentScroll scrollData={contentItems} />
 
@@ -163,7 +162,7 @@ const SectionWrapper = () =>
               </div>
             </ScrollableSection>
           </div>
-          <div className="float-none w-full mx-auto 992px:w-1/2 992px:float-left relative left-0 flex-1 flex justify-start">
+          <div className="float-none w-full mx-auto 992px:w-1/2 992px:float-left relative left-0 flex-1 flex justify-end">
             <div className="cta-box relative  992px:w-[90%]">
               <img
                 className="backdraft h-full w-full "

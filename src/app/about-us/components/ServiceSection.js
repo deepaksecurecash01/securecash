@@ -63,7 +63,7 @@ export const ServiceSection = ({
                                 <div className="section-header px-10 600px:px-6 py-[18px] relative 600px:absolute 1200px:relative 600px:top-[30px] right-0 w-auto 768px:top-0 768px:px-8 768px:py-10 bg-[#000000] items-end justify-center text-[#ffffff] m-0 flex flex-col text-right">
                                     <Divider
                                         color="primary"
-                                        alignment="left"
+                                        alignment="right"
                                         className="w-[100px] m-0 768px:text-left 768px:mx-0 hidden 1200px:block divider-gold divider-2"
                                     />
                                     <Typography

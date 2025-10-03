@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Container from "@/components/layout/Container";
-import BannerContent from "./BannerContent";
+import SliderContent from "./SliderContent";
 
 const Slide = ({ slide, isActive }) => (
   <div
@@ -25,7 +25,7 @@ const Slide = ({ slide, isActive }) => (
       />
     </picture>
     <Container className=" z-10 w-full">
-      <BannerContent {...slide} />
+      <SliderContent {...slide} />
     </Container>
   </div>
 );
@@ -49,7 +49,7 @@ const SlideControls = ({ slides, currentSlide, onSlideChange }) => (
   </div>
 );
 
-const BannerSlide = ({ slides = [] }) => {
+const Slider = ({ slides = [] }) => {
   const [slideIndex, setSlideIndex] = useState(1);
   const bannerInterval = useRef(null);
 
@@ -97,4 +97,4 @@ const BannerSlide = ({ slides = [] }) => {
   );
 };
 
-export default BannerSlide;
+export default Slider;
