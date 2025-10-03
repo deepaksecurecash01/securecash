@@ -37,7 +37,7 @@ const HeadlineContent = () =>
                         <Typography
                             as="h1"
                             fontFamily="montserrat"
-                            className="text-[38px] text-white font-bold leading-[42px] text-center mx-auto 992px:text-[64px] 992px:leading-[1em] 768px:text-left 768px:mx-0"
+                            className="text-[38px] text-white font-bold leading-[62px] text-center mx-auto 992px:text-[64px] 992px:leading-[1em] 768px:text-left 768px:mx-0"
                         >
                             Your Special Event
                         </Typography>

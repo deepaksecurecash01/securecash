@@ -50,6 +50,7 @@ const SiteInfoForm = () =>
         onSuccess: (result, finalData) =>
         {
             console.log("Complete form submitted successfully!", finalData);
+            
         },
         onError: (error) =>
         {
@@ -140,8 +141,10 @@ const SiteInfoForm = () =>
                             Thanks for that! This is the final step in order to getting your service setup.
                         </Typography>
 
-                        <Divider color="primary" alignment="left" className="w-[100px] my-5 768px:text-left 768px:mx-0" />
+                        <hr
+                            className='h-[4px] rounded-[5px] border-0 bg-primary w-[100px] my-5 text-left mx-0'
 
+                        />
                         <Typography as="p" fontFamily="montserrat"
                             className="text-[16px] leading-[2rem] text-left mb-4 768px:text-left font-light">
                             Please provide us with the necessary contact information and the service schedule
@@ -273,7 +276,7 @@ const SiteInfoForm = () =>
             {/* Thank You Modal */}
             <ThankYouModal
                 showThankYou={formManager.isSubmitted}
-                setIsFormSubmitted={() => { }}
+                onClose={formManager.resetForm}
                 type="Thankyou"
             />
         </>

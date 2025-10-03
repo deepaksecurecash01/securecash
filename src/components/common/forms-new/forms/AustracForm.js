@@ -1,4 +1,3 @@
-// /components/forms/AustracForm.js
 "use client";
 import React, { useEffect } from "react";
 import
@@ -20,21 +19,12 @@ import UniversalFormField from "@/components/common/forms-new/core/UniversalForm
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate } from '@/utils/formHelpers';
 import AustracFormSchema, { AUSTRAC_DEFAULT_VALUES } from '@/zod/AustracFormSchema';
+import { useRouter } from "next/navigation";
 
-/**
- * Enhanced AustracForm - Converted to Terms Architecture
- * 
- * ✅ IMPROVEMENTS APPLIED:
- * - Unified form manager with complete focus integration
- * - Controller-based architecture (no register usage)
- * - Enhanced field error handling
- * - Clean submission pipeline
- * - Consistent styling with Terms form
- */
 const AustracForm = ({ className, setOrganisation, setABN }) =>
 {
+    const router = useRouter();
 
-    // Enhanced form manager with complete focus integration
     const formManager = useFormManager({
         schema: AustracFormSchema,
         defaultValues: AUSTRAC_DEFAULT_VALUES,
@@ -43,17 +33,14 @@ const AustracForm = ({ className, setOrganisation, setABN }) =>
         formId: 'AUSTRAC',
         onSuccess: (result, finalData) =>
         {
-            console.log("AUSTRAC form submitted successfully!");
-            // Redirect to /site-info on successful submission
-            // router.push("/site-info");
+            router.push("/site-info");
+            //formManager.resetForm();
         },
         onError: (error) =>
         {
-            console.error("AUSTRAC submission failed:", error);
         },
         prepareData: async (data) =>
         {
-            // Format date of submission
             const dateOfSubmission = formatSubmissionDate();
 
             return {
@@ -67,11 +54,9 @@ const AustracForm = ({ className, setOrganisation, setABN }) =>
         }
     });
 
-    // Watch form values for parent component props
     const organisationValue = formManager.watch("Organisation");
     const abnValue = formManager.watch("ABN");
 
-    // Pass values to parent component props
     useEffect(() =>
     {
         if (organisationValue && setOrganisation) setOrganisation(organisationValue);
@@ -82,7 +67,6 @@ const AustracForm = ({ className, setOrganisation, setABN }) =>
         if (abnValue && setABN) setABN(abnValue);
     }, [abnValue, setABN]);
 
-    // Field configurations
     const inputFields = [
         {
             name: "Organisation",
@@ -167,17 +151,6 @@ const AustracForm = ({ className, setOrganisation, setABN }) =>
         },
     ];
 
-    // Debug logging for troubleshooting
-    useEffect(() =>
-    {
-        if (process.env.NODE_ENV === 'development') {
-            const debugInfo = formManager.getDebugInfo();
-            if (debugInfo.currentFocus || Object.keys(debugInfo.errors).length > 0) {
-                console.log('🐛 AustracForm Debug Info:', debugInfo);
-            }
-        }
-    }, [formManager.currentFocusField, formManager.errors]);
-
     return (
         <div className={`float-none w-full mx-auto relative left-0 flex-1 flex justify-center ${className}`}>
             <div className="forms-quote-v2 h-auto 768px:mx-2.5 992px:mx-0 px-6 1366px:h-full forms-quote submit-status mt-4 992px:mt-0 992px:mb-16 w-full lg:mt-0 lg:mb-0 992px:w-[450px] 1100px:w-[480px] 1200px:w-[500px] 1280px:w-[600px] shadow-[3px_3px_5px_0px_rgba(0,0,0,0.75)] text-center py-8 rounded-[6px] bg-[#1a1a1a]">
@@ -189,10 +162,7 @@ const AustracForm = ({ className, setOrganisation, setABN }) =>
                     autoComplete="off"
                 >
                     <div className="form-page austrac">
-
-
                         <div className="form-tab 480px:w-[90%] mx-auto">
-                            {/* Bot field (honeypot) - hidden field for spam protection */}
                             <input
                                 type="text"
                                 name="BotField"
@@ -203,7 +173,6 @@ const AustracForm = ({ className, setOrganisation, setABN }) =>
                                 autoComplete="off"
                             />
 
-                            {/* All fields now use proper focus management */}
                             {inputFields.map((field) => (
                                 <div key={field.name} className="relative">
                                     <UniversalFormField
@@ -216,14 +185,12 @@ const AustracForm = ({ className, setOrganisation, setABN }) =>
                         </div>
                     </div>
 
-                    {/* Display submission error if any */}
                     {formManager.submissionError && (
                         <div className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded mx-4">
                             <strong>Submission Error:</strong> {formManager.submissionError}
                         </div>
                     )}
 
-                    {/* Button section */}
                     <div className="button-controls-container 480px:w-[80%] mx-auto mt-9 mb-2">
                         <div className="button-section relative">
                             <button

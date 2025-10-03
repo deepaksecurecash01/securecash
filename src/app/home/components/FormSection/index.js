@@ -66,7 +66,7 @@ const FormSection = () =>
             Make The Right Choice
           </Typography>
 
-          <Divider color="primary" className="w-[100px] mb-[24px] mx-auto 1024px:ml-0  1024px:mr-auto"  />
+          <Divider color="primary" className="w-[100px] mb-[24px] mx-auto 992px:ml-0  992px:mr-auto"  />
           <Typography
             as="h2"
             fontFamily="montserrat"
@@ -84,7 +84,7 @@ const FormSection = () =>
           </Typography>
 
           <ScrollableSection className=" h-auto 414px:w-[85%] 992px:w-full p-0 mx-auto   992px:h-[630px] 1200px:h-[658px] 1366px:h-[740px] bg-white mt-6 leading-[2]">
-            <ul className="list-none w-full  1024px:pr-6 services-content">
+            <ul className="list-none w-full  992px:pr-6 services-content">
               {contentItems.map((item, index) => (
                 <li key={index}>
                   <span className="inline-block">

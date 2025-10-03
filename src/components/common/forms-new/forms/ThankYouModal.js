@@ -70,8 +70,8 @@ export default function ThankYouModal({
     const closeModal = useCallback(() =>
     {
         setIsOpen(false);
-        setIsFormSubmitted?.(false);
         onClose?.();
+        
     }, [setIsFormSubmitted, onClose]);
 
     // Event handlers
@@ -144,19 +144,16 @@ export default function ThankYouModal({
                 </p>
 
                 <div className="business-type-thank-you--card__btn-wrap w-full">
-                    <Link href="/add-location">
                         <button
                             className="btn-gold-alt btn-ty-note-submit"
-                            onClick={handleAddAnotherLocation}
+                            onClick={onClose}
                             style={MODAL_STYLES.button}
                         >
                             Add another Location
                         </button>
-                    </Link>
                     <Link href="/">
                         <button
                             className="btn-gold-alt btn-ty-note-submit"
-                            onClick={handleReturnToHomepage}
                             style={MODAL_STYLES.button}
                         >
                             Return to Homepage

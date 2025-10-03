@@ -64,10 +64,8 @@ const FormSection = () =>
             Thank you and welcome aboard!
           </Typography>
 
-          <Divider
-            color="primary"
-            alignment="left"
-            className='w-[100px] my-5 768px:text-left 768px:mx-0'
+          <hr
+            className='h-[4px] rounded-[5px] border-0 bg-primary w-[100px] my-5 text-left mx-0'
           />
 
 
@@ -107,10 +105,8 @@ const FormSection = () =>
             Who is <span className=" uppercase">Austrac?</span>
           </Typography>
 
-          <Divider
-            color="primary"
-            alignment="left"
-            className='w-[100px] my-5 768px:text-left 768px:mx-0'
+          <hr
+            className='h-[4px] rounded-[5px] border-0 bg-primary w-[100px] my-5 text-left mx-0'
 
           />
 

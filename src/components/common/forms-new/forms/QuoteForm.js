@@ -188,7 +188,7 @@ const QuoteForm = ({ className }) =>
         <h5 className="text-white font-montserrat text-center capitalize pb-2 text-[16px]">
           We received your submission.
         </h5>
-        <Divider color="primary" className="mt-4 w-[20%]" alignment="center" />
+        <Divider color="primary" className="mt-4 w-[100px]" alignment="center" />
 
         <div className="quote-ty-note">
           <Typography
