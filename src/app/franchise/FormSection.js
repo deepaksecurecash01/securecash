@@ -31,7 +31,7 @@ const FormSection = () =>
     ];
     return (
         <div
-            className="  inline-block w-full "
+            className="inline-block w-full "
         >
             <div className="inner-big w-[95%] max-w-[1366px] mx-auto my-0  992px:flex ">
                 <div className=" 414px:mx-4 992px:w-[50%] 992px:mx-0 py-8 px-10  480px:px-[5%] 992px:pl-8 1280px:pl-24 992px:pt-32 shadow-[3px_3px_10px_0px_rgba(0,0,0,0.2)] rounded-t-[8px] 992px:rounded-l-[8px] 992px:rounded-tr-none relative bg-black">

@@ -18,10 +18,10 @@ import SiteRiskFormFields from "./SiteRiskFormFields";
 
 // Import the Special-Events specific schema with previous placeholders/errors
 import
-    {
-        UNIFIED_SPECIAL_EVENT_SCHEMA,
-        UNIFIED_SPECIAL_EVENT_DEFAULT_VALUES
-    } from '@/zod/SpecialEventFormSchema';
+{
+    UNIFIED_SPECIAL_EVENT_SCHEMA,
+    UNIFIED_SPECIAL_EVENT_DEFAULT_VALUES
+} from '@/zod/SpecialEventFormSchema';
 import ThankYouModal from "./ThankYouModal";
 
 const SpecialEventForm = () =>
@@ -85,7 +85,8 @@ const SpecialEventForm = () =>
 
     // Submit handler
     const handleFormSubmit = async (e) =>
-    {console.log('first')
+    {
+        console.log('first');
         e.preventDefault();
         const result = await formManager.handleSubmit();
         return result;

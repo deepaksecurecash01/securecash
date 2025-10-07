@@ -35,6 +35,7 @@ const ContactForm = ({ className }) =>
         onSuccess: (result, finalData) =>
         {
             console.log("Contact form submitted successfully!");
+            
         },
         onError: (error) =>
         {
