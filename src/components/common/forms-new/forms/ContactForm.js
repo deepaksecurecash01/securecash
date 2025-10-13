@@ -280,7 +280,7 @@ const ContactForm = ({ className }) =>
                                         fontFamily="font-montserrat"
                                         className=" font-normal text-center pb-4 text-[16px] mt-8"
                                     >
-                                        We've received your inquiry and will get back to you shortly.
+                                        We&apos;ve received your inquiry and will get back to you shortly.
                                     </Typography>
                                     <Typography
                                         as="p"
