@@ -1,12 +1,9 @@
 'use client';
 import React from "react";
-import Container from "../../../../components/layout/Container";
 import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Typography from "@/components/common/Typography";
-import Paragraph from "@/components/common/Paragraph";
-import SubHeading from "@/components/common/SubHeading";
 import Slider from "react-slick";
 import Link from "next/link";
 

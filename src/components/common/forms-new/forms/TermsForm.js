@@ -13,24 +13,16 @@ import
         FaCheckCircle,
     } from "react-icons/fa";
 import Typography from "@/components/common/Typography";
-import Divider from "@/components/common/Divider";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatBirthdayForAPI } from '@/utils/formHelpers';
 import TermsFormSchema, { TERMS_DEFAULT_VALUES } from '@/zod/TermsFormSchema';
+import { useRouter } from "next/navigation";
 
-/**
- * Enhanced TermsForm - FIXED WarningPopup Behavior
- * 
- * ✅ FIXES APPLIED:
- * - Proper focus state management for WarningPopup display
- * - Individual field error icon styling
- * - Clean Controller-based architecture maintained
- * - Enhanced debugging and state tracking
- */
+
 const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
 {
-
+    const router = useRouter();
     // ✅ Enhanced form manager with complete focus integration
     const formManager = useFormManager({
         schema: TermsFormSchema,
@@ -42,7 +34,7 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
         {
             console.log("✅ Terms form submitted successfully!");
             // Redirect to /austrac on successful submission
-            // router.push("/austrac");
+            router.push("/austrac");
         },
         onError: (error) =>
         {
@@ -204,10 +196,8 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
                             Service Agreement
                         </Typography>
 
-                        <Divider
-                            color="primary"
-                            className="w-[100px] mx-auto mt-2.5 mb-4"
-                            alignment="center"
+                        <hr
+                            className="w-[100px] mx-auto mt-2.5 mb-4 bg-primary"
                         />
 
                         <div className="form-tab 480px:w-[90%] mx-auto">

@@ -6,7 +6,6 @@ import { servicesData } from "@/data/servicesData";
 import VideoSection from "@/components/common/VideoSection";
 import ScrollSectionWithImage from "../components/ScrollSectionWithImage";
 import GuaranteeSection from "../components/GuaranteeSection";
-import Divider from "@/components/common/Divider";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
@@ -26,10 +25,9 @@ const FreeChangeOrderService = () => (
       <strong>Free Change Order Service</strong>
     </h1>
 
-    <Divider
-      color="primary"
-      alignment="center"
-      className="w-[100px] mt-[20px]"
+    <hr
+      
+      className="w-[100px] mt-[20px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"
     />
 
     <div className="relative">

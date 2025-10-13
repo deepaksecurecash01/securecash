@@ -1,5 +1,4 @@
 import React from "react";
-import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
 
 import { FaPhoneAlt, FaMapMarkerAlt, FaEnvelope, FaStar } from "react-icons/fa";
@@ -44,7 +43,7 @@ const FormSection = () =>
                         Register Your Interest
                     </Typography>
 
-                    <Divider color="primary" className="w-[100px] mb-[24px]" alignment="left" />
+                    <hr className="w-[100px] mb-[24px] bg-primary mx-auto 992px:ml-0  992px:mr-auto h-[4px] rounded-[5px] border-0"  />
                     <ul className="list-none text-center lg:text-left 480px:w-[90%] mx-auto 992px:w-full">
                         {contactInfo.map((info, index) => (
                             <li

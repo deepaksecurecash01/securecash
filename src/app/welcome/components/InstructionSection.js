@@ -1,6 +1,5 @@
 'use client';
 import React, { useEffect, useCallback, useRef } from 'react';
-import Divider from '@/components/common/Divider';
 
 const InstructionSection = () =>
 {
@@ -142,10 +141,9 @@ const InstructionSection = () =>
                     <h2 className="text-[#c7a652] text-[34px] font-semibold">
                         INSTRUCTIONS:
                     </h2>
-                    <Divider
-                        color="#7a7a7a"
-                        alignment="left"
-                        className="mt-[30px] mb-[24px] w-[100px] 768px:text-left 768px:mx-0"
+                    <hr
+                       
+                        className="mt-[30px] mb-[24px] w-[100px] 768px:text-left 768px:mx-0 h-[4px] rounded-[5px] border-0 bg-[#7a7a7a]"
                     />
                     <div className="instruction-wrapper relative mt-[40px] pt-[8px] pb-[8px]">
                         <div className="counter absolute top-0 left-0 z-0 flex justify-center items-center w-[50px] h-[67px]">

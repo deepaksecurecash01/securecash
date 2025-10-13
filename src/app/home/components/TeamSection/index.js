@@ -1,7 +1,6 @@
 "use client";
 import Typography from "@/components/common/Typography";
 import TeamSlider from "./TeamSlider";
-import Divider from "@/components/common/Divider";
 
 // data/teamMembers.js
 const teamMembers = [
@@ -181,10 +180,8 @@ const TeamContent = () =>
         </Typography>
 
 
-        <Divider
-          color="#c7a652"
-          alignment="center"
-          className="w-[100px] mb-10 mt-4"
+        <hr
+          className="w-[100px] mb-10 mt-4 h-[4px] rounded-[5px] border-0 mx-auto bg-primary"
         />
 
         <div className="members-slider relative select-none block w-full float-left mb-[100px]">

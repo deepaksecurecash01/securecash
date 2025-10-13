@@ -1,4 +1,3 @@
-import Divider from "@/components/common/Divider";
 import React from "react";
 
 const FormHeader = ({ COMPANY_INFO }) => (
@@ -6,10 +5,8 @@ const FormHeader = ({ COMPANY_INFO }) => (
     <h1 className="text-[34px] font-bold text-gray-800">
       Independent Contractors Agreement
     </h1>
-    <Divider
-      color="primary"
-      alignment="center"
-      className="mt-5 mb-5 w-[100px]"
+    <hr
+      className="mt-5 mb-5 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary"
     />
     <h2 className="text-xl text-gray-600 mb-4">
       The parties to this agreement are:

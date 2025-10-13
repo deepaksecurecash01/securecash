@@ -1,5 +1,4 @@
 import React from "react";
-import Divider from "./Divider";
 import Typography from "./Typography";
 
 const BottomBanner = () =>
@@ -24,10 +23,9 @@ const BottomBanner = () =>
           >
             Let us do the banking for you
           </Typography>
-          <Divider
-            color="primary"
-            alignment="center"
-            className="w-[100px] mt-[6px] mb-[36px] 768px:text-left 768px:mx-0 divider-gold divider-2 z-20"
+          <hr
+           
+            className="w-[100px] mt-[6px] mb-[36px]  divider-gold divider-2 z-20 h-[4px] rounded-[5px] border-0 bg-primary mx-auto"
           />
         </div>
       </div>

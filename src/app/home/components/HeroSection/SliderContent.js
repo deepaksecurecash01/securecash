@@ -1,4 +1,3 @@
-import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
 import Paragraph from "@/components/common/Paragraph";
 import SliderButton from "./SliderButton";
@@ -11,7 +10,7 @@ const BannerContent = ({
   buttonLink,
 }) => (
   <div className="absolute w-full text-center text-white 1024px:w-[90%] 1200px:w-[80%] 1024px:pl-[3%] 1200px:pl-[4%] 1440px:pl-0 top-[50%] transform -translate-y-1/2">
-    <Divider className="w-[100px] mb-6 mx-auto 1024px:ml-0  1024px:mr-auto" />
+    <hr className="w-[100px] h-[4px] rounded-[5px] border-0 bg-white mb-6 mx-auto 1024px:ml-0  1024px:mr-auto" />
     <Typography
       fontFamily="prata"
       as="h3"

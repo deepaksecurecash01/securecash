@@ -3,7 +3,6 @@ import React from 'react';
 import { FaBuilding, FaHome, FaMapMarkerAlt } from 'react-icons/fa';
 import UniversalFormField from '@/components/common/forms-new/core/UniversalFormField';
 import Typography from '@/components/common/Typography';
-import Divider from '@/components/common/Divider';
 import { SPECIAL_EVENT_BUSINESS_FIELDS } from '@/zod/SpecialEventFormSchema';
 
 const SpecialEventBusinessStep = ({ formManager, theme = 'dark' }) =>
@@ -39,7 +38,7 @@ const SpecialEventBusinessStep = ({ formManager, theme = 'dark' }) =>
                 Business Information
             </Typography>
 
-            <Divider color="primary" className="w-[100px] mt-2.5 mb-4" alignment="center" />
+            <hr className="w-[100px] mt-2.5 mb-4 h-[4px] rounded-[5px] border-0 bg-primary mx-auto" />
 
             <div className="form-tab 480px:w-[90%] mx-auto">
                 {fieldsWithIcons.map((field, index) =>

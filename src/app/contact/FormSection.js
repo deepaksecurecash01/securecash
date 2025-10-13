@@ -1,5 +1,4 @@
 import React from "react";
-import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
 import Paragraph from "@/components/common/Paragraph";
 import SubHeading from "@/components/common/SubHeading";
@@ -47,7 +46,7 @@ const FormSection = () =>
                         Contact Information
                     </Typography>
 
-                    <Divider color="primary" className="w-[100px] mb-[24px]" alignment="left" />
+                    <hr  className="w-[100px] mb-[24px] h-[4px] rounded-[5px] border-0 mx-auto 992px:ml-0  922px:mr-auto bg-primary" />
                     <ul className="list-none text-center lg:text-left 480px:w-[90%] mx-auto 992px:w-full">
                         {contactInfo.map((info, index) => (
                             <li

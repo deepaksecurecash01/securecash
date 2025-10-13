@@ -1,6 +1,4 @@
-import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
-import Paragraph from "@/components/common/Paragraph";
 import Image from "next/image";
 import React from "react";
 
@@ -68,9 +66,9 @@ const CardsSection = () =>
       >
         <div className="bottom-row-left bg-[#c7a652]  w-full mx-auto  1200px:relative">
           <div className="row-container w-[95%] mx-auto py-[40px] 992px:pl-[14px] 992px:w-[490px] mt-[32px] pt-2.5 text-center  1200px:w-[650px] 1366px:w-[683px] 1366px:mr-0 1366px:ml-auto 1024px:mt-10 1366px:mt-[80px] text-[#fff]">
-            <Divider
+            <hr
               
-              className="w-[100px] mb-6 mx-auto 992px:ml-0  992px:mr-auto"
+              className="w-[100px] mb-6 mx-auto 992px:ml-0  992px:mr-auto h-[4px] rounded-[5px] border-0 bg-white"
             />
             <Typography
               as="h3"

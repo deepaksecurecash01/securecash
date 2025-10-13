@@ -1,10 +1,10 @@
 import React from "react";
 import Container from "../../../components/layout/Container";
-import Divider from "../../../components/common/Divider";
 import ScrollableSection from "../../../components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
 import Typography from "../../../components/common/Typography";
 import Image from "next/image";
+import Link from "next/link";
 
 export const HelpSection = ({
     title,
@@ -60,11 +60,8 @@ export const HelpSection = ({
                         <div className={`section-content-wrapper w-full flex flex-col justify-start 768px:justify-end ${secondSectionOrder}`}>
                             <div className="content bg-white h-full flex flex-col self-end 1200px:max-h-[calc(636px-56px)]">
                                 <div className="section-header px-10 600px:px-6 py-[18px] relative 600px:absolute 1200px:relative 600px:top-[30px] right-0 w-auto 768px:top-0 768px:px-8 768px:py-10 bg-[#000000] items-end justify-center text-[#ffffff] m-0 flex flex-col text-right">
-                                    <Divider
-                                        color="primary"
-                                        alignment="right"
-                                        className="w-[100px] m-0 768px:text-left 768px:mx-0 hidden 1200px:block divider-gold divider-2"
-
+                                    <hr                                      
+                                        className="h-[4px] rounded-[5px] border-0  w-[100px] bg-primary mx-auto 768px:ml-auto 768px:mr-0 hidden 1200px:block divider-gold divider-2"
                                     />
                                     <Typography
                                         as="h3"
@@ -82,7 +79,7 @@ export const HelpSection = ({
                                     {hasCTA && (
                                         <div className="flex justify-center 768px:justify-end items-center">
                                             <div className="w-[200px] bg-[#c7a652] text-[#fff] text-center px-[8px] py-[12px] rounded-[50px] mt-0 768px:ml-0 z-10 hover:bg-[#000000] hover:cursor-pointer no-underline mr-0">
-                                                <a href="https://www.securecash.com.au/quote">Get a Quote</a>
+                                                <Link href="quote">Get a Quote</Link>
                                             </div>
                                         </div>
                                     )}

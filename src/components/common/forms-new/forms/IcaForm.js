@@ -11,6 +11,7 @@ import LicensingInsuranceSection from "./sections/LicensingInsuranceSection.js";
 import EDocketSystemSection from "./sections/EDocketSystemSection.js";
 import DriversSection from "./sections/DriversSection.js";
 import { IcaFormSchema, ICA_DEFAULT_VALUES } from "@/zod/IcaFormSchema";
+import { FaCheckCircle, FaCheckDouble } from "react-icons/fa";
 
 const COMPANY_INFO = {
     name: "Office Central Pty Ltd",
@@ -42,8 +43,7 @@ const SubmitButton = ({ formManager }) => (
     <button
         type="submit"
         disabled={formManager.isSubmitting}
-        className={`nextBtn ${formManager.isSubmitted ? "bg-[#4bb543]" : "bg-[#c6a54b]"
-            } text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer rounded-[40px] outline-none appearance-none hover:opacity-80 text-base p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
+        className={`nextBtn ${formManager.isSubmitted ? "bg-[#4bb543]" : "bg-[#c6a54b]"} text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer rounded-[40px] outline-none appearance-none hover:opacity-80 text-base p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
     >
         {formManager.isSubmitting ? (
             <span className="flex items-center justify-center gap-2">
@@ -51,7 +51,10 @@ const SubmitButton = ({ formManager }) => (
                 Submitting... Please Wait.
             </span>
         ) : formManager.isSubmitted ? (
-            "Thank you. We received your submission!"
+            <div className="flex items-center justify-center">
+                    <FaCheckCircle className="text-white mr-2" />
+                Thank you. We received your submission!
+            </div>
         ) : (
             "Click here to execute this deed & agreement"
         )}
@@ -110,6 +113,10 @@ const IndependentContractorsForm = ({
         onSuccess: (result, finalData) =>
         {
             console.log("ICA form submitted successfully with attachments!", finalData);
+            setTimeout(() =>
+            {
+                formManager.resetForm();
+            }, 15000);
         },
         onError: (error) =>
         {
@@ -166,24 +173,9 @@ const IndependentContractorsForm = ({
 
                     <div className="text-center space-y-4">
                         <SubmitButton formManager={formManager} />
-                        {formManager.isSubmitted && <SuccessMessage />}
                     </div>
 
-                    {/* Error Display */}
-                    {formManager.submissionError && (
-                        <div className="max-w-[1200px] mx-auto mt-4">
-                            <div className="text-red-600 text-center mb-4 p-4 bg-red-50 border border-red-200 rounded mx-4">
-                                <strong>Submission Error:</strong> {formManager.submissionError}
-                                <button
-                                    type="button"
-                                    onClick={() => window.location.reload()}
-                                    className="ml-4 text-blue-600 hover:underline"
-                                >
-                                    Retry
-                                </button>
-                            </div>
-                        </div>
-                    )}
+                  
 
                     {/* File Upload Progress */}
                     {formManager.fileUpload && formManager.fileUpload.isProcessing && (

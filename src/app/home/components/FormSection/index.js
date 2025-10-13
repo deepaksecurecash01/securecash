@@ -1,5 +1,4 @@
 import React from "react";
-import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
 import Paragraph from "@/components/common/Paragraph";
 import SubHeading from "@/components/common/SubHeading";
@@ -66,7 +65,7 @@ const FormSection = () =>
             Make The Right Choice
           </Typography>
 
-          <Divider color="primary" className="w-[100px] mb-[24px] mx-auto 992px:ml-0  992px:mr-auto"  />
+          <hr className="w-[100px] mb-[24px] bg-primary h-[4px] rounded-[5px] border-0 mx-auto 992px:ml-0  992px:mr-auto"  />
           <Typography
             as="h2"
             fontFamily="montserrat"

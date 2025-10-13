@@ -1,5 +1,4 @@
 import React from "react";
-import Divider from '@/components/common/Divider';
 import Typography from '@/components/common/Typography';
 import Image from "next/image";
 import Container from "@/components/layout/Container";
@@ -42,10 +41,8 @@ const HeadlineContent = () =>
                             Your Business
                         </Typography>
 
-                        <Divider
-                            color="primary"
-                            alignment="left"
-                            className='w-[100px] mt-[22px] mb-[34px] mx-auto 768px:text-left 768px:mx-0'
+                        <hr
+                            className='w-[100px] mt-[22px] mb-[34px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto 768px:ml-0  768px:mr-auto'
                         />
                     </div>
                 </Container>

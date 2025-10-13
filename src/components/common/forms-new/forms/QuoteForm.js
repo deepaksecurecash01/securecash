@@ -14,7 +14,6 @@ import
   FaChevronLeft,
 } from "react-icons/fa";
 import Typography from "@/components/common/Typography";
-import Divider from "@/components/common/Divider";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 import BankingStep from "./steps/BankingStep.js";
 import ChangeStep from "./steps/ChangeStep";
@@ -144,7 +143,7 @@ const QuoteForm = ({ className }) =>
               We Just Need A Few Details
             </Typography>
 
-            <Divider color="primary" className="mt-4 w-[100px]" alignment="center" />
+            <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"  />
 
             <div className="form-tab 480px:w-[90%] mx-auto">
               {quoteFields.map((field) => (
@@ -188,7 +187,7 @@ const QuoteForm = ({ className }) =>
         <h5 className="text-white font-montserrat text-center capitalize pb-2 text-[16px]">
           We received your submission.
         </h5>
-        <Divider color="primary" className="mt-4 w-[100px]" alignment="center" />
+        <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto" />
 
         <div className="quote-ty-note">
           <Typography

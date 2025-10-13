@@ -104,6 +104,9 @@ const ContactForm = ({ className }) =>
         },
     ];
 
+    const userName = formManager.getValues().FullName || "";
+
+
     // Debug logging for troubleshooting
     useEffect(() =>
     {
@@ -166,7 +169,7 @@ const ContactForm = ({ className }) =>
                             ))}
 
                             {/* Callback checkbox */}
-                            <div className="relative">
+                            <div className="relative mt-6">
                                 <UniversalFormField
                                     {...formManager.getFieldProps({
                                         name: "ChkCallBack",
@@ -249,7 +252,101 @@ const ContactForm = ({ className }) =>
                             </div>
                         </div>
                     </div>
+                    {/* Form submitted overlay */}
+                    {formManager.isSubmitted && (
+                        <div
+                            className="form-submitted-message text-center py-4 absolute h-full top-0 flex  flex-col justify-center items-center bg-[#f1f1f1] z-10 w-[90%]"
+                            style={{ background: "#f1f1f1" }}
+                        >
 
+                            <div className="480px:w-[90%] mx-auto 992px:h-[75%]">
+                                <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" />
+
+                                <Typography
+                                    as="h3"
+                                    fontFamily="montserrat"
+                                    className=" text-primary font-montserrat text-center capitalize pb-2 text-[32px] leading-[30px] mt-8 font-bold"
+                                >
+                                    Thank you{userName && ` ${userName}`}!
+                                </Typography>
+                                <h5 className=" font-montserrat text-center capitalize pb-2 text-[16px]">
+                                    Your message has been sent successfully.
+                                </h5>
+                                <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" />
+
+                                <div className="quote-ty-note">
+                                    <Typography
+                                        as="p"
+                                        fontFamily="font-montserrat"
+                                        className=" font-normal text-center pb-4 text-[16px] mt-8"
+                                    >
+                                        We've received your inquiry and will get back to you shortly.
+                                    </Typography>
+                                    <Typography
+                                        as="p"
+                                        fontFamily="font-montserrat"
+                                        className=" font-normal text-center pb-4 text-[16px]"
+                                    >
+                                        In the meantime, feel free to explore more about our services:
+                                    </Typography>
+                                    <div className="ty-note-list-wrap mt-2">
+                                        <ul className="list-none p-0 m-0 flex flex-col justify-center items-center gap-1 font-medium">
+                                            <li className="cash-collection mb-2 flex items-center">
+                                                <img
+                                                    src="/images/contentpageicons/cashcollection.png"
+                                                    alt="Cash Collection"
+                                                    className="inline-block mr-2 w-[30px]"
+                                                />
+                                                <a
+                                                    href="https://www.securecash.com.au/cash-collection/"
+                                                    className="text-[#c6a54b] hover:underline"
+                                                >
+                                                    <p className="m-0">Cash Collections</p>
+                                                </a>
+                                            </li>
+                                            <li className="cash-delivery mb-2 flex items-center">
+                                                <img
+                                                    src="/images/contentpageicons/cashdelivery.png"
+                                                    alt="Cash Delivery"
+                                                    className="inline-block mr-2 w-[30px]"
+                                                />
+                                                <a
+                                                    href="https://www.securecash.com.au/cash-delivery/"
+                                                    className="text-[#c6a54b] hover:underline"
+                                                >
+                                                    <p className="m-0">Cash Deliveries</p>
+                                                </a>
+                                            </li>
+                                            <li className="cash-counting mb-2 flex items-center">
+                                                <img
+                                                    src="/images/contentpageicons/cashcounting.png"
+                                                    alt="Cash Counting"
+                                                    className="inline-block mr-2 w-[30px]"
+                                                />
+                                                <a
+                                                    href="https://www.securecash.com.au/cash-counting/"
+                                                    className="text-[#c6a54b] hover:underline"
+                                                >
+                                                    <p className="m-0">Cash Counting</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <div className="button-controls-container w-[80%] mx-auto mt-8">
+                                    <button
+                                        type="button"
+                                        onClick={formManager.resetForm}
+                                        className="bg-[#c6a54b] text-white border-none py-[15px] font-medium cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-[15px] p-2.5 shadow-none font-montserrat"
+                                    >
+                                        Send Another Message
+                                    </button>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    )}
                     {/* Display submission error if any */}
                     {formManager.submissionError && (
                         <div className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded mx-4">

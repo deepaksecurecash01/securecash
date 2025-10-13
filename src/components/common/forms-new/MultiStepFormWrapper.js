@@ -3,7 +3,6 @@
 import React from "react";
 import { FaSpinner, FaCheckCircle, FaArrowLeft } from "react-icons/fa";
 import Typography from "@/components/common/Typography";
-import Divider from "@/components/common/Divider";
 import UniversalFormField from "./core/UniversalFormField";
 import CheckboxGroupInput from "./core/CheckboxGroupInput";
 import { useMultiStepCoordinator } from "@/hooks/useMultiStepCoordinator";
@@ -90,11 +89,8 @@ const MultiStepFormWrapper = ({
                     </Typography>
                 )}
 
-                <Divider
-                    color="primary"
-                    margin="mt-2.5 mb-4"
-                    alignment="center"
-                    responsiveClassName="mx-auto"
+                <hr
+                    className="mt-2.5 mb-4 h-[4px] rounded-[5px] border-0  mx-auto bg-primary"
                 />
             </>
         );

@@ -1,9 +1,8 @@
 import React from "react";
 import Container from "../../../components/layout/Container";
-import Divider from "../../../components/common/Divider";
 import ScrollableSection from "../../../components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
-import Typography from "../../../components/common/Typography";
+import Link from "next/link";
 
 export const StorySection = ({
   title,
@@ -49,7 +48,7 @@ export const StorySection = ({
       >
         <div className={` bg-no-repeat bg-cover 480px:bg-contain w-full h-full`} >
           <Container className="section-col inner relative h-full 600px:h-[296px] 768px:h-[calc(342px+40px)] 1200px:h-[calc(456px+56px)] 1440px:h-full flex flex-col mt-0 600px:flex-row w-full 1024px:w-[95%] 1440px:w-full">
-            <div className={`section-content-wrapper w-full h-full flex flex-col justify-end ${firstSectionOrder}`}>
+            <div className={`section-content-wrapper w-full h-full flex flex-col justify-end ${firstSectionOrder}`} id="about-us-section-story">
               <img
                 src={imageUrl}
                 alt={imageAlt}
@@ -61,18 +60,15 @@ export const StorySection = ({
             <div className={`section-content-wrapper w-full flex flex-col justify-start 768px:justify-end ${secondSectionOrder}`}>
               <div className="content h-full flex flex-col self-end 1200px:max-h-[400px]">
                 <div className="section-header px-10 600px:px-6 py-[18px] relative 600px:absolute 1200px:relative 600px:top-[30px] left-0 w-auto 768px:top-0 768px:px-8 768px:py-10 bg-[#000000] items-start justify-center text-[#ffffff] m-0 flex flex-col text-right">
-                  <Divider
-                    color="primary"
-                    alignment="left"
-                    className="w-[100px] m-0 768px:text-left 768px:mx-0 hidden 1200px:block divider-gold divider-2"
+                 
+                  <hr
+                    className="h-[4px] rounded-[5px] border-0 bg-primary w-[100px] m-0 768px:text-left 768px:mx-0 hidden 1200px:block divider-gold divider-2"
                   />
-                  <Typography
-                    as="h3"
-                    fontFamily="montserrat"
-                    className="text-[32px] font-bold leading-[1.4em] text-center 768px:text-left 600px:text-[30px] 768px:text-[32px] 992px:text-[40px] 1200px:mt-6 1200px:mb-2"
+                  <h3
+                    className="text-[32px] font-montserrat font-bold leading-[1.4em] text-center 768px:text-left 600px:text-[30px] 768px:text-[32px] 992px:text-[40px] 1200px:mt-6 1200px:mb-2"
                   >
                     {title}
-                  </Typography>
+                  </h3>
                 </div>
 
                 <ScrollableSection className={`section-content h-auto 600px:mt-[120px] 768px:mt-[142px] ${!id.includes("story") && 'bg-white'} pt-8 600px:pt-5 pb-4 px-8 mx-2 1200px:mt-2.5 leading-[2]`}>
@@ -81,7 +77,7 @@ export const StorySection = ({
                   {hasCTA && (
                     <div className="flex justify-center 768px:justify-end items-center">
                       <div className="w-[200px] bg-[#c7a652] text-[#fff] text-center px-[8px] py-[12px] rounded-[50px] mt-0 768px:ml-0 z-10 hover:bg-[#000000] hover:cursor-pointer no-underline mr-0">
-                        <a href="https://www.securecash.com.au/quote">Get a Quote</a>
+                        <Link href="quote">Get a Quote</Link>
                       </div>
                     </div>
                   )}

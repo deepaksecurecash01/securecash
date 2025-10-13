@@ -3,7 +3,6 @@ import React from 'react';
 import { FaUser, FaUsers, FaPhone, FaEnvelope } from 'react-icons/fa';
 import UniversalFormField from '@/components/common/forms-new/core/UniversalFormField';
 import Typography from '@/components/common/Typography';
-import Divider from '@/components/common/Divider';
 import { CONTACT_INFO_FIELDS } from '@/zod/SiteInfoFormSchema';
 
 const SiteContactStep = ({ formManager, theme = 'dark' }) =>
@@ -36,7 +35,7 @@ const SiteContactStep = ({ formManager, theme = 'dark' }) =>
                 Contact Information
             </Typography>
 
-            <Divider color="primary" className="w-[100px] mt-2.5 mb-4" alignment="center" />
+            <hr className="w-[100px] mt-2.5 mb-4 h-[4px] rounded-[5px] border-0 bg-primary mx-auto" />
 
             <div className="form-tab 480px:w-[90%] mx-auto">
                 {fieldsWithIcons.map(field => (

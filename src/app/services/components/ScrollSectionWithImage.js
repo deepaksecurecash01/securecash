@@ -2,7 +2,6 @@
 import React, { useEffect } from "react";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import Typography from "@/components/common/Typography";
-import Divider from "@/components/common/Divider";
 import Image from "next/image";
 import Link from "next/link";
 import parse from 'html-react-parser';
@@ -103,10 +102,8 @@ const ScrollSectionWithImage = ({
               >
                 {ctaText ? ctaText : "Why Choose SecureCash for Your Business?"} 
               </Typography>
-              <Divider
-                color="white"
-                alignment="left"
-                  className="mt-[20px] 992px:mx-0 992px:text-left w-[100px] ml-0"
+              <hr
+                  className="mt-[20px] 992px:mx-0 992px:text-left w-[100px] ml-0 h-[4px] rounded-[5px] border-0 bg-white"
               />
             </div>
           </div>

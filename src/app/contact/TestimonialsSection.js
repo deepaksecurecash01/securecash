@@ -1,6 +1,5 @@
 "use client";
 import Typography from "@/components/common/Typography";
-import Divider from "@/components/common/Divider";
 import React, { useState, useRef } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -108,10 +107,8 @@ const TeamContent = () =>
                 </Typography>
 
 
-                <Divider
-                    color="#c7a652"
-                    alignment="center"
-                    className="mb-6 mt-4 w-[100px]"
+                <hr
+                    className="mb-6 mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary"
                 />
                 <Typography
                     as="p"

@@ -1,5 +1,3 @@
-
-
 .checkbox input[type="checkbox"]:checked+label:after {
   content: "";
   -webkit-transform: rotate(45deg);
@@ -33,4 +31,18 @@
   border-radius: 4px;
   box-sizing: border-box;
   /* Ensures consistent sizing */
+}
+
+
+
+/* Existing rule - when hovering the label */
+.checkbox input[type="checkbox"]:not(:checked)+label:hover span {
+  background: #c6a54b;
+  opacity: 50%;
+}
+
+/* NEW rule - when hovering the input itself */
+.checkbox input[type="checkbox"]:not(:checked):hover+label span {
+  background: #c6a54b;
+  opacity: 50%;
 }

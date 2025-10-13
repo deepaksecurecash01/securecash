@@ -1,5 +1,4 @@
 import React from "react";
-import Divider from "../../components/common/Divider";
 import DoubleButton from "../../components/common/DoubleButton";
 
 const HeroImage = () =>
@@ -7,7 +6,7 @@ const HeroImage = () =>
   return (
     <div
       id="hero-image"
-      className="flex flex-col justify-center items-center bg-[45%] bg-cover h-[404px]  414px:h-[412px]  768px:h-[454px] 1024px:h-[55vh] 480px:bg-[position:50%]  600px:bg-cover bg-no-repeat  992px:bg-center "
+      className="flex flex-col justify-center items-center overflow-hidden bg-[45%] bg-cover h-[404px]  414px:h-[412px]  768px:h-[454px] 1024px:h-[55vh] 480px:bg-[position:50%]  600px:bg-cover bg-no-repeat  992px:bg-center "
       style={{
         backgroundImage:
           "-webkit-linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg')",
@@ -42,11 +41,8 @@ const HeroImage = () =>
           Now Available
         </span>
       </h2>
-      <Divider
-        color="white"
-       
-        alignment="center"
-        className="w-[16%] mt-2.5 mb-5 992px:mx-0 992px:text-left 768px:mt-5 768px:mb-0 414px:mb-0 600px:w-[100px]"
+      <hr
+        className="w-[16%] mt-2.5 mb-5 bg-white h-[4px] rounded-[5px] border-0 768px:mt-5 768px:mb-0 414px:mb-0 600px:w-[100px]"
       />
       <DoubleButton
         primaryButton={{ text: "Register Now", href: "#franchise-form" }}

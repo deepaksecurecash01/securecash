@@ -1,7 +1,5 @@
 import React from "react";
-import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
-
 import Link from "next/link";
 import AustracForm from "@/components/common/forms-new/forms/AustracForm";
 

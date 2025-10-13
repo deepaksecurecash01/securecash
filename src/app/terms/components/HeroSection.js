@@ -1,6 +1,5 @@
 import { FaArrowDownLong } from "react-icons/fa6";
 import Container from "@/components/layout/Container";
-import Divider from "@/components/common/Divider";
 
 export const HeroSection = () => (
   <section className="welcome-main-hero h-full 600px:h-[500px] 1024px:h-[547px]  relative">
@@ -24,10 +23,9 @@ const HeroLeftContent = () => (
     <h1 className="welcome-main-hero--content-left__title text-[38px] leading-[42px] 1024px:leading-[1em] 1024px:text-[64px] font-extrabold 600px:font-semibold 600px:text-left">
       Conditions{" "}
     </h1>
-    <Divider
-      color="primary"
-      alignment="center"
-      className="mx-auto my-[22px] mb-[34px] w-[100px] 600px:mx-0 1024px:text-left 1024px:mx-0 1366px:mt-[30px] 1024px:mb-[57px]"
+    <hr
+     
+      className="mx-auto my-[22px] mb-[34px] w-[100px] 600px:mx-0 1024px:text-left 1024px:mx-0 1366px:mt-[30px] 1024px:mb-[57px] bg-primary h-[4px] rounded-[5px] border-0"
     />
     <a
       className="btn btn-welcome-hero btn-welcome-main text-[14px] px-5 py-3 border border-white   1024px:text-[16px]  1024px:px-[40px]  1024px:py-[20px] mb-[30px] "

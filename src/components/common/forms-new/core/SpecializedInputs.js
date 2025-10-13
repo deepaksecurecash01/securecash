@@ -1493,6 +1493,7 @@ const LegacyCheckbox = ({
             <input
                 type="checkbox"
                 name={value}
+                id={value}
                 value={value}
                 checked={checked}
                 ref={inputRef}
@@ -1500,7 +1501,7 @@ const LegacyCheckbox = ({
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 data-validate="CheckboxMulti"
-                className="text-sm p-2.5 shadow-none font-montserrat border-none w-[28px] h-[28px] opacity-0 absolute z-40 peer"
+                className="text-sm p-2.5 shadow-none font-montserrat border-none w-[28px] h-[28px] opacity-0 absolute z-40 peer cursor-pointer"
                 disabled={disabled}
             />
             <label

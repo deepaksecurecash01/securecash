@@ -1,6 +1,5 @@
 import React from "react";
 import Typography from "@/components/common/Typography";
-import Divider from "@/components/common/Divider";
 import Link from "next/link";
 import parse from "html-react-parser";
 const GuaranteeSection = ({ guaranteeContent, imageUrl }) =>
@@ -134,10 +133,9 @@ const GuaranteeSection = ({ guaranteeContent, imageUrl }) =>
                             >
                                 Give more focus to the things you love.
                             </Typography>
-                            <Divider
-                                color="white"
-                                alignment="center"
-                                className="my-6 992px:mx-0 992px:text-left w-[100px]"
+                            <hr
+                              
+                                className="my-6 992px:mx-0 992px:text-left w-[100px] h-[4px] rounded-[5px] border-0 bg-white mx-auto"
                             />
 
                             <Typography

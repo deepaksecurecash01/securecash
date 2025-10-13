@@ -1,5 +1,4 @@
 import React from 'react';
-import Divider from '@/components/common/Divider';
 
 const PARTNER_FLAGS = [
     {
@@ -68,10 +67,8 @@ const HeroSection = () =>
                     SecureCash International Partners
                 </h1>
 
-                <Divider
-                    color="primary"
-                    alignment="center"
-                    className="w-[100px] mt-[30px] mb-[60px]"
+                <hr
+                    className="w-[100px] mt-[30px] mb-[60px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"
                 />
 
                 <h3 className="

@@ -6,7 +6,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useFormManager } from '@/hooks/useFormManager';
 import Typography from "@/components/common/Typography";
-import Divider from "@/components/common/Divider";
 
 // Import step components (reuse Site-Info components with modifications)
 import SpecialEventBusinessStep from "./SpecialEvents/steps/SpecialEventBusinessStep.js";
@@ -283,7 +282,7 @@ const SpecialEventForm = () =>
                                     Site Risk Information
                                 </Typography>
 
-                                <Divider color="primary" alignment="left" className="w-[100px] my-5 768px:text-left 768px:mx-0" />
+                                <hr className="w-[100px] my-5 768px:text-left 768px:mx-0 h-[4px] rounded-[5px] border-0 bg-primary" />
 
                                 <Typography as="p" fontFamily="montserrat"
                                     className="text-[16px] leading-[2rem] text-left 768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light">

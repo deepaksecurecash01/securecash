@@ -1,5 +1,4 @@
 import React from 'react'
-import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
 
 const HeadlineContent = () => {
@@ -30,10 +29,9 @@ const HeadlineContent = () => {
                 >
                     Our Services Today&nbsp;
                 </Typography>
-                <Divider
-                    alignment="center"
-                    color="primary"
-                    className="1024px:mt-0 1024px:mb-6 w-[100px]"
+                <hr
+                   
+                  className="1024px:mt-0 1024px:mb-6 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"
                 />
                 <Typography
                     as="p"

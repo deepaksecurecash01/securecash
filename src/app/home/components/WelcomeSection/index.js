@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
 import Paragraph from "@/components/common/Paragraph";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
@@ -65,11 +64,9 @@ const WelcomeSection = () =>
               priority={true}
               className=" max-w-full h-auto block mx-auto"
             />
-            <Divider
-              color="primary"
-          
-              alignment="center"
-              className="w-[100px] mt-3 mb-6" 
+            <hr
+            
+              className="w-[100px] mt-3 mb-6 h-[4px] rounded-[5px] border-0 mx-auto bg-primary" 
             />
             <Typography
               as="p"

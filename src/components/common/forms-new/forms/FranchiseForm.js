@@ -131,6 +131,8 @@ const FranchiseForm = ({ className }) =>
         },
     ];
 
+    const userName = formManager.getValues().FullName || "";
+
     // Debug logging for troubleshooting
     useEffect(() =>
     {
@@ -188,17 +190,23 @@ const FranchiseForm = ({ className }) =>
                     {/* Form submitted overlay */}
                     {isFormSubmitted && (
                         <div
-                            className="form-submitted-message text-center py-4 absolute h-full top-0 flex justify-center items-center bg-[#f1f1f1] z-10"
+                            className="form-submitted-message text-center py-4 absolute h-full top-0 flex  flex-col justify-center items-center bg-[#f1f1f1] z-10 " 
                             style={{ background: "#f1f1f1" }}
                         >
-                            <div className="480px:w-[90%] mx-auto">
+                            
+                            <div className="480px:w-[90%] mx-auto 992px:h-[75%]">
+                                <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" />
+
                                 <Typography
                                     as="h3"
                                     fontFamily="montserrat"
-                                    className="text-[32px] text-primary leading-[1.4em] text-center font-bold mb-[16px]"
+                                    className=" text-primary font-montserrat text-center capitalize pb-2 text-[32px] leading-[30px] mt-8 font-bold"
                                 >
-                                    Thank You for Your Interest!
+                                    Thank you{userName && ` ${userName}`}!
                                 </Typography>
+                               
+                                <hr className="mt-4 mb-6 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary"  />
+
 
                                 <p className="mb-6">
                                     Your form has been submitted successfully. The meeting scheduler
@@ -258,6 +266,7 @@ const FranchiseForm = ({ className }) =>
                     {
                         setIsCalendlyOpen(false);
                         setIsFormSubmitted(false);
+                        formManager.resetForm();
                     }}
                     open={isCalendlyOpen}
                     rootElement={document.getElementById("root") || document.body}

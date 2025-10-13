@@ -1,7 +1,5 @@
 import React from "react";
-import Divider from "@/components/common/Divider";
-import BannerButton from "../home/components/HeroSection/SliderButton";
-import Link from "next/link";
+
 import Typography from "@/components/common/Typography";
 
 const HeroImage = () =>
@@ -24,11 +22,9 @@ const HeroImage = () =>
         Within 45 Minutes
       </h1>
 
-      <Divider
-        color="primary"
-
-        alignment="center"
-        className="992px:mx-0 992px:text-left mt-[21px] mb-[24px] w-[100px]"
+      <hr
+     
+        className="mx-auto h-[4px] rounded-[5px] border-0 bg-primary mt-[21px] mb-[24px] w-[100px]"
       />   <div
         className=" w-4/5 768px:w-[75%] mx-auto"
       >

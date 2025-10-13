@@ -1,4 +1,3 @@
-import Divider from '@/components/common/Divider';
 import Typography from '@/components/common/Typography';
 import Container from '@/components/layout/Container';
 import ScrollableSection from '@/components/layout/ScrollbarSection';
@@ -512,7 +511,7 @@ const TermsSection = ({ section }) => (
         <Typography
             as="h4"
             fontFamily="montserrat"
-            className="text-[16px] font-medium leading-[1.6em] text-left mx-auto 992px:text-[18px] pt-4 mb-[24px] 768px:text-left 768px:mx-0"
+            className="text-[16px] font-medium leading-[1.6em] text-left mx-auto 992px:text-[18px] mb-[24px] 768px:text-left 768px:mx-0"
         >            {section.title}
         </Typography>
         <ul className="tnc-page-sa-clauses--content__list list-none font-light relative pr-10">
@@ -556,10 +555,9 @@ const ServiceAgreementClauses = () =>
                             >
                             Service Agreement Clauses
                         </Typography>
-                        <Divider
-                            color="primary"
-                            alignment="left"
-                            className="mt-5 mb-[34px] w-[100px] 768px:text-left 768px:mx-0"
+                        <hr
+                          
+                            className="mt-5 mb-[34px] w-[100px] 768px:text-left 768px:mx-0 h-[4px] rounded-[5px] border-0 bg-primary"
 
                         />
                         <ScrollableSection className="h-[652px] 992px:w-full p-0 mx-auto 992px:h-[370px] pb-[18px]">

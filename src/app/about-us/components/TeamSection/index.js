@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import TeamSlider from "./TeamSlider";
-import Container from "@/components/layout/Container";
 
 const teamMembers = [
   {

@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
 
 

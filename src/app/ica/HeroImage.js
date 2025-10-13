@@ -1,6 +1,5 @@
 import { FaArrowDownLong } from "react-icons/fa6";
 import Container from "@/components/layout/Container";
-import Divider from "@/components/common/Divider";
 import Link from "next/link";
 
 const HeroImage = () => (
@@ -30,10 +29,8 @@ const HeroLeftContent = () => (
     <h1 className="welcome-main-hero--content-left__title w-[70%] mx-auto 600px:mx-0 text-[38px] 600px:text-[34px] 720px:text-[38px] leading-[42px] 1024px:leading-[1em] 1024px:text-[64px] font-extrabold 600px:font-semibold 600px:text-left">
       Independent Contractors Agreement
     </h1>
-    <Divider
-      color="primary"
-      alignment="center"
-      className="mx-auto mt-[22px] w-[100px] 600px:mx-0 1024px:text-left 1024px:mx-0 1366px:mt-[30px]"
+    <hr
+      className="mx-auto mt-[22px] w-[100px] h-[4px] rounded-[5px] border-0 bg-primary 600px:mx-0 1366px:mt-[30px]"
     />
    
   </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import Divider from "@/components/common/Divider";
 import Link from "next/link";
 import DoubleButton from "@/components/common/DoubleButton";
 
@@ -21,10 +20,8 @@ const HeroImage = ({ title, imgSrc }) =>
             />
 
 
-            <Divider
-                color="white"
-                alignment="center"
-                className="mt-2.5 mb-5 992px:mx-0 992px:text-left w-[16%] 768px:mt-5 768px:mb-0 414px:mb-0 600px:w-[100px]"
+            <hr
+                className="mt-2.5 mb-5 992px:mx-0 992px:text-left w-[16%] 768px:mt-5 768px:mb-0 414px:mb-0 600px:w-[100px] h-[4px] rounded-[5px] border-0 bg-white mx-auto"
             />
             <DoubleButton
                 primaryButton={{ text: "Get a Quote", href: "/quote" }}

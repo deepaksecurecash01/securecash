@@ -1,5 +1,4 @@
 import React from "react";
-import Divider from "@/components/common/Divider";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import Typography from "@/components/common/Typography";
 import Link from "next/link";
@@ -89,10 +88,8 @@ const SectionWrapper = ({
         <h2 className="montBold text-[22px] leading-[30px] 768px:text-[34px] font-bold text-center mx-auto 768px:leading-[45px] max-w-[80%] text-black">
           {heading}
         </h2>
-        <Divider
-          color="primary"
-          alignment="left"
-          className="w-[100px] my-[24px] 992px:mx-0 992px:text-left 768px:mb-0 768px:mt-5"
+        <hr
+          className="w-[100px] my-[24px] 992px:mx-0 992px:text-left 768px:mb-0 768px:mt-5 h-[4px] rounded-[5px] border-0 bg-primary"
         />
         <div className="content-wrapper   768px:w-4/5 768px:mt-12 p-0">
           <div id="intro-text" className="w-[90%] 768px:w-full mx-auto 768px:bg-inherit">
@@ -190,10 +187,8 @@ const SectionWrapper = ({
                 >
                   What Type of Service Do You Need?
                 </Typography>
-                <Divider
-                  color="white"
-                  alignment="left"
-                  className="w-[100px] my-6 992px:mx-0 992px:text-left "
+                <hr
+                  className="w-[100px] mx-auto my-6 992px:mx-0 992px:text-left h-[4px] rounded-[5px] border-0 bg-white"
                 />
                 <Typography
                   as="p"

@@ -1,4 +1,3 @@
-import Divider from '@/components/common/Divider';
 import Typography from '@/components/common/Typography';
 import Container from '@/components/layout/Container';
 import React from 'react';
@@ -46,10 +45,8 @@ const PrivacyPolicyPage = () =>
                 >                    <br />
                     SKY WALLET PTY LTD
                 </Typography>
-                <Divider
-                    color="primary"
-                    alignment="center"
-                    className="my-5 w-[100px]"
+                <hr
+                    className="my-5 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"
                 />            </div>
 
             <div className="section-wrapper">

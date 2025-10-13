@@ -1,5 +1,4 @@
 import React from "react";
-import Divider from '@/components/common/Divider';
 import Typography from '@/components/common/Typography';
 import Image from "next/image";
 import Container from "@/components/layout/Container";
@@ -42,10 +41,8 @@ const HeadlineContent = () =>
                             Your Location
                         </Typography>
 
-                        <Divider
-                            color="primary"
-                            alignment="left"
-                            className='mt-[22px] mb-[34px] w-[100px] mx-auto 768px:text-left 768px:mx-0'
+                        <hr
+                            className='mt-[22px] mb-[34px] w-[100px] mx-auto 768px:text-left 768px:mx-0 h-[4px] rounded-[5px] border-0 bg-primary'
                         />
                     </div>
                 </Container>

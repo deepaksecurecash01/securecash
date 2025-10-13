@@ -2,7 +2,6 @@ import Link from "next/link";
 import Typography from "@/components/common/Typography";
 import Container from "@/components/layout/Container";
 import { blogPosts } from "../../../data/blogData";
-import Divider from "../../../components/common/Divider";
 
 const BlogLatestPost = () =>
 {
@@ -26,10 +25,9 @@ const BlogLatestPost = () =>
       >
         Latest post{" "}
       </Typography>
-      <Divider
-        color="primary"
-        alignment="left"
-        className="w-[100px] mt-[6px] mb-[16px] 992px:mx-0 992px:text-left"
+      <hr
+      
+        className="w-[100px] mt-[6px] mb-[16px] mx-auto 768px:ml-0  768px:mr-auto h-[4px] rounded-[5px] border-0 bg-primary"
       />
       <div className="inner-grid">
         <section className="blog-index-main blog-index-footer">

@@ -12,7 +12,6 @@ import
 import BottomBanner from '@/components/common/BottomBanner';
 import { FaArrowDownLong } from "react-icons/fa6";
 
-import Divider from "@/components/common/Divider";
 import Typography from "@/components/common/Typography";
 import Container from "@/components/layout/Container";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
@@ -113,10 +112,9 @@ const MainSection = () => (
         >
           {TERMS_CONDITIONS.MAIN_TITLE}
         </Typography>
-        <Divider
-          color="primary"
-          alignment="left"
-          className="mt-5 mb-[34px] w-[100px] 768px:text-left 768px:mx-0"
+        <hr
+          
+          className="mt-5  h-[4px] rounded-[5px] border-0 mb-[34px] w-[100px] 768px:text-left 768px:mx-0 bg-primary"
         />
         <ScrollableSection className="h-auto w-full p-0 mx-auto 992px:h-[366px]  768px:pb-[18px] bg-[#f7f7f7]">
           <TermsList terms={GENERAL_TERMS} showExtraBreak={true} />

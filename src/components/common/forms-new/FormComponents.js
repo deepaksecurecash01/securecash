@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { FaFileUpload, FaFile, FaTimes } from 'react-icons/fa';
-import Divider from "@/components/common/Divider";
 import WarningPopup from "@/components/common/forms/elements/WarningPopup";
 
 

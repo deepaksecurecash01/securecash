@@ -22,7 +22,6 @@ import { RiskAssessmentSchema } from "@/zod/SiteInfoFormSchema";
 import WarningPopup from "@/components/common/forms/elements/WarningPopup";
 import Typography from "@/components/common/Typography";
 import styles from "@/components/common/checkbox/Checkbox.module.css";
-import Divider from "@/components/common/Divider";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 
 // Legacy Checkbox Component - Keep original styling with improved focus handling
@@ -434,10 +433,9 @@ const SiteRiskForm = ({
                         Site Risk Information
                     </Typography>
 
-                    <Divider
-                        color="primary"
-                        alignment="left"
-                        responsiveClassName="my-5 w-[100px] 768px:text-left 768px:mx-0"
+                    <hr
+
+                        className="my-5 w-[100px] 768px:text-left 768px:mx-0 h-[4px] rounded-[5px] border-0 bg-primary mx-auto 768px:ml-0  768px:mr-auto"
                     />
 
                     <Typography

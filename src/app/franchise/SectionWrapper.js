@@ -1,6 +1,5 @@
 
 import React from "react";
-import Divider from "@/components/common/Divider";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "../../app/franchise/ContentScroll";
 import Typography from "@/components/common/Typography";
@@ -47,9 +46,8 @@ const SectionWrapper = () =>
         >
           Become Your Own Boss With A Banking Courier Franchise!
         </h2>
-        <Divider
-          color="primary"
-          className="w-[100px] mt-[20px]"
+        <hr
+          className="w-[100px] mt-[20px] mx-auto h-[4px] rounded-[5px] border-0 bg-primary"
         />
         <div className="content-wrapper w-4/5  768px:mt-2 p-0 bg-white/70 ">
           <div id="intro-text" className="">
@@ -177,11 +175,10 @@ const SectionWrapper = () =>
                 >
                   Why Choose A SecureCash Franchise?
                 </Typography>
-                <Divider
-                  color="white"
-                  alignment="left"
-                  className="w-[100px] mt-[20px] 992px:mx-0 992px:text-left ml-0"
-                />{" "}
+                <hr
+                 
+                  className="w-[100px] mt-[20px] mx-auto 768px:ml-0  768px:mr-auto h-[4px] rounded-[5px] border-0 bg-white"
+                />
               </div>
             </div>
           </div>

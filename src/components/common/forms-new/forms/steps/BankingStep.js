@@ -7,7 +7,6 @@ import
         FaUniversity,
     } from "react-icons/fa";
 import Typography from "@/components/common/Typography";
-import Divider from "@/components/common/Divider";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 
 
@@ -93,10 +92,8 @@ const BankingStep = ({ formManager, theme = 'dark' }) =>
                 Banking
             </Typography>
 
-            <Divider
-                color="primary"
-                className="w-[100px] mt-4"
-                alignment="center"
+            <hr
+                className="w-[100px] mt-4 h-[4px] rounded-[5px] border-0 bg-primary mx-auto"
             />
 
             <div className="form-tab 480px:w-[90%] mx-auto">
