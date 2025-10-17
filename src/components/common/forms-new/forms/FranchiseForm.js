@@ -53,9 +53,9 @@ const FranchiseForm = ({ className }) =>
             console.log("Franchise form submitted successfully!");
 
             // Store form data for Calendly prefill
-            setSubmittedFormData(finalData);
-            setIsFormSubmitted(true);
-            setIsCalendlyOpen(true);
+            // setSubmittedFormData(finalData);
+            // setIsFormSubmitted(true);
+            // setIsCalendlyOpen(true);
         },
         onError: (error) =>
         {
@@ -76,6 +76,18 @@ const FranchiseForm = ({ className }) =>
             };
         }
     });
+
+    // Watch the ReferralSource field to determine if "Other" is selected
+    const referralSource = formManager.watch('ReferralSource');
+    const showOtherField = referralSource === 'Other';
+
+    // Clear the "Other" field when user changes away from "Other"
+    useEffect(() =>
+    {
+        if (!showOtherField) {
+            formManager.setValue('ReferralSourceOther', '');
+        }
+    }, [showOtherField, formManager]);
 
     // Field configurations
     const inputFields = [
@@ -124,9 +136,18 @@ const FranchiseForm = ({ className }) =>
         },
         {
             name: "ReferralSource",
-            type: "text",
-            label: "How did you hear about this Opportunity?",
-            placeholder: "E.g., Google, Social Media, Referral",
+            type: "select",
+            label: "Where did you hear about this Franchise Opportunity?",
+            options: [
+                { value: "", label: "Please Select" },
+                { value: "Google", label: "Google" },
+                { value: "Business For Sale", label: "Business For Sale" },
+                { value: "Facebook", label: "Facebook" },
+                { value: "Instagram", label: "Instagram" },
+                { value: "LinkedIn", label: "LinkedIn" },
+                { value: "Other Social Media", label: "Other Social Media" },
+                { value: "Other", label: "Other" },
+            ],
             Icon: FaQuestionCircle,
         },
     ];
@@ -179,6 +200,23 @@ const FranchiseForm = ({ className }) =>
                                 </div>
                             ))}
 
+                            {/* Conditional "Other" text field */}
+                            {showOtherField && (
+                                <div className="relative">
+                                    <UniversalFormField
+                                        {...formManager.getFieldProps({
+                                            name: "ReferralSourceOther",
+                                            type: "text",
+                                            label: "Please specify",
+                                            placeholder: "Please specify where you heard about us",
+                                            Icon: FaQuestionCircle,
+                                        })}
+                                        theme="light"
+                                        autoComplete="new-password"
+                                    />
+                                </div>
+                            )}
+
                             {/* Information text */}
                             <div className="text-primary-text text-[14px] font-medium mt-4 mb-2 w-full text-left px-2 768px:px-0">
                                 After submitting the form, please pick a time from the popup
@@ -190,10 +228,10 @@ const FranchiseForm = ({ className }) =>
                     {/* Form submitted overlay */}
                     {isFormSubmitted && (
                         <div
-                            className="form-submitted-message text-center py-4 absolute h-full top-0 flex  flex-col justify-center items-center bg-[#f1f1f1] z-10 " 
+                            className="form-submitted-message text-center py-4 absolute h-full top-0 flex  flex-col justify-center items-center bg-[#f1f1f1] z-10 "
                             style={{ background: "#f1f1f1" }}
                         >
-                            
+
                             <div className="480px:w-[90%] mx-auto 992px:h-[75%]">
                                 <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" />
 
@@ -204,8 +242,8 @@ const FranchiseForm = ({ className }) =>
                                 >
                                     Thank you{userName && ` ${userName}`}!
                                 </Typography>
-                               
-                                <hr className="mt-4 mb-6 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary"  />
+
+                                <hr className="mt-4 mb-6 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" />
 
 
                                 <p className="mb-6">

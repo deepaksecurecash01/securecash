@@ -1,5 +1,4 @@
 import Carousel from "./Carousel";
-import Typography from "@/components/common/Typography";
 import SubHeading from "@/components/common/SubHeading";
 import Paragraph from "@/components/common/Paragraph";
 
@@ -15,34 +14,31 @@ const ContentSection = () =>
           <div className="service-container p-4 992px:p-0 pt-0 leading-[2em] m-0 text-[16px] text-white">
             <hr className="w-[100px] my-6 h-[4px] rounded-[5px] border-0 1024px:mt-0 mx-auto 992px:ml-0  992px:mr-auto bg-white" />
 
-            <Typography
-              as="h3"
-              fontFamily="prata"
+            <h3
+             
               className="text-[22px] leading-[36px] text-center mb-[24px] 
              w-[90%] 992px:w-auto mx-auto 992px:mx-0 992px:text-left 
-             768px:text-2xl 992px:text-[28px] 992px:leading-[1.4em]"
+             768px:text-2xl 992px:text-[28px] 992px:leading-[1.4em] font-prata"
             >
               Let Us Do Your Banking,
-            </Typography>
+            </h3>
 
-            <Typography
-              as="h2"
-              fontFamily="montserrat"
+            <h2
+             
               className="text-[40px] font-bold leading-[1.4em] text-center text-[#c7a652] mb-[24px] 
              w-3/4 mx-auto 992px:mx-0 480px:text-[30px] 768px:text-5xl 
-             992px:w-auto 992px:text-[40px] 992px:leading-[1.4em] 992px:mb-[24px] 992px:text-left"
+             992px:w-auto 992px:text-[40px] 992px:leading-[1.4em] 992px:mb-[24px] 992px:text-left font-montserrat"
             >
               {`Don't Take The Risk!`}
-            </Typography>
+            </h2>
 
-            <Typography
-              as="p"
+            <p
               className="text-[14px] leading-[1em] text-center mb-0 font-normal 
              992px:text-left 414px:leading-[1.3em] 768px:text-[16px] 
-             1024px:leading-[2em] 1366px:leading-[1em]"
+             1024px:leading-[2em] 1366px:leading-[1em] font-montserrat"
             >
               Anywhere, Anytime, Australia Wide
-            </Typography>
+            </p>
 
           </div>
         </div>

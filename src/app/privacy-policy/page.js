@@ -1,5 +1,5 @@
-import Typography from '@/components/common/Typography';
 import Container from '@/components/layout/Container';
+import Image from 'next/image';
 import React from 'react';
 
 const PrivacyPolicyPage = () =>
@@ -7,57 +7,66 @@ const PrivacyPolicyPage = () =>
 
 
     const SectionHeader = ({ children }) => (
-        <Typography
-        as="h3"
-        fontFamily="montserrat"
-            className="text-[26px] font-semibold leading-[1.6em] "
+        <h3
+      
+            className={`600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-2 text-[40px] mb-4 leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] 992px:text-left 992px:w-full mt-8 font-montserrat`}
       >
-            <strong style={{ textAlign: "left" }}
+            <strong style={{ textAlign: "left", fontWeight: "700" }}
 >
-                {children}
-                <br />
-                <br />
-            </strong>      </Typography>
+                {children}:
+
+            </strong>      </h3>
        
     );
 
     const SectionText = ({ children }) => (
-        <p className="text-[#808080] pt-[15px] pb-[10px] leading-[1.5em] text-[15px] align-left" >
+        <p className="text-[16px] leading-[2rem] text-left mb-0 
+             768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light font-montserrat" >
             {children}
         </p>
     );
 
-    const ListItem = ({ children }) => (
-        <li className="box-text align-left" >
-            <span style={{ color: "#000000" }}>
-                {children}
-            </span>
-        </li>
+    const ListItem = ({ children, index }) => (
+           <div className={`flex items-start mt-[30px] ${index === 0 ? '1024px:mt-[8px]' : ' 1024px:mt-[16px]'
+                                    } mb-[12px] gap-3`}>
+                                <Image
+                                    className="inline-block bg-contain bg-no-repeat  992px:w-[30px] 992px:h-full"
+                                    src="https://www.securecash.com.au/images/icons/tick.png"
+                                    alt={"check.png"}
+                                    width={40}
+                                    height={15}
+                                    priority={true}
+        
+                                />
+                                <h4
+                                    className="text-[16px]  font-medium text-[#000] text-left mb-0 w-full font-montserrat"
+                                >
+                                    {children}
+                                </h4>
+        
+                            </div>
     );
 
     return (
         <>
-            <div>
-                <Typography
-                    as="h3"
-                    fontFamily="montserrat"
-                    className="text-[42px] text-center font-semibold leading-[1.6em] "
-                >                    <br />
-                    SKY WALLET PTY LTD
-                </Typography>
-                <hr
-                    className="my-5 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"
-                />            </div>
+            <section className="blog-single-hero mb-[32px] bg-black text-white h-full 768px:mb-[44px] relative">
+                <Container className="w-full">
+                    <div className="blog-single-hero--wrap flex items-center relative">
+                        <div className="blog-single-hero--head h-[290px] p-0 max-w-[900px] mx-auto flex flex-col justify-center items-center 768px:h-[340px]">
+                            <h1 className={`blog-single-hero--head__title blog-index-hero--content__title text-[28px] leading-[34px] px-[10px] w-full  480px:text-[38px]  480px:leading-[36px]  480px:px-[40px] 768px:px-0 mb-[20px] text-center  768px:text-[46px] font-extrabold  768px:leading-[50px] capitalize  600px:w-[590px]`}> SKY WALLET PTY LTD</h1>
+                            <hr className="w-[100px] mx-auto mt-[6px] mb-[16px] h-[4px] rounded-[5px] border-0 bg-primary" />
+                            <div className="blog-index-hero--content__subtitle  mb-0">
+                                <h3 className=" text-[34px] text-center font-semibold leading-[1.6em] font-montserrat"> Privacy Policy</h3>
+                            </div>
+                        </div>
+                    </div>
+                </Container>
+            </section>
+            
 
             <div className="section-wrapper">
-                <Container id="intro" color='w-full'>
-                    <Typography
-                        as="h3"
-                        fontFamily="montserrat"
-                        className="text-[34px] text-center font-semibold leading-[1.6em] "
-                    >                    
-                        Privacy Policy
-                    </Typography>
+                <section className='max-w-[1024px] mx-auto' id="" color='w-full'>
+                  
 
                     <div className='mt-[50px]'> 
                         <SectionHeader>Introduction</SectionHeader>
@@ -178,22 +187,22 @@ const PrivacyPolicyPage = () =>
                         </SectionText>
                    </div>
 
-                    <ul>
-                        <ListItem>
+                    <ul className='mt-8 mb-4'>
+                        <ListItem index={0}>
                             Payments are fully automated with an immediate response.
                         </ListItem>
-                        <ListItem>
+                        <ListItem index={1}>
                             Your complete credit card number cannot be viewed by Sky Wallet Pty
                             Ltd&nbsp;or any outside party.
                         </ListItem>
-                        <ListItem>
+                        <ListItem index={2}>
                             All transactions are performed under 128 Bit SSL Certificate.
                         </ListItem>
-                        <ListItem>
+                        <ListItem index={3}>
                             All transaction data is encrypted for storage within Billpower&apos;s
                             bank-grade data centre, further protecting your credit card data.
                         </ListItem>
-                        <ListItem>
+                        <ListItem index={4}>
                             Billpower is an authorised third party processor for all the major
                             Australian banks.
                         </ListItem>
@@ -204,16 +213,16 @@ const PrivacyPolicyPage = () =>
                         </ListItem>
                     </ul>
 
-                    <h3 className="content-wrapper" />
+                    <div className='flex justify-center my-12 italic'>
+                        <p className=" align-center"  >
+                            For more information about Billpower and online credit card payments,
+                            please visit{" "}
+                            <a className=' text-primary hover:underline' href="https://www.billpower.co/">https://www.billpower.co/</a>.<br />
 
-                    <p className="box-text align-left" >
-                        For more information about Billpower and online credit card payments,
-                        please visit{" "}
-                        <a href="https://www.billpower.co/">https://www.billpower.co/</a>.<br />
-                        <br />
-                        <br />
-                    </p>
-                </Container>
+                        </p>
+</div>
+                   
+                </section>
             </div>
         </>
     );

@@ -1,7 +1,4 @@
 import React from "react";
-import Typography from "@/components/common/Typography";
-import Paragraph from "@/components/common/Paragraph";
-import SubHeading from "@/components/common/SubHeading";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import QuoteForm from "@/components/common/forms-new/forms/QuoteForm";
 
@@ -57,30 +54,27 @@ const FormSection = () =>
       <div className="inner-big w-[95%] max-w-[1366px] mx-auto my-0  992px:flex">
         <QuoteForm />
         <div className="right-contact-row  w-[96%] 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1]  992px:pl-8">
-          <Typography
-            as="h3"
-            fontFamily="prata-regular"
-            className="text-[32px] leading-[1.6em] text-center mb-[16px] 992px:text-left"
+          <h3
+         
+            className="text-[32px] leading-[1.6em] text-center mb-[16px] 992px:text-left font-prata-regular"
           >
             Make The Right Choice
-          </Typography>
+          </h3>
 
           <hr className="w-[100px] mb-[24px] bg-primary h-[4px] rounded-[5px] border-0 mx-auto 992px:ml-0  992px:mr-auto"  />
-          <Typography
-            as="h2"
-            fontFamily="montserrat"
-            className="font-bold text-[40px] text-primary leading-[1.4em] text-center mb-[24px] 992px:text-left"
+          <h2
+
+            className="font-bold text-[40px] text-primary leading-[1.4em] text-center mb-[24px] 992px:text-left font-montserrat"
           >
             Why Choose SecureCash?
-          </Typography>
+          </h2>
 
-          <Typography
-            as="p"
-            fontFamily="montserrat"
-            className="leading-[2em] font-normal text-center mb-[14px] 768px:mb-0 992px:text-left"
+          <p
+           
+            className="leading-[2em] font-normal text-center mb-[14px] 768px:mb-0 992px:text-left font-montserrat"
           >
             For one reason: We have been established for over 25 years, since 1992 to be exact!
-          </Typography>
+          </p>
 
           <ScrollableSection className=" h-auto 414px:w-[85%] 992px:w-full p-0 mx-auto   992px:h-[630px] 1200px:h-[658px] 1366px:h-[740px] bg-white mt-6 leading-[2]">
             <ul className="list-none w-full  992px:pr-6 services-content">

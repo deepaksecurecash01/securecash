@@ -2,7 +2,6 @@
 import React from "react";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "../../app/franchise/ContentScroll";
-import Typography from "@/components/common/Typography";
 import Link from "next/link";
 
 const SectionWrapper = () =>
@@ -84,17 +83,15 @@ const SectionWrapper = () =>
               <div style={{ direction: "ltr" }}>
                 <ContentScroll scrollData={contentItems} />
 
-                <Typography
-                  as="h3"
-                  fontFamily="font-montserrat"
-                  className="text-[26px] font-bold text-[#000] text-left my-[28px]"
+                <h3
+                 
+                  className="text-[26px] font-bold text-[#000] text-left my-[28px] font-montserrat"
                 >
                   GET IN TOUCH TODAY!{" "}
-                </Typography>
-                <Typography
-                  as="div"
-                  fontFamily="font-montserrat"
-                  className="text-left font-light leading-[2rem] mt-4  414px:pr-0 "
+                </h3>
+                <div
+                 
+                  className="text-left font-light leading-[2rem] mt-4  414px:pr-0 font-montserrat"
                 >
                   <em>
                     <strong>
@@ -126,11 +123,10 @@ const SectionWrapper = () =>
                       </span>
                     </strong>
                   </em>{" "}
-                </Typography>
-                <Typography
-                  as="div"
-                  fontFamily="font-montserrat"
-                  className="text-left font-light leading-[2rem] mt-4  414px:pr-0 "
+                </div>
+                <div
+                 
+                  className="text-left font-light leading-[2rem] mt-4  414px:pr-0 font-montserrat"
                 >
                   <em>
                     <strong>
@@ -156,7 +152,7 @@ const SectionWrapper = () =>
                       </p>
                     </strong>{" "}
                   </em>
-                </Typography>
+                </div>
               </div>
             </ScrollableSection>
           </div>
@@ -168,13 +164,12 @@ const SectionWrapper = () =>
                 alt="Australia Cash in Transit: Services, Business, Delivery, and Provider Australia Wide"
               />
               <div className="flex flex-col absolute top-0 left-0 h-[80%] w-[70%] bg-black px-[30px] justify-center content-center">
-                <Typography
-                  as="h4"
-                  fontFamily="font-montserrat"
-                  className="text-[33px] font-bold text-primary text-left mb-0"
+                <h4
+                
+                  className="text-[33px] font-bold text-primary text-left mb-0 font-montserrat"
                 >
                   Why Choose A SecureCash Franchise?
-                </Typography>
+                </h4>
                 <hr
                  
                   className="w-[100px] mt-[20px] mx-auto 768px:ml-0  768px:mr-auto h-[4px] rounded-[5px] border-0 bg-white"

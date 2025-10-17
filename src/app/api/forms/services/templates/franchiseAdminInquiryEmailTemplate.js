@@ -1,7 +1,20 @@
-import React from 'react'
+import React from "react";
 
-const franchiseAdminInquiryEmailTemplate = (formData) => {
-  return `
+const franchiseAdminInquiryEmailTemplate = (formData) =>
+{
+    const getReferralSourceDisplay = () =>
+    {
+        if (formData.ReferralSource === "Other") {
+            // If "Other" is selected, show "Other - custom text" or fallback
+            return formData.ReferralSourceOther
+                ? `Other - ${formData.ReferralSourceOther}`
+                : "Other (not specified)";
+        }
+        // For all other selections, show the selected value
+        return formData.ReferralSource || "";
+    };
+
+    return `
       <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
       <html xmlns="http://www.w3.org/1999/xhtml">
           <head>
@@ -28,32 +41,43 @@ const franchiseAdminInquiryEmailTemplate = (formData) => {
                                       <table>
                                           <tr>
                                               <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px;width:160px;"><strong>Sent To:</strong></td>
-                                              <td style="padding:5px 9px 5px 9px;">${formData.FullName || ''}</td>
+                                              <td style="padding:5px 9px 5px 9px;">${formData.FullName || ""
+        }</td>
                                           </tr>
                                           <tr><td colspan="2" style="height:2px;"></tr>
                                           <tr>
                                               <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px;width:160px;"><strong>Phone #:</strong></td>
-                                              <td style="padding:5px 9px 5px 9px;">${formData.Phone || ''}</td>
+                                              <td style="padding:5px 9px 5px 9px;">${formData.Phone || ""
+        }</td>
                                           </tr>
                                           <tr><td colspan="2" style="height:2px;"></tr>
                                           <tr>
                                               <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px;"><strong>Email:</strong></td>
-                                              <td style="padding:5px 9px 5px 9px;">${formData.Email || ''}</td>
+                                              <td style="padding:5px 9px 5px 9px;">${formData.Email || ""
+        }</td>
                                           </tr>
                                           <tr><td colspan="2" style="height:2px;"></tr>
                                           <tr>
                                               <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px;"><strong>Postal Address:</strong></td>
-                                              <td style="padding:5px 9px 5px 9px;">${formData.Address || ''}</td>
+                                              <td style="padding:5px 9px 5px 9px;">${formData.Address || ""
+        }</td>
                                           </tr>
                                           <tr><td colspan="2" style="height:2px;"></tr>
                                           <tr>
                                               <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px;"><strong>Territory:</strong></td>
-                                              <td style="padding:5px 9px 5px 9px;">${formData.InterestedArea || ''}</td>
+                                              <td style="padding:5px 9px 5px 9px;">${formData.InterestedArea || ""
+        }</td>
                                           </tr>
                                           <tr><td colspan="2" style="height:2px;"></tr>
                                           <tr>
-                                              <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px"><strong>Message:</strong></td>
-                                              <td style="padding:5px 9px 5px 9px;">${formData.ReasonForInterest || ''}</td>
+                                            <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px;"><strong>Message:</strong></td>
+                                              <td style="padding:5px 9px 5px 9px;">${formData.ReasonForInterest || ""
+        }</td>
+                                          </tr>
+                                          <tr><td colspan="2" style="height:2px;"></tr>
+                                          <tr>
+                                              <td valign="top" style="color:#ffffff;background-color:#c2a14b;padding:5px 9px 5px 9px"><strong>Referral Source:</strong></td>
+                                              <td style="padding:5px 9px 5px 9px;">${getReferralSourceDisplay()}</td>
                                           </tr>
                                           <tr><td colspan="2" style="height:2px;"></tr>
                                       </table>
@@ -104,7 +128,7 @@ const franchiseAdminInquiryEmailTemplate = (formData) => {
                   </tr>
               </table>
           </body>
-      </html>`
-}
+      </html>`;
+};
 
-export default franchiseAdminInquiryEmailTemplate
+export default franchiseAdminInquiryEmailTemplate;

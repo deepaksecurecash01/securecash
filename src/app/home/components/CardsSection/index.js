@@ -1,4 +1,3 @@
-import Typography from "@/components/common/Typography";
 import Image from "next/image";
 import React from "react";
 
@@ -12,22 +11,20 @@ const ServiceRow = ({ imgSrc, link, title, description }) => (
         alt={title}
         className="w-[80px] mr-[16px] pt-[35px] 992px:w-1/4 bg-brown-overlay 992px:pt-[50px]"
       />
-      <Typography
-        as="h3"
-        fontFamily="font-montserrat"
-        className="text-[#c7a652] text-center font-bold text-[24px] mt-[18px] mb-[15px] mx-auto 768px:mx-0 992px:text-[20px]"
+      <h3
+     
+        className="text-[#c7a652] text-center font-bold text-[24px] mt-[18px] mb-[15px] mx-auto 768px:mx-0 992px:text-[20px] font-montserrat"
       >
         <a href={link}>{title}</a>
-      </Typography>
+      </h3>
     </div>
 
-      <Typography
-        as="p"
-        fontFamily="font-montserrat"
-        className="text-[#3f3f3f] text-left font-light text-[16px] leading-[2em] mb-0 1280px:text-[14px]"
+      <p
+      
+        className="text-[#3f3f3f] text-left font-light text-[16px] leading-[2em] mb-0 1280px:text-[14px] font-montserrat"
       >
         {description}
-      </Typography>
+      </p>
 
   </div>
 );
@@ -70,29 +67,25 @@ const CardsSection = () =>
               
               className="w-[100px] mb-6 mx-auto 992px:ml-0  992px:mr-auto h-[4px] rounded-[5px] border-0 bg-white"
             />
-            <Typography
-              as="h3"
-              fontFamily="font-prata-regular"
-              className="text-inherit text-center font-prata text-[32px] leading-[1.4em] mb-[16px] 992px:text-left"
+            <h3
+
+              className="text-inherit text-center text-[32px] leading-[1.4em] mb-[16px] 992px:text-left font-prata"
             >
               Your One-Stop
-            </Typography>
+            </h3>
 
-            <Typography
-              as="h2"
-              fontFamily="font-montserrat"
-              className="text-white text-center font-bold text-[40px] leading-[1.2em] mt-[18px] mb-[24px] mx-auto montSemiBold 414px:leading-[1.4em] 992px:text-left"
+            <h2 
+              className="text-white text-center font-bold text-[40px] leading-[1.2em] mt-[18px] mb-[24px] mx-auto montSemiBold 414px:leading-[1.4em] 992px:text-left font-montserrat"
             >
               Secure Banking Courier Service
-            </Typography>
+            </h2>
 
-            <Typography
-              as="p"
-              fontFamily="font-montserrat"
-              className="text-inherit text-center text-[16px] leading-[2rem] mb-[24px] w-4/5 ml-auto mr-auto 480px:w-full 1366px:leading-4 992px:text-left"
+            <p
+             
+              className="text-inherit text-center text-[16px] leading-[2rem] mb-[24px] w-4/5 ml-auto mr-auto 480px:w-full 1366px:leading-4 992px:text-left font-montserrat"
             >
               SecureCash can serve your specific needs, we provide:
-            </Typography>
+            </p>
 
             <div
               id="content-cash"
@@ -117,13 +110,12 @@ const CardsSection = () =>
         className="bg-[#fff]  1200px:min-h-[195px] clear-both float-none w-full mx-auto my-0 pr-2 1280px:pr-[52px] 992px:pb-[370px] 1366px:pb-0"
       >
         <div className=" w-full max-w-[1366px] mx-auto my-0 z-40">
-          <Typography
-            as="h5"
-            fontFamily="font-montserrat"
-            className="hidden text-[16px] text-center text-[#000000] font-normal mt-[18px] 1200px:w-full 1200px:right-0 1280px:mr-12 1200px:block 1200px:text-right"
+          <h5
+       
+            className="hidden text-[16px] text-center text-[#000000] font-normal mt-[18px] 1200px:w-full 1200px:right-0 1280px:mr-12 1200px:block 1200px:text-right font-montserrat"
           >
             The Team at Our Head Office
-          </Typography>
+          </h5>
 
 
         </div>

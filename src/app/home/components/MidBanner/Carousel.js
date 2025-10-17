@@ -1,5 +1,4 @@
 "use client";
-import Typography from "@/components/common/Typography";
 import Image from "next/image";
 import React, { useState } from "react";
 import Slider from "react-slick";
@@ -11,37 +10,37 @@ const Carousel = () =>
       imgSrc: "https://www.securecash.com.au/images/icons/australia.png",
       title: "Australia Wide",
       description:
-        "SecureCash is a one stop cash in transit agency that will manage your banking &amp; change order services no matter where you are located in Australia.",
+        "SecureCash is a one stop cash in transit agency that will manage your banking & change order services no matter where you are located in Australia.",
     },
     {
       imgSrc: "https://www.securecash.com.au/images/icons/edocket.png",
       title: "eDocket System",
       description:
-        "Using our industry leading software technology unique to only SecureCash, we are able to track &amp; trace your deposit with a click of a button.",
+        "Using our industry leading software technology unique to only SecureCash, we are able to track & trace your deposit with a click of a button.",
     },
     {
       imgSrc: "https://www.securecash.com.au/images/icons/flexible.png",
       title: "Total Flexibility",
       description:
-        "You can have your banking collected on any day or days you choose, &amp; you are free to cancel or change the days your banking is collected whenever you want.",
+        "You can have your banking collected on any day or days you choose, & you are free to cancel or change the days your banking is collected whenever you want.",
     },
     {
       imgSrc: "https://www.securecash.com.au/images/icons/banks.png",
       title: "All Major Banks",
       description:
-        "We work with most major banks in Australia including the NAB, Commonwealth Bank, ANZ, Westpac &amp; some local banks such as BankSA &amp; Bendigo Bank.",
+        "We work with most major banks in Australia including the NAB, Commonwealth Bank, ANZ, Westpac & some local banks such as BankSA & Bendigo Bank.",
     },
     {
       imgSrc: "https://www.securecash.com.au/images/icons/contracts.png",
       title: "No Lock-in Contracts",
       description:
-        "We do not lock you into lengthy contracts, you are free to try our service &amp; if you find that it is not suitable for your organisation, then you can cancel at anytime with notice.",
+        "We do not lock you into lengthy contracts, you are free to try our service & if you find that it is not suitable for your organisation, then you can cancel at anytime with notice.",
     },
     {
       imgSrc: "https://www.securecash.com.au/images/icons/olservices.png",
       title: "Online Services",
       description:
-        "Customers are able to book extra pickups, cancel a scheduled pickup, submit change orders, &amp; even verify a banking courier’s identification all online.",
+        "Customers are able to book extra pickups, cancel a scheduled pickup, submit change orders, & even verify a banking courier’s identification all online.",
     },
   ];
 
@@ -130,23 +129,21 @@ const Carousel = () =>
             />
           </div>
           <div className="service-info text-white clear-both">
-            <Typography
-              as="h2"
-              fontFamily="montserrat"
-              className="text-white text-[16px] leading-[1.6em] text-center font-bold my-[1rem]"
+            <h2
+            
+              className="text-white text-[16px] leading-[1.6em] text-center font-bold my-[1rem] font-montserrat"
             >
               {slide.title}
-            </Typography>
+            </h2>
 
-            <Typography
-              as="p"
-              fontFamily="montserrat"
+            <p
+
               className="text-[14px] leading-[1.6em] text-center font-light mb-0 
              w-[70%] 992px:w-[95%]
-             992px:leading-[2em] mx-auto whitespace-normal 992px:text-center"
+             992px:leading-[2em] mx-auto whitespace-normal 992px:text-center font-montserrat"
             >
               {slide.description}
-            </Typography>
+            </p>
 
 
           </div>

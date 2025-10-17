@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Typography from "@/components/common/Typography";
 import Container from "@/components/layout/Container";
 import { blogPosts } from "../../../data/blogData";
 
@@ -18,13 +17,12 @@ const BlogLatestPost = () =>
 
   return (
     <div className="blog-single-main--footer">
-      <Typography
-        as="h4"
-        fontFamily="montserrat"
-        className=" font-bold leading-[2rem] text-center max-[414px]:text-[36px] text-[30px] z-30 mb-[20px]"
+      <h4
+      
+        className=" font-bold leading-[2rem] text-center max-[414px]:text-[36px] text-[30px] z-30 mb-[20px] font-montserrat"
       >
         Latest post{" "}
-      </Typography>
+      </h4>
       <hr
       
         className="w-[100px] mt-[6px] mb-[16px] mx-auto 768px:ml-0  768px:mr-auto h-[4px] rounded-[5px] border-0 bg-primary"
@@ -50,10 +48,8 @@ const BlogLatestPost = () =>
                       height="240"
                     />
                   </Link>
-                  <Typography
-                    as="h4"
-                    fontFamily="font-montserrat"
-                    className="text-[22px] font-bold text-primary text-center 768px:text-left pb-5"
+                  <h4
+                    className="text-[22px] font-bold text-primary text-center 768px:text-left pb-5 font-montserrat"
                   >
                     <Link
                       href={`/blog/${item.id}`}
@@ -61,7 +57,7 @@ const BlogLatestPost = () =>
                     >
                       {item.title}
                     </Link>
-                  </Typography>
+                  </h4>
                 </div>
               ))}
             </div>

@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/image";
-import Typography from "@/components/common/Typography";
 
 
 const ContentScroll = ({ isExpanded, scrollData, toggleContent }) =>
@@ -15,10 +14,9 @@ const ContentScroll = ({ isExpanded, scrollData, toggleContent }) =>
           key={data.id}
           className={`item-box w-full clear-both mx-auto text-left mt-[40px] 768px:mt-0`}
         >
-          <Typography
-            as="h4"
-            fontFamily="font-montserrat"
-            className={`600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-2 text-[20px] mb-4 leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] 992px:text-left 992px:w-full mt-6`}
+          <h4
+          
+            className={`600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-2 text-[2h40px] mb-4 leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] 992px:text-left 992px:w-full mt-6 font-montserrat`}
           >
               <Image
                 className="icon-data h-[40px] pr-2 w-auto"
@@ -28,14 +26,13 @@ const ContentScroll = ({ isExpanded, scrollData, toggleContent }) =>
                 height={40}
               />
             {data.title}
-              </Typography>
+              </h4>
       
 
-            <Typography
-              as="p"
-              fontFamily="montserrat"
+            <p
+            
               className="text-[16px] leading-[2rem] text-left mb-0 
-             768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light"
+             768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light font-montserrat"
             >
               {data.description}&nbsp;
               {index === scrollData.length - 1 && (
@@ -47,7 +44,7 @@ const ContentScroll = ({ isExpanded, scrollData, toggleContent }) =>
                   Show Less
                 </button>
               )}
-            </Typography>
+            </p>
 
         </div>
       ))}

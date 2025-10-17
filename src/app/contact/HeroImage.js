@@ -1,7 +1,5 @@
 import React from "react";
 
-import Typography from "@/components/common/Typography";
-
 const HeroImage = () =>
 {
   return (
@@ -28,17 +26,16 @@ const HeroImage = () =>
       />   <div
         className=" w-4/5 768px:w-[75%] mx-auto"
       >
-        <Typography
-          as="p"
+        <p
           className="text-[16px] text-white font-normal leading-[32px] text-center mb-0 
               768px:w-[55%] mx-auto 
-             [text-shadow:2px_2px_6px_#111111]"
+             [text-shadow:2px_2px_6px_#111111] font-montserrat"
         >
           <strong>
             No problem is too big or too small, our team is here to make sure your services go as plan.
             Simply select the team you need help from and we will get back to you in a timely manner.
             You can always call us on <a className=" text-primary" href="tel:1300732873">1300 SECURE</a> if it is more convenient for you!
-          </strong>          </Typography>
+          </strong>          </p>
       </div>
 
     </div>

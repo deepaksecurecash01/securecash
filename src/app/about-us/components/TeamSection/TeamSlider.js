@@ -3,7 +3,6 @@ import React from "react";
 import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import Typography from "@/components/common/Typography";
 import Slider from "react-slick";
 import Link from "next/link";
 
@@ -130,21 +129,19 @@ const TeamSlider = ({ member }) =>
                             />
                         </div>
                         <div className="member-info p-4 414px:p-0 414px:pl-[20px] 414px:pr-[20px] w-full text-left 768px:pl-[16px] 768px:pr-[16px] 1366px:pl-[20px] 1366px:pr-[20px] 414px:py-[25px] clear-both overflow-hidden bg-[#b9984b]  rounded-bl-[6px] rounded-br-[6px]">
-                            <Typography
-                                as="h4"
-                                fontFamily="montserrat"
-                                className="text-white font-semibold text-left text-[22px] pb-3"
+                            <h4
+                              
+                                className="text-white font-semibold text-left text-[22px] pb-3 font-montserrat"
                             >
                                 {member.name}
-                            </Typography>
+                            </h4>
 
-                            <Typography
-                                as="h5"
-                                fontFamily="prata"
-                                className="text-white font-extrabold text-left text-[16px] leading-normal pb-3"
+                            <h5
+                               
+                                className="text-white font-extrabold text-left text-[16px] leading-normal pb-3 font-prata"
                             >
                                 {member.position}
-                            </Typography>
+                            </h5>
 
                             <div className="email-info flex justify-items-center px-0 py-[10px]">
                                 <Image
@@ -191,13 +188,12 @@ const TeamSlider = ({ member }) =>
                     </div>
                     <div className="team-item-about-content h-[710px]  414px:h-[600px] 480px:h-[500px]  768px:border-x-[4px] border-[#b9984b]  768px:absolute  768px:top-[50px] right-0  768px:w-[calc(100%-50px)]  768px:h-[calc(100%-50px)] bg-white  768px:rounded-[8px] flex justify-center ">
                         <div className="wrapper max-h-full  768px:before:content-[''] 768px:before:h-[376px] 1024px:before:h-[320px]  1100px:before:h-[376px] 768px:before:w-[242px]  1024px:before:w-[200px]  1100px:before:w-[224px] 1200px:before:w-[252px] before:inline-block before:float-left before:mr-[32px] before:mb-3.5">
-                            <Typography
-                                as="p"
-                                fontWeight="montserrat"
-                                className="block my-5 mx-4 pr-0 text-left text-[15px] leading-[2rem] 768px:my-[38px] 768px:mx-8 414px:pr-0 font-light"
+                            <p
+                               
+                                className="block my-5 mx-4 pr-0 text-left text-[15px] leading-[2rem] 768px:my-[38px] 768px:mx-8 414px:pr-0 font-light font-montserrat"
                             >
                                 {member.description}
-                            </Typography>
+                            </p>
 
                         </div>
                     </div>

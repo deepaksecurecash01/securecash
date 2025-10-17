@@ -12,7 +12,7 @@ const MENU_ITEMS = [
   {
     name: "About Us",
     submenuId: "aboutUs",
-    href: "/about-us",
+    href: "",
     links: [
       { text: "About Us", href: "/about-us" },
       { text: "Blog", href: "/blog" },
@@ -23,7 +23,7 @@ const MENU_ITEMS = [
   {
     name: "Services",
     submenuId: "services",
-    href: "/about-us",
+    href: "",
     links: [
       { text: "Cash In Transit", href: "/services/cash-in-transit" },
       { text: "Cash Collection", href: "/services/cash-collection" },

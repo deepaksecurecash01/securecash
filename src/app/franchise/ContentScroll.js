@@ -1,7 +1,5 @@
 import Image from "next/image";
-import Typography from "@/components/common/Typography";
-import SubHeading from "@/components/common/SubHeading";
-import Paragraph from "@/components/common/Paragraph";
+
 
 const ContentScroll = ({ scrollData }) =>
 {
@@ -20,22 +18,19 @@ const ContentScroll = ({ scrollData }) =>
                             priority={true}
 
                         />
-                        <Typography
-                            as="h4"
-                            fontFamily="font-montserrat"
-                            className="text-[18px] leading-[1.5rem] font-bold text-[#000] text-left mb-0 w-full"
+                        <h4
+                            className="text-[18px] leading-[1.5rem] font-bold text-[#000] text-left mb-0 w-full font-montserrat"
                         >
                             {item.title}:
-                        </Typography>
+                        </h4>
 
                     </div>
-                    <Typography
-                        as="h5"
-                        fontFamily="font-montserrat"
-                        className="text-[18px] font-medium text-[#000]  text-left mb-0"
+                    <h5
+                     
+                        className="text-[18px] font-medium text-[#000]  text-left mb-0 font-montserrat"
                     >
                         {item.subtitle}
-                    </Typography>
+                    </h5>
                     <div
                         className="text-left font-light leading-[2rem] mt-2.5 414px:pr-0"
                         dangerouslySetInnerHTML={{ __html: item.content }}

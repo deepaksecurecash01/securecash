@@ -1,5 +1,4 @@
 import React from 'react';
-import Typography from '../../../components/common/Typography';
 import Link from 'next/link';
 
 const Banner = () =>
@@ -14,15 +13,12 @@ const Banner = () =>
                     <hr
                         
                         className="w-[100px] divider-gold divider-2 z-20 bg-primary h-[4px] rounded-[5px] border-0 mx-auto"
-
                     />
-                    <Typography
-                        as="h2"
-                        fontFamily="montserrat"
-                        className="text-white font-medium text-center  text-[32px] z-30 py-6"
+                    <h2
+                        className="text-white font-medium text-center  text-[32px] z-30 py-6 font-montserrat"
                     >
                         Join The SecureCash Family
-                    </Typography>
+                    </h2>
 
                     <div className="w-[200px] bg-[#c7a652] text-[#fff] text-center px-[8px] py-[14px] rounded-[50px] mt-0 768px:ml-0 z-10 hover:bg-[#fff] hover:text-[#000] hover:cursor-pointer no-underline mr-0">
                         <Link href="quote">Get a Quote</Link>

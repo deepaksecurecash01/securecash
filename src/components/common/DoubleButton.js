@@ -12,7 +12,7 @@ const DoubleButton = ({
 
     const baseBtnClasses = "flex flex-row justify-center items-center w-[150px] 414px:w-[170px] min-h-[45px] min-w-[130px] px-5 py-0 rounded-full 992px:min-w-[200px] 992px:min-h-[62px] max-h-[73px] group 768px:mx-auto 992px:mx-0";
 
-    const baseTextClasses = "m-0 p-0 text-[14px] 768px:text-base 992px:text-[20px] font-semibold w-full hover:no-underline text-center";
+    const baseTextClasses = "m-0 p-0 text-[14px] 768px:text-base 992px:text-lg font-semibold w-full hover:no-underline text-center";
 
     return (
         <div

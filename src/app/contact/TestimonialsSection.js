@@ -1,5 +1,4 @@
 "use client";
-import Typography from "@/components/common/Typography";
 import React, { useState, useRef } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -58,13 +57,12 @@ const TeamSlider = ({ TESTIMONIALS }) =>
                         <div className="contact-testimonial--carousel__items h-full flex justify-center items-center">
                             <div className="carousel-item">
                                 <div className="excerpt my-[24px] mx-auto text-center w-[65%] 480px:w-1/2">
-                                    <Typography
-                                        as="p"
-                                        fontFamily="font-montserrat"
-                                        className="text-center font-light leading-[29px] "
+                                    <p
+                                     
+                                        className="text-center font-light leading-[29px] font-montserrat"
                                     >
                                         {testimonial}
-                                    </Typography>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -98,25 +96,23 @@ const TeamContent = () =>
             className=" inline-block w-full px-[10px] py-[24px] 414px:pt-[100px] 414px:px-0 mt-0  992px:px-2 992px:pt-[130px] bg-contact-bg bg-no-repeat bg-cover bg-center"
         >
             <div className="w-full max-w-[1366px] mx-[auto] my-[0]">
-                <Typography
-                    as="h2"
-                    fontFamily="font-montserrat"
-                    className=" text-center font-bold text-[32px] leading-[64px] mt-[18px] mb-[24px] mx-auto montSemiBold 414px:leading-[1.4em] "
+                <h2
+                   
+                    className=" text-center font-bold text-[32px] leading-[64px] mt-[18px] mb-[24px] mx-auto montSemiBold 414px:leading-[1.4em] font-montserrat"
                 >
                     Testimonials
-                </Typography>
+                </h2>
 
 
                 <hr
                     className="mb-6 mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary"
                 />
-                <Typography
-                    as="p"
-                    fontFamily="font-montserrat"
-                    className="text-center font-light leading-[32px]"
+                <p
+                  
+                    className="text-center font-light leading-[32px] font-montserrat"
                 >
                     Don&apos;t just take our word for it. <br />Hear what our customers have to say about our services!
-                </Typography>
+                </p>
                 <div className=" relative select-none block w-full float-left mb-[100px]">
                     <div
                         className=" 768px:w-[90%] mx-auto  1024px:w-full "

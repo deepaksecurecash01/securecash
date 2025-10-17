@@ -2,7 +2,6 @@
 import Image from "next/image";
 import React, { useState, useEffect, useRef } from "react";
 import CountUp from "react-countup";
-import Typography from "@/components/common/Typography";
 
 // Skeleton component for loading state
 const SkeletonCounter = () => (
@@ -174,10 +173,9 @@ const DynamicCounterSection = () =>
               <div className="mid-row py-[50px] 992px:py-0 w-full float-none mx-auto pb-[50px] pl-0 992px:w-1/3 text-center relative 992px:float-left">
 
                 {/* Counter Value with Loading State */}
-                <Typography
-                  as="h4"
-                  fontFamily="montserrat"
-                  className="banner-mid-header font-black text-[40px] text-primary mb-[30px] h-[40px]"
+                <h4
+                
+                  className="banner-mid-header font-black text-[40px] text-primary mb-[30px] h-[40px] font-montserrat"
                 >
                   {loading ? (
                     <SkeletonCounter />
@@ -190,7 +188,7 @@ const DynamicCounterSection = () =>
                       preserveValue={true}
                     />
                   )}
-                </Typography>
+                </h4>
 
                 {/* Icon */}
                 <Image
@@ -207,12 +205,11 @@ const DynamicCounterSection = () =>
                 />
 
                 {/* Description */}
-                <Typography
-                  as="p"
-                  className="text-[16px] text-white font-normal pb-0 mb-0"
+                <p
+                  className="text-[16px] text-white font-normal pb-0 mb-0 font-montserrat"
                 >
                   {config.description}
-                </Typography>
+                </p>
 
               </div>
 

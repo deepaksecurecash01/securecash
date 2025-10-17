@@ -35,7 +35,7 @@ const ContactForm = ({ className }) =>
         onSuccess: (result, finalData) =>
         {
             console.log("Contact form submitted successfully!");
-            
+
         },
         onError: (error) =>
         {
@@ -343,7 +343,7 @@ const ContactForm = ({ className }) =>
                                         Send Another Message
                                     </button>
                                 </div>
-                                
+
                             </div>
                         </div>
                     )}

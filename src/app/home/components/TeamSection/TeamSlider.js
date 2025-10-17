@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 import Slider from "react-slick";
 import Image from "next/image";
-import Typography from "@/components/common/Typography";
 
 import Link from "next/link";
 
@@ -128,21 +127,19 @@ const TeamSlider = ({ member }) =>
             />
           </div>
           <div className="member-info p-4 414px:p-0 414px:pl-[20px] 414px:pr-[20px] w-full text-left 768px:pl-[16px] 768px:pr-[16px] 1366px:pl-[20px] 1366px:pr-[20px] 414px:py-[25px] clear-both overflow-hidden">
-            <Typography
-              as="h4"
-              fontFamily="montserrat"
-              className="text-[20px] font-semibold text-[#333333] pb-3 text-left"
+            <h4
+            
+              className="text-[20px] font-semibold text-[#333333] pb-3 text-left font-montserrat"
             >
               {member.name}
-            </Typography>
+            </h4>
 
-            <Typography
-              as="h5"
-              fontFamily="prata"
-              className="text-[14px] text-[#808080] font-normal leading-normal text-left mb-[18px]"
+            <h5
+
+              className="text-[14px] text-[#808080] font-normal leading-normal text-left mb-[18px] font-prata"
             >
               {member.position}
-            </Typography>
+            </h5>
 
 
 

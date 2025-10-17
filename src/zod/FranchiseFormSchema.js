@@ -11,7 +11,7 @@ import { z } from "zod";
  * - Address validation for location accuracy
  * - Territory/area interest validation
  * - Reason for interest validation
- * - Referral source validation
+ * - Referral source validation with conditional "Other" field
  * - Honeypot spam protection
  */
 const FranchiseFormSchema = z.object({
@@ -144,22 +144,36 @@ const FranchiseFormSchema = z.object({
         })
         .min(1, "Please explain your interest in a SecureCash franchise.")
         .min(10, "Please provide more detail about your interest (minimum 10 characters).")
-        .max(1000, "Response is too long (maximum 1000 characters).")
-       ,
+        .max(1000, "Response is too long (maximum 1000 characters)."),
 
     ReferralSource: z
         .string({
-            required_error: "Please tell us how you heard about this opportunity."
+            required_error: "Please tell us where you heard about this opportunity."
         })
-        .min(1, "Please tell us how you heard about this opportunity.")
-        .min(2, "Please specify how you heard about us (minimum 2 characters).")
-        .max(100, "Response is too long (maximum 100 characters).")
-       ,
+        .min(1, "Please tell us where you heard about this opportunity.")
+        .refine((value) => value !== "", {
+            message: "Please select where you heard about us."
+        }),
+
+    ReferralSourceOther: z
+        .string()
+        .optional(),
 
     BotField: z
         .string()
         .max(0, "Bot detected!"), // Honeypot field must be empty
-});
+})
+    .refine((data) =>
+    {
+        // If ReferralSource is "Other", then ReferralSourceOther must be filled
+        if (data.ReferralSource === "Other") {
+            return data.ReferralSourceOther && data.ReferralSourceOther.trim().length > 0;
+        }
+        return true;
+    }, {
+        message: "Please specify where you heard about us.",
+        path: ["ReferralSourceOther"], // This puts the error on the ReferralSourceOther field
+    });
 
 // Default values for the form
 export const FRANCHISE_DEFAULT_VALUES = {
@@ -170,13 +184,10 @@ export const FRANCHISE_DEFAULT_VALUES = {
     InterestedArea: "",
     ReasonForInterest: "",
     ReferralSource: "",
+    ReferralSourceOther: "",
     BotField: "",
 };
 
-/**
- * Field priority order for sequential error display
- * Used with priority error resolver if needed
- */
 export const FRANCHISE_FIELD_PRIORITY = [
     'FullName',
     'Phone',
@@ -184,7 +195,8 @@ export const FRANCHISE_FIELD_PRIORITY = [
     'Address',
     'InterestedArea',
     'ReasonForInterest',
-    'ReferralSource'
+    'ReferralSource',
+    'ReferralSourceOther'
 ];
 
 /**
@@ -219,6 +231,16 @@ export const createFranchiseSchemaForRegion = (region = 'AU') =>
 /**
  * Schema for partial validation (useful for multi-step forms)
  */
-export const FranchisePartialSchema = FranchiseFormSchema.partial();
+export const FranchisePartialSchema = z.object({
+    FullName: z.string().optional(),
+    Phone: z.string().optional(),
+    Email: z.string().optional(),
+    Address: z.string().optional(),
+    InterestedArea: z.string().optional(),
+    ReasonForInterest: z.string().optional(),
+    ReferralSource: z.string().optional(),
+    ReferralSourceOther: z.string().optional(),
+    BotField: z.string().optional(),
+});
 
 export default FranchiseFormSchema;

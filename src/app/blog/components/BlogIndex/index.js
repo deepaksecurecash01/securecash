@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Typography from "@/components/common/Typography";
 import Container from "@/components/layout/Container";
 import { blogPosts } from "../../../../data/blogData";
 
@@ -29,13 +28,11 @@ const BlogIndex = () =>
                                     height="240"
                                 />
                             </Link>
-                            <Typography
-                                as="h4"
-                                fontFamily="font-montserrat"
-                                className="text-[22px] font-bold text-primary text-center 768px:text-left pb-5"
+                            <h4
+                                className="text-[22px] font-bold text-primary text-center 768px:text-left pb-5 font-montserrat"
                             >
                                 <Link href={`/blog/${item.id}`} className="flex flex-wrap justify-center transition-all duration-200 ease-in">{item.title}</Link>
-                            </Typography>
+                            </h4>
 
                         </div>
                     ))}

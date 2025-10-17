@@ -1,7 +1,6 @@
 import React from "react";
 import BannerInfo from "../../../components/common/BannerInfo";
 import Image from "next/image";
-import Typography from "../../../components/common/Typography";
 import Container from "../../../components/layout/Container";
 import Link from "next/link";
 
@@ -19,21 +18,17 @@ const HeadlineContent = () =>
                     <Container className=" about-hero--wrapper flex relative h-full w-full">
                         <div className=" flex flex-col justify-center gap-3 px-[30px]   768px:w-[38.25%] 1024px:pr-[10px] 1024px:pl-[34px]  1024px:w-[32.5%] 1280px:pl-[34px] 1280px:pr-[24px]  1280px:w-[30%]  1366px:pl-[34px]  1366px:pr-[94px]   1366px:w-[34.4%]  1440px:pl-[0]  1440px:pr-[174px] w-full  1440px:w-[37.7%]">
                             <hr className='h-[4px] rounded-[5px] border-0 bg-primary w-[100px] mx-auto 768px:ml-0  768px:mr-auto' />
-                            <Typography
-                                as="h1"
-                                fontFamily="montserrat"
-                                className="text-[44px] font-bold leading-[1.6em] text-center mx-auto 992px:text-[56px] 768px:text-left 768px:mx-0"
+                            <h1   
+                                className="text-[44px] font-bold leading-[1.6em] text-center mx-auto 992px:text-[56px] 768px:text-left 768px:mx-0 font-montserrat"
                             >
                                 About Us
-                            </Typography>
+                            </h1>
 
-                            <Typography
-                                as="p"
-                                fontFamily="montserrat"
-                                className="text-[18px] font-normal leading-[1.4em] text-center mx-auto mb-3 1024px:w-full 768px:mx-0 992px:text-[24px] 768px:text-left"
+                            <p
+                                className="text-[18px] font-normal leading-[1.4em] text-center mx-auto mb-3 1024px:w-full 768px:mx-0 992px:text-[24px] 768px:text-left font-montserrat"
                             >
                                 Established in 1992, we are a courier business that specialises in the pickup and banking of your daily takings.
-                            </Typography>
+                            </p>
 
 
                             <div className="callback-button w-[200px] bg-[#c7a652] text-[#fff] text-center px-[8px] py-[14px] ml-auto mr-auto rounded-[50px] mt-0  768px:ml-0 z-10 hover:bg-[#000000] hover:cursor-pointer no-underline">

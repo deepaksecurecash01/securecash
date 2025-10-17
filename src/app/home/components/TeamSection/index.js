@@ -1,5 +1,4 @@
 "use client";
-import Typography from "@/components/common/Typography";
 import TeamSlider from "./TeamSlider";
 
 // data/teamMembers.js
@@ -171,13 +170,13 @@ const TeamContent = () =>
       className="bg-[#ebebeb] inline-block w-full px-[10px] py-[24px] 414px:pt-[100px] 414px:px-0 414px:py mt-0 768px:p-[50px] 992px:mt-[100px] 992px:px-2 992px:pt-[100px]"
     >
       <div className="w-full max-w-[1366px] mx-[auto] my-[0]">
-        <Typography
+        <h3
           as="h3"
           fontFamily="prata"
           className="text-[24px] text-[#000] font-normal leading-[1.5em] text-center w-3/5 mx-auto my-0 414px:w-auto 414px:text-[32px]"
         >
           Meet The SecureCash Team
-        </Typography>
+        </h3>
 
 
         <hr

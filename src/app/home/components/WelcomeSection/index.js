@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import Typography from "@/components/common/Typography";
 import Paragraph from "@/components/common/Paragraph";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
@@ -49,13 +48,12 @@ const WelcomeSection = () =>
           className=" min-h-[400px] w-full 992px:w-auto mx-auto "
         >
           <div className="center-content pb-0 block w-[82%] 768px:[80%] 992px:w-[70%] mx-auto mb-[40px] 992px:mb-0">
-            <Typography
-              as="h4"
-              fontFamily="prata-regular"
-              className="text-[32px] text-center mx-auto"
+            <h4
+
+              className="text-[32px] text-center mx-auto font-prata-regular"
             >
               Welcome to
-            </Typography>
+            </h4>
             <Image
               src="/images/SecureCash.webp"
               alt="SecureCash Logo"
@@ -68,11 +66,10 @@ const WelcomeSection = () =>
             
               className="w-[100px] mt-3 mb-6 h-[4px] rounded-[5px] border-0 mx-auto bg-primary" 
             />
-            <Typography
-              as="p"
-              fontFamily="montserrat"
+            <p
+             
               className="text-[16px] leading-[2rem] text-center mb-[12px] mt-[16px] 
-             992px:text-center 480px:mb-0 font-light"
+             992px:text-center 480px:mb-0 font-light font-montserrat"
             >
               Do you need cash in transit services? SecureCash specialises in
               picking up your money and banking it. Wherever you are, anywhere
@@ -80,7 +77,7 @@ const WelcomeSection = () =>
               can collect your takings and deposit them at your bank. Whether
               you need cash collection, cash counting, or cash delivery,
               SecureCash has got you covered.&nbsp;
-            </Typography>
+            </p>
 
           </div>
           <div className="content-columns pt-0 block text-left mt-[40px] 768px:mt-0 992px:w-[95%] 992px:mx-auto 1366px:w-full 992px:flex 992px:pt-[80px] items-center">
@@ -93,22 +90,20 @@ const WelcomeSection = () =>
                   className="scrollable-content my-2"
                   style={{ direction: "ltr" }}
                 >
-                  <Typography
-                    as="h3"
+                  <h3
                     className="text-[22px] font-bold leading-[1.6em] text-center mt-2.5 mb-5 
              480px:text-[26px] 992px:text-left 
-             768px:mb-4 768px:leading-[1.6rem]"
+             768px:mb-4 768px:leading-[1.6rem] font-montserrat"
                   >
                     Our Cash In Transit Services
-                  </Typography>
+                  </h3>
 
 
 
-                  <Typography
-                    as="p"
-                    fontFamily="montserrat"
+                  <p
+                   
                     className="text-[16px] leading-[2rem] text-left
-             768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light"
+             768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light font-montserrat"
                   >
                     What cash in transit service does your business need? As one
                     of the largest and most respected cash logistics companies
@@ -121,7 +116,7 @@ const WelcomeSection = () =>
                     >
                       Read More
                     </button>
-                  </Typography>
+                  </p>
 
 
                   <ContentScroll
