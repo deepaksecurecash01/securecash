@@ -13,7 +13,6 @@ import
     FaSpinner,
     FaCheckCircle,
 } from "react-icons/fa";
-import Typography from "@/components/common/Typography";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate } from '@/utils/formHelpers';

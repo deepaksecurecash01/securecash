@@ -1,5 +1,4 @@
 import React from "react";
-import Typography from "@/components/common/Typography";
 import Link from "next/link";
 import parse from "html-react-parser";
 const GuaranteeSection = ({ guaranteeContent, imageUrl }) =>
@@ -126,22 +125,20 @@ const GuaranteeSection = ({ guaranteeContent, imageUrl }) =>
                         />
 
                         <div className="absolute top-0 992px:left-0 w-[70%] h-full 768px:h-[80%] bg-black/60 flex flex-col justify-center py-[30px] px-[10px] 768px:py-0 768px:px-[50px]">
-                            <Typography
-                                as="h4"
-                                fontFamily="font-montserrat"
-                                className="text-[22px] 480px:text-[26px] 768px:text-[28px] 992px:text-[33px] leading-[32px] 480px:leading-[36px] 768px:leading-[43px]  992px:leading-[48px] font-bold text-white text-center 992px:text-left mb-0"
+                            <h4
+                           
+                                className="text-[22px] 480px:text-[26px] 768px:text-[28px] 992px:text-[33px] leading-[32px] 480px:leading-[36px] 768px:leading-[43px]  992px:leading-[48px] font-bold text-white text-center 992px:text-left mb-0 font-montserrat"
                             >
                                 Give more focus to the things you love.
-                            </Typography>
+                            </h4>
                             <hr
                               
                                 className="my-6 992px:mx-0 992px:text-left w-[100px] h-[4px] rounded-[5px] border-0 bg-white mx-auto"
                             />
 
-                            <Typography
-                                as="p"
-                                fontFamily="font-montserrat"
-                                className="text-[18px] 768px:text-[26px] 768px:leading-[1.4em] font-medium text-white text-center mt-4 pb-3"
+                            <p
+                              
+                                className="text-[18px] 768px:text-[26px] 768px:leading-[1.4em] font-medium text-white text-center mt-4 pb-3 font-montserrat"
                             >
                                 <strong>Call us</strong> at{" "}
                                 <a
@@ -150,14 +147,13 @@ const GuaranteeSection = ({ guaranteeContent, imageUrl }) =>
                                 >
                                     1300 SECURE
                                 </a>
-                            </Typography>
-                            <Typography
-                                as="p"
-                                fontFamily="font-montserrat"
-                                className="text-[18px] 768px:text-[26px] 768px:leading-[1.4em] font-medium text-white text-center mt-4 pb-3"
+                            </p>
+                            <p
+                              
+                                className="text-[18px] 768px:text-[26px] 768px:leading-[1.4em] font-medium text-white text-center mt-4 pb-3 font-montserrat"
                             >
                                 or
-                            </Typography>
+                            </p>
                             <Link href="/quote" className="w-full mt-[18px] button">
                                 <div className="flex flex-row justify-center items-center min-h-[45px] min-w-[130px] px-5 py-0 rounded-full bg-primary hover:bg-white text-white 768px:w-full 768px:min-h-[55px] 768px:mt-8 1070px:mt-0 max-h-[73px] group 768px:mx-auto 1024px:mx-0">
                                     <p className="m-0 p-0 text-[14px] 768px:text-base font-semibold w-full group-hover:text-[#000] text-white hover:no-underline text-center">

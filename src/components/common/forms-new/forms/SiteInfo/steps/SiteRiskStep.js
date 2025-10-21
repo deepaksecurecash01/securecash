@@ -20,7 +20,6 @@ import
 
 import { RiskAssessmentSchema } from "@/zod/SiteInfoFormSchema";
 import WarningPopup from "@/components/common/forms/elements/WarningPopup";
-import Typography from "@/components/common/Typography";
 import styles from "@/components/common/checkbox/Checkbox.module.css";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 
@@ -425,28 +424,26 @@ const SiteRiskForm = ({
                 noValidate
             >
                 <div className="form-tab 480px:w-[90%] mx-auto">
-                    <Typography
-                        as="h3"
-                        fontFamily="montserrat"
-                        className="text-[22px] font-semibold leading-[1.6em] mx-auto 992px:text-[26px] 768px:text-left 768px:mx-0"
+                    <h3
+                       
+                        className="text-[22px] font-semibold leading-[1.6em] mx-auto 992px:text-[26px] 768px:text-left 768px:mx-0 font-montserrat"
                     >
                         Site Risk Information
-                    </Typography>
+                    </h3>
 
                     <hr
 
                         className="my-5 w-[100px] 768px:text-left 768px:mx-0 h-[4px] rounded-[5px] border-0 bg-primary mx-auto 768px:ml-0  768px:mr-auto"
                     />
 
-                    <Typography
-                        as="p"
-                        fontFamily="montserrat"
-                        className="text-[16px] leading-[2rem] text-left 768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light"
+                    <p
+
+                        className="text-[16px] leading-[2rem] text-left 768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light font-montserrat"
                     >
                         Please provide us with the information below so our Area Managers
                         and Banking Couriers can better identify any potential hazards or
                         dangers at this location.
-                    </Typography>
+                    </p>
 
                     <ScrollableSection className="h-auto 992px:w-full p-0 mx-auto 992px:h-[480px] 600px:pr-10">
                         {/* Amount Selection */}

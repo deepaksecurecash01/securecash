@@ -1,4 +1,3 @@
-import Typography from '@/components/common/Typography';
 import Container from '@/components/layout/Container';
 import ScrollableSection from '@/components/layout/ScrollbarSection';
 import React from 'react';
@@ -472,10 +471,10 @@ const additionalSections = [
 
 
 // Component for rendering list items
-const TermsListItem = ({ item }) => (
+const TermsListItem = ({ item, index, section }) => (
     <li>
         <span className="tnc-number absolute left-0 text-[16px] font-semibold text-primary">{item.number}</span>
-        <p className={`${item.wide ? "bullet-wide" : ""} block leading-[2em] pl-[47px] mb-[30px]`}>
+        <p className={`${item.wide ? "bullet-wide" : ""} block leading-[2em] pl-[47px] ${index !== section.length - 1 && 'mb-[30px]'} `}>
             {item.text}
             {item.link && (
                 <>
@@ -508,15 +507,14 @@ const TermsListItem = ({ item }) => (
 // Component for rendering sections
 const TermsSection = ({ section }) => (
     <>
-        <Typography
-            as="h4"
-            fontFamily="montserrat"
-            className="text-[16px] font-medium leading-[1.6em] text-left mx-auto 992px:text-[18px] mb-[24px] 768px:text-left 768px:mx-0"
+        <h4
+            
+            className="text-[16px] font-medium leading-[1.6em] text-left mx-auto 992px:text-[18px] mb-[24px] 768px:text-left 768px:mx-0 font-montserrat"
         >            {section.title}
-        </Typography>
+        </h4>
         <ul className="tnc-page-sa-clauses--content__list list-none font-light relative pr-10">
             {section.items.map((item, index) => (
-                <TermsListItem key={index} item={item} />
+                <TermsListItem index={index} item={item} section={section} />
             ))}
         </ul>
     </>
@@ -548,13 +546,12 @@ const ServiceAgreementClauses = () =>
             <Container className="inner w-full">
                 <div className="tnc-page-sa-clauses--wrap flex justify-end">
                     <div className="tnc-page-sa-clauses--content 1024px:w-[70%] 1200px:w-[65%] py-[50px] px-[30px] 480px:py-[82px]  480px:px-[34px]  1366px:pt-[110px]  1366px:pb-[110px]  1366px:pl-[18px]">
-                        <Typography
-                            as="h3"
-                            fontFamily="montserrat"
-                            className=" text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mx-auto 992px:text-[26px] 768px:mx-0"
+                        <h3
+                           
+                            className=" text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mx-auto 992px:text-[26px] 768px:mx-0 font-montserrat"
                             >
                             Service Agreement Clauses
-                        </Typography>
+                        </h3>
                         <hr
                           
                             className="mt-5 mb-[34px] w-[100px] 768px:text-left 768px:mx-0 h-[4px] rounded-[5px] border-0 bg-primary"

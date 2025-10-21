@@ -4,7 +4,6 @@ import { FaMoneyBillAlt, FaSpinner, FaCheckCircle } from 'react-icons/fa';
 import { useFormManager } from '@/hooks/useFormManager';
 import { RiskAssessmentSchema, RISK_ASSESSMENT_FIELDS } from '@/zod/SiteInfoFormSchema';
 import UniversalFormField from '@/components/common/forms-new/core/UniversalFormField';
-import Typography from '@/components/common/Typography';
 import Divider from '@/components/common/Divider';
 import ScrollableSection from '@/components/layout/ScrollbarSection';
 
@@ -160,13 +159,12 @@ const ConvertedHazardForm = forwardRef(({
             noValidate
         >
             <div className="form-tab 480px:w-[90%] mx-auto">
-                <Typography
-                    as="h3"
-                    fontFamily="montserrat"
-                    className="text-[22px] font-semibold leading-[1.6em] mx-auto 992px:text-[26px] 768px:text-left 768px:mx-0"
+                <h3
+                   
+                    className="text-[22px] font-semibold leading-[1.6em] mx-auto 992px:text-[26px] 768px:text-left 768px:mx-0 font-montserrat"
                 >
                     Site Risk Information
-                </Typography>
+                </h3>
 
                 <Divider
                     color="primary"
@@ -174,15 +172,14 @@ const ConvertedHazardForm = forwardRef(({
                     className="w-[100px] my-5 768px:text-left 768px:mx-0"
                 />
 
-                <Typography
-                    as="p"
-                    fontFamily="montserrat"
-                    className="text-[16px] leading-[2rem] text-left 768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light"
+                <p
+                  
+                    className="text-[16px] leading-[2rem] text-left 768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light font-montserrat"
                 >
                     Please provide us with the information below so our Area Managers
                     and Banking Couriers can better identify any potential hazards or
                     dangers at this location.
-                </Typography>
+                </p>
 
                 <ScrollableSection className="h-auto 992px:w-full p-0 mx-auto 992px:h-[480px] 600px:pr-10">
                     {fieldsWithIcons.map(field => (

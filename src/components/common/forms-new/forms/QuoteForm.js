@@ -13,7 +13,6 @@ import
   FaCheckCircle,
   FaChevronLeft,
 } from "react-icons/fa";
-import Typography from "@/components/common/Typography";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 import BankingStep from "./steps/BankingStep.js";
 import ChangeStep from "./steps/ChangeStep";
@@ -127,21 +126,19 @@ const QuoteForm = ({ className }) =>
       case "quote":
         return (
           <div className="form-page quote">
-            <Typography
-              as="h3"
-              fontFamily="montserrat"
+            <h3
+
               className="text-white font-montserrat text-center capitalize pb-4 text-[22px] leading-[30px]"
             >
               Want a quote from SecureCash?
-            </Typography>
+            </h3>
 
-            <Typography
-              as="p"
-              fontFamily="font-montserrat"
-              className="text-white font-normal text-center capitalize pb-4 text-[16px]"
+            <p
+
+              className="text-white font-normal text-center capitalize pb-4 text-[16px] font-montserrat"
             >
               We Just Need A Few Details
-            </Typography>
+            </p>
 
             <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"  />
 
@@ -177,33 +174,30 @@ const QuoteForm = ({ className }) =>
       <div className="form-page success text-center flex flex-col justify-center items-center 992px:h-[75%]">
         <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" />
 
-        <Typography
-          as="h3"
-          fontFamily="montserrat"
+        <h3
+         
           className="text-white font-montserrat text-center capitalize pb-2 text-[24px] leading-[30px] mt-8"
         >
           Thank you{userName && ` ${userName}`}!
-        </Typography>
+        </h3>
         <h5 className="text-white font-montserrat text-center capitalize pb-2 text-[16px]">
           We received your submission.
         </h5>
         <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto" />
 
         <div className="quote-ty-note">
-          <Typography
-            as="p"
-            fontFamily="font-montserrat"
-            className="text-white font-normal text-center pb-4 text-[16px] mt-8"
+          <p
+           
+            className="text-white font-normal text-center pb-4 text-[16px] mt-8 font-montserrat"
           >
             We will start working on your quote now.
-          </Typography>
-          <Typography
-            as="p"
-            fontFamily="font-montserrat"
-            className="text-white font-normal text-center pb-4 text-[16px]"
+          </p>
+          <p
+            
+            className="text-white font-normal text-center pb-4 text-[16px] font-montserrat"
           >
             While you wait feel free to check out how our services can benefit your organisation:
-          </Typography>
+          </p>
           <div className="ty-note-list-wrap mt-2">
             <ul className="list-none p-0 m-0 flex flex-col justify-center items-center gap-1">
               <li className="cash-collection mb-2 flex items-center">

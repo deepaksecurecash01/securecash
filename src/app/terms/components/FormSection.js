@@ -1,6 +1,5 @@
 'use client';
 import React, { useState } from 'react';
-import Typography from "@/components/common/Typography";
 import Container from "@/components/layout/Container";
 import Link from 'next/link';
 import TermsFormControllerVersion from '@/components/common/forms-new/forms/TermsForm';
@@ -64,16 +63,15 @@ const FormSection = () =>
                           [&quot;Expiry&quot;].
                         </p>
 
-                        <Typography
-                            as="p"
-                            fontFamily="montserrat"
+                        <p
+                          
                             className="text-[16px] leading-[2rem] text-left
-                            768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light flex flex-col gap-4 mt-4"
+                            768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light flex flex-col gap-4 mt-4 font-montserrat"
                         >
                             <strong>
                                 <Link className="text-primary hover:underline" href="https://www.securecash.com.au/welcome">&lt;&lt; Previous</Link>
                             </strong>
-                        </Typography>
+                        </p>
                     </div>
                     <div className="tnc-page-sa-form--form  1024px:w-1/2 order-1 1024px:order-2">
                       <p className="tnc-page-sa-form--content__text-alt font-light text-[16px] text-center p-5  leading-[2em] 1024px:hidden">

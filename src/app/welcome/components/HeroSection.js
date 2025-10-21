@@ -1,6 +1,5 @@
 import React from "react";
 import Container from "@/components/layout/Container";
-import Typography from "@/components/common/Typography";
 
 const HeroSection = () =>
 {

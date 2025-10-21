@@ -9,7 +9,7 @@ const PrivacyPolicyPage = () =>
     const SectionHeader = ({ children }) => (
         <h3
       
-            className={`600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-2 text-[40px] mb-4 leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] 992px:text-left 992px:w-full mt-8 font-montserrat`}
+            className={`text-[22px] flex flex-row justify-start items-center gap-2 768px:gap-2  mb-4 leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] 992px:text-left 992px:w-full mt-8 font-montserrat`}
       >
             <strong style={{ textAlign: "left", fontWeight: "700" }}
 >
@@ -56,7 +56,7 @@ const PrivacyPolicyPage = () =>
                             <h1 className={`blog-single-hero--head__title blog-index-hero--content__title text-[28px] leading-[34px] px-[10px] w-full  480px:text-[38px]  480px:leading-[36px]  480px:px-[40px] 768px:px-0 mb-[20px] text-center  768px:text-[46px] font-extrabold  768px:leading-[50px] capitalize  600px:w-[590px]`}> SKY WALLET PTY LTD</h1>
                             <hr className="w-[100px] mx-auto mt-[6px] mb-[16px] h-[4px] rounded-[5px] border-0 bg-primary" />
                             <div className="blog-index-hero--content__subtitle  mb-0">
-                                <h3 className=" text-[34px] text-center font-semibold leading-[1.6em] font-montserrat"> Privacy Policy</h3>
+                                <h3 className=" text-[24px]  768px:text-[34px] text-center font-semibold leading-[1.6em] font-montserrat"> Privacy Policy</h3>
                             </div>
                         </div>
                     </div>
@@ -64,8 +64,8 @@ const PrivacyPolicyPage = () =>
             </section>
             
 
-            <div className="section-wrapper">
-                <section className='max-w-[1024px] mx-auto' id="" color='w-full'>
+            <div className="section-wrapper w-full mx-auto">
+                <section className='max-w-[90%] 1100px:max-w-[1024px] mx-auto'>
                   
 
                     <div className='mt-[50px]'> 

@@ -15,7 +15,6 @@ import
 } from "react-icons/fa";
 import { PopupModal } from "react-calendly";
 
-import Typography from "@/components/common/Typography";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate } from '@/utils/formHelpers';
@@ -235,13 +234,12 @@ const FranchiseForm = ({ className }) =>
                             <div className="480px:w-[90%] mx-auto 992px:h-[75%]">
                                 <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" />
 
-                                <Typography
-                                    as="h3"
-                                    fontFamily="montserrat"
+                                <h3
+
                                     className=" text-primary font-montserrat text-center capitalize pb-2 text-[32px] leading-[30px] mt-8 font-bold"
                                 >
                                     Thank you{userName && ` ${userName}`}!
-                                </Typography>
+                                </h3>
 
                                 <hr className="mt-4 mb-6 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" />
 

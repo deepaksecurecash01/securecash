@@ -1,5 +1,4 @@
 import React from "react";
-import Typography from "./Typography";
 
 const BottomBanner = () =>
 {
@@ -16,13 +15,12 @@ const BottomBanner = () =>
              no-webp:before:bg-[url('https://securecash.com.au/images/team.jpg')]"
         >
 
-          <Typography
-            as="h2"
-            fontFamily="montserrat"
-            className="text-white font-medium leading-[2rem] text-center max-[414px]:text-[36px] text-[40px] z-30 py-6"
+          <h2
+
+            className="text-white font-medium leading-[2rem] text-center max-[414px]:text-[36px] text-[40px] z-30 py-6 font-montserrat"
           >
             Let us do the banking for you
-          </Typography>
+          </h2>
           <hr
            
             className="w-[100px] mt-[6px] mb-[36px]  divider-gold divider-2 z-20 h-[4px] rounded-[5px] border-0 bg-primary mx-auto"

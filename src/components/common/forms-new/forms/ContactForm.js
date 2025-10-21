@@ -16,7 +16,6 @@ import
     FaCalendarAlt,
 } from "react-icons/fa";
 
-import Typography from "@/components/common/Typography";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate, formatDateForAPI } from '@/utils/formHelpers';
@@ -262,33 +261,30 @@ const ContactForm = ({ className }) =>
                             <div className="480px:w-[90%] mx-auto 992px:h-[75%]">
                                 <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" />
 
-                                <Typography
-                                    as="h3"
-                                    fontFamily="montserrat"
+                                <h3
+
                                     className=" text-primary font-montserrat text-center capitalize pb-2 text-[32px] leading-[30px] mt-8 font-bold"
                                 >
                                     Thank you{userName && ` ${userName}`}!
-                                </Typography>
+                                </h3>
                                 <h5 className=" font-montserrat text-center capitalize pb-2 text-[16px]">
                                     Your message has been sent successfully.
                                 </h5>
                                 <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" />
 
                                 <div className="quote-ty-note">
-                                    <Typography
-                                        as="p"
-                                        fontFamily="font-montserrat"
-                                        className=" font-normal text-center pb-4 text-[16px] mt-8"
+                                    <p
+                                      
+                                        className=" font-normal text-center pb-4 text-[16px] mt-8 font-montserrat"
                                     >
                                         We&apos;ve received your inquiry and will get back to you shortly.
-                                    </Typography>
-                                    <Typography
-                                        as="p"
-                                        fontFamily="font-montserrat"
-                                        className=" font-normal text-center pb-4 text-[16px]"
+                                    </p>
+                                    <p
+                                      
+                                        className=" font-normal text-center pb-4 text-[16px] font-montserrat"
                                     >
                                         In the meantime, feel free to explore more about our services:
-                                    </Typography>
+                                    </p>
                                     <div className="ty-note-list-wrap mt-2">
                                         <ul className="list-none p-0 m-0 flex flex-col justify-center items-center gap-1 font-medium">
                                             <li className="cash-collection mb-2 flex items-center">

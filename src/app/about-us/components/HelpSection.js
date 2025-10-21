@@ -70,7 +70,7 @@ export const HelpSection = ({
 
                                 </div>
 
-                                <ScrollableSection className={`section-content h-auto 600px:mt-[120px] 768px:mt-[142px] ${!id.includes("story") && 'bg-white'} pt-8 600px:pt-5 pb-4 px-8 mx-2 1200px:mt-2.5 leading-[2]`}>
+                                <ScrollableSection className={`section-content h-auto 600px:mt-[120px] 768px:mt-[142px] ${!id.includes("story") && 'bg-white'} pt-8 600px:pt-5  px-8 mx-2 1200px:mt-2.5 leading-[2]`}>
                                     <ContentScroll sectionContent={sectionContent} />
 
                                     {hasCTA && (

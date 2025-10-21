@@ -2,7 +2,6 @@
 "use client";
 import React from "react";
 import { FaSpinner, FaCheckCircle, FaArrowLeft } from "react-icons/fa";
-import Typography from "@/components/common/Typography";
 import UniversalFormField from "./core/UniversalFormField";
 import CheckboxGroupInput from "./core/CheckboxGroupInput";
 import { useMultiStepCoordinator } from "@/hooks/useMultiStepCoordinator";
@@ -71,22 +70,20 @@ const MultiStepFormWrapper = ({
 
         return (
             <>
-                <Typography
-                    as="h3"
-                    fontFamily="montserrat"
-                    className="text-white font-normal text-center capitalize pb-4 text-[26px] leading-[30px]"
+                <h3
+                   
+                    className="text-white font-normal text-center capitalize pb-4 text-[26px] leading-[30px] font-montserrat"
                 >
                     {stepConfig.title}
-                </Typography>
+                </h3>
 
                 {stepConfig.subtitle && (
-                    <Typography
-                        as="p"
-                        fontFamily="montserrat"
-                        className="text-white font-normal text-center capitalize pb-4 text-[16px]"
+                    <p
+
+                        className="text-white font-normal text-center capitalize pb-4 text-[16px] font-montserrat"
                     >
                         {stepConfig.subtitle}
-                    </Typography>
+                    </p>
                 )}
 
                 <hr

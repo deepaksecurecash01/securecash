@@ -6,7 +6,6 @@ import
         FaMoneyBillAlt,
         FaUniversity,
     } from "react-icons/fa";
-import Typography from "@/components/common/Typography";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 
 
@@ -84,13 +83,12 @@ const BankingStep = ({ formManager, theme = 'dark' }) =>
 
     return (
         <div className="form-page banking">
-            <Typography
-                as="h3"
-                fontFamily="montserrat"
-                className="text-white font-normal text-center capitalize pb-4 text-[22px] leading-[30px]"
+            <h3
+               
+                className="text-white font-normal text-center capitalize pb-4 text-[22px] leading-[30px] font-montserrat"
             >
                 Banking
-            </Typography>
+            </h3>
 
             <hr
                 className="w-[100px] mt-4 h-[4px] rounded-[5px] border-0 bg-primary mx-auto"

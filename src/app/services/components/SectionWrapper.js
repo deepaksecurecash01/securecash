@@ -1,6 +1,5 @@
 import React from "react";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
-import Typography from "@/components/common/Typography";
 import Link from "next/link";
 import Image from "next/image";
 import parse from "html-react-parser";
@@ -126,14 +125,13 @@ const SectionWrapper = ({
                     return (
                       <li key={index}>
                         {item.title && (
-                          <Typography
-                            as="h4"
-                            fontFamily="font-montserrat"
+                          <h4
+                           
                             className={`${item.icon
                                 ? "600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-2 text-[20px] mb-4"
                                 : "mb-5 768px:w-[80%] 600px:text-[26px] text-center text-[22px]"
                               } leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] 992px:text-left 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' mt-6'
-                              }`}
+                              } font-montserrat`}
                           >
                             {item.icon && (
                               <Image
@@ -145,7 +143,7 @@ const SectionWrapper = ({
                               />
                             )}
                             {item.title}
-                          </Typography>
+                          </h4>
                         )}
 
                         {item.details.map((paragraph, paragraphIndex) =>
@@ -180,30 +178,27 @@ const SectionWrapper = ({
                 alt="Australia Cash in Transit Services"
               />
               <div className="absolute top-0 left-0 w-[70%] 480px:w-[60%] 1366px:w-[55%] h-full 1366px:h-auto 1366px:py-[60px] bg-black px-[30px] flex flex-col justify-center">
-                <Typography
-                  as="h4"
-                  fontFamily="font-montserrat"
-                  className="text-[22px] 480px:text-[26px] 768px:text-[28px] 992px:text-[33px] leading-[32px] 480px:leading-[36px] 768px:leading-[43px]  992px:leading-[48px] font-bold text-white text-center 992px:text-left mb-0"
+                <h4
+                
+                  className="text-[22px] 480px:text-[26px] 768px:text-[28px] 992px:text-[33px] leading-[32px] 480px:leading-[36px] 768px:leading-[43px]  992px:leading-[48px] font-bold text-white text-center 992px:text-left mb-0 font-montserrat"
                 >
                   What Type of Service Do You Need?
-                </Typography>
+                </h4>
                 <hr
                   className="w-[100px] mx-auto my-6 992px:mx-0 992px:text-left h-[4px] rounded-[5px] border-0 bg-white"
                 />
-                <Typography
-                  as="p"
-                  fontFamily="font-montserrat"
-                  className="text-[18px] 768px:text-[26px] 768px:leading-[1.4em] font-medium text-white text-center 992px:text-left mt-4 pb-3"
+                <p
+
+                  className="text-[18px] 768px:text-[26px] 768px:leading-[1.4em] font-medium text-white text-center 992px:text-left mt-4 pb-3 font-montserrat"
                 >
                   Let&apos;s start discussing
                   <br />
                   your options.
-                </Typography>
+                </p>
 
-                <Typography
-                  as="p"
-                  fontFamily="font-montserrat"
-                  className="text-[18px] 768px:text-[26px] 768px:leading-[1.4em] font-medium text-white text-center 992px:text-left mt-4 pb-3"
+                <p
+                
+                  className="text-[18px] 768px:text-[26px] 768px:leading-[1.4em] font-medium text-white text-center 992px:text-left mt-4 pb-3 font-montserrat"
                 >
                   <strong>Call us</strong> at{" "}
                   <a
@@ -212,14 +207,13 @@ const SectionWrapper = ({
                   >
                     1300 SECURE
                   </a>
-                </Typography>
-                <Typography
-                  as="p"
-                  fontFamily="font-montserrat"
-                  className="text-[18px] 768px:text-[26px] 768px:leading-[1.4em] font-medium text-white text-center mt-4 pb-3"
+                </p>
+                <p
+                 
+                  className="text-[18px] 768px:text-[26px] 768px:leading-[1.4em] font-medium text-white text-center mt-4 pb-3 font-montserrat"
                 >
                   or
-                </Typography>
+                </p>
                 <Link href="/quote" className="w-full mt-[18px] button">
                   <div className="flex flex-row justify-center items-center min-h-[45px] min-w-[130px] px-5 py-0 rounded-full bg-white 768px:w-full 768px:min-h-[55px] 1070px:mt-0 max-h-[73px] group 768px:mx-auto 992px:mx-0">
                     <p className="m-0 p-0 text-[14px] 768px:text-base font-semibold w-full group-hover:text-[#c7a652] text-[#000] hover:no-underline text-center">

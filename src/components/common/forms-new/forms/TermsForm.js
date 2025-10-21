@@ -12,7 +12,6 @@ import
         FaSpinner,
         FaCheckCircle,
     } from "react-icons/fa";
-import Typography from "@/components/common/Typography";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatBirthdayForAPI } from '@/utils/formHelpers';
@@ -188,13 +187,12 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
                 >
                     <div className="form-page terms">
                         {/* Header - exact same as before */}
-                        <Typography
-                            as="h3"
-                            fontFamily="montserrat"
-                            className="text-white font-normal text-center capitalize pb-4 text-[26px] leading-[30px]"
+                        <h3
+
+                            className="text-white font-normal text-center capitalize pb-4 text-[26px] leading-[30px] font-montserrat"
                         >
                             Service Agreement
-                        </Typography>
+                        </h3>
 
                         <hr
                             className="w-[100px] mx-auto mt-2.5 mb-4 bg-primary"

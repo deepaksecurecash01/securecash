@@ -171,9 +171,8 @@ const TeamContent = () =>
     >
       <div className="w-full max-w-[1366px] mx-[auto] my-[0]">
         <h3
-          as="h3"
-          fontFamily="prata"
-          className="text-[24px] text-[#000] font-normal leading-[1.5em] text-center w-3/5 mx-auto my-0 414px:w-auto 414px:text-[32px]"
+         
+          className="text-[24px] text-[#000] font-normal leading-[1.5em] text-center w-3/5 mx-auto my-0 414px:w-auto 414px:text-[32px] font-prata"
         >
           Meet The SecureCash Team
         </h3>

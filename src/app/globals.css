@@ -128,10 +128,13 @@ strong {
 /* ================================
    BACKGROUND SECTIONS
    ================================ */
-.section-wrapper {
-  background: url("../../public/images/bg-quote-header-left.webp") left top no-repeat,
-    url("../../public/images/bg-quote-header-right.webp") right top no-repeat;
-  width: 100%;
+
+@media (min-width: 1200px) {
+  .section-wrapper {
+      background: url("../../public/images/bg-quote-header-left.webp") left top no-repeat,
+        url("../../public/images/bg-quote-header-right.webp") right top no-repeat;
+      width: 100%;
+    }
 }
 
 .bg-dots {

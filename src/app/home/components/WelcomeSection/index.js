@@ -87,7 +87,7 @@ const WelcomeSection = () =>
                 style={{ direction: "rtl" }}
               >
                 <div
-                  className="scrollable-content my-2"
+                  className="scrollable-content mt-2"
                   style={{ direction: "ltr" }}
                 >
                   <h3

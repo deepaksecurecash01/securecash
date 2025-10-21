@@ -2,7 +2,6 @@
 import React from 'react';
 import { FaBuilding, FaHome, FaMapMarkerAlt } from 'react-icons/fa';
 import UniversalFormField from '@/components/common/forms-new/core/UniversalFormField';
-import Typography from '@/components/common/Typography';
 import { SPECIAL_EVENT_BUSINESS_FIELDS } from '@/zod/SpecialEventFormSchema';
 
 const SpecialEventBusinessStep = ({ formManager, theme = 'dark' }) =>
@@ -30,13 +29,12 @@ const SpecialEventBusinessStep = ({ formManager, theme = 'dark' }) =>
             {/* Hidden Type field - Special Event specific */}
             <input type="hidden" {...formManager.formMethods.register("Type")} value="Special Event" />
 
-            <Typography
-                as="h3"
-                fontFamily="montserrat"
-                className="text-white font-normal text-center capitalize pb-4 text-[26px] leading-[30px]"
+            <h3
+               
+                className="text-white font-normal text-center capitalize pb-4 text-[26px] leading-[30px] font-montserrat"
             >
                 Business Information
-            </Typography>
+            </h3>
 
             <hr className="w-[100px] mt-2.5 mb-4 h-[4px] rounded-[5px] border-0 bg-primary mx-auto" />
 

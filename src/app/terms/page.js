@@ -12,7 +12,6 @@ import
 import BottomBanner from '@/components/common/BottomBanner';
 import { FaArrowDownLong } from "react-icons/fa6";
 
-import Typography from "@/components/common/Typography";
 import Container from "@/components/layout/Container";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import FormSection from './components/FormSection';
@@ -105,26 +104,24 @@ const MainSection = () => (
     />
     <Container className="inner w-full">
       <div className="tnc-page-main--content  1024px:w-[68%] 1200px:w-[65%] py-[50px] px-[30px]  480px:py-[82px]  480px:px-[34px]  1366px:pt-[110px]  1366px:pb-[110px]  1366px:pl-[18px]">
-        <Typography
-          as="h3"
-          fontFamily="montserrat"
-          className=" text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mx-auto 992px:text-[26px] 768px:mx-0"
+        <h3
+         
+          className=" text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mx-auto 992px:text-[26px] 768px:mx-0 font-montserrat"
         >
           {TERMS_CONDITIONS.MAIN_TITLE}
-        </Typography>
+        </h3>
         <hr
           
           className="mt-5  h-[4px] rounded-[5px] border-0 mb-[34px] w-[100px] 768px:text-left 768px:mx-0 bg-primary"
         />
         <ScrollableSection className="h-auto w-full p-0 mx-auto 992px:h-[366px]  768px:pb-[18px] bg-[#f7f7f7]">
           <TermsList terms={GENERAL_TERMS} showExtraBreak={true} />
-          <Typography
-            as="h4"
-            fontFamily="montserrat"
-            className=" text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mb-4 mx-auto 992px:text-[26px] 768px:mx-0"
+          <h4
+          
+            className=" text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mb-4 mx-auto 992px:text-[26px] 768px:mx-0 font-montserrat"
           >
             Change Orders
-          </Typography>
+          </h4>
           <TermsList terms={CHANGE_ORDER_TERMS} />
         </ScrollableSection>
       </div>

@@ -1,5 +1,4 @@
 import React from "react";
-import Typography from '@/components/common/Typography';
 import Image from "next/image";
 import Container from "@/components/layout/Container";
 
@@ -26,20 +25,18 @@ const HeadlineContent = () =>
 
                 <Container className="about-hero--wrapper flex relative h-full w-full z-10 justify-center 768px:justify-start">
                     <div className="flex flex-col justify-center gap-3 px-[30px] 768px:w-1/2">
-                        <Typography
-                            as="h1"
-                            fontFamily="montserrat"
-                            className="text-[26px] mb-1.5 text-white font-light leading-[30px] text-center mx-auto 992px:text-[38px] 768px:text-left 768px:mx-0"
+                        <h1
+                          
+                            className="text-[26px] mb-1.5 text-white font-light leading-[30px] text-center mx-auto 992px:text-[38px] 768px:text-left 768px:mx-0 font-montserrat"
                         >
                             Information About
-                        </Typography>
-                        <Typography
-                            as="h1"
-                            fontFamily="montserrat"
-                            className="text-[38px] text-white font-bold leading-[62px] text-center mx-auto 992px:text-[64px] 992px:leading-[1em] 768px:text-left 768px:mx-0"
+                        </h1>
+                        <h1
+                           
+                            className="text-[38px] text-white font-bold leading-[62px] text-center mx-auto 992px:text-[64px] 992px:leading-[1em] 768px:text-left 768px:mx-0 font-montserrat"
                         >
                             Your Special Event
-                        </Typography>
+                        </h1>
 
                         <hr                           
                             className='mt-[22px] mb-[34px] w-[100px] mx-auto 768px:text-left 768px:mx-0 bg-primary h-[4px] rounded-[5px] border-0'

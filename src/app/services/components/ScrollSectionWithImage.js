@@ -1,7 +1,6 @@
 'use client';
 import React, { useEffect } from "react";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
-import Typography from "@/components/common/Typography";
 import Image from "next/image";
 import Link from "next/link";
 import parse from 'html-react-parser';
@@ -95,13 +94,12 @@ const ScrollSectionWithImage = ({
               alt="Australia Cash in Transit Services"
             />
             <div className="absolute top-0 right-0 h-[80%] w-[70%] bg-black px-[30px] flex flex-col justify-center py-[30px]">
-              <Typography
-                as="h4"
-                fontFamily="font-montserrat"
-                className="text-[22px] 480px:text-[26px] 768px:text-[28px] 992px:text-[33px] leading-[32px] 480px:leading-[36px] 768px:leading-[43px]  992px:leading-[48px] font-bold text-white 992px:text-left mb-0"
+              <h4
+              
+                className="text-[22px] 480px:text-[26px] 768px:text-[28px] 992px:text-[33px] leading-[32px] 480px:leading-[36px] 768px:leading-[43px]  992px:leading-[48px] font-bold text-white 992px:text-left mb-0 font-montserrat"
               >
                 {ctaText ? ctaText : "Why Choose SecureCash for Your Business?"} 
-              </Typography>
+              </h4>
               <hr
                   className="mt-[20px] 992px:mx-0 992px:text-left w-[100px] ml-0 h-[4px] rounded-[5px] border-0 bg-white"
               />
@@ -119,14 +117,13 @@ const ScrollSectionWithImage = ({
                     return (
                       <li key={index}>
                         {item.title && (
-                          <Typography
-                            as="h4"
-                            fontFamily="font-montserrat"
+                          <h4
+
                             className={`${item.icon
                                 ? "600px:text-[20px] flex flex-row justify-start items-center gap-2 768px:gap-2 text-[20px] mb-4"
                                 : "mb-5 768px:w-[80%] 600px:text-[26px] text-center text-[22px]"
                               } leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] 992px:text-left 992px:w-full ${index === 0 ? '768px:mt-2.5' : ' mt-6'
-                              }`}
+                              } font-montserrat`}
                           >
                             {item.icon && (
                               <Image
@@ -138,7 +135,7 @@ const ScrollSectionWithImage = ({
                               />
                             )}
                             {item.title}
-                          </Typography>
+                          </h4>
                         )}
 
                         <div className="">
