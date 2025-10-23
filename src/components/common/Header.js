@@ -32,7 +32,10 @@ const MENU_ITEMS = [
       { text: "No Armoured Trucks", href: "/services/armoured-car-service" },
       { text: "Tips On Cash Security", href: "/services/cash-security" },
       { text: "Our Cash Couriers", href: "/services/cash-couriers" },
-      { text: "Cash Logistics Management", href: "/services/cash-logistics-management" },
+      {
+        text: "Cash Logistics Management",
+        href: "/services/cash-logistics-management",
+      },
     ],
   },
   { name: "Online Services", href: "https://service.securecash.com.au/" },
@@ -74,6 +77,22 @@ const DesktopSubmenu = ({ links }) => (
       <li key={index} className="border-b border-light-border">
         <Link
           href={subLink.href}
+          onClick={(e) =>
+          {
+            // Find the parent li with group class and remove hover
+            const parentLi = e.currentTarget.closest(".group");
+            if (parentLi) {
+              const submenu = parentLi.querySelector("ul");
+              if (submenu) {
+                submenu.style.display = "none";
+                // Reset display after a brief moment to allow CSS to take over again
+                setTimeout(() =>
+                {
+                  submenu.style.display = "";
+                }, 100);
+              }
+            }
+          }}
           className="block p-[19px_40px_18px_20px] text-primary-text text-sm no-underline leading-[22px] hover:text-active-text hover:bg-black"
         >
           {subLink.text}
@@ -83,7 +102,6 @@ const DesktopSubmenu = ({ links }) => (
   </ul>
 );
 
-// Desktop Menu Component
 const DesktopMenu = ({ onMenuClick }) => (
   <div
     id="main-menu"
@@ -99,6 +117,11 @@ const DesktopMenu = ({ onMenuClick }) => (
             <li key={index} className="leading-[50px] py-5 relative group">
               <Link
                 href={item.href}
+                onClick={() =>
+                {
+                  const item = document.getElementById(item.submenuId);
+                  item.style.display = "none";
+                }}
                 className="block text-primary-text text-sm no-underline leading-6 group-hover:text-active-text"
               >
                 {hasSubMenu && (
