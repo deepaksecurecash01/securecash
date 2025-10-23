@@ -50,9 +50,11 @@ export const HelpSection = ({
                 <div className=" bg-quote-header bg-no-repeat bg-cover 480px:bg-contain w-full h-full ">
                     <Container className="section-col inner relative h-full 600px:h-[calc(342px+80px)] 768px:h-[500px] 1200px:h-full flex flex-col mt-0 600px:flex-row w-full 1024px:w-[95%] 1440px:w-full">
                         <div className={`section-content-wrapper w-full h-full flex flex-col justify-end ${firstSectionOrder}`}>
-                            <img
+                            <Image
                                 src={imageUrl}
                                 alt={imageAlt}
+                                width={300}
+                                height={300}
                                 className="w-full 1200px:w-auto h-[calc(100%-68px)]"
                             />
                         </div>

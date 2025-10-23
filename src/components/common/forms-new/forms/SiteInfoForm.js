@@ -160,7 +160,7 @@ const SiteInfoForm = () => {
               collection fill out the form located{" "}
               <span className="underline">
                 <strong className="uppercase">
-                  <a href="https://www.securecash.com.au/special-event/">
+                  <a href="/special-event/">
                     HERE
                   </a>
                 </strong>
@@ -177,7 +177,7 @@ const SiteInfoForm = () => {
                 view our{" "}
                 <Link
                   className="text-primary hover:underline"
-                  href="https://www.securecash.com.au/privacy-policy/"
+                  href="/privacy-policy/"
                 >
                   Privacy Policy
                 </Link>
@@ -186,7 +186,7 @@ const SiteInfoForm = () => {
               <strong>
                 <Link
                   className="text-primary hover:underline"
-                  href="https://www.securecash.com.au/austrac/"
+                  href="/austrac/"
                 >
                   &lt;&lt; Previous
                 </Link>
@@ -259,7 +259,7 @@ const SiteInfoForm = () => {
         <div className="inner-big w-[95%] max-w-[1366px] mx-auto my-0 992px:flex">
           <div className="414px:mx-4 hidden 992px:block 992px:w-[50%] 992px:mx-0 py-8 px-10 480px:px-[5%] 992px:pl-8 1280px:pl-24 992px:pt-32 shadow-[3px_3px_10px_0px_rgba(0,0,0,0.2)] rounded-t-[8px] 992px:rounded-l-[8px] 992px:rounded-tr-none relative">
             <Image
-              src="https://www.securecash.com.au/images/welcome/terms-main-img-2.jpg"
+              src="/images/welcome/terms-main-img-2.jpg"
               alt="Making A Deal"
               fill
               objectFit="cover"

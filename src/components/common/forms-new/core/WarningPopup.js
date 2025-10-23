@@ -4,15 +4,10 @@ const WarningPopup = ({ error, isFirstError, className, type }) =>
 {
   if (!isFirstError || !error) return null;
 
-  // Default top positions based on field type
-  const typePosition = {
-    
-    textarea: "top-[236px]",  // bigger field
-    ica: "top-12",         // dropdown
-  };
+
 
   // Decide which position to use
-  const topClass = className || typePosition[type] || "top-24";
+  const topClass = className || "top-24";
 
   return (
     <span

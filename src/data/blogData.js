@@ -4,7 +4,7 @@ export const blogPosts = [
     title: "Bank Cyber Safety",
     date: "January 06, 2021",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/bank-cyber-safety-featured-img.jpg",
+      "/images/blog/bank-cyber-safety-featured-img.jpg",
     content: `<p>Long gone are the days where most of us were distrustful of internet or phone banking. Originally
       seen as risky, many of us now think nothing of paying via tap-and-go, BPay or PayPal. Electronic
       banking has become the go-to convenience for so many people, too busy in their day-to-day lives
@@ -157,7 +157,7 @@ export const blogPosts = [
   <p class="link-new-tab">Read More: <a target="&rdquo;_blank&rdquo;"
           href="https://7news.com.au/lifestyle/personal-finance/westpac-customers-urged-to-remain-vigilant-after-hackers-accessed-c-417666">Hackers
           successfully breach tens of thousands of Australian banking accounts</a></p>
-  <img src="https://www.securecash.com.au/images/blog/bank-cyber-safety-img.jpg"
+  <img src="/images/blog/bank-cyber-safety-img.jpg"
       alt="Picture of software code" width="900" height="600">
   <p>And the NAB specifically reported being hit by millions of cyber attacks per day. The increase of
       attacks by 78% mid year led to 33% more losses being reported. The claim in the NAB report was
@@ -213,13 +213,13 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/bank-cyber-safety-featured-img.jpg",
+        url: "/images/blog/bank-cyber-safety-featured-img.jpg",
         alt: "Bank Cyber Safety",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/bank-cyber-safety-img.jpg",
+        url: "/images/blog/bank-cyber-safety-img.jpg",
         alt: "Picture of software code",
         width: 900,
         height: 600,
@@ -231,7 +231,7 @@ export const blogPosts = [
     title: "Banking Updates April 2021",
     date: "April 28, 2021",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/banking-updates-april-2021-featured-img.jpg",
+      "/images/blog/banking-updates-april-2021-featured-img.jpg",
     content: `<p>There has been a lot of action with banks lately in Australia, some good, some not so good, but
       all not related to interest rates. So if interest rates bore you, or that&rsquo;s all you see
       when you search for banking news on Google, check out the points below to see if your bank has
@@ -254,7 +254,7 @@ export const blogPosts = [
   <p class="link-new-tab">Read More: <a target="&rdquo;_blank&rdquo;"
           href="https://www.mortgagebusiness.com.au/breaking-news/15508-westpac-group-to-close-dozens-of-branches">Westpac
           Group to close dozens of branches</a></p>
-  <img src="https://www.securecash.com.au/images/blog/banking-updates-april-2021-img-1.jpg"
+  <img src="/images/blog/banking-updates-april-2021-img-1.jpg"
       alt="Housing Loan" width="900" height="506">
   <h3>Faster home loans</h3>
   <p>The Big 4 have announced a dramatic cut in wait times for home loan approvals. Some cite one day
@@ -270,7 +270,7 @@ export const blogPosts = [
       for sale. The ACCC have already warned the Big 4 that if they do consider put in an offer for
       the first foreign bank to be granted a license to trade in Australia, they would consider
       blocking the deal.</p>
-  <img src="https://www.securecash.com.au/images/blog/banking-updates-april-2021-img-2.jpg"
+  <img src="/images/blog/banking-updates-april-2021-img-2.jpg"
       alt="Citi Building" width="900" height="1125">
   <p>Citi are looking to move away from consumer banking and focus more on investment and commercial
       banking. The sale will affect Citi&rsquo;s holdings in Australia, India, Bahrain, China,
@@ -289,7 +289,7 @@ export const blogPosts = [
   <p>There are also claims being made that the insurance was still charged to customers after their
       loans had been completely paid off, and that some were sold the CCI even if they were ineligible
       to claim under their policy.</p>
-  <img src="https://www.securecash.com.au/images/blog/banking-updates-april-2021-img-3.jpg"
+  <img src="/images/blog/banking-updates-april-2021-img-3.jpg"
       alt="Piggy Bank Wearing Mask" width="900" height="600">
   <p>So overall, please check your insurances, your branch closures, and perhaps see if your home loan
       application should be lodged now to avoid lengthy waiting periods.</p>`,
@@ -303,25 +303,25 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/banking-updates-april-2021-featured-img.jpg",
+        url: "/images/blog/banking-updates-april-2021-featured-img.jpg",
         alt: "Banking Updates April 2021",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/banking-updates-april-2021-img-1.jpg",
+        url: "/images/blog/banking-updates-april-2021-img-1.jpg",
         alt: "Housing Loan",
         width: 900,
         height: 506,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/banking-updates-april-2021-img-2.jpg",
+        url: "/images/blog/banking-updates-april-2021-img-2.jpg",
         alt: "Citi Building",
         width: 900,
         height: 1125,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/banking-updates-april-2021-img-3.jpg",
+        url: "/images/blog/banking-updates-april-2021-img-3.jpg",
         alt: "Piggy Bank Wearing Mask",
         width: 900,
         height: 600,
@@ -333,7 +333,7 @@ export const blogPosts = [
     title: "Creating Online Services",
     date: "March 2, 2021",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/creating-online-services-featured-img.jpg",
+      "/images/blog/creating-online-services-featured-img.jpg",
     content: `<p>SecureCash is Australia&rsquo;s most trusted cash-in-transit services provider. For over 25
                 years, we have provided top-class cash security solutions for retailers, hotels, restaurants,
                 financial firms, medical and veterinary centres, councils, government facilities, and even
@@ -343,7 +343,7 @@ export const blogPosts = [
                 want to understand our clients better, so we decided to ask what they really need and how we can
                 offer our services in a more convenient way. This is how our Online Services came into the
                 picture.</p>
-    <img src="https://www.securecash.com.au/images/blog/creating-online-services-img.jpg"
+    <img src="/images/blog/creating-online-services-img.jpg"
                 alt="Creating Online Services Infographics" width="900" height="600">
     <p>Now, all our clients are able to manage their account and access information easily. By logging
                 in to the Online Services page, they can request cash collection, change order, cash delivery,
@@ -361,13 +361,13 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/creating-online-services-featured-img.jpg",
+        url: "/images/blog/creating-online-services-featured-img.jpg",
         alt: "Online Services Snippet",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/creating-online-services-img.jpg",
+        url: "/images/blog/creating-online-services-img.jpg",
         alt: "Creating Online Services Infographics",
         width: 900,
         height: 600,
@@ -379,7 +379,7 @@ export const blogPosts = [
     title: "Differences Between... Banks",
     date: "November 25, 2020",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/differences-between-banks-featured-img.jpg",
+      "/images/blog/differences-between-banks-featured-img.jpg",
     content: `<p>Banking institutions have a long past, and there are options. You do not have to use a
                         &ldquo;bank&rdquo; but perhaps might prefer a credit union. What is the difference?</p>
     <p>Banks originated as <strong>Merchant Banks</strong> and were invented by grain and cloth
@@ -410,7 +410,7 @@ export const blogPosts = [
                         their books. This was bank money and was safe from fire or robbery as it was secured by the
                         city, and it could be transferred to another person. The Bank of Amsterdam gave receipts for
                         gold and silver bullion stored, and charged a nominal fee for this rental of bank space.</p>
-    <img src="https://www.securecash.com.au/images/blog/differences-between-banks-img-1.jpg"
+    <img src="/images/blog/differences-between-banks-img-1.jpg"
                         alt="Olden Days Bank" width="900" height="699">
     <p class="link-new-tab">Read More: <a target="&rdquo;_blank&rdquo;"
                             href="https://en.wikipedia.org/wiki/Amsterdam_Wisselbank">Amsterdam Wisselbank&nbsp;</a></p>
@@ -468,13 +468,13 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/differences-between-banks-featured-img.jpg",
+        url: "/images/blog/differences-between-banks-featured-img.jpg",
         alt: "Piggy Bank",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/differences-between-banks-img-1.jpg",
+        url: "/images/blog/differences-between-banks-img-1.jpg",
         alt: "Olden Days Bank",
         width: 900,
         height: 699,
@@ -486,7 +486,7 @@ export const blogPosts = [
     title: "Differences Between... CIT Models",
     date: "April 14, 2021",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/differences-between-cit-models-featured-img.jpg",
+      "/images/blog/differences-between-cit-models-featured-img.jpg",
     content: `<p>Running a business means you will be dealing with money every day. Therefore, you will need a
                         reliable cash-in-transit (CIT) service provider who can secure your takings and deliver them to
                         the bank on time. There are many CIT firms in the market, but choosing the right fit is vital in
@@ -498,13 +498,13 @@ export const blogPosts = [
     <p>There are two types of guards or couriers in the cash-in-transit industry: <strong>unarmed guards
                             and armed guards</strong>. The infographic below presents the pros and cons of each model to
                         help you weigh out your options.</p>
-    <img src="https://www.securecash.com.au/images/blog/differences-between-cit-models-img-1.jpg"
+    <img src="/images/blog/differences-between-cit-models-img-1.jpg"
                         alt="Differences Between... CIT Models Infographics" width="900" height="600">
     <p>Cash-in-transit companies ensure the safest transport of money, and each one has a unique
                         approach to getting things done. Most CIT providers utilise marked vehicles that are usually
                         bulletproof, while others use covert or soft-skinned vehicles to move money discreetly. Check
                         out the infographic below for the pros and cons of each model.</p>
-    <img src="https://www.securecash.com.au/images/blog/differences-between-cit-models-img-2.jpg"
+    <img src="/images/blog/differences-between-cit-models-img-2.jpg"
                         alt="Differences Between... CIT Models Infographics" width="900" height="600">
     <p>Whichever CIT model you choose, make sure that you have assessed the company based on its length
                         of service and experience. You may also browse their website, read client reviews, and ask other
@@ -521,19 +521,19 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/differences-between-cit-models-featured-img.jpg",
+        url: "/images/blog/differences-between-cit-models-featured-img.jpg",
         alt: "Covert & Marked Vehicles Snippet",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/differences-between-cit-models-img-1.jpg",
+        url: "/images/blog/differences-between-cit-models-img-1.jpg",
         alt: "Differences Between... CIT Models Infographics",
         width: 900,
         height: 600,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/differences-between-cit-models-img-2.jpg",
+        url: "/images/blog/differences-between-cit-models-img-2.jpg",
         alt: "Differences Between... CIT Models Infographics",
         width: 900,
         height: 600,
@@ -545,7 +545,7 @@ export const blogPosts = [
     title: "History of Banks - Part 1",
     date: "March 17, 2021",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/history-of-banks-featured-img.jpg",
+      "/images/blog/history-of-banks-featured-img.jpg",
     content: `<p>Once upon a time, a long time ago, there were some men, who sold things. Let&rsquo;s call them
                         merchants. And these merchants travelled between big, vast cities, carrying their goods and
                         trying to sell them to support their families.</p>
@@ -559,7 +559,7 @@ export const blogPosts = [
                         over as the premier banking authority and lenders would base themselves in temples, handing out
                         loans and accepting deposits to hold for later withdrawal.</p>
     <img class="blog-single-main--content__img-with-caption"
-                        src="https://www.securecash.com.au/images/blog/history-of-banks-img-1.jpg" alt="Ancient Temple"
+                        src="/images/blog/history-of-banks-img-1.jpg" alt="Ancient Temple"
                         width="900" height="600">
     <p class="blog-single-main--content__attribution-only">Image by 
                             href="https://pixabay.com/users/engin_akyurt-3656355/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=2614952">Engin
@@ -591,13 +591,13 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/history-of-banks-featured-img.jpg",
+        url: "/images/blog/history-of-banks-featured-img.jpg",
         alt: "Horse & Cart Cartoon",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/history-of-banks-img-1.jpg",
+        url: "/images/blog/history-of-banks-img-1.jpg",
         alt: "Ancient Temple",
         width: 900,
         height: 600,
@@ -609,7 +609,7 @@ export const blogPosts = [
     title: "History of Banks - Part 2",
     date: "March 31, 2021",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/history-of-banks-img-2.jpg",
+      "/images/blog/history-of-banks-img-2.jpg",
     content: `<p>The Egyptian grain-banking system was a huge success. The Ptolemy&rsquo;s reign (around 300BC)
                         saw branches in a network developed, and all the regional accounts were recorded in the central
                         bank at Alexandria.</p>
@@ -621,7 +621,7 @@ export const blogPosts = [
                         lenders had their benches (banca) they would trade from, and in the cases where they did not
                         perform well, their bench was broken (rotta) - banca rotta eventually being more recognisable as
                         bankrupt.</p>
-                    <img src="https://www.securecash.com.au/images/blog/history-of-banks-img-3.jpg"
+                    <img src="/images/blog/history-of-banks-img-3.jpg"
                         alt="Broken Bench - Banca Rotta" width="392" height="296">
                     <p>Goldsmiths of London is usually lauded as the first modern bank. A series of vaults you could pay
                         for storage, customers would deposit precious materials and collect them later. While
@@ -637,7 +637,7 @@ export const blogPosts = [
                         persecution, moved and brought with them practices from the Middle and Far East. The silk and
                         trade routes had long been funded by lenders, and the Jewish people applied these processes to
                         general loans.</p>
-                    <img src="https://www.securecash.com.au/images/blog/history-of-banks-img-4.jpg"
+                    <img src="/images/blog/history-of-banks-img-4.jpg"
                         alt="Silk Trade Depiction" width="526" height="648">
                     <p>They were able to trade in piazza&rsquo;s in Italy, whereas the Christian&rsquo;s could not, so
                         set their benches up in public spaces. They also arranged for the sale of the crop their grain
@@ -664,19 +664,19 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/history-of-banks-img-2.jpg",
+        url: "/images/blog/history-of-banks-img-2.jpg",
         alt: "Ptolemaic Empire 200 BC Map",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/history-of-banks-img-3.jpg",
+        url: "/images/blog/history-of-banks-img-3.jpg",
         alt: "Broken Bench - Banca Rotta",
         width: 392,
         height: 296,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/history-of-banks-img-4.jpg",
+        url: "/images/blog/history-of-banks-img-4.jpg",
         alt: "Silk Trade Depiction",
         width: 526,
         height: 648,
@@ -688,7 +688,7 @@ export const blogPosts = [
     title: "History of Cash in Transit",
     date: "January 19, 2021",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/history-of-cash-in-transit-featured-img.jpg",
+      "/images/blog/history-of-cash-in-transit-featured-img.jpg",
     content: `<p>Cash-in-transit (CIT) is largely defined as the physical transfer of banknotes, coins, cheques,
                        and other valuable items from one location to another. It is popular among many corporations, as
                        it has been serving them for the longest time by providing the most secure solutions in moving
@@ -698,7 +698,7 @@ export const blogPosts = [
                        in Australia stretch back as far as camel trains that carried goods and supplies throughout the
                        country and its outback? Check out the infographic below which details the brief history of cash
                        in transit.</p>
-                   <img src="https://www.securecash.com.au/images/blog/history-of-cash-in-transit-img.jpg"
+                   <img src="/images/blog/history-of-cash-in-transit-img.jpg"
                        alt="History of Cash in Transit Infographics">
 `,
     socialLinks: {
@@ -711,13 +711,13 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/history-of-cash-in-transit-featured-img.jpg",
+        url: "/images/blog/history-of-cash-in-transit-featured-img.jpg",
         alt: "Vintage Horse & Cart Photo",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/history-of-cash-in-transit-img.jpg",
+        url: "/images/blog/history-of-cash-in-transit-img.jpg",
         alt: "History of Cash in Transit Infographics",
         width: null,
         height: null,
@@ -729,7 +729,7 @@ export const blogPosts = [
     title: "Merry Christmas 2020",
     date: "December 22, 2020",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/merry-christmas-2020-featured-img.jpg",
+      "/images/blog/merry-christmas-2020-featured-img.jpg",
     content: `<p>This has been one of the most unpredictable years that we have all gone through.</p>
                    <p>I distinctly remember talking in the office earlier in the year and we were all debating if Covid
                        was going to be an issue. Some offices nearby were closing down, and a lot of our clients were
@@ -762,7 +762,7 @@ export const blogPosts = [
                        families. But we will likely still have many more mini celebrations before the end of the year.
                        We are all so grateful to have survived Covid, to still be employed (by wonderful people), to
                        still have our fantastic clients with us. There is so much to be grateful for.</p>
-                   <img src="https://www.securecash.com.au/images/blog/merry-christmas-2020-img-1.jpg"
+                   <img src="/images/blog/merry-christmas-2020-img-1.jpg"
                        alt="Christmas 2020 SecureCash Team &amp; Families" width="900" height="675">
                    <p>I think we all know how lucky we were to find each other. We all appreciate what each other can
                        do, we know how to push ourselves forward and we do expect the best from each other because we
@@ -784,7 +784,7 @@ export const blogPosts = [
                        work that went into learning new tasks, adapting to new routines, or driving much further to get
                        to a makeshift office was all noticed and appreciated.</p>
                    <h2 style="text-align:center;">Merry Christmas from SecureCash!</h2>
-                   <img src="https://www.securecash.com.au/images/blog/merry-christmas-2020-img-2.jpg"
+                   <img src="/images/blog/merry-christmas-2020-img-2.jpg"
                        alt="Santa On A Beach" width="900" height="600">
 `,
     socialLinks: {
@@ -797,19 +797,19 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/merry-christmas-2020-featured-img.jpg",
+        url: "/images/blog/merry-christmas-2020-featured-img.jpg",
         alt: "Broken Red Christmas Bauble",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/merry-christmas-2020-img-1.jpg",
+        url: "/images/blog/merry-christmas-2020-img-1.jpg",
         alt: "Christmas 2020 SecureCash Team & Families",
         width: 900,
         height: 675,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/merry-christmas-2020-img-2.jpg",
+        url: "/images/blog/merry-christmas-2020-img-2.jpg",
         alt: "Santa On A Beach",
         width: 900,
         height: 600,
@@ -820,7 +820,7 @@ export const blogPosts = [
     id: "negative-interest-rates",
     title: "Negative Interest Rates",
     date: "November 12, 2020",
-    featuredImage: "https://www.securecash.com.au/images/blog/laptop.jpg",
+    featuredImage: "/images/blog/laptop.jpg",
     content: `<p></p>
                    <p style="text-align:center;"><strong>Recently the Reserve Bank of Australia (RBA) announced an
                            interest rate drop. Even if you do not own stocks and shares, if you do not earn millions
@@ -861,7 +861,7 @@ export const blogPosts = [
                        up paying to store the money in the first place. So you will end up paying the bank twice to use
                        your own income.</p>
                    <p></p>
-                   <img src="https://www.securecash.com.au/images/blog/safe.jpg" alt="Safe in Wall" width="900"
+                   <img src="/images/blog/safe.jpg" alt="Safe in Wall" width="900"
                        height="600">
                    <p class="blog-content-wrap">However if you borrow funds, again for whatever purpose - building,
                        car, holiday) your lower interest rate might mean that when you perhaps borrow $200000 to build
@@ -895,7 +895,7 @@ export const blogPosts = [
                    <p class="blog-content-wrap">If you have not had to delve into interest rates before, I hope this
                        explains a lot and clears up some terminology for you. If you already know about them, thanks
                        for reading. It looks like it will be an interesting time in banking.</p>
-                   <img src="https://www.securecash.com.au/images/blog/newspaper.jpg" alt="Newspaper Business Section"
+                   <img src="/images/blog/newspaper.jpg" alt="Newspaper Business Section"
                        width="900" height="1350">
 `,
     socialLinks: {
@@ -908,19 +908,19 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/laptop.jpg",
+        url: "/images/blog/laptop.jpg",
         alt: "Negative Interest Rates",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/safe.jpg",
+        url: "/images/blog/safe.jpg",
         alt: "Safe in Wall",
         width: 900,
         height: 600,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/newspaper.jpg",
+        url: "/images/blog/newspaper.jpg",
         alt: "Newspaper Business Section",
         width: 900,
         height: 1350,
@@ -932,7 +932,7 @@ export const blogPosts = [
     title: "Office Culture",
     date: "October 12, 2020",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/featured-img-office-culture.jpg",
+      "/images/blog/featured-img-office-culture.jpg",
     content: `<p>If there&rsquo;s anything at all you need to know about the SecureCash Head Office, it&rsquo;s
                         that we like to have fun. There are so many things that we do together, after hours, in
                         different groups or teams, but inside the office, during business hours, we still like a laugh.
@@ -952,7 +952,7 @@ export const blogPosts = [
                         feel like eating that day. But as soon as the order button is hit, that&rsquo;s it. Everyone is
                         informed of everyone else placing the order and that is our sole focus until everyone has
                         ordered lunch.</p>
-                    <img src="https://www.securecash.com.au/images/blog/office-culture-img-3.jpg"
+                    <img src="/images/blog/office-culture-img-3.jpg"
                         alt="2019 SecureCash Christmas Lunch" width="900" height="571">
                     <p>There have been rating systems in place so you can see what local restaurants others had enjoyed
                         and recommended to each other. We moved offices recently and didn&rsquo;t know many of the local
@@ -973,7 +973,7 @@ export const blogPosts = [
                     <p>We have pets in the office. Often. Every Tuesday a particular Staffie visited us and hung out for
                         the day. If we work from our business owner&rsquo;s house, there is a German Shepherd, an Akita
                         and a Siamese that keep us company.</p>
-                    <img src="https://www.securecash.com.au/images/blog/office-culture-img-2.jpg"
+                    <img src="/images/blog/office-culture-img-2.jpg"
                         alt="2020 September SecureCash Dinner" width="600" height="284">
                     <p>I&rsquo;ve lost count of the times we&rsquo;ve helped each other out. Whether it&rsquo;s advice,
                         an ear to listen, a sounding board required, or more severe times and helped find lost pets. If
@@ -1003,19 +1003,19 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/featured-img-office-culture.jpg",
+        url: "/images/blog/featured-img-office-culture.jpg",
         alt: "2018 SecureCash Christmas Lunch",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/office-culture-img-3.jpg",
+        url: "/images/blog/office-culture-img-3.jpg",
         alt: "2019 SecureCash Christmas Lunch",
         width: 900,
         height: 571,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/office-culture-img-2.jpg",
+        url: "/images/blog/office-culture-img-2.jpg",
         alt: "2020 September SecureCash Dinner",
         width: 600,
         height: 284,
@@ -1027,7 +1027,7 @@ export const blogPosts = [
     title: "Paradigm Shifts",
     date: "February 02, 2021",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/paradigm-shifts-featured-img.jpg",
+      "/images/blog/paradigm-shifts-featured-img.jpg",
     content: `<p>When I was at University, I learned about paradigm shifts. Society or groups of people have ways
                 of thinking about things, and these socially acceptable processes are known as paradigms.</p>
             <p class="link-new-tab">Read More: <a target="&rdquo;_blank&rdquo;"
@@ -1059,7 +1059,7 @@ export const blogPosts = [
                 manufacturing. Until the item is popular enough, this is going to be made in a smaller scale
                 than the regular gum. People are also already so used to their solid gum, they don&rsquo;t want
                 to change.</p>
-            <img src="https://www.securecash.com.au/images/blog/paradigm-shifts-img-1.jpg" alt="Thought Cycle"
+            <img src="/images/blog/paradigm-shifts-img-1.jpg" alt="Thought Cycle"
                 width="401" height="343">
             <p>But we know that we can change. We accepted email over letter writing. We go to supermarkets
                 instead of the greengrocer, butcher and general store. And we learned to stand 1.5m from each
@@ -1126,13 +1126,13 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/paradigm-shifts-featured-img.jpg",
+        url: "/images/blog/paradigm-shifts-featured-img.jpg",
         alt: "Change Is Coming Poster",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/paradigm-shifts-img-1.jpg",
+        url: "/images/blog/paradigm-shifts-img-1.jpg",
         alt: "Thought Cycle",
         width: 401,
         height: 343,
@@ -1144,7 +1144,7 @@ export const blogPosts = [
     title: "Terminology of Cash in Transit",
     date: "December 8, 2020",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/blog-terminology-of-cit-featured-img.jpg",
+      "/images/blog/blog-terminology-of-cit-featured-img.jpg",
     content: `<p>Cash in transit is a broad term that has evolved through the years. But mainly, it is widely
                 defined as the secure transport of business takings from one location to another.</p>
             <p>When you&rsquo;re new to the cash-in-transit industry, you&rsquo;ll encounter jargons or
@@ -1155,9 +1155,9 @@ export const blogPosts = [
                 cash-in-transit, covert, deposit box, docket book, guard, and tamper-evident bags&mdash;all
                 frequent in the cash handling process. We hope this information could help you in your next
                 cash-in-transit booking with SecureCash.</p>
-            <img src="https://www.securecash.com.au/images/blog/blog-terminology-of-cit-img-1.jpg"
+            <img src="/images/blog/blog-terminology-of-cit-img-1.jpg"
                 alt="Terminology of Cash in Transit First Infographics" width="900" height="1911"> <img
-                src="https://www.securecash.com.au/images/blog/blog-terminology-of-cit-img-2.jpg"
+                src="/images/blog/blog-terminology-of-cit-img-2.jpg"
                 alt="Terminology of Cash in Transit Second Infographics" width="900" height="1911">
 `,
     socialLinks: {
@@ -1170,19 +1170,19 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/blog-terminology-of-cit-featured-img.jpg",
+        url: "/images/blog/blog-terminology-of-cit-featured-img.jpg",
         alt: "Terminology of Cash in Transit Infographic Snippet",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/blog-terminology-of-cit-img-1.jpg",
+        url: "/images/blog/blog-terminology-of-cit-img-1.jpg",
         alt: "Terminology of Cash in Transit First Infographics",
         width: 900,
         height: 1911,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/blog-terminology-of-cit-img-2.jpg",
+        url: "/images/blog/blog-terminology-of-cit-img-2.jpg",
         alt: "Terminology of Cash in Transit Second Infographics",
         width: 900,
         height: 1911,
@@ -1194,7 +1194,7 @@ export const blogPosts = [
     title: "The Relevance of Cash",
     date: "October 29, 2020",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/relevance-of-cash-featured-img.jpg",
+      "/images/blog/relevance-of-cash-featured-img.jpg",
     content: `<p>I was at the chemist, post-Covid, and their power was out. Customers queued outside while the
                 staff used the torches from their phones to light merchandise and bring it to the counter for
                 purchases. We could hand cash over to them, or enter the store, one at a time, to pay. Cash
@@ -1291,7 +1291,7 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/relevance-of-cash-featured-img.jpg",
+        url: "/images/blog/relevance-of-cash-featured-img.jpg",
         alt: "Offline EFTPOS Terminal",
         width: 900,
         height: 420,
@@ -1303,7 +1303,7 @@ export const blogPosts = [
     title: "What Covid Changes are you Keeping?",
     date: "February 17, 2021",
     featuredImage:
-      "https://www.securecash.com.au/images/blog/what-covid-changes-are-you-keeping-featured-img.jpg",
+      "/images/blog/what-covid-changes-are-you-keeping-featured-img.jpg",
     content: `<p>Our business is unique in that we change our procedures often. We develop our procedures in
         response to our clients feedback and input. We hire new staff pretty regularly as we grow. And
         we have to learn new tasks that help our own positions as those requirements evolve. I would
@@ -1322,7 +1322,7 @@ export const blogPosts = [
         back into the habits of work.</p>
     <p>But we know we can do this! We are resilient. We are fighters. If we are told things are going to
         be a bit tougher, we knuckle down. We know we can overcome anything.</p>
-    <img src="https://www.securecash.com.au/images/blog/what-covid-changes-are-you-keeping-img-1.jpg"
+    <img src="/images/blog/what-covid-changes-are-you-keeping-img-1.jpg"
         alt="Empty Building With Desks" width="900" height="600">
     <p>Did you learn new tasks during lockdown? Did you pick up a new hobby while under isolation? From
         what I could hear online while everyone else was forced to remain at home, so many people picked
@@ -1367,13 +1367,13 @@ export const blogPosts = [
     },
     images: [
       {
-        url: "https://www.securecash.com.au/images/blog/what-covid-changes-are-you-keeping-featured-img.jpg",
+        url: "/images/blog/what-covid-changes-are-you-keeping-featured-img.jpg",
         alt: "Corona Hotspot - Restricted Entry Sign",
         width: 900,
         height: 420,
       },
       {
-        url: "https://www.securecash.com.au/images/blog/what-covid-changes-are-you-keeping-img-1.jpg",
+        url: "/images/blog/what-covid-changes-are-you-keeping-img-1.jpg",
         alt: "Empty Building With Desks",
         width: 900,
         height: 600,

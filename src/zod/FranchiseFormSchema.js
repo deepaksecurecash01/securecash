@@ -4,7 +4,7 @@ import { z } from "zod";
 /**
  * Enhanced Franchise Form Schema - Clean Declarative Version
  * 
- * ✅ COMPREHENSIVE VALIDATION:
+ * COMPREHENSIVE VALIDATION:
  * - Full name validation with business context
  * - Phone number validation with Australian format
  * - Email validation with professional context

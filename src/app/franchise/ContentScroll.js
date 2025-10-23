@@ -11,7 +11,7 @@ const ContentScroll = ({ scrollData }) =>
                             } mb-[12px] gap-3`}>
                         <Image
                             className="inline-block bg-contain bg-no-repeat  992px:w-[40px]"
-                            src="https://www.securecash.com.au/images/icons/tick.png"
+                            src="/images/icons/tick.png"
                             alt={"check.png"}
                             width={50}
                             height={15}

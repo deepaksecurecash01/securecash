@@ -72,14 +72,14 @@ const initializePdfCache = () =>
                 console.warn(`⚠️ PDF not found for caching: ${filename}`);
             }
         } catch (error) {
-            console.error(`❌ Error caching PDF ${filename}:`, error.message);
+            console.error(`Error caching PDF ${filename}:`, error.message);
         }
     });
 
     const initTime = performance.now() - startTime;
     const sizeMB = (totalSize / (1024 * 1024)).toFixed(2);
 
-    console.log(`✅ PDF cache initialized: ${cachedCount}/${pdfFiles.length} files cached`);
+    console.log(`PDF cache initialized: ${cachedCount}/${pdfFiles.length} files cached`);
     console.log(`📊 Cache size: ${sizeMB}MB, Init time: ${initTime.toFixed(2)}ms`);
 
     PDF_CACHE_INITIALIZED.value = true;
@@ -367,7 +367,7 @@ const sendEmailWithRetry = async (emailData, formType, maxRetries = RETRY_CONFIG
             lastError = error;
             const sendTime = performance.now();
 
-            console.error(`❌ Email attempt ${attempt}/${maxRetries} failed:`, {
+            console.error(`Email attempt ${attempt}/${maxRetries} failed:`, {
                 to: emailData.to,
                 subject: emailData.subject,
                 error: error.message,
@@ -435,7 +435,7 @@ const processEmailQueue = async () =>
 
                 if (allSuccessful) {
                     success = true;
-                    console.log(`\n✅ Successfully processed ${emailTask.type.toUpperCase()} emails:`);
+                    console.log(`\nSuccessfully processed ${emailTask.type.toUpperCase()} emails:`);
                     console.log(`   └─ Form Type: ${emailTask.formType}`);
                     console.log(`   └─ Processing Time: ${taskTime.toFixed(2)}ms`);
                     console.log(`   └─ Emails Sent: ${result.emailsSent}`);
@@ -473,7 +473,7 @@ const processEmailQueue = async () =>
                         console.log(`⏱️ Retrying entire batch in ${retryDelay}ms...`);
                         await delay(retryDelay);
                     } else {
-                        console.error(`❌ Final batch failure for ${emailTask.formType} after ${maxTaskRetries} retries`);
+                        console.error(`Final batch failure for ${emailTask.formType} after ${maxTaskRetries} retries`);
                         break;
                     }
                 }
@@ -484,14 +484,14 @@ const processEmailQueue = async () =>
 
                 if (retryCount <= maxTaskRetries) {
                     const retryDelay = calculateRetryDelay(retryCount);
-                    console.error(`❌ Batch error retry ${retryCount}/${maxTaskRetries}:`, {
+                    console.error(`Batch error retry ${retryCount}/${maxTaskRetries}:`, {
                         formType: emailTask.formType,
                         error: error.message,
                         retryDelay: `${retryDelay}ms`
                     });
                     await delay(retryDelay);
                 } else {
-                    console.error(`❌ Final batch error for ${emailTask.formType}:`, {
+                    console.error(`Final batch error for ${emailTask.formType}:`, {
                         errorTime: `${taskTime.toFixed(2)}ms`,
                         error: error.message,
                         stack: error.stack
@@ -592,7 +592,7 @@ const executeMultiEmailBatch = async (emailTasks, formType) =>
         const pendingTasks = emailTasks.filter(task => !task.sent);
 
         if (pendingTasks.length === 0) {
-            console.log(`✅ All ${formType} emails successfully sent (retry ${retryCount})`);
+            console.log(`All ${formType} emails successfully sent (retry ${retryCount})`);
             break;
         }
 
@@ -609,14 +609,14 @@ const executeMultiEmailBatch = async (emailTasks, formType) =>
                     // Mark as sent if successful
                     if (result.success) {
                         task.sent = true;
-                        console.log(`✅ ${formType} ${task.id} email sent successfully`);
+                        console.log(`${formType} ${task.id} email sent successfully`);
                     } else {
-                        console.warn(`❌ ${formType} ${task.id} email failed: ${result.response}`);
+                        console.warn(`${formType} ${task.id} email failed: ${result.response}`);
                     }
 
                     return { ...result, taskId: task.id, recipient: task.recipient };
                 } catch (error) {
-                    console.error(`❌ ${formType} ${task.id} email error:`, error.message);
+                    console.error(`${formType} ${task.id} email error:`, error.message);
                     return {
                         success: false,
                         taskId: task.id,
@@ -639,7 +639,7 @@ const executeMultiEmailBatch = async (emailTasks, formType) =>
         const allSent = emailTasks.every(task => task.sent);
 
         if (allSent) {
-            console.log(`✅ All ${formType} emails sent successfully on attempt ${retryCount + 1}`);
+            console.log(`All ${formType} emails sent successfully on attempt ${retryCount + 1}`);
             break;
         }
 
@@ -686,7 +686,7 @@ const executeMultiEmailBatch = async (emailTasks, formType) =>
 
     // Log final summary
     if (sentCount === emailTasks.length) {
-        console.log(`\n✅ ${formType} COMPLETE: All ${emailTasks.length} emails sent successfully`);
+        console.log(`\n${formType} COMPLETE: All ${emailTasks.length} emails sent successfully`);
     } else {
         console.warn(`\n⚠️ ${formType} PARTIAL SUCCESS: ${sentCount}/${emailTasks.length} emails sent`);
         const failedEmails = finalDetails.filter(d => !d.success);
@@ -1219,7 +1219,7 @@ export async function POST(req)
             emailProcessingTime = performance.now() - emailStartTime;
 
             // Log email results immediately
-            console.log(`\n✅ ${formType.toUpperCase()} emails sent synchronously:`);
+            console.log(`\n${formType.toUpperCase()} emails sent synchronously:`);
             console.log(`   └─ Emails Sent: ${emailResult.emailsSent}`);
             console.log(`   └─ Processing Time: ${emailProcessingTime.toFixed(2)}ms`);
 
@@ -1310,7 +1310,7 @@ export async function POST(req)
         const errorTime = performance.now() - startTime;
 
         // Fast error response
-        console.error(`❌ ${USE_SYNC_EMAILS ? 'Vercel' : 'Production'} form error:`, {
+        console.error(`${USE_SYNC_EMAILS ? 'Vercel' : 'Production'} form error:`, {
             error: error.message,
             time: `${errorTime.toFixed(2)}ms`,
             stack: error.stack

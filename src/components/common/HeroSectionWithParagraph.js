@@ -22,7 +22,7 @@ export const HeroSectionWithParagraph = ({
           className="absolute hidden 480px:block right-0 w-[54%] 768px:w-1/2 h-[434px] 600px:h-[500px] 1024px:h-[600px] 1200px:h-[547px] 1366px:h-[610px] bg-cover bg-no-repeat -z-10"
           style={{
             backgroundImage:
-              'url("https://www.securecash.com.au/images/ica/ica-hero-bg.jpg")',
+              'url("/images/ica/ica-hero-bg.jpg")',
           }}
         ></div>
       </>
@@ -97,7 +97,7 @@ const HeroRightContent = ({ paragraphs, page }) => (
         <p className="text-[14px]  768px:text-[16px] font-light leading-[2em] mt-4">
           To learn more about how we manage information provided you can view
           our{" "}
-          <a href="https://www.securecash.com.au/privacy-policy/">
+          <a href="/privacy-policy/">
             Privacy Policy
           </a>
         </p>

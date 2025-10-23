@@ -31,7 +31,7 @@ const PrivacyPolicyPage = () =>
                                     } mb-[12px] gap-3`}>
                                 <Image
                                     className="inline-block bg-contain bg-no-repeat  992px:w-[30px] 992px:h-full"
-                                    src="https://www.securecash.com.au/images/icons/tick.png"
+                                    src="/images/icons/tick.png"
                                     alt={"check.png"}
                                     width={40}
                                     height={15}

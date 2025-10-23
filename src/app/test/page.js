@@ -221,9 +221,9 @@ const Page = () =>
       <div className="bg-slate-800 p-4 rounded">
         <h2 className="text-xl font-bold text-white mb-2">Summary</h2>
         <div className="text-white space-y-1">
-          <p>✅ Main Pages: {mainPages.length}</p>
-          <p>✅ Service Pages: {services.length}</p>
-          <p>✅ Blog Posts: {blogPosts.length}</p>
+          <p>Main Pages: {mainPages.length}</p>
+          <p>Service Pages: {services.length}</p>
+          <p>Blog Posts: {blogPosts.length}</p>
           <p className="font-bold">Total Built: {mainPages.length + services.length + blogPosts.length}</p>
         </div>
       </div>

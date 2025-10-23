@@ -28,7 +28,7 @@ const THEMES = {
 const UniversalFormField = ({
     // Core props
     name,
-    control, // ✅ Required - comes from React Hook Form
+    control, // Required - comes from React Hook Form
     type = 'text',
     label,
     hidden = false,
@@ -147,6 +147,9 @@ const UniversalFormField = ({
                             className={
                                 theme === 'legacy-hazard' ? "top-16" :
                                     theme === 'ica' ? "top-12" :
+                                        theme === 'light' && type === 'textarea' ? "top-[150px]" :
+                                            theme === 'dark' && type === 'textarea' ? "top-[236px]" :
+
                                         undefined
                             }
                         />

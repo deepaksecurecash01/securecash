@@ -23,7 +23,7 @@ import FranchiseFormSchema, { FRANCHISE_DEFAULT_VALUES } from '@/zod/FranchiseFo
 /**
  * Enhanced FranchiseForm - Converted to New Foundation Architecture
  * 
- * ✅ IMPROVEMENTS APPLIED:
+ * IMPROVEMENTS APPLIED:
  * - Unified form manager with complete focus integration
  * - Controller-based architecture (no register usage)
  * - Enhanced field error handling

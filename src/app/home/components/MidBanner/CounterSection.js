@@ -30,8 +30,8 @@ const DynamicCounterSection = () =>
     {
       id: 1,
       key: "customers",
-      imgSrc: "https://www.securecash.com.au/images/icons/clients.webp",
-      imgFallback: "https://www.securecash.com.au/images/icons/clients.png",
+      imgSrc: "/images/icons/clients.webp",
+      imgFallback: "/images/icons/clients.png",
       alt: "Customers",
       description: "Customers",
       prefix: false
@@ -39,8 +39,8 @@ const DynamicCounterSection = () =>
     {
       id: 2,
       key: "servicesPerformed",
-      imgSrc: "https://www.securecash.com.au/images/icons/services.webp",
-      imgFallback: "https://www.securecash.com.au/images/icons/services.png",
+      imgSrc: "/images/icons/services.webp",
+      imgFallback: "/images/icons/services.png",
       alt: "Services Performed",
       description: "Services Performed",
       prefix: false
@@ -48,8 +48,8 @@ const DynamicCounterSection = () =>
     {
       id: 3,
       key: "cashMoved",
-      imgSrc: "https://www.securecash.com.au/images/icons/transport.webp",
-      imgFallback: "https://www.securecash.com.au/images/icons/transport.png",
+      imgSrc: "/images/icons/transport.webp",
+      imgFallback: "/images/icons/transport.png",
       alt: "Cash Moved",
       description: "Cash Moved",
       prefix: true

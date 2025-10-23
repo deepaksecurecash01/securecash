@@ -6,14 +6,14 @@ const Partners = () => {
       country: "NEW ZEALAND",
       greeting: "Tēnā koutou katoa!",
       flagColor: "default",
-      flagSrc: "https://www.securecash.com.au/images/partners/new-zealand.png",
+      flagSrc: "/images/partners/new-zealand.png",
       flagWidth: "small",
       partners: [
         {
           name: "G.A.I.S NZ - Guarding and Investigation Services",
           quote:
             '"What makes us different is our exemplary track record, our utmost pride and integrity in services and the commitment to our client\'s privacy."',
-          logoSrc: "https://www.securecash.com.au/images/partners/GAISlogo.png",
+          logoSrc: "/images/partners/GAISlogo.png",
           logoWidth: "150px",
           mobileWidth: "auto",
           description: [
@@ -31,7 +31,7 @@ const Partners = () => {
           name: "Smartway Security & Technologies",
           quote:
             '"Experience the DIFFERENCE, because the difference is EXPERIENCE"',
-          logoSrc: "https://www.securecash.com.au/images/partners/smartway.png",
+          logoSrc: "/images/partners/smartway.png",
           logoWidth: "auto",
           mobileWidth: "auto",
           description: [
@@ -47,7 +47,7 @@ const Partners = () => {
         {
           name: "PROtective Security Services NZ Ltd",
           quote: '"Awarded with QUALITY CERTIFICATION by OH & S."',
-          logoSrc: "https://www.securecash.com.au/images/partners/pssnzl.jpg",
+          logoSrc: "/images/partners/pssnzl.jpg",
           logoWidth: "40%",
           mobileWidth: "90%",
           description: [
@@ -64,7 +64,7 @@ const Partners = () => {
           name: "IQ Security",
           quote: '"We are Experienced, Trusted, and Friendly"',
           logoSrc:
-            "https://www.securecash.com.au/images/partners/IQSecurity.png",
+            "/images/partners/IQSecurity.png",
           logoWidth: "auto",
           mobileWidth: "auto",
           description: [
@@ -84,13 +84,13 @@ const Partners = () => {
       country: "SINGAPORE",
       greeting: "Can lah!",
       flagColor: "#ff0000",
-      flagSrc: "https://www.securecash.com.au/images/partners/singapore.png",
+      flagSrc: "/images/partners/singapore.png",
       flagWidth: "small",
       partners: [
         {
           name: "Event Security Specialist",
           quote: '"Your Security, Our Responsibility"',
-          logoSrc: "https://www.securecash.com.au/images/partners/ESS.png",
+          logoSrc: "/images/partners/ESS.png",
           logoWidth: "auto",
           mobileWidth: "auto",
           description: [
@@ -110,14 +110,14 @@ const Partners = () => {
       country: "SWEDEN",
       greeting: "Välkommen!",
       flagColor: "#0000ff",
-      flagSrc: "https://www.securecash.com.au/images/partners/sweden.png",
+      flagSrc: "/images/partners/sweden.png",
       flagWidth: "small",
       partners: [
         {
           name: "Engtex – Avertic Armour Security Panels",
           quote: '"Why Worry?"',
           logoSrc:
-            "https://www.securecash.com.au/images/partners/avertiicengtex.jpg",
+            "/images/partners/avertiicengtex.jpg",
           logoWidth: "30%",
           mobileWidth: "70%",
           description: [
@@ -136,14 +136,14 @@ const Partners = () => {
       country: "INDIA",
       greeting: "Nämaste!",
       flagColor: "#808000",
-      flagSrc: "https://www.securecash.com.au/images/partners/india.png",
+      flagSrc: "/images/partners/india.png",
       flagWidth: "small",
       partners: [
         {
           name: "Black Hawks Security",
           quote: '"Why Worry?"',
           logoSrc:
-            "https://www.securecash.com.au/images/partners/Blackhawk.png",
+            "/images/partners/Blackhawk.png",
           logoWidth: "auto",
           mobileWidth: "auto",
           description: [
@@ -159,7 +159,7 @@ const Partners = () => {
         {
           name: "Datar Security Service Group",
           quote: '"Peerless Security Provider"',
-          logoSrc: "https://www.securecash.com.au/images/partners/DSSGIN.png",
+          logoSrc: "/images/partners/DSSGIN.png",
           logoWidth: "auto",
           mobileWidth: "auto",
           description: [
@@ -181,14 +181,14 @@ const Partners = () => {
       country: "THAILAND",
       greeting: "Sawasdee",
       flagColor: "#ffbf00",
-      flagSrc: "https://www.securecash.com.au/images/partners/thailand.png",
+      flagSrc: "/images/partners/thailand.png",
       flagWidth: "71",
       flagHeight: "71",
       partners: [
         {
           name: "BKK Protection Services",
           quote: '"Security is not a product but a process" - Bruce Schenier?',
-          logoSrc: "https://www.securecash.com.au/images/partners/bkk.png",
+          logoSrc: "/images/partners/bkk.png",
           logoWidth: "auto",
           mobileWidth: "auto",
           description: [
@@ -209,7 +209,7 @@ const Partners = () => {
       country: "MALAYSIA",
       greeting: "Selamat siang!",
       flagColor: "#dba901",
-      flagSrc: "https://www.securecash.com.au/images/partners/malaysia.png",
+      flagSrc: "/images/partners/malaysia.png",
       flagWidth: "72",
       flagHeight: "72",
       partners: [
@@ -217,7 +217,7 @@ const Partners = () => {
           name: "MVD International",
           quote:
             '"Our global mission is to be professional, efficient and trustworthy."',
-          logoSrc: "https://www.securecash.com.au/images/partners/mvd.jpg",
+          logoSrc: "/images/partners/mvd.jpg",
           logoWidth: "auto",
           mobileWidth: "auto",
           description: [
@@ -237,7 +237,7 @@ const Partners = () => {
       country: "UNITED KINGDOM",
       greeting: "I'm chuffed to bits!!",
       flagColor: "#0404b4",
-      flagSrc: "https://www.securecash.com.au/images/partners/uk.png",
+      flagSrc: "/images/partners/uk.png",
       flagWidth: "small",
       partners: [
         {
@@ -245,7 +245,7 @@ const Partners = () => {
           quote:
             '"We will gain the evidence, you will find out the truth, your company will save time and money"',
           logoSrc:
-            "https://www.securecash.com.au/images/partners/corporate-investigations-uk.jpg",
+            "/images/partners/corporate-investigations-uk.jpg",
           logoWidth: "30%",
           mobileWidth: "90%",
           description: [
@@ -266,13 +266,13 @@ const Partners = () => {
       country: "ISRAEL",
       greeting: "Shalom!",
       flagColor: "#260fea",
-      flagSrc: "https://www.securecash.com.au/images/partners/israel.png",
+      flagSrc: "/images/partners/israel.png",
       flagWidth: "71",
       flagHeight: "71",
       partners: [
         {
           name: "Abir Global Security Services",
-          logoSrc: "https://www.securecash.com.au/images/partners/abir.jpg",
+          logoSrc: "/images/partners/abir.jpg",
           logoWidth: "40%",
           mobileWidth: "90%",
           description: [
@@ -292,13 +292,13 @@ const Partners = () => {
       country: "NIGERIA",
       greeting: "Migwo!",
       flagColor: "#000",
-      flagSrc: "https://www.securecash.com.au/images/partners/nigeria.png",
+      flagSrc: "/images/partners/nigeria.png",
       flagWidth: "71",
       flagHeight: "71",
       partners: [
         {
           name: "Rowluk Security Services",
-          logoSrc: "https://www.securecash.com.au/images/partners/Rowluk.jpg",
+          logoSrc: "/images/partners/Rowluk.jpg",
           logoWidth: "40%",
           mobileWidth: "90%",
           description: [

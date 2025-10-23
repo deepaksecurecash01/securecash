@@ -69,7 +69,7 @@ const FormSection = () =>
                             768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light flex flex-col gap-4 mt-4 font-montserrat"
                         >
                             <strong>
-                                <Link className="text-primary hover:underline" href="https://www.securecash.com.au/welcome">&lt;&lt; Previous</Link>
+                                <Link className="text-primary hover:underline" href="/welcome">&lt;&lt; Previous</Link>
                             </strong>
                         </p>
                     </div>

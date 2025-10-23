@@ -160,7 +160,7 @@ const SectionWrapper = () =>
             <div className="cta-box relative  992px:w-[90%]">
               <img
                 className="backdraft h-full w-full "
-                src="https://www.securecash.com.au/images/franchise-square-car.jpg"
+                src="/images/franchise-square-car.jpg"
                 alt="Australia Cash in Transit: Services, Business, Delivery, and Provider Australia Wide"
               />
               <div className="flex flex-col absolute top-0 left-0 h-[80%] w-[70%] bg-black px-[30px] justify-center content-center">

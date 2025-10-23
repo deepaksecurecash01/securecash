@@ -45,7 +45,7 @@ const SpecialEventServiceStep = ({ formManager, theme = 'dark' }) =>
                         fieldProps = {
                             ...fieldProps,
                             type: 'textarea',
-                            rows: 5,
+                            rows: 6,
                             placeholder: 'Enter dates, times and other relevant information...'
                         };
                     }

@@ -7,7 +7,7 @@ const teamMembers = [
     name: "Darren Bacchus",
     position: "Chief Executive Officer",
     email: "darren@securecash.com.au",
-    image: "https://www.securecash.com.au/images/team/darren.png",
+    image: "/images/team/darren.png",
     socialLinks: {
       facebook: "https://www.facebook.com/SecureCash/",
       twitter: "https://twitter.com/SecureCash",
@@ -25,7 +25,7 @@ const teamMembers = [
     name: "Beth Bacchus",
     position: "Chief Business Officer",
     email: "beth@securecash.com.au",
-    image: "https://www.securecash.com.au/images/team/beth.png",
+    image: "/images/team/beth.png",
     socialLinks: {
       facebook: "https://www.facebook.com/SecureCash/",
       twitter: "https://twitter.com/SecureCash",
@@ -43,7 +43,7 @@ const teamMembers = [
     name: "Jo French",
     position: "Chief Administrative Officer",
     email: "jo@securecash.com.au",
-    image: "https://www.securecash.com.au/images/team/jo.png",
+    image: "/images/team/jo.png",
     socialLinks: {
       facebook: "https://www.facebook.com/SecureCash/",
       twitter: "https://twitter.com/SecureCash",
@@ -61,7 +61,7 @@ const teamMembers = [
     name: "Dylan Cross",
     position: "Chief Information Officer",
     email: "dylan@securecash.com.au",
-    image: "https://www.securecash.com.au/images/team/dylan.png",
+    image: "/images/team/dylan.png",
     socialLinks: {
       facebook: "https://www.facebook.com/SecureCash/",
       twitter: "https://twitter.com/SecureCash",

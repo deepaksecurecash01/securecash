@@ -182,14 +182,14 @@ const ChangeSchema = z.object({
   BankingComments: z.string().optional(),
 });
 
-// ✅ Export schemas object for multi-step form manager
+// Export schemas object for multi-step form manager
 export const QUOTE_SCHEMAS = {
   quote: QuoteFormSchema,
   banking: BankingSchema,
   change: ChangeSchema,
 };
 
-// ✅ Default values for all steps
+// Default values for all steps
 export const QUOTE_DEFAULT_VALUES = {
   Name: "",
   Organisation: "",
@@ -212,5 +212,5 @@ export const QUOTE_DEFAULT_VALUES = {
   BotField: "",
 };
 
-// ✅ Individual schema exports (for backwards compatibility)
+// Individual schema exports (for backwards compatibility)
 export { QuoteFormSchema, BankingSchema, ChangeSchema };

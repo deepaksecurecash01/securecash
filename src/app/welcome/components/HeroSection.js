@@ -9,7 +9,7 @@ const HeroSection = () =>
       className="h-[450px] 480px:h-[584px] 768px:[550px] pt-3  1024px:h-[82vh]  1366px:h-[81vh] my-auto w-full relative"
       style={{
         background:
-          'url("https://www.securecash.com.au/images/welcome/welcome-hero-bg.jpg")no-repeat center',
+          'url("/images/welcome/welcome-hero-bg.jpg")no-repeat center',
       }}
     >
       <Container className="w-[95%]  1366px:w-full flex flex-wrap justify-start items-center h-full ">
@@ -44,7 +44,7 @@ const HeroSection = () =>
         </div>
         <div className="hidden welcome-image-wrapper pl-0  768px:w-1/2  1024px:pl-10 768px:block">
           <img
-            src="https://www.securecash.com.au/images/welcome/welcome-hero-img.jpg"
+            src="/images/welcome/welcome-hero-img.jpg"
             alt="Passion Led Us Here"
             className="w-full ml-5 1024px:ml-0 768px:w-[95%] 992px:w-full  1600px:w-[110%] shadow-[-11px_-9px_24px_-16px_black]"
             width={707}

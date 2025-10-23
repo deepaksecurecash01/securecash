@@ -2,16 +2,16 @@
 "use client";
 import React, { useEffect } from "react";
 import
-    {
-        FaUser,
-        FaBriefcase,
-        FaEnvelope,
-        FaCalendarAlt,
-        FaUsers,
-        FaIdCard,
-        FaSpinner,
-        FaCheckCircle,
-    } from "react-icons/fa";
+{
+    FaUser,
+    FaBriefcase,
+    FaEnvelope,
+    FaCalendarAlt,
+    FaUsers,
+    FaIdCard,
+    FaSpinner,
+    FaCheckCircle,
+} from "react-icons/fa";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatBirthdayForAPI } from '@/utils/formHelpers';
@@ -22,7 +22,7 @@ import { useRouter } from "next/navigation";
 const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
 {
     const router = useRouter();
-    // ✅ Enhanced form manager with complete focus integration
+    // Enhanced form manager with complete focus integration
     const formManager = useFormManager({
         schema: TermsFormSchema,
         defaultValues: TERMS_DEFAULT_VALUES,
@@ -31,13 +31,13 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
         formId: 'Terms',
         onSuccess: (result, finalData) =>
         {
-            console.log("✅ Terms form submitted successfully!");
+            console.log("Terms form submitted successfully!");
             // Redirect to /austrac on successful submission
             router.push("/austrac");
         },
         onError: (error) =>
         {
-            console.error("❌ Terms submission failed:", error);
+            console.error("Terms submission failed:", error);
         },
         prepareData: async (data) =>
         {
@@ -87,7 +87,7 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
         }
     });
 
-    // ✅ Watch form values for parent component props (unchanged functionality)
+    // Watch form values for parent component props (unchanged functionality)
     const nameValue = formManager.watch("Name");
     const positionValue = formManager.watch("Position");
     const organisationValue = formManager.watch("Organisation");
@@ -114,7 +114,7 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
         if (abnValue && setAbn) setAbn(abnValue);
     }, [abnValue, setAbn]);
 
-    // ✅ Field configurations - enhanced with better debugging
+    // Field configurations - enhanced with better debugging
     const inputFields = [
         {
             name: "Name",
@@ -130,7 +130,7 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
             placeholder: "Enter your position in the organisation",
             Icon: FaBriefcase,
         },
-        
+
         {
             name: "Email",
             type: "email",
@@ -164,7 +164,7 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
         },
     ];
 
-    // ✅ Debug logging for troubleshooting (can be removed in production)
+    // Debug logging for troubleshooting (can be removed in production)
     useEffect(() =>
     {
         if (process.env.NODE_ENV === 'development') {
@@ -210,7 +210,7 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) =>
                                 autoComplete="off"
                             />
 
-                            {/* ✅ FIXED: All fields now use proper focus management */}
+                            {/* FIXED: All fields now use proper focus management */}
                             {inputFields.map((field) => (
                                 <div key={field.name} className="relative">
                                     <UniversalFormField

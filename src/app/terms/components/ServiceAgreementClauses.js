@@ -471,10 +471,10 @@ const additionalSections = [
 
 
 // Component for rendering list items
-const TermsListItem = ({ item, index, section }) => (
-    <li>
+const TermsListItem = ({ item, key, section }) => (
+    <li key={key}>
         <span className="tnc-number absolute left-0 text-[16px] font-semibold text-primary">{item.number}</span>
-        <p className={`${item.wide ? "bullet-wide" : ""} block leading-[2em] pl-[47px] ${index !== section.length - 1 && 'mb-[30px]'} `}>
+        <p className={`${item.wide ? "bullet-wide" : ""} block leading-[2em] pl-[47px] ${key !== section.length - 1 && 'mb-[30px]'} `}>
             {item.text}
             {item.link && (
                 <>
@@ -514,7 +514,7 @@ const TermsSection = ({ section }) => (
         </h4>
         <ul className="tnc-page-sa-clauses--content__list list-none font-light relative pr-10">
             {section.items.map((item, index) => (
-                <TermsListItem index={index} item={item} section={section} />
+                <TermsListItem key={index} item={item} section={section} />
             ))}
         </ul>
     </>
@@ -537,7 +537,7 @@ const ServiceAgreementClauses = () =>
     return (
         <section className="tnc-page-sa-clauses relative z-[1] bg-[#fff] shadow-[0_1px_6px_0_rgba(32,33,36,0.28)] 1024px:shadow-none">
             <img
-                src="https://www.securecash.com.au/images/welcome/terms-main-img-2.jpg"
+                src="/images/welcome/terms-main-img-2.jpg"
                 alt="Two People Shaking Hands"
                 className="tnc-page-sa-clauses__img-bg hidden 1024px:block absolute left-0 768px:w-[30%] h-full object-cover -z-[1]"
                 width={559}

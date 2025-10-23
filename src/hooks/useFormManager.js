@@ -96,12 +96,12 @@ export const useFormManager = ({
             });
 
             if (response.ok) {
-                console.log(`✅ Progressive email sent successfully for step: ${currentStepId}`);
+                console.log(`Progressive email sent successfully for step: ${currentStepId}`);
             } else {
                 console.warn(`⚠️ Progressive email failed for step: ${currentStepId}`, await response.text());
             }
         } catch (error) {
-            console.error(`❌ Progressive email error for step: ${currentStepId}`, error);
+            console.error(`Progressive email error for step: ${currentStepId}`, error);
             // Don't throw - progressive emails shouldn't block form progression
         }
     }, [isQuoteForm]);

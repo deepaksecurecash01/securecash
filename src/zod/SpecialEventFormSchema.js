@@ -171,7 +171,7 @@ export const SPECIAL_EVENT_SERVICE_FIELDS = [
         type: "textarea",
         label: "Please provide us with a list of the dates, times & any other relevant information for the event below;",
         placeholder: "Enter dates, times and other relevant information...",
-        rows: 5
+        rows: 6,
     },
     {
         name: "Bank",

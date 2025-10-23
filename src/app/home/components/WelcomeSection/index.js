@@ -11,21 +11,21 @@ const servicesData = [
   {
     id: 1,
     title: "Cash Collection Services",
-    icon: "https://www.securecash.com.au/images/contentpageicons/cashcollection.png",
+    icon: "/images/contentpageicons/cashcollection.png",
     description:
       'Our plain clothes staff will visit your premises at an agreed time, pick up and secure your takings, drive them to your bank in one of our unmarked vehicles and deposit them in your account. At a later time, we will deliver the bank deposit records back to your office. We call this our "Banking Courier Service" and we can collect your cash takings (including cheques) any hour or any day or night. That includes weekends and public holidays because our number one priority is ensuring the cash security of our clients.',
   },
   {
     id: 2,
     title: "Cash Delivery Services",
-    icon: "https://www.securecash.com.au/images/contentpageicons/cashdelivery.png",
+    icon: "/images/contentpageicons/cashdelivery.png",
     description:
       'When you want cash delivered to your organisation, just order our cash delivery service. We call it a "Change Order Service" because often our clients are ordering small change to meet their trading needs. So we pick up the needed amount of change, in whatever denominations you require.',
   },
   {
     id: 3,
     title: "Cash Counting Services",
-    icon: "https://www.securecash.com.au/images/cashcounting.png",
+    icon: "/images/contentpageicons/cashcounting.png",
     description:
       "If you don't want your staff to have to deal with counting the takings, our cash counting service can assist. We collect your cash and count it before depositing it into your bank account.",
   },

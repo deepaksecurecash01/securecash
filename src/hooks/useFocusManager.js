@@ -11,7 +11,7 @@ export const useFocusManager = (control) =>
     const focusAttempts = useRef({});
     const lastFocusedField = useRef(null);
 
-    // ✅ FIXED: Get fields in React Hook Form registration order
+    // FIXED: Get fields in React Hook Form registration order
     const getFieldsInRegistrationOrder = useCallback(() =>
     {
         if (!control || !control._fields) {
@@ -25,7 +25,7 @@ export const useFocusManager = (control) =>
         return fieldNames;
     }, [control]);
 
-    // ✅ FIXED: Get first error field in RHF registration order
+    // FIXED: Get first error field in RHF registration order
     const getFirstErrorFieldInRegistrationOrder = useCallback((errors) =>
     {
         if (!errors || Object.keys(errors).length === 0) return null;
@@ -50,7 +50,7 @@ export const useFocusManager = (control) =>
         return fallback;
     }, [getFieldsInRegistrationOrder]);
 
-    // ✅ Direct focus field setter (for field-initiated focus changes)
+    // Direct focus field setter (for field-initiated focus changes)
     const setFocusField = useCallback((fieldName) =>
     {
         console.log(`🎯 Setting focus field: ${fieldName}`);
@@ -58,7 +58,7 @@ export const useFocusManager = (control) =>
         lastFocusedField.current = fieldName;
     }, []);
 
-    // ✅ Enhanced focus field with better error handling
+    // Enhanced focus field with better error handling
     const focusField = useCallback((fieldName) =>
     {
         console.log(`SEQUENTIAL FIX: Attempting to focus field: ${fieldName}`);
@@ -84,14 +84,14 @@ export const useFocusManager = (control) =>
                 const focusableElement = domElement.querySelector('input, select, textarea, [tabindex]') || domElement;
                 if (focusableElement && focusableElement.focus) {
                     focusableElement.focus();
-                    console.log(`✅ DOM fallback focus successful: ${fieldName}`);
+                    console.log(`DOM fallback focus successful: ${fieldName}`);
                     return true;
                 }
 
                 // For file uploads, try scrolling into view
                 if (domElement.querySelector('[type="file"]') || domElement.getAttribute('data-field-name')) {
                     domElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    console.log(`✅ File upload scrolled into view: ${fieldName}`);
+                    console.log(`File upload scrolled into view: ${fieldName}`);
                     return true;
                 }
             }
@@ -105,7 +105,7 @@ export const useFocusManager = (control) =>
                 // ENHANCED: File upload specific focus handling
                 if (fieldRef && fieldRef.focus && typeof fieldRef.focus === 'function') {
                     fieldRef.focus();
-                    console.log(`✅ Successfully focused: ${fieldName}`);
+                    console.log(`Successfully focused: ${fieldName}`);
                     return true;
                 }
 
@@ -114,7 +114,7 @@ export const useFocusManager = (control) =>
                     const focusableElement = fieldRef.querySelector('input, select, textarea, [tabindex]');
                     if (focusableElement) {
                         focusableElement.focus();
-                        console.log(`✅ Successfully focused nested element in: ${fieldName}`);
+                        console.log(`Successfully focused nested element in: ${fieldName}`);
                         return true;
                     }
                 }
@@ -122,14 +122,14 @@ export const useFocusManager = (control) =>
                 // For custom components with focus methods
                 if (fieldRef.current && fieldRef.current.focus) {
                     fieldRef.current.focus();
-                    console.log(`✅ Successfully focused via ref.current: ${fieldName}`);
+                    console.log(`Successfully focused via ref.current: ${fieldName}`);
                     return true;
                 }
 
                 // ENHANCED: File upload container focus
                 if (fieldRef.dataset && fieldRef.dataset.fieldName === fieldName) {
                     fieldRef.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                    console.log(`✅ File field scrolled into view: ${fieldName}`);
+                    console.log(`File field scrolled into view: ${fieldName}`);
                     return true;
                 }
 
@@ -159,7 +159,7 @@ export const useFocusManager = (control) =>
         return success;
     }, [control]);
 
-    // ✅ FIXED: First error focus using RHF registration order instead of alphabetical order
+    // FIXED: First error focus using RHF registration order instead of alphabetical order
     const focusFirstError = useCallback((errors) =>
     {
         if (!errors || Object.keys(errors).length === 0) {
@@ -179,20 +179,20 @@ export const useFocusManager = (control) =>
         return focusField(firstErrorField);
     }, [focusField, getFirstErrorFieldInRegistrationOrder]);
 
-    // ✅ Clear focus with logging
+    // Clear focus with logging
     const clearFocus = useCallback(() =>
     {
         console.log(`🧹 Clearing focus from: ${currentFocusField}`);
         setCurrentFocusField(null);
     }, [currentFocusField]);
 
-    // ✅ Check if a field is currently focused
+    // Check if a field is currently focused
     const isFieldFocused = useCallback((fieldName) =>
     {
         return currentFocusField === fieldName;
     }, [currentFocusField]);
 
-    // ✅ Get focus history for debugging
+    // Get focus history for debugging
     const getFocusDebugInfo = useCallback(() =>
     {
         return {
@@ -207,7 +207,7 @@ export const useFocusManager = (control) =>
     return {
         // Core focus management
         focusField,
-        focusFirstError, // ✅ Now uses RHF registration order instead of alphabetical order
+        focusFirstError, // Now uses RHF registration order instead of alphabetical order
         clearFocus,
 
         // Field-initiated focus management

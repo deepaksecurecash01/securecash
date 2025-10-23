@@ -35,7 +35,7 @@ const TERMS_CONDITIONS = {
   },
   MAIN_TITLE: "Terms & Conditions",
   IMAGE: {
-    SRC: "https://www.securecash.com.au/images/welcome/terms-main-img-1.jpg",
+    SRC: "/images/welcome/terms-main-img-1.jpg",
     ALT: "Filling Out Forms",
     WIDTH: 559,
     HEIGHT: 678,

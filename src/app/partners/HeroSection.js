@@ -94,7 +94,7 @@ const HeroSection = () =>
 
                 <div className="partners-hero--header__img">
                     <img
-                        src="https://www.securecash.com.au/images/partners/australiacolors.png"
+                        src="/images/partners/australiacolors.png"
                         alt="SecureCash Partners Australia Map"
                         className="w-full h-auto"
                     />

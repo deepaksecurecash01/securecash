@@ -9,7 +9,7 @@ const HeroImage = () =>
       className="flex flex-col justify-center items-center overflow-hidden bg-[45%] bg-cover h-[404px]  414px:h-[412px]  768px:h-[454px] 1024px:h-[55vh] 480px:bg-[position:50%]  600px:bg-cover bg-no-repeat  992px:bg-center "
       style={{
         backgroundImage:
-          "-webkit-linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg')",
+          "-webkit-linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url('/images/3-australia-securecash-services-featured.jpg')",
       }}
     >
       <h1

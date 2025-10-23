@@ -4,7 +4,7 @@ import { z } from "zod";
 /**
  * Enhanced Austrac Form Schema - Clean Declarative Version
  * 
- * ✅ COMPREHENSIVE VALIDATION:
+ * COMPREHENSIVE VALIDATION:
  * - Organisation name with business context validation
  * - ABN validation with proper Australian format checking
  * - Website URL validation with proper protocols
@@ -55,7 +55,7 @@ const AustracFormSchema = z.object({
         }, {
             message: "ABN must be exactly 11 digits."
         })
-       ,
+    ,
 
     Website: z
         .string({
@@ -192,7 +192,7 @@ const AustracFormSchema = z.object({
         }, {
             message: "Please provide valid personnel names and positions."
         })
-       ,
+    ,
 
     BotField: z
         .string()

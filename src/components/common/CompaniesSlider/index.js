@@ -3,7 +3,7 @@ import React, { useMemo } from "react";
 
 // Configuration - move to constants file in production
 const LOGO_CONFIG = {
-  baseUrl: "https://www.securecash.com.au/images/companies/",
+  baseUrl: "/images/companies/",
   companies: [
     "dominos",
     "mcdonalds",

@@ -20,6 +20,7 @@ import UniversalFormField from "@/components/common/forms-new/core/UniversalForm
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate, formatDateForAPI } from '@/utils/formHelpers';
 import ContactFormSchema, { CONTACT_DEFAULT_VALUES, formConfig } from '@/zod/ContactFormSchema';
+import Link from "next/link";
 
 const ContactForm = ({ className }) =>
 {
@@ -293,12 +294,12 @@ const ContactForm = ({ className }) =>
                                                     alt="Cash Collection"
                                                     className="inline-block mr-2 w-[30px]"
                                                 />
-                                                <a
-                                                    href="https://www.securecash.com.au/cash-collection/"
+                                                <Link
+                                                    href="/services/cash-collection/"
                                                     className="text-[#c6a54b] hover:underline"
                                                 >
                                                     <p className="m-0">Cash Collections</p>
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li className="cash-delivery mb-2 flex items-center">
                                                 <img
@@ -306,12 +307,12 @@ const ContactForm = ({ className }) =>
                                                     alt="Cash Delivery"
                                                     className="inline-block mr-2 w-[30px]"
                                                 />
-                                                <a
-                                                    href="https://www.securecash.com.au/cash-delivery/"
+                                                <Link
+                                                    href="/services/cash-delivery/"
                                                     className="text-[#c6a54b] hover:underline"
                                                 >
                                                     <p className="m-0">Cash Deliveries</p>
-                                                </a>
+                                                </Link>
                                             </li>
                                             <li className="cash-counting mb-2 flex items-center">
                                                 <img
@@ -319,12 +320,12 @@ const ContactForm = ({ className }) =>
                                                     alt="Cash Counting"
                                                     className="inline-block mr-2 w-[30px]"
                                                 />
-                                                <a
-                                                    href="https://www.securecash.com.au/cash-counting/"
+                                                <Link
+                                                    href="/services/cash-counting/"
                                                     className="text-[#c6a54b] hover:underline"
                                                 >
                                                     <p className="m-0">Cash Counting</p>
-                                                </a>
+                                                </Link>
                                             </li>
                                         </ul>
                                     </div>

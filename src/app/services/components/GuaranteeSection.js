@@ -78,7 +78,7 @@ const GuaranteeSection = ({ guaranteeContent, imageUrl }) =>
                             className="768px:flex mb-[24px] items-center justify-evenly"
                         >
                             <img
-                                src="https://www.securecash.com.au/images/seal.png"
+                                src="/images/seal.png"
                                 alt="Australia Cash in Transit Services | SecureCash Guaranteed Seal"
                                 width="95%"
                                 height="auto"

@@ -138,9 +138,9 @@ const FormSection = () =>
             className="text-[16px] leading-[2rem] text-left
              768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light flex flex-col gap-4 font-montserrat"
           >                <span>   To learn more about how we manage information provided you can view our{" "}
-              <Link className="text-primary hover:underline" href="https://www.securecash.com.au/privacy-policy/">Privacy Policy</Link>.</span>
+              <Link className="text-primary hover:underline" href="/privacy-policy/">Privacy Policy</Link>.</span>
             <strong>
-              <Link className="text-primary hover:underline" href="https://www.securecash.com.au/terms/">&lt;&lt; Previous</Link>
+              <Link className="text-primary hover:underline" href="/terms/">&lt;&lt; Previous</Link>
             </strong>
           </p>
         </div>

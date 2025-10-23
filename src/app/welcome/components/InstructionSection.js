@@ -212,7 +212,7 @@ const InstructionSection = () =>
                         </p>
                     </div>
                     <a
-                        href="https://www.securecash.com.au/terms/"
+                        href="/terms/"
                         className="bg-[#c7a652] text-white w-[248px] text-center px-[22px] py-[30px] rounded-[50px] block mx-auto shadow-[0_0_22px_-5px_#c7a652] hover:bg-black hover:text-white hover:no-underline"
                     >
                         Let&apos;s Get Started

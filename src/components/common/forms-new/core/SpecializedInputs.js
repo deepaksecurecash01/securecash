@@ -8,7 +8,6 @@ import { FaCalendarAlt, FaTimes, FaCircle, FaFileUpload, FaFile, FaSpinner, FaEx
 import styles from "@/components/common/checkbox/Checkbox.module.css";
 import imageCompression from 'browser-image-compression';
 
-// COMPLETE THEMES - Including ICA theme with pixel-perfect styling
 const THEMES = {
     dark: {
         input: "w-full text-sm py-2 px-3 shadow-none font-montserrat border-none rounded-sm h-9",

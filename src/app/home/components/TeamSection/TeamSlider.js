@@ -16,7 +16,7 @@ const SocialLink = ({ href, icon, alt }) => (
         height={25}
         quality={80}
         className=" hover:filter hover:contrast-0"
-        src={`https://www.securecash.com.au/images/icons/social/webp/${icon}.webp`}
+        src={`/images/icons/social/webp/${icon}.webp`}
         alt={alt}
       />
     </Link>
@@ -148,7 +148,7 @@ const TeamSlider = ({ member }) =>
                 width={5}
                 height={5}
                 className="mail-icon w-[5%] h-auto mr-2 py-[5px]"
-                src="https://www.securecash.com.au/images/icons/mail.png"
+                src="/images/icons/mail.png"
                 alt="mail"
                 aria-hidden="true"
               />

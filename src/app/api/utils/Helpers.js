@@ -278,7 +278,7 @@ export const processAttachmentsSequentially = (attachmentMappings, formData, get
                     attachments.push(processedAttachment);
 
                     // Log successful processing
-                    console.log(`✅ Processed attachment: ${mapping.filename} (${(Buffer.byteLength(processedAttachment.content, 'base64') / 1024).toFixed(2)}KB)`);
+                    console.log(`Processed attachment: ${mapping.filename} (${(Buffer.byteLength(processedAttachment.content, 'base64') / 1024).toFixed(2)}KB)`);
                 } else {
                     console.warn(`⚠️ Failed to process attachment: ${mapping.filename}`);
                 }
@@ -375,7 +375,7 @@ export const logError = (context, error, additionalData = {}) =>
         ...additionalData
     };
 
-    console.error(`❌ ${context}:`, errorInfo);
+    console.error(`${context}:`, errorInfo);
 
     return errorInfo;
 };

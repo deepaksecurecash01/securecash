@@ -2,7 +2,7 @@ export const servicesData = {
   "armoured-car-service": {
     metaTitle: `Armoured Car Service | Why We Don't Recommend`,
     title: `Armoured Car Services`,
-    imageUrl: `https://www.securecash.com.au/images/1-australia-securecash-services-01-featured.jpg`,
+    imageUrl: `/images/1-australia-securecash-services-01-featured.jpg`,
     heading: `Looking For Armoured Car Services?`,
     description: `<strong>Armoured Cars</strong> are used by <a href="cash-in-transit/">cash-in-transit companies</a> to transport cash and other valuables from location to location. <strong>SecureCash</strong> <strong>discourages the use of armoured cars</strong> as they draw unnecessary attention to your business, and advertise the fact that you have large amounts of cash on site. Make the change to a covert service now! <a href="tel:1300732873"><strong>Give us a call today</strong></a> to find out why we prefer unarmoured vehicles.`,
     sections: {
@@ -20,7 +20,7 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/19-australia-securecash-services-0019-f.jpg`,
+        imageUrl: `/images/19-australia-securecash-services-0019-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -43,7 +43,7 @@ export const servicesData = {
           },
         ],
         ctaText: `Why Choose SecureCash for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/14-australia-securecash-services-14.jpg`,
+        imageUrl: `/images/14-australia-securecash-services-14.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -55,14 +55,14 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "bank-runs": {
     metaTitle: `Bank Runs | Professional Team to Handle Your Banking | SecureCash`,
     title: `Bank Runs Services`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/3-australia-securecash-services-featured.jpg`,
     heading: `Looking For Bank Runs Services?`,
     description: `<strong>SecureCash</strong> provides fast and low-profile bank runs for companies anywhere in Australia. Our <strong><a href="cash-couriers/">cash couriers</a></strong> are efficient and reliable in managing <a href="banking-pickups/"><strong>banking pickups and transports</strong></a>. If you are looking for help with your banking, we provide the best unarmoured cash-in-transit services in the country. <a href="tel:1300732873"><strong>Call us</strong></a> now!`,
     sections: {
@@ -78,28 +78,28 @@ export const servicesData = {
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/contentpageicons/cashcollection.png`,
+            icon: `/images/contentpageicons/cashcollection.png`,
             details: [
               'Our <a href="cash-collection/">cash collection</a> service relieves you from doing the banking on your own. We can pick up your business takings from your office location and deliver it to the bank on the same day. With this time saved, you can focus more on your work and your customers. If in the case we have reached the bank beyond the cut-off hours, we can hold the money in our depot, locked up and transport it first thing on the next business day.',
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               '<a href="cash-delivery/">Cash delivery</a> is highly recommended for businesses like coffee shops, restaurants, convenience stores, and other retail outlets who <a href="https://bizfluent.com/info-8642939-cash-float.html">need cash and coins in different denominations</a>. We can pick up the money from your bank and deliver it to you. This time, you don\'t have to leave the store, rush to the bank and withdraw money. We can do that for you without any hassle. Just inform us what you need at least 2 days prior so we can make arrangements for with your bank.',
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               'Does your business deal heavily with cash and coins? <a href="cash-counting/">Cash counting</a> is a practical solution in sorting out large amounts of money effectively. We can collect the funds from your location and take it to our depot for counting. Once we have the total amount, we can take the money back to you or deliver it directly to your bank.',
               'Our <strong>bank runs</strong> can be customized according to your organisation\'s specific needs. We aim to deliver top-class solutions that cater to your budget and schedule. If you\'re not sure on what service to avail, talk to us by calling <a href="tel:1300732873">1300 SECURE</a> or by getting a <a href="/quote">quote</a> through our website.',
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/17-australia-securecash-services-0017.jpg`,
+        imageUrl: `/images/17-australia-securecash-services-0017.jpg`,
       },
       leftImageSection: {
         content: [
@@ -120,7 +120,7 @@ export const servicesData = {
           },
         ],
         ctaText: `How You Can Benefit From Our Services`,
-        imageUrl: `https://www.securecash.com.au/images/14-australia-securecash-services-14.jpg`,
+        imageUrl: `/images/14-australia-securecash-services-14.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -132,14 +132,14 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "banking-collection": {
     metaTitle: `A Leader in Banking Collections | SecureCash`,
     title: `Banking Collection Services`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/3-australia-securecash-services-featured.jpg`,
     heading: `Looking For Banking Collection Services?`,
     description: `<strong>Banking collection</strong> services provide secure transportation of your daily takings directly to the bank. <strong><a href="/">SecureCash</a></strong> specialists are trained to collect your funds discreetly and deposit them safely, reducing the risk of theft or robbery. <a href="/quote"><strong>Get a quote today</strong></a> and let our banking collection team handle your business deposits with utmost security!`,
     sections: {
@@ -160,7 +160,7 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/5-australia-securecash-services-005.jpg`,
+        imageUrl: `/images/5-australia-securecash-services-005.jpg`,
       },
       leftImageSection: {
         content: [
@@ -171,14 +171,14 @@ export const servicesData = {
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `Cash Delivery is the process of delivering money to your location upon your request. We can also sort out various denominations that your store may need for the day. We can liaise with your bank, collect the funds, and deliver it right to where you are.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Cash Counting is highly-recommended for coin-operated businesses and is available in all major cities. We can pick up the money, count it, and verify its total amount before we transfer it to your bank account.`,
             ],
@@ -199,7 +199,7 @@ export const servicesData = {
           },
         ],
         ctaText: `How Can We Benefit Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/18-australia-securecash-services-18.jpg`,
+        imageUrl: `/images/18-australia-securecash-services-18.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -211,14 +211,14 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "banking-pickups": {
     metaTitle: `Secure and Efficient Banking Pickups | SecureCash`,
     title: `Our Banking Pickups Service`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/3-australia-securecash-services-featured.jpg`,
     heading: `Looking For Banking Pickups?`,
     description: `A <b>Banking Pickup</b> is the process where a courier collects your business' takings, brings it to the bank, and deposits the money directly into your account. <a href="/"  ><strong>SecureCash</strong></a> provides cash collection services across Australia. It offers the convenience of securing your money without you having to leave your workplace. <a href="/quote"  ><strong>Get a quote</strong></a> today!`,
     sections: {
@@ -235,7 +235,7 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/15-australia-securecash-services-0015.jpg`,
+        imageUrl: `/images/15-australia-securecash-services-0015.jpg`,
       },
       leftImageSection: {
         content: [
@@ -257,7 +257,7 @@ export const servicesData = {
           },
         ],
         ctaText: `How You Can Benefit From Our Banking Pickup Services`,
-        imageUrl: `https://www.securecash.com.au/images/24-australia-securecash-services-24.jpg`,
+        imageUrl: `/images/24-australia-securecash-services-24.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -269,14 +269,14 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "banking-services-central-coast": {
     metaTitle: `Reliable Banking Services on the Central Coast | SecureCash`,
     title: `Banking Services,<br> Central Coast AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-33.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-33.jpg`,
     heading: `Looking For Banking Services on the Central Coast?`,
     description:
       '<strong>Banking services</strong> can help your company move any amount of money. <strong><a href="/">SecureCash</a></strong>&nbsp;banking couriers can safely collect business takings wherever your office is located on the Central Coast. Our plain-clothed officers drive covert "soft skin" vehicles, making sure it safely reaches the bank discreetly and without any hassle. <a href="tel:1300732873"><strong>Call us</strong></a> now!',
@@ -295,7 +295,7 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/46-australia-securecash-services-0046.jpg`,
+        imageUrl: `/images/46-australia-securecash-services-0046.jpg`,
       },
       leftImageSection: {
         content: [
@@ -315,7 +315,7 @@ export const servicesData = {
           },
         ],
         ctaText: `Why Are We the Best Central Coast Banking Courier Service Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/61-australia-securecash-services-61.jpg`,
+        imageUrl: `/images/61-australia-securecash-services-61.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -327,14 +327,14 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "banking-services-maitland": {
     metaTitle: `Banking Services Maitland | Secure Your Cash | SecureCash`,
     title: `Banking Services,<br> Maitland AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-3.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-3.jpg`,
     heading: `Looking For Banking Services in Maitland?`,
     description:
       '<strong>Banking services</strong> are essential in every company&rsquo;s progress and security. <strong>SecureCash</strong> provides banking services in Maitland. Our plain clothed officers can pick up your money right from your office location and deposit it to the bank on your behalf.<br><a href="/quote" ><strong>Get a quote today</strong></a> to know how we can help your business.',
@@ -351,28 +351,28 @@ export const servicesData = {
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/cashcollection.png`,
+            icon: `/images/cashcollection.png`,
             details: [
               `Our <strong>Cash Collection Services</strong> help you manage your business takings in Maitland. We can pick up your funds, secure it in your satchels, take it to the bank, and deposit it to your account. There&rsquo;s no need for you to physically go to the bank anymore, our <strong>banking services</strong> can do that for you.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Our <strong>Cash Counting Service</strong> is beneficial for companies who need help in counting and sorting out daily takings. We can pickup your money, bring it to our depot, and count it using our state-of-the-art cash counting devices. We can bring the money back to you or wire it to your account, whichever works for you.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `Our <strong>Cash Delivery Service</strong> (also called the Change Order Service) allows us to deliver your funds in various denominations. We can liaise with your bank, pick up your money, sort it according to your requested denominations, and bring it to your business location.`,
               `All these services are made available to small and large corporations including <em>retail stores</em>, <em>academic institutions</em>, <em>healthcare sectors</em>, <em>pet shops</em>, <em>government facilities</em>, <em>financial firms</em>, <em>hotels</em>, and <em>restaurants</em>.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/51-australia-securecash-services-0051.jpg`,
+        imageUrl: `/images/51-australia-securecash-services-0051.jpg`,
       },
       leftImageSection: {
         content: [
@@ -391,7 +391,7 @@ export const servicesData = {
           },
         ],
         ctaText: `Why Should You Hire a Maitland Banking Courier Service for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/33-australia-securecash-services-33.jpg`,
+        imageUrl: `/images/33-australia-securecash-services-33.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -403,14 +403,14 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "banking-services-melbourne": {
     metaTitle: `Cash Pickup Services, Bendigo AU | SecureCash`,
     title: `Banking Services,<br> Melbourne AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-4.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-melbourne-australia-featured-4.jpg`,
     heading: `Looking For Banking Services in Melbourne?`,
     description: `<strong>Banking Services</strong> is a secure way of managing your banking by transporting your daily takings from your office location to your bank. <strong>SecureCash</strong>&rsquo;s operations are discreet so your employees and customers will not notice any cash transactions in the office. Find out how we can help your business in Melbourne by <a href="/quote"><strong>getting a quote</strong></a> now.`,
     sections: {
@@ -429,7 +429,7 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-melbourne-australia-025.jpg`,
+        imageUrl: `/images/securecash-services-melbourne-australia-025.jpg`,
       },
       leftImageSection: {
         content: [
@@ -449,7 +449,7 @@ export const servicesData = {
           },
         ],
         ctaText: `Why Should You Hire a Banking Services Provider for Your Business in Melbourne?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-melbourne-australia-0014.jpg`,
+        imageUrl: `/images/securecash-services-melbourne-australia-0014.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -461,14 +461,14 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "banking-services-newcastle": {
     metaTitle: `Reliable Cash Banking Services in Newcastle | SecureCash`,
     title: `Banking Services,<br> Newcastle AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-3.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-3.jpg`,
     heading: `Looking For Banking Services in Newcastle?`,
     description:
       '<strong>Banking services</strong> is a cash management service that safely transports any amount of cash for any type of business. <strong>SecureCash</strong> has drivers and couriers who can discreetly collect the money and bring it to the bank on your behalf. <br><strong><a href="/contact/">Contact us today</a></strong> to find out how we can greatly benefit your business in Newcastle.',
@@ -513,7 +513,7 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/51-australia-securecash-services-0051.jpg`,
+        imageUrl: `/images/51-australia-securecash-services-0051.jpg`,
       },
       leftImageSection: {
         content: [
@@ -537,7 +537,7 @@ export const servicesData = {
           },
         ],
         ctaText: `Why Are We the Best Newcastle Banking Courier Service Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/41-australia-securecash-services-41.jpg`,
+        imageUrl: `/images/41-australia-securecash-services-41.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -549,14 +549,14 @@ export const servicesData = {
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection": {
     metaTitle: `Cash Collection Services Australia Wide | SecureCash`,
     title: `Cash Collection Services`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/3-australia-securecash-services-featured.jpg`,
     heading: `Looking For Cash Collection Services?`,
     description: `
 A <strong>Cash Collection Service</strong> is the process where a courier collects your business'
@@ -604,7 +604,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/15-australia-securecash-services-0015.jpg`,
+        imageUrl: `/images/15-australia-securecash-services-0015.jpg`,
       },
       leftImageSection: {
         content: [
@@ -625,7 +625,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
               Using our Online Services portal, our <strong>cash collection courier&rsquo;s</strong>
               identity can be verified at any time online.`,
               `<img
-                src="https://www.securecash.com.au/images/securecash-license-to-operate-cash-collection-service-australia-wide.jpg"
+                src="/images/securecash-license-to-operate-cash-collection-service-australia-wide.jpg"
                 alt="SecureCash License to Operate Cash Collection Service Australia wide" width="90%" height="auto">`,
               `You can have your cash collected on a regular basis e.g. daily,
               once a week, or three times a week, it&rsquo;s totally up to you and your company&rsquo;s
@@ -655,7 +655,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
           },
         ],
         ctaText: `How Can We Benefit Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/24-australia-securecash-services-24.jpg`,
+        imageUrl: `/images/24-australia-securecash-services-24.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -683,14 +683,14 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-adelaide": {
     metaTitle: `Cash Collection Services, Adelaide | SecureCash`,
     title: `Cash Collection Services,<br> Adelaide AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-adelaide-australia-featured-1.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-adelaide-australia-featured-1.jpg`,
     heading: `Looking For Cash Collection Services in Adelaide?`,
     description: `<strong>Cash collection</strong> is the process of picking up any amount of money from your business location and transporting it to the bank in a safe, discreet, and timely manner. <a href="/quote"  ><strong>Get a quote now</strong></a> to find out how <strong>SecureCash</strong>&rsquo;s cash collection services in Adelaide can help you and your business save time, effort and money.`,
     sections: {
@@ -717,20 +717,20 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               'Our <a href="cash-delivery/">cash delivery</a> team in Adelaide can deliver any amount of cash to your business. Just tell us how much you need, where to deliver it, and when do you need it delivered. We can pick up the funds from your bank (in whatever denominations you need) and bring it to you on the appointed date. We can also arrange deliveries for special events like conferences, festivals, and fundraisers.',
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               'Our <a href="cash-counting/">cash counting</a> service offers convenience and time-efficiency. We help sort out the money from vending machines, parking meters, arcade cabinets, ticket sales, charity boxes, and other coin-operated businesses. We process the counting at our depot that is equipped with state-of-the-art cash sorting and processing machines, which allow us to provide accurate data.',
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/23-australia-securecash-services-0023-f.jpg`,
+        imageUrl: `/images/23-australia-securecash-services-0023-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -757,7 +757,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
           },
         ],
         ctaText: `Why Are We the Best Adelaide Cash Collection Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-adelaide-australia-0019.jpg`,
+        imageUrl: `/images/securecash-services-adelaide-australia-0019.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -769,14 +769,14 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-bendigo": {
     metaTitle: `Reliable Cash Collection Services In Bendigo | SecureCash`,
     title: `Cash Collection Services,<br> Bendigo AU`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/3-australia-securecash-services-featured.jpg`,
     heading: `Looking For Cash Collection Services in Bendigo?`,
     description: `<strong>Cash collection</strong> is an efficient and cost-effective service that benefits all kinds of businesses. <a href="/"  ><strong>SecureCash</strong></a> has banking couriers in Bendigo to collect any amount of cash from your office location and bring it to the bank in a safe and timely manner.<br><a href="tel:1300732873"><strong>Call us today</strong></a> to find out how our services can help your company.`,
     sections: {
@@ -805,7 +805,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/11-australia-securecash-services-0011.jpg`,
+        imageUrl: `/images/11-australia-securecash-services-0011.jpg`,
       },
       leftImageSection: {
         content: [
@@ -832,7 +832,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
           },
         ],
         ctaText: `Why Are We the Best Bendigo Cash Collection Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/13-australia-securecash-services-13.jpg`,
+        imageUrl: `/images/13-australia-securecash-services-13.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -844,14 +844,14 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-brisbane": {
     metaTitle: `Trusted & Reliable Cash Collection in Brisbane | SecureCash`,
     title: `Cash Collection Services,<br> Brisbane AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-brisbane-australia-featured-6.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-brisbane-australia-featured-6.jpg`,
     heading: `Looking For Cash Collection Services in Brisbane?`,
     description: `A <strong>cash collection service</strong> specializes in collecting and securing any amounts of money from business establishments. <strong>SecureCash</strong> couriers can pick up your business takings, transport them to the bank, and deposit them straight to your account.<br><strong><a href="/quote"  >Get a quote today</a></strong> to know how we can help your business in Brisbane.`,
     sections: {
@@ -890,20 +890,20 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `We can deliver money to your place of business. Just let us know the amount of cash or coins you need, the delivery date and address. We will liaise with your bank to collect the funds (in any denominations you need) and discreetly deliver them to you.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `If you operate vending machines, parking meters, arcade cabinets, charity boxes, and the like, we can help you sort out your takings. We'll collect your cash, count it, and get it to the bank for you. Our depots have state-of-the-art cash sorting and processing machines that easily get the job done.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-brisbane-australia-01.jpg`,
+        imageUrl: `/images/securecash-services-brisbane-australia-01.jpg`,
       },
       leftImageSection: {
         content: [
@@ -928,7 +928,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
           },
         ],
         ctaText: `Why Are We the Best Brisbane Cash Collection Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-brisbane-australia-0028.jpg`,
+        imageUrl: `/images/securecash-services-brisbane-australia-0028.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -940,14 +940,14 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-cairns": {
     metaTitle: `Cash collection Cairns | Cairns Cash Pickup Services`,
     title: `Cash Collection Services,<br> Cairns AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-22.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-22.jpg`,
     heading: `Looking For Cash Collection Services in Cairns?`,
     description: `<strong>Cash Collection</strong> is a security service that assists companies in carrying any amount of cash, coins, and cheques from their location to the bank. <strong>SecureCash</strong> is <strong>Cairns #1 cash collection service provider</strong> that offers covert and discreet transport of money.<br> <a href="tel:1300732873"><strong>Call us today</strong></a> to know how we can benefit your business.`,
     sections: {
@@ -963,7 +963,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/50-australia-securecash-services-0050.jpg`,
+        imageUrl: `/images/50-australia-securecash-services-0050.jpg`,
       },
       leftImageSection: {
         content: [
@@ -984,7 +984,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
           },
         ],
         ctaText: `Why Are We the Best Cairns Cash Collection Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/41-australia-securecash-services-41.jpg`,
+        imageUrl: `/images/41-australia-securecash-services-41.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -996,14 +996,14 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-canberra": {
     metaTitle: `Canberra's Most Trusted Cash Collection Service | SecureCash`,
     title: `Cash Collection Services,<br> Canberra AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-canberra-australia-featured-3.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-canberra-australia-featured-3.jpg`,
     heading: `Looking For Cash Collection Services in Canberra?`,
     description: `A <strong>cash collection service</strong> is the physical transfer of funds from one location to another. <strong>SecureCash</strong> provides a fast, secure, and covert transport of your money (cash, coins, and cheques) from your business location to the bank. <strong><span class="underline"><a href="tel:1300732873">Call now to find out</a></span></strong> why we are the most trusted cash-in-transit company in Canberra.<span style="font-family:'Montserrat Light'; font-size:16px; text-align:center;"></span>`,
     sections: {
@@ -1037,20 +1037,20 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `We can deliver any amount of cash. Tell us how much you need, where to deliver, and when you need it. We will work with your bank to collect the funds (in any denominations you need) and deliver it to you wherever you are in Canberra.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `This service is highly recommended for those who operate vending machines, parking meters, charity boxes, and other coin-operated businesses. We can collect the money and bring it to our depot for counting. We have state-of-the-art cash sorting and processing machines that provides efficient and accurate data.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/23-australia-securecash-services-0023-f.jpg`,
+        imageUrl: `/images/23-australia-securecash-services-0023-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -1076,7 +1076,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
           },
         ],
         ctaText: `Why Are We the Best Cash Collection Canberra Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/48-australia-securecash-services-0048.jpg`,
+        imageUrl: `/images/48-australia-securecash-services-0048.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -1088,14 +1088,14 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-central-coast": {
     metaTitle: `Cash Collection Services Central Coast | SecureCash`,
     title: `Cash Collection Services,<br> Central Coast AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-29.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-29.jpg`,
     heading: `Looking For Cash Collection Services on the Central Coast?`,
     description: `A <strong>cash collection service</strong> can assist your business in moving any amount of money. <strong><a href="/">SecureCash</a></strong> can safely pick up your cash, coins, and cheques wherever you are on the Central Coast. Our plain-clothed officers transport it in soft skin covert vehicles, making sure it reaches its destination - in the bank. <a href="tel:1300732873"><strong>Call us</strong></a> now!`,
     sections: {
@@ -1118,7 +1118,7 @@ A <strong>Cash Collection Service</strong> is the process where a courier collec
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/42-australia-securecash-services-0042.jpg`,
+        imageUrl: `/images/42-australia-securecash-services-0042.jpg`,
       },
       leftImageSection: {
         content: [
@@ -1167,7 +1167,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Central Coast Cash Collection Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/55-australia-securecash-services-55.jpg`,
+        imageUrl: `/images/55-australia-securecash-services-55.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -1179,14 +1179,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-hobart": {
     metaTitle: `Hobart's Reliable Cash Collection Services | SecureCash`,
     title: `Cash Collection Services,<br> Hobart AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-hobart-australia-featured-1.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-hobart-australia-featured-1.jpg`,
     heading: `Looking For Cash Collection Services in Hobart?`,
     description: `A <strong>cash collection service</strong> is the most secure way of picking up your company&rsquo;s business takings. <strong><a href="/">SecureCash</a></strong>&nbsp;has cash couriers in Hobart who can collect your money from your location and safely bring it to the bank on your behalf,<br> <a href="tel:1300732873"><strong>Call us now</strong></a> to know why we are the number one cash collection service provider in Australia.`,
     sections: {
@@ -1204,7 +1204,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-cash-pickup-sydney-australia-011.jpg`,
+        imageUrl: `/images/securecash-cash-pickup-sydney-australia-011.jpg`,
       },
       leftImageSection: {
         content: [
@@ -1224,7 +1224,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Hobart Cash Collection Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/30-australia-securecash-services-30.jpg`,
+        imageUrl: `/images/30-australia-securecash-services-30.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -1236,14 +1236,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-kadina": {
     metaTitle: `Kadina's Premier Cash Collection Services | SecureCash`,
     title: `Cash Collection Services,<br> Kadina AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-28.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-melbourne-australia-featured-28.jpg`,
     heading: `Looking For Cash Collection Services in Kadina?`,
     description: `<strong>Cash collection</strong> is a cash management service that provides convenience for businesses. <a href="/"  ><strong>SecureCash</strong></a> has plain clothed couriers to collect your banking wherever your office is located in Kadina. Our team can discreetly transport it to the bank, making sure it is directly deposited into your account. <a href="tel:1300732873"><strong>Call us</strong></a> now!`,
     sections: {
@@ -1268,7 +1268,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/23-australia-securecash-services-0023-f.jpg`,
+        imageUrl: `/images/23-australia-securecash-services-0023-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -1296,7 +1296,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Kadina Cash Collection Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/14-australia-securecash-services-14.jpg`,
+        imageUrl: `/images/14-australia-securecash-services-14.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -1308,14 +1308,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-melbourne": {
     metaTitle: `Cash Collection Melbourne | Victoria Wide | SecureCash`,
     title: `Cash Collection Services,<br> Melbourne AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-1.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-melbourne-australia-featured-1.jpg`,
     heading: `Looking For Cash Collection Services in Melbourne?`,
     description: `<strong>Cash collection</strong> is a cost-effective service that assists your business in moving any amount of cash, making sure your money reaches its destination swiftly, safely, and on time. Find out how <strong><a href="/">SecureCash</a></strong>&rsquo;s world-class services can help you save the time and hassle of going to and from the bank in Melbourne. <a href="/quote"  ><strong>Request for a quote</strong></a> now!`,
     sections: {
@@ -1368,20 +1368,20 @@ Insured Services</h4>
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `You can ask for any amount of cash to be delivered to your place of business. Just let us know the delivery time and how much you need. We will collect the funds from your bank (in whatever denominations you specify) and discreetly deliver them to you. If you need funds outside of bank opening hours, we'll withdraw early and store the locked bank satchel securely until delivery time. No problem!`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Do you operate vending machines, parking meters, charity boxes, or similar? Then our cash sorting and cash processing machines might be just what the doctor ordered. We'll collect your cash, count it, and get it to the bank for you.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-melbourne-australia-030.jpg`,
+        imageUrl: `/images/securecash-services-melbourne-australia-030.jpg`,
       },
       leftImageSection: {
         content: [
@@ -1403,7 +1403,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Melbourne Cash Collection Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-melbourne-australia-0020.jpg`,
+        imageUrl: `/images/securecash-services-melbourne-australia-0020.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -1415,14 +1415,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-newcastle": {
     metaTitle: `Cash Collection Newcastle | Central Coast Cash Collection | SecureCash`,
     title: `Cash Collection Services,<br> Newcastle AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-2.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-2.jpg`,
     heading: `Looking For Cash Collection Services in Newcastle?`,
     description: `<strong>Cash Collection</strong> is a security service that collects and transports any amount of cash for businesses. Our <strong>SecureCash</strong> couriers and drivers are well-trained professionals in the field of cash security, management, and transport. <a href="/contact/"><strong>Contact us today</strong></a> to find out how we can safely move your money around Newcastle.`,
     sections: {
@@ -1461,20 +1461,20 @@ Insured Services</h4>
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `We can deliver any amount of cash, in any denominations, for your daily trading. Just tell us how much you need, where to deliver it and when. We can work with your bank, collect the funds from them, and deliver it to your location on time.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Our cash collection depots are equipped with cash sorting and processing machines that help provide efficient and accurate cash counting service. This service is ideal if you own or operate vending machines, parking meters, charity boxes, and the like.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/49-australia-securecash-services-0049.jpg`,
+        imageUrl: `/images/49-australia-securecash-services-0049.jpg`,
       },
       leftImageSection: {
         content: [
@@ -1501,7 +1501,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Newscastle Cash Collection Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/41-australia-securecash-services-41.jpg`,
+        imageUrl: `/images/41-australia-securecash-services-41.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -1513,14 +1513,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-perth": {
     metaTitle: `Premier Cash Collection Services in Perth | SecureCash`,
     title: `Cash Collection Services,<br> Perth AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-perth-australia-featured-6.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-perth-australia-featured-6.jpg`,
     heading: `Looking For Cash Collection Services in Perth?`,
     description: `A <strong>cash collection service</strong> is a process of picking up daily takings from a business location and transporting it to the bank for much safer cash deposits. <a href="/"  ><strong>SecureCash</strong></a> offers reliable and hassle-free services to all establishments located in and around Perth. Contact us for ad hoc and regular cash collection needs. <a href="tel:1300732873"  ><strong>Call us</strong></a> now!`,
     sections: {
@@ -1549,20 +1549,20 @@ Insured Services</h4>
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `Do you need to top-up your floats from time to time? We can do that for you. You can even request for the money to be sorted out in various denominations. We can collect the money from your bank, arrange it according to your specified denominations, and deliver it straight to where you are.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `If you own a business like parking meters, vending machines, charity boxes, and the like, we can help you sort out your cash and coins. Our couriers can collect the money and bring it to our depot to be counted out using our state-of-the-art cash sorting and processing machines. After that, we can deliver the money to you or transfer it to your bank account.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/23-australia-securecash-services-0023-f.jpg`,
+        imageUrl: `/images/23-australia-securecash-services-0023-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -1584,7 +1584,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Cash Collection Perth Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-perth-australia-002.jpg`,
+        imageUrl: `/images/securecash-services-perth-australia-002.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -1596,14 +1596,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-service-adelaide": {
     metaTitle: `Cash Collection Adelaide | Gawler to Aldinga | SecureCash`,
     title: `Cash Collection Services,<br> Adelaide AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-adelaide-australia-featured-1.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-adelaide-australia-featured-1.jpg`,
     heading: `Looking For Cash Collection Services in Adelaide?`,
     description: `<strong>Cash collection</strong> is the process of picking up any amount of money from your business location and transporting it to the bank in a safe, discreet, and timely manner. <a href="/quote"  ><strong>Get a quote now</strong></a> to find out how <strong>SecureCash</strong>&rsquo;s cash collection services in Adelaide can help you and your business save time, effort and money.`,
     sections: {
@@ -1625,20 +1625,20 @@ Insured Services</h4>
           },
           {
             title: `Cash Delivery Service`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `A process whereby businesses can request for money to be delivered to their location. They have the option to ask our delivery team to sort out the money according to their needed denominations. We can collect the money from your bank, arrange it according to your specifications, and bring it to you.`,
             ],
           },
           {
             title: `Cash Counting Service`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `A convenient solution if you need someone to sort out the money from your coin-operated businesses (e.g. vending machines, arcade cabinets, parking meters, charity boxes, and similar sources). Our depots are equipped with advanced cash sorting and processing machines that help us provide accurate amounts and data.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/23-australia-securecash-services-0023-f.jpg`,
+        imageUrl: `/images/23-australia-securecash-services-0023-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -1658,7 +1658,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Cash Collection Adelaide Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-adelaide-australia-0019.jpg`,
+        imageUrl: `/images/securecash-services-adelaide-australia-0019.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -1670,14 +1670,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-service-canberra": {
     metaTitle: `Reliable Cash Collection Service in Canberra | SecureCash`,
     title: `Cash Collection Services,<br> Canberra AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-canberra-australia-featured-5.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-canberra-australia-featured-5.jpg`,
     heading: `Looking For Cash Collection Services in Canberra?`,
     description:
       'A <strong>cash collection service</strong> is the physical transfer of funds from one location to another. <strong>SecureCash</strong> provides a fast, secure, and covert transport of your money (cash, coins, and cheques) from your business location to the bank. <a href="tel:1300732873"><strong>Call now to find ou</strong></a><a href="tel:1300732873"><strong>t</strong></a> why we are the most trusted cash-in-transit company in Canberra.',
@@ -1696,7 +1696,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/55-australia-securecash-services-0055.jpg`,
+        imageUrl: `/images/55-australia-securecash-services-0055.jpg`,
       },
       leftImageSection: {
         content: [
@@ -1715,7 +1715,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Cash Collection Canberra Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/49-australia-securecash-services-49.jpg`,
+        imageUrl: `/images/49-australia-securecash-services-49.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -1727,14 +1727,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-service-melbourne": {
     metaTitle: `Melbourne's Premier Cash Collection Service | SecureCash`,
     title: `Cash Collection Services,<br> Melbourne AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-28.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-melbourne-australia-featured-28.jpg`,
     heading: `Looking For Cash Collection Services in Melbourne?`,
     description: `<strong>Cash collection</strong> is a cost-effective service that assists your business in moving any amount of cash, making sure your money reaches its destination swiftly, safely, and on time. Find out how <strong>SecureCash</strong>&rsquo;s world-class services can help you save the time and hassle of going to and from the bank in Melbourne. <a href="/quote"  ><strong>Request for a quote</strong></a> now!`,
     sections: {
@@ -1757,7 +1757,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/23-australia-securecash-services-0023-f.jpg`,
+        imageUrl: `/images/23-australia-securecash-services-0023-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -1794,7 +1794,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Melbourne Cash Collection Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-melbourne-australia-0017.jpg`,
+        imageUrl: `/images/securecash-services-melbourne-australia-0017.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -1806,14 +1806,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-service-newcastle": {
     metaTitle: `Reliable Cash Collection Services Newcastle | SecureCash`,
     title: `Cash Collection Services,<br> Newcastle AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-3.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-3.jpg`,
     heading: `Looking For Cash Collection Services in Newcastle?`,
     description: `<strong>Cash Collection</strong> is a security service that collects and transports any amount of cash for businesses. Our <strong>SecureCash</strong> couriers and drivers are well-trained professionals in the field of cash security, management, and transport. <a href="/contact/"  ><strong>Contact us today</strong></a> to find out how we can safely move your money around Newcastle.`,
     sections: {
@@ -1830,7 +1830,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/56-australia-securecash-services-0056.jpg`,
+        imageUrl: `/images/56-australia-securecash-services-0056.jpg`,
       },
       leftImageSection: {
         content: [
@@ -1850,7 +1850,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Newcastle Cash Collection Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/50-australia-securecash-services-50.jpg`,
+        imageUrl: `/images/50-australia-securecash-services-50.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -1862,14 +1862,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-services": {
     metaTitle: `Affordable & Trusted Cash Collection Services | SecureCash`,
     title: `Cash Collection Services`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/3-australia-securecash-services-featured.jpg`,
     heading: `Looking For Cash Collection Services?`,
     description: `A <strong>Cash Collection Service</strong> is the process where a courier collects your business' takings, brings it to the bank, and deposits the money directly into your account. <a href="/"  ><strong>SecureCash</strong></a> provides cash collection services across Australia. It offers the convenience of securing your money without you having to leave your workplace. <a href="/quote"  ><strong>Get a quote</strong></a> today!`,
     sections: {
@@ -1886,7 +1886,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/15-australia-securecash-services-0015.jpg`,
+        imageUrl: `/images/15-australia-securecash-services-0015.jpg`,
       },
       leftImageSection: {
         content: [
@@ -1902,7 +1902,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `How We Can Benefit Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/24-australia-securecash-services-24.jpg`,
+        imageUrl: `/images/24-australia-securecash-services-24.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -1914,14 +1914,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-sydney": {
     metaTitle: `Cash Collection Sydney | NSW's License Cash Provider`,
     title: `Cash Collection Services,<br> Sydney AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-sydney-australia-featured-7.jpg`,
+    imageUrl: `/images/securecash-cash-collection-sydney-australia-featured-7.jpg`,
     heading: `Looking For Cash Collection Services in Sydney?`,
     description: `A <strong>cash collection service</strong>&nbsp;is the safest way to transport your daily takings from your business location to the bank. <strong>SecureCash</strong> can collect your money right from your store or office and we'll deposit it to the bank for you. <a href="tel:1300732873"><strong>Call us now</strong></a> or <a href="/quote" ><strong>get a quote</strong></a> to find out how we can help your company in Sydney.`,
     sections: {
@@ -1958,20 +1958,20 @@ Insured Services</h4>
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `Do you need to top-up your tills? We can deliver any amount of cash in the denominations that you need. Just tell us the amount, location of delivery, and date of delivery. We will visit your bank to collect the funds and bring them to your location on the agreed date.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               'Our <a href="cash-collection-services/" >cash collection services</a> depots are equipped with cash counting and processing machines. This means that we can offer an efficient sorting and counting service for your funds. This is highly recommended if you manage vending machines, parking meters, charity boxes, and the like.',
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-sydney-australia-022.jpg`,
+        imageUrl: `/images/securecash-cash-collection-sydney-australia-022.jpg`,
       },
       leftImageSection: {
         content: [
@@ -1996,7 +1996,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Cash Collection Sydney Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-sydney-australia-0024.jpg`,
+        imageUrl: `/images/securecash-services-sydney-australia-0024.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -2008,14 +2008,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-toowoomba": {
     metaTitle: `Reliable Toowoomba Cash Collection Services | SecureCash`,
     title: `Cash Collection Services,<br> Toowoomba AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-9.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-9.jpg`,
     heading: `Looking For Cash Collection Services in Toowoomba?`,
     description:
       'Our <strong>cash collection services in Toowoomba</strong> offer cost-effective solutions to assist your business in moving any amount of cash. <strong>SecureCash</strong> makes sure your money reaches its destination safely, on time, and without any hassle.<br><a href="tel:1300732873"><strong>Give us a call today</strong></a> to find out exactly how we can help. <a href="/quote"><strong>Get a quote</strong></a> now!',
@@ -2032,7 +2032,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/52-australia-securecash-services-0052.jpg`,
+        imageUrl: `/images/52-australia-securecash-services-0052.jpg`,
       },
       leftImageSection: {
         content: [
@@ -2051,7 +2051,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Toowoomba Cash Collection Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/45-australia-securecash-services-45.jpg`,
+        imageUrl: `/images/45-australia-securecash-services-45.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -2063,14 +2063,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-warrawong": {
     metaTitle: `Warrawong's Trusted Cash Collection Service | SecureCash`,
     title: `Cash Collection Services,<br> Warrawong AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-13.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-13.jpg`,
     heading: `Looking For Cash Collection Services in Warrawong?`,
     description:
       '<strong>Cash collection</strong> is the safest way of transporting cash, coins, and cheques from location to location. We have <strong><a href="/" >SecureCash</a></strong> couriers in Warrawong who can pick up your money from your place of business, transport it to the bank, and deposit it directly to your account. <a href="/quote" ><strong>Get a quote now</strong></a> to find out more about our services today!',
@@ -2090,7 +2090,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/44-australia-securecash-services-0044.jpg`,
+        imageUrl: `/images/44-australia-securecash-services-0044.jpg`,
       },
       leftImageSection: {
         content: [
@@ -2109,7 +2109,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Warrawong Cash Collection Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/36-australia-securecash-services-36.jpg`,
+        imageUrl: `/images/36-australia-securecash-services-36.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -2121,14 +2121,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collection-wollongong": {
     metaTitle: `Cash Collection Wollongong | Trusted & Reliable | SecureCash`,
     title: `Cash Collection Services,<br> Wollongong AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-22.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-22.jpg`,
     heading: `Looking For Cash Collection Services in Wollongong?`,
     description: `A <strong>cash collection service</strong> is the safest way to transport huge amounts of cash from one location to another. <strong><a href="/">SecureCash</a></strong>&nbsp;collects your money from your office location and safely transports it to the bank in an unarmoured vehicle. <strong><a href="tel:1300732873">Call us now</a></strong> to find out how <strong>cash collection</strong> benefits your company in Wollongong.`,
     sections: {
@@ -2152,7 +2152,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/23-australia-securecash-services-0023-f.jpg`,
+        imageUrl: `/images/23-australia-securecash-services-0023-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -2179,7 +2179,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Wollongong Cash Collection Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/51-australia-securecash-services-51.jpg`,
+        imageUrl: `/images/51-australia-securecash-services-51.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -2191,14 +2191,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-collections-on-the-gold-coast": {
     metaTitle: `Cash Collections on the Gold Coast Queensland | SecureCash`,
     title: `Cash Collection Services,<br> Gold Coast AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-32.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-32.jpg`,
     heading: `Looking For Cash Collection Services on the Gold Coast?`,
     description: `<strong>Cash collection</strong> is a cash management service that helps companies secure their business takings. <strong>SecureCash</strong> provides cash collection services in the Gold Coast. We can pick up your money right from where you are, take it to the bank, and deposit it for you. Find out how we can help your business by <a href="/quote" ><strong>getting a quote today</strong></a>!`,
     sections: {
@@ -2215,7 +2215,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/46-australia-securecash-services-0046.jpg`,
+        imageUrl: `/images/46-australia-securecash-services-0046.jpg`,
       },
       leftImageSection: {
         content: [
@@ -2237,7 +2237,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Gold Coast Cash Collection Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/38-australia-securecash-services-38.jpg`,
+        imageUrl: `/images/38-australia-securecash-services-38.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -2249,14 +2249,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-counting": {
     metaTitle: `Cash Counting | We Count, Sort & Bank Your Cash`,
     title: `Cash Counting Service`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/3-australia-securecash-services-featured.jpg`,
     heading: `Looking For Cash Counting Service?`,
     description: `A <strong>cash counting service</strong> helps sort money from coin-operated businesses. <a
             href="/">SecureCash</a>&nbsp;has state-of-the-art counting and
@@ -2286,7 +2286,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/15-australia-securecash-services-0015.jpg`,
+        imageUrl: `/images/15-australia-securecash-services-0015.jpg`,
       },
       leftImageSection: {
         content: [
@@ -2307,7 +2307,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Choose SecureCash for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/24-australia-securecash-services-24.jpg`,
+        imageUrl: `/images/24-australia-securecash-services-24.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -2319,14 +2319,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-couriers": {
     metaTitle: `Trusted Cash Courier Services | SecureCash`,
     title: `Cash Couriers Services`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/3-australia-securecash-services-featured.jpg`,
     heading: `Looking For Cash Couriers Services?`,
     description: `<strong>Cash couriers</strong> are cash security professionals sent to pick up your money from your location and deposit it to the bank on your behalf. <strong><a href="/">SecureCash</a> </strong>couriers are plainclothes officers who are trained to collect your money in a discreet way. <a href="/quote"  ><strong>Get a quote today</strong></a> so our couriers can do the banking for your business!`,
     sections: {
@@ -2343,7 +2343,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/5-australia-securecash-services-005.jpg`,
+        imageUrl: `/images/5-australia-securecash-services-005.jpg`,
       },
       leftImageSection: {
         content: [
@@ -2355,21 +2355,21 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/contentpageicons/cashcollection.png`,
+            icon: `/images/contentpageicons/cashcollection.png`,
             details: [
               `Our Cash Collection services team can pick up your daily takings and deposit it to your bank.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `Our Cash Delivery service can bring you cash and coins, in different denominations.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `our Cash Counting services team can sort out cash and coins from any type of businesses.`,
               '<a href="tel:1300732873">Call us today</a> to know how each of these services can benefit your business.',
@@ -2392,7 +2392,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `How Can We Benefit Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/18-australia-securecash-services-18.jpg`,
+        imageUrl: `/images/18-australia-securecash-services-18.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -2404,14 +2404,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-delivery": {
     metaTitle: `Cash Delivery Services | Cash delivered to you | SecureCash`,
     title: `Cash Delivery Services`,
-    imageUrl: `https://www.securecash.com.au/images/31-australia-securecash-services-featured.png`,
+    imageUrl: `/images/31-australia-securecash-services-featured.png`,
     heading: `Looking For Cash Delivery Services?`,
     description: `
 <strong>Cash delivery</strong> is a cash-in-transit service that brings various amounts of cash to
@@ -2451,14 +2451,14 @@ Insured Services</h4>
                   cash delivery service as an "ad hoc" or &ldquo;as needed&rdquo; basis. Simply
                   request for a cash delivery through our website&rsquo;s online services or by
                   calling us directly at 1300 SECURE."</em></strong><strong><em></em></strong>`,
-              `<img src="https://www.securecash.com.au/images/SecureCash-ASIAL-Member-Accredited-and-Certified.jpg"
+              `<img src="/images/SecureCash-ASIAL-Member-Accredited-and-Certified.jpg"
                 alt="SecureCash ASIAL Member - Accredited and Certified | #1 Reliable Australia Cash Delivery Service Provider"
                 width="99%" height="auto">`,
             ],
           },
         ],
 
-        imageUrl: `https://www.securecash.com.au/images/23-australia-securecash-services-0023-f.jpg`,
+        imageUrl: `/images/23-australia-securecash-services-0023-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -2512,7 +2512,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `How Can We Benefit Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/4-australia-securecash-services-004.jpg`,
+        imageUrl: `/images/4-australia-securecash-services-004.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -2524,14 +2524,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit": {
     metaTitle: `Australia Wide Cash in Transit | SecureCash`,
     title: `Cash In Transit`,
-    imageUrl: `https://www.securecash.com.au/images/32-australia-securecash-services-featured.png`,
+    imageUrl: `/images/32-australia-securecash-services-featured.png`,
     heading: `Looking for Cash In Transit Services?`,
     description: `
       <strong>Cash in transit</strong> is the physical transfer of banknotes, coins, cheques, credit cards,
@@ -2556,7 +2556,7 @@ Insured Services</h4>
           },
         ],
 
-        imageUrl: `https://www.securecash.com.au/images/2-australia-securecash-services-002.jpg`,
+        imageUrl: `/images/2-australia-securecash-services-002.jpg`,
       },
       leftImageSection: {
         content: [
@@ -2607,7 +2607,7 @@ Insured Services</h4>
         ],
         ctaText: `Why Choose SecureCash for Your Business?`,
 
-        imageUrl: `https://www.securecash.com.au/images/25-australia-securecash-services-25.jpg`,
+        imageUrl: `/images/25-australia-securecash-services-25.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -2619,14 +2619,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-adelaide": {
     metaTitle: `Cash in Transit Services Anywhere in Adelaide | SecureCash`,
     title: `Cash In Transit Services,<br> Adelaide AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-adelaide-australia-featured-2.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-adelaide-australia-featured-2.jpg`,
     heading: `Looking For Cash In Transit Services in Adelaide?`,
     description:
       '<strong>Cash In Transit</strong> is the process of collecting your business\' daily takings, transporting these funds in a secure method and depositing it at the bank on your behalf. Find out more on how <strong><a href="/">SecureCash</a></strong>&nbsp;can provide you with cash in transit solutions that are straightforward and cost-efficient in Adelaide without having to leave the office.',
@@ -2643,27 +2643,27 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/cashcollection.png`,
+            icon: `/images/cashcollection.png`,
             details: [
               'Cash Collection is our most popular service that is highly recommended for business owners who need help in managing their daily takings. Once we have confirmed your booking, a team will be organized to take care of your <a href="cash-in-transit/"  >cash in transit</a> Adelaide needs. They will collect your takings (cash, coins, and cheques) from your location, secure them in your bank\'s tamper-evident satchels, and drive to the bank to process your deposit. You won&rsquo;t have to leave your office again to personally deposit your money.',
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Do you need help in counting and sorting out your daily takings? We&rsquo;d be glad to help you with that. This is beneficial for coin-operated businesses like ticketing outlets, laundromats, parking meters, arcade centres, etc. We can collect your takings and bring it to our depot for counting. Once done, we can take it to the bank for deposit, or bring it to you, or wire transfer the money to your account, whichever works best for you.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `We can help you in topping up your floats and tills without you having to leave your business. Our cash delivery service is also called &ldquo;Change Order Service&rdquo; where you can request specific denominations. To do this, you can contact your bank and request the funds you need. We can collect the money from your bank, arrange your money according to the denominations you requested, and deliver them to you.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/25-australia-securecash-services-0025-f.jpg`,
+        imageUrl: `/images/25-australia-securecash-services-0025-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -2730,7 +2730,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire an Adelaide Cash In Transit Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-adelaide-australia-0015.jpg`,
+        imageUrl: `/images/securecash-services-adelaide-australia-0015.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -2742,14 +2742,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-brisbane": {
     metaTitle: `Brisbane Cash in Transit Services Provider | SecureCash`,
     title: `Cash In Transit Services,<br> Brisbane AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-in-transit-services-brisbane-australia-featured-14.jpg`,
+    imageUrl: `/images/securecash-cash-in-transit-services-brisbane-australia-featured-14.jpg`,
     heading: `Looking For Cash In Transit Services in Brisbane?`,
     description:
       'Our <strong>cash in transit</strong> operation is the safest way to transfer large amounts of cash from your business location to your banking institution in Brisbane. <strong><a href="/">SecureCash</a></strong>&nbsp;guarantees a direct credit into your account and hassle-free transports. Find out more about why SecureCash is the most reliable cash security provider in the country.',
@@ -2766,27 +2766,27 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/cashcollection.png`,
+            icon: `/images/cashcollection.png`,
             details: [
               `Our couriers will visit your location to collect your daily takings (<em>cash</em>, <em>coins</em>, and <em>cheques</em>). We'll take your money to the bank and deposit it for you. We can deliver the receipt of your deposit back to you or we can bring it during our next collection. Depending on your requirements, you can opt for a daily, weekly, fortnightly, or monthly pickup.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               'We can deliver money to your business location. Simply request for a cash delivery service through our website or by calling <a href="tel:1300732873">1300 SECURE</a>. We can liaise with your bank and bring the money to you so you won&rsquo;t have to personally withdraw from the bank in order to meet your trading needs. You can request for the specific denomination of cash and coins, and we&rsquo;ll deliver it to your address on your requested day.',
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `We understand that most of your staff don&rsquo;t have extra time to count the takings. You can rely on our experienced cash counting staff in Brisbane to safely count the money and bring it to your bank for deposit.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-brisbane-australia-02.jpg`,
+        imageUrl: `/images/securecash-services-brisbane-australia-02.jpg`,
       },
       leftImageSection: {
         content: [
@@ -2846,7 +2846,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Cash In Transit Brisbane Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-brisbane-australia-006.jpg`,
+        imageUrl: `/images/securecash-services-brisbane-australia-006.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -2858,14 +2858,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-cairns": {
     metaTitle: `Cash In Transit Services, Cairns AU | SecureCash`,
     title: `Cash In Transit Services,<br> Cairns AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-20.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-20.jpg`,
     heading: `Looking For Cash In Transit Services in Cairns?`,
     description: `<strong>Cash In Transit</strong> is the most convenient way of managing the cash flow in your company. <strong>SecureCash</strong> specializes in picking up your business takings and transporting them to the bank. We guarantee a fast and secure collection wherever your business is located in Cairns. <a href="/quote" ><strong>Get a quote now</strong></a> for a convenient and hassle-free transaction!`,
     sections: {
@@ -2881,21 +2881,21 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/contentpageicons/cashcollection.png`,
+            icon: `/images/contentpageicons/cashcollection.png`,
             details: [
               `We pick up your business takings and deposit it to the bank on your behalf.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `If you need to replenish your tills, we can deliver any amount (cash and coins), in various denominations, to help you with your daily trading.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Your staff might be exhausted from the busy day, and asking them to count money can be draining. This should be the least of your worries because we can do that for you. We can sort out and count your daily takings for you accurately.`,
             ],
@@ -2909,7 +2909,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/41-australia-securecash-services-0041.jpg`,
+        imageUrl: `/images/41-australia-securecash-services-0041.jpg`,
       },
       leftImageSection: {
         content: [
@@ -2930,7 +2930,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why is a CIT Service Essential for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/33-australia-securecash-services-33.jpg`,
+        imageUrl: `/images/33-australia-securecash-services-33.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -2942,14 +2942,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-canberra": {
     metaTitle: `Reliable Cash in Transit Services in Canberra | SecureCash`,
     title: `Cash In Transit Services,<br> Canberra AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-canberra-australia-featured-2.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-canberra-australia-featured-2.jpg`,
     heading: `Looking For Cash In Transit Services in Canberra?`,
     description: `<strong>Cash in Transit</strong> is the physical transfer of funds, which is done in a secure and covert manner by <strong>SecureCash</strong>'s professional team. <strong><a href="/quote" >Get a quote now</a></strong> so we can offer your business a partnership with the most trusted <strong>cash-in-transit company in Canberra</strong> that specializes in getting your cash 100% right where it should be - to the bank.`,
     sections: {
@@ -2966,27 +2966,27 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/cashcollection.png`,
+            icon: `/images/cashcollection.png`,
             details: [
               `Our plain clothes couriers will collect your takings (<em>cash</em>, <em>coins</em>, and <em>cheques</em>) on your requested day. Once we have secured your money, we'll then drive to your bank and hand it over to be deposited in it to your account. This cash collection service is available 24 hours, 7 days a week, including weekends and public holidays. Our number one priority is ensuring the security of your funds, that is why we make sure that you can reach us anytime.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `If you need to top up your tills and you need cash delivered to your store during trading hours, we can help you out. There&rsquo;s no minimum or maximum order and we can even deliver small change to meet your trading needs. We'll pick it up from your bank, sort it into the denominations you specify, and deliver it on the scheduled day.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `If your staff is too busy to count the takings, you can call on our cash counting service. We can collect your cash takings, count it, and deliver it to your bank.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-brisbane-australia-023.jpg`,
+        imageUrl: `/images/securecash-services-brisbane-australia-023.jpg`,
       },
       leftImageSection: {
         content: [
@@ -3032,7 +3032,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Canberra Cash In Transit Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-brisbane-australia-0019.jpg`,
+        imageUrl: `/images/securecash-services-brisbane-australia-0019.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -3044,14 +3044,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-central-coast": {
     metaTitle: `Cash in Transit Anywhere on the Central Coast | SecureCash`,
     title: `Cash In Transit Services,<br> Central Coast AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-21.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-21.jpg`,
     heading: `Looking For Cash In Transit Services on the Central Coast?`,
     description: `<strong>Cash In Transit</strong> is the most secure way of moving your money. <strong>SecureCash</strong> can collect your daily takings, wherever your business is located on the Central Coast. We transport it to the bank on your behalf, so you won't have to worry about leaving the office. Find out more about how we can help secure your money. <a href="tel:1300732873"><strong>Contact us today</strong></a> today!`,
     sections: {
@@ -3068,27 +3068,27 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/cashcollection.png`,
+            icon: `/images/cashcollection.png`,
             details: [
               `<strong>Cash Collection</strong>, also called the Banking Courier Service, is our most in-demand service in the Central Coast. Once we receive your request, our plain clothed staff will be at your location to collect your takings (cash, coins, and cheques). Once secured, they will drive to the bank and deposit the money in your nominated account. You will also receive updates about the transaction via email.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Do you need help in counting your daily takings? Our <strong>Cash Counting Service</strong> can surely solve it all for you. We can collect your takings, count them, and bring it to the bank for deposit. We can also simply wire the money to your account, whichever works for you.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `<strong>Cash Delivery</strong>, also called the Change Order Service, is a type of <strong>cash in transit service</strong> where you can request for cash and coins to be delivered in your location. We will contact the bank, order the funds, and sort them according to your requested denominations. Once we have all the funds ready, we will deliver it to your address on the agreed date.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/25-australia-securecash-services-0025-f.jpg`,
+        imageUrl: `/images/25-australia-securecash-services-0025-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -3147,7 +3147,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire an Central Coast Cash In Transit Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/37-australia-securecash-services-37.jpg`,
+        imageUrl: `/images/37-australia-securecash-services-37.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -3159,14 +3159,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-couriers": {
     metaTitle: `Cash in Transit Couriers | Choose a Trusted Name`,
     title: `Cash In Transit Couriers`,
-    imageUrl: `https://www.securecash.com.au/images/19-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/19-australia-securecash-services-featured.jpg`,
     heading: `Looking For Cash In Transit Couriers?`,
     description: `<strong>Cash-in-transit couriers</strong> are professionals assigned to collect your money. They pick up your banking from your business location and transport it to the bank, so you won&rsquo;t have to take the risk of carrying the money yourself. <strong>SecureCash</strong> couriers are plain-clothed officers who are trained to blend in with the crowd and avoid attention. <a href="/quote"  ><strong>Get a quote today</strong></a> so we can do the banking for you!`,
     sections: {
@@ -3189,7 +3189,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/23-australia-securecash-services-0023-f.jpg`,
+        imageUrl: `/images/23-australia-securecash-services-0023-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -3214,7 +3214,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `How We Can Benefit Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/25-australia-securecash-services-25.jpg`,
+        imageUrl: `/images/25-australia-securecash-services-25.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -3226,14 +3226,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-maitland": {
     metaTitle: `Cash in Transit Maitland | Premium Cash in Transit in Maitland`,
     title: `Cash In Transit Services,<br> Maitland AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-4.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-4.jpg`,
     heading: `Looking For Cash In Transit Services in Maitland?`,
     description: `<strong>Cash In Transit</strong> is a swift and secure transport of cash, coins, credit cards, and cheques. <strong><a href="/">SecureCash</a></strong>&nbsp;offers convenience to businesses in Maitland by picking up their takings and transporting it to the bank. Find out why we are the largest and the most trusted cash-in-transit provider in Maitland. <a href="/quote"><strong>Get a quote</strong></a> now!`,
     sections: {
@@ -3255,7 +3255,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/6-australia-securecash-services-006.jpg`,
+        imageUrl: `/images/6-australia-securecash-services-006.jpg`,
       },
       leftImageSection: {
         content: [
@@ -3275,7 +3275,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Maitland Cash In Transit Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/52-australia-securecash-services-52.jpg`,
+        imageUrl: `/images/52-australia-securecash-services-52.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -3287,14 +3287,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-melbourne": {
     metaTitle: `Cash in Transit Melbourne | We Pickup & bank Your Money`,
     title: `Banking Courier Services,<br> Melbourne AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-30.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-melbourne-australia-featured-30.jpg`,
     heading: `Looking For Cash In Transit Services in Melbourne?`,
     description: `<strong> Cash in Transit</strong></Cash > in the state of Victoria is where a guard provides the service with a firearm.We provide a service without a firearm, so provide a <strong> Banking Courier Service</strong> instead of <strong> Cash in Transit</strong>.<strong> Banking Courier Services</strong> is a secure way of managing your banking by transporting your daily takings from your office location to your bank. <strong> <a href="/">SecureCash</a></strong>'s operations are discreet so your employees and customers will not notice any cash transactions in the office.  Find out how we can help your business in Melbourne by <a href="/quote"> <strong>getting a quote</strong></a> now.`,
     sections: {
@@ -3315,27 +3315,27 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/contentpageicons/cashcollection.png`,
+            icon: `/images/contentpageicons/cashcollection.png`,
             details: [
               `Once we have received your request, a Melbourne cash-in-transit team will be organized to pick up your business takings (cash, coins, and cheques). Your funds will be secured in your bank-provided satchels and will then be brought to your bank discreetly.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `If you need to top-up your tills with cash and small change, we can make that happen. Just tell us how much you need and specify your required denominations. We can collect the money from your bank, sort out the banknotes and coins, and deliver it right to your business location.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Need help counting your takings? Our expert cash counting team in Melbourne can take that job off your hands. We will collect your cash and count it before depositing it into your bank account.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/25-australia-securecash-services-0025-f.jpg`,
+        imageUrl: `/images/25-australia-securecash-services-0025-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -3393,7 +3393,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Banking Courier Services Provider for Your Business in Melbourne?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-melbourne-australia-006.jpg`,
+        imageUrl: `/images/securecash-services-melbourne-australia-006.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -3405,14 +3405,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-newcastle": {
     metaTitle: `Newcastle Cash in Transit Services Provider | SecureCash`,
     title: `Cash In Transit Services,<br> Newcastle AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-1.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-1.jpg`,
     heading: `Looking For Cash In Transit Services in Newcastle?`,
     description: `<strong>Cash In Transit</strong> is a security service that moves your cash from your place of business straight to the bank. <strong>SecureCash</strong> is the largest cash-in-transit provider in Newcastle. Our drivers and operators are well-trained professionals in the field of cash security and transport. <strong><a href="tel:1300732873">Contact us today</a></strong> to find out how we can safely move your money!`,
     sections: {
@@ -3429,27 +3429,27 @@ Insured Services</h4>
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Instead of letting your staff do the strenuous task of counting your takings, we can process that for you. We will collect your cash, count it at our depot, and deposit it to your bank in Newcastle.`,
             ],
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/cashcollection.png`,
+            icon: `/images/cashcollection.png`,
             details: [
               'This is our most popular service. At an agreed time, our crew will visit your premises to pick up your takings (banknotes, coins, and cheques). They will then drive to your bank in an unmarked vehicle and deposit the funds into your account. This is service is also called "Banking Courier Service" and is available anytime, any day, even on weekends and holidays. You can book for a cash collection in Newcastle using our <a href="https://service.securecash.com.au/">Online Services</a>.',
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `Are you running out of cash and change? Wouldn&rsquo;t it be better if someone can deliver them to your firm during business hours? This way, you do not have to close the shop and run to the bank to withdraw money. Our cash delivery service can do this for you. You can even request your cash and coins to be readied in various denominations. We can pick up the needed amount of change and deliver it to your location on your requested date and time. You can process this request using our website.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/16-australia-securecash-services-0016.jpg`,
+        imageUrl: `/images/16-australia-securecash-services-0016.jpg`,
       },
       leftImageSection: {
         content: [
@@ -3507,7 +3507,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Cash in Transit Provider for Your Business in Newcastle?`,
-        imageUrl: `https://www.securecash.com.au/images/32-australia-securecash-services-32.jpg`,
+        imageUrl: `/images/32-australia-securecash-services-32.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -3519,14 +3519,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-perth": {
     metaTitle: `Perth Cash in Transit Services Provider | SecureCash`,
     title: `Cash In Transit Services,<br> Perth AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-in-transit-services-perth-australia-featured-7.jpg`,
+    imageUrl: `/images/securecash-cash-in-transit-services-perth-australia-featured-7.jpg`,
     heading: `Looking For Cash In Transit Services in Perth?`,
     description: `<strong>Cash in Transit</strong> is a service that safely transports your cash and cheques to the bank. <strong>SecureCash couriers in Perth</strong> can collect your money from your office and deliver it to the bank on your behalf. You won't have to go through the hassle of going through traffic and waiting on long queues again.`,
     sections: {
@@ -3542,7 +3542,7 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/contentpageicons/cashcollection.png`,
+            icon: `/images/contentpageicons/cashcollection.png`,
             details: [
               'Once we have received and confirmed your <a href="/quote"  >request</a>, a cash collection team will be deployed to your location to pick up your daily takings (cash, coins, and cheques). Your funds will be secured in your bank-provided satchels and will be transported to the bank discreetly. In the bank, our courier will deposit the money into your account, you will receive a deposit notification via email once your money has been deposited at the bank. This will include a GPS stamp so you know exactly where your money is at all times.',
               `Our cash collection service is available every day, including weekends and on holidays. We also process night-time collections to cater to businesses that operate outside normal business hours.`,
@@ -3550,7 +3550,7 @@ Insured Services</h4>
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `We also provide secure cash counting services to companies who need help in calculating their takings. This is ideal for those who own coin-operated businesses like arcade cabinets, vending machines, laundromat service, parking meters, etc. We can collect the money for you and count it at our depot. Once we have the amount verified from you, we can deliver it to your location or deposit it to the bank or wire the money to your account, whichever works for you.`,
               `Our secure cash counting service offers nothing but convenience to our clients. This time, you won&rsquo;t have to go through the strenuous task of picking up your money and counting it, we can sort it out for you.`,
@@ -3558,14 +3558,14 @@ Insured Services</h4>
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `<strong>SecureCash</strong> can deliver cash and coins directly to your location. This is recommended to businesses who need to replenish their funds to meet their trading needs.`,
               'This service is also called the "<strong>Change Order Service</strong>", where we can bring you cash and coins in specific denominations. Once we have received your request, we can pick up the money from your bank, sort them according to your requested denominations, and deliver them right to where you are.',
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/19-australia-securecash-services-0019-f.jpg`,
+        imageUrl: `/images/19-australia-securecash-services-0019-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -3623,7 +3623,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Cash In Transit Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-perth-australia-0010.jpg`,
+        imageUrl: `/images/securecash-services-perth-australia-0010.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -3635,14 +3635,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-security": {
     metaTitle: `Cash in Transit Security | Insured Services | SecureCash`,
     title: `Cash In Transit Security Service`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-21.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-21.jpg`,
     heading: `Looking For Cash In Transit Security Service?`,
     description: `<strong>Cash in Transit security</strong> is the careful planning and implementation of strategies to avoid any form of risk associated during the cash transportation process. <strong>SecureCash</strong> provides security during the movement of cash from your location until it reaches the bank. <br><a href="tel:1300732873"><strong>Talk to us today</strong></a> to understand how our security strategies benefit your business.`,
     sections: {
@@ -3658,21 +3658,21 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/cashcollection.png`,
+            icon: `/images/cashcollection.png`,
             details: [
               `We can pick up your business takings and transport it to the bank safely. This relieves you from the strenuous task of personally banking your money.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `Do you need to top-up your floats and tills? We can liaise with your bank, collect your funds, and bring it to your store. We can also arrange the money in specific denominations to make your daily transactions easier.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `If your business generates too much cash and coins, we can sort it out for you. We&rsquo;ll pick up the money, take it to our depot for counting, and deposit the total amount to your bank account.`,
               'To avail our services, get a <a href="/quote">quote</a> or call us directly at <a href="tel:1300732873">1300 SECURE</a>. You can reach us 24 hours a day, seven days a week&mdash;including special holidays.&nbsp;',
@@ -3680,7 +3680,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/45-australia-securecash-services-0045.jpg`,
+        imageUrl: `/images/45-australia-securecash-services-0045.jpg`,
       },
       leftImageSection: {
         content: [
@@ -3710,7 +3710,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best CIT Security Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/37-australia-securecash-services-37.jpg`,
+        imageUrl: `/images/37-australia-securecash-services-37.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -3722,14 +3722,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-services-adelaide": {
     metaTitle: `First Class Cash in Transit Services Adelaide | SecureCash`,
     title: `Cash In Transit Services,<br> Adelaide AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-adelaide-australia-featured-2.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-adelaide-australia-featured-2.jpg`,
     heading: `Looking For Cash In Transit Services in Adelaide?`,
     description: `<strong>Cash In Transit</strong> is the process of collecting your business' daily takings, transporting these funds in a secure method and depositing it at the bank on your behalf. Find out more on how <strong><a href="/">SecureCash</a></strong>&nbsp;can provide you with cash in transit solutions that are straightforward and cost-efficient in Adelaide without having to leave the office.`,
     sections: {
@@ -3746,7 +3746,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/25-australia-securecash-services-0025-f.jpg`,
+        imageUrl: `/images/25-australia-securecash-services-0025-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -3768,7 +3768,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire an Adelaide Cash In Transit Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-adelaide-australia-0015.jpg`,
+        imageUrl: `/images/securecash-services-adelaide-australia-0015.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -3780,14 +3780,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-services-brisbane": {
     metaTitle: `Cash in Transit Services - Brisbane Wide | SecureCash`,
     title: `Cash In Transit Services,<br> Brisbane AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-in-transit-services-brisbane-australia-featured-18.jpg`,
+    imageUrl: `/images/securecash-cash-in-transit-services-brisbane-australia-featured-18.jpg`,
     heading: `Looking For Cash In Transit Services in Brisbane?`,
     description: `Our <strong>cash in transit</strong> operation is the safest way to transfer large amounts of cash from your business location to your banking institution in Brisbane. <a href="/"><strong>SecureCash</strong></a>&nbsp;guarantees a direct credit into your account and hassle-free transports. Find out more about why SecureCash is the most reliable cash security provider in the country.`,
     sections: {
@@ -3808,7 +3808,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-brisbane-australia-034.jpg`,
+        imageUrl: `/images/securecash-services-brisbane-australia-034.jpg`,
       },
       leftImageSection: {
         content: [
@@ -3828,7 +3828,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Brisbane Cash In Transit Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-brisbane-australia-002.jpg`,
+        imageUrl: `/images/securecash-services-brisbane-australia-002.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -3840,14 +3840,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-services-melbourne": {
     metaTitle: `Cash in Transit Services Anywhere in Melbourne | SecureCash`,
     title: `Cash In Transit Services,<br> Melbourne AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-4.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-melbourne-australia-featured-4.jpg`,
     heading: `Looking For Cash In Transit Services in Melbourne?`,
     description: `<strong>Cash In Transit</strong> is a secure way of managing your banking by transporting your daily takings from your office location to your bank. <strong>SecureCash</strong>&rsquo;s operations are discreet so your employees and customers will not notice any cash transactions in the office. Find out how we can help your business in Melbourne by <a href="/quote"><strong>getting a quote</strong></a> now.`,
     sections: {
@@ -3865,7 +3865,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-melbourne-australia-025.jpg`,
+        imageUrl: `/images/securecash-services-melbourne-australia-025.jpg`,
       },
       leftImageSection: {
         content: [
@@ -3885,7 +3885,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Cash in Transit Provider for Your Business in Melbourne?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-melbourne-australia-0014.jpg`,
+        imageUrl: `/images/securecash-services-melbourne-australia-0014.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -3897,14 +3897,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-services-perth": {
     metaTitle: `Premier Cash in Transit Services Perth | SecureCash`,
     title: `Cash In Transit Services,<br> Perth AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-in-transit-services-perth-australia-featured-10.jpg`,
+    imageUrl: `/images/securecash-cash-in-transit-services-perth-australia-featured-10.jpg`,
     heading: `Looking For Cash In Transit Services in Perth?`,
     description: `<strong>Cash in Transit</strong> is a service that safely transports your cash and cheques to the bank. <strong>SecureCash couriers in Perth</strong> can collect your money from your office and deliver it to the bank on your behalf. You won't have to go through the hassle of going through traffic and waiting on long queues again. Read more about it here.`,
     sections: {
@@ -3933,7 +3933,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/1-australia-securecash-services-001.jpg`,
+        imageUrl: `/images/1-australia-securecash-services-001.jpg`,
       },
       leftImageSection: {
         content: [
@@ -3949,7 +3949,7 @@ Insured Services</h4>
         ],
         ctaText:
           "Why Should You Hire an Perth Cash In Transit Provider for Your Business?",
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-perth-australia-0010.jpg`,
+        imageUrl: `/images/securecash-services-perth-australia-0010.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -3961,14 +3961,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-services-sydney": {
     metaTitle: `Trusted Cash in Transit Services Sydney | SecureCash`,
     title: `Cash In Transit Services,<br> Sydney AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-in-transit-sydney-australia-featured-9.jpg`,
+    imageUrl: `/images/securecash-cash-in-transit-sydney-australia-featured-9.jpg`,
     heading: `Looking For Cash In Transit Services in Sydney?`,
     description:
       "SecureCash's <strong>cash in transit couriers</strong> can safely move your cash, coins, and cheques from your business location to your bank in Sydney. We can set up a one-time collection or a regular pick up for you, depending on your company's needs.<br><a href=\"/quote\" ><strong>Request for a quote now</strong></a> so we can start discussing how we can exactly help your business.",
@@ -3987,7 +3987,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-cash-in-transit-sydney-australia-023.jpg`,
+        imageUrl: `/images/securecash-cash-in-transit-sydney-australia-023.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4013,7 +4013,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Cash In Transit Sydney Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-sydney-australia-006.jpg`,
+        imageUrl: `/images/securecash-services-sydney-australia-006.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4025,14 +4025,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-sydney": {
     metaTitle: `Cash in Transit Services Anywhere in Sydney | SecureCash`,
     title: `Cash In Transit Services,<br> Sydney AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-in-transit-sydney-australia-featured-21.jpg`,
+    imageUrl: `/images/securecash-cash-in-transit-sydney-australia-featured-21.jpg`,
     heading: `Looking For Cash In Transit Services in Sydney?`,
     description: `SecureCash's <strong>cash in transit couriers</strong> can safely move your cash, coins, and cheques from your business location to your bank in Sydney. We can set up a one-time collection or a regular pick up for you, depending on your company's needs.<br><a href="/quote"  ><strong>Request for a quote now</strong></a> so we can start discussing how we can exactly help your business.`,
     sections: {
@@ -4050,7 +4050,7 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/contentpageicons/cashcollection.png`,
+            icon: `/images/contentpageicons/cashcollection.png`,
             details: [
               `On your agreed day, our plainclothed personnel will visit your premises to collect your banking (cash, coins, and cheques) and deliver it to the bank safely. We can bring the bank deposit records back to your premises on our next visit.`,
               `We can collect your cash takings any time &mdash; day or night, including weekends and public holidays. We understand that many businesses don't just operate on the 9-5 regular hours, so we made sure that our staff is available to serve you 24/7. If you're working and you need our help, we'll be there for you. That's our commitment.`,
@@ -4058,20 +4058,20 @@ Insured Services</h4>
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `If you own a retail store, a coffee shop, or restaurant and you need to replenish your tills during trading hours, we can definitely help you with that! Tell us how much cash you need, specify the denominations of banknotes and coins you require, and we'll get it organised with your bank and deliver it straight to you.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Do you need someone who can count your takings and deposit it to the bank for you? We can collect your funds wherever you are in Sydney and verify the total amount. We can either deliver it to the bank or wire it directly into your account, whichever works best for you.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-cash-in-transit-sydney-australia-020.jpg`,
+        imageUrl: `/images/securecash-cash-in-transit-sydney-australia-020.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4140,7 +4140,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Cash in Transit Sydney Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-sydney-australia-009.jpg`,
+        imageUrl: `/images/securecash-services-sydney-australia-009.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4152,14 +4152,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-toowoomba": {
     metaTitle: `Toowoomba's Reliable Cash in Transit Service | SecureCash`,
     title: `Cash In Transit Services,<br> Toowoomba AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-8.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-8.jpg`,
     heading: `Looking For Cash In Transit Services in Toowoomba?`,
     description:
       '<strong>Cash in Transit</strong> provides clients with a swift and secure transport solution for their daily takings. <strong>SecureCash</strong> has well-vetted professional couriers who can pick up the money from your business premises and bring it to the bank. Find out why we are the largest cash-in-transit provider in Toowoomba. <a href="/quote"><strong>Get a quote</strong></a> now!',
@@ -4185,7 +4185,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/43-australia-securecash-services-0043.jpg`,
+        imageUrl: `/images/43-australia-securecash-services-0043.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4205,7 +4205,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Toowoomba Cash In Transit Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/35-australia-securecash-services-35.jpg`,
+        imageUrl: `/images/35-australia-securecash-services-35.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4217,14 +4217,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-in-transit-warrawong": {
     metaTitle: `Warrawong's Reliable Cash in Transit Service | SecureCash`,
     title: `Cash In Transit Services,<br> Warrawong AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-14.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-14.jpg`,
     heading: `Looking For Cash In Transit Services in Warrawong?`,
     description: `<strong>Cash in Transit</strong> is the secure way of transferring cash, coins, and cheques from one location to another. We have <strong><a href="/">SecureCash</a></strong>&nbsp;couriers in <strong>Warrawong</strong> who can collect your money from your place of business, bring it to the bank, and deposit it directly to your account. <a href="/quote" ><strong>Get a quote</strong></a> to find out more about our services today!`,
     sections: {
@@ -4241,7 +4241,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/53-australia-securecash-services-0053.jpg`,
+        imageUrl: `/images/53-australia-securecash-services-0053.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4260,7 +4260,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Warrawong Cash In Transit Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/45-australia-securecash-services-45.jpg`,
+        imageUrl: `/images/45-australia-securecash-services-45.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4272,14 +4272,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-logistic-services": {
     metaTitle: `Cash Logistics Services | SecureCash`,
     title: `Cash Logistics Services`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/3-australia-securecash-services-featured.jpg`,
     heading: `Looking For Cash Logistics Services?`,
     description: `A <strong>cash logistic service</strong> manages, transports, and protects your funds by eliminating risks and public exposure. <strong>SecureCash</strong> can manage your banking for you, providing you with peace of mind while we transport and deposit your money to the bank.<br><a href="tel:1300732873"><strong>Give us a call today</strong></a> to find out how our cash logistics team can help your business.`,
     sections: {
@@ -4294,21 +4294,21 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/contentpageicons/cashcollection.png`,
+            icon: `/images/contentpageicons/cashcollection.png`,
             details: [
               `<strong>Cash Collection</strong> is the most-requested service by clients who want to deposit their funds without leaving the workplace. We can <em>pick up the money from your location</em>, <em>secure it in your bank-provided satchels</em>, <em>take it to the bank</em>, and <em>process your deposit</em>.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `<strong>Cash Delivery</strong> is ideal for businesses who may need cash deliveries to top up floats and tills. We can also help replenish your funds in one-off events like <em>carnivals</em>, <em>conventions</em>, <em>fundraisers</em>, <em>festivals</em>, etc. We can collect the money from your bank, arrange them according to your required denominations, and deliver them to your location.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `<strong>Cash Counting</strong> is highly recommended for business owners who need help in <em>sorting out cash and coins</em> from <em>parking meters</em>, <em>arcade cabinets</em>, <em>charity boxes</em>, and other <em>coin-operated machines</em>. Now, you won&rsquo;t have to do the counting yourself or ask one of your employees to do it. <strong>For years, <em>our clients</em> have commended us</strong> for our accurate calculations and real-time bank transfers.`,
               `With <strong>SecureCash</strong>, you won&rsquo;t have to leave your office anymore to process your banking needs. Our services can keep you from the <em>hassles of traffic</em>, <em>finding a parking spot</em>, <em>spending gas money</em>, and <em>waiting on long queues in the bank</em>.`,
@@ -4316,7 +4316,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/12-australia-securecash-services-0012.jpg`,
+        imageUrl: `/images/12-australia-securecash-services-0012.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4335,7 +4335,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Choose SecureCash for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/1-australia-securecash-services-1.jpg`,
+        imageUrl: `/images/1-australia-securecash-services-1.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4347,14 +4347,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-logistics": {
     metaTitle: `Cash Logistics | Worry Free Services with SecureCash`,
     title: `Cash Logistic Services`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/3-australia-securecash-services-featured.jpg`,
     heading: `Looking For Cash Logistic Services?`,
     description:
       'A <strong>cash logistic service</strong> manages, transports, and protects your funds by eliminating risks and public exposure. <strong>SecureCash</strong> can manage your banking for you, providing you with peace of mind while we transport and deposit your money to the bank.<br><a href="tel:1300732873"><strong>Give us a call today</strong></a> to find out how our cash logistics team can help your business.',
@@ -4372,7 +4372,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/12-australia-securecash-services-0012-f.jpg`,
+        imageUrl: `/images/12-australia-securecash-services-0012-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4394,7 +4394,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Choose SecureCash for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/1-australia-securecash-services-1.jpg`,
+        imageUrl: `/images/1-australia-securecash-services-1.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4406,14 +4406,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-logistics-management": {
     metaTitle: `Cash Logistics Management | Fast and Secure`,
     title: `Cash Logistics Management`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.webp`,
+    imageUrl: `/images/3-australia-securecash-services-featured.webp`,
     heading: `Looking For Cash Logistics Management?`,
     description: `<strong>Cash logistics management</strong> is vital in keeping your business' takings secured. Outsourcing your cash logistics with <strong>SecureCash</strong> is a beneficial move for your organization, as we keep the movement of funds in a covert and discreet method.<br><a href="tel:1300732873"><strong>Call us today</strong></a> to find out why we are Australia&rsquo;s no. 1 cash logistics management provider.`,
     sections: {
@@ -4430,7 +4430,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/2-australia-securecash-services-002-f.jpg`,
+        imageUrl: `/images/2-australia-securecash-services-002-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4440,21 +4440,21 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/contentpageicons/cashcollection.png`,
+            icon: `/images/contentpageicons/cashcollection.png`,
             details: [
               `We offer straightforward cash collection services. Once we have received your request, we will be at your location to meet-up with your assigned cash handler and collect your banking. We will then take it to the bank to process your deposit. You will receive a notification via email to confirm that your deposit has been completed.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               'SecureCash can deliver cash and coins in bulk or in individual floats. You can request for your money to be prepared in specific denominations. We can collect the money from your bank, arrange them according to your required denominations, and deliver them to where you are. As a client, you are free to choose a suitable method of funding your regular cash deliveries. Call us on <a href="tel:1300732873">1300 SECURE</a> to learn more about this service.',
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Our cash counting service is highly recommended for business operators who own vending machines, arcade cabinets, parking metes, charity collections, etc. We can pick up the money, take it to our depot, and sort them out using our advanced cash counting equipment. Once done, we can deliver the money to you or wire it to your bank account, whichever works best for you.`,
             ],
@@ -4474,7 +4474,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Choose SecureCash for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/14-australia-securecash-services-14.jpg`,
+        imageUrl: `/images/14-australia-securecash-services-14.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4486,14 +4486,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups": {
     metaTitle: `Cash Pickup Services | Safely Manage Your Cash | SecureCash`,
     title: `Cash Pickup Services`,
-    imageUrl: `https://www.securecash.com.au/images/31-australia-securecash-services-featured.png`,
+    imageUrl: `/images/31-australia-securecash-services-featured.png`,
     heading: `Looking For Cash Pickup Services?`,
     description: `A <strong>cash pick up service</strong> collects your cash, coins, and cheques and takes it to your bank where it will be deposited to your account safely and securely. <strong>SecureCash</strong> provides cost-effective cash pick up solutions for all types of businesses in Australia. <a href="tel:1300732873"><strong>Talk to us</strong></a> today so we can discuss how we can help you with your banking.`,
     sections: {
@@ -4512,11 +4512,11 @@ Insured Services</h4>
             details: [
               `Here the known benefits of choosing SecureCash for your company:`,
               '<ul class="services-list"><li>Prevents future risks for your business</li><li>Protects your staff and location from potential crimes</li><li>Discreet cash counting and safekeeping</li><li>Reliable and round-the-clock service</li><li>Fast and easy online access</li><li>Nationwide coverage with depots in Brisbane, Perth, Sydney, Adelaide, and Melbourne</li><li>Available 24 hours a day, 7 days a week&mdash;Australia wide</li></ul>',
-              '<img src="https://www.securecash.com.au/images/provider-comparison.jpg" alt="SecureCash Benefits | #1 Reliable Australia Cash Pickup Service Provider" width="99%" height="auto">',
+              '<img src="/images/provider-comparison.jpg" alt="SecureCash Benefits | #1 Reliable Australia Cash Pickup Service Provider" width="99%" height="auto">',
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/25-australia-securecash-services-0025-f.jpg`,
+        imageUrl: `/images/25-australia-securecash-services-0025-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4527,14 +4527,14 @@ Insured Services</h4>
           },
           {
             title: `Cash Deliveries`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `<strong>SecureCash</strong> can deliver any amount of cash to top up your tills and prepare you for your daily tradings. You can specify your request in cash and coins, in any specific denominations, and we&rsquo;ll gladly arrange the amount and deliver them right to your doorstep.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Our much-valued cash counting service can help you sort out and count your business&rsquo; cash and coins, which can help you save time and increase productivity. SecureCash uses the latest cash sorting and cash processing machines to provide you with a precise and detailed amount. This service is ideal for companies who operate vending machines, parking meters, laundromats, and other coin-operated devices.`,
             ],
@@ -4549,7 +4549,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `How We Can Benefit Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/4-australia-securecash-services-004.jpg`,
+        imageUrl: `/images/4-australia-securecash-services-004.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4561,14 +4561,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-adelaide": {
     metaTitle: `Adelaide's Most Trusted Cash Pickup Provider | SecureCash`,
     title: `Cash Pickup Services,<br> Adelaide AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-adelaide-australia-featured-9.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-adelaide-australia-featured-9.jpg`,
     heading: `Looking For Cash Pickup Services in Adelaide?`,
     description: `<strong>Cash pickup</strong> is the safe collection of daily takings from a business establishment. <strong>SecureCash</strong> is Adelaide&rsquo;s #1 when it comes to collecting funds from your location and depositing them to the bank. Find out how we can provide you with cash security solutions that are straightforward and cost-efficient for your company. <a href="tel:1300732873"  ><strong>Call us now</strong></a>!`,
     sections: {
@@ -4591,7 +4591,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/19-australia-securecash-services-0019-f.jpg`,
+        imageUrl: `/images/19-australia-securecash-services-0019-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4613,7 +4613,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire an Adelaide Cash Pickup Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-adelaide-australia-0016.jpg`,
+        imageUrl: `/images/securecash-services-adelaide-australia-0016.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4625,14 +4625,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-bendigo": {
     metaTitle: `Cash Pickup Services, Bendigo AU | SecureCash`,
     title: `Cash Pickup Services,<br> Bendigo AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-18.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-18.jpg`,
     heading: `Looking For Cash Pickup Services in Bendigo?`,
     description: `<strong>Cash pickup</strong> is a safe and cost-effective service that benefits all types of businesses. <a href="/"><strong>SecureCash</strong></a>&nbsp;has banking couriers in Bendigo who can collect any amount of cash from your company's location and transport it to the bank in a timely manner. <strong><a href="/quote">Get a quote now</a></strong>&nbsp;or <a href="tel:1300732873"><strong>call us</strong></a> today to find out how our services can help your company.`,
     sections: {
@@ -4660,7 +4660,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/19-australia-securecash-services-0019-f.jpg`,
+        imageUrl: `/images/19-australia-securecash-services-0019-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4681,7 +4681,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire an Bendigo Cash Pickup Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/60-australia-securecash-services-60.jpg`,
+        imageUrl: `/images/60-australia-securecash-services-60.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4693,14 +4693,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-brisbane": {
     metaTitle: `Trusted Cash Pickups Anywhere in Brisbane | SecureCash`,
     title: `Cash Pickup Services,<br> Brisbane AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-pickup-services-brisbane-australia-featured-15.jpg`,
+    imageUrl: `/images/securecash-cash-pickup-services-brisbane-australia-featured-15.jpg`,
     heading: `Looking For Cash Pickup Services in Brisbane?`,
     description: `<strong>Cash pickups</strong> are the safest way to transfer your hard-earned takings from your business location to your banking institution in Brisbane. <strong>SecureCash</strong> guarantees hassle-free transports and a direct credit into your account. <strong><a href="/quote" >Find out more</a></strong> about why we are the most reliable cash security provider in the country. <strong><a href="tel:1300732873" >Call us now</a></strong>!`,
     sections: {
@@ -4721,7 +4721,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-brisbane-australia-023.jpg`,
+        imageUrl: `/images/securecash-services-brisbane-australia-023.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4739,7 +4739,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Brisbane Cash Pickup Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-brisbane-australia-0019.jpg`,
+        imageUrl: `/images/securecash-services-brisbane-australia-0019.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4751,14 +4751,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-cairns": {
     metaTitle: `Cash Pickups Cairns | Reliable and Affordable | SecureCash`,
     title: `Cash Pickup Services,<br> Cairns AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-23.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-23.jpg`,
     heading: `Looking For Cash Pickup Services in Cairns?`,
     description: `<strong>Cash pickup</strong> is the most convenient way of managing your company&rsquo;s cash flow and security. <strong>SecureCash</strong> specializes in picking up your business takings, transporting it to the bank, and depositing it to your account. We guarantee a fast and secure collection wherever your business is located in Cairns. <a href="/quote" ><strong>Get a quote</strong></a> now!`,
     sections: {
@@ -4776,7 +4776,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/57-australia-securecash-services-0057.jpg`,
+        imageUrl: `/images/57-australia-securecash-services-0057.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4803,7 +4803,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Cairns Cash Pickup Services for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/51-australia-securecash-services-51.jpg`,
+        imageUrl: `/images/51-australia-securecash-services-51.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4815,14 +4815,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-canberra": {
     metaTitle: `Cash Pickups Canberra | Insured & Secure | SecureCash`,
     title: `Cash Pickup Services,<br> Canberra AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-canberra-australia-featured-6.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-canberra-australia-featured-6.jpg`,
     heading: `Looking For Cash Pickup Services in Canberra?`,
     description: `A <strong>cash pickup</strong> is a process of collecting physical cash from a business and transporting it to the bank on their behalf. <strong>SecureCash</strong> provides a fast, secure, and strategic transport of your money (cash, coins, and cheques) from your location to the bank. <a href="/quote" ><strong>Get a quote</strong></a> to find out why we are the most trusted cash-in-transit company in Canberra.`,
     sections: {
@@ -4840,7 +4840,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/43-australia-securecash-services-0043.jpg`,
+        imageUrl: `/images/43-australia-securecash-services-0043.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4859,7 +4859,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Canberra Cash Pickup Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/56-australia-securecash-services-56.jpg`,
+        imageUrl: `/images/56-australia-securecash-services-56.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4871,14 +4871,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-gold-coast": {
     metaTitle: `Gold Coast's Trusted Cash Pickup Service | SecureCash`,
     title: `Cash Pickup Services,<br> Gold Coast AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-4.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-4.jpg`,
     heading: `Looking For Cash Pickup Services on the Gold Coast?`,
     description: `Cash pickup services help companies secure their business takings by collecting their money from the business premises and covertly transporting it to the bank. <strong><a href="/">SecureCash</a></strong>&nbsp;couriers can pick up your money wherever you are in the Gold Coast. Our services are available 24 hours a day, 7 days a week. <a href="/quote" ><strong>Get a quote</strong></a> now!`,
     sections: {
@@ -4894,7 +4894,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/47-australia-securecash-services-0047.jpg`,
+        imageUrl: `/images/47-australia-securecash-services-0047.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4914,7 +4914,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Gold Coast Cash Pickup Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/47-australia-securecash-services-47.jpg`,
+        imageUrl: `/images/47-australia-securecash-services-47.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4926,14 +4926,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-hobart": {
     metaTitle: `Cash Pickups Hobart | SecureCash`,
     title: `Cash Pickup Services,<br> Hobart AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-hobart-australia-featured-3.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-hobart-australia-featured-3.jpg`,
     heading: `Looking For Cash Pickup Services in Hobart?`,
     description: `<strong>Cash pickup</strong> is a security service that prevents your funds from going to the wrong hands. <strong>SecureCash</strong> has bank couriers to pick up your banking from your business location and take it to the bank safely and on time. <a href="/quote" ><strong>Get a quote now</strong></a> to find out how we can exactly help your business in Hobart. <a href="tel:1300732873"><strong>Call us</strong></a> today!`,
     sections: {
@@ -4953,7 +4953,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-cash-pickup-sydney-australia-011.jpg`,
+        imageUrl: `/images/securecash-cash-pickup-sydney-australia-011.jpg`,
       },
       leftImageSection: {
         content: [
@@ -4976,7 +4976,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire an Hobart Cash Pickup Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/48-australia-securecash-services-48.jpg`,
+        imageUrl: `/images/48-australia-securecash-services-48.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -4988,14 +4988,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-kadina": {
     metaTitle: `Cash Pickups in Kadina, Wallaroo & Moonta | SecureCash`,
     title: `Cash Pickup Services,<br> Kadina AU`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/3-australia-securecash-services-featured.jpg`,
     heading: `Looking For Cash Pickup Services in Kadina?`,
     description: `<strong>Cash pickup</strong> is a cash management service that gives convenience to companies. <strong>SecureCash's</strong> professional couriers are available in Kadina to collect your banking wherever your office is located. We can discreetly bring it to the bank, making sure it is directly deposited into your account. <a href="/quote" ><strong>Get a quote now</strong></a>!`,
     sections: {
@@ -5014,7 +5014,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/19-australia-securecash-services-0019-f.jpg`,
+        imageUrl: `/images/19-australia-securecash-services-0019-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -5035,7 +5035,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire an Kadina Cash Pickup Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/1-australia-securecash-services-1.jpg`,
+        imageUrl: `/images/1-australia-securecash-services-1.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -5047,14 +5047,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-melbourne": {
     metaTitle: `Melbourne's Premier Cash Pickup Company | SecureCash`,
     title: `Cash Pickup Services,<br> Melbourne AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-3.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-melbourne-australia-featured-3.jpg`,
     heading: `Looking For Cash Pickup Services in Melbourne?`,
     description: `<strong>Cash pickup</strong> is the process of collecting your business&rsquo; daily takings and sending it to the bank in a covert method. <a href="/" ><strong>SecureCash</strong></a> provides cash pickup in Melbourne. Our couriers are trained to blend in with the crowd and create no disruptions in your workplace. Find out how we can help your business by <a href="/quote" ><strong>getting a quote now</strong></a>.`,
     sections: {
@@ -5070,7 +5070,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/19-australia-securecash-services-0019-f.jpg`,
+        imageUrl: `/images/19-australia-securecash-services-0019-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -5089,7 +5089,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Melbourne Cash Pickup Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-melbourne-australia-0030.jpg`,
+        imageUrl: `/images/securecash-services-melbourne-australia-0030.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -5101,14 +5101,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-perth": {
     metaTitle: `Cash Pickups Perth | Trusted for Over 20 Years | SecureCash`,
     title: `Cash Pickup Services,<br> Perth AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-pickup-collection-services-perth-australia-featured-7.jpg`,
+    imageUrl: `/images/securecash-cash-pickup-collection-services-perth-australia-featured-7.jpg`,
     heading: `Looking For Cash Pickup Services in Perth?`,
     description: `<strong>Cash pickup</strong> is a cash security service that provides convenience to companies. <strong><a href="/">SecureCash</a></strong>&nbsp;can help your business by collecting your daily takings wherever your office is located in Perth. We can discreetly transport it to the bank and deposit it on your behalf.<br> <a href="tel:1300732873"><strong>Talk to us today</strong></a> to learn more about how we can help your company in Perth.`,
     sections: {
@@ -5132,7 +5132,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/15-australia-securecash-services-0015-f.jpg`,
+        imageUrl: `/images/15-australia-securecash-services-0015-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -5162,7 +5162,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Cash Pickup Service for Your Business in Perth?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-perth-australia-0011.jpg`,
+        imageUrl: `/images/securecash-services-perth-australia-0011.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -5174,14 +5174,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-sydney": {
     metaTitle: `Sydney's Premier Cash Pickup Service | SecureCash`,
     title: `Cash Pickup Services,<br> Sydney AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-pickup-sydney-australia-featured-13.jpg`,
+    imageUrl: `/images/securecash-cash-pickup-sydney-australia-featured-13.jpg`,
     heading: `Looking For Cash Pickup Services in Sydney?`,
     description: `<strong>Cash pickup couriers</strong> can safely move your banknotes, coins, and cheques from your business location to your bank in Sydney. We can set up an ad hoc collection or a regular pick up for you, depending on what your company requires. Find out more by <a href="/quote" ><strong>getting a quote now</strong></a> to discover how we can exactly help your business.`,
     sections: {
@@ -5197,7 +5197,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/securecash-cash-pickup-sydney-australia-011.jpg`,
+        imageUrl: `/images/securecash-cash-pickup-sydney-australia-011.jpg`,
       },
       leftImageSection: {
         content: [
@@ -5217,7 +5217,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire a Cash Pickup Service for Your Business in Sydney?`,
-        imageUrl: `https://www.securecash.com.au/images/securecash-services-sydney-australia-0017.jpg`,
+        imageUrl: `/images/securecash-services-sydney-australia-0017.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -5229,14 +5229,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-toowoomba": {
     metaTitle: `Cash Pickups Toowoomba | Safe & Secure`,
     title: `Cash Pickup Services,<br> Toowoomba AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-11.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-11.jpg`,
     heading: `Looking For Cash Pickup Services in Toowoomba?`,
     description:
       'A <strong>cash pickup service</strong> is the physical collection of banknotes, coins, and cheques from a business location. <strong>SecureCash</strong> offers discreet and covert cash pickups to all stores, cafes, and offices located in and around Toowoomba.<br><a href="tel:1300732873"><strong>Call us now</strong></a> to find out how we can help you and your business. <a href="/quote/"><strong>Get a quote</strong></a> now!',
@@ -5259,7 +5259,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/43-australia-securecash-services-0043.jpg`,
+        imageUrl: `/images/43-australia-securecash-services-0043.jpg`,
       },
       leftImageSection: {
         content: [
@@ -5279,7 +5279,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Toowoomba Cash Pickup Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/56-australia-securecash-services-56.jpg`,
+        imageUrl: `/images/56-australia-securecash-services-56.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -5291,14 +5291,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-warrawong": {
     metaTitle: `Cash Pickups Warrawong | Reliable Cash Pickup Services | SecureCash`,
     title: `Cash Pickup Services,<br> Warrawong AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-18.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-18.jpg`,
     heading: `Looking For Cash Pickup Services in Warrawong?`,
     description:
       '<strong>Cash pickup</strong> is the secure collection of business takings done by a professional courier. <strong><a href="/">SecureCash</a></strong>&nbsp;deploys plain clothed couriers to pick up your money from your company and safely transport it to the bank for deposit. We ensure the safety of your money and real-time deposit into your account. <a href="/quote" ><strong>Get a quote</strong></a> now!',
@@ -5322,7 +5322,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/41-australia-securecash-services-0041.jpg`,
+        imageUrl: `/images/41-australia-securecash-services-0041.jpg`,
       },
       leftImageSection: {
         content: [
@@ -5342,7 +5342,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Warrawong Cash Pickup Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/54-australia-securecash-services-54.jpg`,
+        imageUrl: `/images/54-australia-securecash-services-54.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -5354,14 +5354,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-pickups-wollongong": {
     metaTitle: `Woolongong's Premier Cash Pickup Company | SecureCash`,
     title: `Cash Pickup Services,<br> Wollongong AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-22.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-22.jpg`,
     heading: `Looking For Cash Pickup Services in Wollongong?`,
     description: `A <strong>cash pickup service</strong> is a process of collecting any amount of cash from one location to another. Our <strong><a href="/">SecureCash</a></strong>&nbsp;couriers pick up your money from your business premises and safely transports it to the bank in an unarmoured vehicle. <a href="tel:1300732873"><strong>Call us now</strong></a> to find out how our services greatly benefit your company in Wollongong.`,
     sections: {
@@ -5384,7 +5384,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/41-australia-securecash-services-0041.jpg`,
+        imageUrl: `/images/41-australia-securecash-services-0041.jpg`,
       },
       leftImageSection: {
         content: [
@@ -5414,7 +5414,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Should You Hire an Wollongong Cash Pickup Provider for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/51-australia-securecash-services-51.jpg`,
+        imageUrl: `/images/51-australia-securecash-services-51.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -5426,14 +5426,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-runs": {
     metaTitle: `Cash Runs | Worry-Free Cash Banking Services | SecureCash`,
     title: `Cash Runs Service`,
-    imageUrl: `https://www.securecash.com.au/images/featured/services-escalator.jpg`,
+    imageUrl: `/images/featured/services-escalator.jpg`,
     heading: `Looking For Cash Runs Service?`,
     description: `<strong><a href="/">SecureCash</a></strong> provides <strong>cash runs</strong> for companies who need their money transported to the bank or change delivered to them. We deploy plain-clothed cash couriers who drive soft skin vehicles to avoid detection. Our operations are covert to avoid distractions in the workplace and to not draw attention to the public. Find out how cash runs benefit your business. <a href="tel:1300732873"><strong>Call us</strong></a> today!`,
     sections: {
@@ -5474,7 +5474,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/cash-runs/cash-runs-1.jpg`,
+        imageUrl: `/images/cash-runs/cash-runs-1.jpg`,
       },
       leftImageSection: {
         content: [
@@ -5501,7 +5501,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `How You Can Benefit From Our Services`,
-        imageUrl: `https://www.securecash.com.au/images/cash-runs/cash-runs-2.jpg`,
+        imageUrl: `/images/cash-runs/cash-runs-2.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -5513,14 +5513,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/cash-runs/cash-runs-3.jpg`,
+        imageUrl: `/images/cash-runs/cash-runs-3.jpg`,
       },
     },
   },
   "cash-security": {
     metaTitle: `Tips on Business Cash Security | SecureCash`,
     title: `Cash Security Tips`,
-    imageUrl: `https://www.securecash.com.au/images/21-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/21-australia-securecash-services-featured.jpg`,
     heading: `Looking For Cash Security Services?`,
     description: `Having a <strong>cash security service</strong> improves company efficiency and enhances business security. <a href="/"  ><strong>SecureCash</strong></a> collects your cash in unarmored ordinary-looking vehicles to avoid public attention, keeping you safe and your money secure throughout the cash handling process. <a href="/quote"><strong>Get a quote now</strong></a> to find out how we can help you improve your company&rsquo;s security.`,
     sections: {
@@ -5557,7 +5557,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/2-australia-securecash-services-002.jpg`,
+        imageUrl: `/images/2-australia-securecash-services-002.jpg`,
       },
       leftImageSection: {
         content: [
@@ -5594,7 +5594,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `How Can SecureCash Help Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/13-australia-securecash-services-13.jpg`,
+        imageUrl: `/images/13-australia-securecash-services-13.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -5606,14 +5606,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-security-services": {
     metaTitle: `Australia's Premier Cash Security Provider | SecureCash`,
     title: `Cash Security Services`,
-    imageUrl: `https://www.securecash.com.au/images/21-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/21-australia-securecash-services-featured.jpg`,
     heading: `Looking For Cash Security Services?`,
     description:
       'Having a <strong>cash security service</strong> improves company efficiency and enhances business security. <a href="/" ><strong>SecureCash</strong></a> collects your cash in unarmored ordinary-looking vehicles to avoid public attention, keeping you safe and your money secure throughout the cash handling process. <a href="/quote" ><strong>Get a quote now</strong></a> to find out how we can help you improve your company&rsquo;s security.',
@@ -5629,27 +5629,27 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/contentpageicons/cashcollection.png`,
+            icon: `/images/contentpageicons/cashcollection.png`,
             details: [
-              `<a href="https://www.securecash.com.au/secure-cash-collection-service/">Cash collection</a> is the strategic process of picking up your business' daily takings (cash, coins, and cheques) and transporting them to your bank for deposit. Having a professional cash courier enhances your company's cash security, giving you more time to focus on other things that matter.`,
+              `<a href="/services/secure-cash-collection-service/">Cash collection</a> is the strategic process of picking up your business' daily takings (cash, coins, and cheques) and transporting them to your bank for deposit. Having a professional cash courier enhances your company's cash security, giving you more time to focus on other things that matter.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `There will be times when your store will run out of funds and you may need to close shop while you arrange more money. With <strong>SecureCash</strong>, this should now be the least of your worries. Our cash delivery team can deliver cash and coins for you&mdash;in bulk or in individual floats. We can collect the money from your bank, arrange them according to your required denominations, and bring them right at your doorstep.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Cash counting is a type of cash security service that is ideal for coin-operated businesses such as vending machines, pokie machines, laundromats, etc. We can collect the money from where you are, take it to our depot, and have it counted. Once the amount is verified, we can bring the money back to you or wire it to your bank account, whichever works best for you.`,
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/25-australia-securecash-services-0025-f.jpg`,
+        imageUrl: `/images/25-australia-securecash-services-0025-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -5712,7 +5712,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `How Can SecureCash Help Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/13-australia-securecash-services-13.jpg`,
+        imageUrl: `/images/13-australia-securecash-services-13.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -5724,14 +5724,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-security-services-hunter-valley": {
     metaTitle: `Cash Security Services Hunter Valley Region | SecureCash`,
     title: `Cash Security Services,<br> Hunter Valley AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-3.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-3.jpg`,
     heading: `Looking For Cash Security Services in Hunter Valley?`,
     description:
       '<strong>Cash security services</strong> are essential in keeping your business\' funds secure. <a href="/" ><strong>SecureCash</strong></a> has plainclothes couriers who can discreetly collect your money from your company\'s location and safely transport it to the bank. <a href="tel:1300732873"><strong>Call us now</strong></a> to find out why we are the number one cash security services provider in Hunter Valley.',
@@ -5755,7 +5755,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/49-australia-securecash-services-0049.jpg`,
+        imageUrl: `/images/49-australia-securecash-services-0049.jpg`,
       },
       leftImageSection: {
         content: [
@@ -5787,7 +5787,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Hunter Valley Cash Security Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/32-australia-securecash-services-32.jpg`,
+        imageUrl: `/images/32-australia-securecash-services-32.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -5799,14 +5799,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-security-services-newcastle": {
     metaTitle: `Professional Cash Security Services Newcastle | SecureCash`,
     title: `Cash Security Services,<br> Newcastle AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-15.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-15.jpg`,
     heading: `Looking For Security Guards Services in Newcastle?`,
     description: `<strong>Cash security services</strong> keep your business funds secure, away from theft and robbery. SecureCash has professional bank couriers who can safely pick up your money and transport it to the bank. <a href="/quote" ><strong>Get a quote now</strong></a> to find out how we can exactly secure your business takings in Newcastle. <a href="tel:1300732873"><strong>Call us</strong></a> today!`,
     sections: {
@@ -5832,7 +5832,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/48-australia-securecash-services-0048.jpg`,
+        imageUrl: `/images/48-australia-securecash-services-0048.jpg`,
       },
       leftImageSection: {
         content: [
@@ -5852,7 +5852,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Newcastle Cash Security Provider?`,
-        imageUrl: `https://www.securecash.com.au/images/60-australia-securecash-services-60.jpg`,
+        imageUrl: `/images/60-australia-securecash-services-60.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -5864,14 +5864,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "cash-transport-companies": {
     metaTitle: `Cash Transport Companies | SecureCash`,
     title: `Cash Transport Companies`,
-    imageUrl: `https://www.securecash.com.au/images/32-australia-securecash-services-featured.png`,
+    imageUrl: `/images/32-australia-securecash-services-featured.png`,
     heading: `What are Cash Transport Companies?`,
     description:
       '<strong>Cash transport companies</strong> specialise in the secure movement of business takings. They have highly skilled banking couriers who can pick up and deliver your money from one location to another. <strong>SecureCash</strong> is one of the most trusted cash transport companies in Australia. We help any size corporations by providing them with security solutions that are available anytime and easy to use.<br><span><a href="/quote">Get a quote now</a> to find out how we can help your business today!</span>',
@@ -5917,7 +5917,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/2-australia-securecash-services-002.jpg`,
+        imageUrl: `/images/2-australia-securecash-services-002.jpg`,
       },
       leftImageSection: {
         content: [
@@ -5966,7 +5966,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Choose SecureCash for Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/25-australia-securecash-services-25.jpg`,
+        imageUrl: `/images/25-australia-securecash-services-25.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -5978,14 +5978,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "money-runs": {
     metaTitle: `Money Runs | Helping To Manage Your Money Runs`,
     title: `Money Runs Services`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/3-australia-securecash-services-featured.jpg`,
     heading: `Looking For Money Runs Services?`,
     description: `<strong>Money runs</strong> are a convenient way of managing your company&rsquo;s cash, coins, and cheques.<strong> <a href="/">SecureCash</a></strong>&nbsp;can move your money from your location and deposit it directly to your nominated bank account. Our services are low profile to prevent the risk of robberies and hijacking. Give us a call today to find out exactly how we can help. <a href="tel:1300732873"><strong>Call now</strong></a>!`,
     sections: {
@@ -6002,7 +6002,7 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/contentpageicons/cashcollection.png`,
+            icon: `/images/contentpageicons/cashcollection.png`,
             details: [
               '<a href="cash-collection/">Cash collection</a> is our most in-demand <strong>money runs service</strong>. We help keep your takings (cash, coins, and cheques) secure by picking it up from your location and moving it to the bank. Your money is sealed in tamper-evident satchels, guaranteed safe from the time of collection until it is deposited into your account.&nbsp;',
               `A <strong>cash collection</strong> is beneficial for business' because it frees you from going to the bank on your own. Also, sending your staff will create a disruption on their work hours, thus affecting the day&rsquo;s productivity. Outsource your banking to us so that you and your staff can focus more on work.&nbsp;`,
@@ -6010,7 +6010,7 @@ Insured Services</h4>
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               'Our <a href="cash-delivery/">cash delivery</a> service also called the <strong>change order service</strong>, is a practical solution if you need to replenish your store&rsquo;s tills and floats. You may request for various denominations of cash and coins and we&rsquo;d be glad to arrange that for you.&nbsp;',
               `Your <strong>cash delivery</strong> can be made in conjunction with your cash collection service to save time. Just inform us 2 days prior so we still have enough time to liaise with your bank.&nbsp;`,
@@ -6018,7 +6018,7 @@ Insured Services</h4>
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               'Our <a href="cash-counting/">cash counting</a> or money processing service is perfect for businesses who deal heavily with coins like vending machines, arcade centres, self-service laundromats, donations, poker machines, etc.&nbsp;',
               `We can collect the money from your location, take it to our depot, and count the money. Once we have the verified amount, we can either bring it to you or wire transfer it to your bank account.&nbsp;`,
@@ -6026,7 +6026,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/17-australia-securecash-services-0017.jpg`,
+        imageUrl: `/images/17-australia-securecash-services-0017.jpg`,
       },
       leftImageSection: {
         content: [
@@ -6045,7 +6045,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `How Can SecureCash Help Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/14-australia-securecash-services-14.jpg`,
+        imageUrl: `/images/14-australia-securecash-services-14.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -6057,14 +6057,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "secure-cash-collection-service": {
     metaTitle: `Secure Cash Collection Services Provider | SecureCash`,
     title: `Secure Cash Collection Services`,
-    imageUrl: `https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/3-australia-securecash-services-featured.jpg`,
     heading: `Looking For Secure Cash Collection Services?`,
     description:
       'Our <strong>secure cash collection service</strong> offers assistance in moving various amounts of cash, making sure your money reaches its destination safely and on time. <a href="/" ><strong>SecureCash</strong></a> can process daily, weekly, and monthly collections, depending on your company requirements. <a href="tel:1300732873"><strong>Give us a call</strong></a> today to find out exactly how we can help.',
@@ -6088,7 +6088,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/15-australia-securecash-services-0015.jpg`,
+        imageUrl: `/images/15-australia-securecash-services-0015.jpg`,
       },
       leftImageSection: {
         content: [
@@ -6108,7 +6108,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `How Can SecureCash Help Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/24-australia-securecash-services-24.jpg`,
+        imageUrl: `/images/24-australia-securecash-services-24.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -6120,14 +6120,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "security-cash-services": {
     metaTitle: `Security Cash Services | Make The Right Choice | SecureCash`,
     title: `Security Cash Services`,
-    imageUrl: `https://www.securecash.com.au/images/21-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/21-australia-securecash-services-featured.jpg`,
     heading: `Looking For Security Cash Services?`,
     description: `<strong><a href="/">SecureCash</a></strong> is a <strong>security cash service</strong> that provides flexible solutions to companies across Australia. We can pick up your daily takings and transport it to the bank without any hassle. We are a family-owned company that has been operating throughout Australia for more than two decades. <a href="tel:1300732873"><strong>Give us a call today</strong></a> to find out how we can help your business!`,
     sections: {
@@ -6143,27 +6143,27 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/13-australia-securecash-services-0013.jpg`,
+        imageUrl: `/images/13-australia-securecash-services-0013.jpg`,
       },
       leftImageSection: {
         content: [
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/contentpageicons/cashcollection.png`,
+            icon: `/images/contentpageicons/cashcollection.png`,
             details: [
               `<strong>We provide <em>cash collection services</em></strong> to all locations across Australia. In picking up your money, we deploy plainclothes couriers who drive unmarked vehicles to discreetly transport your money to the bank. This is to avoid attention and reduce any cash-handling related risks. You can call us for a one-time pickup or opt-in anytime for a regular collection. Our security cash services can be customized according to your organisation's budget.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `<strong>We deliver cash and coins</strong> to any business across Australia. You can specify your needed denominations in bills and coins. We can collect your money from the bank, arrange them according to the denominations you&rsquo;ve requested, and bring them to your location as soon as possible.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               `Our cash counting service is handy for businesses that deal heavily on coins such as vending machines, parking meters, donation boxes, etc. We can collect and take the money to our nearest depot and have it counted for you. With the help of our state-of-the-art cash counting equipment, we can guarantee to provide you with a comprehensive report that should include the grand total and the breakdown of denominations.`,
               `Our security cash services come with several tangible benefits for your business operation. You also get to save costs from buying your own armoured truck and other security cash equipment. You can save yourself from going through the hassles of traffic or by having to get past the crowd just to get to your bank. Let SecureCash manage your banking so you can focus more on the business, your employees, and your customers.`,
@@ -6177,7 +6177,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `How Can SecureCash Help Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/13-australia-securecash-services-13.jpg`,
+        imageUrl: `/images/13-australia-securecash-services-13.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -6189,14 +6189,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "security-central-coast": {
     metaTitle: `Security Central Coast | Total Peace of Mind for Your Cash in Transit`,
     title: `Cash Security Services,<br> Central Coast AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-3.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-3.jpg`,
     heading: `Looking For Cash Security Services on the Central Coast?`,
     description: `<strong>Security</strong> is essential in keeping your people and your company assets safe. <strong>SecureCash</strong> provides cash security and transport solutions that can be tailored according to your business demands. <strong><a href="/quote" >Get a quote</a> </strong>to know how our cash-in-transit strategies helped most organisations in the Central Coast. <a href="tel:1300732873"><strong>Call us today</strong></a>!`,
     sections: {
@@ -6218,7 +6218,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/49-australia-securecash-services-0049.jpg`,
+        imageUrl: `/images/49-australia-securecash-services-0049.jpg`,
       },
       leftImageSection: {
         content: [
@@ -6238,7 +6238,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Central Coast Security Guards Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/32-australia-securecash-services-32.jpg`,
+        imageUrl: `/images/32-australia-securecash-services-32.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -6250,14 +6250,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "security-companies": {
     metaTitle: `Security Companies | Your Cash in Transit Provider`,
     title: `Security Companies`,
-    imageUrl: `https://www.securecash.com.au/images/21-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/21-australia-securecash-services-featured.jpg`,
     heading: `Looking For A Security Company?`,
     description: `Working with <strong>security companies</strong> is essential in running a business, from protecting your staff to protecting your earnings. <a href="/"><strong>SecureCash</strong></a> provides <strong>cash security</strong> by picking up your daily takings and banking them for you. We offer a partnership that provides efficiency and convenience for your businesses in Australia. <a href="tel:1300732873"><strong>Call us now</strong></a> to learn more about the security we provide.`,
     sections: {
@@ -6292,7 +6292,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/2-australia-securecash-services-002-f.jpg`,
+        imageUrl: `/images/2-australia-securecash-services-002-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -6320,7 +6320,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Choose SecureCash for your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/25-australia-securecash-services-25.jpg`,
+        imageUrl: `/images/25-australia-securecash-services-25.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -6332,14 +6332,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "security-companies-melbourne": {
     metaTitle: `Security Companies Melbourne | Trusted Provider | SecureCash`,
     title: `Cash Security Companies,<br> Melbourne AU`,
-    imageUrl: `https://www.securecash.com.au/images/securecash-cash-collection-services-melbourne-australia-featured-21.jpg`,
+    imageUrl: `/images/securecash-cash-collection-services-melbourne-australia-featured-21.jpg`,
     heading: `Looking For Cash Security Company Services in Melbourne?`,
     description:
       '<strong>Security</strong> is vital in keeping your business and your company assets safe. <strong><a href="/">SecureCash</a></strong>&nbsp;is one of the largest and most trusted <strong>security companies</strong> in Melbourne that provides professional <strong>cash security solutions</strong> to various organisations.<br><a href="/contact/"><strong>Talk to us today</strong></a> so we can discuss how we can improve your company&rsquo;s safety and security. Call us now!',
@@ -6366,7 +6366,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/49-australia-securecash-services-0049.jpg`,
+        imageUrl: `/images/49-australia-securecash-services-0049.jpg`,
       },
       leftImageSection: {
         content: [
@@ -6388,7 +6388,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Melbourne Cash Security Company Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/32-australia-securecash-services-32.jpg`,
+        imageUrl: `/images/32-australia-securecash-services-32.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -6400,14 +6400,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "security-guards-central-coast": {
     metaTitle: `Cash Security Guards Central Coast | SecureCash`,
     title: `Security Guard Services,<br> Central Coast AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cash-collection-services-featured-22.jpg`,
+    imageUrl: `/images/australia-securecash-cash-collection-services-featured-22.jpg`,
     heading: `Looking For Security Guards Services on the Central Coast?`,
     description: `<strong>Security guards</strong> are employed by a company to protect their property, employees, equipment, and business takings. <strong><a href="/">SecureCash</a></strong>&nbsp;has security guards in the Central Coast who are trained to detect and prevent any form of danger during the cash-in-transit process.<br><a href="tel:1300732873"><strong>Talk to us today</strong></a> and find out exactly how we can help your business. <strong>Call us now!</strong>`,
     sections: {
@@ -6432,7 +6432,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/54-australia-securecash-services-0054.jpg`,
+        imageUrl: `/images/54-australia-securecash-services-0054.jpg`,
       },
       leftImageSection: {
         content: [
@@ -6453,7 +6453,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Central Coast Security Guards Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/46-australia-securecash-services-46.jpg`,
+        imageUrl: `/images/46-australia-securecash-services-46.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -6465,14 +6465,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "security-guards-maitland": {
     metaTitle: `Security Guards Maitland | Get Your Cash Protected Today`,
     title: `Security Guard Services,<br> Maitland AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-24.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-24.jpg`,
     heading: `Looking For Security Guards Services in Maitland?`,
     description: `<strong>Security guards</strong> help deter crimes by providing a sense of security in the workplace. <strong>SecureCash</strong> has high-calibre security guards in Maitland to protect your company's hard-earned money from robberies, theft, intrusion, violence, and other possible hazards.<br><a href="tel:1300732873"><strong>Give us a call today</strong></a> to find out exactly how we can help. <strong>Call us now</strong>!`,
     sections: {
@@ -6489,7 +6489,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/42-australia-securecash-services-0042.jpg`,
+        imageUrl: `/images/42-australia-securecash-services-0042.jpg`,
       },
       leftImageSection: {
         content: [
@@ -6509,7 +6509,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Maitland Security Guards Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/34-australia-securecash-services-34.jpg`,
+        imageUrl: `/images/34-australia-securecash-services-34.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -6521,14 +6521,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "security-guards-newcastle": {
     metaTitle: `Security Guard Services, Newcastle AU | SecureCash`,
     title: `Security Guard Services,<br> Newcastle AU`,
-    imageUrl: `https://www.securecash.com.au/images/australia-securecash-cit-services-featured-11.jpg`,
+    imageUrl: `/images/australia-securecash-cit-services-featured-11.jpg`,
     heading: `Looking For Security Guard Services in Newcastle?`,
     description: `<strong>Security guards</strong> enforce preventative measures from a variety of hazards such as waste, property damage, vandalism, theft, and other criminal activities. <a href="/" ><strong>SecureCash</strong></a> has top-class cash-in-transit security guards in Newcastle to protect your business' money from risk.<br><a href="tel:1300732873"><strong>Give us a call today</strong></a> to find out how we can help.`,
     sections: {
@@ -6545,7 +6545,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/47-australia-securecash-services-0047.jpg`,
+        imageUrl: `/images/47-australia-securecash-services-0047.jpg`,
       },
       leftImageSection: {
         content: [
@@ -6565,7 +6565,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Are We the Best Newcastle Security Guards Provider in Australia?`,
-        imageUrl: `https://www.securecash.com.au/images/59-australia-securecash-services-59.jpg`,
+        imageUrl: `/images/59-australia-securecash-services-59.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -6577,14 +6577,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "security-officers": {
     metaTitle: `Security Officers | Collect and Deliver Your Cash | SecureCash`,
     title: `Cash Security Officer Services`,
-    imageUrl: `https://www.securecash.com.au/images/21-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/21-australia-securecash-services-featured.jpg`,
     heading: `Looking For Cash Security Officer Services?`,
     description: `<strong>Security officers</strong> are essential in keeping banking collections safe. <strong>SecureCash</strong> has plain clothed security officers who will collect your daily takings and discreetly transport it to the bank. For over 25 years, we have carried out careful and efficient banking collections for companies across Australia. <a href="/quote" ><strong>Get a quote</strong></a> today!`,
     sections: {
@@ -6610,7 +6610,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/19-australia-securecash-services-0019-f.jpg`,
+        imageUrl: `/images/19-australia-securecash-services-0019-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -6643,7 +6643,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `How Can SecureCash Help Your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/13-australia-securecash-services-13.jpg`,
+        imageUrl: `/images/13-australia-securecash-services-13.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -6655,14 +6655,14 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },
   "security-services-company": {
     metaTitle: `Cash Security Company | Reliable Services | SecureCash`,
     title: `Security Services Company`,
-    imageUrl: `https://www.securecash.com.au/images/21-australia-securecash-services-featured.jpg`,
+    imageUrl: `/images/21-australia-securecash-services-featured.jpg`,
     heading: `Looking For Security Services Company?`,
     description: `<strong>SecureCash</strong> is a <strong>security cash service</strong> company that provides flexible solutions to companies across Australia. We can pick up your daily takings and transport it to the bank without any hassle. We are a family-owned company that has been operating throughout Australia for more than two decades. <a href="tel:1300732873"><strong>Give us a call today</strong></a> to find out how we can help your business!`,
     sections: {
@@ -6678,27 +6678,27 @@ Insured Services</h4>
           },
           {
             title: `Cash Collection`,
-            icon: `https://www.securecash.com.au/images/contentpageicons/cashcollection.png`,
+            icon: `/images/contentpageicons/cashcollection.png`,
             details: [
               `Our cash collection service specializes in picking up your daily takings and transporting the money to your banking institution. <strong>Our couriers will pick up your business takings (notes, coins, and checks),</strong> place them in your bank&rsquo;s tamper-evident satchels and transport it to your bank for deposit. We can guarantee you the safest method of transport, that your money will remain secure and untouched until it reaches the bank.`,
             ],
           },
           {
             title: `Cash Delivery`,
-            icon: `https://www.securecash.com.au/images/cashdelivery.png`,
+            icon: `/images/cashdelivery.png`,
             details: [
               `Opting for a cash delivery service allows us to deliver money right where you are. You can even request for your money to be sorted out in specific denominations. We&rsquo;ll collect the money from your bank, sort it out according to your requested denominations, and bring it directly to your business location.`,
             ],
           },
           {
             title: `Cash Counting`,
-            icon: `https://www.securecash.com.au/images/cashcounting.png`,
+            icon: `/images/cashcounting.png`,
             details: [
               'Our cash counting service is convenient especially if you are running a coin-operated business: vending machines, parking meters, laundromats, charity boxes, etc. We can collect your money from its location and bring it to our depot for counting. We can conveniently sort out the coins with the help of our cash sorting equipment. Once the total amount is verified, we can transfer the money electronically or we can deposit it to the bank, whichever works for you. This service is available in <em><a href="cash-in-transit-sydney/" >Sydney</a>, <a href="cash-collection-brisbane/" >Brisbane</a>, <a href="cash-pickups-perth/" >Perth</a>, <a href="cash-pickups-adelaide/" >Adelaide</a>, </em>and <em><a href="cash-in-transit-melbourne/" >Melbourne</a>.</em>',
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/2-australia-securecash-services-002-f.jpg`,
+        imageUrl: `/images/2-australia-securecash-services-002-f.jpg`,
       },
       leftImageSection: {
         content: [
@@ -6722,7 +6722,7 @@ Insured Services</h4>
           },
         ],
         ctaText: `Why Choose SecureCash for your Business?`,
-        imageUrl: `https://www.securecash.com.au/images/25-australia-securecash-services-25.jpg`,
+        imageUrl: `/images/25-australia-securecash-services-25.jpg`,
       },
       guaranteeSection: {
         content: [
@@ -6734,7 +6734,7 @@ Insured Services</h4>
             ],
           },
         ],
-        imageUrl: `https://www.securecash.com.au/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
+        imageUrl: `/images/at-securecash-give-more-focus-to-the-things-you-love.jpg`,
       },
     },
   },

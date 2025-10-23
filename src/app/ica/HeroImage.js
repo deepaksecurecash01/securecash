@@ -9,7 +9,7 @@ const HeroImage = () => (
       className="absolute hidden 480px:block h-[530px]  right-0 w-[54%]  768px:w-1/2  768px:h-[614px] bg-cover bg-no-repeat -z-10"
       style={{
         backgroundImage:
-          'url("https://www.securecash.com.au/images/ica/ica-hero-bg.jpg")',
+          'url("/images/ica/ica-hero-bg.jpg")',
       }}
     ></div>
 
