@@ -167,7 +167,7 @@ const TeamContent = () =>
   return (
     <div
       id="team"
-      className="bg-[#ebebeb] inline-block w-full px-[10px] py-[24px] 414px:pt-[100px] 414px:px-0 414px:py mt-0 768px:p-[50px] 992px:mt-[100px] 992px:px-2 992px:pt-[100px]"
+      className="bg-[#ebebeb] inline-block w-full px-[10px] py-[24px] 414px:py-[100px] 414px:px-0 mt-0 768px:p-[50px] 992px:mt-[100px] 992px:px-2 992px:py-[100px]"
     >
       <div className="w-full max-w-[1366px] mx-[auto] my-[0]">
         <h3
@@ -182,7 +182,7 @@ const TeamContent = () =>
           className="w-[100px] mb-10 mt-4 h-[4px] rounded-[5px] border-0 mx-auto bg-primary"
         />
 
-        <div className="members-slider relative select-none block w-full float-left mb-[100px]">
+        <div className="members-slider relative select-none block w-full float-left ">
           <div
             className="team-slider w-[90%] mx-auto  1024px:w-full "
             aria-label="Team Members"

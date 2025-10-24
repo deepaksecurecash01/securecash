@@ -739,6 +739,7 @@ body.modal-on .site-info-modal {
 @media screen and (min-width: 1366px) {
   #instruction-box {
     margin-right: calc((100% - 1366px) / 2);
+    max-width: calc((1366px / 2) + 100px);
   }
 }
 

@@ -49,9 +49,9 @@ const FormSection = () =>
   return (
     <div
       id="content-contact"
-      className=" bg-content-bg bg-center bg-no-repeat  1366px:bg-cover inline-block w-full 992px:mt-[40px]  1280px:mt-[84px]"
+      className=" bg-content-bg bg-center bg-no-repeat  1366px:bg-cover inline-block w-full  1280px:mt-[84px]"
     >
-      <div className="inner-big w-[95%] max-w-[1366px] mx-auto my-0  992px:flex">
+      <div className="inner-big w-[95%] mt-10 1280px:mt-0 max-w-[1366px] mx-auto my-0  992px:flex">
         <QuoteForm />
         <div className="right-contact-row  w-[96%] 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1]  992px:pl-8">
           <h3
@@ -76,7 +76,7 @@ const FormSection = () =>
             For one reason: We have been established for over 25 years, since 1992 to be exact!
           </p>
 
-          <ScrollableSection className=" h-auto 414px:w-[85%] 992px:w-full p-0 mx-auto   992px:h-[630px] 1200px:h-[658px] 1366px:h-[740px] bg-white mt-6 leading-[2]">
+          <ScrollableSection className=" h-auto 480px:w-[90%] 992px:w-full p-0 mx-auto   992px:h-[630px] 1200px:h-[658px] 1366px:h-[740px] bg-white mt-6 leading-[2]">
             <ul className="list-none w-full  992px:pr-6 services-content">
               {contentItems.map((item, index) => (
                 <li key={index}>

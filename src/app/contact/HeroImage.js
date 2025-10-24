@@ -11,11 +11,11 @@ const HeroImage = () =>
           "-webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0)), url('/images/contact-page/Header-Image.png')",
       }}
     >
-      <h2 className="text-[24px] 414px:text-[40px] mb-3 leading-[30px] 768px:leading-[56px] text-white">
+      <h2 className="text-[24px] 600px:text-[40px] mb-3 leading-[30px] 768px:leading-[56px] text-white">
         Get a Reply Back
       </h2>
       <h1
-        className="text-white font-bold text-center text-[32px] leading-[36px]  414px:leading-[78px]  414px:text-[56px] [text-shadow:2px_2px_6px_#111111] px-[25px] 1070px:mt-0"
+        className="text-white font-bold text-center text-[32px] leading-[36px]  600px:leading-[78px]  600px:text-[56px] [text-shadow:2px_2px_6px_#111111] px-[25px] 1070px:mt-0"
       >
         Within 45 Minutes
       </h1>

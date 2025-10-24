@@ -50,22 +50,21 @@ export const HelpSection = ({
                 <div className=" bg-quote-header bg-no-repeat bg-cover 480px:bg-contain w-full h-full ">
                     <Container className="section-col inner relative h-full 600px:h-[calc(342px+80px)] 768px:h-[500px] 1200px:h-full flex flex-col mt-0 600px:flex-row w-full 1024px:w-[95%] 1440px:w-full">
                         <div className={`section-content-wrapper w-full h-full flex flex-col justify-end ${firstSectionOrder}`}>
-                            <Image
+                            <img
                                 src={imageUrl}
                                 alt={imageAlt}
-                                width={300}
-                                height={300}
+                              
                                 className="w-full 1200px:w-auto h-[calc(100%-68px)]"
                             />
                         </div>
                         <div className={`section-content-wrapper w-full flex flex-col justify-start 768px:justify-end ${secondSectionOrder}`}>
-                            <div className="content bg-white h-full flex flex-col self-end 1200px:max-h-[calc(636px-56px)]">
+                            <div className="content bg-white h-full flex flex-col self-end 1200px:max-h-[calc(636px-66px)]">
                                 <div className="section-header px-10 600px:px-6 py-[18px] relative 600px:absolute 1200px:relative 600px:top-[30px] right-0 w-auto 768px:top-0 768px:px-8 768px:py-10 bg-[#000000] items-end justify-center text-[#ffffff] m-0 flex flex-col text-right">
                                     <hr                                      
                                         className="h-[4px] rounded-[5px] border-0  w-[100px] bg-primary mx-auto 768px:ml-auto 768px:mr-0 hidden 1200px:block divider-gold divider-2"
                                     />
                                     <h3
-                                        className="text-[32px] font-bold leading-[1.4em] text-center 768px:text-right 1200px:pl-[46px] 1366px:pl-[56px] 600px:text-[30px] 768px:text-[32px] 992px:text-[40px] 1200px:mt-6 1200px:mb-2 font-montserrat"
+                                        className="text-[32px] font-bold leading-[1.4em] text-center 768px:text-right 1366px:pl-[56px] 600px:text-[30px] 768px:text-[32px] 992px:text-[40px] 1200px:mt-6 1200px:mb-2 font-montserrat"
                                     >
                                         {title}
                                     </h3>
@@ -76,7 +75,7 @@ export const HelpSection = ({
                                     <ContentScroll sectionContent={sectionContent} />
 
                                     {hasCTA && (
-                                        <div className="flex justify-center 768px:justify-end items-center">
+                                        <div className="flex justify-center 768px:justify-end items-center mt-4">
                                             <div className="w-[200px] bg-[#c7a652] text-[#fff] text-center px-[8px] py-[12px] rounded-[50px] mt-0 768px:ml-0 z-10 hover:bg-[#000000] hover:cursor-pointer no-underline mr-0">
                                                 <Link href="quote">Get a Quote</Link>
                                             </div>

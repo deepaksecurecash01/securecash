@@ -3,6 +3,7 @@ import Container from "../../../components/layout/Container";
 import ScrollableSection from "../../../components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
 import Link from "next/link";
+import Image from "next/image";
 
 export const StorySection = ({
   title,
@@ -52,13 +53,12 @@ export const StorySection = ({
               <img
                 src={imageUrl}
                 alt={imageAlt}
-                width={imageWidth}
-                height={imageHeight}
-                className="w-full h-[calc(100%-68px)]"
+              
+                className="w-full h-[calc(100%-58px)]"
               />
             </div>
             <div className={`section-content-wrapper w-full flex flex-col justify-start 768px:justify-end ${secondSectionOrder}`}>
-              <div className="content h-full flex flex-col self-end 1200px:max-h-[400px]">
+              <div className="content h-full flex flex-col self-end 1200px:max-h-[390px]">
                 <div className="section-header px-10 600px:px-6 py-[18px] relative 600px:absolute 1200px:relative 600px:top-[30px] left-0 w-auto 768px:top-0 768px:px-8 768px:py-10 bg-[#000000] items-start justify-center text-[#ffffff] m-0 flex flex-col text-right">
                  
                   <hr

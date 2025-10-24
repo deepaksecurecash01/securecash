@@ -15,15 +15,13 @@ const QuoteContent = () => {
           >
             <div id="left-content-header-wrapper" className="mb-10">
               <h3
-                className=" mx-auto font-medium text-center text-[32px] 1100px:text-[36px]  1200px:text-[40px] mb-[8px] leading-[1.4em] -mt-[10px]  font-montserrat
-         "
+                className=" mx-auto font-medium text-center text-[24px]  768px:text-[32px] 1100px:text-[36px]  1200px:text-[40px] mb-[8px] leading-[1.4em] -mt-[10px]  font-montserrat"
               >
                 Get in touch with our <br />
                 Business Development Team
               </h3>
               <hr
-               
-                className="1024px:mt-0 1024px:mb-6 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"
+                className="1024px:mt-0 mt-4 1024px:mb-6 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"
               />
             </div>
             <div id="contact-info-wrapper" className="480px:flex  992px:pb-10">

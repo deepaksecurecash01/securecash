@@ -3,6 +3,7 @@ import Container from "../../../components/layout/Container";
 import ScrollableSection from "../../../components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
 import Link from "next/link";
+import Image from "next/image";
 
 export const ServiceSection = ({
     title,
@@ -52,8 +53,7 @@ export const ServiceSection = ({
                             <img
                                 src={imageUrl}
                                 alt={imageAlt}
-                                width={imageWidth}
-                                height={imageHeight}
+                                
                                 className="w-full 1200px:w-auto h-[calc(100%-68px)]"
                             />
                         </div>
@@ -64,7 +64,7 @@ export const ServiceSection = ({
                                         className="h-[4px] rounded-[5px] border-0  w-[100px] bg-primary mx-auto 768px:ml-auto 768px:mr-0 hidden 1200px:block divider-gold divider-2"
                                     />
                                     <h3                                       
-                                        className="text-[32px] font-bold leading-[1.4em] text-center 768px:text-right 1200px:pl-[46px] 1366px:pl-[56px] 600px:text-[30px] 768px:text-[32px] 992px:text-[40px] 1200px:mt-6 1200px:mb-2 font-montserrat"
+                                        className="text-[32px] font-bold leading-[1.4em] text-center 768px:text-right  1366px:pl-[56px] 600px:text-[30px] 768px:text-[32px] 992px:text-[40px] 1200px:mt-6 1200px:mb-2 font-montserrat"
                                     >
                                         {title}
                                     </h3>

@@ -42,7 +42,7 @@ const WelcomeSection = () =>
 
   return (
     <div className=" w-full bg-content-bg bg-no-repeat bg-center  1366px:bg-cover inline-block mt-10">
-      <Container className="max-[1366px]:max-w-[1280px]">
+      <Container className="max-[1440px]:max-w-[1280px]">
         <div
           id="welcome"
           className=" min-h-[400px] w-full 992px:w-auto mx-auto "
@@ -80,8 +80,8 @@ const WelcomeSection = () =>
             </p>
 
           </div>
-          <div className="content-columns pt-0 block text-left mt-[40px] 768px:mt-0 992px:w-[95%] 992px:mx-auto 1366px:w-full 992px:flex 992px:pt-[80px] items-center">
-            <div className="leftside-column mb-[40px] 992px:mb-0 text-left w-full 992px:w-1/2 p-0 mx-auto my-0 pl-0 ">
+          <div className=" pt-0 block text-left mt-[40px] 768px:mt-0 992px:w-[95%] 992px:mx-auto 1366px:w-full 992px:flex 992px:pt-[80px] items-center">
+            <div className=" mb-[40px] 992px:mb-0 text-left w-full 992px:w-1/2 p-0 mx-auto my-0 pl-0 ">
               <ScrollableSection
                 className=" h-auto w-[82%] 992px:w-full p-0 mx-auto 992px:h-[290px] 1024px:h-[290px] 1200px:h-[320px] 1366px:h-[390px] bg-white 992px:px-[40px] "
                 style={{ direction: "rtl" }}

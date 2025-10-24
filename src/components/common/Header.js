@@ -196,8 +196,8 @@ const MobileMenu = ({
         <li
           key={index}
           className={`border-b border-light-border py-5 ${item.submenuId && activeSubMenu === item.submenuId
-              ? "bg-black pb-0"
-              : "text-black"
+            ? "bg-black pb-0"
+            : "text-black"
             }`}
         >
           {item.submenuId ? (

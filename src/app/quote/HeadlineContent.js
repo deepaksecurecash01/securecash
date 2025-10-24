@@ -4,7 +4,7 @@ const HeadlineContent = () => {
   return (
         <div
             id="headline-content"
-            className="in-full bg-dots bg-gray w-full h-[572px] flex justify-center items-center flex-col"
+          className="in-full bg-dots bg-gray w-full h-[406px]  768px:h-[572px] flex justify-center items-center flex-col"
         >
             <div id="headline-wrapper" className="text-center">
                 <h3
@@ -27,7 +27,7 @@ const HeadlineContent = () => {
                 </h1>
                 <hr
                    
-                  className="1024px:mt-0 1024px:mb-6 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"
+                  className="1024px:mt-0 mb-6 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"
                 />
                 <p
                     className="text-[16px] text-[#4d4d4d] font-normal leading-[24px] text-center mb-4 

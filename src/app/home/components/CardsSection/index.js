@@ -13,7 +13,7 @@ const ServiceRow = ({ imgSrc, link, title, description }) => (
       />
       <h3
      
-        className="text-[#c7a652] text-center font-bold text-[24px] mt-[18px] mb-[15px] mx-auto 768px:mx-0 992px:text-[20px] font-montserrat"
+        className="text-[#c7a652] text-left font-bold text-[24px] mt-[18px] mb-[15px] 768px:mx-0 992px:text-[20px] font-montserrat"
       >
         <a href={link}>{title}</a>
       </h3>
