@@ -1,236 +1,104 @@
-// /zod/FranchiseFormSchema.js
-import { z } from "zod";
+"use client";
+import React, { useEffect, useRef, useState } from "react";
+import Image from "next/image";
+import Container from "@/components/layout/Container";
+import SliderContent from "./SliderContent";
 
-/**
- * Enhanced Franchise Form Schema - Clean Declarative Version
- * 
- * COMPREHENSIVE VALIDATION:
- * - Full name validation with business context
- * - Phone number validation with Australian format
- * - Email validation with professional context
- * - Address validation for location accuracy
- * - Territory/area interest validation
- * - Reason for interest validation
- * - Referral source validation with conditional "Other" field
- * - Honeypot spam protection
- */
-const FranchiseFormSchema = z.object({
-    FullName: z
-        .string({
-            required_error: "Full name is required."
-        })
-        .min(1, "Full name is required.")
-        .min(2, "Full name must be at least 2 characters long.")
-        .max(100, "Full name is too long (maximum 100 characters).")
-        .refine((name) =>
-        {
-            const trimmed = name.trim();
-            // Should contain at least one letter and have multiple words (first + last name)
-            const words = trimmed.split(/\s+/).filter(word => word.length > 0);
-            return /[A-Za-z]/.test(trimmed) && words.length >= 2;
-        }, {
-            message: "Please enter your full name (first and last name)."
-        })
-        .refine((name) =>
-        {
-            const trimmed = name.trim();
-            // Should not be just common test values
-            const invalidNames = ['test test', 'john doe', 'jane doe', 'example name'];
-            return !invalidNames.includes(trimmed.toLowerCase());
-        }, {
-            message: "Please enter a valid full name."
-        }),
+const Slide = ({ slide, isActive }) => (
+    <div
+        className={`bannerSlides relative animate-fade transition-opacity duration-300 ${isActive ? " opacity-100 block" : " opacity-0 hidden"
+            }`}
+    >
+        <div className="absolute inset-0 bg-black/35 transition-opacity duration-700" />
+        <picture>
+            <source media="(min-width: 1200px)" srcSet={slide.web} />
+            <source media="(min-width: 768px)" srcSet={slide.tablet} />
+            <source media="(max-width: 480px)" srcSet={slide.mobile} />
+            <img
 
-    Phone: z
-        .string({
-            required_error: "Phone number is required."
-        })
-        .min(1, "Phone number is required.")
-        .min(8, "Phone number must be at least 8 digits.")
-        .max(20, "Phone number is too long.")
-        .refine((phone) =>
-        {
-            // Remove all non-numeric characters
-            const cleanPhone = phone.replace(/[^0-9]/g, '');
-            return cleanPhone.length >= 8 && cleanPhone.length <= 15;
-        }, {
-            message: "Phone number must be between 8-15 digits."
-        })
-        .refine((phone) =>
-        {
-            // Should contain some digits
-            return /[0-9]/.test(phone);
-        }, {
-            message: "Phone number must contain valid digits."
-        }),
+                priority="true"
+                alt={slide.alt || "Banner Image"}
+                src={slide.mobile}
+                sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 100vw"
+                className="h-full w-full min-h-[480px] 414px:min-h-[490px] object-cover 768px:min-h-[600px] 1280px:h-full -z-10"
+            />
+        </picture>
+        <Container className=" z-10 w-full">
+            <SliderContent {...slide} />
+        </Container>
+    </div>
+);
 
-    Email: z
-        .string({
-            required_error: "Email address is required."
-        })
-        .min(1, "Email address is required.")
-        .email("Please enter a valid email address.")
-        .max(254, "Email address is too long.")
-        .refine((email) =>
-        {
-            // Additional validation for consecutive dots
-            const trimmed = email.trim().toLowerCase();
-            return !trimmed.includes('..');
-        }, {
-            message: "Email address format is invalid (consecutive dots not allowed)."
-        })
-        .refine((email) =>
-        {
-            // Should have valid domain structure
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            return emailRegex.test(email.trim());
-        }, {
-            message: "Please enter a valid email address format."
-        }),
+const SlideControls = ({ slides, currentSlide, onSlideChange }) => (
+    <div className="inner-controls absolute w-5 h-[68px] z-10 top-[calc(50%-80px)] right-0 cursor-default ml-auto mr-0 320px:w-[40px] 768px:right-0 992px:mr-[30px] 1200px:right-0">
+        <ul className="dot-navigation absolute top-[32%] list-none">
+            {slides.map((_, index) => (
+                <li key={index}>
+                    <span
+                        className={`cursor-pointer h-[15px] w-[15px] mx-[2px] bg-[#a3a3a3] rounded-full inline-block transition-[background-color_0.6s_ease] dot hover:bg-white hover:transform hover:scale-[1.34] hover:w-[15px] hover:h-[15px] ${currentSlide === index + 1
+                                ? "bg-white transform scale-[1.34] w-[15px] h-[15px]"
+                                : ""
+                            }`}
+                        onClick={() => onSlideChange(index + 1)}
+                    />
+                </li>
+            ))}
+        </ul>
+    </div>
+);
 
-    Address: z
-        .string({
-            required_error: "Address is required."
-        })
-        .min(1, "Address is required.")
-        .min(5, "Address must be at least 5 characters long.")
-        .max(200, "Address is too long (maximum 200 characters).")
-        .refine((address) =>
-        {
-            const trimmed = address.trim();
-            // Should contain both letters and numbers (typical address format)
-            return /[A-Za-z]/.test(trimmed) && (/[0-9]/.test(trimmed) || /street|road|avenue|lane|drive|place|court|way/i.test(trimmed));
-        }, {
-            message: "Please enter a valid address with street details."
-        })
-        .refine((address) =>
-        {
-            const trimmed = address.trim();
-            // Should have at least 2 words
-            const words = trimmed.split(/\s+/);
-            return words.length >= 2;
-        }, {
-            message: "Please enter a complete address."
-        }),
-
-    InterestedArea: z
-        .string({
-            required_error: "Territory/Area/Suburb of interest is required."
-        })
-        .min(1, "Territory/Area/Suburb of interest is required.")
-        .min(2, "Please specify the area of interest (minimum 2 characters).")
-        .max(100, "Area of interest is too long (maximum 100 characters).")
-        .refine((area) =>
-        {
-            const trimmed = area.trim();
-            // Should contain at least one letter
-            return /[A-Za-z]/.test(trimmed);
-        }, {
-            message: "Please enter a valid territory, area, or suburb name."
-        })
-        .refine((area) =>
-        {
-            const trimmed = area.trim();
-            // Should not be just generic terms
-            const genericTerms = ['area', 'suburb', 'territory', 'location', 'place'];
-            return !genericTerms.includes(trimmed.toLowerCase());
-        }, {
-            message: "Please specify the actual area/suburb you're interested in."
-        }),
-
-    ReasonForInterest: z
-        .string({
-            required_error: "Please explain your interest in a SecureCash franchise."
-        })
-        .min(1, "Please explain your interest in a SecureCash franchise.")
-        .min(10, "Please provide more detail about your interest (minimum 10 characters).")
-        .max(1000, "Response is too long (maximum 1000 characters)."),
-
-    ReferralSource: z
-        .string({
-            required_error: "Please tell us where you heard about this opportunity."
-        })
-        .min(1, "Please tell us where you heard about this opportunity.")
-        .refine((value) => value !== "", {
-            message: "Please select where you heard about us."
-        }),
-
-    ReferralSourceOther: z
-        .string()
-        .optional(),
-
-    BotField: z
-        .string()
-        .max(0, "Bot detected!"), // Honeypot field must be empty
-})
-    .refine((data) =>
-    {
-        // If ReferralSource is "Other", then ReferralSourceOther must be filled
-        if (data.ReferralSource === "Other") {
-            return data.ReferralSourceOther && data.ReferralSourceOther.trim().length > 0;
-        }
-        return true;
-    }, {
-        message: "Please specify where you heard about us.",
-        path: ["ReferralSourceOther"], // This puts the error on the ReferralSourceOther field
-    });
-
-// Default values for the form
-export const FRANCHISE_DEFAULT_VALUES = {
-    FullName: "",
-    Phone: "",
-    Email: "",
-    Address: "",
-    InterestedArea: "",
-    ReasonForInterest: "",
-    ReferralSource: "",
-    ReferralSourceOther: "",
-    BotField: "",
-};
-
-export const FRANCHISE_FIELD_PRIORITY = [
-    'FullName',
-    'Phone',
-    'Email',
-    'Address',
-    'InterestedArea',
-    'ReasonForInterest',
-    'ReferralSource',
-    'ReferralSourceOther'
-];
-
-/**
- * Alternative schema factory for different validation requirements
- * E.g., for different regions or validation strictness
- */
-export const createFranchiseSchemaForRegion = (region = 'AU') =>
+const Slider = ({ slides = [] }) =>
 {
-    if (region === 'US') {
-        // US variant - different phone validation
-        return FranchiseFormSchema.extend({
-            Phone: z
-                .string({
-                    required_error: "Phone number is required."
-                })
-                .min(1, "Phone number is required.")
-                .regex(/^[\d\s\-\(\)\+]+$/, "Phone number contains invalid characters.")
-                .refine((phone) =>
-                {
-                    // US phone format validation
-                    const cleanPhone = phone.replace(/[^0-9]/g, '');
-                    return cleanPhone.length === 10;
-                }, {
-                    message: "Please enter a valid 10-digit US phone number."
-                }),
-        });
-    }
+    const [slideIndex, setSlideIndex] = useState(1);
+    const bannerInterval = useRef(null);
 
-    return FranchiseFormSchema;
+    const slideBannerAuto = () =>
+    {
+        setSlideIndex((prev) => (prev >= slides.length ? 1 : prev + 1));
+    };
+
+    useEffect(() =>
+    {
+        const startBanner = () =>
+        {
+            bannerInterval.current = setInterval(slideBannerAuto, 5000);
+        };
+
+        const stopBanner = () =>
+        {
+            clearInterval(bannerInterval.current);
+        };
+
+        startBanner();
+        return () => stopBanner();
+    }, []);
+
+    return (
+        <div
+            id="banner-slider"
+            className="w-full inline-block relative overflow-hidden"
+            onMouseOver={() => clearInterval(bannerInterval.current)}
+            onMouseOut={() =>
+            {
+                bannerInterval.current = setInterval(slideBannerAuto, 5000);
+            }}
+        >
+            <div className="slideshow-container">
+                {slides.map((slide, index) => (
+                    <Slide
+                        key={index}
+                        slide={slide}
+                        isActive={slideIndex === index + 1}
+                    />
+                ))}
+            </div>
+            <SlideControls
+                slides={slides}
+                currentSlide={slideIndex}
+                onSlideChange={setSlideIndex}
+            />
+        </div>
+    );
 };
 
-/**
- * Schema for partial validation (useful for multi-step forms)
- */
-export const FranchisePartialSchema = FranchiseFormSchema.partial();
-
-export default FranchiseFormSchema;
+export default Slider;

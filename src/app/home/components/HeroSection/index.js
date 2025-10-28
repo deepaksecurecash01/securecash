@@ -12,6 +12,7 @@ const SLIDES = [
     text: "Anywhere. Anytime. Australia Wide.",
     buttonText: "Learn More",
     buttonLink: "#welcome",
+    alt: "SecureCash Banking Services - Australia Wide"
   },
   {
     mobile: "/images/banner/Slide-2-mobile.jpg",
@@ -22,6 +23,7 @@ const SLIDES = [
     text: "We Just Need A Few Details!",
     buttonText: "Get a Quote",
     buttonLink: "/quote",
+    alt: "Get a Quote from SecureCash"
   },
   {
     mobile: "/images/banner/Slide-3-mobile.jpg",
@@ -32,6 +34,7 @@ const SLIDES = [
     text: "Control Your Services With A Click Of A Button",
     buttonText: "Learn More",
     buttonLink: "https://www.edockets.app/",
+    alt: "eDockets System - Digital Cash Management"
   },
   {
     mobile: "/images/banner/Slide-4-mobile.jpg",
@@ -42,6 +45,7 @@ const SLIDES = [
     text: "A Safer Solution For Your Business",
     buttonText: "Learn More",
     buttonLink: "/about-us#about-us-section-service",
+    alt: "Covert Cash Transport Services"
   },
   {
     mobile: "/images/banner/Slide-5-mobile.jpg",
@@ -52,6 +56,7 @@ const SLIDES = [
     text: "Our Managers Have Over 100 Years Combined Industry Experience",
     buttonText: "About Us",
     buttonLink: "/about-us",
+    alt: "Trusted Cash Transport Provider - 25+ Years Experience"
   },
 ];
 
