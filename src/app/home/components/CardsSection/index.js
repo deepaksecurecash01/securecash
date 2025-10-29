@@ -103,7 +103,7 @@ const CardsSection = () =>
             </div>
           </div>
         </div>
-        <div className="bottom-row-right hidden 992px:block bg-team-bg bg-no-repeat bg-cover bg-center" />
+        <div className="bottom-row-right hidden 992px:block bg-team-bg bg-no-repeat bg-cover bg-[10%] 1440px:bg-[0%]" />
       </div>
       <div
         id="space-white"

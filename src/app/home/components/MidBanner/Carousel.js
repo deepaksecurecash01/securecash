@@ -130,7 +130,7 @@ const Carousel = () =>
           </div>
           <div className="service-info text-white clear-both">
             <h2
-            
+
               className="text-white text-[16px] leading-[1.6em] text-center font-bold my-[1rem] font-montserrat"
             >
               {slide.title}

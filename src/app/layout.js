@@ -5,15 +5,17 @@ import Footer from "@/components/common/Footer";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  display: "swap",
+  display: "optional",
   variable: "--font-montserrat",
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  weight: ["300" ,"400", "500", "600", "700", "800", "900"],
+  preload: true,
 });
 const prata = Prata({
   subsets: ["latin"],
-  display: "swap",
+  display: "optional",
   variable: "--font-prata",
-  weight: [ "400"],
+  weight: ["400"],
+  preload: true,
 });
 
 
