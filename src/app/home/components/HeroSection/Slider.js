@@ -28,6 +28,7 @@ const Slide = ({ slide, isActive, isPriority, slideIndex }) =>
           fill
           priority={isPriority}
           loading={isPriority ? "eager" : "lazy"}
+          fetchPriority={isPriority ? "high" : "low"}
           quality={85}
           sizes="(max-width: 768px) 0vw, 100vw"
           className="object-cover hidden 768px:block"
@@ -42,6 +43,7 @@ const Slide = ({ slide, isActive, isPriority, slideIndex }) =>
           fill
           priority={isPriority}
           loading={isPriority ? "eager" : "lazy"}
+          fetchPriority={isPriority ? "high" : "low"}
           quality={85}
           sizes="(max-width: 767px) 0vw, (max-width: 1199px) 100vw, 0vw"
           className="object-cover hidden 480px:block 768px:hidden"
@@ -56,7 +58,8 @@ const Slide = ({ slide, isActive, isPriority, slideIndex }) =>
           fill
           priority={isPriority}
           loading={isPriority ? "eager" : "lazy"}
-          quality={85}
+          fetchPriority={isPriority ? "high" : "low"}
+          quality={75}
           sizes="(max-width: 479px) 100vw, 0vw"
           className="object-cover block 480px:hidden"
           placeholder="blur"

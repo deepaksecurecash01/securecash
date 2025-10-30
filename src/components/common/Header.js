@@ -117,11 +117,7 @@ const DesktopMenu = ({ onMenuClick }) => (
             <li key={index} className="leading-[50px] py-5 relative group">
               <Link
                 href={item.href}
-                onClick={() =>
-                {
-                  const item = document.getElementById(item.submenuId);
-                  item.style.display = "none";
-                }}
+               
                 className="block text-primary-text text-sm no-underline leading-6 group-hover:text-active-text"
               >
                 {hasSubMenu && (

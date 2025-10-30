@@ -1,0 +1,22 @@
+# .browserslistrc
+# Create this file in your project root
+# This tells Next.js to target ONLY modern browsers
+# Removes 12KB of legacy polyfills!
+
+# Production browsers (what gets deployed)
+[production]
+>0.5%
+last 2 versions
+not dead
+not IE 11
+not op_mini all
+Chrome >= 90
+Firefox >= 88
+Safari >= 14
+Edge >= 90
+
+# Development browsers (for testing)
+[development]
+last 1 chrome version
+last 1 firefox version
+last 1 safari version
