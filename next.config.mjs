@@ -81,7 +81,7 @@ const nextConfig = {
 
   // ✅ ADDED: Experimental optimizations
   experimental: {
-    optimizeCss: true, // ✅ Fixes render-blocking global.css
+    // Optimize imports for better tree-shaking
     optimizePackageImports: [
       'react-icons',
       'lucide-react',
