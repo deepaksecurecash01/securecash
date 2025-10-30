@@ -1,5 +1,9 @@
+// ============================================
+// Banner.jsx - OPTIMIZED
+// ============================================
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Banner = () =>
 {
@@ -8,14 +12,28 @@ const Banner = () =>
             <div id="about-us-banner" className="max-[414px]:mt-0">
                 <div
                     id="banner-mid-content"
-                    className="flex justify-center items-center flex-col pt-0 px-4 bg-cover bg-no-repeat h-[340px] w-full mx-auto relative before:content-[''] before:w-full before:h-[340px] before:absolute before:bg-[url('https://securecash.com.au/images/banner/banner-people.webp')] before:bg-no-repeat before:grayscale before:bg-cover before:bg-center max-[414px]:before:bg-[-1000px_center]"
+                    className="flex justify-center items-center flex-col pt-0 px-4 h-[340px] w-full mx-auto relative overflow-hidden"
                 >
+                    {/* ✅ OPTIMIZED: Replaced CSS background with Next.js Image */}
+                    <div className="absolute inset-0 w-full h-full">
+                        <Image
+                            src="/images/banner/banner-people.webp"
+                            alt="SecureCash Team"
+                            fill
+                            loading="lazy"
+                            quality={75}
+                            sizes="100vw"
+                            className="object-cover object-center grayscale max-[414px]:object-[-1000px_center]"
+                            placeholder="blur"
+                            blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
+                        />
+                    </div>
+
                     <hr
-                        
                         className="w-[100px] divider-gold divider-2 z-20 bg-primary h-[4px] rounded-[5px] border-0 mx-auto"
                     />
                     <h2
-                        className="text-white font-medium text-center  text-[32px] z-30 py-6 font-montserrat"
+                        className="text-white font-medium text-center text-[32px] z-30 py-6 font-montserrat"
                     >
                         Join The SecureCash Family
                     </h2>
@@ -30,3 +48,4 @@ const Banner = () =>
 };
 
 export default Banner;
+
