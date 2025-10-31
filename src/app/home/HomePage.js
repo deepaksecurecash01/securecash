@@ -4,7 +4,6 @@ import MidBanner from "./components/MidBanner";
 import FormSection from "./components/FormSection";
 import CardsSection from "./components/CardsSection";
 import CompaniesSlider from "@/components/common/CompaniesSlider";
-import TeamContent from "./components/TeamSection";
 
 export default function HomePage()
 {
@@ -15,7 +14,7 @@ export default function HomePage()
       <MidBanner />
       <FormSection />
       <CardsSection />
-      <TeamContent />
+      {/* <TeamContent /> */}
       <CompaniesSlider />
     </div>
   );
