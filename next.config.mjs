@@ -16,14 +16,14 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
 
-  // ✅ ADDED: Remove console logs in production
+  // ✅ Remove console logs in production
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production' ? {
       exclude: ['error', 'warn'],
     } : false,
   },
 
-  // ✅ ADDED: Optimize bundle splitting for better caching
+  // ✅ Optimize bundle splitting for better caching
   webpack: (config, { isServer, dev }) =>
   {
     if (!isServer && !dev) {
@@ -79,7 +79,7 @@ const nextConfig = {
     return config;
   },
 
-  // ✅ ADDED: Experimental optimizations
+  // ✅ Experimental optimizations + Modern Browser Targets
   experimental: {
     // Optimize imports for better tree-shaking
     optimizePackageImports: [
