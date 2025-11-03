@@ -1,0 +1,48 @@
+.checkbox input[type="checkbox"]:checked+label:after {
+  content: "";
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  color: #fff;
+  transition: all 0.2s;
+  cursor: pointer;
+  left: 9px;
+  top: 0;
+  font-size: 36px;
+  border: solid white;
+  border-width: 0 4px 4px 0;
+  width: 7px;
+  height: 17px;
+  box-sizing: unset;  /* Ensures consistent sizing */
+}
+
+.checkbox input[type="checkbox"]:checked+label span {
+  background: #c6a54b;
+}
+
+.checkbox input[type="checkbox"]+label span {
+  display: inline-block;
+  margin: 0 10px 0 0;
+  vertical-align: middle;
+  background: #fff;
+  cursor: pointer;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  box-sizing: border-box;
+  /* Ensures consistent sizing */
+}
+
+
+
+/* Existing rule - when hovering the label */
+.checkbox input[type="checkbox"]:not(:checked)+label:hover span {
+  background: #c6a54b;
+  opacity: 50%;
+}
+
+/* NEW rule - when hovering the input itself */
+.checkbox input[type="checkbox"]:not(:checked):hover+label span {
+  background: #c6a54b;
+  opacity: 50%;
+}

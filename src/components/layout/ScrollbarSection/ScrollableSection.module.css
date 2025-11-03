@@ -1,0 +1,39 @@
+/* Universal Scrollable Styles */
+.contentScroll {
+  overflow: auto;
+
+  /* Custom scrollbar variables */
+  --scrollbarBG: #ebebeb;
+  --thumbBG: #808080;
+}
+
+/* Webkit scrollbar styles (Chrome, Edge, Safari) */
+.contentScroll::-webkit-scrollbar {
+  width: 10px;
+  /* Adjust scrollbar width */
+}
+
+.contentScroll::-webkit-scrollbar-thumb {
+  background: var(--thumbBG);
+  /* Thumb color */
+  border-radius: 20px;
+  /* Rounded thumb */
+}
+
+.contentScroll::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+  /* Track color */
+  border-radius: 20px;
+  /* Rounded track */
+}
+
+/* Firefox scrollbar styles */
+.contentScroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+/* Improved hover states */
+.contentScroll::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}

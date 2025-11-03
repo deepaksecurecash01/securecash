@@ -1,0 +1,54 @@
+#banner .slick-dots li {
+  content: none;
+  width: auto !important;
+  height: auto !important;
+  position: relative;
+  display: inline-block;
+  padding: 0;
+}
+
+#banner .slick-dots li button {
+  display: block;
+  content: none !important;
+}
+
+#banner .slick-dots li button:before {
+  content: none !important;
+}
+#banner .slick-track {
+  background-color: black !important;
+}
+
+#banner .slick-slide div {
+  display: flex !important;
+  flex-direction: column;
+}
+
+#banner .slide-button:hover {
+  background: #fff !important;
+  transform: scale(1.34) !important;
+}
+
+#banner .slick-dots {
+  position: absolute !important;
+  width: 20px !important;
+  height: 68px !important;
+  z-index: 10 !important;
+  top: calc(50% - 80px) !important;
+  right: 20px !important;
+  cursor: default !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
+@media (min-width: 768px) {
+  #banner .slick-dots {
+    right: 20px !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  #banner .slick-dots {
+    right: 40px !important;
+  }
+}

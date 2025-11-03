@@ -3,7 +3,7 @@ import Checkbox from "@/components/common/checkbox/Checkbox";
 import React, { forwardRef, useImperativeHandle, useRef, useState, useEffect, useCallback } from 'react';
 import DatePicker from "react-date-picker";
 import 'react-date-picker/dist/DatePicker.css';
-import 'react-calendar/dist/Calendar.css';
+// import 'react-calendar/dist/Calendar.css';
 import { FaCalendarAlt, FaTimes, FaCircle, FaFileUpload, FaFile, FaSpinner, FaExclamationTriangle } from "react-icons/fa";
 import styles from "@/components/common/checkbox/Checkbox.module.css";
 import imageCompression from 'browser-image-compression';
