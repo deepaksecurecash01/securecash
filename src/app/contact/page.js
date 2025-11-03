@@ -1,58 +1,69 @@
-
-
-// ============================================
-// STEP 2: Optimized Contact Page
-// File: app/contact/page.jsx (or wherever your contact page is)
-// ============================================
+// File: app/contact/page.jsx (ENHANCED VERSION)
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import HeroImage from './HeroImage';
 import CompaniesSlider from '@/components/common/CompaniesSlider';
 import FormSection from '@/app/contact/FormSection.js';
 import TestimonialsSection from '@/app/contact/TestimonialsSection.js';
-
-// ✅ Static imports (these are needed immediately)
 import { AUSTRALIA_COORDINATES, NEW_ZEALAND_COORDINATES } from './mapCoordinates.js';
 
-// ✅ Dynamically import the MapSection
-// It will only load when user scrolls down to it
-const DynamicMapSection = dynamic(
-    () => import('./MapSection'),
-    {
-        ssr: false,
-        loading: () => (
-            <div id="map-section">
-                <div id="mapContainer">
-                    <div style={{
-                        height: '500px',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        backgroundColor: '#f5f5f5',
-                        color: '#666',
-                        fontSize: '18px'
-                    }}>
-                        Loading map...
-                    </div>
-                </div>
-            </div>
-        ),
-    }
-);
+// ✅ Dynamically import MapSection
+const DynamicMapSection = dynamic(() => import('./MapSection'), {
+    ssr: false,
+    loading: () => (
+        <div style={{ height: '500px', backgroundColor: '#f5f5f5' }}>
+            Loading map...
+        </div>
+    ),
+});
 
 const ContactPage = () =>
 {
-    // Combine all coordinates
+    const [shouldLoadMap, setShouldLoadMap] = useState(false);
+    const mapSectionRef = useRef(null);
     const allCoordinates = [...AUSTRALIA_COORDINATES, ...NEW_ZEALAND_COORDINATES];
+
+    useEffect(() =>
+    {
+        // ✅ Only load map when user scrolls near it
+        const observer = new IntersectionObserver(
+            (entries) =>
+            {
+                if (entries[0].isIntersecting) {
+                    setShouldLoadMap(true);
+                    observer.disconnect(); // Stop observing after loading
+                }
+            },
+            {
+                rootMargin: '200px', // Start loading 200px before it comes into view
+            }
+        );
+
+        if (mapSectionRef.current) {
+            observer.observe(mapSectionRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, []);
 
     return (
         <>
             <HeroImage />
             <FormSection />
             <TestimonialsSection />
-            {/* ✅ Map section loads dynamically */}
-            <DynamicMapSection coordinates={allCoordinates} />
+
+            {/* ✅ Placeholder that triggers loading */}
+            <div ref={mapSectionRef}>
+                {shouldLoadMap ? (
+                    <DynamicMapSection coordinates={allCoordinates} />
+                ) : (
+                    <div style={{ height: '500px', backgroundColor: '#f5f5f5' }}>
+                        {/* Placeholder */}
+                    </div>
+                )}
+            </div>
+
             <CompaniesSlider />
         </>
     );
