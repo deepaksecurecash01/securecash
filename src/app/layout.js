@@ -1,5 +1,5 @@
 import { Montserrat, Prata} from "next/font/google";
-import "./test.css";
+import "./globals.css";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 
