@@ -7,19 +7,14 @@ import SliderContent from "./SliderContent";
 
 const Slide = ({ slide, isActive, isPriority, slideIndex }) =>
 {
-  // Only load images for active slide and next/previous slides
-  const shouldLoad = isActive || isPriority;
-
   return (
     <div
       className={`bannerSlides relative transition-opacity duration-700 ${isActive ? "opacity-100 block" : "opacity-0 hidden"
         }`}
       aria-hidden={!isActive}
     >
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black/35 z-[1]" />
 
-      {/* Optimized Image Loading */}
       <div className="relative w-full h-full min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1024px:h-full 1440px:min-h-[70vh]">
         {/* Desktop Image */}
         <Image
@@ -67,7 +62,6 @@ const Slide = ({ slide, isActive, isPriority, slideIndex }) =>
         />
       </div>
 
-      {/* Content */}
       <Container className="z-10 w-full absolute inset-0 flex items-center">
         <SliderContent {...slide} />
       </Container>
@@ -75,6 +69,9 @@ const Slide = ({ slide, isActive, isPriority, slideIndex }) =>
   );
 };
 
+// ============================================
+// SlideControls - Same as before
+// ============================================
 const SlideControls = ({ slides, currentSlide, onSlideChange }) => (
   <div
     className="inner-controls absolute w-5 h-[68px] z-10 top-[calc(50%-80px)] right-0 cursor-default ml-auto mr-0 320px:w-[40px] 768px:right-0 992px:mr-[30px] 1200px:right-0"
@@ -99,10 +96,14 @@ const SlideControls = ({ slides, currentSlide, onSlideChange }) => (
   </div>
 );
 
+// ============================================
+// OPTIMIZED Slider - Only renders current + next slide
+// ============================================
 const Slider = ({ slides = [] }) =>
 {
   const [slideIndex, setSlideIndex] = useState(1);
   const [isHovered, setIsHovered] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
   const bannerInterval = useRef(null);
 
   const slideBannerAuto = useCallback(() =>
@@ -135,21 +136,31 @@ const Slider = ({ slides = [] }) =>
 
   const handleSlideChange = useCallback((index) =>
   {
+    setIsTransitioning(true);
     setSlideIndex(index);
     stopBanner();
-    startBanner();
+
+    // Reset transition state after animation completes
+    setTimeout(() =>
+    {
+      setIsTransitioning(false);
+      startBanner();
+    }, 700); // Match transition duration
   }, [stopBanner, startBanner]);
 
-  // Determine which slides should be prioritized (first slide + preload next/prev)
-  const getPriority = (index) =>
+  // ✅ KEY OPTIMIZATION: Only render current and next slide
+  const getSlidesToRender = useCallback(() =>
   {
-    if (index === 0) return true; // First slide always priority
-    // Preload adjacent slides
     const currentIndex = slideIndex - 1;
-    const nextIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
-    const prevIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
-    return index === nextIndex || index === prevIndex;
-  };
+    const nextIndex = (currentIndex + 1) % slides.length;
+
+    return [
+      { slide: slides[currentIndex], index: currentIndex, isActive: true, isPriority: true },
+      { slide: slides[nextIndex], index: nextIndex, isActive: false, isPriority: true }
+    ];
+  }, [slideIndex, slides]);
+
+  const slidesToRender = getSlidesToRender();
 
   return (
     <div
@@ -162,13 +173,14 @@ const Slider = ({ slides = [] }) =>
       aria-live="polite"
     >
       <div className="slideshow-container relative">
-        {slides.map((slide, index) => (
+        {/* ✅ OPTIMIZED: Only render current + next slide (2 slides instead of 5!) */}
+        {slidesToRender.map(({ slide, index, isActive, isPriority }) => (
           <Slide
-            key={index}
+            key={`slide-${slideIndex}-${index}`}
             slide={slide}
             slideIndex={index}
-            isActive={slideIndex === index + 1}
-            isPriority={getPriority(index)}
+            isActive={isActive}
+            isPriority={isPriority}
           />
         ))}
       </div>
