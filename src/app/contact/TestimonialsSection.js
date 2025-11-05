@@ -102,8 +102,6 @@ const TeamContent = () =>
                 >
                     Testimonials
                 </h2>
-
-
                 <hr
                     className="mb-6 mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary"
                 />

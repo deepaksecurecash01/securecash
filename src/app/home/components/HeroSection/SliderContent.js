@@ -1,4 +1,3 @@
-import Paragraph from "@/components/common/Paragraph";
 import SliderButton from "./SliderButton";
 
 const BannerContent = ({
