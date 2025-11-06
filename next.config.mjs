@@ -111,6 +111,7 @@ const nextConfig = {
       "lucide-react",
       "@react-google-maps/api",
       "react-slick",
+      "swiper",
       "react-hook-form",
     ],
     scrollRestoration: true,

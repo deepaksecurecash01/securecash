@@ -2,55 +2,21 @@
    OPTIMIZED SWIPER STYLES
    ============================================ */
 
-/* Custom pagination positioning */
-#banner-slider .swiper-pagination {
-  position: absolute !important;
-  right: 20px !important;
-  top: calc(50% - 80px) !important;
-  bottom: auto !important;
-  left: auto !important;
-  width: auto !important;
-  display: flex !important;
-  flex-direction: column !important;
-  gap: 8px !important;
-  z-index: 10 !important;
+/* Black background for fade effect */
+#banner-slider {
+  background-color: #000 !important;
 }
 
-@media (min-width: 992px) {
-  #banner-slider .swiper-pagination {
-    right: 30px !important;
-  }
+#banner-slider .swiper {
+  background-color: #000 !important;
 }
 
-@media (min-width: 1200px) {
-  #banner-slider .swiper-pagination {
-    right: 40px !important;
-  }
+#banner-slider .swiper-wrapper {
+  background-color: #000 !important;
 }
 
-/* Custom bullet styles */
-.swiper-custom-bullet {
-  width: 15px !important;
-  height: 15px !important;
-  background: #a3a3a3 !important;
-  border-radius: 50% !important;
-  opacity: 1 !important;
-  transition: all 0.3s ease !important;
-  cursor: pointer !important;
-  border: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-.swiper-custom-bullet:hover {
-  background: #fff !important;
-  transform: scale(1.34) !important;
-}
-
-.swiper-custom-bullet-active,
-.swiper-pagination-bullet-active.swiper-custom-bullet {
-  background: #fff !important;
-  transform: scale(1.34) !important;
+#banner-slider .swiper-slide {
+  background-color: #000 !important;
 }
 
 /* Performance optimizations */
@@ -63,6 +29,17 @@
 /* Smooth fade transitions */
 #banner-slider .swiper-slide-active {
   z-index: 1;
+}
+
+#banner-slider .swiper-slide-prev,
+#banner-slider .swiper-slide-next {
+  z-index: 0;
+}
+
+/* Hover effect for custom dots */
+.dot-navigation button:hover {
+  background: #fff !important;
+  transform: scale(1.34) !important;
 }
 
 /* Reduce motion for accessibility */
