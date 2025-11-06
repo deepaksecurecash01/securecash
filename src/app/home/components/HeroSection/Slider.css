@@ -15,7 +15,6 @@
 #banner .slick-dots li button:before {
   content: none !important;
 }
-
 #banner .slick-track {
   background-color: black !important;
 }
@@ -51,5 +50,27 @@
 @media (min-width: 1200px) {
   #banner .slick-dots {
     right: 40px !important;
+  }
+}
+
+
+/* Smoother fade with custom easing */
+.bannerSlides {
+  transition: opacity 1000ms cubic-bezier(0.4, 0, 0.2, 1);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: no-preference) {
+  .bannerSlides {
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
+}
+
+/* For users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .bannerSlides {
+    transition-duration: 0.01ms !important;
   }
 }
