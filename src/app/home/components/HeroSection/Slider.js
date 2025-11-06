@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useCallback } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade } from "swiper/modules"; // ✅ Removed Pagination module
+import { Autoplay, EffectFade } from "swiper/modules";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -28,7 +28,7 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
           priority={shouldPrioritize}
           loading={shouldPrioritize ? "eager" : "lazy"}
           fetchPriority={shouldPrioritize ? "high" : "low"}
-          quality={80}
+          quality={75} // ✅ Reduced from 80
           sizes="(max-width: 767px) 0vw, 100vw"
           className="object-cover hidden 1024px:block"
           placeholder="blur"
@@ -43,7 +43,7 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
           priority={shouldPrioritize}
           loading={shouldPrioritize ? "eager" : "lazy"}
           fetchPriority={shouldPrioritize ? "high" : "low"}
-          quality={80}
+          quality={70} // ✅ Reduced from 80
           sizes="(max-width: 479px) 0vw, (min-width: 1024px) 0vw, 100vw"
           className="object-cover hidden 480px:block 1024px:hidden"
           placeholder="blur"
@@ -58,7 +58,7 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
           priority={shouldPrioritize}
           loading={shouldPrioritize ? "eager" : "lazy"}
           fetchPriority={shouldPrioritize ? "high" : "low"}
-          quality={75}
+          quality={65} // ✅ CRITICAL: Reduced from 75 for mobile performance
           sizes="(max-width: 479px) 100vw, 0vw"
           className="object-cover block 480px:hidden"
           placeholder="blur"
@@ -76,7 +76,7 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
 BannerSlide.displayName = "BannerSlide";
 
 // ============================================
-// ✅ CUSTOM PAGINATION CONTROLS
+// CUSTOM PAGINATION CONTROLS
 // ============================================
 const CustomPagination = ({ slides, activeIndex, onDotClick }) => (
   <div
@@ -96,7 +96,7 @@ const CustomPagination = ({ slides, activeIndex, onDotClick }) => (
             aria-label={`Go to slide ${index + 1}`}
             aria-current={activeIndex === index ? "true" : "false"}
             style={{
-              transition: 'all 0.3s ease',
+              transition: "all 0.3s ease",
             }}
           />
         </li>
@@ -123,13 +123,15 @@ const BannerSlider = ({ slides = [] }) =>
     setSwiperInstance(swiper);
   }, []);
 
-  // ✅ Handle dot click
-  const handleDotClick = useCallback((index) =>
-  {
-    if (swiperInstance) {
-      swiperInstance.slideToLoop(index); // Use slideToLoop for loop mode
-    }
-  }, [swiperInstance]);
+  const handleDotClick = useCallback(
+    (index) =>
+    {
+      if (swiperInstance) {
+        swiperInstance.slideToLoop(index);
+      }
+    },
+    [swiperInstance]
+  );
 
   if (!slides.length) return null;
 
@@ -142,10 +144,10 @@ const BannerSlider = ({ slides = [] }) =>
       aria-live="polite"
     >
       <Swiper
-        modules={[Autoplay, EffectFade]} // ✅ Removed Pagination module
+        modules={[Autoplay, EffectFade]}
         effect="fade"
         fadeEffect={{
-          crossFade: true
+          crossFade: true,
         }}
         speed={1000}
         autoplay={{
@@ -154,6 +156,8 @@ const BannerSlider = ({ slides = [] }) =>
           pauseOnMouseEnter: true,
         }}
         loop={slides.length > 1}
+        preloadImages={false} // ✅ Don't preload all images
+        lazy={false} // ✅ Let Next.js Image handle lazy loading
         watchSlidesProgress={true}
         onSwiper={handleSwiper}
         onSlideChange={handleSlideChange}
@@ -167,7 +171,6 @@ const BannerSlider = ({ slides = [] }) =>
         ))}
       </Swiper>
 
-      {/* ✅ Custom Pagination Outside Swiper */}
       <CustomPagination
         slides={slides}
         activeIndex={activeIndex}
