@@ -1,31 +1,23 @@
 "use client";
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, EffectFade } from "swiper/modules";
 import Image from "next/image";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/effect-fade";
 import Container from "@/components/layout/Container";
 import SliderContent from "./SliderContent";
 
 // ============================================
-// SLIDE COMPONENT - OPTIMIZED TRANSITIONS
+// SINGLE SLIDE COMPONENT - Memoized
 // ============================================
-const Slide = ({ slide, isActive, slideIndex }) =>
+const BannerSlide = React.memo(({ slide, slideIndex }) =>
 {
-  // ✅ Only first slide gets priority
   const shouldPrioritize = slideIndex === 0;
 
   return (
-    <div
-      className={`bannerSlides absolute inset-0 transition-all duration-[1000ms] ease-in-out
-        ${isActive
-          ? "opacity-100 z-10 visible"
-          : "opacity-0 z-0 invisible pointer-events-none"
-        }`}
-      style={{
-        // ✅ Force GPU acceleration for smooth transitions
-        transform: 'translate3d(0, 0, 0)',
-        willChange: isActive ? 'opacity' : 'auto',
-      }}
-      aria-hidden={!isActive}
-    >
+    <div className="relative overflow-hidden">
       <div className="absolute inset-0 bg-black/35 z-[1]" />
 
       <div className="relative w-full h-full min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1024px:h-full 1440px:min-h-[70vh]">
@@ -80,116 +72,71 @@ const Slide = ({ slide, isActive, slideIndex }) =>
       </Container>
     </div>
   );
-};
+});
+
+BannerSlide.displayName = "BannerSlide";
 
 // ============================================
-// SlideControls - Same as before
+// OPTIMIZED SWIPER SLIDER
 // ============================================
-const SlideControls = ({ slides, currentSlide, onSlideChange }) => (
-  <div
-    className="inner-controls absolute w-5 h-[68px] z-10 top-[calc(50%-80px)] right-0 cursor-default ml-auto mr-0 320px:w-[40px] 768px:right-0 992px:mr-[30px] 1200px:right-0"
-    role="navigation"
-    aria-label="Slider navigation"
-  >
-    <ul className="dot-navigation absolute top-[32%] list-none">
-      {slides.map((slide, index) => (
-        <li key={index}>
-          <button
-            className={`cursor-pointer h-[15px] w-[15px] mx-[2px] bg-[#a3a3a3] rounded-full inline-block transition-all duration-300 dot hover:bg-white hover:transform hover:scale-[1.34] hover:w-[15px] hover:h-[15px] border-0 ${currentSlide === index + 1
-                ? "bg-white transform scale-[1.34] w-[15px] h-[15px]"
-                : ""
-              }`}
-            onClick={() => onSlideChange(index + 1)}
-            aria-label={`Go to slide ${index + 1}`}
-            aria-current={currentSlide === index + 1 ? "true" : "false"}
-          />
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
-// ============================================
-// OPTIMIZED Slider - Only renders current slide
-// ============================================
-const Slider = ({ slides = [] }) =>
+const BannerSlider = ({ slides = [] }) =>
 {
-  const [slideIndex, setSlideIndex] = useState(1);
-  const [isHovered, setIsHovered] = useState(false);
-  const bannerInterval = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
 
-  const slideBannerAuto = useCallback(() =>
+  // ✅ Hooks BEFORE any conditional returns
+  const handleSlideChange = useCallback((swiper) =>
   {
-    setSlideIndex((prev) => (prev >= slides.length ? 1 : prev + 1));
-  }, [slides.length]);
-
-  const startBanner = useCallback(() =>
-  {
-    if (bannerInterval.current) {
-      clearInterval(bannerInterval.current);
-    }
-    bannerInterval.current = setInterval(slideBannerAuto, 5000);
-  }, [slideBannerAuto]);
-
-  const stopBanner = useCallback(() =>
-  {
-    if (bannerInterval.current) {
-      clearInterval(bannerInterval.current);
-    }
+    setActiveIndex(swiper.activeIndex);
   }, []);
 
-  useEffect(() =>
-  {
-    if (!isHovered) {
-      startBanner();
-    }
-    return () => stopBanner();
-  }, [isHovered, startBanner, stopBanner]);
-
-  const handleSlideChange = useCallback(
-    (index) =>
-    {
-      setSlideIndex(index);
-      stopBanner();
-      // Restart autoplay after user interaction
-      setTimeout(() =>
-      {
-        if (!isHovered) {
-          startBanner();
-        }
-      }, 1000);
-    },
-    [stopBanner, startBanner, isHovered]
-  );
+  // ✅ Early return AFTER all hooks
+  if (!slides.length) return null;
 
   return (
     <div
       id="banner-slider"
-      className="w-full inline-block relative overflow-hidden"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="w-full relative overflow-hidden"
       role="region"
       aria-label="Hero slider"
       aria-live="polite"
     >
-      <div className="slideshow-container relative min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1440px:min-h-[70vh]">
-        {/* ✅ OPTIMIZED: Render ALL slides but only current is visible */}
-        {slides.map((slide, index) => (
-          <Slide
-            key={index}
-            slide={slide}
-            slideIndex={index}
-            isActive={slideIndex === index + 1}
-          />
-        ))}
-      </div>
-      <SlideControls
-        slides={slides}
-        currentSlide={slideIndex}
+      <Swiper
+        modules={[Autoplay, Pagination, EffectFade]}
+        effect="fade"
+        fadeEffect={{
+          crossFade: true
+        }}
+        speed={1000}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
+        loop={slides.length > 1}
+        lazy={{
+          loadPrevNext: true,
+          loadPrevNextAmount: 1,
+        }}
+        watchSlidesProgress={true}
         onSlideChange={handleSlideChange}
-      />
+        pagination={{
+          clickable: true,
+          renderBullet: (index, className) =>
+          {
+            return `<button class="${className} swiper-custom-bullet ${activeIndex === index ? "swiper-custom-bullet-active" : ""
+              }" aria-label="Go to slide ${index + 1}"></button>`;
+          },
+        }}
+        className="w-full"
+      >
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <BannerSlide slide={slide} slideIndex={index} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };
 
-export default Slider;
+export default BannerSlider;
