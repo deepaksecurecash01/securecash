@@ -28,6 +28,42 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        {/* ✅ CRITICAL: Preload first slide images */}
+        <link
+          rel="preload"
+          as="image"
+          href="/images/banner/Slide-1-mobile.jpg"
+          type="image/jpeg"
+          media="(max-width: 479px)"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/banner/Slide-1-tablet.jpg"
+          type="image/jpeg"
+          media="(min-width: 480px) and (max-width: 1023px)"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/banner/Slide-1-web.jpg"
+          type="image/jpeg"
+          media="(min-width: 1024px)"
+          fetchPriority="high"
+        />
+
+        {/* DNS/Preconnect */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link rel="dns-prefetch" href="https://www.securecash.com.au" />
+      </head>
       <body className={`${montserrat.className} ${prata.variable} antialiased`}>
         <Header />
         {children}
