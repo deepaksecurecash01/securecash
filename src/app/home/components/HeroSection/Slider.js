@@ -1,117 +1,99 @@
 "use client";
-
-import React, { useEffect, useRef, useState, useCallback } from "react";
-import SlideItem from "./SlideItem.js";
+import React, { useRef, useState } from "react";
+import Slider from "react-slick";
+import Image from "next/image";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Container from "@/components/layout/Container";
-import SliderContent from "./SliderContent";
-import SlideControls from "./SlideControls"; // we'll provide a small control component below
+import BannerContent from "./SliderContent";
 
-const AUTO_DELAY = 5000;
-
-const Slider = ({ slides = [] }) =>
+const BannerSlide = ({ slides = [] }) =>
 {
-  const [index, setIndex] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isVisible, setIsVisible] = useState(true); // initial true for SSR -> client adjustment
-  const timerRef = useRef(null);
-  const rootRef = useRef(null);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const sliderRef = useRef(null);
 
-  // Intersection observer to pause when off-screen
-  useEffect(() =>
-  {
-    if (!rootRef.current || typeof window === "undefined") return;
+  if (!slides.length) return null;
 
-    const obs = new IntersectionObserver(
-      ([entry]) =>
-      {
-        setIsVisible(entry.isIntersecting);
-      },
-      { threshold: 0.1, rootMargin: "200px" }
-    );
+  const settings = {
+    infinite: slides.length > 1,
+    autoplay: true,
+    speed: 1000,
+    dots: true,
+    fade: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    pauseOnHover: true,
 
-    obs.observe(rootRef.current);
-    return () => obs.disconnect();
-  }, []);
-
-  const clearTimer = useCallback(() =>
-  {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-      timerRef.current = null;
-    }
-  }, []);
-
-  const startTimer = useCallback(() =>
-  {
-    clearTimer();
-    timerRef.current = setInterval(() =>
+    beforeChange: (_, next) =>
     {
-      setIndex((prev) => (prev + 1) % slides.length);
-    }, AUTO_DELAY);
-  }, [clearTimer, slides.length]);
-
-  useEffect(() =>
-  {
-    if (isVisible && !isHovered && slides.length > 1) {
-      startTimer();
-    } else {
-      clearTimer();
-    }
-    return clearTimer;
-  }, [isVisible, isHovered, startTimer, clearTimer, slides.length]);
-
-  // Manual navigation
-  const goTo = useCallback(
-    (n) =>
-    {
-      const next = Math.max(0, Math.min(slides.length - 1, n));
-      setIndex(next);
+      setCurrentSlide(next);
     },
-    [slides.length]
-  );
-
-  const next = useCallback(() => setIndex((s) => (s + 1) % slides.length), [slides.length]);
-  const prev = useCallback(() => setIndex((s) => (s - 1 + slides.length) % slides.length), [slides.length]);
-
-  if (!slides || slides.length === 0) return null;
+    appendDots: (dots) => (
+      <div className="dots-section">
+        <ul
+          style={{
+            position: "absolute",
+            top: "32%",
+            listStyleType: "none",
+          }}
+        >
+          {dots}
+        </ul>
+      </div>
+    ),
+    customPaging: (i) => (
+      <button
+        className="slide-button"
+        style={{
+          width: "15px",
+          height: "15px",
+          padding: "0",
+          borderRadius: "50%",
+          background: currentSlide === i ? "#fff" : "#a3a3a3",
+          border: "none",
+          cursor: "pointer",
+          transition: "all 0.3s ease",
+          transform: currentSlide === i ? "scale(1.34)" : "scale(1)",
+        }}
+        onClick={() =>
+        {
+          if (sliderRef.current) {
+            sliderRef.current.slickGoTo(i);
+          }
+        }}
+        aria-label={`Go to slide ${i + 1}`}
+      />
+    ),
+  };
 
   return (
-    <div
-      ref={rootRef}
-      id="banner-slider"
-      className="w-full inline-block relative overflow-hidden"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      role="region"
-      aria-label="Hero slider"
-      aria-live="polite"
-    >
-      <div className="slideshow-container relative">
-        {/* Render all slides, toggle via CSS classes */}
-        {slides.map((slide, idx) => (
-          <SlideItem
-            key={idx}
-            slide={slide}
-            idx={idx}
-            active={idx === index}
-            isFirst={idx === 0}
-          >
-            {/* Keep your SliderContent inside SlideItem via children or SlideItem renders it */}
-          </SlideItem>
+    <div className="relative w-full">
+      <Slider className="relative" ref={sliderRef} {...settings}>
+        {slides.map((slide, index) => (
+          <div key={index} className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-black/30 transition-opacity duration-700" />
+            <picture className="w-full h-full">
+              <source media="(min-width: 1200px)" srcSet={slide.web} />
+              <source media="(min-width: 768px)" srcSet={slide.tablet} />
+              <source media="(max-width: 480px)" srcSet={slide.mobile} />
+              <Image
+                width={1200}
+                height={800}
+                alt={slide.alt || "Banner Image"}
+                src={slide.mobile}
+                priority
+                sizes="(max-width: 480px) 100vw, (max-width: 768px) 100vw, 100vw"
+                className="w-full h-[480px] 414px:h-[490px] 768px:h-[600px] 1280px:h-[800px] object-cover"
+              />
+            </picture>
+            <Container className=" z-10">
+              <BannerContent {...slide} />
+            </Container>
+          </div>
         ))}
-      </div>
-
-      {/* Controls: dots / prev-next (kept minimal and memoized) */}
-      <SlideControls
-        slides={slides}
-        currentIndex={index}
-        onGoTo={goTo}
-        onNext={next}
-        onPrev={prev}
-        visible // we can make visible conditional if needed
-      />
+      </Slider>
     </div>
   );
 };
 
-export default Slider;
+export default BannerSlide;

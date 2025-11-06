@@ -1,95 +1,55 @@
-/* Slider.css - GPU driven transitions, keep slides stacked and only change opacity/transform */
-/* Ensure this file is imported by the parent (HeroSection or Slider.js) */
-
-.slideshow-container {
+#banner .slick-dots li {
+  content: none;
+  width: auto !important;
+  height: auto !important;
   position: relative;
-  width: 100%;
-  height: 100%;
+  display: inline-block;
+  padding: 0;
 }
 
-/* Slide base: stacked absolute, not visible by default */
-.slide-item {
-  position: absolute;
-  inset: 0;
-  opacity: 0;
-  transform: translateX(8%) scale(0.995);
-  transition: opacity 700ms cubic-bezier(.22, .9, .28, 1), transform 700ms cubic-bezier(.22, .9, .28, 1);
-  will-change: opacity, transform;
-  pointer-events: none;
-  /* only active slide receives pointer events */
+#banner .slick-dots li button {
+  display: block;
+  content: none !important;
 }
 
-/* Active slide: visible and on top */
-.slide-active {
-  opacity: 1;
-  transform: translateX(0) scale(1);
-  z-index: 2;
-  pointer-events: auto;
+#banner .slick-dots li button:before {
+  content: none !important;
 }
 
-/* Non-active slides are behind */
-.slide-item:not(.slide-active) {
-  z-index: 1;
+#banner .slick-track {
+  background-color: black !important;
 }
 
-/* Overlay adjustment if you need less composition: combine overlay into image via gradient if possible */
-.slide-item .object-cover {
-  /* Next/Image applies an img wrapper; ensure it covers */
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+#banner .slick-slide div {
+  display: flex !important;
+  flex-direction: column;
 }
 
-/* Controls (dots) - tuned for mobile */
-.inner-controls {
-  pointer-events: auto;
+#banner .slide-button:hover {
+  background: #fff !important;
+  transform: scale(1.34) !important;
 }
 
-/* Button focus / accessibility */
-.inner-controls button:focus {
-  outline: 2px solid rgba(255, 255, 255, 0.9);
-  outline-offset: 2px;
-}
-
-/* Reduce paint for overlay: avoid multiple stacked semi-transparent layers when possible */
-/* Example: create a single pseudo-element gradient on .slide-item to mimic overlay instead of separate div */
-.slide-item::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.36));
-  z-index: 1;
-  pointer-events: none;
-}
-
-/* Ensure container has a fixed min-height to avoid layout shifts */
-#banner-slider {
-  min-height: 480px;
-  /* adjust per your breakpoints or make it responsive with media queries */
-}
-
-/* Responsive min-height tweaks (copy your breakpoints) */
-@media (min-width: 414px) {
-  #banner-slider {
-    min-height: 490px;
-  }
+#banner .slick-dots {
+  position: absolute !important;
+  width: 20px !important;
+  height: 68px !important;
+  z-index: 10 !important;
+  top: calc(50% - 80px) !important;
+  right: 20px !important;
+  cursor: default !important;
+  margin-left: auto !important;
+  margin-right: 0 !important;
 }
 
 @media (min-width: 768px) {
-  #banner-slider {
-    min-height: 600px;
+  #banner .slick-dots {
+    right: 20px !important;
   }
 }
 
-@media (min-width: 1440px) {
-  #banner-slider {
-    min-height: 70vh;
+@media (min-width: 1200px) {
+  #banner .slick-dots {
+    right: 40px !important;
   }
-}
-
-/* Accessibility: visually hide non-active slides from assistive tech */
-.slide-item[aria-hidden="true"] {
-  visibility: hidden;
 }

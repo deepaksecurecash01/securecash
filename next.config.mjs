@@ -12,7 +12,6 @@ const nextConfig = {
   },
 
   compress: true,
-  swcMinify: true,
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
@@ -114,7 +113,6 @@ const nextConfig = {
       "react-slick",
       "react-hook-form",
     ],
-    modern: true,
     scrollRestoration: true,
   },
 };
