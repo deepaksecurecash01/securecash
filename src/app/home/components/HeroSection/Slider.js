@@ -1,187 +1,83 @@
-// ============================================
-// FILE 1: Slider.js - JPG-Optimized Version
-// ============================================
 "use client";
+
 import React, { useEffect, useRef, useState, useCallback } from "react";
+import SlideItem from "./SlideItem.js";
 import Container from "@/components/layout/Container";
 import SliderContent from "./SliderContent";
+import SlideControls from "./SlideControls"; // we'll provide a small control component below
 
-// ============================================
-// Optimized Slide Component - JPG Version
-// ============================================
-const Slide = ({ slide, slideIndex, isFirst }) =>
-{
-  return (
-    <div className="bannerSlides relative">
-      <div className="absolute inset-0 bg-black/35 z-[1]" />
+const AUTO_DELAY = 5000;
 
-      <div className="relative w-full h-full min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1024px:h-full 1440px:min-h-[70vh]">
-        {/* ✅ Native picture element with JPG */}
-        <picture>
-          {/* Mobile: 320-479px */}
-          <source
-            media="(max-width: 479px)"
-            srcSet={slide.mobile}
-            type="image/jpeg"
-          />
-
-          {/* Tablet: 480-1023px */}
-          <source
-            media="(min-width: 480px) and (max-width: 1023px)"
-            srcSet={slide.tablet}
-            type="image/jpeg"
-          />
-
-          {/* Desktop: 1024px+ */}
-          <source
-            media="(min-width: 1024px)"
-            srcSet={slide.web}
-            type="image/jpeg"
-          />
-
-          {/* Fallback with optimized attributes */}
-          <img
-            src={slide.web}
-            alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
-            className="absolute inset-0 w-full h-full object-cover"
-            loading={isFirst ? "eager" : "lazy"}
-            fetchpriority={isFirst ? "high" : "low"}
-            decoding={isFirst ? "sync" : "async"}
-            width="1920"
-            height="800"
-          />
-        </picture>
-      </div>
-
-      <Container className="z-10 w-full absolute inset-0 flex items-center">
-        <SliderContent {...slide} />
-      </Container>
-    </div>
-  );
-};
-
-// ============================================
-// Slide Controls (Memoized)
-// ============================================
-const SlideControls = React.memo(({ slides, currentSlide, onSlideChange, isVisible }) =>
-{
-  if (!isVisible) return null;
-
-  return (
-    <div
-      className="inner-controls absolute w-5 h-[68px] z-10 top-[calc(50%-80px)] right-0 cursor-default ml-auto mr-0 320px:w-[40px] 768px:right-0 992px:mr-[30px] 1200px:right-0"
-      role="navigation"
-      aria-label="Slider navigation"
-    >
-      <ul className="dot-navigation absolute top-[32%] list-none">
-        {slides.map((_, index) => (
-          <li key={index}>
-            <button
-              className={`cursor-pointer h-[15px] w-[15px] mx-[2px] bg-[#a3a3a3] rounded-full inline-block transition-all duration-300 dot hover:bg-white hover:transform hover:scale-[1.34] border-0 ${currentSlide === index + 1
-                ? "bg-white transform scale-[1.34]"
-                : ""
-                }`}
-              onClick={() => onSlideChange(index + 1)}
-              aria-label={`Go to slide ${index + 1}`}
-              aria-current={currentSlide === index + 1}
-            />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-});
-
-SlideControls.displayName = 'SlideControls';
-
-// ============================================
-// FINAL OPTIMIZED Slider Component
-// ============================================
 const Slider = ({ slides = [] }) =>
 {
-  const [slideIndex, setSlideIndex] = useState(1);
+  const [index, setIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [isReady, setIsReady] = useState(false);
-  const bannerInterval = useRef(null);
-  const sliderRef = useRef(null);
+  const [isVisible, setIsVisible] = useState(true); // initial true for SSR -> client adjustment
+  const timerRef = useRef(null);
+  const rootRef = useRef(null);
 
-  // ✅ Critical: Wait for first image to load before showing controls
+  // Intersection observer to pause when off-screen
   useEffect(() =>
   {
-    if (typeof window === 'undefined') return;
+    if (!rootRef.current || typeof window === "undefined") return;
 
-    // Small delay to ensure first paint happens
-    const timer = setTimeout(() =>
-    {
-      setIsReady(true);
-    }, 50);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const slideBannerAuto = useCallback(() =>
-  {
-    setSlideIndex((prev) => (prev >= slides.length ? 1 : prev + 1));
-  }, [slides.length]);
-
-  const startBanner = useCallback(() =>
-  {
-    if (bannerInterval.current) clearInterval(bannerInterval.current);
-    bannerInterval.current = setInterval(slideBannerAuto, 5000);
-  }, [slideBannerAuto]);
-
-  const stopBanner = useCallback(() =>
-  {
-    if (bannerInterval.current) clearInterval(bannerInterval.current);
-  }, []);
-
-  // ✅ Intersection Observer
-  useEffect(() =>
-  {
-    if (!sliderRef.current) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => setIsVisible(entry.isIntersecting),
-      { threshold: 0.1, rootMargin: '100px' }
+    const obs = new IntersectionObserver(
+      ([entry]) =>
+      {
+        setIsVisible(entry.isIntersecting);
+      },
+      { threshold: 0.1, rootMargin: "200px" }
     );
 
-    observer.observe(sliderRef.current);
-    return () => observer.disconnect();
+    obs.observe(rootRef.current);
+    return () => obs.disconnect();
   }, []);
 
-  // ✅ Auto-rotation - only when ready and visible
+  const clearTimer = useCallback(() =>
+  {
+    if (timerRef.current) {
+      clearInterval(timerRef.current);
+      timerRef.current = null;
+    }
+  }, []);
+
+  const startTimer = useCallback(() =>
+  {
+    clearTimer();
+    timerRef.current = setInterval(() =>
+    {
+      setIndex((prev) => (prev + 1) % slides.length);
+    }, AUTO_DELAY);
+  }, [clearTimer, slides.length]);
+
   useEffect(() =>
   {
-    if (isReady && isVisible && !isHovered) {
-      startBanner();
+    if (isVisible && !isHovered && slides.length > 1) {
+      startTimer();
     } else {
-      stopBanner();
+      clearTimer();
     }
-    return stopBanner;
-  }, [isReady, isVisible, isHovered, startBanner, stopBanner]);
+    return clearTimer;
+  }, [isVisible, isHovered, startTimer, clearTimer, slides.length]);
 
-  const handleSlideChange = useCallback(
-    (index) =>
+  // Manual navigation
+  const goTo = useCallback(
+    (n) =>
     {
-      setSlideIndex(index);
-      stopBanner();
-      setTimeout(() =>
-      {
-        if (isVisible && !isHovered) startBanner();
-      }, 700);
+      const next = Math.max(0, Math.min(slides.length - 1, n));
+      setIndex(next);
     },
-    [stopBanner, startBanner, isVisible, isHovered]
+    [slides.length]
   );
 
-  // ✅ Only render current slide
-  const currentSlide = slides[slideIndex - 1];
+  const next = useCallback(() => setIndex((s) => (s + 1) % slides.length), [slides.length]);
+  const prev = useCallback(() => setIndex((s) => (s - 1 + slides.length) % slides.length), [slides.length]);
 
-  if (!currentSlide) return null;
+  if (!slides || slides.length === 0) return null;
 
   return (
     <div
-      ref={sliderRef}
+      ref={rootRef}
       id="banner-slider"
       className="w-full inline-block relative overflow-hidden"
       onMouseEnter={() => setIsHovered(true)}
@@ -191,19 +87,28 @@ const Slider = ({ slides = [] }) =>
       aria-live="polite"
     >
       <div className="slideshow-container relative">
-        <Slide
-          key={`slide-${slideIndex}`}
-          slide={currentSlide}
-          slideIndex={slideIndex - 1}
-          isFirst={slideIndex === 1}
-        />
+        {/* Render all slides, toggle via CSS classes */}
+        {slides.map((slide, idx) => (
+          <SlideItem
+            key={idx}
+            slide={slide}
+            idx={idx}
+            active={idx === index}
+            isFirst={idx === 0}
+          >
+            {/* Keep your SliderContent inside SlideItem via children or SlideItem renders it */}
+          </SlideItem>
+        ))}
       </div>
 
+      {/* Controls: dots / prev-next (kept minimal and memoized) */}
       <SlideControls
         slides={slides}
-        currentSlide={slideIndex}
-        onSlideChange={handleSlideChange}
-        isVisible={isReady}
+        currentIndex={index}
+        onGoTo={goTo}
+        onNext={next}
+        onPrev={prev}
+        visible // we can make visible conditional if needed
       />
     </div>
   );
