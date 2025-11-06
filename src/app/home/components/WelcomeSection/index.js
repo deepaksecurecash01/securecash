@@ -41,7 +41,7 @@ const WelcomeSection = () =>
   };
 
   return (
-    <div className=" w-full bg-content-bg bg-no-repeat bg-center  1366px:bg-cover inline-block mt-10">
+    <div className=" w-full  600px:bg-content-bg bg-no-repeat bg-center  1366px:bg-cover inline-block mt-10">
       <Container className="max-[1440px]:max-w-[1280px]">
         <div
           id="welcome"
@@ -97,10 +97,7 @@ const WelcomeSection = () =>
                   >
                     Our Cash In Transit Services
                   </h3>
-
-
-
-                  <p
+ <p
                    
                     className="text-[16px] leading-[2rem] text-left
              768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light font-montserrat"
