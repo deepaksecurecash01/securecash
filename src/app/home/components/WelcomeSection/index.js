@@ -4,7 +4,7 @@ import Image from "next/image";
 import Paragraph from "@/components/common/Paragraph";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
-import VimeoLite from "@/components/common/VimeoLite";
+// import VimeoLite from "@/components/common/VimeoLite";
 import Container from "@/components/layout/Container";
 
 const servicesData = [
@@ -125,7 +125,7 @@ const WelcomeSection = () =>
               </ScrollableSection>
             </div>
             <div className="rightside-column pb-0 float-none w-full 992px:w-1/2 p-0 mx-auto my-0 992px:pb-0">
-              <VimeoLite videoId="312442368" />
+              {/* <VimeoLite videoId="312442368" /> */}
             </div>
           </div>
         </div>
