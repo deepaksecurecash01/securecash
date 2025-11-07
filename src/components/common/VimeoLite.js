@@ -7,8 +7,9 @@ const VideoPlayer = ({
   width = "100%",
   aspectRatio = "16:9",
   thumbnail,
-  provider = "vimeo", // Future-proof for YouTube, etc.
+  provider = "vimeo",
   className = "",
+  priority = false, // ✅ CRITICAL: Allow selective priority
 }) =>
 {
   const [videoState, setVideoState] = useState("idle");
@@ -16,7 +17,7 @@ const VideoPlayer = ({
   const [isLoading, setIsLoading] = useState(false);
   const iframeRef = useRef(null);
 
-  // Fetch thumbnail if not provided
+  // ✅ OPTIMIZED: Fetch thumbnail with quality parameter
   useEffect(() =>
   {
     if (!thumbnail && provider === "vimeo") {
@@ -26,6 +27,8 @@ const VideoPlayer = ({
         .then((data) =>
         {
           if (data && data[0]) {
+            // ✅ Use thumbnail_medium (200x150) instead of thumbnail_large (640x360)
+            // For better quality, use thumbnail_large but let Next.js optimize it
             setThumbnailUrl(data[0].thumbnail_large);
           }
         })
@@ -55,7 +58,6 @@ const VideoPlayer = ({
   const handlePlay = () =>
   {
     setVideoState("playing");
-    // Set iframe src after component re-renders with iframe present
     setTimeout(() =>
     {
       if (iframeRef.current) {
@@ -100,7 +102,7 @@ const VideoPlayer = ({
               </div>
             )}
 
-            {/* Thumbnail Image */}
+            {/* ✅ OPTIMIZED: Thumbnail Image with proper lazy loading */}
             {thumbnailUrl && !isLoading && (
               <Image
                 src={thumbnailUrl}
@@ -108,7 +110,9 @@ const VideoPlayer = ({
                 fill
                 className="object-cover object-center"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-                priority
+                quality={60} // ✅ Reduce quality (was default 75)
+                loading={priority ? "eager" : "lazy"} // ✅ Lazy by default
+                priority={priority} // ✅ Only prioritize when explicitly set
               />
             )}
 
@@ -152,6 +156,7 @@ const VideoPlayer = ({
             title={title}
             allow="autoplay; fullscreen; picture-in-picture"
             allowFullScreen
+            loading="lazy" // ✅ Add lazy loading to iframe
           />
         )}
       </div>

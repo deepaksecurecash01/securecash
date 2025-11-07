@@ -286,25 +286,6 @@ strong {
   padding-right: 34px;
 }
 
-.services-content li {
-  display: flex !important;
-}
-
-.services-content li::before {
-  content: "" !important;
-  display: inline-block !important;
-  height: 15px !important;
-  width: 20px !important;
-  background-image: url(../../public/images/icons/check.png) !important;
-  background-size: contain !important;
-  background-repeat: no-repeat !important;
-  padding-right: 34px !important;
-  margin-top: 10px !important;
-}
-
-.services-content li:not(:first-child)::before {
-  margin-top: 26px !important;
-}
 
 .services-content li span h4 {
   font-size: 20px;
@@ -337,17 +318,7 @@ strong {
   margin-bottom: 10px;
 }
 
-@media (min-width: 600px) {
-  .your-element {
-    line-height: 1.6em;
-  }
-}
 
-@media (min-width: 992px) {
-  .your-element {
-    width: 100%;
-  }
-}
 
 /* ================================
    UTILITY CLASSES

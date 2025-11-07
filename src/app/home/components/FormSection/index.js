@@ -1,6 +1,7 @@
 import React from "react";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import QuoteForm from "@/components/common/forms-new/forms/QuoteForm";
+import { IoCheckmarkSharp } from "react-icons/io5"; // ✅ Using react-icons
 
 const FormSection = () =>
 {
@@ -55,13 +56,13 @@ const FormSection = () =>
         <QuoteForm />
         <div className="right-contact-row  w-[96%] 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1]  992px:pl-8">
           <h3
-         
+
             className="text-[32px] leading-[1.6em] text-center mb-[16px] 992px:text-left font-prata-regular"
           >
             Make The Right Choice
           </h3>
 
-          <hr className="w-[100px] mb-[24px] bg-primary h-[4px] rounded-[5px] border-0 mx-auto 992px:ml-0  992px:mr-auto"  />
+          <hr className="w-[100px] mb-[24px] bg-primary h-[4px] rounded-[5px] border-0 mx-auto 992px:ml-0  992px:mr-auto" />
           <h2
 
             className="font-bold text-[40px] text-primary leading-[1.4em] text-center mb-[24px] 992px:text-left font-montserrat"
@@ -70,7 +71,7 @@ const FormSection = () =>
           </h2>
 
           <p
-           
+
             className="leading-[2em] font-normal text-center mb-[14px] 768px:mb-0 992px:text-left font-montserrat"
           >
             For one reason: We have been established for over 25 years, since 1992 to be exact!
@@ -79,11 +80,22 @@ const FormSection = () =>
           <ScrollableSection className=" h-auto 480px:w-[90%] 992px:w-full p-0 mx-auto   992px:h-[630px] 1200px:h-[658px] 1366px:h-[740px] bg-white mt-6 leading-[2]">
             <ul className="list-none w-full  992px:pr-6 services-content">
               {contentItems.map((item, index) => (
-                <li key={index}>
+                <li key={index} className="flex items-start"
+                  style={{
+                    marginTop: index === 0 ? '' : '26px'
+                  }}>
+                  <IoCheckmarkSharp
+                    className="flex-shrink-0 text-primary mt-1 mr-3"
+                    size={24}
+                    aria-hidden="true"
+                  />
                   <span className="inline-block">
 
                     <h4
-
+                      className="mb-2.5"
+                      style={{
+                        marginTop: index === 0 ? '0' : '0'
+                      }}
                     >
                       {item.title}:
                     </h4>
