@@ -9,7 +9,6 @@ const nextConfig = {
     dangerouslyAllowSVG: false,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
 
-    // ✅ ADD: More secure pattern matching
     remotePatterns: [
       {
         protocol: "https",
@@ -26,7 +25,7 @@ const nextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
-  swcMinify: true, // ✅ ADD: Faster minification
+  swcMinify: true,
 
   compiler: {
     removeConsole:
@@ -52,13 +51,14 @@ const nextConfig = {
             enforce: true,
           },
 
-          // ✅ ADD: Separate Swiper chunk
+          // ✅ Separate Swiper chunk with aggressive optimization
           swiper: {
             name: "swiper",
             test: /[\\/]node_modules[\\/](swiper)[\\/]/,
             priority: 35,
             enforce: true,
             reuseExistingChunk: true,
+            chunks: 'async', // ✅ Load async since we use dynamic import
           },
 
           lib: {
@@ -100,16 +100,21 @@ const nextConfig = {
   async headers()
   {
     return [
-      // ✅ IMPROVED: More specific image caching
+      // ✅ Cache banner images aggressively
       {
-        source: "/images/:path*",
+        source: "/images/banner/:path*",
         headers: [
           {
             key: "Cache-Control",
             value: "public, max-age=31536000, immutable",
           },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
         ],
       },
+      // ✅ Cache Next.js optimized images
       {
         source: "/_next/image:path*",
         headers: [
@@ -119,6 +124,7 @@ const nextConfig = {
           },
         ],
       },
+      // ✅ Cache static assets
       {
         source: "/(.*)\\.(js|css|woff2|woff|ttf|otf)",
         headers: [
@@ -128,19 +134,9 @@ const nextConfig = {
           },
         ],
       },
-      // ✅ ADD: Preload hint for homepage
+      // ✅ HTML pages - no cache
       {
-        source: "/",
-        headers: [
-          {
-            key: "Link",
-            value:
-              "</images/banner/Slide-1-mobile.jpg>; rel=preload; as=image; media=(max-width: 479px), </images/banner/Slide-1-tablet.jpg>; rel=preload; as=image; media=(min-width: 480px) and (max-width: 1023px), </images/banner/Slide-1-web.jpg>; rel=preload; as=image; media=(min-width: 1024px)",
-          },
-        ],
-      },
-      {
-        source: "/(.*)",
+        source: "/:path*",
         headers: [
           {
             key: "Cache-Control",
@@ -154,15 +150,17 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     optimizePackageImports: [
+      "swiper/react",
+      "swiper/modules",
       "react-icons",
       "lucide-react",
       "@react-google-maps/api",
-      "swiper", // ✅ CHANGED: From react-slick to swiper
       "react-hook-form",
+      "react-slick",
     ],
     scrollRestoration: true,
-    webpackBuildWorker: true, // ✅ ADD: Parallel builds
-    optimisticClientCache: true, // ✅ ADD: Faster navigation
+    webpackBuildWorker: true,
+    optimisticClientCache: true,
   },
 };
 

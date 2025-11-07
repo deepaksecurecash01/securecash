@@ -1,6 +1,22 @@
+'use client'
+import dynamic from 'next/dynamic';
 import InfoBar from "@/components/common/BannerInfo";
-import Slider from "./Slider";
 import "./Slider.css";
+
+// ✅ CRITICAL: Dynamic import with SSR disabled for maximum performance
+const BannerSlider = dynamic(() => import('./Slider'), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full relative overflow-hidden bg-black min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1440px:min-h-[70vh]">
+      {/* Skeleton loader matching first slide */}
+      <div className="absolute inset-0 bg-black/35 z-[1]" />
+      <div
+        className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent animate-pulse"
+        aria-label="Loading slider..."
+      />
+    </div>
+  ),
+});
 
 const SLIDES = [
   {
@@ -60,12 +76,11 @@ const SLIDES = [
   },
 ];
 
-const HeroSection = () => {
+const HeroSection = () =>
+{
   return (
-    <div id="banner" className="flex flex-col justify-end items-center ">
-      <Slider slides={SLIDES} />
-      {/* <div style={{ height: '600px', background: '#ccc' }}>Placeholder</div> */}
-
+    <div id="banner" className="flex flex-col justify-end items-center">
+      <BannerSlider slides={SLIDES} />
       <InfoBar />
     </div>
   );
