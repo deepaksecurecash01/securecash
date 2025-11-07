@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
@@ -7,67 +6,46 @@ import SliderContent from "./SliderContent";
 
 const Slide = ({ slide, isActive, isPriority, slideIndex }) =>
 {
-  // Only load images for active slide and next/previous slides
-  const shouldLoad = isActive || isPriority;
+  const [viewport, setViewport] = useState("desktop");
+
+  useEffect(() =>
+  {
+    const update = () =>
+    {
+      const w = window.innerWidth;
+      if (w < 480) setViewport("mobile");
+      else if (w < 1024) setViewport("tablet");
+      else setViewport("web");
+    };
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+
+  const src =
+    viewport === "mobile" ? slide.mobile : viewport === "tablet" ? slide.tablet : slide.web;
 
   return (
     <div
-      className={`bannerSlides relative transition-opacity duration-700 ${isActive ? "opacity-100 block" : "opacity-0 hidden"
-        }`}
+      className={`bannerSlides relative transition-opacity duration-700 ${isActive ? "opacity-100 block" : "opacity-0 hidden"}`}
       aria-hidden={!isActive}
     >
-      {/* Overlay */}
       <div className="absolute inset-0 bg-black/35 z-[1]" />
 
-      {/* Optimized Image Loading */}
       <div className="relative w-full h-full min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1024px:h-full 1440px:min-h-[70vh]">
-        {/* Desktop Image */}
         <Image
-          src={slide.web}
+          src={src}
           alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
           fill
           priority={isPriority}
           loading={isPriority ? "eager" : "lazy"}
           fetchPriority={isPriority ? "high" : "low"}
-          quality={75}
-          sizes="(max-width: 768px) 0vw, 100vw"
-          className="object-cover hidden 1024px:block"
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
-        />
-
-        {/* Tablet Image */}
-        <Image
-          src={slide.tablet}
-          alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
-          fill
-          priority={isPriority}
-          loading={isPriority ? "eager" : "lazy"}
-          fetchPriority={isPriority ? "high" : "low"}
-          quality={75}
-          sizes="(max-width: 768px) 0vw, (min-width: 1024px) 100vw, 0vw"
-          className="object-cover hidden 480px:block 1024px:hidden"
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
-        />
-
-        {/* Mobile Image */}
-        <Image
-          src={slide.mobile}
-          alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
-          fill
-          priority={isPriority}
-          loading={isPriority ? "eager" : "lazy"}
-          fetchPriority={isPriority ? "high" : "low"}
-          quality={55}
-          sizes="(max-width: 479px) 100vw, 0vw"
-          className="object-cover block 480px:hidden"
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
+          quality={isPriority ? 75 : 50}
+          sizes="100vw"
+          className="object-cover"
         />
       </div>
 
-      {/* Content */}
       <Container className="z-10 w-full absolute inset-0 flex items-center">
         <SliderContent {...slide} />
       </Container>
@@ -112,24 +90,18 @@ const Slider = ({ slides = [] }) =>
 
   const startBanner = useCallback(() =>
   {
-    if (bannerInterval.current) {
-      clearInterval(bannerInterval.current);
-    }
+    if (bannerInterval.current) clearInterval(bannerInterval.current);
     bannerInterval.current = setInterval(slideBannerAuto, 5000);
   }, [slideBannerAuto]);
 
   const stopBanner = useCallback(() =>
   {
-    if (bannerInterval.current) {
-      clearInterval(bannerInterval.current);
-    }
+    if (bannerInterval.current) clearInterval(bannerInterval.current);
   }, []);
 
   useEffect(() =>
   {
-    if (!isHovered) {
-      startBanner();
-    }
+    if (!isHovered) startBanner();
     return () => stopBanner();
   }, [isHovered, startBanner, stopBanner]);
 
@@ -140,14 +112,13 @@ const Slider = ({ slides = [] }) =>
     startBanner();
   }, [stopBanner, startBanner]);
 
-  // Determine which slides should be prioritized (first slide + preload next/prev)
+  const currentIndex = slideIndex - 1;
+  const prevIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
+  const nextIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
+
   const getPriority = (index) =>
   {
-    if (index === 0) return true; // First slide always priority
-    // Preload adjacent slides
-    const currentIndex = slideIndex - 1;
-    const nextIndex = currentIndex === slides.length - 1 ? 0 : currentIndex + 1;
-    const prevIndex = currentIndex === 0 ? slides.length - 1 : currentIndex - 1;
+    if (index === 0) return true;
     return index === nextIndex || index === prevIndex;
   };
 
@@ -162,16 +133,24 @@ const Slider = ({ slides = [] }) =>
       aria-live="polite"
     >
       <div className="slideshow-container relative">
-        {slides.map((slide, index) => (
-          <Slide
-            key={index}
-            slide={slide}
-            slideIndex={index}
-            isActive={slideIndex === index + 1}
-            isPriority={getPriority(index)}
-          />
-        ))}
+        {slides.map((slide, index) =>
+        {
+          const isActive = currentIndex === index;
+          const shouldRender = isActive || index === prevIndex || index === nextIndex;
+          if (!shouldRender) return null;
+
+          return (
+            <Slide
+              key={index}
+              slide={slide}
+              slideIndex={index}
+              isActive={isActive}
+              isPriority={getPriority(index)}
+            />
+          );
+        })}
       </div>
+
       <SlideControls
         slides={slides}
         currentSlide={slideIndex}

@@ -99,7 +99,6 @@ const TeamSlider = ({ member }) =>
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          fade: true,
           speed: 800,
           nextArrow: <CustomArrow direction="next" slidesToShow={1} />,
           prevArrow: <CustomArrow direction="prev" slidesToShow={1} />,
