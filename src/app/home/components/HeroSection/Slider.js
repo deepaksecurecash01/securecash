@@ -28,7 +28,7 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
           priority={shouldPrioritize}
           loading={shouldPrioritize ? "eager" : "lazy"}
           fetchPriority={shouldPrioritize ? "high" : "low"}
-          quality={80}
+          quality={75}
           sizes="(max-width: 767px) 0vw, 100vw"
           className="object-cover hidden 1024px:block"
           placeholder="blur"
@@ -43,7 +43,7 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
           priority={shouldPrioritize}
           loading={shouldPrioritize ? "eager" : "lazy"}
           fetchPriority={shouldPrioritize ? "high" : "low"}
-          quality={80}
+          quality={70}
           sizes="(max-width: 479px) 0vw, (min-width: 1024px) 0vw, 100vw"
           className="object-cover hidden 480px:block 1024px:hidden"
           placeholder="blur"
@@ -58,7 +58,7 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
           priority={shouldPrioritize}
           loading={shouldPrioritize ? "eager" : "lazy"}
           fetchPriority={shouldPrioritize ? "high" : "low"}
-          quality={75}
+          quality={55}
           sizes="(max-width: 479px) 100vw, 0vw"
           className="object-cover block 480px:hidden"
           placeholder="blur"
