@@ -1,65 +1,39 @@
-
 "use client";
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, EffectFade } from "swiper/modules"; // ✅ Removed Pagination module
 import Image from "next/image";
+import "swiper/css";
+import "swiper/css/effect-fade";
 import Container from "@/components/layout/Container";
 import SliderContent from "./SliderContent";
 
-const Slide = ({ slide, isActive, isPriority, slideIndex }) =>
+// ============================================
+// SINGLE SLIDE COMPONENT - Memoized
+// ============================================
+const BannerSlide = React.memo(({ slide, slideIndex }) =>
 {
+  const shouldPrioritize = slideIndex === 0;
+
   return (
-    <div
-      className={`bannerSlides relative transition-opacity duration-700 ${isActive ? "opacity-100 block" : "opacity-0 hidden"
-        }`}
-      aria-hidden={!isActive}
-    >
+    <div className="relative overflow-hidden bg-black">
       <div className="absolute inset-0 bg-black/35 z-[1]" />
 
       <div className="relative w-full h-full min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1024px:h-full 1440px:min-h-[70vh]">
         {/* Desktop Image */}
-        {/* <Image
+        <Image
           src={slide.web}
           alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
           fill
-          priority={isPriority}
-          loading={isPriority ? "eager" : "lazy"}
-          fetchPriority={isPriority ? "high" : "low"}
-          quality={85}
-          sizes="(max-width: 768px) 0vw, 100vw"
-          className="object-cover hidden 1024px:block"
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
-        /> */}
-
-        {/* Tablet Image */}
-        {/* <Image
-          src={slide.tablet}
-          alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
-          fill
-          priority={isPriority}
-          loading={isPriority ? "eager" : "lazy"}
-          fetchPriority={isPriority ? "high" : "low"}
-          quality={75}
-          sizes="(max-width: 768px) 0vw, (min-width: 1024px) 100vw, 0vw"
-          className="object-cover hidden 480px:block 1024px:hidden"
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
-        /> */}
-
-        {/* Mobile Image */}
-        <Image
-          src={slide.mobile}
-          alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
-          fill
-          priority={isPriority}
-          loading={isPriority ? "eager" : "lazy"}
-          fetchPriority={isPriority ? "high" : "low"}
-          quality={55}
-          sizes="(max-width: 479px) 100vw, 0vw"
-          className="object-cover block 480px:hidden"
+          priority={shouldPrioritize}
+          loading={shouldPrioritize ? "eager" : "lazy"}
+          fetchPriority={shouldPrioritize ? "high" : "low"}
+          quality={80}
+          sizes="(max-width: 767px) 0vw, 100vw"
           placeholder="blur"
           blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
         />
+
       </div>
 
       <Container className="z-10 w-full absolute inset-0 flex items-center">
@@ -67,28 +41,33 @@ const Slide = ({ slide, isActive, isPriority, slideIndex }) =>
       </Container>
     </div>
   );
-};
+});
+
+BannerSlide.displayName = "BannerSlide";
 
 // ============================================
-// SlideControls - Same as before
+// ✅ CUSTOM PAGINATION CONTROLS
 // ============================================
-const SlideControls = ({ slides, currentSlide, onSlideChange }) => (
+const CustomPagination = ({ slides, activeIndex, onDotClick }) => (
   <div
     className="inner-controls absolute w-5 h-[68px] z-10 top-[calc(50%-80px)] right-0 cursor-default ml-auto mr-0 320px:w-[40px] 768px:right-0 992px:mr-[30px] 1200px:right-0"
     role="navigation"
     aria-label="Slider navigation"
   >
-    <ul className="dot-navigation absolute top-[32%] list-none">
-      {slides.map((slide, index) => (
+    <ul className="dot-navigation absolute top-[32%] list-none m-0 p-0">
+      {slides.map((_, index) => (
         <li key={index}>
           <button
-            className={`cursor-pointer h-[15px] w-[15px] mx-[2px] bg-[#a3a3a3] rounded-full inline-block transition-all duration-300 dot hover:bg-white hover:transform hover:scale-[1.34] hover:w-[15px] hover:h-[15px] border-0 ${currentSlide === index + 1
-              ? "bg-white transform scale-[1.34] w-[15px] h-[15px]"
-              : ""
+            className={`cursor-pointer h-[15px] w-[15px] mx-[2px] rounded-full inline-block transition-all duration-300 border-0 p-0 ${activeIndex === index
+              ? "bg-white transform scale-[1.34]"
+              : "bg-[#a3a3a3]"
               }`}
-            onClick={() => onSlideChange(index + 1)}
+            onClick={() => onDotClick(index)}
             aria-label={`Go to slide ${index + 1}`}
-            aria-current={currentSlide === index + 1 ? "true" : "false"}
+            aria-current={activeIndex === index ? "true" : "false"}
+            style={{
+              transition: 'all 0.3s ease',
+            }}
           />
         </li>
       ))}
@@ -97,100 +76,75 @@ const SlideControls = ({ slides, currentSlide, onSlideChange }) => (
 );
 
 // ============================================
-// OPTIMIZED Slider - Only renders current + next slide
+// OPTIMIZED SWIPER SLIDER
 // ============================================
-const Slider = ({ slides = [] }) =>
+const BannerSlider = ({ slides = [] }) =>
 {
-  const [slideIndex, setSlideIndex] = useState(1);
-  const [isHovered, setIsHovered] = useState(false);
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const bannerInterval = useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [swiperInstance, setSwiperInstance] = useState(null);
 
-  const slideBannerAuto = useCallback(() =>
+  const handleSlideChange = useCallback((swiper) =>
   {
-    setSlideIndex((prev) => (prev >= slides.length ? 1 : prev + 1));
-  }, [slides.length]);
-
-  const startBanner = useCallback(() =>
-  {
-    if (bannerInterval.current) {
-      clearInterval(bannerInterval.current);
-    }
-    bannerInterval.current = setInterval(slideBannerAuto, 5000);
-  }, [slideBannerAuto]);
-
-  const stopBanner = useCallback(() =>
-  {
-    if (bannerInterval.current) {
-      clearInterval(bannerInterval.current);
-    }
+    setActiveIndex(swiper.realIndex);
   }, []);
 
-  useEffect(() =>
+  const handleSwiper = useCallback((swiper) =>
   {
-    if (!isHovered) {
-      startBanner();
+    setSwiperInstance(swiper);
+  }, []);
+
+  // ✅ Handle dot click
+  const handleDotClick = useCallback((index) =>
+  {
+    if (swiperInstance) {
+      swiperInstance.slideToLoop(index); // Use slideToLoop for loop mode
     }
-    return () => stopBanner();
-  }, [isHovered, startBanner, stopBanner]);
+  }, [swiperInstance]);
 
-  const handleSlideChange = useCallback((index) =>
-  {
-    setIsTransitioning(true);
-    setSlideIndex(index);
-    stopBanner();
-
-    // Reset transition state after animation completes
-    setTimeout(() =>
-    {
-      setIsTransitioning(false);
-      startBanner();
-    }, 700); // Match transition duration
-  }, [stopBanner, startBanner]);
-
-  // ✅ KEY OPTIMIZATION: Only render current and next slide
-  const getSlidesToRender = useCallback(() =>
-  {
-    const currentIndex = slideIndex - 1;
-    const nextIndex = (currentIndex + 1) % slides.length;
-
-    return [
-      { slide: slides[currentIndex], index: currentIndex, isActive: true, isPriority: true },
-      { slide: slides[nextIndex], index: nextIndex, isActive: false, isPriority: true }
-    ];
-  }, [slideIndex, slides]);
-
-  const slidesToRender = getSlidesToRender();
+  if (!slides.length) return null;
 
   return (
     <div
       id="banner-slider"
-      className="w-full inline-block relative overflow-hidden"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="w-full relative overflow-hidden bg-black"
       role="region"
       aria-label="Hero slider"
       aria-live="polite"
     >
-      <div className="slideshow-container relative">
-        {/* ✅ OPTIMIZED: Only render current + next slide (2 slides instead of 5!) */}
-        {slidesToRender.map(({ slide, index, isActive, isPriority }) => (
-          <Slide
-            key={`slide-${slideIndex}-${index}`}
-            slide={slide}
-            slideIndex={index}
-            isActive={isActive}
-            isPriority={isPriority}
-          />
-        ))}
-      </div>
-      <SlideControls
-        slides={slides}
-        currentSlide={slideIndex}
+      <Swiper
+        modules={[Autoplay, EffectFade]} // ✅ Removed Pagination module
+        effect="fade"
+        fadeEffect={{
+          crossFade: true
+        }}
+        speed={1000}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+        }}
+        loop={slides.length > 1}
+        watchSlidesProgress={true}
+        onSwiper={handleSwiper}
         onSlideChange={handleSlideChange}
+        onRealIndexChange={handleSlideChange}
+        className="w-full bg-black"
+      >
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <BannerSlide slide={slide} slideIndex={index} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
+
+      {/* ✅ Custom Pagination Outside Swiper */}
+      <CustomPagination
+        slides={slides}
+        activeIndex={activeIndex}
+        onDotClick={handleDotClick}
       />
     </div>
   );
 };
 
-export default Slider;
+export default BannerSlider;
