@@ -63,8 +63,8 @@ const SLIDES = [
 const HeroSection = () => {
   return (
     <div id="banner" className="flex flex-col justify-end items-center ">
-      <Slider slides={SLIDES} />
-      {/* <div style={{ height: '600px', background: '#ccc' }}>Placeholder</div> */}
+      {/* <Slider slides={SLIDES} /> */}
+      <div style={{ height: '600px', background: '#ccc' }}>Placeholder</div>
 
       <InfoBar />
     </div>
