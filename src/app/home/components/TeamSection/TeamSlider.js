@@ -99,6 +99,7 @@ const TeamSlider = ({ member }) =>
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
+          fade: true,
           speed: 800,
           nextArrow: <CustomArrow direction="next" slidesToShow={1} />,
           prevArrow: <CustomArrow direction="prev" slidesToShow={1} />,
@@ -150,8 +151,6 @@ const TeamSlider = ({ member }) =>
                 src="/images/icons/mail.png"
                 alt="mail"
                 aria-hidden="true"
-                loading="lazy"
-                quality={80}
               />
               <Link
                 className="text-[14px] text-[#929292] hover:no-underline hover:text-[#c7a652]"

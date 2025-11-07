@@ -150,16 +150,16 @@ const nextConfig = {
   experimental: {
     optimizeCss: true,
     optimizePackageImports: [
-   
+      "swiper/react",
+      "swiper/modules",
       "react-icons",
+      "lucide-react",
       "@react-google-maps/api",
       "react-hook-form",
-      "react-slick",
     ],
     scrollRestoration: true,
     webpackBuildWorker: true,
     optimisticClientCache: true,
-    cssChunking: 'loose', // ✅ ADD THIS - enables better CSS code splitting
   },
 };
 

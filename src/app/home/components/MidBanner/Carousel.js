@@ -125,9 +125,7 @@ const Carousel = () =>
               height={60}
               className="h-[60px] w-auto mx-auto"
               src={slide.imgSrc}
-              alt={slide.title}
-              loading="lazy"
-              quality={80}
+              alt=""
             />
           </div>
           <div className="service-info text-white clear-both">
