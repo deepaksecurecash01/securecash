@@ -10,7 +10,7 @@ const MidBanner = () => {
     <div>
       <CounterSection />
       <ContentSection />
-      <VideoSection  height={`630px`}/>
+      {/* <VideoSection  height={`630px`}/> */}
     </div>
   );
 };
