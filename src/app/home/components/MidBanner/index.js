@@ -1,5 +1,5 @@
 import React from "react";
-// import CounterSection from "./CounterSection";
+import CounterSection from "./CounterSection";
 import ContentSection from "./ContentSection";
 import VideoSection from "@/components/common/VideoSection";
 
@@ -8,7 +8,7 @@ import VideoSection from "@/components/common/VideoSection";
 const MidBanner = () => {
   return (
     <div>
-      {/* <CounterSection /> */}
+      <CounterSection />
       <ContentSection />
       <VideoSection  height={`630px`}/>
     </div>
