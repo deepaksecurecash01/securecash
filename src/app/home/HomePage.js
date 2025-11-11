@@ -3,7 +3,7 @@
 // import MidBanner from "./components/MidBanner";
 import FormSection from "./components/FormSection";
 import CardsSection from "./components/CardsSection";
-import CompaniesSlider from "@/components/common/CompaniesSlider";
+// import CompaniesSlider from "@/components/common/CompaniesSlider";
 // import TeamContent from "./components/TeamSection";
 
 export default function HomePage()
@@ -16,7 +16,7 @@ export default function HomePage()
       <FormSection />
       <CardsSection />
       {/* <TeamContent /> */}
-      <CompaniesSlider />
+      {/* <CompaniesSlider /> */}
     </div>
   );
 }
