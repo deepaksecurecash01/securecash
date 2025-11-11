@@ -1,4 +1,4 @@
-// import HeroSection from "./components/HeroSection";
+import HeroSection from "./components/HeroSection";
 // import WelcomeSection from "./components/WelcomeSection";
 // import MidBanner from "./components/MidBanner";
 // import FormSection from "./components/FormSection";
@@ -10,7 +10,7 @@ export default function HomePage()
 {
   return (
     <div className="overflow-hidden">
-      {/* <HeroSection /> */}
+      <HeroSection />
       {/* <WelcomeSection /> */}
       {/* <MidBanner /> */}
       {/* <FormSection /> */}
