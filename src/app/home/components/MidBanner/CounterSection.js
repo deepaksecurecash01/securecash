@@ -216,7 +216,7 @@ const CounterSection = () =>
     <section
       ref={sectionRef}
       id="banner-mid"
-      className="relative bg-banner-mid-mobile-bg pt-0 h-auto mt-[40px] 414px:h-[760px] 600px:h-[920px] 992px:bg-banner-mid-bg bg-center bg-cover bg-no-repeat 992px:h-[340px] w-full mx-auto flex flex-col 414px:mt-10 justify-center items-center 992px:mt-[100px]"
+      className="relative b pt-0 h-auto mt-[40px] 414px:h-[760px] 600px:h-[920px] 992px:h-[340px] w-full mx-auto flex flex-col 414px:mt-10 justify-center items-center 992px:mt-[100px]"
     >
       {/* Dark overlay */}
       <div className="bg-black w-full h-full z-0 absolute opacity-50" />
@@ -259,6 +259,7 @@ const CounterSection = () =>
                   alt={counter.alt}
                   loading="lazy"
                   fetchPriority="low"
+                  quality={70}
                 />
 
                 {/* Description */}
