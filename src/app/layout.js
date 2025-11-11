@@ -1,6 +1,6 @@
 import { Montserrat, Prata } from "next/font/google";
 import "./globals.css";
-// import Header from "@/components/common/Header";
+import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 
 // ✅ OPTIMIZED: Only load weights actually used in hero section
@@ -78,7 +78,7 @@ export default function RootLayout({ children })
       <body
         className={`${montserrat.variable} ${prata.variable} font-montserrat antialiased`}
       >
-        {/* <Header /> */}
+        <Header />
         {children}
         <Footer />
       </body>
