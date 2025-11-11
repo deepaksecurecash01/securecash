@@ -1,7 +1,7 @@
 // import HeroSection from "./components/HeroSection";
 // import WelcomeSection from "./components/WelcomeSection";
 // import MidBanner from "./components/MidBanner";
-import FormSection from "./components/FormSection";
+// import FormSection from "./components/FormSection";
 import CardsSection from "./components/CardsSection";
 // import CompaniesSlider from "@/components/common/CompaniesSlider";
 // import TeamContent from "./components/TeamSection";
@@ -13,7 +13,7 @@ export default function HomePage()
       {/* <HeroSection /> */}
       {/* <WelcomeSection /> */}
       {/* <MidBanner /> */}
-      <FormSection />
+      {/* <FormSection /> */}
       <CardsSection />
       {/* <TeamContent /> */}
       {/* <CompaniesSlider /> */}
