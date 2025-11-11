@@ -4,85 +4,97 @@ import React, { useState, useEffect, useRef } from "react";
 import CountUp from "react-countup";
 import { useStatsCache } from "@/hooks/useStatsCache";
 
-// Fallback values (last known production values)
-const FALLBACK_STATS = {
-  customers: 2955,
-  servicesPerformed: 578424,
-  cashMoved: 2652053680,
-  source: 'static-fallback'
-};
-
 /**
- * Calculate optimal animation duration based on value magnitude
- * Larger numbers get longer duration for smooth, visible count-up
+ * Get optimal animation duration based on value magnitude
  */
 const getOptimalDuration = (value) =>
 {
-  if (value < 1000) return 2;           // Small numbers: 2s
-  if (value < 10000) return 2.5;        // Thousands: 2.5s
-  if (value < 100000) return 3;         // Tens of thousands: 3s
-  if (value < 1000000) return 3.5;      // Hundreds of thousands: 3.5s
-  return 4;                             // Millions+: 4s
+  if (value < 1000) return 2;
+  if (value < 10000) return 2.5;
+  if (value < 100000) return 3;
+  if (value < 1000000) return 3.5;
+  return 4;
 };
 
 /**
- * Single counter component with smart animation logic
+ * AnimatedCounter - Handles 3-stage animation
+ * Stage 1: Mount → display 0
+ * Stage 2: Fallback arrives → animate 0 → fallback
+ * Stage 3: Real value arrives → animate fallback → real (if different)
  */
 const AnimatedCounter = ({
   targetValue,
   prefix = false,
   isVisible,
-  hasAnimated,
   isMobile
 }) =>
 {
-  const previousValueRef = useRef(targetValue);
+  const [displayStart, setDisplayStart] = useState(0);
+  const [displayEnd, setDisplayEnd] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [animationKey, setAnimationKey] = useState(0);
+  const previousValueRef = useRef(0);
+  const hasAnimatedRef = useRef(false);
 
   /**
-   * Determine animation parameters based on state
+   * Handle value changes and trigger appropriate animations
    */
-  const getAnimationProps = () =>
+  useEffect(() =>
   {
+    // Not visible yet - don't animate
+    if (!isVisible) {
+      setDisplayStart(targetValue);
+      setDisplayEnd(targetValue);
+      setDuration(0);
+      return;
+    }
+
     // Mobile - no animation, instant display
     if (isMobile) {
-      return { start: targetValue, end: targetValue, duration: 0 };
-    }
-
-    // Not visible yet - static display (no animation)
-    if (!isVisible) {
-      return { start: targetValue, end: targetValue, duration: 0 };
-    }
-
-    // First animation when section scrolls into view
-    if (!hasAnimated) {
-      const duration = getOptimalDuration(targetValue);
-      console.log(`🎬 Count-up animation: 0 → ${targetValue.toLocaleString()} (${duration}s)`);
-      return { start: 0, end: targetValue, duration };
-    }
-
-    // Value changed after initial animation - smooth update
-    if (targetValue !== previousValueRef.current) {
-      console.log(`🔄 Value update: ${previousValueRef.current} → ${targetValue}`);
+      setDisplayStart(targetValue);
+      setDisplayEnd(targetValue);
+      setDuration(0);
       previousValueRef.current = targetValue;
-      // Force re-render by changing key
-      setAnimationKey(prev => prev + 1);
-      return { start: previousValueRef.current, end: targetValue, duration: 1.5 };
+      return;
     }
 
-    // No animation needed - value unchanged
-    return { start: targetValue, end: targetValue, duration: 0 };
-  };
+    // First animation (0 → fallback)
+    if (!hasAnimatedRef.current && targetValue > 0) {
+      const animDuration = getOptimalDuration(targetValue);
+      console.log(`[Counter] First animation: 0 → ${targetValue.toLocaleString()} (${animDuration}s)`);
 
-  const animProps = getAnimationProps();
+      setDisplayStart(0);
+      setDisplayEnd(targetValue);
+      setDuration(animDuration);
+      setAnimationKey(prev => prev + 1);
+
+      previousValueRef.current = targetValue;
+      hasAnimatedRef.current = true;
+      return;
+    }
+
+    // Value changed (fallback → real, or subsequent updates)
+    if (hasAnimatedRef.current && targetValue !== previousValueRef.current && targetValue > 0) {
+      console.log(`[Counter] Update animation: ${previousValueRef.current.toLocaleString()} → ${targetValue.toLocaleString()}`);
+
+      setDisplayStart(previousValueRef.current);
+      setDisplayEnd(targetValue);
+      setDuration(1.5);
+      setAnimationKey(prev => prev + 1);
+
+      previousValueRef.current = targetValue;
+      return;
+    }
+
+  }, [targetValue, isVisible, isMobile]);
 
   return (
     <CountUp
       key={animationKey}
-      start={animProps.start}
-      end={animProps.end}
+      start={displayStart}
+      end={displayEnd}
       prefix={prefix ? "$" : ""}
-      duration={animProps.duration}
+      duration={duration}
       separator=","
       preserveValue={true}
       useEasing={true}
@@ -96,27 +108,27 @@ const AnimatedCounter = ({
 };
 
 /**
- * CounterSection - Main counter component
- * Always renders (no layout shift), uses cached/fallback values
+ * CounterSection - Main component
+ * Always visible (no layout shift), uses fallback → real flow
  */
 const CounterSection = () =>
 {
-  // Hook for stats management
-  const { stats, isInitialLoad, isUpdating } = useStatsCache();
+  const { stats, isUpdating } = useStatsCache();
 
-  // State for animations and visibility
   const [isVisible, setIsVisible] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  // Refs
   const sectionRef = useRef(null);
 
   /**
-   * Determine which stats to display (cache > fallback)
-   * This ensures we ALWAYS have values to display (no null/undefined)
+   * Always have stats to display (never null)
+   * This prevents layout shift and ensures component always renders
    */
-  const displayStats = stats || FALLBACK_STATS;
+  const displayStats = stats || {
+    customers: 0,
+    servicesPerformed: 0,
+    cashMoved: 0
+  };
 
   /**
    * Detect mobile viewport
@@ -127,7 +139,6 @@ const CounterSection = () =>
     {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
-      console.log(`📱 Device: ${mobile ? 'Mobile' : 'Desktop'}`);
     };
 
     checkMobile();
@@ -137,14 +148,12 @@ const CounterSection = () =>
   }, []);
 
   /**
-   * Intersection Observer for scroll-triggered animation
-   * Triggers ONCE per page load when user scrolls to section
+   * Intersection Observer - triggers animation when scrolled into view
+   * Only fires once per page load
    */
   useEffect(() =>
   {
     if (!sectionRef.current || isVisible) return;
-
-    console.log('👁️  Setting up Intersection Observer');
 
     const observer = new IntersectionObserver(
       (entries) =>
@@ -152,7 +161,7 @@ const CounterSection = () =>
         entries.forEach((entry) =>
         {
           if (entry.isIntersecting && !isVisible) {
-            console.log('✅ Counter section visible - triggering count-up animation');
+            console.log('[CounterSection] Section visible, triggering animations');
             setIsVisible(true);
             observer.disconnect();
           }
@@ -172,32 +181,8 @@ const CounterSection = () =>
     };
   }, [isVisible]);
 
-  /**
-   * Mark animation as complete after it plays
-   * This prevents re-animation on scroll up/down
-   */
-  useEffect(() =>
-  {
-    if (isVisible && !hasAnimated && !isMobile) {
-      // Delay setting hasAnimated until after the animation completes
-      const maxDuration = getOptimalDuration(Math.max(
-        displayStats.customers,
-        displayStats.servicesPerformed,
-        displayStats.cashMoved
-      ));
-
-      const timer = setTimeout(() =>
-      {
-        setHasAnimated(true);
-        console.log('✅ Count-up animation completed');
-      }, maxDuration * 1000 + 100); // Add 100ms buffer
-
-      return () => clearTimeout(timer);
-    }
-  }, [isVisible, hasAnimated, isMobile, displayStats]);
-
-  // Static configuration for each counter
-  const staticConfig = [
+  // Counter configuration
+  const counters = [
     {
       id: 1,
       key: "customers",
@@ -234,72 +219,72 @@ const CounterSection = () =>
       className="relative bg-banner-mid-mobile-bg pt-0 h-auto mt-[40px] 414px:h-[760px] 600px:h-[920px] 992px:bg-banner-mid-bg bg-center bg-cover bg-no-repeat 992px:h-[340px] w-full mx-auto flex flex-col 414px:mt-10 justify-center items-center 992px:mt-[100px]"
     >
       {/* Dark overlay */}
-      <div className="bg-black w-full h-full z-0 absolute opacity-50"></div>
+      <div className="bg-black w-full h-full z-0 absolute opacity-50" />
 
       {/* Content wrapper */}
       <div
         className="inner w-full max-w-[1366px] mx-auto flex flex-col 992px:flex-row justify-center items-center"
         id="content-counter-wrapper"
       >
-        {staticConfig.map((config, index) =>
+        {counters.map((counter, index) =>
         {
-          const value = displayStats[config.key];
-          const isLastItem = index === staticConfig.length - 1;
+          const value = displayStats[counter.key] || 0;
+          const isLastItem = index === counters.length - 1;
 
           return (
-            <React.Fragment key={config.id}>
+            <React.Fragment key={counter.id}>
               <div className="mid-row py-[50px] 992px:py-0 w-full float-none mx-auto pb-[50px] pl-0 992px:w-1/3 text-center relative 992px:float-left">
 
                 {/* Counter Value */}
                 <h4 className="banner-mid-header font-black text-[40px] text-primary mb-[30px] h-[40px] font-montserrat">
                   <AnimatedCounter
-                    targetValue={value || 0}
-                    prefix={config.prefix}
+                    targetValue={value}
+                    prefix={counter.prefix}
                     isVisible={isVisible}
-                    hasAnimated={hasAnimated}
                     isMobile={isMobile}
                   />
                 </h4>
 
                 {/* Icon */}
                 <Image
-                  src={config.imgSrc}
+                  src={counter.imgSrc}
                   onError={(e) =>
                   {
                     e.target.onerror = null;
-                    e.target.src = config.imgFallback;
+                    e.target.src = counter.imgFallback;
                   }}
                   width={60}
                   height={60}
                   className="h-[60px] w-auto pb-[10px] mx-auto"
-                  alt={config.alt}
+                  alt={counter.alt}
                   loading="lazy"
                   fetchPriority="low"
                 />
 
                 {/* Description */}
                 <p className="text-[16px] text-white font-normal pb-0 mb-0 font-montserrat">
-                  {config.description}
+                  {counter.description}
                 </p>
 
               </div>
 
-              {/* Divider between counters */}
+              {/* Divider */}
               {!isLastItem && (
-                <div className="mid-row-divider h-0.5 w-[150px] 992px:h-[100px] 992px:w-0.5 bg-white z-10"></div>
+                <div className="mid-row-divider h-0.5 w-[150px] 992px:h-[100px] 992px:w-0.5 bg-white z-10" />
               )}
             </React.Fragment>
           );
         })}
       </div>
 
-      {/* Subtle background update indicator (only shows during background refresh) */}
-      {isUpdating && hasAnimated && !isInitialLoad && (
+      {/* Optional: Update indicator (only shows during background refresh) */}
+      {isUpdating && stats && (
         <div
           className="absolute top-4 right-4 z-20"
-          title="Updating stats..."
+          title="Refreshing data..."
+          aria-label="Updating stats"
         >
-          <div className="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
+          <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
         </div>
       )}
     </section>

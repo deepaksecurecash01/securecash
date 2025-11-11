@@ -1,9 +1,10 @@
 // app/api/stats/scc/route.js
-// Optimized API route with improved caching and error handling
+// Main API route with fallback persistence
 
 import { connectMongo } from "@/utils/connectMongo";
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
+import { writeFallback } from "@/utils/statsFallback";
 
 // Define schemas
 const locationSchema = new mongoose.Schema({}, { collection: 'locations', strict: false });
@@ -16,7 +17,7 @@ const Transaction = mongoose.models.Transaction || mongoose.model('Transaction',
 const CACHE_TTL = 6 * 60 * 60 * 1000; // 6 HOURS - Fresh cache
 const STALE_WINDOW = 24 * 60 * 60 * 1000; // 24 HOURS - Stale but usable
 
-// In-memory cache - survives between requests in same instance
+// In-memory cache
 let cache = {
   data: null,
   timestamp: null,
@@ -24,66 +25,61 @@ let cache = {
 };
 
 /**
- * Check if cache is fresh (within TTL)
+ * Check if cache is fresh
  */
-function isCacheFresh() {
+function isCacheFresh()
+{
   return cache.data &&
     cache.timestamp &&
     (Date.now() - cache.timestamp) < CACHE_TTL;
 }
 
 /**
- * Check if cache is stale but usable (expired but within stale window)
+ * Check if cache is stale but usable
  */
-function isCacheStale() {
+function isCacheStale()
+{
   return cache.data &&
     cache.timestamp &&
     (Date.now() - cache.timestamp) < STALE_WINDOW;
 }
 
 /**
- * Fetch fresh stats from database with optimized queries
+ * Fetch fresh stats from database
  */
-async function fetchFreshStats() {
+async function fetchFreshStats()
+{
   const startTime = Date.now();
 
   try {
     await connectMongo();
 
-    console.log('Fetching fresh stats from database...');
+    console.log('[Stats API] Fetching fresh data from database...');
 
-    // Run all queries in parallel for maximum performance
+    // Run queries in parallel
     const [customers, servicesPerformed, cashMovedResult] = await Promise.all([
-      // Query 1: Active Locations Count
       Location.countDocuments({
         Status: 'ACTIVE',
         Zone: 'SCC'
       }),
 
-      // Query 2: Total Transactions Count
       Transaction.countDocuments({
         Organisation: 'SCC'
       }),
 
-      // Query 3: Cash Moved - Optimized aggregation
       Transaction.aggregate([
-        // Stage 1: Match SCC transactions with relevant items
         {
           $match: {
             Organisation: 'SCC',
             'Items.Type': { $in: ['Bank Service', 'Change Order'] }
           }
         },
-
-        // Stage 2: Unwind Items array
         {
           $unwind: {
             path: '$Items',
             preserveNullAndEmptyArrays: false
           }
         },
-
-        // Stage 3: Filter for specific item types with valid cash
         {
           $match: {
             'Items.Type': { $in: ['Bank Service', 'Change Order'] },
@@ -97,8 +93,6 @@ async function fetchFreshStats() {
             }
           }
         },
-
-        // Stage 4: Convert cash to number and sum
         {
           $group: {
             _id: null,
@@ -130,46 +124,51 @@ async function fetchFreshStats() {
       source: 'database'
     };
 
-    console.log(`✅ Stats fetched successfully in ${queryTime}ms:`, {
+    console.log(`[Stats API] Query completed in ${queryTime}ms:`, {
       customers,
       servicesPerformed,
       cashMoved
     });
 
-    // Update cache
+    // Update in-memory cache
     cache = {
       data: stats,
       timestamp: Date.now(),
       isRefreshing: false
     };
 
+    // Write to fallback storage (non-blocking)
+    writeFallback(stats).catch(err =>
+      console.error('[Stats API] Failed to write fallback:', err)
+    );
+
     return stats;
 
   } catch (error) {
-    console.error('❌ Database query failed:', error);
+    console.error('[Stats API] Database query failed:', error);
     cache.isRefreshing = false;
     throw error;
   }
 }
 
 /**
- * Background refresh function - doesn't block response
+ * Background refresh
  */
-async function backgroundRefresh() {
-  // Prevent multiple simultaneous refreshes
+async function backgroundRefresh()
+{
   if (cache.isRefreshing) {
-    console.log('⏳ Background refresh already in progress, skipping...');
+    console.log('[Stats API] Background refresh already in progress');
     return;
   }
 
-  console.log('🔄 Starting background refresh...');
+  console.log('[Stats API] Starting background refresh...');
   cache.isRefreshing = true;
 
   try {
     await fetchFreshStats();
-    console.log('✅ Background refresh completed successfully');
+    console.log('[Stats API] Background refresh completed');
   } catch (error) {
-    console.error('❌ Background refresh failed:', error);
+    console.error('[Stats API] Background refresh failed:', error);
     cache.isRefreshing = false;
   }
 }
@@ -177,12 +176,13 @@ async function backgroundRefresh() {
 /**
  * Main GET handler
  */
-export async function GET() {
+export async function GET()
+{
   try {
-    // STRATEGY 1: Return fresh cache immediately (best case)
+    // Strategy 1: Fresh cache
     if (isCacheFresh()) {
-      console.log('✅ Cache HIT - Returning fresh data');
-      
+      console.log('[Stats API] Cache HIT (fresh)');
+
       return NextResponse.json(
         {
           ...cache.data,
@@ -199,13 +199,13 @@ export async function GET() {
       );
     }
 
-    // STRATEGY 2: Return stale cache while refreshing in background
+    // Strategy 2: Stale cache with background refresh
     if (isCacheStale()) {
-      console.log('⚠️  Cache STALE - Returning stale data and triggering background refresh');
+      console.log('[Stats API] Cache STALE - returning stale + refreshing');
 
-      // Start background refresh (non-blocking)
-      backgroundRefresh().catch(err => 
-        console.error('Background refresh error:', err)
+      // Non-blocking background refresh
+      backgroundRefresh().catch(err =>
+        console.error('[Stats API] Background refresh error:', err)
       );
 
       return NextResponse.json(
@@ -224,8 +224,8 @@ export async function GET() {
       );
     }
 
-    // STRATEGY 3: No cache available - fetch fresh data (blocking)
-    console.log('❌ Cache MISS - Fetching fresh data');
+    // Strategy 3: No cache - fetch fresh
+    console.log('[Stats API] Cache MISS - fetching fresh data');
     const freshStats = await fetchFreshStats();
 
     return NextResponse.json(freshStats, {
@@ -237,12 +237,12 @@ export async function GET() {
     });
 
   } catch (error) {
-    console.error('❌ API ERROR:', error);
+    console.error('[Stats API] Error:', error);
 
-    // FALLBACK 1: If we have any cached data (even very old), use it
+    // Fallback 1: Emergency cache
     if (cache.data) {
-      console.log('⚠️  Error occurred - Returning cached data as emergency fallback');
-      
+      console.log('[Stats API] Error - returning emergency cache');
+
       return NextResponse.json(
         {
           ...cache.data,
@@ -258,14 +258,14 @@ export async function GET() {
       );
     }
 
-    // FALLBACK 2: Ultimate fallback when no cache exists at all
-    console.log('⚠️  No cache available - Using static fallback');
-    
+    // Fallback 2: Static values
+    console.log('[Stats API] No cache - returning static fallback');
+
     return NextResponse.json(
       {
-        customers: 2900,
-        servicesPerformed: 556000,
-        cashMoved: 2546000000,
+        customers: 2990,
+        servicesPerformed: 578424,
+        cashMoved: 2652053680,
         asOf: Date.now(),
         source: 'static-fallback'
       },
@@ -281,23 +281,23 @@ export async function GET() {
 }
 
 /**
- * Optional: Manual cache refresh endpoint
- * Usage: POST /api/stats/scc
+ * Manual refresh endpoint
  */
-export async function POST() {
+export async function POST()
+{
   try {
-    console.log('🔄 Manual refresh triggered');
-    
-    // Clear existing cache
+    console.log('[Stats API] Manual refresh triggered');
+
+    // Clear cache
     cache = {
       data: null,
       timestamp: null,
       isRefreshing: false
     };
-    
-    // Fetch fresh data
+
+    // Fetch fresh
     const freshStats = await fetchFreshStats();
-    
+
     return NextResponse.json(
       {
         success: true,
@@ -306,10 +306,10 @@ export async function POST() {
       },
       { status: 200 }
     );
-    
+
   } catch (error) {
-    console.error('❌ Manual refresh failed:', error);
-    
+    console.error('[Stats API] Manual refresh failed:', error);
+
     return NextResponse.json(
       {
         success: false,

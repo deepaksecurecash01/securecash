@@ -1,133 +1,153 @@
 // hooks/useStatsCache.js
-// Custom hook for managing stats with localStorage cache and API fetching
+// Simplified hook with fallback API integration
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { getFromCache, saveToCache } from '@/utils/statsCache';
-
-// Static fallback values (update these weekly)
-const STATIC_FALLBACK = {
-    customers: 2955,
-    servicesPerformed: 578424,
-    cashMoved: 2652053680,
-    source: 'static-fallback'
-};
 
 /**
- * Custom hook for stats with intelligent caching
- * @returns {Object} { stats, isInitialLoad, isUpdating, error, refresh }
+ * Custom hook for stats with fast fallback + real-time data
+ * Flow: Fetch fallback (fast) → Display → Fetch real (slow) → Update if changed
+ * 
+ * @returns {Object} { stats, isUpdating, error, refresh }
  */
 export function useStatsCache()
 {
-    // State management
     const [stats, setStats] = useState(null);
-    const [isInitialLoad, setIsInitialLoad] = useState(true);
     const [isUpdating, setIsUpdating] = useState(false);
     const [error, setError] = useState(null);
 
-    // Refs
-    const hasFetchedRef = useRef(false);
-    const refreshTimeoutRef = useRef(null);
+    const hasFetchedFallbackRef = useRef(false);
+    const hasFetchedRealRef = useRef(false);
     const abortControllerRef = useRef(null);
 
     /**
-     * Initialize with cached or fallback data
+     * Fetch fallback stats (fast, <10ms)
+     * This runs first to provide instant display value
      */
-    useEffect(() =>
+    const fetchFallback = useCallback(async () =>
     {
-        console.log('🔄 useStatsCache: Initializing...');
+        if (hasFetchedFallbackRef.current) return;
+        hasFetchedFallbackRef.current = true;
 
-        const cached = getFromCache();
+        try {
+            console.log('[useStatsCache] Fetching fallback...');
+            const startTime = Date.now();
 
-        if (cached) {
-            console.log('✅ useStatsCache: Loaded from cache');
-            setStats(cached);
-        } else {
-            console.log('⚠️  useStatsCache: No cache found, using static fallback');
-            setStats(STATIC_FALLBACK);
+            const response = await fetch('/api/stats/fallback', {
+                method: 'GET',
+                headers: { 'Accept': 'application/json' },
+                cache: 'default'
+            });
+
+            if (!response.ok) {
+                throw new Error(`Fallback API error: ${response.status}`);
+            }
+
+            const data = await response.json();
+            const fetchTime = Date.now() - startTime;
+
+            console.log(`[useStatsCache] Fallback loaded in ${fetchTime}ms:`, {
+                customers: data.customers,
+                source: data.source
+            });
+
+            setStats({
+                customers: data.customers,
+                servicesPerformed: data.servicesPerformed,
+                cashMoved: data.cashMoved,
+                source: data.source || 'fallback'
+            });
+
+        } catch (fallbackError) {
+            console.error('[useStatsCache] Fallback fetch failed:', fallbackError);
+            // Set static fallback on error
+            setStats({
+                customers: 2990,
+                servicesPerformed: 578424,
+                cashMoved: 2652053680,
+                source: 'static-error-fallback'
+            });
         }
-
-        setIsInitialLoad(false);
     }, []);
 
     /**
-     * Fetch fresh stats from API
+     * Fetch real-time stats (slow, 7-8s on cold start)
+     * This runs in background after fallback is displayed
      */
-    const fetchStats = useCallback(async (showLoading = false) =>
+    const fetchRealData = useCallback(async (showLoading = false) =>
     {
-        // Prevent multiple simultaneous fetches
-        if (hasFetchedRef.current && showLoading) {
-            console.log('⏳ fetchStats: Already fetching, skipping...');
+        if (hasFetchedRealRef.current && showLoading) {
+            console.log('[useStatsCache] Real data fetch already in progress');
             return;
         }
 
         try {
             if (showLoading) {
-                console.log('🔄 fetchStats: Starting API call with loading state...');
                 setIsUpdating(true);
-                hasFetchedRef.current = true;
-            } else {
-                console.log('🔄 fetchStats: Starting background API call...');
+                hasFetchedRealRef.current = true;
             }
 
             setError(null);
 
-            // Create abort controller for this request
+            console.log('[useStatsCache] Fetching real-time data...');
+            const startTime = Date.now();
+
+            // Create abort controller
             abortControllerRef.current = new AbortController();
 
             const response = await fetch('/api/stats/scc', {
                 method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Accept': 'application/json' },
                 cache: 'default',
                 signal: abortControllerRef.current.signal
             });
 
             if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                throw new Error(`API error: ${response.status}`);
             }
 
             const data = await response.json();
+            const fetchTime = Date.now() - startTime;
 
-            console.log('✅ fetchStats: API response received', {
-                source: data.source,
+            console.log(`[useStatsCache] Real data loaded in ${fetchTime}ms:`, {
                 customers: data.customers,
-                servicesPerformed: data.servicesPerformed,
-                cashMoved: data.cashMoved
+                source: data.source
             });
 
-            // Validate data structure
-            if (
-                data &&
-                typeof data.customers === 'number' &&
-                typeof data.servicesPerformed === 'number' &&
-                typeof data.cashMoved === 'number'
-            ) {
-                // Save to localStorage
-                saveToCache(data);
+            // Update stats (will trigger re-render and animation if value changed)
+            setStats(prevStats =>
+            {
+                // Only update if values actually changed
+                if (
+                    prevStats &&
+                    prevStats.customers === data.customers &&
+                    prevStats.servicesPerformed === data.servicesPerformed &&
+                    prevStats.cashMoved === data.cashMoved
+                ) {
+                    console.log('[useStatsCache] Values unchanged, no update needed');
+                    return prevStats;
+                }
 
-                // Update state
-                setStats(data);
-                setError(null);
+                console.log('[useStatsCache] Values changed, updating stats');
+                return {
+                    customers: data.customers,
+                    servicesPerformed: data.servicesPerformed,
+                    cashMoved: data.cashMoved,
+                    source: data.source || 'api'
+                };
+            });
 
-                console.log('✅ fetchStats: Stats updated successfully');
-            } else {
-                throw new Error('Invalid data structure received from API');
-            }
+            setError(null);
 
         } catch (fetchError) {
-            // Don't log error if request was aborted (component unmounted)
+            // Don't log if aborted (component unmounted)
             if (fetchError.name === 'AbortError') {
-                console.log('⚠️  fetchStats: Request aborted');
+                console.log('[useStatsCache] Real data fetch aborted');
                 return;
             }
 
-            console.error('❌ fetchStats error:', fetchError);
+            console.error('[useStatsCache] Real data fetch failed:', fetchError);
             setError(fetchError.message);
-
-            // Keep showing cached value on error
-            // If no cache exists, the static fallback is already shown
+            // Keep showing fallback/previous stats on error
 
         } finally {
             if (showLoading) {
@@ -137,54 +157,21 @@ export function useStatsCache()
     }, []);
 
     /**
-     * Trigger initial API fetch after component mounts
+     * Initial load: Fetch fallback immediately, then real data
      */
     useEffect(() =>
     {
-        if (!isInitialLoad && !hasFetchedRef.current) {
-            console.log('🚀 useStatsCache: Triggering initial API fetch...');
+        // Step 1: Load fallback (fast)
+        fetchFallback();
 
-            // Small delay to prioritize rendering cached data first
-            const timer = setTimeout(() =>
-            {
-                fetchStats(true);
-            }, 100);
+        // Step 2: Load real data after small delay (let fallback render first)
+        const timer = setTimeout(() =>
+        {
+            fetchRealData(true);
+        }, 100);
 
-            return () => clearTimeout(timer);
-        }
-    }, [isInitialLoad, fetchStats]);
-
-    /**
-     * Auto-refresh every 30 minutes
-     */
-    useEffect(() =>
-    {
-        if (!isInitialLoad && hasFetchedRef.current) {
-            // Clear any existing timeout
-            if (refreshTimeoutRef.current) {
-                clearTimeout(refreshTimeoutRef.current);
-            }
-
-            // Refresh interval: 30 minutes
-            const REFRESH_INTERVAL = 30 * 60 * 1000;
-
-            console.log('⏰ useStatsCache: Setting up auto-refresh (30 minutes)');
-
-            refreshTimeoutRef.current = setTimeout(() =>
-            {
-                console.log('🔄 useStatsCache: Auto-refresh triggered');
-                hasFetchedRef.current = false;
-                fetchStats(false); // Background refresh without loading state
-            }, REFRESH_INTERVAL);
-
-            return () =>
-            {
-                if (refreshTimeoutRef.current) {
-                    clearTimeout(refreshTimeoutRef.current);
-                }
-            };
-        }
-    }, [isInitialLoad, stats, fetchStats]);
+        return () => clearTimeout(timer);
+    }, [fetchFallback, fetchRealData]);
 
     /**
      * Cleanup on unmount
@@ -193,17 +180,9 @@ export function useStatsCache()
     {
         return () =>
         {
-            // Clear timeout
-            if (refreshTimeoutRef.current) {
-                clearTimeout(refreshTimeoutRef.current);
-            }
-
-            // Abort any pending requests
             if (abortControllerRef.current) {
                 abortControllerRef.current.abort();
             }
-
-            console.log('🧹 useStatsCache: Cleanup complete');
         };
     }, []);
 
@@ -212,16 +191,15 @@ export function useStatsCache()
      */
     const refresh = useCallback(() =>
     {
-        console.log('🔄 useStatsCache: Manual refresh triggered');
-        hasFetchedRef.current = false;
-        fetchStats(true);
-    }, [fetchStats]);
+        console.log('[useStatsCache] Manual refresh triggered');
+        hasFetchedRealRef.current = false;
+        fetchRealData(true);
+    }, [fetchRealData]);
 
     return {
-        stats,           // Current stats object
-        isInitialLoad,   // True during first render
-        isUpdating,      // True when API call is in progress
-        error,           // Error message if API failed
-        refresh          // Function to manually refresh
+        stats,       // Current stats object (fallback → real)
+        isUpdating,  // True when fetching real data
+        error,       // Error message if any
+        refresh      // Manual refresh function
     };
 }
