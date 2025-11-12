@@ -37,22 +37,19 @@ export default function RootLayout({ children })
   return (
     <html lang="en">
       <head>
-        {/* ============================================
-            CRITICAL: Preload First Slide Images
-            Using Next.js Image API format
-            ============================================ */}
+        {/* ✅ OPTIMIZED: Only preload first slide (not all 3 versions) */}
         <link
           rel="preload"
           as="image"
-          href="/_next/image?url=%2Fimages%2Fbanner%2FSlide-1-mobile.jpg&w=750&q=45"
+          href="/images/banner/Slide-1-web.jpg"
           type="image/jpeg"
-          media="(max-width: 479px)"
+          media="(min-width: 1024px)"
           fetchPriority="high"
         />
         <link
           rel="preload"
           as="image"
-          href="/_next/image?url=%2Fimages%2Fbanner%2FSlide-1-tablet.jpg&w=1200&q=50"
+          href="/images/banner/Slide-1-tablet.jpg"
           type="image/jpeg"
           media="(min-width: 480px) and (max-width: 1023px)"
           fetchPriority="high"
@@ -60,9 +57,9 @@ export default function RootLayout({ children })
         <link
           rel="preload"
           as="image"
-          href="/_next/image?url=%2Fimages%2Fbanner%2FSlide-1-web.jpg&w=1920&q=55"
+          href="/images/banner/Slide-1-mobile.jpg"
           type="image/jpeg"
-          media="(min-width: 1024px)"
+          media="(max-width: 479px)"
           fetchPriority="high"
         />
 

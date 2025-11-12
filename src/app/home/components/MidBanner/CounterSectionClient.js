@@ -3,25 +3,34 @@ import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
 /**
- * ✅ OPTIMIZED: Custom counter using requestAnimationFrame (GPU-accelerated)
- * REMOVED: react-countup library (saves 5.3KB + main thread work)
+ * ✅ OPTIMIZED: Custom counter with update animations
  */
-const AnimatedCounter = ({ end, prefix, duration = 2 }) =>
+const AnimatedCounter = ({ end, prefix, duration = 2, isUpdate = false }) =>
 {
-    const [count, setCount] = useState(0);
+    const [count, setCount] = useState(isUpdate ? end : 0);
     const rafRef = useRef();
     const startTimeRef = useRef();
+    const startValueRef = useRef(isUpdate ? end : 0);
 
     useEffect(() =>
     {
+        startValueRef.current = count; // Store current value as start
+        startTimeRef.current = null; // Reset timing
+
         const animate = (timestamp) =>
         {
             if (!startTimeRef.current) startTimeRef.current = timestamp;
-            const progress = Math.min((timestamp - startTimeRef.current) / (duration * 1000), 1);
+            const progress = Math.min(
+                (timestamp - startTimeRef.current) / (duration * 1000),
+                1
+            );
 
             // Easing function (ease-out cubic)
             const eased = 1 - Math.pow(1 - progress, 3);
-            setCount(Math.floor(end * eased));
+            const currentValue = Math.floor(
+                startValueRef.current + (end - startValueRef.current) * eased
+            );
+            setCount(currentValue);
 
             if (progress < 1) {
                 rafRef.current = requestAnimationFrame(animate);
@@ -30,9 +39,9 @@ const AnimatedCounter = ({ end, prefix, duration = 2 }) =>
 
         rafRef.current = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(rafRef.current);
-    }, [end, duration]);
+    }, [end, duration]); // Re-run when end value changes
 
-    return `${prefix ? '$' : ''}${count.toLocaleString()}`;
+    return `${prefix ? "$" : ""}${count.toLocaleString()}`;
 };
 
 export default function CounterSectionClient({ initialStats })
@@ -40,6 +49,8 @@ export default function CounterSectionClient({ initialStats })
     const [stats, setStats] = useState(initialStats);
     const [isVisible, setIsVisible] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
+    const [isUpdating, setIsUpdating] = useState(false);
+    const [hasAnimated, setHasAnimated] = useState(false); // Track first animation
     const sectionRef = useRef(null);
 
     // Mobile detection
@@ -47,8 +58,8 @@ export default function CounterSectionClient({ initialStats })
     {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
         checkMobile();
-        window.addEventListener('resize', checkMobile);
-        return () => window.removeEventListener('resize', checkMobile);
+        window.addEventListener("resize", checkMobile);
+        return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
     // IntersectionObserver for scroll-triggered animation
@@ -61,35 +72,36 @@ export default function CounterSectionClient({ initialStats })
             {
                 if (entries[0].isIntersecting) {
                     setIsVisible(true);
+                    setHasAnimated(true); // Mark as animated
                     observer.disconnect();
                 }
             },
-            { threshold: 0.2, rootMargin: '0px 0px -100px 0px' }
+            { threshold: 0.2, rootMargin: "0px 0px -100px 0px" }
         );
 
         observer.observe(sectionRef.current);
         return () => observer.disconnect();
     }, [isVisible]);
 
-    // ✅ FIX 1: Defer API call until after component is visible + paint complete
+    // ✅ Deferred API call
     useEffect(() =>
     {
-        if (!isVisible) return; // Only fetch when visible
+        if (!isVisible) return;
 
-        // Push to next tick after render completes
         const timer = setTimeout(() =>
         {
-            fetch('/api/stats/scc')
-                .then(res =>
+            setIsUpdating(true); // ✅ Show pulse indicator
+
+            fetch("/api/stats/scc")
+                .then((res) =>
                 {
                     if (!res.ok) throw new Error(`API error: ${res.status}`);
                     return res.json();
                 })
-                .then(data =>
+                .then((data) =>
                 {
-                    // Validate response
-                    if (!data || typeof data.customers !== 'number') {
-                        throw new Error('Invalid data structure');
+                    if (!data || typeof data.customers !== "number") {
+                        throw new Error("Invalid data structure");
                     }
 
                     // Only update if values changed
@@ -101,15 +113,21 @@ export default function CounterSectionClient({ initialStats })
                         setStats({
                             customers: data.customers,
                             servicesPerformed: data.servicesPerformed,
-                            cashMoved: data.cashMoved
+                            cashMoved: data.cashMoved,
                         });
                     }
+
+                    setIsUpdating(false); // ✅ Hide pulse after 1 second
                 })
-                .catch(err => console.log('Stats fetch failed:', err));
-        }, 150); // 150ms delay after visibility
+                .catch((err) =>
+                {
+                    console.log("Stats fetch failed:", err);
+                    setIsUpdating(false);
+                });
+        }, 150);
 
         return () => clearTimeout(timer);
-    }, [isVisible]); // Removed stats dependency to prevent loop
+    }, [isVisible]);
 
     const counters = [
         {
@@ -119,7 +137,7 @@ export default function CounterSectionClient({ initialStats })
             imgFallback: "/images/icons/clients.png",
             alt: "Customers",
             description: "Customers",
-            prefix: false
+            prefix: false,
         },
         {
             id: 2,
@@ -128,7 +146,7 @@ export default function CounterSectionClient({ initialStats })
             imgFallback: "/images/icons/services.png",
             alt: "Services Performed",
             description: "Services Performed",
-            prefix: false
+            prefix: false,
         },
         {
             id: 3,
@@ -137,8 +155,8 @@ export default function CounterSectionClient({ initialStats })
             imgFallback: "/images/icons/transport.png",
             alt: "Cash Moved",
             description: "Cash Moved",
-            prefix: true
-        }
+            prefix: true,
+        },
     ];
 
     return (
@@ -147,7 +165,7 @@ export default function CounterSectionClient({ initialStats })
             id="banner-mid"
             className="relative pt-0 h-auto mt-[40px] 414px:h-[760px] 600px:h-[920px] 992px:h-[340px] w-full mx-auto flex flex-col 414px:mt-10 justify-center items-center 992px:mt-[100px]"
         >
-            {/* ✅ FIX 2: Single responsive background (not two separate images) */}
+            {/* ✅ Single responsive background */}
             <picture>
                 <source
                     media="(min-width: 992px)"
@@ -176,19 +194,19 @@ export default function CounterSectionClient({ initialStats })
                         <div key={counter.id} className="contents">
                             <div className="mid-row py-[50px] 992px:py-0 w-full float-none mx-auto pb-[50px] pl-0 992px:w-1/3 text-center relative 992px:float-left">
                                 <h4 className="banner-mid-header font-black text-[40px] text-primary mb-[30px] h-[40px] font-montserrat">
-                                    {/* ✅ FIX 3: No animation on mobile (instant), animate on desktop when visible */}
-                                    {isMobile || !isVisible ? (
-                                        `${counter.prefix ? '$' : ''}${value.toLocaleString()}`
+                                    {/* ✅ Mobile: instant, Desktop: animate on first view + updates */}
+                                    {isMobile ? (
+                                        `${counter.prefix ? "$" : ""}${value.toLocaleString()}`
                                     ) : (
                                         <AnimatedCounter
                                             end={value}
                                             prefix={counter.prefix}
-                                            duration={2}
+                                            duration={hasAnimated ? 1.5 : 2} // Faster for updates
+                                            isUpdate={hasAnimated} // Pass update flag
                                         />
                                     )}
                                 </h4>
 
-                                {/* ✅ FIX 4: Lazy load icons (below fold) */}
                                 <Image
                                     src={counter.imgSrc}
                                     onError={(e) =>
@@ -216,6 +234,17 @@ export default function CounterSectionClient({ initialStats })
                     );
                 })}
             </div>
+
+            {/* ✅ Pulse indicator - CSS animation (no JS, no performance hit) */}
+            {isUpdating && (
+                <div
+                    className="absolute top-4 right-4 z-20"
+                    title="Refreshing data..."
+                    aria-label="Updating stats"
+                >
+                    <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                </div>
+            )}
         </section>
     );
 }
