@@ -1,6 +1,6 @@
 // import HeroSection from "./components/HeroSection";
 import WelcomeSection from "./components/WelcomeSection";
-import MidBanner from "./components/MidBanner";
+// import MidBanner from "./components/MidBanner";
 import FormSection from "./components/FormSection";
 import CardsSection from "./components/CardsSection";
 import CompaniesSlider from "@/components/common/CompaniesSlider";
@@ -12,7 +12,7 @@ export default function HomePage()
     <div className="overflow-hidden">
       {/* <HeroSection /> */}
       <WelcomeSection />
-      <MidBanner />
+      {/* <MidBanner /> */}
       <FormSection />
       <CardsSection />
       <TeamContent />
