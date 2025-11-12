@@ -37,21 +37,35 @@ export default function RootLayout({ children })
   return (
     <html lang="en">
       <head>
-        {/* ✅ Preload ONLY first slide - Next.js auto-optimizes */}
+        {/* ✅ Preload AVIF versions of first slide */}
         <link
           rel="preload"
           as="image"
-          href="/images/banner/Slide-1-web.jpg"
+          href="/images/banner/Slide-1-mobile.avif"
+          type="image/avif"
+          media="(max-width: 767px)"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/banner/Slide-1-tablet.avif"
+          type="image/avif"
+          media="(min-width: 768px) and (max-width: 1023px)"
+          fetchPriority="high"
+        />
+        <link
+          rel="preload"
+          as="image"
+          href="/images/banner/Slide-1-web.avif"
+          type="image/avif"
+          media="(min-width: 1024px)"
           fetchPriority="high"
         />
 
-        {/* Preconnect */}
+        {/* Keep your existing preconnects */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
       </head>
       <body

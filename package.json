@@ -7,7 +7,8 @@
     "dev2": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "optimize-images": "node scripts/optimize-to-avif.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

@@ -2,14 +2,13 @@
 import React, { useState, useCallback } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
-import Image from "next/image";
 import "swiper/css";
 import "swiper/css/effect-fade";
 import Container from "@/components/layout/Container";
 import SliderContent from "./SliderContent";
 
 // ============================================
-// SINGLE SLIDE COMPONENT - Maximum Performance
+// OPTIMIZED SLIDE - Native Picture Element
 // ============================================
 const BannerSlide = React.memo(({ slide, slideIndex }) =>
 {
@@ -17,20 +16,59 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
 
     return (
         <div className="relative overflow-hidden bg-black">
-            <div className="absolute inset-0 bg-black/35 z-[1]" />
+            <div className="absolute inset-0 bg-black/40 z-[1]" />
 
             <div className="relative w-full h-full min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1024px:h-full 1440px:min-h-[70vh]">
-                <Image
-                    src={slide.web}
-                    alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
-                    fill
-                    priority={shouldPrioritize}
-                    loading={shouldPrioritize ? "eager" : "lazy"}
-                    fetchPriority={shouldPrioritize ? "high" : "low"}
-                    quality={75}
-                    sizes="(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1920px"
-                    className="object-cover"
-                />
+                {/* ✅ Native Picture Element - Uses your existing WebP as fallback */}
+                <picture>
+                    {/* Mobile: < 768px - AVIF (best) */}
+                    <source
+                        media="(max-width: 767px)"
+                        srcSet={slide.mobile.replace('.jpg', '.avif')}
+                        type="image/avif"
+                    />
+                    {/* Mobile: < 768px - WebP (existing fallback) */}
+                    <source
+                        media="(max-width: 767px)"
+                        srcSet={slide.mobile.replace('.jpg', '.webp')}
+                        type="image/webp"
+                    />
+
+                    {/* Tablet: 768px - 1023px - AVIF (best) */}
+                    <source
+                        media="(min-width: 768px) and (max-width: 1023px)"
+                        srcSet={slide.tablet.replace('.jpg', '.avif')}
+                        type="image/avif"
+                    />
+                    {/* Tablet: 768px - 1023px - WebP (existing fallback) */}
+                    <source
+                        media="(min-width: 768px) and (max-width: 1023px)"
+                        srcSet={slide.tablet.replace('.jpg', '.webp')}
+                        type="image/webp"
+                    />
+
+                    {/* Desktop: >= 1024px - AVIF (best) */}
+                    <source
+                        media="(min-width: 1024px)"
+                        srcSet={slide.web.replace('.jpg', '.avif')}
+                        type="image/avif"
+                    />
+                    {/* Desktop: >= 1024px - WebP (existing fallback) */}
+                    <source
+                        media="(min-width: 1024px)"
+                        srcSet={slide.web.replace('.jpg', '.webp')}
+                        type="image/webp"
+                    />
+
+                    {/* Final Fallback: JPEG for all devices */}
+                    <img
+                        src={slide.web}
+                        alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
+                        loading={shouldPrioritize ? "eager" : "lazy"}
+                        fetchpriority={shouldPrioritize ? "high" : "low"}
+                        className="absolute inset-0 w-full h-full object-cover"
+                    />
+                </picture>
             </div>
 
             <Container className="z-10 w-full absolute inset-0 flex items-center">
@@ -70,7 +108,7 @@ const CustomPagination = ({ slides, activeIndex, onDotClick }) => (
 );
 
 // ============================================
-// OPTIMIZED SWIPER - Only loads visible slides
+// OPTIMIZED SWIPER
 // ============================================
 const BannerSlider = ({ slides = [] }) =>
 {
@@ -118,8 +156,6 @@ const BannerSlider = ({ slides = [] }) =>
                     pauseOnMouseEnter: true,
                 }}
                 loop={slides.length > 1}
-                watchSlidesProgress={false}
-                preloadImages={false}
                 onSwiper={handleSwiper}
                 onSlideChange={handleSlideChange}
                 onRealIndexChange={handleSlideChange}
