@@ -37,7 +37,7 @@ export default function RootLayout({ children })
   return (
     <html lang="en">
       <head>
-        {/* ✅ Preload AVIF versions of first slide */}
+        {/* Existing preload for AVIF banner images */}
         <link
           rel="preload"
           as="image"
@@ -63,9 +63,41 @@ export default function RootLayout({ children })
           fetchPriority="high"
         />
 
-        {/* Keep your existing preconnects */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        {/* ✅ ADD THIS - Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "SecureCash",
+              "alternateName": "Secure Cash",
+              "url": "https://www.securecash.com.au",
+              "logo": "https://www.securecash.com.au/images/SecureCash.webp",
+              "description": "Australia's trusted cash in transit service. Secure, covert banking solutions with 25+ years experience.",
+              "foundingDate": "1992",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+61-1300-732-873",
+                "contactType": "customer service",
+                "areaServed": "AU",
+                "availableLanguage": "en"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "AU"
+              },
+              "sameAs": [
+                "https://www.facebook.com/SecureCash/",
+                "https://twitter.com/SecureCash",
+                "https://www.youtube.com/securecash",
+                "https://www.linkedin.com/company/securecash"
+              ]
+            })
+          }}
+        />
+
+        {/* Only keep Vimeo DNS prefetch - remove Google Fonts preconnects */}
         <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
       </head>
       <body

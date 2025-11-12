@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic';
 import HeroImage from './HeroImage';
 import CompaniesSlider from '@/components/common/CompaniesSlider';
 import FormSection from '@/app/contact/FormSection.js';
-import TestimonialsSection from '@/app/contact/TestimonialsSection.js';
+// import TestimonialsSection from '@/app/contact/TestimonialsSection.js';
 import { AUSTRALIA_COORDINATES, NEW_ZEALAND_COORDINATES } from './mapCoordinates.js';
 
 // ✅ Dynamically import MapSection
@@ -51,7 +51,7 @@ const ContactPage = () =>
         <>
             <HeroImage />
             <FormSection />
-            <TestimonialsSection />
+            {/* <TestimonialsSection /> */}
 
             {/* ✅ Placeholder that triggers loading */}
             <div ref={mapSectionRef}>

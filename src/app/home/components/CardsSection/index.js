@@ -4,7 +4,6 @@ import React from "react";
 const ServiceRow = ({ imgSrc, link, title, description }) => (
   <div className="cash-row flex-1 mb-5 992px:mb-0 w-full px-[24px] py-0 float-none my-0 992px:w-[30%] h-auto 992px:h-[495px] 992px:px-4 992px:pb-4 mx-auto pb-6 992px:float-left 1200px:w-[320px] 1366px:w-[68%] rounded-[20px] bg-[#ffffff] 1024px:px-4 1366px:h-auto [box-shadow:-2px_10px_15px_-1px_rgba(0,_0,_0,_0.31)] 1366px:px-10 1366px:pb-[30px]">
     <div className="header-wrapper flex flex-row 992px:flex-col justify-start items-center 992px:items-start mb-[20px] 992px:mb-0">
-      {/* ✅ OPTIMIZED: Added loading="lazy" and quality */}
       <Image
         width={80}
         height={80}
@@ -14,16 +13,17 @@ const ServiceRow = ({ imgSrc, link, title, description }) => (
         quality={85}
         className="w-[80px] mr-[16px] pt-[35px] 992px:w-1/4 bg-brown-overlay 992px:pt-[50px]"
       />
-      <h3
-        className="text-[#c7a652] text-left font-bold text-[24px] mt-[18px] mb-[15px] 768px:mx-0 992px:text-[20px] font-montserrat"
-      >
-        <a href={link}>{title}</a>
+      <h3 className="text-[#c7a652] text-left font-bold text-[24px] mt-[18px] mb-[15px] 768px:mx-0 992px:text-[20px] font-montserrat">
+        <a
+          href={link}
+          aria-label={`Learn more about ${title} services`} // ✅ Add descriptive label
+        >
+          {title}
+        </a>
       </h3>
     </div>
 
-    <p
-      className="text-[#3f3f3f] text-left font-light text-[16px] leading-[2em] mb-0 1280px:text-[14px] font-montserrat"
-    >
+    <p className="text-[#3f3f3f] text-left font-light text-[16px] leading-[2em] mb-0 1280px:text-[14px] font-montserrat">
       {description}
     </p>
   </div>

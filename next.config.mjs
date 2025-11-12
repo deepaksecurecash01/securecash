@@ -195,6 +195,8 @@ const nextConfig = {
       "react-icons",
       "@react-google-maps/api",
       "react-hook-form",
+      "swiper", // ✅ Add this
+
      
     ],
 

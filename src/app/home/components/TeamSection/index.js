@@ -1,5 +1,5 @@
 "use client";
-import TeamSlider from "./TeamSlider";
+// import TeamSlider from "./TeamSlider";
 
 // data/teamMembers.js
 const teamMembers = [
@@ -187,7 +187,7 @@ const TeamContent = () =>
             className="team-slider w-[90%] mx-auto  1024px:w-full "
             aria-label="Team Members"
           >
-            <TeamSlider member={teamMembers} />
+            {/* <TeamSlider member={teamMembers} /> */}
           </div>
         </div>
       </div>
