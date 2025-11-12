@@ -4,48 +4,38 @@ import Image from "next/image";
 import Container from "@/components/layout/Container";
 import SliderContent from "./SliderContent";
 
-// ✅ FIX 1: Only render active slide (not hide with CSS)
-const Slide = ({ slide, slideIndex, isPriority }) => (
-  <div className="bannerSlides relative">
-    {/* Overlay */}
-    <div className="absolute inset-0 bg-black/35 z-[1]" />
+// ✅ BEST APPROACH: Single image per slide, Next.js handles responsive versions
+const Slide = ({ slide, slideIndex, isPriority }) =>
+{
+  return (
+    <div className="bannerSlides relative">
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/35 z-[1]" />
 
-    {/* ✅ FIX 2: Single responsive image with proper srcSet */}
-    <div className="relative w-full h-full min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1024px:h-full 1440px:min-h-[70vh]">
-      <picture>
-        {/* Desktop (1024px+) */}
-        <source
-          media="(min-width: 1024px)"
-          srcSet={slide.web}
-        />
-        {/* Tablet (480px - 1023px) */}
-        <source
-          media="(min-width: 480px)"
-          srcSet={slide.tablet}
-        />
-        {/* Mobile (< 480px) */}
+      {/* Single Responsive Image */}
+      <div className="relative w-full h-full min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1024px:h-full 1440px:min-h-[70vh]">
         <Image
-          src={slide.mobile}
+          src={slide.web} // Use highest quality as source
           alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
           fill
           priority={isPriority}
           loading={isPriority ? "eager" : "lazy"}
           fetchPriority={isPriority ? "high" : "low"}
-          quality={isPriority ? 75 : 60}
-          sizes="100vw"
+          quality={75}
+          sizes="(max-width: 479px) 479px, (max-width: 1023px) 1023px, 1920px"
           className="object-cover"
           placeholder="blur"
           blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
         />
-      </picture>
-    </div>
+      </div>
 
-    {/* Content */}
-    <Container className="z-10 w-full absolute inset-0 flex items-center">
-      <SliderContent {...slide} />
-    </Container>
-  </div>
-);
+      {/* Content */}
+      <Container className="z-10 w-full absolute inset-0 flex items-center">
+        <SliderContent {...slide} />
+      </Container>
+    </div>
+  );
+};
 
 const SlideControls = ({ slides, currentSlide, onSlideChange }) => (
   <div
@@ -75,21 +65,13 @@ const Slider = ({ slides = [] }) =>
 {
   const [slideIndex, setSlideIndex] = useState(1);
   const [isHovered, setIsHovered] = useState(false);
-  const [isClient, setIsClient] = useState(false); // ✅ Prevent hydration mismatch
   const bannerInterval = useRef(null);
-
-  // ✅ FIX 3: Mark client-side rendering complete
-  useEffect(() =>
-  {
-    setIsClient(true);
-  }, []);
 
   const slideBannerAuto = useCallback(() =>
   {
     setSlideIndex((prev) => (prev >= slides.length ? 1 : prev + 1));
   }, [slides.length]);
 
-  // ✅ FIX 4: Use requestIdleCallback for interval (low priority)
   const startBanner = useCallback(() =>
   {
     if (bannerInterval.current) {
@@ -101,7 +83,6 @@ const Slider = ({ slides = [] }) =>
       bannerInterval.current = setInterval(slideBannerAuto, 5000);
     };
 
-    // Defer interval start to idle time (doesn't block paint)
     if (typeof window !== "undefined" && "requestIdleCallback" in window) {
       requestIdleCallback(startInterval);
     } else {
@@ -118,11 +99,11 @@ const Slider = ({ slides = [] }) =>
 
   useEffect(() =>
   {
-    if (!isHovered && isClient) {
+    if (!isHovered) {
       startBanner();
     }
     return () => stopBanner();
-  }, [isHovered, isClient, startBanner, stopBanner]);
+  }, [isHovered, startBanner, stopBanner]);
 
   const handleSlideChange = useCallback(
     (index) =>
@@ -133,12 +114,6 @@ const Slider = ({ slides = [] }) =>
     },
     [stopBanner, startBanner]
   );
-
-  // ✅ FIX 5: Preload next slide image
-  const getNextSlideIndex = () =>
-  {
-    return slideIndex === slides.length ? 0 : slideIndex;
-  };
 
   return (
     <div
@@ -151,33 +126,22 @@ const Slider = ({ slides = [] }) =>
       aria-live="polite"
     >
       <div className="slideshow-container relative">
-        {/* ✅ FIX 6: Only render current slide + conditionally preload next */}
+        {/* Only render current slide */}
         {slides.map((slide, index) =>
         {
           const isCurrent = slideIndex === index + 1;
 
-          // Only render current slide
           if (!isCurrent) return null;
 
           return (
-            <div key={index}>
-              <Slide
-                slide={slide}
-                slideIndex={index}
-                isPriority={index === 0} // Only first slide is priority
-              />
-            </div>
+            <Slide
+              key={index}
+              slide={slide}
+              slideIndex={index}
+              isPriority={index === 0}
+            />
           );
         })}
-
-        {/* ✅ FIX 7: Preload next slide image (hidden, loads in background) */}
-        {isClient && (
-          <link
-            rel="prefetch"
-            as="image"
-            href={slides[getNextSlideIndex()]?.web}
-          />
-        )}
       </div>
 
       <SlideControls

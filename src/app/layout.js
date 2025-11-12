@@ -41,25 +41,8 @@ export default function RootLayout({ children })
         <link
           rel="preload"
           as="image"
-          href="/images/banner/Slide-1-web.jpg"
+          href="/_next/image?url=%2Fimages%2Fbanner%2FSlide-1-web.jpg&w=1920&q=75"
           type="image/jpeg"
-          media="(min-width: 1024px)"
-          fetchPriority="high"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/images/banner/Slide-1-tablet.jpg"
-          type="image/jpeg"
-          media="(min-width: 480px) and (max-width: 1023px)"
-          fetchPriority="high"
-        />
-        <link
-          rel="preload"
-          as="image"
-          href="/images/banner/Slide-1-mobile.jpg"
-          type="image/jpeg"
-          media="(max-width: 479px)"
           fetchPriority="high"
         />
 
