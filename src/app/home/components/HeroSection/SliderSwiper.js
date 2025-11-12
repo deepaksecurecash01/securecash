@@ -9,7 +9,7 @@ import Container from "@/components/layout/Container";
 import SliderContent from "./SliderContent";
 
 // ============================================
-// SINGLE SLIDE COMPONENT - Memoized with Single Image
+// SINGLE SLIDE COMPONENT - Maximum Performance
 // ============================================
 const BannerSlide = React.memo(({ slide, slideIndex }) =>
 {
@@ -19,20 +19,17 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
         <div className="relative overflow-hidden bg-black">
             <div className="absolute inset-0 bg-black/35 z-[1]" />
 
-            {/* ✅ SINGLE RESPONSIVE IMAGE */}
             <div className="relative w-full h-full min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1024px:h-full 1440px:min-h-[70vh]">
                 <Image
-                    src={slide.web} // Use web version as source
+                    src={slide.web}
                     alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
                     fill
                     priority={shouldPrioritize}
                     loading={shouldPrioritize ? "eager" : "lazy"}
                     fetchPriority={shouldPrioritize ? "high" : "low"}
                     quality={75}
-                    sizes="(max-width: 479px) 479px, (max-width: 1023px) 1023px, 1920px"
+                    sizes="(max-width: 640px) 640px, (max-width: 1024px) 1024px, 1920px"
                     className="object-cover"
-                    placeholder="blur"
-                    blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
                 />
             </div>
 
@@ -46,7 +43,7 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
 BannerSlide.displayName = "BannerSlide";
 
 // ============================================
-// CUSTOM PAGINATION CONTROLS
+// CUSTOM PAGINATION
 // ============================================
 const CustomPagination = ({ slides, activeIndex, onDotClick }) => (
     <div
@@ -73,7 +70,7 @@ const CustomPagination = ({ slides, activeIndex, onDotClick }) => (
 );
 
 // ============================================
-// OPTIMIZED SWIPER SLIDER
+// OPTIMIZED SWIPER - Only loads visible slides
 // ============================================
 const BannerSlider = ({ slides = [] }) =>
 {
@@ -113,9 +110,7 @@ const BannerSlider = ({ slides = [] }) =>
             <Swiper
                 modules={[Autoplay, EffectFade]}
                 effect="fade"
-                fadeEffect={{
-                    crossFade: true,
-                }}
+                fadeEffect={{ crossFade: true }}
                 speed={1000}
                 autoplay={{
                     delay: 5000,
@@ -123,7 +118,8 @@ const BannerSlider = ({ slides = [] }) =>
                     pauseOnMouseEnter: true,
                 }}
                 loop={slides.length > 1}
-                watchSlidesProgress={true}
+                watchSlidesProgress={false}
+                preloadImages={false}
                 onSwiper={handleSwiper}
                 onSlideChange={handleSlideChange}
                 onRealIndexChange={handleSlideChange}
@@ -136,7 +132,6 @@ const BannerSlider = ({ slides = [] }) =>
                 ))}
             </Swiper>
 
-            {/* Custom Pagination */}
             <CustomPagination
                 slides={slides}
                 activeIndex={activeIndex}

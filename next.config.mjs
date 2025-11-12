@@ -1,15 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    // ✅ REMOVED: domains (deprecated in Next.js 14+)
     formats: ["image/avif", "image/webp"],
-
-    // ✅ OPTIMIZED: Reduced device sizes (only what you need)
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
-
-    // ✅ OPTIMIZED: Reduced image sizes (removed unnecessary small sizes)
-    imageSizes: [16, 32, 48, 64, 96, 128, 256],
-
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: false,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -31,8 +25,6 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
 
-  // ✅ REMOVED: swcMinify (enabled by default in Next.js 13+)
-
   compiler: {
     removeConsole:
       process.env.NODE_ENV === "production"
@@ -43,7 +35,6 @@ const nextConfig = {
   webpack: (config, { isServer, dev }) =>
   {
     if (!isServer && !dev) {
-      // ✅ OPTIMIZED: Simplified chunk splitting
       config.optimization.splitChunks = {
         chunks: "all",
         cacheGroups: {
@@ -59,7 +50,13 @@ const nextConfig = {
             enforce: true,
           },
 
-          // ✅ REMOVED: Swiper chunk (you're not using Swiper)
+          // ✅ ADDED: Separate Swiper chunk
+          swiper: {
+            name: "swiper",
+            test: /[\\/]node_modules[\\/]swiper[\\/]/,
+            priority: 35,
+            enforce: true,
+          },
 
           // All other node_modules
           lib: {
@@ -96,6 +93,7 @@ const nextConfig = {
           },
         },
       };
+      
     }
     return config;
   },
@@ -151,7 +149,7 @@ const nextConfig = {
         ],
       },
 
-      // ✅ ADDED: Security headers for all pages
+      // ✅ Security headers for all pages
       {
         source: "/:path*",
         headers: [
@@ -173,38 +171,18 @@ const nextConfig = {
           },
         ],
       },
-
-      // ✅ HTML pages - revalidate
-      {
-        source: "/:path*",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=0, must-revalidate",
-          },
-        ],
-      },
     ];
   },
 
   experimental: {
     optimizeCss: true,
-
-    // ✅ OPTIMIZED: Removed swiper/react, swiper/modules (not installed)
     optimizePackageImports: [
       "react-icons",
       "@react-google-maps/api",
       "react-hook-form",
-      "swiper/react",
-      "swiper/modules",
-      "react-slick",
-      "slick-carousel",
     ],
-
     scrollRestoration: true,
     webpackBuildWorker: true,
-
-    // ✅ REMOVED: optimisticClientCache (not a valid Next.js 15 option)
   },
 };
 

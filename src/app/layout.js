@@ -37,12 +37,11 @@ export default function RootLayout({ children })
   return (
     <html lang="en">
       <head>
-        {/* ✅ Preload first slide - Next.js will generate responsive versions */}
+        {/* ✅ Preload ONLY first slide - Next.js auto-optimizes */}
         <link
           rel="preload"
           as="image"
-          href="/_next/image?url=%2Fimages%2Fbanner%2FSlide-1-web.jpg&w=1920&q=75"
-          type="image/jpeg"
+          href="/images/banner/Slide-1-web.jpg"
           fetchPriority="high"
         />
 
