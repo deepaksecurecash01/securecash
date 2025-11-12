@@ -1,10 +1,10 @@
 {
   "version": "v1",
-  "lastUpdated": 1762847681546,
+  "lastUpdated": 1762905934005,
   "stats": {
     "customers": 2955,
     "servicesPerformed": 578424,
     "cashMoved": 2652053680
   },
-  "source": "database"
+  "source": "api"
 }
