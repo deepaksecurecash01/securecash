@@ -37,7 +37,7 @@ export default function RootLayout({ children })
   return (
     <html lang="en">
       <head>
-        {/* ✅ OPTIMIZED: Only preload first slide (not all 3 versions) */}
+        {/* ✅ Preload first slide - Next.js will generate responsive versions */}
         <link
           rel="preload"
           as="image"
@@ -46,7 +46,7 @@ export default function RootLayout({ children })
           fetchPriority="high"
         />
 
-        {/* DNS/Preconnect for external resources */}
+        {/* Preconnect */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
