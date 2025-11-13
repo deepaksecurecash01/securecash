@@ -1,7 +1,8 @@
 import InfoBar from "@/components/common/BannerInfo";
 import "./SliderSwiper.css";
 import BannerSlider from "./SliderSwiper";
-
+// import SlickSlider from "./Slider";
+// import "./Slider.css";
 
 const SLIDES = [
   {
@@ -65,6 +66,8 @@ const HeroSection = () => {
   return (
     <div id="banner" className="flex flex-col justify-end items-center ">
       <BannerSlider slides={SLIDES} />
+      {/* <SlickSlider slides={SLIDES} /> */}
+
       {/* <div style={{ height: '600px', background: '#ccc' }}>Placeholder</div> */}
 
       <InfoBar />

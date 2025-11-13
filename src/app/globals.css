@@ -78,39 +78,82 @@ strong {
   -moz-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
   box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
 }
-
 /* ================================
-   CAROUSEL / SLICK SLIDER
+   CAROUSEL / SWIPER STYLES
    ================================ */
-#team .slick-list {
-  width: 85% !important;
-  margin: 0 auto !important;
+
+/* Services Carousel Container */
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
 }
 
-#team .slick-slide>div {
-  margin: 0 !important;
-}
-
-#content-middle .slick-list {
+.services-carousel {
   width: 90% !important;
   margin: 0 auto !important;
 }
 
 @media screen and (max-width: 991px) {
-  #content-middle .slick-list {
+  .services-carousel {
     width: 100% !important;
-    margin: 0 auto !important;
   }
 }
 
+/* Swiper Slide Spacing */
+.services-carousel .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: auto;
+}
+
+.services-carousel .swiper-slide>div {
+  width: 100%;
+  margin: 0 !important;
+}
+
+/* Swiper Navigation Buttons - Hide default */
+.services-carousel .swiper-button-next,
+.services-carousel .swiper-button-prev {
+  display: none !important;
+}
+
+/* Team Slider Styles */
+.team-slider-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.team-swiper {
+  width: 85% !important;
+  margin: 0 auto !important;
+}
+
+.team-swiper .swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: auto;
+}
+
+.team-swiper .swiper-slide>div {
+  margin: 0 !important;
+}
+
+/* Hide default Swiper navigation */
+.team-swiper .swiper-button-next,
+.team-swiper .swiper-button-prev {
+  display: none !important;
+}
+
 @media (min-width: 768px) {
-  #team .slick-list {
+  .team-swiper {
     width: 92% !important;
     margin-left: auto !important;
     margin-right: 0 !important;
   }
 
-  #team .slick-track {
+  .team-swiper .swiper-wrapper {
     display: flex;
     justify-content: space-evenly !important;
     gap: 0.7rem;
@@ -118,13 +161,72 @@ strong {
 }
 
 @media (min-width: 1024px) {
-  #team .slick-list {
+  .team-swiper {
     width: 94% !important;
     margin-left: auto !important;
     margin-right: 0 !important;
   }
 }
 
+/* Fade effect for mobile (767px and below) */
+@media (max-width: 767px) {
+  .team-swiper .swiper-slide {
+    opacity: 0 !important;
+  }
+
+  .team-swiper .swiper-slide-active {
+    opacity: 1 !important;
+  }
+}
+
+/* Custom Arrow Buttons */
+.carousel-arrow,
+.team-slider-wrapper button {
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.carousel-arrow:focus-visible,
+.team-slider-wrapper button:focus-visible {
+  outline: 2px solid #c7a652;
+  outline-offset: 4px;
+}
+
+.carousel-arrow:disabled,
+.team-slider-wrapper button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Legacy ID selectors (for backwards compatibility) */
+#team .swiper-wrapper {
+  width: 85% !important;
+  margin: 0 auto !important;
+}
+
+#team .swiper-slide>div {
+  margin: 0 !important;
+}
+
+@media (min-width: 768px) {
+  #team .swiper-wrapper {
+    width: 92% !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+    display: flex;
+    justify-content: space-evenly !important;
+    gap: 0.7rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  #team .swiper-wrapper {
+    width: 94% !important;
+    margin-left: auto !important;
+    margin-right: 0 !important;
+  }
+}
 /* ================================
    BACKGROUND SECTIONS
    ================================ */
@@ -812,9 +914,53 @@ body.modal-on .site-info-modal {
   .business-type-thank-you--card__text-strong {
     font-size: 20px;
     line-height: 24px;
-  }
+    }
+    
+    .business-type-thank-you--card__text {
+      font-size: 16px;
+    }
+    }
 
-  .business-type-thank-you--card__text {
-    font-size: 16px;
-  }
-}
+        /* ================================
+       CLIENT LOGOS SMOOTH SCROLL
+       ================================ */
+    
+         @keyframes smoothScrollLeft {
+           0% {
+             transform: translateX(-33.333%);
+           }
+    
+           100% {
+             transform: translateX(0);
+           }
+         }
+    
+        .logo-scroll-track {
+          will-change: transform;
+          backface-visibility: hidden;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+    
+        /* Ensure smooth rendering on all browsers */
+        #client-logos {
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+        }
+    
+        /* Optional: Add subtle background pattern */
+        #client-logos::before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          opacity: 0.03;
+          background-image: radial-gradient(circle, #c7a652 1px, transparent 1px);
+          background-size: 20px 20px;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+               

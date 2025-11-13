@@ -1,4 +1,4 @@
-// import Carousel from "./Carousel";
+import Carousel from "./Carousel";
 
 
 const ContentSection = () =>
@@ -45,7 +45,7 @@ const ContentSection = () =>
         {/* Carousel */}
         <div className="ml-0 mt-[40px] 992px:mt-0  992px:mr-[40px]   992px:col-span-3">
           <div id="service-slider" className="">
-            {/* <Carousel /> */}
+            <Carousel />
           </div>
         </div>
       </div>

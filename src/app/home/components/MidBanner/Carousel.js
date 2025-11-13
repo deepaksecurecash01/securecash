@@ -1,10 +1,16 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
-import Slider from "react-slick";
+import React, { useState, useCallback } from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, A11y } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/a11y";
 
 const Carousel = () =>
 {
+  const [swiperInstance, setSwiperInstance] = useState(null);
+
   const slides = [
     {
       imgSrc: "/images/icons/australia.png",
@@ -40,116 +46,106 @@ const Carousel = () =>
       imgSrc: "/images/icons/olservices.png",
       title: "Online Services",
       description:
-        "Customers are able to book extra pickups, cancel a scheduled pickup, submit change orders, & even verify a banking courier’s identification all online.",
+        "Customers are able to book extra pickups, cancel a scheduled pickup, submit change orders, & even verify a banking courier's identification all online.",
     },
   ];
 
-  const CustomPrevArrow = ({ currentSlide, slideCount, onClick }) => (
-    <div
-      className={`  absolute  992px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer z-10 top-1/2  transform -translate-y-1/2 992px:-right-6  992px:top-[38%] hover:opacity-100 text-[50px] text-white `}
-      onClick={() =>
-      {
-        if (onClick) {
-          onClick();
-        }
-      }}
-    >
-      ❮
-    </div>
-  );
+  const handleSwiper = useCallback((swiper) =>
+  {
+    setSwiperInstance(swiper);
+  }, []);
 
-  const CustomNextArrow = ({ currentSlide, slideCount, onClick }) => (
-    <div
-      className={`  absolute  992px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer top-1/2 z-10 right-0   992px:-right-6 transform -translate-y-1/2  992px:top-[62%] hover:opacity-100 text-[50px] text-white `}
-      onClick={() =>
-      {
-        if (onClick) {
-          onClick();
-        }
-      }}
-    >
-      ❯
-    </div>
-  );
-
-  const settings = {
-    dots: false,
-    infinite: true,
-    speed: 700,
-    slidesToShow: 3,
-    slidesToScroll: 3,
-    nextArrow: <CustomNextArrow />,
-    prevArrow: <CustomPrevArrow />,
-    responsive: [
-      {
-        breakpoint: 1366,
-        settings: {
-          slidesToShow: 3,
-          slidesToScroll: 3,
-        },
-      },
-      {
-        breakpoint: 1200,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-        },
-      },
-      {
-        breakpoint: 991,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-        },
-      },
-    ],
-  };
   return (
-    <Slider {...settings}>
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`slick-item inline-block w-full text-center mx-auto opacity-100  visible relative transition-opacity duration-1000 ease-in-out  992px:align-top  992px:w-[30%]  992px:float-left text-white  `}
-        >
-          <div className="service-img">
-            <Image
-              width={60}
-              height={60}
-              className="h-[60px] w-auto mx-auto"
-              src={slide.imgSrc}
-              alt=""
-            />
-          </div>
-          <div className="service-info text-white clear-both">
-            <h2
+    <div className="relative carousel-wrapper">
+      {/* Custom Previous Arrow */}
+      <button
+        onClick={() => swiperInstance?.slidePrev()}
+        className={`  absolute  992px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer z-10 top-1/2  transform -translate-y-1/2 992px:-right-6  992px:top-[38%] hover:opacity-100 text-[50px] text-white `}
+        aria-label="Previous slide"
+        type="button"
+      >
+        ❮
+      </button>
 
-              className="text-white text-[16px] leading-[1.6em] text-center font-bold my-[1rem] font-montserrat"
-            >
-              {slide.title}
-            </h2>
+      {/* Custom Next Arrow */}
+      <button
+        onClick={() => swiperInstance?.slideNext()}
+        className={`  absolute  992px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer top-1/2 z-10 right-0   992px:-right-6 transform -translate-y-1/2  992px:top-[62%] hover:opacity-100 text-[50px] text-white `}
+        aria-label="Next slide"
+        type="button"
+      >
+        ❯
+      </button>
 
-            <p
-
-              className="text-[14px] leading-[1.6em] text-center font-light mb-0 
-             w-[70%] 992px:w-[95%]
-             992px:leading-[2em] mx-auto whitespace-normal 992px:text-center font-montserrat"
-            >
-              {slide.description}
-            </p>
-
-
-          </div>
-        </div>
-      ))}
-    </Slider>
+      <Swiper
+        modules={[Navigation, A11y]}
+        spaceBetween={0}
+        speed={700}
+        loop={true}
+        slidesPerView={1}
+        slidesPerGroup={1}
+        onSwiper={handleSwiper}
+        watchSlidesProgress={true}
+        a11y={{
+          enabled: true,
+          prevSlideMessage: "Previous service slide",
+          nextSlideMessage: "Next service slide",
+          firstSlideMessage: "This is the first slide",
+          lastSlideMessage: "This is the last slide",
+          paginationBulletMessage: "Go to slide {{index}}",
+        }}
+        breakpoints={{
+          0: {
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+          },
+          768: {
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+          },
+          991: {
+            slidesPerView: 1,
+            slidesPerGroup: 1,
+          },
+          1200: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+            spaceBetween: 10,
+          },
+          1366: {
+            slidesPerView: 3,
+            slidesPerGroup: 3,
+            spaceBetween: 10,
+          },
+        }}
+        className="services-carousel"
+      >
+        {slides.map((slide, index) => (
+          <SwiperSlide key={index}>
+            <div className="slick-item inline-block w-full text-center mx-auto opacity-100 visible relative transition-opacity duration-1000 ease-in-out 992px:align-top text-white">
+              <div className="service-img">
+                <Image
+                  width={60}
+                  height={60}
+                  className="h-[60px] w-auto mx-auto"
+                  src={slide.imgSrc}
+                  alt={slide.title}
+                  loading={index < 3 ? "eager" : "lazy"}
+                />
+              </div>
+              <div className="service-info text-white clear-both">
+                <h3 className="text-white text-[16px] leading-[1.6em] text-center font-bold my-[1rem] font-montserrat">
+                  {slide.title}
+                </h3>
+                <p className="text-[14px] leading-[1.6em] text-center font-light mb-0 w-[70%] 992px:w-[95%] 992px:leading-[2em] mx-auto whitespace-normal font-montserrat">
+                  {slide.description}
+                </p>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
+    </div>
   );
 };
 

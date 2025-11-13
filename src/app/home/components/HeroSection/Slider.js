@@ -1,156 +1,136 @@
 "use client";
-import { useEffect, useRef, useState, useCallback } from "react";
+import React, { useRef, useState } from "react";
+import Slider from "react-slick";
 import Image from "next/image";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Container from "@/components/layout/Container";
-import SliderContent from "./SliderContent";
+import BannerContent from "./SliderContent";
 
-// ✅ BEST APPROACH: Single image per slide, Next.js handles responsive versions
-const Slide = ({ slide, slideIndex, isPriority }) =>
+const SlickSlider = ({ slides = [] }) =>
 {
-  return (
-    <div className="bannerSlides relative">
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/35 z-[1]" />
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const sliderRef = useRef(null);
 
-      {/* Single Responsive Image */}
-      <div className="relative w-full h-full min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1024px:h-full 1440px:min-h-[70vh]">
-        <Image
-          src={slide.web} // Use highest quality as source
-          alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
-          fill
-          priority={isPriority}
-          loading={isPriority ? "eager" : "lazy"}
-          fetchPriority={isPriority ? "high" : "low"}
-          quality={75}
-          sizes="(max-width: 479px) 479px, (max-width: 1023px) 1023px, 1920px"
-          className="object-cover"
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
-        />
-      </div>
+  if (!slides.length) return null;
 
-      {/* Content */}
-      <Container className="z-10 w-full absolute inset-0 flex items-center">
-        <SliderContent {...slide} />
-      </Container>
-    </div>
-  );
-};
+  const settings = {
+    infinite: slides.length > 1,
+    autoplay: true,
+    speed: 1000,
+    dots: true,
+    fade: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    pauseOnHover: true,
 
-const SlideControls = ({ slides, currentSlide, onSlideChange }) => (
-  <div
-    className="inner-controls absolute w-5 h-[68px] z-10 top-[calc(50%-80px)] right-0 cursor-default ml-auto mr-0 320px:w-[40px] 768px:right-0 992px:mr-[30px] 1200px:right-0"
-    role="navigation"
-    aria-label="Slider navigation"
-  >
-    <ul className="dot-navigation absolute top-[32%] list-none">
-      {slides.map((slide, index) => (
-        <li key={index}>
-          <button
-            className={`cursor-pointer h-[15px] w-[15px] mx-[2px] bg-[#a3a3a3] rounded-full inline-block transition-all duration-300 dot hover:bg-white hover:transform hover:scale-[1.34] hover:w-[15px] hover:h-[15px] border-0 ${currentSlide === index + 1
-                ? "bg-white transform scale-[1.34] w-[15px] h-[15px]"
-                : ""
-              }`}
-            onClick={() => onSlideChange(index + 1)}
-            aria-label={`Go to slide ${index + 1}`}
-            aria-current={currentSlide === index + 1 ? "true" : "false"}
-          />
-        </li>
-      ))}
-    </ul>
-  </div>
-);
-
-const Slider = ({ slides = [] }) =>
-{
-  const [slideIndex, setSlideIndex] = useState(1);
-  const [isHovered, setIsHovered] = useState(false);
-  const bannerInterval = useRef(null);
-
-  const slideBannerAuto = useCallback(() =>
-  {
-    setSlideIndex((prev) => (prev >= slides.length ? 1 : prev + 1));
-  }, [slides.length]);
-
-  const startBanner = useCallback(() =>
-  {
-    if (bannerInterval.current) {
-      clearInterval(bannerInterval.current);
-    }
-
-    const startInterval = () =>
+    beforeChange: (_, next) =>
     {
-      bannerInterval.current = setInterval(slideBannerAuto, 5000);
-    };
-
-    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-      requestIdleCallback(startInterval);
-    } else {
-      setTimeout(startInterval, 100);
-    }
-  }, [slideBannerAuto]);
-
-  const stopBanner = useCallback(() =>
-  {
-    if (bannerInterval.current) {
-      clearInterval(bannerInterval.current);
-    }
-  }, []);
-
-  useEffect(() =>
-  {
-    if (!isHovered) {
-      startBanner();
-    }
-    return () => stopBanner();
-  }, [isHovered, startBanner, stopBanner]);
-
-  const handleSlideChange = useCallback(
-    (index) =>
-    {
-      setSlideIndex(index);
-      stopBanner();
-      startBanner();
+      setCurrentSlide(next);
     },
-    [stopBanner, startBanner]
-  );
+    appendDots: (dots) => (
+      <div className="dots-section">
+        <ul
+          style={{
+            position: "absolute",
+            top: "32%",
+            listStyleType: "none",
+          }}
+        >
+          {dots}
+        </ul>
+      </div>
+    ),
+    customPaging: (i) => (
+      <button
+        className="slide-button"
+        style={{
+          width: "15px",
+          height: "15px",
+          padding: "0",
+          borderRadius: "50%",
+          background: currentSlide === i ? "#fff" : "#a3a3a3",
+          border: "none",
+          cursor: "pointer",
+          transition: "all 0.3s ease",
+          transform: currentSlide === i ? "scale(1.34)" : "scale(1)",
+        }}
+        onClick={() =>
+        {
+          if (sliderRef.current) {
+            sliderRef.current.slickGoTo(i);
+          }
+        }}
+        aria-label={`Go to slide ${i + 1}`}
+      />
+    ),
+  };
 
   return (
-    <div
-      id="banner-slider"
-      className="w-full inline-block relative overflow-hidden"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      role="region"
-      aria-label="Hero slider"
-      aria-live="polite"
-    >
-      <div className="slideshow-container relative">
-        {/* Only render current slide */}
-        {slides.map((slide, index) =>
-        {
-          const isCurrent = slideIndex === index + 1;
+    <div className="relative w-full">
+      <Slider className="relative" ref={sliderRef} {...settings}>
+        {slides.map((slide, index) => (
+          <div key={index} className="relative overflow-hidden">
+            <div className="absolute inset-0 bg-black/40 z-[1]" />
+            <div className="relative w-full h-full min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1024px:h-full 1440px:min-h-[70vh]">
+              {/* ✅ Native Picture Element - Uses your existing WebP as fallback */}
+              <picture>
+                {/* Mobile: < 768px - AVIF (best) */}
+                <source
+                  media="(max-width: 767px)"
+                  srcSet={slide.mobile.replace('.jpg', '.avif')}
+                  type="image/avif"
+                />
+                {/* Mobile: < 768px - WebP (existing fallback) */}
+                <source
+                  media="(max-width: 767px)"
+                  srcSet={slide.mobile.replace('.jpg', '.webp')}
+                  type="image/webp"
+                />
 
-          if (!isCurrent) return null;
+                {/* Tablet: 768px - 1023px - AVIF (best) */}
+                <source
+                  media="(min-width: 768px) and (max-width: 1023px)"
+                  srcSet={slide.tablet.replace('.jpg', '.avif')}
+                  type="image/avif"
+                />
+                {/* Tablet: 768px - 1023px - WebP (existing fallback) */}
+                <source
+                  media="(min-width: 768px) and (max-width: 1023px)"
+                  srcSet={slide.tablet.replace('.jpg', '.webp')}
+                  type="image/webp"
+                />
 
-          return (
-            <Slide
-              key={index}
-              slide={slide}
-              slideIndex={index}
-              isPriority={index === 0}
-            />
-          );
-        })}
-      </div>
+                {/* Desktop: >= 1024px - AVIF (best) */}
+                <source
+                  media="(min-width: 1024px)"
+                  srcSet={slide.web.replace('.jpg', '.avif')}
+                  type="image/avif"
+                />
+                {/* Desktop: >= 1024px - WebP (existing fallback) */}
+                <source
+                  media="(min-width: 1024px)"
+                  srcSet={slide.web.replace('.jpg', '.webp')}
+                  type="image/webp"
+                />
 
-      <SlideControls
-        slides={slides}
-        currentSlide={slideIndex}
-        onSlideChange={handleSlideChange}
-      />
+                {/* Final Fallback: JPEG for all devices */}
+                <img
+                  src={slide.web}
+                  alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
+                 
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </picture>
+            </div>
+            <Container className="z-10 w-full absolute inset-0 flex items-center">
+              <BannerContent {...slide} />
+            </Container>
+          </div>
+        ))}
+      </Slider>
     </div>
   );
 };
 
-export default Slider;
+export default SlickSlider;
