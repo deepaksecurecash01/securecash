@@ -1,13 +1,13 @@
 "use client";
 import React, { useState, useCallback } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, A11y } from "swiper/modules";
+import { Navigation, EffectFade, A11y } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
+import "swiper/css/effect-fade";
 import "swiper/css/a11y";
-
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
 
 const SocialLink = ({ href, icon, alt }) => (
   <li className="float-left pr-[5px]">
@@ -19,12 +19,13 @@ const SocialLink = ({ href, icon, alt }) => (
         className="hover:filter hover:contrast-0"
         src={`/images/icons/social/webp/${icon}.webp`}
         alt={alt}
+        loading="lazy"
       />
     </Link>
   </li>
 );
 
-const TeamSlider = ({ member }) =>
+const TeamSliderSwiper = ({ member }) =>
 {
   const [swiperInstance, setSwiperInstance] = useState(null);
   const [isBeginning, setIsBeginning] = useState(true);
@@ -43,64 +44,44 @@ const TeamSlider = ({ member }) =>
     setIsEnd(swiper.isEnd);
   }, []);
 
-  const CustomArrow = ({ direction, isDisabled, onClick }) =>
-  {
-    const isPrev = direction === "prev";
-
-    return (
-      <div
-        className={`absolute  1024px:px-5 transition-opacity duration-200 z-10 text-primary text-[50px] top-1/2 transform -translate-y-1/2 ${isPrev
-          ? " -left-[3%] 768px:-left-3 1366px:left-0  768px:top-[42%]"
-          : "-right-[3%]  768px:-left-3 1366px:left-0  768px:top-[58%]"
-          } ${isDisabled
-            ? "opacity-50 pointer-events-none cursor-not-allowed no-underline"
-            : ""
-          }`}
-      >
-        <button
-          className="768px:w-16 cursor-pointer flex justify-center items-center bg-transparent border-0 text-primary text-[50px] p-0"
-          onClick={!isDisabled ? onClick : undefined}
-          aria-label={isPrev ? "Previous Slide" : "Next Slide"}
-          disabled={isDisabled}
-          type="button"
-        >
-          {isPrev ? "❮" : "❯"}
-        </button>
-      </div>
-    );
-  };
-
   return (
-    <div className="team-slider-wrapper relative">
+    <div className="team-slider-wrapper">
       {/* Custom Previous Arrow */}
-      <CustomArrow
-        direction="prev"
-        isDisabled={isBeginning}
+      <button
         onClick={() => swiperInstance?.slidePrev()}
-      />
+        disabled={isBeginning}
+        aria-label="Previous Slide"
+        type="button"
+        className="team-arrow team-arrow-prev"
+      >
+        <div>❮</div>
+      </button>
 
       {/* Custom Next Arrow */}
-      <CustomArrow
-        direction="next"
-        isDisabled={isEnd}
+      <button
         onClick={() => swiperInstance?.slideNext()}
-      />
+        disabled={isEnd}
+        aria-label="Next Slide"
+        type="button"
+        className="team-arrow team-arrow-next"
+      >
+        <div>❯</div>
+      </button>
 
       <Swiper
-        modules={[Navigation, A11y]}
-        spaceBetween={0}
+        modules={[Navigation, EffectFade, A11y]}
+        spaceBetween={12}
         speed={800}
-        slidesPerView={4}
+        loop={false}
+        slidesPerView={1}
         slidesPerGroup={1}
-        watchSlidesProgress={true}
         onSwiper={handleSwiper}
         onSlideChange={handleSlideChange}
+        watchSlidesProgress={true}
         a11y={{
           enabled: true,
           prevSlideMessage: "Previous team member",
           nextSlideMessage: "Next team member",
-          firstSlideMessage: "This is the first team member",
-          lastSlideMessage: "This is the last team member",
         }}
         breakpoints={{
           0: {
@@ -110,41 +91,41 @@ const TeamSlider = ({ member }) =>
             fadeEffect: {
               crossFade: true,
             },
+            spaceBetween: 0,
           },
-          767: {
+          768: {
             slidesPerView: 1,
             slidesPerGroup: 1,
             effect: "fade",
             fadeEffect: {
               crossFade: true,
             },
-          },
-          768: {
-            slidesPerView: 2,
-            slidesPerGroup: 1,
-            effect: "slide",
+            spaceBetween: 0,
           },
           992: {
             slidesPerView: 2,
             slidesPerGroup: 1,
             effect: "slide",
+            spaceBetween: 16,
           },
           1140: {
             slidesPerView: 3,
             slidesPerGroup: 1,
             effect: "slide",
+            spaceBetween: 20,
           },
           1366: {
             slidesPerView: 4,
             slidesPerGroup: 1,
             effect: "slide",
+            spaceBetween: 12,
           },
         }}
         className="team-swiper"
       >
         {member.map((member, index) => (
           <SwiperSlide key={index}>
-            <div className="item-container inline-block w-[80%] 1024px:w-full bg-white self-center justify-center items-center align-top">
+            <div className="item-container">
               <div className="item ml-0 w-full float-left">
                 <Image
                   className="w-full mx-auto my-0 object-center"
@@ -183,7 +164,7 @@ const TeamSlider = ({ member }) =>
                   </Link>
                 </div>
                 <div className="social-media pt-[5px]">
-                  <ul className="list-none flex gap-2">
+                  <ul className="list-none flex gap-2 m-0 p-0">
                     <SocialLink
                       href={member.socialLinks?.facebook}
                       icon="fb"
@@ -215,4 +196,4 @@ const TeamSlider = ({ member }) =>
   );
 };
 
-export default TeamSlider;
+export default TeamSliderSwiper;

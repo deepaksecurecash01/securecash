@@ -65,7 +65,7 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
                         src={slide.web}
                         alt={slide.alt || `Banner Slide ${slideIndex + 1}`}
                         loading={shouldPrioritize ? "eager" : "lazy"}
-                        fetchpriority={shouldPrioritize ? "high" : "low"} // ✅ Note: lowercase 'fetchpriority'
+                        fetchPriority={shouldPrioritize ? "high" : "low"} // ✅ Note: lowercase 'fetchpriority'
                         className="absolute inset-0 w-full h-full object-cover"
                     />
                 </picture>

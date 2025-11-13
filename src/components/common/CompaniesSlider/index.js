@@ -2,7 +2,7 @@
 import Image from "next/image";
 import React, { useMemo } from "react";
 
-// Configuration - move to constants file in production
+// Configuration
 const LOGO_CONFIG = {
   baseUrl: "/images/companies/",
   companies: [
@@ -27,7 +27,7 @@ const LOGO_CONFIG = {
   ],
   slideWidth: 300,
   slideHeight: 150,
-  animationDuration: 40, // seconds - adjust for speed (lower = faster)
+  animationDuration: 40,
 };
 
 const LogoSlide = ({ src, alt, width, height, isPriority = false }) => (
@@ -61,10 +61,10 @@ const ClientLogos = ({ className = "", config = LOGO_CONFIG }) =>
     [baseUrl, companies]
   );
 
-  // Create triple set for seamless infinite scroll
+  // Create double set for seamless infinite scroll
   const extendedSlides = useMemo(() =>
   {
-    return [...slideData, ...slideData, ...slideData];
+    return [...slideData, ...slideData];
   }, [slideData]);
 
   // Calculate total width
@@ -76,8 +76,6 @@ const ClientLogos = ({ className = "", config = LOGO_CONFIG }) =>
       className={`relative px-0 py-[30px] 992px:py-[65px] bg-white ${className}`}
       aria-label="Our clients"
     >
-
-
       {/* Gradient overlays for fade effect */}
       <div className="absolute left-0 top-0 bottom-0 w-[100px] 992px:w-[200px] bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-[100px] 992px:w-[200px] bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
