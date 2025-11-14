@@ -268,9 +268,9 @@ const ContactForm = ({ className }) =>
                                 >
                                     Thank you{userName && ` ${userName}`}!
                                 </h3>
-                                <h5 className=" font-montserrat text-center capitalize pb-2 text-[16px]">
+                                <h4 className="font-montserrat text-center capitalize pb-2 text-[16px]">
                                     Your message has been sent successfully.
-                                </h5>
+                                </h4>
                                 <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" />
 
                                 <div className="quote-ty-note">

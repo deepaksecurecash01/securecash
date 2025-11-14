@@ -1,3 +1,6 @@
+// ============================================
+// 1. next.config.js - FINAL OPTIMIZED VERSION
+// ============================================
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
@@ -24,6 +27,7 @@ const nextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
+  swcMinify: true,
 
   compiler: {
     removeConsole:
@@ -32,70 +36,11 @@ const nextConfig = {
         : false,
   },
 
-  webpack: (config, { isServer, dev }) =>
-  {
-    if (!isServer && !dev) {
-      config.optimization.splitChunks = {
-        chunks: "all",
-        cacheGroups: {
-          default: false,
-          vendors: false,
+  // ✅ ADDED: Transpile packages to remove polyfills
+  transpilePackages: ['swiper'],
 
-          // React framework
-          framework: {
-            name: "framework",
-            chunks: "all",
-            test: /[\\/]node_modules[\\/](react|react-dom|scheduler)[\\/]/,
-            priority: 40,
-            enforce: true,
-          },
-
-          // Swiper (since you're using it)
-          swiper: {
-            name: "npm.swiper",
-            test: /[\\/]node_modules[\\/]swiper[\\/]/,
-            priority: 35,
-            enforce: true,
-          },
-
-          // All other node_modules
-          lib: {
-            test: /[\\/]node_modules[\\/]/,
-            name(module)
-            {
-              const packageName = module.context.match(
-                /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-              )?.[1];
-              return packageName
-                ? `npm.${packageName.replace("@", "")}`
-                : "lib";
-            },
-            priority: 30,
-            minChunks: 1,
-            reuseExistingChunk: true,
-          },
-
-          // Shared components
-          commons: {
-            name: "commons",
-            minChunks: 2,
-            priority: 20,
-            reuseExistingChunk: true,
-          },
-
-          // CSS
-          styles: {
-            name: "styles",
-            test: /\.css$/,
-            chunks: "all",
-            enforce: true,
-            priority: 50,
-          },
-        },
-      };
-    }
-    return config;
-  },
+  // ✅ REMOVED: Custom webpack splitChunks - let Next.js handle it optimally
+  // The experimental.optimizePackageImports does this better
 
   async headers()
   {
@@ -185,6 +130,7 @@ const nextConfig = {
   },
 
   experimental: {
+    // ✅ REMOVED: 'modern: true' (deprecated, causes errors)
     optimizeCss: true,
     optimizePackageImports: [
       "swiper",

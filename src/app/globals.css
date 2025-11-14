@@ -1066,7 +1066,7 @@ body.modal-on .site-info-modal {
 /* Item Container */
 .item-container {
   display: inline-block;
-  width: 80%;
+  width: 329px;
   background: white;
   align-self: center;
   justify-content: center;
@@ -1095,3 +1095,4 @@ body.modal-on .site-info-modal {
 .team-swiper .swiper-button-prev {
   display: none !important;
 }
+

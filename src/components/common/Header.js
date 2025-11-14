@@ -51,7 +51,7 @@ const Logo = ({ onClick }) => (
         src="/images/SecureCash.webp"
         alt="SecureCash Logo"
         width={285}
-        height={0}
+        height={91}   // ✅ Actual height
         className="w-[285px] h-auto"
         priority={true}
       />

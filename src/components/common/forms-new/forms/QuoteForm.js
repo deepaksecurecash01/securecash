@@ -181,9 +181,9 @@ const QuoteForm = ({ className }) =>
         >
           Thank you{userName && ` ${userName}`}!
         </h3>
-        <h5 className="text-white font-montserrat text-center capitalize pb-2 text-[16px]">
+        <h4 className="text-white font-montserrat text-center capitalize pb-2 text-[16px]">
           We received your submission.
-        </h5>
+        </h4>
         <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto" />
 
         <div className="quote-ty-note">

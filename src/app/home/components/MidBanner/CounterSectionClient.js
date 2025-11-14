@@ -2,9 +2,6 @@
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
-/**
- * ✅ OPTIMIZED: Custom counter with update animations
- */
 const AnimatedCounter = ({ end, prefix, duration = 2, isUpdate = false }) =>
 {
     const [count, setCount] = useState(isUpdate ? end : 0);
@@ -14,8 +11,8 @@ const AnimatedCounter = ({ end, prefix, duration = 2, isUpdate = false }) =>
 
     useEffect(() =>
     {
-        startValueRef.current = count; // Store current value as start
-        startTimeRef.current = null; // Reset timing
+        startValueRef.current = count;
+        startTimeRef.current = null;
 
         const animate = (timestamp) =>
         {
@@ -25,7 +22,6 @@ const AnimatedCounter = ({ end, prefix, duration = 2, isUpdate = false }) =>
                 1
             );
 
-            // Easing function (ease-out cubic)
             const eased = 1 - Math.pow(1 - progress, 3);
             const currentValue = Math.floor(
                 startValueRef.current + (end - startValueRef.current) * eased
@@ -39,7 +35,7 @@ const AnimatedCounter = ({ end, prefix, duration = 2, isUpdate = false }) =>
 
         rafRef.current = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(rafRef.current);
-    }, [end, duration]); // Re-run when end value changes
+    }, [end, duration]);
 
     return `${prefix ? "$" : ""}${count.toLocaleString()}`;
 };
@@ -50,10 +46,9 @@ export default function CounterSectionClient({ initialStats })
     const [isVisible, setIsVisible] = useState(false);
     const [isMobile, setIsMobile] = useState(false);
     const [isUpdating, setIsUpdating] = useState(false);
-    const [hasAnimated, setHasAnimated] = useState(false); // Track first animation
+    const [hasAnimated, setHasAnimated] = useState(false);
     const sectionRef = useRef(null);
 
-    // Mobile detection
     useEffect(() =>
     {
         const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -62,7 +57,6 @@ export default function CounterSectionClient({ initialStats })
         return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
-    // IntersectionObserver for scroll-triggered animation
     useEffect(() =>
     {
         if (!sectionRef.current || isVisible) return;
@@ -72,7 +66,7 @@ export default function CounterSectionClient({ initialStats })
             {
                 if (entries[0].isIntersecting) {
                     setIsVisible(true);
-                    setHasAnimated(true); // Mark as animated
+                    setHasAnimated(true);
                     observer.disconnect();
                 }
             },
@@ -83,14 +77,13 @@ export default function CounterSectionClient({ initialStats })
         return () => observer.disconnect();
     }, [isVisible]);
 
-    // ✅ Deferred API call
     useEffect(() =>
     {
         if (!isVisible) return;
 
         const timer = setTimeout(() =>
         {
-            setIsUpdating(true); // ✅ Show pulse indicator
+            setIsUpdating(true);
 
             fetch("/api/stats/scc")
                 .then((res) =>
@@ -104,7 +97,6 @@ export default function CounterSectionClient({ initialStats })
                         throw new Error("Invalid data structure");
                     }
 
-                    // Only update if values changed
                     if (
                         data.customers !== stats.customers ||
                         data.servicesPerformed !== stats.servicesPerformed ||
@@ -117,7 +109,7 @@ export default function CounterSectionClient({ initialStats })
                         });
                     }
 
-                    setIsUpdating(false); // ✅ Hide pulse after 1 second
+                    setIsUpdating(false);
                 })
                 .catch((err) =>
                 {
@@ -165,17 +157,41 @@ export default function CounterSectionClient({ initialStats })
             id="banner-mid"
             className="relative pt-0 h-auto mt-[40px] 414px:h-[760px] 600px:h-[920px] 992px:h-[340px] w-full mx-auto flex flex-col 414px:mt-10 justify-center items-center 992px:mt-[100px]"
         >
-            {/* ✅ Single responsive background */}
+            {/* ✅ OPTIMIZED: AVIF with WebP and JPG fallbacks */}
             <picture>
+                {/* Desktop AVIF */}
+                <source
+                    media="(min-width: 992px)"
+                    type="image/avif"
+                    srcSet="/images/banner/home-statistics.avif"
+                />
+                {/* Desktop WebP fallback */}
+                <source
+                    media="(min-width: 992px)"
+                    type="image/webp"
+                    srcSet="/images/banner/home-statistics.webp"
+                />
+                {/* Desktop JPG fallback */}
                 <source
                     media="(min-width: 992px)"
                     srcSet="/images/banner/home-statistics.jpg"
                 />
+                {/* Mobile AVIF */}
+                <source
+                    type="image/avif"
+                    srcSet="/images/banner/home-statistics-mobile.avif"
+                />
+                {/* Mobile WebP fallback */}
+                <source
+                    type="image/webp"
+                    srcSet="/images/banner/home-statistics-mobile.webp"
+                />
+                {/* Mobile JPG fallback */}
                 <Image
                     src="/images/banner/home-statistics-mobile.jpg"
                     alt=""
                     fill
-                    priority={false}
+                    loading="lazy"
                     quality={75}
                     sizes="100vw"
                     className="object-cover object-center"
@@ -194,15 +210,14 @@ export default function CounterSectionClient({ initialStats })
                         <div key={counter.id} className="contents">
                             <div className="mid-row py-[50px] 992px:py-0 w-full float-none mx-auto pb-[50px] pl-0 992px:w-1/3 text-center relative 992px:float-left">
                                 <h4 className="banner-mid-header font-black text-[40px] text-primary mb-[30px] h-[40px] font-montserrat">
-                                    {/* ✅ Mobile: instant, Desktop: animate on first view + updates */}
                                     {isMobile ? (
                                         `${counter.prefix ? "$" : ""}${value.toLocaleString()}`
                                     ) : (
                                         <AnimatedCounter
                                             end={value}
                                             prefix={counter.prefix}
-                                            duration={hasAnimated ? 1.5 : 2} // Faster for updates
-                                            isUpdate={hasAnimated} // Pass update flag
+                                            duration={hasAnimated ? 1.5 : 2}
+                                            isUpdate={hasAnimated}
                                         />
                                     )}
                                 </h4>
@@ -235,7 +250,6 @@ export default function CounterSectionClient({ initialStats })
                 })}
             </div>
 
-            {/* ✅ Pulse indicator - CSS animation (no JS, no performance hit) */}
             {isUpdating && (
                 <div
                     className="absolute top-4 right-4 z-20"

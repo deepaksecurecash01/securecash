@@ -92,12 +92,11 @@ const SpecialEventForm = () => {
       service: SpecialEventServiceStep,
       risk: () => (
         <div className="h-full flex flex-col items-center justify-center gap-2">
-          <h4
-
+          <h2
             className="text-white font-normal text-center capitalize pb-4 text-[26px] leading-[30px] font-montserrat"
           >
             Review & Edit Previous Steps
-          </h4>
+          </h2>
           <div>
             <button
               type="button"

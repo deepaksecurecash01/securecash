@@ -57,10 +57,10 @@ const WelcomeSection = () =>
             <Image
               src="/images/SecureCash.webp"
               alt="SecureCash Logo"
-              width={320}
-              height={0}
+              width={325}   // ✅ Actual width
+              height={91}   // ✅ Actual height
               priority={true}
-              className=" max-w-full h-auto block mx-auto"
+              className="max-w-full h-auto block mx-auto"
             />
             <hr
             

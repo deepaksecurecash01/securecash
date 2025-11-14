@@ -33,7 +33,9 @@
     "zod": "^3.24.1"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.22",
     "critters": "^0.0.23",
+    "cssnano": "^7.1.2",
     "eslint": "^8",
     "eslint-config-next": "15.0.2",
     "postcss": "^8",

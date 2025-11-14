@@ -131,8 +131,8 @@ const TeamSliderSwiper = ({ member }) =>
                   className="w-full mx-auto my-0 object-center"
                   width={500}
                   height={300}
-                  priority={index < 4}
-                  quality={80}
+                  loading="lazy"
+                  quality={75}
                   src={member.image}
                   alt={`${member.name}, ${member.position}`}
                 />
@@ -154,6 +154,7 @@ const TeamSliderSwiper = ({ member }) =>
                     src="/images/icons/mail.png"
                     alt="mail"
                     aria-hidden="true"
+                    loading="lazy"
                   />
                   <Link
                     className="text-[14px] text-[#929292] hover:no-underline hover:text-[#c7a652]"

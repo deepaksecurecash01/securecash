@@ -9,37 +9,52 @@ const VideoPlayer = ({
   thumbnail,
   provider = "vimeo",
   className = "",
-  priority = false, // ✅ CRITICAL: Allow selective priority
+  priority = false,
 }) =>
 {
   const [videoState, setVideoState] = useState("idle");
   const [thumbnailUrl, setThumbnailUrl] = useState(thumbnail);
   const [isLoading, setIsLoading] = useState(false);
   const iframeRef = useRef(null);
+  const containerRef = useRef(null); // ✅ Use ref instead of id
 
-  // ✅ OPTIMIZED: Fetch thumbnail with quality parameter
+  // ✅ OPTIMIZED: Only fetch thumbnail when component is visible
   useEffect(() =>
   {
-    if (!thumbnail && provider === "vimeo") {
-      setIsLoading(true);
-      fetch(`https://vimeo.com/api/v2/video/${videoId}.json`)
-        .then((response) => response.json())
-        .then((data) =>
+    if (!thumbnail && provider === "vimeo" && typeof window !== "undefined") {
+      const observer = new IntersectionObserver(
+        (entries) =>
         {
-          if (data && data[0]) {
-            // ✅ Use thumbnail_medium (200x150) instead of thumbnail_large (640x360)
-            // For better quality, use thumbnail_large but let Next.js optimize it
-            setThumbnailUrl(data[0].thumbnail_large);
+          if (entries[0].isIntersecting) {
+            setIsLoading(true);
+            fetch(`https://vimeo.com/api/v2/video/${videoId}.json`)
+              .then((response) => response.json())
+              .then((data) =>
+              {
+                if (data && data[0]) {
+                  setThumbnailUrl(data[0].thumbnail_large);
+                }
+              })
+              .catch((error) =>
+              {
+                console.error("Error fetching Vimeo thumbnail:", error);
+              })
+              .finally(() =>
+              {
+                setIsLoading(false);
+              });
+            observer.disconnect();
           }
-        })
-        .catch((error) =>
-        {
-          console.error("Error fetching Vimeo thumbnail:", error);
-        })
-        .finally(() =>
-        {
-          setIsLoading(false);
-        });
+        },
+        { rootMargin: "50px" }
+      );
+
+      // Use ref instead of getElementById
+      if (containerRef.current) {
+        observer.observe(containerRef.current);
+      }
+
+      return () => observer.disconnect();
     }
   }, [videoId, thumbnail, provider]);
 
@@ -58,13 +73,14 @@ const VideoPlayer = ({
   const handlePlay = () =>
   {
     setVideoState("playing");
-    setTimeout(() =>
+    // Use requestAnimationFrame for smoother transition
+    requestAnimationFrame(() =>
     {
       if (iframeRef.current) {
         const playerUrl = getPlayerUrl();
         iframeRef.current.src = playerUrl;
       }
-    }, 0);
+    });
   };
 
   const aspectRatioPercentage = (() =>
@@ -74,7 +90,10 @@ const VideoPlayer = ({
   })();
 
   return (
-    <div className={`relative w-full max-w-full overflow-hidden bg-black ${className}`}>
+    <div
+      ref={containerRef}
+      className={`relative w-full max-w-full overflow-hidden bg-black ${className}`}
+    >
       <div
         className="relative w-full"
         style={{ paddingTop: `${aspectRatioPercentage}%` }}
@@ -102,7 +121,7 @@ const VideoPlayer = ({
               </div>
             )}
 
-            {/* ✅ OPTIMIZED: Thumbnail Image with proper lazy loading */}
+            {/* ✅ OPTIMIZED: Thumbnail Image */}
             {thumbnailUrl && !isLoading && (
               <Image
                 src={thumbnailUrl}
@@ -110,9 +129,8 @@ const VideoPlayer = ({
                 fill
                 className="object-cover object-center"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-                quality={60} // ✅ Reduce quality (was default 75)
-                loading={priority ? "eager" : "lazy"} // ✅ Lazy by default
-                priority={priority} // ✅ Only prioritize when explicitly set
+                quality={60}
+                loading="lazy"
               />
             )}
 
@@ -156,7 +174,6 @@ const VideoPlayer = ({
             title={title}
             allow="autoplay; fullscreen; picture-in-picture"
             allowFullScreen
-            loading="lazy" // ✅ Add lazy loading to iframe
           />
         )}
       </div>
