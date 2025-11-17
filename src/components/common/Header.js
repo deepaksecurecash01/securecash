@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import Link from "next/link";
-import Headroom from "react-headroom";
+import useScrollDirection from "@/hooks/useScrollDirection";
 
 // Constants
 const MENU_ITEMS = [
@@ -51,7 +51,7 @@ const Logo = ({ onClick }) => (
         src="/images/SecureCash.webp"
         alt="SecureCash Logo"
         width={285}
-        height={91}   // ✅ Actual height
+        height={91}
         className="w-[285px] h-auto"
         priority={true}
       />
@@ -62,8 +62,8 @@ const Logo = ({ onClick }) => (
 // Quote Button Component
 const QuoteButton = () => (
   <Link href="/quote/">
-    <div className="min-w-[182px] min-h-[70px] max-h-[70px] text-black flex flex-row justify-center items-center rounded-full bg-primary hover:text-white hover:cursor-pointer shadow-[0px_7px_64px_-16px_rgba(199,166,82,1)] leading-[22px] hover:bg-black group">
-      <span className="bg-quote-icon inline-block w-[22px] h-[22px] bg-contain bg-no-repeat mr-1 mb-0.5 group-hover:bg-quote-icon-white" />
+    <div className="min-w-[182px] min-h-[70px] max-h-[70px] text-black flex flex-row justify-center items-center rounded-full bg-primary hover:text-white hover:cursor-pointer shadow-[0px_7px_64px_-16px_rgba(199,166,82,1)] leading-[22px] hover:bg-black group transition-colors duration-300">
+      <span className="bg-quote-icon inline-block w-[22px] h-[22px] bg-contain bg-no-repeat mr-1 mb-0.5 group-hover:bg-quote-icon-white transition-all duration-300" />
       <p className="m-0 p-0 text-base">Get a Quote</p>
     </div>
   </Link>
@@ -72,20 +72,18 @@ const QuoteButton = () => (
 // Desktop Submenu Component
 const DesktopSubmenu = ({ links }) => (
   <ul className="absolute hidden shadow-[0_2px_5px_rgba(0,0,0,0.5)] w-[220px] z-50 border-t-4 border-active-text mt-5 ml-[-3px] bg-white group-hover:block">
-    <span className="w-0 h-0 border-l-[5px] border-r-[5px] border-b-[5px] border-l-transparent border-r-transparent border-b-active-text border-solid -top-2 -left-0.5 absolute" />
+    <span className="w-0 h-0 border-l-[5px] border-r-[5px] border-b-[5px] border-l-transparent border-r-transparent border-b-active-text border-solid absolute -top-2 -left-0.5" />
     {links.map((subLink, index) => (
-      <li key={index} className="border-b border-light-border">
+      <li key={index} className="border-b border-light-border last:border-b-0">
         <Link
           href={subLink.href}
           onClick={(e) =>
           {
-            // Find the parent li with group class and remove hover
             const parentLi = e.currentTarget.closest(".group");
             if (parentLi) {
               const submenu = parentLi.querySelector("ul");
               if (submenu) {
                 submenu.style.display = "none";
-                // Reset display after a brief moment to allow CSS to take over again
                 setTimeout(() =>
                 {
                   submenu.style.display = "";
@@ -93,7 +91,7 @@ const DesktopSubmenu = ({ links }) => (
               }
             }
           }}
-          className="block p-[19px_40px_18px_20px] text-primary-text text-sm no-underline leading-[22px] hover:text-active-text hover:bg-black"
+          className="block p-[19px_40px_18px_20px] text-primary-text text-sm no-underline leading-[22px] hover:text-active-text hover:bg-black transition-colors duration-200"
         >
           {subLink.text}
         </Link>
@@ -102,10 +100,11 @@ const DesktopSubmenu = ({ links }) => (
   </ul>
 );
 
+// Desktop Menu Component
 const DesktopMenu = ({ onMenuClick }) => (
   <div
     id="main-menu"
-    className="w-full 1024px:flex flex-row items-center hidden "
+    className="w-full 1024px:flex flex-row items-center hidden"
   >
     <ul className="m-0 p-0 bg-white list-none flex flex-row justify-between items-center ml-auto w-[97%] 1200px:w-[90%]">
       {MENU_ITEMS.filter((item) => item.name !== "Get A Quote").map(
@@ -117,12 +116,11 @@ const DesktopMenu = ({ onMenuClick }) => (
             <li key={index} className="leading-[50px] py-5 relative group">
               <Link
                 href={item.href}
-               
-                className="block text-primary-text text-sm no-underline leading-6 group-hover:text-active-text"
+                className="block text-primary-text text-sm no-underline leading-6 group-hover:text-active-text transition-colors duration-200"
               >
                 {hasSubMenu && (
                   <>
-                    <i className="rotate-45 inline-block border-solid border-dark-border border-t-0 border-l-0 border-r-2 border-b-2 p-[3px] relative -top-0.5 group-hover:border-active-text" />
+                    <i className="rotate-45 inline-block border-solid border-dark-border border-t-0 border-l-0 border-r-2 border-b-2 p-[3px] relative -top-0.5 group-hover:border-active-text transition-colors duration-200" />
                     <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
                   </>
                 )}
@@ -143,7 +141,7 @@ const DesktopMenu = ({ onMenuClick }) => (
 // Mobile Submenu Component
 const MobileSubmenu = ({ subMenuId, links, isActive, onMenuClick }) => (
   <ul
-    className={`overflow-hidden bg-white text-[#808080] ${isActive ? "opacity-100 visible h-auto mt-5" : "opacity-0 invisible h-0"
+    className={`overflow-hidden bg-white text-[#808080] transition-all duration-300 ease-in-out ${isActive ? "opacity-100 visible h-auto mt-5" : "opacity-0 invisible h-0"
       }`}
   >
     {links.map((link, index) => (
@@ -153,7 +151,7 @@ const MobileSubmenu = ({ subMenuId, links, isActive, onMenuClick }) => (
       >
         <Link
           href={link.href}
-          className="text-paragraph text-sm pl-11 ml-[20%]"
+          className="text-paragraph text-sm pl-11 ml-[20%] hover:text-active-text transition-colors duration-200"
           onClick={onMenuClick}
         >
           {link.text}
@@ -173,11 +171,13 @@ const MobileMenu = ({
   <div
     id="mobile-menu"
     className={`block ${isVisible ? "h-screen" : ""
-      }  bg-white 1024px:hidden w-full`}
+      } bg-white 1024px:hidden w-full`}
   >
     <button
-      className="bg-primary w-full py-[15px] px-2.5 text-white pl-7"
+      className="bg-primary w-full py-[15px] px-2.5 text-white pl-7 hover:bg-opacity-90 transition-all duration-200"
       onClick={onMenuClick}
+      aria-label="Toggle mobile menu"
+      aria-expanded={isVisible}
     >
       <span className="flex items-center gap-0.5">
         <FaBars className="relative -left-2.5" />
@@ -185,23 +185,25 @@ const MobileMenu = ({
       </span>
     </button>
     <ul
-      className={`transition-all duration-100 ${isVisible ? "h-[70vh] opacity-100" : "max-h-0 opacity-0"
+      className={`transition-all duration-300 ease-in-out ${isVisible ? "h-[70vh] opacity-100" : "max-h-0 opacity-0"
         } overflow-auto`}
     >
       {MENU_ITEMS.map((item, index) => (
         <li
           key={index}
           className={`border-b border-light-border py-5 ${item.submenuId && activeSubMenu === item.submenuId
-            ? "bg-black pb-0"
-            : "text-black"
+              ? "bg-black pb-0"
+              : "text-black"
             }`}
         >
           {item.submenuId ? (
             <>
               <button
-                className={`ml-[20%] flex items-center gap-4 ${activeSubMenu === item.submenuId && "text-active-text"
+                className={`ml-[20%] flex items-center gap-4 transition-colors duration-200 ${activeSubMenu === item.submenuId && "text-active-text"
                   }`}
                 onClick={() => onToggleSubmenu(item.submenuId)}
+                aria-label={`Toggle ${item.name} submenu`}
+                aria-expanded={activeSubMenu === item.submenuId}
               >
                 <i className="rotate-45 border-dark-border border-r-2 border-b-2 w-2 h-2" />
                 {item.name}
@@ -216,7 +218,7 @@ const MobileMenu = ({
           ) : (
             <Link
               href={item.href}
-              className="text-black ml-[20%]"
+              className="text-black ml-[20%] hover:text-active-text transition-colors duration-200"
               onClick={onMenuClick}
             >
               {item.name}
@@ -234,6 +236,12 @@ const Navbar = () =>
   const [mobileNavVisible, setMobileNavVisible] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState(null);
 
+  // Custom scroll direction hook
+  const { scrollDir } = useScrollDirection({
+    threshold: 5,
+    offSet: 100,
+  });
+
   const toggleMobileMenu = () =>
   {
     setMobileNavVisible((prev) => !prev);
@@ -247,10 +255,18 @@ const Navbar = () =>
 
   const handleMenuClick = () => setMobileNavVisible(false);
 
+  // Determine transformation class (hide when scrolling down, show when scrolling up)
+  const isHidden = scrollDir === "down" && !mobileNavVisible;
+  const transformClass = isHidden ? "-translate-y-full" : "translate-y-0";
+  const transitionClass = "transition-transform duration-300 ease-in-out";
+
   return (
-    <Headroom className="z-50 relative ">
+    <div
+      className={`fixed top-0 w-full ${transitionClass} ${transformClass} z-50`}
+      role="banner"
+    >
       <header
-        className={`bg-white  w-full h-auto transition-all duration-500 shadow-[0_1px_6px_0_rgba(32,33,36,.28)] ${mobileNavVisible ? "fixed no-doc-scroll" : ""
+        className={`bg-white w-full h-auto shadow-[0_1px_6px_0_rgba(32,33,36,.28)] ${mobileNavVisible ? "no-doc-scroll" : ""
           }`}
       >
         <div className="w-full max-w-[1366px] mx-auto pt-2.5 1024px:pb-2.5 flex justify-evenly items-center">
@@ -266,7 +282,7 @@ const Navbar = () =>
           </div>
         </div>
       </header>
-    </Headroom>
+    </div>
   );
 };
 

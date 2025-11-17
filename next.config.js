@@ -1,16 +1,14 @@
-// ============================================
-// 1. next.config.js - FINAL OPTIMIZED VERSION
-// ============================================
 /** @type {import('next').NextConfig} */
+
 const nextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    deviceSizes: [375, 640, 768, 1024, 1280, 1536],
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
     minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: false,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-
+    qualities: [75, 80, 85],
     remotePatterns: [
       {
         protocol: "https",
@@ -27,7 +25,6 @@ const nextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
-  swcMinify: true,
 
   compiler: {
     removeConsole:
@@ -36,16 +33,43 @@ const nextConfig = {
         : false,
   },
 
-  // ✅ ADDED: Transpile packages to remove polyfills
-  transpilePackages: ['swiper'],
+  // ✅ Force modern JavaScript compilation
+  experimental: {
+    optimizeCss: true,
+    optimizePackageImports: [
+      "swiper",
+      "swiper/react",
+      "react-icons",
+      "@react-google-maps/api",
+      "react-hook-form",
+    ],
+    scrollRestoration: true,
+    webpackBuildWorker: true,
+  },
 
-  // ✅ REMOVED: Custom webpack splitChunks - let Next.js handle it optimally
-  // The experimental.optimizePackageImports does this better
+  // ✅ Configure webpack to use modern JS target
+  webpack: (config, { isServer }) =>
+  {
+    // Set modern target for client bundles
+    if (!isServer) {
+      config.target = ['web', 'es2020'];
+    }
+    return config;
+  },
 
   async headers()
   {
     return [
-      // Cache banner images aggressively
+      // Preload critical CSS
+      {
+        source: '/',
+        headers: [
+          {
+            key: 'Link',
+            value: '</_next/static/css/3371bc9a75f6cfdc.css>; rel=preload; as=style',
+          },
+        ],
+      },
       {
         source: "/images/banner/:path*",
         headers: [
@@ -59,8 +83,6 @@ const nextConfig = {
           },
         ],
       },
-
-      // Cache all static images
       {
         source: "/images/:path*",
         headers: [
@@ -70,10 +92,8 @@ const nextConfig = {
           },
         ],
       },
-
-      // Cache Next.js optimized images
       {
-        source: "/_next/image:path*",
+        source: "/_next/image",
         headers: [
           {
             key: "Cache-Control",
@@ -81,8 +101,6 @@ const nextConfig = {
           },
         ],
       },
-
-      // Cache static JS/CSS/fonts
       {
         source: "/_next/static/:path*",
         headers: [
@@ -92,10 +110,17 @@ const nextConfig = {
           },
         ],
       },
-
-      // Security headers for all pages
       {
-        source: "/:path*",
+        source: "/:path((?!.*\\.).*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, must-revalidate",
+          },
+        ],
+      },
+      {
+        source: "/:path((?!_next|images).*)*",
         headers: [
           {
             key: "X-DNS-Prefetch-Control",
@@ -113,34 +138,22 @@ const nextConfig = {
             key: "Referrer-Policy",
             value: "origin-when-cross-origin",
           },
-        ],
-      },
-
-      // HTML pages - revalidate
-      {
-        source: "/:path((?!.*\\.).*)",
-        headers: [
           {
-            key: "Cache-Control",
-            value: "public, max-age=0, must-revalidate",
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
           },
         ],
       },
     ];
   },
 
-  experimental: {
-    // ✅ REMOVED: 'modern: true' (deprecated, causes errors)
-    optimizeCss: true,
-    optimizePackageImports: [
-      "swiper",
-      "react-icons",
-      "@react-google-maps/api",
-      "react-hook-form",
-    ],
-    scrollRestoration: true,
-    webpackBuildWorker: true,
-  },
+  transpilePackages: [
+    'swiper',
+    'swiper/react',
+    'react-calendar',
+    'react-date-picker',
+    'html-react-parser',
+  ],
 };
 
-export default nextConfig;
+module.exports = nextConfig;
