@@ -1,25 +1,25 @@
-import { Montserrat, Prata } from "next/font/google";
+// import { Montserrat, Prata } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 
-const montserrat = Montserrat({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-montserrat",
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
-  preload: true,
-  fallback: ['system-ui', 'arial'],
-});
+// const montserrat = Montserrat({
+//   subsets: ["latin"],
+//   display: "swap",
+//   variable: "--font-montserrat",
+//   weight: ["300", "400", "500", "600", "700", "800", "900"],
+//   preload: true,
+//   fallback: ['system-ui', 'arial'],
+// });
 
-const prata = Prata({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-prata",
-  weight: ["400"],
-  preload: true,
-  fallback: ['Georgia', 'serif'],
-});
+// const prata = Prata({
+//   subsets: ["latin"],
+//   display: "swap",
+//   variable: "--font-prata",
+//   weight: ["400"],
+//   preload: true,
+//   fallback: ['Georgia', 'serif'],
+// });
 
 export const metadata = {
   title: "SecureCash | Covert CIT Provider",
@@ -100,7 +100,7 @@ export default function RootLayout({ children })
         <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
       </head>
       <body
-        className={`${montserrat.variable} ${prata.variable} font-montserrat antialiased`}
+        className={` antialiased`}
       >
         <Header />
         {children}

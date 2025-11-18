@@ -9,23 +9,28 @@ module.exports = {
   theme: {
     extend: {
       screens: {
-        // Keeping key mobile/tablet breakpoints
+        "320px": "320px",
+        "360px": "360px",
+        "414px": "414px",
         "480px": "480px",
         "600px": "600px",
+        "720px": "720px",
         "768px": "768px",
-
-        // Keeping key desktop/layout breakpoints
+        "800px": "800px",
         "992px": "992px",
         "1024px": "1024px",
+        "1070px": "1070px",
+        "1100px": "1100px",
         "1200px": "1200px",
+        "1280px": "1280px",
+        "1366px": "1366px",
         "1440px": "1440px",
         "1600px": "1600px",
-        // Default Tailwind sizes cover 320, 360, 414, 1280 (lg), 1536 (2xl) implicitly.
-        // Removed highly redundant sizes for cleaner output.
+        "1920px": "1920px",
       },
 
       fontFamily: {
-        // Uses next/font variables, critical for FOUT prevention.
+        // ✅ UPDATED: Use CSS variables for next/font
         montserrat: ["var(--font-montserrat)", "system-ui", "sans-serif"],
         prata: ["var(--font-prata)", "Georgia", "serif"],
         "prata-regular": ["var(--font-prata)", "Georgia", "serif"],
@@ -33,7 +38,6 @@ module.exports = {
       },
 
       colors: {
-        // Design colors remain untouched as per guidelines
         primary: "#c7a652",
         link: "#957433",
         "light-border": "#E9E9E9",
@@ -42,9 +46,22 @@ module.exports = {
         "primary-text": "#333333",
       },
 
-      // 💥 OPTIMIZATION FIX: All static background images removed.
-      // These must now be implemented using the Next.js <Image> component 
-      // within the relevant components for format optimization and lazy loading.
+      backgroundImage: {
+        "quote-icon": "url('/images/quote.png')",
+        "quote-icon-white": "url('/images/quote-white.png')",
+        "content-bg": "url('/images/main-background.webp')",
+        "banner-mid-bg": "url('/images/banner/home-statistics.jpg')",
+        "banner-mid-mobile-bg":
+          "url('/images/banner/home-statistics-mobile.jpg')",
+        "main-content-bg": "url('/images/banner/mainbg.webp')",
+        "team-bg": "url('/images/team.webp')",
+        "brown-overlay": "url('/images/brown-overlay.png')",
+        "quote-header":
+          "url('/images/bg-quote-header-left.png'), url('/images/bg-quote-header-right.png')",
+        "quote-header-right": "url('/images/bg-quote-header-right.png')",
+        "quote-header-left": "url('/images/bg-quote-header-left.png')",
+        "contact-bg": "url('/images/mainbg-contact.jpg')",
+      },
 
       backgroundPosition: {
         "quote-header": "left center, right center",

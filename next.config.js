@@ -26,13 +26,6 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
 
-  // ✅ Fix: Set modern JS target for swcMinify to prevent "Legacy JavaScript" audit failure
-  swcMinify: {
-    jsc: {
-      target: 'es2020',
-    },
-    enabled: true,
-  },
 
   compiler: {
     removeConsole:
