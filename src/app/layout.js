@@ -3,14 +3,13 @@ import "./globals.css";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 
-// ✅ OPTIMIZED: Only load weights actually used in hero section
 const montserrat = Montserrat({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-montserrat",
   weight: ["300", "400", "500", "600", "700", "800", "900"],
   preload: true,
-  fallback: ['system-ui', 'arial'], // ✅ ADDED: Faster fallback rendering
+  fallback: ['system-ui', 'arial'],
 });
 
 const prata = Prata({
@@ -19,7 +18,7 @@ const prata = Prata({
   variable: "--font-prata",
   weight: ["400"],
   preload: true,
-  fallback: ['Georgia', 'serif'], // ✅ ADDED: Faster fallback rendering
+  fallback: ['Georgia', 'serif'],
 });
 
 export const metadata = {
@@ -37,7 +36,7 @@ export default function RootLayout({ children })
   return (
     <html lang="en">
       <head>
-        {/* Existing preload for AVIF banner images */}
+        {/* ✅ CRITICAL: Preload hero images with fetchpriority="high" */}
         <link
           rel="preload"
           as="image"
@@ -63,7 +62,7 @@ export default function RootLayout({ children })
           fetchPriority="high"
         />
 
-        {/* ✅ ADD THIS - Structured Data */}
+        {/* ✅ Structured Data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -97,7 +96,7 @@ export default function RootLayout({ children })
           }}
         />
 
-        {/* Only keep Vimeo DNS prefetch - remove Google Fonts preconnects */}
+        {/* DNS prefetch for third-party domains */}
         <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
       </head>
       <body

@@ -26,7 +26,7 @@ const FreeChangeOrderService = () => (
     </h1>
 
     <hr
-      
+
       className="w-[100px] mt-[20px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"
     />
 

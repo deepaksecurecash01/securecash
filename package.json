@@ -31,8 +31,6 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.22",
-    "critters": "^0.0.23",
-    "critters-webpack-plugin": "^3.0.2",
     "cssnano": "^7.1.2",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",

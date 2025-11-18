@@ -26,6 +26,14 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
 
+  // ✅ Fix: Set modern JS target for swcMinify to prevent "Legacy JavaScript" audit failure
+  swcMinify: {
+    jsc: {
+      target: 'es2020',
+    },
+    enabled: true,
+  },
+
   compiler: {
     removeConsole:
       process.env.NODE_ENV === "production"
@@ -33,8 +41,9 @@ const nextConfig = {
         : false,
   },
 
-  // ✅ Force modern JavaScript compilation
+  // 1. CRITICAL FIX: The native way to inline critical CSS
   experimental: {
+    // Keep this true: Next.js will now try to handle critical CSS
     optimizeCss: true,
     optimizePackageImports: [
       "swiper",
@@ -47,29 +56,20 @@ const nextConfig = {
     webpackBuildWorker: true,
   },
 
-  // ✅ Configure webpack to use modern JS target
+  // 2. CRITICAL FIX: The code that caused the build error is now removed
   webpack: (config, { isServer }) =>
   {
     // Set modern target for client bundles
     if (!isServer) {
       config.target = ['web', 'es2020'];
     }
+    // All manual plugin injection logic (like for Critters) is removed.
     return config;
   },
 
   async headers()
   {
     return [
-      // Preload critical CSS
-      {
-        source: '/',
-        headers: [
-          {
-            key: 'Link',
-            value: '</_next/static/css/3371bc9a75f6cfdc.css>; rel=preload; as=style',
-          },
-        ],
-      },
       {
         source: "/images/banner/:path*",
         headers: [
