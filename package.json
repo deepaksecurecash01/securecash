@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev2": "next dev --turbopack",
+    "dev": "next dev --turbopack",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint",
-    "optimize-images": "node scripts/optimize-to-avif.js"
+    "optimize-images": "node scripts/optimize-images.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -31,6 +30,7 @@
   },
   "devDependencies": {
     "autoprefixer": "^10.4.22",
+    "critters": "^0.0.23",
     "cross-env": "^10.1.0",
     "cssnano": "^7.1.2",
     "eslint": "^9",
@@ -39,8 +39,12 @@
     "tailwindcss": "^3.4.1"
   },
   "browserslist": [
-    "defaults and supports es6-module",
+    "chrome >= 111",
+    "edge >= 111",
+    "firefox >= 111",
+    "safari >= 16.4",
     "not IE 11",
-    "not op_mini all"
+    "not op_mini all",
+    "not dead"
   ]
 }

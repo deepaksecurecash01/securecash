@@ -1,32 +1,35 @@
 import Image from "next/image";
 import React from "react";
+import Link from "next/link";
 
 const ServiceRow = ({ imgSrc, link, title, description }) => (
-  <div className="cash-row flex-1 mb-5 992px:mb-0 w-full px-[24px] py-0 float-none my-0 992px:w-[30%] h-auto 992px:h-[495px] 992px:px-4 992px:pb-4 mx-auto pb-6 992px:float-left 1200px:w-[320px] 1366px:w-[68%] rounded-[20px] bg-[#ffffff] 1024px:px-4 1366px:h-auto [box-shadow:-2px_10px_15px_-1px_rgba(0,_0,_0,_0.31)] 1366px:px-10 1366px:pb-[30px]">
+  <article className="cash-row flex-1 mb-5 992px:mb-0 w-full px-[24px] py-0 float-none my-0 992px:w-[30%] h-auto 992px:h-[495px] 992px:px-4 992px:pb-4 mx-auto pb-6 992px:float-left 1200px:w-[320px] 1366px:w-[68%] rounded-[20px] bg-[#ffffff] 1024px:px-4 1366px:h-auto [box-shadow:-2px_10px_15px_-1px_rgba(0,_0,_0,_0.31)] 1366px:px-10 1366px:pb-[30px]">
     <div className="header-wrapper flex flex-row 992px:flex-col justify-start items-center 992px:items-start mb-[20px] 992px:mb-0">
       <Image
         width={80}
         height={80}
         src={imgSrc}
-        alt={title}
+        alt=""
         loading="lazy"
         quality={85}
         className="w-[80px] mr-[16px] pt-[35px] 992px:w-1/4 bg-brown-overlay 992px:pt-[50px]"
+        aria-hidden="true"
       />
       <h3 className="text-[#c7a652] text-left font-bold text-[24px] mt-[18px] mb-[15px] 768px:mx-0 992px:text-[20px] font-montserrat">
-        <a
+        <Link
           href={link}
-          aria-label={`Learn more about ${title} services`} // ✅ Add descriptive label
+          className="focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          aria-label={`Learn more about ${title}`}
         >
           {title}
-        </a>
+        </Link>
       </h3>
     </div>
 
     <p className="text-[#3f3f3f] text-left font-light text-[16px] leading-[2em] mb-0 1280px:text-[14px] font-montserrat">
       {description}
     </p>
-  </div>
+  </article>
 );
 
 const CardsSection = () =>
@@ -57,30 +60,27 @@ const CardsSection = () =>
 
   return (
     <>
-      <div
+      <section
         id="bottom-content"
         className="grid 992px:grid-cols-[50%_50%] clear-both relative h-auto 992px:h-[450px] 1366px:h-[600px] w-full mt-10 1024px:mt-[100px] mx-0 mb-auto"
+        aria-labelledby="services-heading"
       >
         <div className="bottom-row-left bg-[#c7a652] w-full mx-auto 1200px:relative">
           <div className="row-container w-[95%] mx-auto py-[40px] 992px:pl-[14px] 992px:w-[490px] mt-[32px] pt-2.5 text-center 1200px:w-[650px] 1366px:w-[683px] 1366px:mr-0 1366px:ml-auto 1024px:mt-10 1366px:mt-[80px] text-[#fff]">
-            <hr
-              className="w-[100px] mb-6 mx-auto 992px:ml-0 992px:mr-auto h-[4px] rounded-[5px] border-0 bg-white"
-            />
-            <h3
-              className="text-inherit text-center text-[32px] leading-[1.4em] mb-[16px] 992px:text-left font-prata"
-            >
+            <hr className="w-[100px] mb-6 mx-auto 992px:ml-0 992px:mr-auto h-[4px] rounded-[5px] border-0 bg-white" aria-hidden="true" />
+
+            <p className="text-inherit text-center text-[32px] leading-[1.4em] mb-[16px] 992px:text-left font-prata">
               Your One-Stop
-            </h3>
+            </p>
 
             <h2
+              id="services-heading"
               className="text-white text-center font-bold text-[40px] leading-[1.2em] mt-[18px] mb-[24px] mx-auto montSemiBold 414px:leading-[1.4em] 992px:text-left font-montserrat"
             >
               Secure Banking Courier Service
             </h2>
 
-            <p
-              className="text-inherit text-center text-[16px] leading-[2rem] mb-[24px] w-4/5 ml-auto mr-auto 480px:w-full 1366px:leading-4 992px:text-left font-montserrat"
-            >
+            <p className="text-inherit text-center text-[16px] leading-[2rem] mb-[24px] w-4/5 ml-auto mr-auto 480px:w-full 1366px:leading-4 992px:text-left font-montserrat">
               SecureCash can serve your specific needs, we provide:
             </p>
 
@@ -101,11 +101,10 @@ const CardsSection = () =>
           </div>
         </div>
 
-        {/* ✅ OPTIMIZED: Replaced bg-team-bg with Next.js Image for better performance */}
         <div className="bottom-row-right hidden 992px:block relative overflow-hidden">
           <Image
             src="/images/team.webp"
-            alt="SecureCash Team at Head Office"
+            alt="SecureCash team members at head office"
             fill
             loading="lazy"
             quality={80}
@@ -115,18 +114,16 @@ const CardsSection = () =>
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
           />
         </div>
-      </div>
+      </section>
 
       <div
         id="space-white"
         className="bg-[#fff] 1200px:min-h-[195px] clear-both float-none w-full mx-auto my-0 pr-2 1280px:pr-[52px] 992px:pb-[370px] 1366px:pb-0"
       >
         <div className="w-full max-w-[1366px] mx-auto my-0 z-40">
-          <h5
-            className="hidden text-[16px] text-center text-[#000000] font-normal mt-[18px] 1200px:w-full 1200px:right-0 1280px:mr-12 1200px:block 1200px:text-right font-montserrat"
-          >
+          <p className="hidden text-[16px] text-center text-[#000000] font-normal mt-[18px] 1200px:w-full 1200px:right-0 1280px:mr-12 1200px:block 1200px:text-right font-montserrat">
             The Team at Our Head Office
-          </h5>
+          </p>
         </div>
       </div>
     </>

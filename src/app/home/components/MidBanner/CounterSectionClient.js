@@ -119,7 +119,7 @@ export default function CounterSectionClient({ initialStats })
         }, 150);
 
         return () => clearTimeout(timer);
-    }, [isVisible]);
+    }, [isVisible, stats.customers, stats.servicesPerformed, stats.cashMoved]);
 
     const counters = [
         {
@@ -127,7 +127,7 @@ export default function CounterSectionClient({ initialStats })
             key: "customers",
             imgSrc: "/images/icons/clients.webp",
             imgFallback: "/images/icons/clients.png",
-            alt: "Customers",
+            alt: "Customers icon",
             description: "Customers",
             prefix: false,
         },
@@ -136,7 +136,7 @@ export default function CounterSectionClient({ initialStats })
             key: "servicesPerformed",
             imgSrc: "/images/icons/services.webp",
             imgFallback: "/images/icons/services.png",
-            alt: "Services Performed",
+            alt: "Services icon",
             description: "Services Performed",
             prefix: false,
         },
@@ -145,7 +145,7 @@ export default function CounterSectionClient({ initialStats })
             key: "cashMoved",
             imgSrc: "/images/icons/transport.webp",
             imgFallback: "/images/icons/transport.png",
-            alt: "Cash Moved",
+            alt: "Cash transport icon",
             description: "Cash Moved",
             prefix: true,
         },
@@ -156,8 +156,8 @@ export default function CounterSectionClient({ initialStats })
             ref={sectionRef}
             id="banner-mid"
             className="relative pt-0 h-auto mt-[40px] 414px:h-[760px] 600px:h-[920px] 992px:h-[340px] w-full mx-auto flex flex-col 414px:mt-10 justify-center items-center 992px:mt-[100px]"
+            aria-label="Company statistics"
         >
-            {/* ✅ OPTIMIZED: AVIF with WebP and JPG fallbacks */}
             <picture>
                 {/* Desktop AVIF */}
                 <source
@@ -165,28 +165,22 @@ export default function CounterSectionClient({ initialStats })
                     type="image/avif"
                     srcSet="/images/banner/home-statistics.avif"
                 />
-                {/* Desktop WebP fallback */}
-                <source
-                    media="(min-width: 992px)"
-                    type="image/webp"
-                    srcSet="/images/banner/home-statistics.webp"
-                />
-                {/* Desktop JPG fallback */}
+                {/* Removed WebP source as we didn't generate it */}
+
+                {/* Desktop Fallback JPG */}
                 <source
                     media="(min-width: 992px)"
                     srcSet="/images/banner/home-statistics.jpg"
                 />
+
                 {/* Mobile AVIF */}
                 <source
                     type="image/avif"
                     srcSet="/images/banner/home-statistics-mobile.avif"
                 />
-                {/* Mobile WebP fallback */}
-                <source
-                    type="image/webp"
-                    srcSet="/images/banner/home-statistics-mobile.webp"
-                />
-                {/* Mobile JPG fallback */}
+                {/* Removed WebP source as we didn't generate it */}
+
+                {/* Main Image Component (Mobile Fallback JPG) */}
                 <Image
                     src="/images/banner/home-statistics-mobile.jpg"
                     alt=""
@@ -198,7 +192,7 @@ export default function CounterSectionClient({ initialStats })
                 />
             </picture>
 
-            <div className="bg-black w-full h-full z-0 absolute opacity-50" />
+            <div className="bg-black w-full h-full z-0 absolute opacity-50" aria-hidden="true" />
 
             <div className="inner w-full max-w-[1366px] mx-auto flex flex-col 992px:flex-row justify-center items-center">
                 {counters.map((counter, index) =>
@@ -209,7 +203,11 @@ export default function CounterSectionClient({ initialStats })
                     return (
                         <div key={counter.id} className="contents">
                             <div className="mid-row py-[50px] 992px:py-0 w-full float-none mx-auto pb-[50px] pl-0 992px:w-1/3 text-center relative 992px:float-left">
-                                <h4 className="banner-mid-header font-black text-[40px] text-primary mb-[30px] h-[40px] font-montserrat">
+                                <p
+                                    className="banner-mid-header font-black text-[40px] text-primary mb-[30px] h-[40px] font-montserrat"
+                                    role="status"
+                                    aria-live="polite"
+                                >
                                     {isMobile ? (
                                         `${counter.prefix ? "$" : ""}${value.toLocaleString()}`
                                     ) : (
@@ -220,7 +218,7 @@ export default function CounterSectionClient({ initialStats })
                                             isUpdate={hasAnimated}
                                         />
                                     )}
-                                </h4>
+                                </p>
 
                                 <Image
                                     src={counter.imgSrc}
@@ -243,7 +241,7 @@ export default function CounterSectionClient({ initialStats })
                             </div>
 
                             {!isLastItem && (
-                                <div className="mid-row-divider h-0.5 w-[150px] 992px:h-[100px] 992px:w-0.5 bg-white z-10" />
+                                <div className="mid-row-divider h-0.5 w-[150px] 992px:h-[100px] 992px:w-0.5 bg-white z-10" aria-hidden="true" />
                             )}
                         </div>
                     );
@@ -253,8 +251,8 @@ export default function CounterSectionClient({ initialStats })
             {isUpdating && (
                 <div
                     className="absolute top-4 right-4 z-20"
-                    title="Refreshing data..."
-                    aria-label="Updating stats"
+                    role="status"
+                    aria-label="Updating statistics"
                 >
                     <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
                 </div>

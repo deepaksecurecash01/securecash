@@ -1096,35 +1096,66 @@ body.modal-on .site-info-modal {
   display: none !important;
 }
 
- /* Optimized CSS for Lighthouse (Required) */
+/* Optimized CSS for Lighthouse (Required) */
 
- /* 1. Base State (CRITICAL: position: sticky MUST be removed) */
- .headroom {
-   /* REMOVED: position: sticky; */
-   top: 0;
-   z-index: 50;
-   transition: transform 0.3s ease-in-out;
-   transform: translateY(0);
-   width: 100%;
- }
+/* 1. Base State (CRITICAL: position: sticky MUST be removed) */
+.headroom {
+  /* REMOVED: position: sticky; */
+  top: 0;
+  z-index: 50;
+  transition: transform 0.3s ease-in-out;
+  transform: translateY(0);
+  width: 100%;
+}
 
- /* 2. Fixed State (Activated by Intersection Observer) */
- .headroom--fixed {
-   /* Now, this ensures position: fixed is applied correctly */
-   position: fixed !important;
-   top: 0;
-   left: 0;
-   right: 0;
-   z-index: 999;
- }
+/* 2. Fixed State (Activated by Intersection Observer) */
+.headroom--fixed {
+  /* Now, this ensures position: fixed is applied correctly */
+  position: fixed !important;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+}
 
- /* 3. Unpinned/Hidden State */
- .headroom--unpinned {
-   transform: translateY(-100%);
- }
+/* 3. Unpinned/Hidden State */
+.headroom--unpinned {
+  transform: translateY(-100%);
+}
 
- /* 4. Wrapper styles */
- .headroom-wrapper {
-   width: 100%;
-   position: relative;
- }
+/* 4. Wrapper styles */
+.headroom-wrapper {
+  width: 100%;
+  position: relative;
+}
+
+/* app/globals.css */
+
+/* --- 1. FIX SCROLLBARS --- */
+/* Extracted from .ScrollableSection_contentScroll */
+.custom-scrollbar {
+  overflow: auto;
+  --scrollbarBG: #ebebeb;
+  --thumbBG: #808080;
+  scrollbar-width: thin;
+  scrollbar-color: var(--thumbBG) var(--scrollbarBG);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--scrollbarBG);
+  border-radius: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--thumbBG);
+  border-radius: 20px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #666;
+}
+

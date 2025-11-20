@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import Paragraph from "@/components/common/Paragraph";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
 import VimeoLite from "@/components/common/VimeoLite";
@@ -41,80 +40,59 @@ const WelcomeSection = () =>
   };
 
   return (
-    <div className=" w-full  600px:bg-content-bg bg-no-repeat bg-center  1366px:bg-cover inline-block mt-10">
+    <section className="w-full 600px:bg-content-bg bg-no-repeat bg-center 1366px:bg-cover inline-block mt-10" aria-labelledby="welcome-heading">
       <Container className="max-[1440px]:max-w-[1280px]">
-        <div
-          id="welcome"
-          className=" min-h-[400px] w-full 992px:w-auto mx-auto "
-        >
+        <div id="welcome" className="min-h-[400px] w-full 992px:w-auto mx-auto">
           <div className="center-content pb-0 block w-[82%] 768px:[80%] 992px:w-[70%] mx-auto mb-[40px] 992px:mb-0">
-            <h4
-
-              className="text-[32px] text-center mx-auto font-prata-regular"
-            >
+            <p className="text-[32px] text-center mx-auto font-prata-regular">
               Welcome to
-            </h4>
+            </p>
             <Image
               src="/images/SecureCash.webp"
-              alt="SecureCash Logo"
-              width={325}   // ✅ Actual width
-              height={91}   // ✅ Actual height
+              alt="SecureCash"
+              width={325}
+              height={91}
               priority={true}
               className="max-w-full h-auto block mx-auto"
             />
-            <hr
-            
-              className="w-[100px] mt-3 mb-6 h-[4px] rounded-[5px] border-0 mx-auto bg-primary" 
-            />
-            <p
-             
-              className="text-[16px] leading-[2rem] text-center mb-[12px] mt-[16px] 
-             992px:text-center 480px:mb-0 font-light font-montserrat"
-            >
+            <hr className="w-[100px] mt-3 mb-6 h-[4px] rounded-[5px] border-0 mx-auto bg-primary" aria-hidden="true" />
+            <p className="text-[16px] leading-[2rem] text-center mb-[12px] mt-[16px] 992px:text-center 480px:mb-0 font-light font-montserrat">
               Do you need cash in transit services? SecureCash specialises in
               picking up your money and banking it. Wherever you are, anywhere
               in Australia, any time of the day or night, seven days a week, we
               can collect your takings and deposit them at your bank. Whether
               you need cash collection, cash counting, or cash delivery,
-              SecureCash has got you covered.&nbsp;
+              SecureCash has got you covered.
             </p>
-
           </div>
-          <div className=" pt-0 block text-left mt-[40px] 768px:mt-0 992px:w-[95%] 992px:mx-auto 1366px:w-full 992px:flex 992px:pt-[80px] items-center">
-            <div className=" mb-[40px] 992px:mb-0 text-left w-full 992px:w-1/2 p-0 mx-auto my-0 pl-0 ">
+
+          <div className="pt-0 block text-left mt-[40px] 768px:mt-0 992px:w-[95%] 992px:mx-auto 1366px:w-full 992px:flex 992px:pt-[80px] items-center">
+            <div className="mb-[40px] 992px:mb-0 text-left w-full 992px:w-1/2 p-0 mx-auto my-0 pl-0">
               <ScrollableSection
-                className=" h-auto w-[82%] 992px:w-full p-0 mx-auto 992px:h-[290px] 1024px:h-[290px] 1200px:h-[320px] 1366px:h-[390px] bg-white 992px:px-[40px] "
+                className="h-auto w-[82%] 992px:w-full p-0 mx-auto 992px:h-[290px] 1024px:h-[290px] 1200px:h-[320px] 1366px:h-[390px] bg-white 992px:px-[40px]"
                 style={{ direction: "rtl" }}
               >
-                <div
-                  className="scrollable-content mt-2"
-                  style={{ direction: "ltr" }}
-                >
-                  <h3
-                    className="text-[22px] font-bold leading-[1.6em] text-center mt-2.5 mb-5 
-             480px:text-[26px] 992px:text-left 
-             768px:mb-4 768px:leading-[1.6rem] font-montserrat"
+                <div className="scrollable-content mt-2" style={{ direction: "ltr" }}>
+                  <h2
+                    id="welcome-heading"
+                    className="text-[22px] font-bold leading-[1.6em] text-center mt-2.5 mb-5 480px:text-[26px] 992px:text-left 768px:mb-4 768px:leading-[1.6rem] font-montserrat"
                   >
                     Our Cash In Transit Services
-                  </h3>
- <p
-                   
-                    className="text-[16px] leading-[2rem] text-left
-             768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light font-montserrat"
-                  >
+                  </h2>
+                  <p className="text-[16px] leading-[2rem] text-left 768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light font-montserrat">
                     What cash in transit service does your business need? As one
                     of the largest and most respected cash logistics companies
                     in Australia, SecureCash can serve your specific needs, we
-                    provide:&nbsp;
+                    provide:
                     <button
-                      className={`read-more-link inline 768px:hidden ${isExpanded && "hidden"} 
-                text-[#957433] text-[16px] font-bold font-[Montserrat] hover:underline`}
+                      className={`read-more-link inline 768px:hidden ${isExpanded && "hidden"} text-[#957433] text-[16px] font-bold font-[Montserrat] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}
                       onClick={toggleContent}
+                      aria-expanded={isExpanded}
+                      aria-controls="services-content"
                     >
                       Read More
                     </button>
                   </p>
-
 
                   <ContentScroll
                     isExpanded={isExpanded}
@@ -125,12 +103,12 @@ const WelcomeSection = () =>
               </ScrollableSection>
             </div>
             <div className="rightside-column pb-0 float-none w-full 992px:w-1/2 p-0 mx-auto my-0 992px:pb-0">
-              <VimeoLite videoId="312442368" />
+              <VimeoLite videoId="312442368" title="SecureCash cash in transit services overview" />
             </div>
           </div>
         </div>
       </Container>
-    </div>
+    </section>
   );
 };
 

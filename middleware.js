@@ -7,12 +7,12 @@ export function middleware(request)
     // Content Security Policy
     const csp = `
     default-src 'self';
-    script-src 'self' 'unsafe-eval' 'unsafe-inline' https://player.vimeo.com https://www.google.com https://maps.googleapis.com https://maps.gstatic.com;
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    script-src 'self' 'unsafe-inline' https://player.vimeo.com https://www.google.com https://maps.googleapis.com https://maps.gstatic.com https://assets.calendly.com https://calendly.com;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://assets.calendly.com;
     img-src 'self' data: https: blob:;
     font-src 'self' data: https://fonts.gstatic.com;
-    frame-src 'self' https://player.vimeo.com https://www.google.com;
-    connect-src 'self' https://vimeo.com https://*.vimeo.com https://maps.googleapis.com;
+    frame-src 'self' https://player.vimeo.com https://www.google.com https://calendly.com;
+    connect-src 'self' https://vimeo.com https://*.vimeo.com https://maps.googleapis.com https://calendly.com https://*.calendly.com;
     media-src 'self' https: blob:;
   `.replace(/\s{2,}/g, ' ').trim();
 
@@ -21,7 +21,7 @@ export function middleware(request)
     // Strict Transport Security
     response.headers.set(
         'Strict-Transport-Security',
-        'max-age=31536000; includeSubDomains'
+        'max-age=31536000; includeSubDomains; preload'
     );
 
     // Cross-Origin Opener Policy

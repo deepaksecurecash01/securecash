@@ -1,14 +1,14 @@
 "use client";
-import React, { useState, useRef } from "react";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-import Slider from "react-slick";
+import React, { useState, useCallback } from "react";
 import Image from "next/image";
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
-
 import Link from "next/link";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 
+// Swiper Imports
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
 
 const TESTIMONIALS = [
     "It makes sense for us to use SecureCash for our cash floats, cash pick-up and cash counting needs during the adelaide festival. It allowed us to concentrate on our core business in the midst of the Festival.",
@@ -23,63 +23,81 @@ const TESTIMONIALS = [
 
 const TeamSlider = ({ TESTIMONIALS }) =>
 {
-    const sliderRef = useRef(null);
-    const [currentSlide, setCurrentSlide] = useState(0);
+    const [swiperInstance, setSwiperInstance] = useState(null);
+    const [activeIndex, setActiveIndex] = useState(0);
 
-    const settings = {
-        dots: false,
-        infinite: false,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false, // Disable default arrows since we're using custom ones
-        beforeChange: (current, next) => setCurrentSlide(next),
-    };
-
-    const goToPrevSlide = () =>
+    // Update state when slide changes
+    const handleSlideChange = (swiper) =>
     {
-        sliderRef.current?.slickPrev();
+        setActiveIndex(swiper.activeIndex);
     };
 
-    const goToNextSlide = () =>
+    const goToPrevSlide = useCallback(() =>
     {
-        sliderRef.current?.slickNext();
-    };
+        swiperInstance?.slidePrev();
+    }, [swiperInstance]);
 
-    const isFirstSlide = currentSlide === 0;
-    const isLastSlide = currentSlide === TESTIMONIALS.length - 1;
+    const goToNextSlide = useCallback(() =>
+    {
+        swiperInstance?.slideNext();
+    }, [swiperInstance]);
+
+    const isFirstSlide = activeIndex === 0;
+    const isLastSlide = activeIndex === TESTIMONIALS.length - 1;
 
     return (
         <>
-            <Slider ref={sliderRef} {...settings}>
+            <Swiper
+                modules={[Navigation]}
+                spaceBetween={0}
+                slidesPerView={1}
+                speed={500}
+                loop={false} // Matches original "infinite: false"
+                onSwiper={setSwiperInstance}
+                onSlideChange={handleSlideChange}
+                className="w-full"
+            >
                 {TESTIMONIALS.map((testimonial, index) => (
-                    <div className="h-[330px] 414px:h-[260px] 480:h-[220px] 1024px:h-[176px] relative overflow-hidden" key={index}>
-                        <div className="contact-testimonial--carousel__items h-full flex justify-center items-center">
-                            <div className="carousel-item">
-                                <div className="excerpt my-[24px] mx-auto text-center w-[65%] 480px:w-1/2">
-                                    <p
-                                     
-                                        className="text-center font-light leading-[29px] font-montserrat"
-                                    >
-                                        {testimonial}
-                                    </p>
+                    <SwiperSlide key={index}>
+                        {/* Kept exact styling structure. 
+                           The height classes allow the container to reserve space,
+                           and the inner flexbox centers the text vertically.
+                        */}
+                        <div className="h-[330px] 414px:h-[260px] 480:h-[220px] 1024px:h-[176px] relative overflow-hidden">
+                            <div className="contact-testimonial--carousel__items h-full flex justify-center items-center">
+                                <div className="carousel-item">
+                                    <div className="excerpt my-[24px] mx-auto text-center w-[65%] 480px:w-1/2">
+                                        <p className="text-center font-light leading-[29px] font-montserrat">
+                                            {testimonial}
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </SwiperSlide>
                 ))}
-            </Slider>
+            </Swiper>
+
+            {/* External Controls - Kept exact styling */}
             <div className="contact-testimonial--carousel-control h-[80px] flex justify-center items-center">
                 <div
-                    className={`${isFirstSlide ? 'opacity-30' : 'cursor-pointer'}`}
+                    className={`${isFirstSlide ? "opacity-30" : "cursor-pointer"}`}
                     onClick={!isFirstSlide ? goToPrevSlide : undefined}
+                    role="button"
+                    aria-label="Previous Testimonial"
+                    aria-disabled={isFirstSlide}
                 >
                     <FaChevronLeft size={36} />
                 </div>
-                <div className="carousel-control-divider h-full w-[2px] bg-[#b9984b] mx-[20px] p-0 rounded-none">&nbsp;</div>
+                <div className="carousel-control-divider h-full w-[2px] bg-[#b9984b] mx-[20px] p-0 rounded-none">
+                    &nbsp;
+                </div>
                 <div
-                    className={`${isLastSlide ? 'opacity-30' : 'cursor-pointer'}`}
+                    className={`${isLastSlide ? "opacity-30" : "cursor-pointer"}`}
                     onClick={!isLastSlide ? goToNextSlide : undefined}
+                    role="button"
+                    aria-label="Next Testimonial"
+                    aria-disabled={isLastSlide}
                 >
                     <FaChevronRight size={36} />
                 </div>
@@ -88,33 +106,23 @@ const TeamSlider = ({ TESTIMONIALS }) =>
     );
 };
 
-// components/TeamContent.js
 const TeamContent = () =>
 {
     return (
-        <div
-            className=" inline-block w-full px-[10px] py-[24px] 414px:pt-[100px] 414px:px-0 mt-0  992px:px-2 992px:pt-[130px] bg-contact-bg bg-no-repeat bg-cover bg-center"
-        >
+        <div className="inline-block w-full px-[10px] py-[24px] 414px:pt-[100px] 414px:px-0 mt-0 992px:px-2 992px:pt-[130px] bg-contact-bg bg-no-repeat bg-cover bg-center">
             <div className="w-full max-w-[1366px] mx-[auto] my-[0]">
-                <h2
-                   
-                    className=" text-center font-bold text-[32px] leading-[64px] mt-[18px] mb-[24px] mx-auto montSemiBold 414px:leading-[1.4em] font-montserrat"
-                >
+                <h2 className="text-center font-bold text-[32px] leading-[64px] mt-[18px] mb-[24px] mx-auto montSemiBold 414px:leading-[1.4em] font-montserrat">
                     Testimonials
                 </h2>
-                <hr
-                    className="mb-6 mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary"
-                />
-                <p
-                  
-                    className="text-center font-light leading-[32px] font-montserrat"
-                >
-                    Don&apos;t just take our word for it. <br />Hear what our customers have to say about our services!
+                <hr className="mb-6 mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" />
+                <p className="text-center font-light leading-[32px] font-montserrat">
+                    Don&apos;t just take our word for it. <br />
+                    Hear what our customers have to say about our services!
                 </p>
-                <div className=" relative select-none block w-full float-left mb-[100px]">
+                <div className="relative select-none block w-full float-left mb-[100px]">
                     <div
-                        className=" 768px:w-[90%] mx-auto  1024px:w-full "
-                        aria-label="Team Members"
+                        className="768px:w-[90%] mx-auto 1024px:w-full"
+                        aria-label="Testimonials Slider"
                     >
                         <TeamSlider TESTIMONIALS={TESTIMONIALS} />
                     </div>

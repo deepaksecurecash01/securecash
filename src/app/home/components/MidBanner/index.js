@@ -3,15 +3,14 @@ import CounterSection from "./CounterSection";
 import ContentSection from "./ContentSection";
 import VideoSection from "@/components/common/VideoSection";
 
-
-
-const MidBanner = () => {
+const MidBanner = () =>
+{
   return (
-    <div>
+    <>
       <CounterSection />
       <ContentSection />
-      <VideoSection  height={`630px`}/>
-    </div>
+      <VideoSection height="630px" />
+    </>
   );
 };
 

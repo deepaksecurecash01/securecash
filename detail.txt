@@ -1,0 +1,564 @@
+I’m sharing **two Lighthouse reports** with you:
+
+1. **Production website**
+2. **Completely blank Next.js project** (only “Hello World”)
+
+Surprisingly, even the blank project shows:
+
+* **12 KiB polyfills**
+* **54 KiB unused JS**
+* **Render-blocking CSS**
+* **90 ms TBT**
+* **2.0 s LCP**
+
+This comparison shows that our current site’s performance is **already very acceptable** and achieving **100 on mobile is unrealistic** in real-world scenarios.
+
+---
+
+### **What I Need You to Do**
+
+1. Analyze **both Lighthouse reports thoroughly**
+2. Identify **what’s worth optimizing** vs what’s **negligible**
+3. Help me **finalize production-level decisions**
+4. Keep discussion **point-to-point**, like two developers reviewing performance
+5. **Do NOT write any code yet**
+6. Ask clarifying questions if needed
+7. Keep answers **short, structured, practical**
+
+---
+
+### **ADDITIONAL CONTEXT**
+
+* I’ll provide **all relevant files referenced in Lighthouse** (~15 files) **one by one**
+
+* **Do NOT start coding** until I say **“done”**
+
+* Latest optimizations already implemented:
+
+  **Components Optimized**
+
+  | Component                  | Before Load | After Optimized | Savings      |
+  | -------------------------- | ----------- | --------------- | ------------ |
+  | Google Maps                | ~120 KiB    | Lazy-loaded     | ~120 KiB     |
+  | Calendly (FranchiseForm)   | ~60 KiB     | On-demand       | ~60 KiB      |
+  | React-slick (Testimonials) | ~50 KiB     | Dynamic import  | ~50 KiB      |
+  | **Total Initial Savings**  | —           | —               | **~230 KiB** |
+
+* **Other measures:**
+
+  * Progressive component loading on scroll
+  * Lazy-loading heavy components
+  * ARIA + accessibility fixes
+  * Reduced initial JS execution
+
+---
+
+### **Key Questions**
+
+**1. Polyfills & unused JS**
+
+* Blank Next.js project already loads polyfills, unused JS, and render-blocking CSS.
+* **Question:** Is it worth trying to eliminate these, or are they negligible/unavoidable?
+
+**2. react-slick vs Swiper**
+
+* **Swiper:** Best performance, ideal for hero banner
+* **React-slick:** Pixel-perfect UI, slightly heavier
+* **Question:** Should I migrate all sliders to Swiper? Or use Swiper only for hero and React-slick for the rest (dynamic import)? Pixel-perfect UI is crucial for all non-hero sliders.
+
+**3. Image Optimization**
+
+* Single image per slide currently
+* Lighthouse suggests compression improvements
+* **Question:** Should I manually compress images (Squoosh/ImageOptim), or rely on Next.js + AVIF/WebP? What’s the best production approach?
+
+**4. Final Production Deadline**
+
+* Website must be **fully production-ready, clean, refactored, and optimized within 2 days**
+* Help me **prioritize what actually matters**
+
+---
+
+### **Why This Review is Needed**
+
+* **100 on mobile** is unrealistic
+* Site is already highly optimized
+* Goal is to achieve:
+
+  * Clean code
+  * Production-ready behavior
+  * Realistic improvements
+  * SEO + Accessibility + Best Practices
+  * No pixel-perfect UI changes
+  * Minimal necessary refactoring
+
+---
+
+### **How You Should Respond**
+
+* Do **NOT write code yet**
+* Keep everything **point-to-point**
+* Treat this as **two developers reviewing a production build**
+* Ask questions if extra context is needed
+* Once decisions are finalized, I’ll send **all files one by one** for review
+* Follow these **strict UI & accessibility rules**:
+
+  * Do not change color theme
+  * Keep **pixel-perfect styling**
+  * No extra underlines on links/buttons
+  * Use **focus-visible** instead of focus:
+
+    * ✅ Mouse clicks: no visual change
+    * ✅ Keyboard navigation: focus ring appears
+    * ✅ Passes Lighthouse
+  * Use **dynamic import** only where needed
+  * Do not add ring, outline, or UI changes arbitrarily
+We’re not allowed to change color theme and don’t add any underline on links/button as per hi guideline. Keep in mind that .
+
+
+---
+
+If you understand everything, let me know. I’ll start sending the files **one by one**, starting with main config files, then layout, then components.
+
+```javascript
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
+
+  theme: {
+    extend: {
+      screens: {
+        "320px": "320px",
+        "360px": "360px",
+        "414px": "414px",
+        "480px": "480px",
+        "600px": "600px",
+        "720px": "720px",
+        "768px": "768px",
+        "800px": "800px",
+        "992px": "992px",
+        "1024px": "1024px",
+        "1070px": "1070px",
+        "1100px": "1100px",
+        "1200px": "1200px",
+        "1280px": "1280px",
+        "1366px": "1366px",
+        "1440px": "1440px",
+        "1600px": "1600px",
+        "1920px": "1920px",
+      },
+
+      fontFamily: {
+        // ✅ UPDATED: Use CSS variables for next/font
+        montserrat: ["var(--font-montserrat)", "system-ui", "sans-serif"],
+        prata: ["var(--font-prata)", "Georgia", "serif"],
+        "prata-regular": ["var(--font-prata)", "Georgia", "serif"],
+        times: ['"Times New Roman"', "Times", "serif"],
+      },
+
+      colors: {
+        primary: "#c7a652",
+        link: "#957433",
+        "light-border": "#E9E9E9",
+        "active-text": "#C5A44B",
+        "dark-border": "#636363",
+        "primary-text": "#333333",
+      },
+
+      backgroundImage: {
+        "quote-icon": "url('/images/quote.png')",
+        "quote-icon-white": "url('/images/quote-white.png')",
+        "content-bg": "url('/images/main-background.webp')",
+        "banner-mid-bg": "url('/images/banner/home-statistics.avif')",
+        "banner-mid-mobile-bg":
+          "url('/images/banner/home-statistics-mobile.jpg')",
+        "main-content-bg": "url('/images/banner/mainbg.webp')",
+        "team-bg": "url('/images/team.webp')",
+        "brown-overlay": "url('/images/brown-overlay.png')",
+        "quote-header":
+          "url('/images/bg-quote-header-left.png'), url('/images/bg-quote-header-right.png')",
+        "quote-header-right": "url('/images/bg-quote-header-right.png')",
+        "quote-header-left": "url('/images/bg-quote-header-left.png')",
+        "contact-bg": "url('/images/mainbg-contact.jpg')",
+      },
+
+      backgroundPosition: {
+        "quote-header": "left center, right center",
+      },
+
+      keyframes: {
+        fade: {
+          "0%": { filter: "brightness(0)", opacity: "0" },
+          "50%": { filter: "brightness(0.5)", opacity: "0.7" },
+          "100%": { filter: "brightness(1)", opacity: "1" },
+        },
+      },
+
+      animation: {
+        fade: "fade 1.5s ease-in-out",
+      },
+    },
+  },
+
+  plugins: [],
+};/** @type {import('next').NextConfig} */
+
+const nextConfig = {
+  images: {
+    formats: ["image/avif", "image/webp"],
+    deviceSizes: [375, 640, 768, 1024, 1280, 1536],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256],
+    minimumCacheTTL: 31536000,
+    dangerouslyAllowSVG: false,
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    qualities: [75, 80, 85],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "www.securecash.com.au",
+      },
+      {
+        protocol: "https",
+        hostname: "i.vimeocdn.com",
+      },
+    ],
+  },
+
+  compress: true,
+  reactStrictMode: true,
+  productionBrowserSourceMaps: false,
+  poweredByHeader: false,
+
+
+  compiler: {
+    removeConsole:
+      process.env.NODE_ENV === "production"
+        ? { exclude: ["error", "warn"] }
+        : false,
+  },
+
+  // 1. CRITICAL FIX: The native way to inline critical CSS
+  experimental: {
+    // Keep this true: Next.js will now try to handle critical CSS
+    optimizeCss: true,
+    optimizePackageImports: [
+      "swiper",
+      "swiper/react",
+      "react-icons",
+      "@react-google-maps/api",
+      "react-hook-form",
+    ],
+    scrollRestoration: true,
+    webpackBuildWorker: true,
+  },
+
+  // 2. CRITICAL FIX: The code that caused the build error is now removed
+  webpack: (config, { isServer }) =>
+  {
+    // Set modern target for client bundles
+    if (!isServer) {
+      config.target = ['web', 'es2020'];
+    }
+    // All manual plugin injection logic (like for Critters) is removed.
+    return config;
+  },
+
+  async headers()
+  {
+    return [
+      {
+        source: "/images/banner/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+        ],
+      },
+      {
+        source: "/images/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/_next/image",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/_next/static/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/:path((?!.*\\.).*)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=0, must-revalidate",
+          },
+        ],
+      },
+      {
+        source: "/:path((?!_next|images).*)*",
+        headers: [
+          {
+            key: "X-DNS-Prefetch-Control",
+            value: "on",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "SAMEORIGIN",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "Referrer-Policy",
+            value: "origin-when-cross-origin",
+          },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+        ],
+      },
+    ];
+  },
+
+  transpilePackages: [
+    'swiper',
+    'swiper/react',
+    'react-calendar',
+    'react-date-picker',
+    'html-react-parser',
+  ],
+};
+
+module.exports = nextConfig;{
+  "name": "securecash",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "next lint",
+    "optimize-images": "node scripts/optimize-to-avif.js"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^3.9.1",
+    "@react-google-maps/api": "^2.20.6",
+    "@sendgrid/mail": "^8.1.5",
+    "browser-image-compression": "^2.0.2",
+    "html-react-parser": "^5.2.3",
+    "mongoose": "^8.18.1",
+    "next": "^16.0.3",
+    "react": "^19.2.0",
+    "react-calendar": "^5.1.0",
+    "react-calendly": "^4.3.1",
+    "react-date-picker": "^11.0.0",
+    "react-dom": "^19.2.0",
+    "react-hook-form": "^7.54.2",
+    "react-icons": "^5.3.0",
+    "react-slick": "^0.31.0",
+    "sharp": "^0.34.5",
+    "slick-carousel": "^1.8.1",
+    "swiper": "^12.0.3",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.22",
+    "cross-env": "^10.1.0",
+    "cssnano": "^7.1.2",
+    "eslint": "^9",
+    "eslint-config-next": "16.0.3",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1"
+  },
+  "browserslist": [
+    "chrome >= 111",
+    "edge >= 111",
+    "firefox >= 111",
+    "safari >= 16.4",
+    "not IE 11",
+    "not op_mini all",
+    "not dead"
+  ]
+}
+import { NextResponse } from 'next/server';
+
+export function middleware(request)
+{
+    const response = NextResponse.next();
+
+    // Content Security Policy
+    const csp = `
+    default-src 'self';
+    script-src 'self' 'unsafe-inline' https://player.vimeo.com https://www.google.com https://maps.googleapis.com https://maps.gstatic.com https://assets.calendly.com https://calendly.com;
+    style-src 'self' 'unsafe-inlsine' https://fonts.googleapis.com https://assets.calendly.com;
+    img-src 'self' data: https: blob:;
+    font-src 'self' data: https://fonts.gstatic.com;
+    frame-src 'self' https://player.vimeo.com https://www.google.com https://calendly.com;
+    connect-src 'self' https://vimeo.com https://*.vimeo.com https://maps.googleapis.com https://calendly.com https://*.calendly.com;
+    media-src 'self' https: blob:;
+  `.replace(/\s{2,}/g, ' ').trim();
+
+    response.headers.set('Content-Security-Policy', csp);
+
+    // Strict Transport Security
+    response.headers.set(
+        'Strict-Transport-Security',
+        'max-age=31536000; includeSubDomains; preload'
+    );
+
+    // Cross-Origin Opener Policy
+    response.headers.set(
+        'Cross-Origin-Opener-Policy',
+        'same-origin-allow-popups'
+    );
+
+    // Additional security headers
+    response.headers.set('X-Frame-Options', 'SAMEORIGIN');
+    response.headers.set('X-Content-Type-Options', 'nosniff');
+    response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+
+    return response;
+}
+
+export const config = {
+    matcher: [
+        '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:jpg|jpeg|gif|png|svg|ico|webp|avif)|images/).*)',
+    ],
+};
+```
+
+
+```javascript
+import { Montserrat, Prata } from "next/font/google";
+import "./globals.css";
+import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
+
+const montserrat = Montserrat({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-montserrat",
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+  preload: true,
+  fallback: ['system-ui', 'arial'],
+});
+
+const prata = Prata({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-prata",
+  weight: ["400"],
+  preload: true,
+  fallback: ['Georgia', 'serif'],
+});
+
+export const metadata = {
+  title: "SecureCash | Covert CIT Provider",
+  description: "Australia's trusted cash in transit service. Secure, covert banking solutions with 25+ years experience. Available nationwide.",
+  openGraph: {
+    title: "SecureCash | Covert CIT Provider",
+    description: "Australia's trusted cash in transit service",
+    type: "website",
+  },
+};
+
+export default function RootLayout({ children })
+{
+  return (
+    <html lang="en">
+      <head>
+   
+
+        {/* ✅ Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "SecureCash",
+              "alternateName": "Secure Cash",
+              "url": "https://www.securecash.com.au",
+              "logo": "https://www.securecash.com.au/images/SecureCash.webp",
+              "description": "Australia's trusted cash in transit service. Secure, covert banking solutions with 25+ years experience.",
+              "foundingDate": "1992",
+              "contactPoint": {
+                "@type": "ContactPoint",
+                "telephone": "+61-1300-732-873",
+                "contactType": "customer service",
+                "areaServed": "AU",
+                "availableLanguage": "en"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "AU"
+              },
+              "sameAs": [
+                "https://www.facebook.com/SecureCash/",
+                "https://twitter.com/SecureCash",
+                "https://www.youtube.com/securecash",
+                "https://www.linkedin.com/company/securecash"
+              ]
+            })
+          }}
+        />
+
+        {/* DNS prefetch for third-party domains */}
+        <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
+      </head>
+      <body
+        className={`${montserrat.variable} ${prata.variable} font-montserrat antialiased`}
+      >
+        <Header />
+        <main id="main-content">
+          {children}
+        </main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
+```
+
+Clarifying Questions
+
+Hero slider: Is it currently React-slick or Swiper?
+Image workflow: Can you manually compress with Squoosh/ImageOptim, or need automated solution?
+Accessibility: Are you okay with focus-visible (no visual change on mouse click, only keyboard)?
+Contrast fixes: Can I adjust hover colors to meet WCAG standards without changing base theme?
+
+It’s swiper and fully optimized
+We’ll do it on last after all components
+Yes but no any changes on UI for user
+It depends that whether it’s changing current UI styling or not if it change any UI style then don’t it. I’m providing you next component I’ve already done all home components. or should we do first optimize images . attaching current report after optimizing all home components. next page is about-us
+
+
+Improve the best practices, accessibility, seo as well performance optimization. Also make it production-ready remove comments
+

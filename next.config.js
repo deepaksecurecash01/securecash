@@ -26,7 +26,6 @@ const nextConfig = {
   productionBrowserSourceMaps: false,
   poweredByHeader: false,
 
-
   compiler: {
     removeConsole:
       process.env.NODE_ENV === "production"
@@ -34,29 +33,29 @@ const nextConfig = {
         : false,
   },
 
-  // 1. CRITICAL FIX: The native way to inline critical CSS
   experimental: {
-    // Keep this true: Next.js will now try to handle critical CSS
-    optimizeCss: true,
     optimizePackageImports: [
       "swiper",
       "swiper/react",
       "react-icons",
       "@react-google-maps/api",
       "react-hook-form",
+      "zod",
+      "react-calendar",
+      "react-date-picker",
     ],
     scrollRestoration: true,
     webpackBuildWorker: true,
   },
 
-  // 2. CRITICAL FIX: The code that caused the build error is now removed
   webpack: (config, { isServer }) =>
   {
-    // Set modern target for client bundles
     if (!isServer) {
-      config.target = ['web', 'es2020'];
+      // ✅ FIX: Target ES2022 to prevent webpack from polyfilling
+      // modern features like Array.at(), flat(), and flatMap()
+      // which are already supported by your Browserslist target.
+      config.target = ["web", "es2022"];
     }
-    // All manual plugin injection logic (like for Critters) is removed.
     return config;
   },
 
@@ -129,7 +128,7 @@ const nextConfig = {
           },
           {
             key: "Referrer-Policy",
-            value: "origin-when-cross-origin",
+            value: "strict-origin-when-cross-origin",
           },
           {
             key: "Permissions-Policy",
@@ -141,11 +140,11 @@ const nextConfig = {
   },
 
   transpilePackages: [
-    'swiper',
-    'swiper/react',
-    'react-calendar',
-    'react-date-picker',
-    'html-react-parser',
+    "swiper",
+    "swiper/react",
+    "react-calendar",
+    "react-date-picker",
+    "html-react-parser",
   ],
 };
 

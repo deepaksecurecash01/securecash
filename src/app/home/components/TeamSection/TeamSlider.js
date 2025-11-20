@@ -9,16 +9,22 @@ import "swiper/css/a11y";
 import Link from "next/link";
 import Image from "next/image";
 
-const SocialLink = ({ href, icon, alt }) => (
+const SocialLink = ({ href, icon, alt, memberName }) => (
   <li className="float-left pr-[5px]">
-    <Link href={href} target="_blank">
+    <Link
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`${memberName}'s ${alt} profile`}
+    >
       <Image
         width={25}
         height={25}
         quality={80}
         className="hover:filter hover:contrast-0"
         src={`/images/icons/social/webp/${icon}.webp`}
-        alt={alt}
+        alt=""
+        aria-hidden="true"
         loading="lazy"
       />
     </Link>
@@ -50,9 +56,9 @@ const TeamSliderSwiper = ({ member }) =>
       <button
         onClick={() => swiperInstance?.slidePrev()}
         disabled={isBeginning}
-        aria-label="Previous Slide"
+        aria-label="Previous team member"
         type="button"
-        className="team-arrow team-arrow-prev"
+        className="team-arrow team-arrow-prev focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
       >
         <div>❮</div>
       </button>
@@ -61,9 +67,9 @@ const TeamSliderSwiper = ({ member }) =>
       <button
         onClick={() => swiperInstance?.slideNext()}
         disabled={isEnd}
-        aria-label="Next Slide"
+        aria-label="Next team member"
         type="button"
-        className="team-arrow team-arrow-next"
+        className="team-arrow team-arrow-next focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
       >
         <div>❯</div>
       </button>
@@ -125,7 +131,7 @@ const TeamSliderSwiper = ({ member }) =>
       >
         {member.map((member, index) => (
           <SwiperSlide key={index}>
-            <div className="item-container">
+            <article className="item-container">
               <div className="item ml-0 w-full float-left">
                 <Image
                   className="w-full mx-auto my-0 object-center"
@@ -138,13 +144,15 @@ const TeamSliderSwiper = ({ member }) =>
                 />
               </div>
               <div className="member-info p-4 414px:p-0 414px:pl-[20px] 414px:pr-[20px] w-full text-left 768px:pl-[16px] 768px:pr-[16px] 1366px:pl-[20px] 1366px:pr-[20px] 414px:py-[25px] clear-both overflow-hidden">
-                <h4 className="text-[20px] font-semibold text-[#333333] pb-3 text-left font-montserrat">
+                {/* ✅ FIXED: h4 → h3 (proper hierarchy within slide) */}
+                <h3 className="text-[20px] font-semibold text-[#333333] pb-3 text-left font-montserrat">
                   {member.name}
-                </h4>
+                </h3>
 
-                <h5 className="text-[14px] text-[#808080] font-normal leading-normal text-left mb-[18px] font-prata">
+                {/* ✅ FIXED: h5 → p (job title is descriptive text, not heading) */}
+                <p className="text-[14px] text-[#808080] font-normal leading-normal text-left mb-[18px] font-prata">
                   {member.position}
-                </h5>
+                </p>
 
                 <div className="email-info flex justify-items-center px-0 py-[10px]">
                   <Image
@@ -152,7 +160,7 @@ const TeamSliderSwiper = ({ member }) =>
                     height={5}
                     className="mail-icon w-[5%] h-auto mr-2 py-[5px]"
                     src="/images/icons/mail.png"
-                    alt="mail"
+                    alt=""
                     aria-hidden="true"
                     loading="lazy"
                   />
@@ -164,32 +172,36 @@ const TeamSliderSwiper = ({ member }) =>
                     {member.email}
                   </Link>
                 </div>
-                <div className="social-media pt-[5px]">
+                <nav className="social-media pt-[5px]" aria-label={`${member.name}'s social media links`}>
                   <ul className="list-none flex gap-2 m-0 p-0">
                     <SocialLink
                       href={member.socialLinks?.facebook}
                       icon="fb"
                       alt="Facebook"
+                      memberName={member.name}
                     />
                     <SocialLink
                       href={member.socialLinks?.twitter}
                       icon="twitter"
                       alt="Twitter"
+                      memberName={member.name}
                     />
                     <SocialLink
                       href={member.socialLinks?.youtube}
                       icon="yt"
                       alt="YouTube"
+                      memberName={member.name}
                     />
                     <SocialLink
                       href={member.socialLinks?.linkedin}
                       icon="linkedin"
                       alt="LinkedIn"
+                      memberName={member.name}
                     />
                   </ul>
-                </div>
+                </nav>
               </div>
-            </div>
+            </article>
           </SwiperSlide>
         ))}
       </Swiper>

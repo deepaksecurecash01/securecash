@@ -60,7 +60,7 @@ const Carousel = () =>
       {/* Custom Previous Arrow */}
       <button
         onClick={() => swiperInstance?.slidePrev()}
-        className={`  absolute  992px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer z-10 top-1/2  transform -translate-y-1/2 992px:-right-6  992px:top-[38%] hover:opacity-100 text-[50px] text-white `}
+        className="absolute 992px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer z-10 top-1/2 transform -translate-y-1/2 992px:-right-6 992px:top-[38%] hover:opacity-100 text-[50px] text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]"
         aria-label="Previous slide"
         type="button"
       >
@@ -70,7 +70,7 @@ const Carousel = () =>
       {/* Custom Next Arrow */}
       <button
         onClick={() => swiperInstance?.slideNext()}
-        className={`  absolute  992px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer top-1/2 z-10 right-0   992px:-right-6 transform -translate-y-1/2  992px:top-[62%] hover:opacity-100 text-[50px] text-white `}
+        className="absolute 992px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer top-1/2 z-10 right-0 992px:-right-6 transform -translate-y-1/2 992px:top-[62%] hover:opacity-100 text-[50px] text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]"
         aria-label="Next slide"
         type="button"
       >
@@ -129,8 +129,9 @@ const Carousel = () =>
                   height={60}
                   className="h-[60px] w-auto mx-auto"
                   src={slide.imgSrc}
-                  alt={slide.title}
+                  alt=""
                   loading={index < 3 ? "eager" : "lazy"}
+                  aria-hidden="true"
                 />
               </div>
               <div className="service-info text-white clear-both">

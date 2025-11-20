@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "./ScrollableSection.module.css";
 
+// Optimization: Removed CSS Module import to prevent render-blocking request
 const ScrollableSection = ({ children, className = "", style = {} }) =>
 {
   return (
-    <div className={`${styles.contentScroll} ${className}`} style={style}>
+    <div className={`custom-scrollbar ${className}`} style={style}>
       {children}
     </div>
   );

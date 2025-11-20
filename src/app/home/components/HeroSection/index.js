@@ -2,7 +2,6 @@ import InfoBar from "@/components/common/BannerInfo";
 import "./SliderSwiper.css";
 import BannerSlider from "./SliderSwiper";
 
-
 const SLIDES = [
   {
     mobile: "/images/banner/Slide-1-mobile.jpg",
@@ -11,7 +10,7 @@ const SLIDES = [
     heading: "Let Us Do Your Banking,",
     subHeading: "Don't Take The Risk!",
     text: "Anywhere. Anytime. Australia Wide.",
-    buttonText: "Explore Our Services", // ✅ Changed from "Learn More"
+    buttonText: "Explore Our Services",
     buttonLink: "#welcome",
     alt: "SecureCash Banking Services - Australia Wide"
   },
@@ -22,7 +21,7 @@ const SLIDES = [
     heading: "Start Taking Advantage Of Our Services Today",
     subHeading: "Get A Quote From SecureCash",
     text: "We Just Need A Few Details!",
-    buttonText: "Get a Quote", // ✅ Already descriptive
+    buttonText: "Get a Quote",
     buttonLink: "/quote",
     alt: "Get a Quote from SecureCash"
   },
@@ -33,7 +32,7 @@ const SLIDES = [
     heading: "We're Pushing Our Industry Into The Future",
     subHeading: "Take Advantage Of Our eDockets System",
     text: "Control Your Services With A Click Of A Button",
-    buttonText: "Discover eDockets", // ✅ Changed from "Learn More"
+    buttonText: "Discover eDockets",
     buttonLink: "https://www.edockets.app/",
     alt: "eDockets System - Digital Cash Management"
   },
@@ -44,7 +43,7 @@ const SLIDES = [
     heading: "Our Services Are Covert",
     subHeading: "We Don't Attract Unwanted Attention",
     text: "A Safer Solution For Your Business",
-    buttonText: "About Our Security", // ✅ Changed from "Learn More"
+    buttonText: "About Our Security",
     buttonLink: "/about-us#about-us-section-service",
     alt: "Covert Cash Transport Services"
   },
@@ -53,21 +52,21 @@ const SLIDES = [
     tablet: "/images/banner/Slide-5-tablet.jpg",
     web: "/images/banner/Slide-5-web.jpg",
     heading: "Use A Provider You Can Trust",
-    subHeading: "We Have Been Operating Over 25 Years",
+    subHeading: "We Have Been Over 25 Years",
     text: "Our Managers Have Over 100 Years Combined Industry Experience",
-    buttonText: "About Us", // ✅ Already descriptive
+    buttonText: "About Us",
     buttonLink: "/about-us",
     alt: "Trusted Cash Transport Provider - 25+ Years Experience"
   },
 ];
 
-const HeroSection = () => {
+const HeroSection = () =>
+{
   return (
-    <div id="banner" className="flex flex-col justify-end items-center ">
+    <section id="banner" className="flex flex-col justify-end items-center" aria-label="Hero banner">
       <BannerSlider slides={SLIDES} />
-      
       <InfoBar />
-    </div>
+    </section>
   );
 };
 

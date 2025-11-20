@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-// import TeamSlider from "./TeamSlider";
+import TeamSlider from "./TeamSlider";
 
 const teamMembers = [
   {
@@ -90,7 +90,7 @@ const TeamSection = () => {
                         className="team-slider w-[96%] 414px:w-[92%] 768px:w-full mx-auto  1024px:w-full "
                         aria-label="Team Members"
                     >
-                        {/* <TeamSlider member={teamMembers} /> */}
+                        <TeamSlider member={teamMembers} />
                     </div>
                 </div>
             </div>

@@ -1,10 +1,29 @@
+"use client"; // 👈 THIS LINE IS MANDATORY FOR ssr: false
+
 import React from "react";
+import dynamic from "next/dynamic";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
-import QuoteForm from "@/components/common/forms-new/forms/QuoteForm";
-import { IoCheckmarkSharp } from "react-icons/io5"; // ✅ Using react-icons
+import { IoCheckmarkSharp } from "react-icons/io5";
+
+// Now this will work because the parent (FormSection) is a Client Component
+const QuoteForm = dynamic(
+  () => import("@/components/common/forms-new/forms/QuoteForm"),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="forms-quote-v2 h-[600px] mx-2.5 992px:mx-0 px-[30px] 1366px:h-full mt-4 992px:mt-0 w-full lg:mt-0 lg:mb-0 992px:w-[450px] 1100px:w-[480px] 1200px:w-[500px] 1280px:w-[546px] shadow-[3px_3px_5px_0px_rgba(0,0,0,0.75)] text-center py-8 rounded-[6px] bg-[#1a1a1a] flex flex-col items-center justify-center"
+      >
+        <div className="w-10 h-10 border-4 border-[#c6a54b] border-t-transparent rounded-full animate-spin mb-4"></div>
+        <p className="text-white font-montserrat text-sm">Loading form...</p>
+      </div>
+    ),
+  }
+);
 
 const FormSection = () =>
 {
+  // ... keep your existing contentItems array ...
   const contentItems = [
     {
       title: "Plain clothes",
@@ -47,63 +66,66 @@ const FormSection = () =>
         "If your group is running a fundraiser or a fete or some other function that involves cash, you will be pleased to know you can order our service on a one-time basis. Tell us how much cash you need to be delivered before the big event, and tell us the closing time, and we'll be there to take care of you.",
     },
   ];
-  return (
-    <div
-      id="content-contact"
-      className=" bg-content-bg bg-center bg-no-repeat  1366px:bg-cover inline-block w-full  1280px:mt-[84px]"
-    >
-      <div className="inner-big w-[95%] mt-10 1280px:mt-0 max-w-[1366px] mx-auto my-0  992px:flex">
-        <QuoteForm />
-        <div className="right-contact-row  w-[96%] 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1]  992px:pl-8">
-          <h3
 
+  return (
+    <section
+      id="content-contact"
+      className="bg-content-bg bg-center bg-no-repeat 1366px:bg-cover inline-block w-full 1280px:mt-[84px]"
+      aria-labelledby="contact-heading"
+    >
+      <div className="inner-big w-[95%] mt-10 1280px:mt-0 max-w-[1366px] mx-auto my-0 992px:flex">
+        <QuoteForm />
+
+        <div className="right-contact-row w-[96%] 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1] 992px:pl-8">
+          <h2
+            id="contact-heading"
             className="text-[32px] leading-[1.6em] text-center mb-[16px] 992px:text-left font-prata-regular"
           >
             Make The Right Choice
-          </h3>
-
-          <hr className="w-[100px] mb-[24px] bg-primary h-[4px] rounded-[5px] border-0 mx-auto 992px:ml-0  992px:mr-auto" />
-          <h2
-
-            className="font-bold text-[40px] text-primary leading-[1.4em] text-center mb-[24px] 992px:text-left font-montserrat"
-          >
-            Why Choose SecureCash?
           </h2>
 
-          <p
+          <hr
+            className="w-[100px] mb-[24px] bg-primary h-[4px] rounded-[5px] border-0 mx-auto 992px:ml-0 992px:mr-auto"
+            aria-hidden="true"
+          />
 
-            className="leading-[2em] font-normal text-center mb-[14px] 768px:mb-0 992px:text-left font-montserrat"
-          >
-            For one reason: We have been established for over 25 years, since 1992 to be exact!
+          <p className="font-bold text-[40px] text-primary leading-[1.4em] text-center mb-[24px] 992px:text-left font-montserrat">
+            Why Choose SecureCash?
           </p>
 
-          <ScrollableSection className=" h-auto 480px:w-[90%] 992px:w-full p-0 mx-auto   992px:h-[630px] 1200px:h-[658px] 1366px:h-[740px] bg-white mt-6 leading-[2]">
-            <ul className="list-none w-full  992px:pr-6 services-content">
+          <p className="leading-[2em] font-normal text-center mb-[14px] 768px:mb-0 992px:text-left font-montserrat">
+            For one reason: We have been established for over 25 years, since 1992
+            to be exact!
+          </p>
+
+          <ScrollableSection className="h-auto 480px:w-[90%] 992px:w-full p-0 mx-auto 992px:h-[630px] 1200px:h-[658px] 1366px:h-[740px] bg-white mt-6 leading-[2]">
+            <ul
+              className="list-none w-full 992px:pr-6 services-content"
+              role="list"
+            >
               {contentItems.map((item, index) => (
-                <li key={index} className="flex items-start"
+                <li
+                  key={index}
+                  className="flex items-start"
                   style={{
-                    marginTop: index === 0 ? '' : '26px'
-                  }}>
+                    marginTop: index === 0 ? "0" : "26px",
+                  }}
+                >
                   <IoCheckmarkSharp
                     className="flex-shrink-0 text-primary mt-1 mr-3"
                     size={24}
                     aria-hidden="true"
                   />
                   <span className="inline-block">
-
                     <h4
                       className="mb-2.5"
                       style={{
-                        marginTop: index === 0 ? '0' : '0'
+                        marginTop: index === 0 ? "0" : "0",
                       }}
                     >
                       {item.title}:
                     </h4>
-                    <p
-                      className="text-light"
-                    >
-                      {item.content}
-                    </p>
+                    <p className="text-light">{item.content}</p>
                   </span>
                 </li>
               ))}
@@ -111,7 +133,7 @@ const FormSection = () =>
           </ScrollableSection>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

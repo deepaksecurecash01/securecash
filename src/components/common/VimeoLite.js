@@ -16,9 +16,8 @@ const VideoPlayer = ({
   const [thumbnailUrl, setThumbnailUrl] = useState(thumbnail);
   const [isLoading, setIsLoading] = useState(false);
   const iframeRef = useRef(null);
-  const containerRef = useRef(null); // ✅ Use ref instead of id
+  const containerRef = useRef(null);
 
-  // ✅ OPTIMIZED: Only fetch thumbnail when component is visible
   useEffect(() =>
   {
     if (!thumbnail && provider === "vimeo" && typeof window !== "undefined") {
@@ -35,10 +34,7 @@ const VideoPlayer = ({
                   setThumbnailUrl(data[0].thumbnail_large);
                 }
               })
-              .catch((error) =>
-              {
-                console.error("Error fetching Vimeo thumbnail:", error);
-              })
+              .catch(() => { })
               .finally(() =>
               {
                 setIsLoading(false);
@@ -49,7 +45,6 @@ const VideoPlayer = ({
         { rootMargin: "50px" }
       );
 
-      // Use ref instead of getElementById
       if (containerRef.current) {
         observer.observe(containerRef.current);
       }
@@ -73,7 +68,6 @@ const VideoPlayer = ({
   const handlePlay = () =>
   {
     setVideoState("playing");
-    // Use requestAnimationFrame for smoother transition
     requestAnimationFrame(() =>
     {
       if (iframeRef.current) {
@@ -98,7 +92,6 @@ const VideoPlayer = ({
         className="relative w-full"
         style={{ paddingTop: `${aspectRatioPercentage}%` }}
       >
-        {/* Thumbnail Layer */}
         {videoState === "idle" && (
           <div
             className="absolute inset-0 flex items-center justify-center cursor-pointer group transition-all duration-200 overflow-hidden z-10"
@@ -114,42 +107,41 @@ const VideoPlayer = ({
             }}
             aria-label={`Play video: ${title}`}
           >
-            {/* Loading State */}
             {isLoading && (
               <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
-                <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" role="status" aria-label="Loading video thumbnail" />
               </div>
             )}
 
-            {/* ✅ OPTIMIZED: Thumbnail Image */}
             {thumbnailUrl && !isLoading && (
               <Image
                 src={thumbnailUrl}
-                alt={title}
+                alt=""
                 fill
                 className="object-cover object-center"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
                 quality={60}
                 loading="lazy"
+                aria-hidden="true"
               />
             )}
 
-            {/* Vignette Effect */}
             <div
               className="absolute inset-0 z-[2]"
               style={{
-                background: "radial-gradient(circle, transparent 50%, rgba(0, 0, 0, 0.6) 100%)"
+                background: "radial-gradient(circle, transparent 50%, rgba(0, 0, 0, 0.6) 100%)",
               }}
+              aria-hidden="true"
             />
 
-            {/* Play Button */}
             <div
-              className="absolute z-[11] flex items-center justify-center bg-[#212121] opacity-80 group-hover:bg-primary group-hover:opacity-100 transition-all duration-200"
+              className="absolute z-[11] flex items-center justify-center bg-[#212121] opacity-80 group-hover:bg-primary group-hover:opacity-100 transition-all duration-200 focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               style={{
                 width: "70px",
                 height: "46px",
-                borderRadius: "10%"
+                borderRadius: "10%",
               }}
+              aria-hidden="true"
             >
               <div
                 style={{
@@ -166,7 +158,6 @@ const VideoPlayer = ({
           </div>
         )}
 
-        {/* Video Iframe - Only render when playing */}
         {videoState === "playing" && (
           <iframe
             ref={iframeRef}

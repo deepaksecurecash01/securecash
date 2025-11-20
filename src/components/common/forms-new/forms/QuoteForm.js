@@ -1,18 +1,18 @@
 "use client";
 import React from "react";
 import
-{
-  FaUser,
-  FaUsers,
-  FaPhone,
-  FaComments,
-  FaEnvelope,
-  FaHome,
-  FaMapMarkerAlt,
-  FaSpinner,
-  FaCheckCircle,
-  FaChevronLeft,
-} from "react-icons/fa";
+  {
+    FaUser,
+    FaUsers,
+    FaPhone,
+    FaComments,
+    FaEnvelope,
+    FaHome,
+    FaMapMarkerAlt,
+    FaSpinner,
+    FaCheckCircle,
+    FaChevronLeft,
+  } from "react-icons/fa";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 import BankingStep from "./steps/BankingStep.js";
 import ChangeStep from "./steps/ChangeStep";
@@ -40,13 +40,8 @@ const QuoteForm = ({ className }) =>
         return nextSteps;
       },
     },
-    onSuccess: (result, finalData) =>
-    {
-      //formManager.resetForm();
-    },
-    onError: (error) =>
-    {
-    },
+    onSuccess: (result, finalData) => { },
+    onError: (error) => { },
     prepareData: async (data) =>
     {
       return { ...data, formType: "quote" };
@@ -117,31 +112,25 @@ const QuoteForm = ({ className }) =>
     },
   ];
 
-  const { stepId, currentStep, isFirst } = formManager.getCurrentStep();
+  const { stepId, isFirst } = formManager.getCurrentStep();
 
   const renderCurrentStep = () =>
   {
-    const { currentStep, stepId } = formManager.getCurrentStep();
+    const { stepId } = formManager.getCurrentStep();
 
     switch (stepId) {
       case "quote":
         return (
           <div className="form-page quote">
-            <h3
-
-              className="text-white font-montserrat text-center capitalize pb-4 text-[22px] leading-[30px]"
-            >
+            <h2 className="text-white font-montserrat text-center capitalize pb-4 text-[22px] leading-[30px]">
               Want a quote from SecureCash?
-            </h3>
+            </h2>
 
-            <p
-
-              className="text-white font-normal text-center capitalize pb-4 text-[16px] font-montserrat"
-            >
+            <p className="text-white font-normal text-center capitalize pb-4 text-[16px] font-montserrat">
               We Just Need A Few Details
             </p>
 
-            <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"  />
+            <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto" aria-hidden="true" />
 
             <div className="form-tab 480px:w-[90%] mx-auto">
               {quoteFields.map((field) => (
@@ -172,72 +161,70 @@ const QuoteForm = ({ className }) =>
   {
     const userName = formManager.getStepData().Name || "";
     return (
-      <div className="form-page success text-center flex flex-col justify-center items-center 992px:h-[75%]">
-        <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" />
+      <div className="form-page success text-center flex flex-col justify-center items-center 992px:h-[75%]" role="status" aria-live="polite">
+        <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" aria-hidden="true" />
 
-        <h3
-         
-          className="text-white font-montserrat text-center capitalize pb-2 text-[24px] leading-[30px] mt-8"
-        >
+        <h2 className="text-white font-montserrat text-center capitalize pb-2 text-[24px] leading-[30px] mt-8">
           Thank you{userName && ` ${userName}`}!
-        </h3>
-        <h4 className="text-white font-montserrat text-center capitalize pb-2 text-[16px]">
+        </h2>
+
+        <p className="text-white font-montserrat text-center capitalize pb-2 text-[16px]">
           We received your submission.
-        </h4>
-        <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto" />
+        </p>
+
+        <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto" aria-hidden="true" />
 
         <div className="quote-ty-note">
-          <p
-           
-            className="text-white font-normal text-center pb-4 text-[16px] mt-8 font-montserrat"
-          >
+          <p className="text-white font-normal text-center pb-4 text-[16px] mt-8 font-montserrat">
             We will start working on your quote now.
           </p>
-          <p
-            
-            className="text-white font-normal text-center pb-4 text-[16px] font-montserrat"
-          >
+
+          <p className="text-white font-normal text-center pb-4 text-[16px] font-montserrat">
             While you wait feel free to check out how our services can benefit your organisation:
           </p>
+
           <div className="ty-note-list-wrap mt-2">
-            <ul className="list-none p-0 m-0 flex flex-col justify-center items-center gap-1">
+            <ul className="list-none p-0 m-0 flex flex-col justify-center items-center gap-1" role="list">
               <li className="cash-collection mb-2 flex items-center">
                 <img
                   src="/images/contentpageicons/cashcollection.png"
-                  alt="Cash Collection"
+                  alt=""
                   className="inline-block mr-2 w-[30px]"
+                  aria-hidden="true"
                 />
                 <Link
                   href="/services/cash-collection/"
-                  className="text-[#c6a54b] hover:underline"
+                  className="text-[#c6a54b] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]"
                 >
-                  <p className="m-0">Cash Collections</p>
+                  Cash Collections
                 </Link>
               </li>
               <li className="cash-delivery mb-2 flex items-center">
                 <img
                   src="/images/contentpageicons/cashdelivery.png"
-                  alt="Cash Delivery"
+                  alt=""
                   className="inline-block mr-2 w-[30px]"
+                  aria-hidden="true"
                 />
                 <Link
                   href="/services/cash-delivery/"
-                  className="text-[#c6a54b] hover:underline"
+                  className="text-[#c6a54b] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]"
                 >
-                  <p className="m-0">Cash Deliveries</p>
+                  Cash Deliveries
                 </Link>
               </li>
               <li className="cash-counting mb-2 flex items-center">
                 <img
                   src="/images/contentpageicons/cashcounting.png"
-                  alt="Cash Counting"
+                  alt=""
                   className="inline-block mr-2 w-[30px]"
+                  aria-hidden="true"
                 />
                 <Link
                   href="/services/cash-counting/"
-                  className="text-[#c6a54b] hover:underline"
+                  className="text-[#c6a54b] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]"
                 >
-                  <p className="m-0">Cash Counting</p>
+                  Cash Counting
                 </Link>
               </li>
             </ul>
@@ -248,7 +235,8 @@ const QuoteForm = ({ className }) =>
           <button
             type="button"
             onClick={formManager.resetForm}
-            className="bg-[#c6a54b] text-white border-none py-[15px] font-medium cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-[15px] p-2.5 shadow-none font-montserrat"
+            className="bg-[#c6a54b] text-white border-none py-[15px] font-medium cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-[15px] p-2.5 shadow-none font-montserrat focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]"
+            aria-label="Submit another quote request"
           >
             Want Another Quote?
           </button>
@@ -266,15 +254,17 @@ const QuoteForm = ({ className }) =>
         data-formid="Quote"
         onSubmit={formManager.handleSubmit}
         noValidate
+        aria-label="Request a quote form"
       >
         {!isFirst && stepId !== "risk" && !formManager.isSubmitted && (
           <div className="form-slide-btn-wrap mb-4 absolute">
             <button
               type="button"
               onClick={formManager.goBack}
-              className="flex items-center text-white hover:text-[#c6a54b] transition-colors"
+              className="flex items-center text-white hover:text-[#c6a54b] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]"
+              aria-label="Go back to previous step"
             >
-              <FaChevronLeft className="mr-2" />
+              <FaChevronLeft className="mr-2" aria-hidden="true" />
               <span>Back</span>
             </button>
           </div>
@@ -286,12 +276,13 @@ const QuoteForm = ({ className }) =>
           style={{ display: "none" }}
           tabIndex={-1}
           autoComplete="off"
+          aria-hidden="true"
         />
 
         {formManager.isSubmitted ? renderSuccessMessage() : renderCurrentStep()}
 
         {formManager.submissionError && (
-          <div className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded">
+          <div className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded" role="alert" aria-live="assertive">
             {formManager.submissionError}
           </div>
         )}
@@ -303,13 +294,22 @@ const QuoteForm = ({ className }) =>
                 type="submit"
                 disabled={formManager.isSubmitting}
                 className={`nextBtn ${formManager.isSubmitted ? "bg-[#4bb543]" : "bg-[#c6a54b]"
-                  } text-white border-none py-[15px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
+                  } text-white border-none py-[15px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]`}
+                aria-label={
+                  formManager.isSubmitting
+                    ? "Submitting form"
+                    : stepId === "quote"
+                      ? "Go to next step"
+                      : formManager.isLastStep()
+                        ? "Submit form"
+                        : "Go to next step"
+                }
               >
                 {formManager.isSubmitting ? (
-                  <div className="flex items-center justify-center">
-                    <FaSpinner className="animate-spin mr-2" />
+                  <span className="flex items-center justify-center">
+                    <FaSpinner className="animate-spin mr-2" aria-hidden="true" />
                     Submitting...
-                  </div>
+                  </span>
                 ) : stepId === "quote" ? (
                   "Next"
                 ) : formManager.isLastStep() ? (

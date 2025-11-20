@@ -30,19 +30,23 @@ const LOGO_CONFIG = {
   animationDuration: 40,
 };
 
-const LogoSlide = ({ src, alt, width, height, isPriority = false }) => (
+const LogoSlide = ({ src, alt, width, height }) => (
   <div
     className="flex-shrink-0 flex items-center justify-center"
     style={{ width: `${width}px`, height: `${height}px` }}
   >
     <Image
       className="align-middle filter grayscale opacity-70 h-[150px] w-auto hover:grayscale-0 hover:opacity-100 transition-all duration-500 ease-in-out"
-      width={350}
-      height={350}
+      width={300} // ✅ MATCHED: Set to match slideWidth config
+      height={150} // ✅ MATCHED: Set to match slideHeight config
       src={src}
       alt={`${alt} logo`}
-      loading={isPriority ? "eager" : "lazy"}
-      quality={85}
+      // ✅ OPTIMIZATION: Always lazy load footer/bottom content
+      loading="lazy"
+      decoding="async"
+      // ✅ OPTIMIZATION: Tell browser these are small images
+      sizes="(max-width: 768px) 50vw, 300px"
+      quality={75} // 85 is overkill for simple logos, 75 is visually identical
     />
   </div>
 );
@@ -76,7 +80,7 @@ const ClientLogos = ({ className = "", config = LOGO_CONFIG }) =>
       className={`relative px-0 py-[30px] 992px:py-[65px] bg-white ${className}`}
       aria-label="Our clients"
     >
-      {/* Gradient overlays for fade effect */}
+      {/* Gradient overlays for fade effect - kept as is, lightweight DOM */}
       <div className="absolute left-0 top-0 bottom-0 w-[100px] 992px:w-[200px] bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-[100px] 992px:w-[200px] bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
@@ -86,7 +90,9 @@ const ClientLogos = ({ className = "", config = LOGO_CONFIG }) =>
           className="flex logo-scroll-track"
           style={{
             width: `${totalWidth}px`,
+            // Ensure this animation is defined in your global CSS or Tailwind config
             animation: `smoothScrollLeft ${animationDuration}s linear infinite`,
+            willChange: 'transform', // ✅ HINT: Tells browser to optimize compositing
           }}
           onMouseEnter={(e) =>
           {
@@ -104,7 +110,7 @@ const ClientLogos = ({ className = "", config = LOGO_CONFIG }) =>
               alt={slide.alt}
               width={slideWidth}
               height={slideHeight}
-              isPriority={index < 3}
+            // Removed isPriority prop entirely
             />
           ))}
         </div>

@@ -36,7 +36,8 @@ const AboutusSection = () =>
         <div>
             <HelpSection
                 title="How SecureCash will help you"
-                imageUrl="/images/about-us-images/img-sec-2.png"
+                // UPDATED: Pointing to optimized AVIF
+                imageUrl="/images/about-us-images/img-sec-2.avif"
                 imageAlt="Secure Cash Logo Over Office"
                 imageWidth={713}
                 imageHeight={636}
@@ -48,7 +49,8 @@ const AboutusSection = () =>
             />
             <StorySection
                 title="The story of SecureCash"
-                imageUrl="/images/team.jpg"
+                 // UPDATED: Pointing to optimized AVIF
+                imageUrl="/images/team.avif"
                 imageAlt="The SecureCash Team"
                 imageWidth={683}
                 imageHeight={455}
@@ -59,7 +61,8 @@ const AboutusSection = () =>
             />
             <ServiceSection
                 title="Why a covert service is important"
-                imageUrl="/images/about-us-images/img-sec-4.png"
+                 // UPDATED: Pointing to optimized AVIF
+                imageUrl="/images/about-us-images/img-sec-4.avif"
                 imageAlt="SecureCash Logo Money Wrapped In Chain"
                 imageWidth={732}
                 imageHeight={600}

@@ -35,37 +35,22 @@ export const THEMES = {
         selectArrow: "rotate-45 inline-block border-solid border-dark-border border-t-0 border-l-0 border-r-2 border-b-2 p-[3px] absolute right-5 top-1/2 transform -translate-y-1/2 group-hover:border-active-text",
         selectFootnote: "text-sm text-gray-600 mt-2 italic",
         checkboxGroupContainer: "relative mt-4",
-        checkboxGroupWrapper: "chkbox-container w-full mx-auto text-left relative",
-        checkboxItem: "chkbox float-left text-left mt-2 mb-2 relative text-primary-text w-full",
-        checkboxInput: "text-sm p-2.5 shadow-none font-montserrat border-none w-[28px] h-[28px] opacity-0 absolute z-40 peer",
-        checkboxLabel: "font-light text-left w-full relative flex cursor-pointer",
-        checkboxSpan: "w-[28px] h-[28px]",
+        checkboxGroupWrapper: "w-full mx-auto text-left relative",
+        checkboxItem: "float-left text-left mt-2 mb-2 relative text-primary-text w-full",
         checkboxGroupFootnote: "text-sm text-gray-600 mt-2 italic"
     },
-    // UPDATED: ICA Theme - Now with complete file upload integration
     'ica': {
-        // Input field styling - exact replica of ICA InputField
         input: "w-full text-sm py-2 px-3 shadow-none font-montserrat border-none rounded-sm",
         inputContainer: "relative w-full flex items-center bg-white rounded-[2px] border border-dark-border/50",
         textarea: "w-full text-sm rounded-sm border-none p-4 shadow-none font-montserrat bg-white",
-
-        // Select field styling - exact replica of ICA SelectionBox
         select: "w-full text-sm rounded-sm border border-white pl-12 pr-12 shadow-none font-montserrat leading-6 h-9 appearance-none bg-white",
         selectContainer: "input-container input-container-select w-full mx-auto text-left flex items-center relative rounded-[2px] border border-dark-border/50",
         selectIcon: "icon absolute text-[18px] rounded-l min-w-[20px] text-center ml-4 z-10",
         selectArrow: "rotate-45 inline-block border-solid border-dark-border border-t-0 border-l-0 border-r-2 border-b-2 p-[3px] absolute right-5 top-1/2 transform -translate-y-1/2 pointer-events-none",
-
-        // Label styling - consistent across all ICA fields
         label: "text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0",
-
-        // Icon styling - consistent focus/error states
         icon: "min-w-[50px] text-[18px]",
-
-        // Date picker styling (if needed for ICA)
         datePicker: "w-full text-sm py-2 px-3 shadow-none font-montserrat border-none rounded-sm bg-white text-left leading-6 appearance-none",
         datePickerContainer: "relative w-full flex items-center bg-white rounded-[2px] border border-dark-border/50",
-
-        // FIXED: File upload styling - exact replica of original FileUpload
         fileUpload: "relative w-full border-2 border-dashed rounded-lg text-center transition-colors h-[200px] overflow-hidden",
         fileUploadInactive: "border-dark-border/50 bg-white",
         fileUploadActive: "border-primary bg-blue-50",
@@ -77,7 +62,6 @@ export const THEMES = {
         filePreviewImage: "w-36 h-24 object-cover rounded mb-2",
         filePreviewName: "text-sm text-gray-700 text-center font-medium",
         filePreviewSize: "text-xs text-gray-500",
-        // FIXED: Original remove button styling - exact match to original
         fileRemoveButton: "absolute top-4 right-4 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs hover:bg-red-600 z-10"
     }
 };
