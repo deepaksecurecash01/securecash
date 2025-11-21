@@ -117,14 +117,12 @@ const FormSection = () =>
                     aria-hidden="true"
                   />
                   <span className="inline-block">
-                    <h4
+                    <h1
                       className="mb-2.5"
-                      style={{
-                        marginTop: index === 0 ? "0" : "0",
-                      }}
+                     
                     >
                       {item.title}:
-                    </h4>
+                    </h1>
                     <p className="text-light">{item.content}</p>
                   </span>
                 </li>

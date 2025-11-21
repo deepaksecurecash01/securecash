@@ -287,7 +287,7 @@ strong {
 }
 
 
-.services-content li span h4 {
+.services-content li span h1 {
   font-size: 20px;
   line-height: 30px;
   margin-left: auto;
@@ -298,11 +298,9 @@ strong {
   margin-bottom: 10px;
 }
 
-.services-content li:not(:first-child) span h4 {
-  margin-top: 16px;
-}
 
-#content-contact .services-content li:not(:first-child) span h4 {
+
+#content-contact li:not(:first-child) span h4 {
   margin-top: 20px;
 }
 
