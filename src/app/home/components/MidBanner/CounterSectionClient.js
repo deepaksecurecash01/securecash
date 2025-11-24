@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 
-const AnimatedCounter = ({ end, prefix, duration = 2, isUpdate = false }) =>
+const AnimatedCounter = ({ end, prefix, duration = 3, isUpdate = false, shouldAnimate = true }) =>
 {
     const [count, setCount] = useState(isUpdate ? end : 0);
     const rafRef = useRef();
@@ -11,6 +11,8 @@ const AnimatedCounter = ({ end, prefix, duration = 2, isUpdate = false }) =>
 
     useEffect(() =>
     {
+        if (!shouldAnimate) return;
+
         startValueRef.current = count;
         startTimeRef.current = null;
 
@@ -35,7 +37,7 @@ const AnimatedCounter = ({ end, prefix, duration = 2, isUpdate = false }) =>
 
         rafRef.current = requestAnimationFrame(animate);
         return () => cancelAnimationFrame(rafRef.current);
-    }, [end, duration]);
+    }, [end, duration, shouldAnimate]);
 
     return `${prefix ? "$" : ""}${count.toLocaleString()}`;
 };
@@ -158,14 +160,13 @@ export default function CounterSectionClient({ initialStats })
             className="relative pt-0 h-auto mt-[40px] 414px:h-[760px] 600px:h-[920px] 992px:h-[340px] w-full mx-auto flex flex-col 414px:mt-10 justify-center items-center 992px:mt-[100px]"
             aria-label="Company statistics"
         >
-            <picture>
+            <picture className="absolute inset-0 w-full h-full -z-10">
                 {/* Desktop AVIF */}
                 <source
                     media="(min-width: 992px)"
                     type="image/avif"
                     srcSet="/images/banner/home-statistics.avif"
                 />
-                {/* Removed WebP source as we didn't generate it */}
 
                 {/* Desktop Fallback JPG */}
                 <source
@@ -178,9 +179,8 @@ export default function CounterSectionClient({ initialStats })
                     type="image/avif"
                     srcSet="/images/banner/home-statistics-mobile.avif"
                 />
-                {/* Removed WebP source as we didn't generate it */}
 
-                {/* Main Image Component (Mobile Fallback JPG) */}
+                {/* Main Image Component */}
                 <Image
                     src="/images/banner/home-statistics-mobile.jpg"
                     alt=""
@@ -214,8 +214,9 @@ export default function CounterSectionClient({ initialStats })
                                         <AnimatedCounter
                                             end={value}
                                             prefix={counter.prefix}
-                                            duration={hasAnimated ? 1.5 : 2}
+                                            duration={hasAnimated ? 2.5 : 3.5}
                                             isUpdate={hasAnimated}
+                                            shouldAnimate={isVisible}
                                         />
                                     )}
                                 </p>
@@ -233,6 +234,7 @@ export default function CounterSectionClient({ initialStats })
                                     alt={counter.alt}
                                     loading="lazy"
                                     fetchPriority="low"
+                                    style={{ width: "auto" }}
                                 />
 
                                 <p className="text-[16px] text-white font-normal pb-0 mb-0 font-montserrat">

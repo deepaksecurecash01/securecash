@@ -145,7 +145,7 @@ const Footer = () =>
           &copy;2005 Sky Wallet Pty Ltd ABN 39 668 299 027 Trading (Under
           License) as Secure Cash - NSW Master License Number 108420 | Proud
           creators of&nbsp;
-          <Link href="/edocket-app" className="text-primary hover:underline">
+          <Link href="https://www.edockets.app/" className="text-primary hover:underline">
             eDockets
           </Link>
         </p>

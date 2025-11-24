@@ -26,7 +26,6 @@ const FreeChangeOrderService = () => (
     </h1>
 
     <hr
-
       className="w-[100px] mt-[20px] h-[4px] rounded-[5px] border-0 bg-primary mx-auto"
     />
 
@@ -130,7 +129,8 @@ export async function generateStaticParams()
 // ----- Generate Metadata -----
 export async function generateMetadata({ params })
 {
-  const { service } = params;
+  // ✅ Await params before accessing properties
+  const { service } = await params;
 
   if (service === "free-change-order-service") {
     return {
@@ -155,9 +155,10 @@ export async function generateMetadata({ params })
 }
 
 // ----- Main Page Component -----
-export default function ServicePage({ params })
+export default async function ServicePage({ params })
 {
-  const { service } = params;
+  // ✅ Await params before accessing properties
+  const { service } = await params;
 
   if (service === "free-change-order-service") {
     return <FreeChangeOrderService />;

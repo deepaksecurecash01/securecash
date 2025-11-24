@@ -57,6 +57,33 @@ const Carousel = () =>
 
   return (
     <div className="relative carousel-wrapper">
+      {/* FIX: Pre-calculate width and gaps for Services Slider.
+        - < 1200: 100%
+        - 1200 - 1365: 2 slides with 10px gap
+        - 1366+: 3 slides with 10px gap
+      */}
+      <style>{`
+        .services-carousel-fixed .swiper-slide {
+          width: 100%;
+          margin-right: 0;
+          height: auto;
+          display: flex;
+          justify-content: center;
+        }
+        @media (min-width: 1200px) {
+          .services-carousel-fixed .swiper-slide {
+            width: calc((100% - 10px) / 2);
+            margin-right: 10px;
+          }
+        }
+        @media (min-width: 1366px) {
+          .services-carousel-fixed .swiper-slide {
+            width: calc((100% - 20px) / 3);
+            margin-right: 10px;
+          }
+        }
+      `}</style>
+
       {/* Custom Previous Arrow */}
       <button
         onClick={() => swiperInstance?.slidePrev()}
@@ -118,7 +145,7 @@ const Carousel = () =>
             spaceBetween: 10,
           },
         }}
-        className="services-carousel"
+        className="services-carousel services-carousel-fixed"
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
@@ -127,11 +154,16 @@ const Carousel = () =>
                 <Image
                   width={60}
                   height={60}
-                  className="h-[60px] w-auto mx-auto"
+                  className="mx-auto"
                   src={slide.imgSrc}
                   alt=""
                   loading={index < 3 ? "eager" : "lazy"}
                   aria-hidden="true"
+                  style={{
+                    width: "60px",
+                    height: "60px",
+                    objectFit: "contain"
+                  }}
                 />
               </div>
               <div className="service-info text-white clear-both">

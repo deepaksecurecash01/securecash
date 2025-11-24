@@ -87,7 +87,7 @@ const TeamSection = () => {
                
                 <div className="members-slider relative select-none block w-full float-left">
                     <div
-                        className="team-slider w-[96%] 414px:w-[92%] 768px:w-full mx-auto  1024px:w-full "
+                        className="team-slider w-[96%] 414px:w-[92%] 768px:w-full mx-auto  "
                         aria-label="Team Members"
                     >
                         <TeamSlider member={teamMembers} />

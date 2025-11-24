@@ -25,28 +25,31 @@ const LOGO_CONFIG = {
     "west",
     "subway",
   ],
-  slideWidth: 300,
+  slideWidth: 330,
   slideHeight: 150,
   animationDuration: 40,
 };
 
 const LogoSlide = ({ src, alt, width, height }) => (
   <div
-    className="flex-shrink-0 flex items-center justify-center"
+    className="flex-shrink-0 flex items-center justify-center relative" // ✅ ADDED: 'relative' is required for 'fill'
     style={{ width: `${width}px`, height: `${height}px` }}
   >
     <Image
-      className="align-middle filter grayscale opacity-70 h-[150px] w-auto hover:grayscale-0 hover:opacity-100 transition-all duration-500 ease-in-out"
-      width={300} // ✅ MATCHED: Set to match slideWidth config
-      height={150} // ✅ MATCHED: Set to match slideHeight config
+      // ✅ FIX part 1: Use 'fill' instead of width/height props.
+      // This removes the strict HTML attributes that caused the warning.
+      fill
+
+      // ✅ FIX part 2: object-contain ensures the logo fits in the box without stretching
+      className="object-cover align-middle filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500 ease-in-out "
+
       src={src}
       alt={`${alt} logo`}
-      // ✅ OPTIMIZATION: Always lazy load footer/bottom content
+      // Optimization settings
       loading="lazy"
       decoding="async"
-      // ✅ OPTIMIZATION: Tell browser these are small images
       sizes="(max-width: 768px) 50vw, 300px"
-      quality={75} // 85 is overkill for simple logos, 75 is visually identical
+      quality={75}
     />
   </div>
 );

@@ -6,7 +6,10 @@
 @tailwind utilities;
 
 html {
-  scroll-behavior: smooth;
+  /* 1. CRITICAL FIX: Stops the "not-scrolled-to-top" glitch on route change */
+  scroll-behavior: auto !important;
+
+  
 }
 
 :root:has(.no-doc-scroll) {
@@ -1094,38 +1097,7 @@ body.modal-on .site-info-modal {
   display: none !important;
 }
 
-/* Optimized CSS for Lighthouse (Required) */
 
-/* 1. Base State (CRITICAL: position: sticky MUST be removed) */
-.headroom {
-  /* REMOVED: position: sticky; */
-  top: 0;
-  z-index: 50;
-  transition: transform 0.3s ease-in-out;
-  transform: translateY(0);
-  width: 100%;
-}
-
-/* 2. Fixed State (Activated by Intersection Observer) */
-.headroom--fixed {
-  /* Now, this ensures position: fixed is applied correctly */
-  position: fixed !important;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 999;
-}
-
-/* 3. Unpinned/Hidden State */
-.headroom--unpinned {
-  transform: translateY(-100%);
-}
-
-/* 4. Wrapper styles */
-.headroom-wrapper {
-  width: 100%;
-  position: relative;
-}
 
 /* app/globals.css */
 

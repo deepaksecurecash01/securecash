@@ -8,7 +8,7 @@ const nextConfig = {
     minimumCacheTTL: 31536000,
     dangerouslyAllowSVG: false,
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    qualities: [75, 80, 85],
+    qualities: [60, 75, 80, 85],
     remotePatterns: [
       {
         protocol: "https",

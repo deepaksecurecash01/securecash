@@ -51,9 +51,17 @@ const Logo = ({ onClick }) => (
       <Image
         src="/images/SecureCash.webp"
         alt="SecureCash Logo"
-        width={285}
+
+        width={0}
         height={0}
+
+        // ✅ FIX: Change this from "100vw" to the actual rendered width ("285px").
+        // This ensures the preloader fetches the exact size needed, clearing the warning.
+        sizes="285px"
+
         className="w-[285px] h-auto"
+        style={{ width: "285px", height: "auto" }}
+
         priority={true}
       />
     </Link>
@@ -255,11 +263,7 @@ const Navbar = () =>
 
   return (
     <div className="relative z-50">
-      {/* 3. PLACEHOLDER DIV (Critical for Score 100) 
-          This occupies the exact height of your header so content doesn't jump.
-          - Mobile height: ~80px
-          - Desktop height: ~115px (Based on logo 91px + padding)
-      */}
+     
       <div className="w-full h-[160px] 1024px:h-[130px] bg-transparent" aria-hidden="true" />
 
       {/* 4. HEADER (Replaces Headroom wrapper) */}

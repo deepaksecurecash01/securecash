@@ -25,7 +25,7 @@ const SocialLink = ({ href, icon, alt, memberName }) => (
         src={`/images/icons/social/webp/${icon}.webp`}
         alt=""
         aria-hidden="true"
-        loading="lazy"
+        loading="eager"
       />
     </Link>
   </li>
@@ -52,6 +52,48 @@ const TeamSliderSwiper = ({ member }) =>
 
   return (
     <div className="team-slider-wrapper">
+      {/* PIXEL PERFECT FIX:
+          1. Override global .item-container to force width: 100% and display: flex.
+          2. Force slides to 'stretch' so they are all equal height immediately.
+          3. Pre-calculate widths to avoid horizontal flicker.
+       */}
+      <style>{`
+        /* 1. Fix the Global CSS conflict inside this slider */
+        .team-swiper .swiper-slide .item-container {
+          display: flex !important;       /* Override inline-block */
+          flex-direction: column;         /* Stack content */
+          width: 100% !important;         /* Override 329px fixed width */
+          height: 100% !important;        /* Force full height */
+          box-sizing: border-box;
+        }
+
+        /* 2. Ensure the slide itself is a flex container that stretches children */
+        .team-swiper .swiper-slide {
+          display: flex;
+          height: auto;
+        }
+
+        /* 3. Pre-calculate widths (Same as before) */
+        @media (min-width: 992px) {
+          .team-swiper .swiper-slide {
+            width: calc((100% - 16px) / 2);
+            margin-right: 16px; 
+          }
+        }
+        @media (min-width: 1140px) {
+          .team-swiper .swiper-slide {
+            width: calc((100% - 40px) / 3);
+            margin-right: 20px;
+          }
+        }
+        @media (min-width: 1366px) {
+          .team-swiper .swiper-slide {
+            width: calc((100% - 36px) / 4);
+            margin-right: 12px;
+          }
+        }
+      `}</style>
+
       {/* Custom Previous Arrow */}
       <button
         onClick={() => swiperInstance?.slidePrev()}
@@ -79,7 +121,7 @@ const TeamSliderSwiper = ({ member }) =>
         spaceBetween={12}
         speed={800}
         loop={false}
-        slidesPerView={1}
+        slidesPerView={4}
         slidesPerGroup={1}
         onSwiper={handleSwiper}
         onSlideChange={handleSlideChange}
@@ -137,19 +179,17 @@ const TeamSliderSwiper = ({ member }) =>
                   className="w-full mx-auto my-0 object-center"
                   width={500}
                   height={300}
-                  loading="lazy"
+                  loading="eager"
                   quality={75}
                   src={member.image}
                   alt={`${member.name}, ${member.position}`}
                 />
               </div>
               <div className="member-info p-4 414px:p-0 414px:pl-[20px] 414px:pr-[20px] w-full text-left 768px:pl-[16px] 768px:pr-[16px] 1366px:pl-[20px] 1366px:pr-[20px] 414px:py-[25px] clear-both overflow-hidden">
-                {/* ✅ FIXED: h4 → h3 (proper hierarchy within slide) */}
                 <h3 className="text-[20px] font-semibold text-[#333333] pb-3 text-left font-montserrat">
                   {member.name}
                 </h3>
 
-                {/* ✅ FIXED: h5 → p (job title is descriptive text, not heading) */}
                 <p className="text-[14px] text-[#808080] font-normal leading-normal text-left mb-[18px] font-prata">
                   {member.position}
                 </p>
@@ -162,7 +202,7 @@ const TeamSliderSwiper = ({ member }) =>
                     src="/images/icons/mail.png"
                     alt=""
                     aria-hidden="true"
-                    loading="lazy"
+                    loading="eager"
                   />
                   <Link
                     className="text-[14px] text-[#929292] hover:no-underline hover:text-[#c7a652]"
