@@ -164,7 +164,7 @@ const TeamSlider = ({ member }) =>
                                             width={500}
                                             height={300}
                                             priority={true}
-                                            loading="eager" // Added eager loading to assist with LCP
+                                            loading="lazy" // Added lazy loading to assist with LCP
                                             quality={80}
                                             src={member.image}
                                             alt={`${member.name}, ${member.position}`}

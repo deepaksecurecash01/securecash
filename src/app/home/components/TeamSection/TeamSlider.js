@@ -25,7 +25,7 @@ const SocialLink = ({ href, icon, alt, memberName }) => (
         src={`/images/icons/social/webp/${icon}.webp`}
         alt=""
         aria-hidden="true"
-        loading="eager"
+        loading="lazy"
       />
     </Link>
   </li>
@@ -179,7 +179,7 @@ const TeamSliderSwiper = ({ member }) =>
                   className="w-full mx-auto my-0 object-center"
                   width={500}
                   height={300}
-                  loading="eager"
+                  loading="lazy"
                   quality={75}
                   src={member.image}
                   alt={`${member.name}, ${member.position}`}
@@ -202,7 +202,7 @@ const TeamSliderSwiper = ({ member }) =>
                     src="/images/icons/mail.png"
                     alt=""
                     aria-hidden="true"
-                    loading="eager"
+                    loading="lazy"
                   />
                   <Link
                     className="text-[14px] text-[#929292] hover:no-underline hover:text-[#c7a652]"
