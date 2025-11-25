@@ -163,8 +163,7 @@ const TeamSlider = ({ member }) =>
                                             className="w-full mx-auto my-0 object-center"
                                             width={500}
                                             height={300}
-                                            priority={true}
-                                            loading="lazy" // Added lazy loading to assist with LCP
+                                            loading="eager" // Added lazy loading to assist with LCP
                                             quality={80}
                                             src={member.image}
                                             alt={`${member.name}, ${member.position}`}

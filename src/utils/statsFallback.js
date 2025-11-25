@@ -1,10 +1,9 @@
 // utils/statsFallback.js
-// Simple server-side utilities for fallback stats
-
 import fs from 'fs/promises';
 import path from 'path';
 
-const FALLBACK_PATH = path.join(process.cwd(), 'data/stats-fallback.json');
+// 🚀 CHANGED: Path now points to 'src/data' instead of root 'data'
+const FALLBACK_PATH = path.join(process.cwd(), 'src/data/stats-fallback.json');
 
 // Static fallback (only used if file read fails)
 const STATIC_FALLBACK = {

@@ -13,7 +13,7 @@ const DynamicMapSection = dynamic(() => import('./MapSection'), {
     ssr: false,
     loading: () => (
         <div style={{ height: '500px', backgroundColor: '#f5f5f5' }}>
-            Loading map...
+            <div className="w-10 h-10 border-4 border-[#c6a54b] border-t-transparent rounded-full animate-spin mb-4"></div>
         </div>
     ),
 });

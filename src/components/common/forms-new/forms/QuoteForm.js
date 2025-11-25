@@ -1,24 +1,34 @@
+// /components/common/forms-new/forms/QuoteForm.js
 "use client";
 import React from "react";
+import dynamic from "next/dynamic";
 import
-  {
-    FaUser,
-    FaUsers,
-    FaPhone,
-    FaComments,
-    FaEnvelope,
-    FaHome,
-    FaMapMarkerAlt,
-    FaSpinner,
-    FaCheckCircle,
-    FaChevronLeft,
-  } from "react-icons/fa";
+{
+  FaUser,
+  FaUsers,
+  FaPhone,
+  FaComments,
+  FaEnvelope,
+  FaHome,
+  FaMapMarkerAlt,
+  FaSpinner,
+  FaCheckCircle,
+  FaChevronLeft,
+} from "react-icons/fa";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
-import BankingStep from "./steps/BankingStep.js";
-import ChangeStep from "./steps/ChangeStep";
 import { useFormManager } from "@/hooks/useFormManager";
 import { QUOTE_SCHEMAS, QUOTE_DEFAULT_VALUES } from "@/zod/QuoteFormSchema";
 import Link from "next/link.js";
+
+// 🚀 OPTIMIZATION: Lazy load subsequent steps to reduce unused JS
+// We don't need a heavy loading state here as these usually load while user types in step 1
+const BankingStep = dynamic(() => import("./steps/BankingStep.js"), {
+  loading: () => <div className="animate-pulse h-96 w-full bg-gray-800/20 rounded-md"></div>
+});
+
+const ChangeStep = dynamic(() => import("./steps/ChangeStep"), {
+  loading: () => <div className="animate-pulse h-96 w-full bg-gray-800/20 rounded-md"></div>
+});
 
 const QuoteForm = ({ className }) =>
 {

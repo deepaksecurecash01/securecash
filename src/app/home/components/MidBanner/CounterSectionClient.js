@@ -121,7 +121,7 @@ export default function CounterSectionClient({ initialStats })
         }, 150);
 
         return () => clearTimeout(timer);
-    }, [isVisible, stats.customers, stats.servicesPerformed, stats.cashMoved]);
+    }, [isVisible]);
 
     const counters = [
         {

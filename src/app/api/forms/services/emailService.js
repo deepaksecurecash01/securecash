@@ -1,5 +1,5 @@
 // app/api/forms/services/emailService.js
-import { formatArrayField, formatCallbackDate, getCurrentDateTime, getMimeType, prepareAttachments, preparePdfAttachments, processAttachment } from "../../utils/Helpers.js";
+import { formatArrayField, formatCallbackDate, getCurrentDateTime, getMimeType, prepareAttachments, preparePdfAttachments, processAttachment } from "./utils/Helpers.js";
 import austracSubmissionEmailTemplate from "./templates/austracSubmissionEmailTemplate.js";
 import contactAdminNotificationEmailTemplate from "./templates/contactAdminNotificationEmailTemplate.js";
 import contactUserConfirmationEmailTemplate from "./templates/contactUserConfirmationEmailTemplate.js";

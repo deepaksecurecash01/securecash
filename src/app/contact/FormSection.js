@@ -1,19 +1,9 @@
+"use client";
 import React from "react";
-import dynamic from "next/dynamic"; // 1. Import dynamic
+// 🚀 OPTIMIZATION: Static import ensures form renders in initial HTML
+// No layout shift, no spinner.
+import ContactForm from "@/components/common/forms-new/forms/ContactForm";
 import { FaPhoneAlt, FaMapMarkerAlt, FaEnvelope, FaStar } from "react-icons/fa";
-
-// 2. Lazy Load the Form Component
-// This removes the heavy Zod/Validation JS from the initial page load
-const ContactForm = dynamic(
-    () => import("../../components/common/forms-new/forms/ContactForm"),
-    {
-        loading: () => (
-            // Matches the dimensions of your form to prevent layout shift
-            <div className="w-full h-[600px] bg-white animate-pulse rounded-[8px]" />
-        ),
-        ssr: false // Form is client-side interactive, SSR is often unnecessary here
-    }
-);
 
 const FormSection = () =>
 {
@@ -39,6 +29,7 @@ const FormSection = () =>
             text: "Proudly Serving Customers Australia Wide 24/7",
         },
     ];
+
     return (
         <div
             id="contact-form-section"
@@ -77,11 +68,11 @@ const FormSection = () =>
                     </ul>
                 </div>
 
-                {/* 3. Render the Lazy Component */}
                 <ContactForm />
 
             </div>
-        </div>);
+        </div>
+    );
 };
 
 export default FormSection;

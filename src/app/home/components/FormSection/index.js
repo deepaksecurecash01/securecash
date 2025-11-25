@@ -1,29 +1,14 @@
-"use client"; // 👈 THIS LINE IS MANDATORY FOR ssr: false
+// /components/layout/FormSection.js
+"use client"; // Still client because of interactive children
 
 import React from "react";
-import dynamic from "next/dynamic";
+
+import QuoteForm from "@/components/common/forms-new/forms/QuoteForm";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import { IoCheckmarkSharp } from "react-icons/io5";
 
-// Now this will work because the parent (FormSection) is a Client Component
-const QuoteForm = dynamic(
-  () => import("@/components/common/forms-new/forms/QuoteForm"),
-  {
-    ssr: false,
-    loading: () => (
-      <div
-        className="forms-quote-v2 h-[600px] mx-2.5 992px:mx-0 px-[30px] 1366px:h-full mt-4 992px:mt-0 w-full lg:mt-0 lg:mb-0 992px:w-[450px] 1100px:w-[480px] 1200px:w-[500px] 1280px:w-[546px] shadow-[3px_3px_5px_0px_rgba(0,0,0,0.75)] text-center py-8 rounded-[6px] bg-[#1a1a1a] flex flex-col items-center justify-center"
-      >
-        <div className="w-10 h-10 border-4 border-[#c6a54b] border-t-transparent rounded-full animate-spin mb-4"></div>
-        <p className="text-white font-montserrat text-sm">Loading form...</p>
-      </div>
-    ),
-  }
-);
-
 const FormSection = () =>
 {
-  // ... keep your existing contentItems array ...
   const contentItems = [
     {
       title: "Plain clothes",
@@ -74,6 +59,8 @@ const FormSection = () =>
       aria-labelledby="contact-heading"
     >
       <div className="inner-big w-[95%] mt-10 1280px:mt-0 max-w-[1366px] mx-auto my-0 992px:flex">
+
+        {/* Render Form directly - Step 1 is fast and light */}
         <QuoteForm />
 
         <div className="right-contact-row w-[96%] 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1] 992px:pl-8">
@@ -119,7 +106,7 @@ const FormSection = () =>
                   <span className="inline-block">
                     <h1
                       className="mb-2.5"
-                     
+
                     >
                       {item.title}:
                     </h1>
