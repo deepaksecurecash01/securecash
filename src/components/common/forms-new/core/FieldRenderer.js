@@ -1,28 +1,20 @@
-// /components/common/forms-new/core/FieldRenderer.js - FINAL OPTIMIZED VERSION
-
+// /components/common/forms-new/core/FieldRenderer.js - ENHANCED FOR COMPLETE FILE UPLOAD INTEGRATION
 import React, { useState, useEffect } from 'react';
-import dynamic from 'next/dynamic'; // <-- ADDED for dynamic import
 import
 {
     TextInput,
     ABNInput,
-    // 💥 DateInput REMOVED from static import
+    DateInput,
     SelectInput,
     TextareaInput,
     CheckboxGroupInput,
     FileUploadInput
 } from './SpecializedInputs';
 
-// 💥 CRITICAL FIX: Dynamically load DateInput and its heavy CSS bundle
-const DynamicDateInput = dynamic(
-    () => import('./DateInputWrapper'), // Path to the new file
-    {
-        ssr: false,
-        loading: () => <div className="h-9 w-full bg-gray-100 animate-pulse rounded-[2px] border" />,
-    }
-);
-
-
+/**
+ * Enhanced FieldRenderer with Complete Theme Support and File Upload Integration
+ * Handles field rendering for all themes including ICA with pixel-perfect file upload support
+ */
 const FieldRenderer = ({
     type,
     field,
@@ -62,49 +54,89 @@ const FieldRenderer = ({
 }) =>
 {
     const [isFocused, setIsFocused] = useState(false);
-    const isFieldFocused = currentFocusField === field.name;
-    const hasError = !!fieldState?.error;
 
+    // Extract field and error info from React Hook Form
+    const { value, onChange, onBlur, name, ref } = field;
+    const { error } = fieldState;
+    const hasError = !!error;
+
+    // Focus state management
+    const isCurrentFocusField = currentFocusField === name;
+    const isFieldFocused = isFocused || isCurrentFocusField;
+
+    // Enhanced focus handler with global state sync
     const handleFocus = (e) =>
     {
         setIsFocused(true);
-        if (onFieldFocus) onFieldFocus(field.name);
+
+        if (onFieldFocus && typeof onFieldFocus === 'function') {
+            onFieldFocus(name);
+        }
+
+        console.log(`Field focused: ${name}`);
     };
 
+    // Enhanced blur handler with global state sync
     const handleBlur = (e) =>
     {
         setIsFocused(false);
-        if (onFieldBlur) onFieldBlur(field.name);
+        onBlur(e); // Call React Hook Form's onBlur
+
+        if (onFieldBlur && typeof onFieldBlur === 'function') {
+            onFieldBlur();
+        }
+
+        console.log(`Field blurred: ${name}`);
     };
 
-    // Common properties passed to all inputs
+    // Sync local focus state with global focus state
+    useEffect(() =>
+    {
+        if (isCurrentFocusField && !isFocused) {
+            setIsFocused(true);
+        } else if (!isCurrentFocusField && isFocused) {
+            if (currentFocusField !== null && currentFocusField !== name) {
+                setIsFocused(false);
+            }
+        }
+    }, [isCurrentFocusField, isFocused, currentFocusField, name]);
+
+    // Common props for all input types
     const commonProps = {
-        ref: field.ref,
-        value: field.value,
-        onChange: field.onChange,
+        value,
+        onChange,
         onFocus: handleFocus,
         onBlur: handleBlur,
-        name: field.name,
-        theme: theme,
-        hasError: hasError,
+        placeholder,
+        theme,
+        hasError,
         isFocused: isFieldFocused,
-        disabled: disabled,
-        required: required,
-        autoComplete: autoComplete,
-        placeholder: placeholder,
-        currentErrorField: currentFocusField,
-        setCurrentErrorField: onFieldFocus,
+        disabled,
+        required,
+        autoComplete,
+        ref,
+        ...otherProps
     };
 
-    // Props specifically for legacy themes
-    const legacyProps = { label, footnote };
+    // Legacy theme specific props for complex components
+    const legacyProps = theme === 'legacy-hazard' ? {
+        label,
+        footnote,
+        currentErrorField: isCurrentFocusField ? name : null,
+        setCurrentErrorField: onFieldFocus,
+    } : {};
 
+    // Render appropriate input based on type
     switch (type) {
         case 'text':
+        case 'email':
+        case 'password':
+        case 'tel':
+        case 'url':
             return (
                 <TextInput
                     {...commonProps}
-                    type="text"
+                    type={type}
                     Icon={Icon || Icon2}
                     maxLength={maxLength}
                     hidden={hidden}
@@ -115,39 +147,13 @@ const FieldRenderer = ({
             return (
                 <ABNInput
                     {...commonProps}
-                    type="text"
                     Icon={Icon || Icon2}
-                    maxLength={maxLength}
-                    hidden={hidden}
-                />
-            );
-
-        case 'email':
-            return (
-                <TextInput
-                    {...commonProps}
-                    type="email"
-                    Icon={Icon || Icon2}
-                    maxLength={maxLength}
-                    hidden={hidden}
-                />
-            );
-
-        // 🚀 FIX: Handle 'url' type to suppress build warnings
-        case 'url':
-            return (
-                <TextInput
-                    {...commonProps}
-                    type="url" // Explicitly set type to 'url' for browser validation
-                    Icon={Icon || Icon2}
-                    maxLength={maxLength}
-                    hidden={hidden}
                 />
             );
 
         case 'date':
             return (
-                <DynamicDateInput // <-- USED DYNAMIC COMPONENT
+                <DateInput
                     {...commonProps}
                     dayPlaceholder={dayPlaceholder}
                     monthPlaceholder={monthPlaceholder}
@@ -162,6 +168,7 @@ const FieldRenderer = ({
                     {...commonProps}
                     options={options}
                     Icon={Icon || Icon2}
+                    {...legacyProps} // Pass legacy-specific props for SelectInput
                 />
             );
 
@@ -173,18 +180,23 @@ const FieldRenderer = ({
                 />
             );
 
-        case 'file-upload':
-        // 🚀 FIX: Map 'file' type to the existing FileUploadInput component
+        case 'number':
+            return (
+                <TextInput
+                    {...commonProps}
+                    type="number"
+                    Icon={Icon || Icon2}
+                    maxLength={maxLength}
+                />
+            );
+
         case 'file':
             return (
                 <FileUploadInput
-                    accept={accept}
-                    multiple={multiple}
-                    fileUploadState={fileUploadState}
                     // ENHANCED: Complete file upload integration with ref forwarding
-                    ref={field.ref}
-                    value={field.value}
-                    onChange={field.onChange}
+                    ref={ref}
+                    value={value}
+                    onChange={onChange}
                     onFocus={handleFocus}
                     onBlur={handleBlur}
                     name={field.name}
@@ -192,6 +204,10 @@ const FieldRenderer = ({
                     hasError={hasError}
                     isFocused={isFieldFocused}
                     disabled={disabled}
+                    accept={accept}
+                    multiple={multiple}
+                    // ENHANCED: Pass complete file upload state
+                    fileUploadState={fileUploadState}
                     {...otherProps}
                 />
             );
@@ -208,7 +224,7 @@ const FieldRenderer = ({
             );
 
         default:
-            // console.warn(`Unknown field type: ${type}, falling back to text input`); // Optional: Can be commented out now
+            console.warn(`Unknown field type: ${type}, falling back to text input`);
             return (
                 <TextInput
                     {...commonProps}

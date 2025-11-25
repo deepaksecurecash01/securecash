@@ -9,12 +9,9 @@ import 'react-calendar/dist/Calendar.css';
 
 import { FaCalendarAlt } from "react-icons/fa";
 
-// 💡 THEME FIX: Import THEMES from the new shared utility file
 import { THEMES } from './theme-utilities';
 
-/**
- * DateInput component extracted for dynamic loading.
- */
+
 export const DateInput = forwardRef(
     ({
         name,
@@ -58,7 +55,7 @@ export const DateInput = forwardRef(
         const baseInputClasses = currentTheme.input || THEMES.dark.input;
         const inputContainerClasses = currentTheme.inputContainer || THEMES.dark.inputContainer;
 
-        const iconClasses = 'absolute text-gray-500 text-[18px] left-3 pointer-events-none z-10';
+        const iconClasses = 'absolute text-[#999] text-[18px] left-3 pointer-events-none z-10';
 
         return (
             <div className={inputContainerClasses} data-theme={theme} data-focused={isFocused}>

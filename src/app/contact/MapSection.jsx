@@ -4,7 +4,7 @@ import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 // Use the ENV variable for consistency, fallback to the hardcoded one if needed
-const MAP_ID = process.env.NEXT_PUBLIC_GOOGLE_MAP_ID || 'c5ae37729b6aeaa456641527';
+const MAP_ID = process.env.NEXT_PUBLIC_GOOGLE_MAP_ID;
 const LIBRARIES = ['marker'];
 
 const getDefaultMapOptions = (width) =>
