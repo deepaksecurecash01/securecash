@@ -1,36 +1,28 @@
-
 'use client';
-import React, { useState, useCallback, useEffect, useRef } from 'react';
+import React, { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
 
 const GOOGLE_MAPS_API_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
+// Use the ENV variable for consistency, fallback to the hardcoded one if needed
+const MAP_ID = process.env.NEXT_PUBLIC_GOOGLE_MAP_ID || 'c5ae37729b6aeaa456641527';
 const LIBRARIES = ['marker'];
 
-const getDefaultMapOptions = () =>
+const getDefaultMapOptions = (width) =>
 {
-    if (typeof window === 'undefined') {
-        return {
-            zoom: 4,
-            center: { lat: -31, lng: 153 },
-            mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID || 'DEMO_MAP_ID',
-        };
-    }
+    // Helper to get consistent options
+    const commonOptions = {
+        mapId: MAP_ID,
+        disableDefaultUI: false, // Optional: clean up UI if desired
+        clickableIcons: false
+    };
 
-    const width = window.innerWidth;
+    if (width <= 375) return { ...commonOptions, zoom: 2.7, center: { lat: -31, lng: 146 } };
+    if (width <= 414) return { ...commonOptions, zoom: 3, center: { lat: -31, lng: 146 } };
+    if (width <= 667) return { ...commonOptions, zoom: 3, center: { lat: -31, lng: 146 } };
+    if (width <= 768) return { ...commonOptions, zoom: 4, center: { lat: -31, lng: 146 } };
+    if (width <= 1024) return { ...commonOptions, zoom: 4, center: { lat: -31, lng: 145 } };
 
-    if (width <= 375) {
-        return { zoom: 2.7, center: { lat: -31, lng: 146 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
-    } else if (width <= 414) {
-        return { zoom: 3, center: { lat: -31, lng: 146 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
-    } else if (width <= 667) {
-        return { zoom: 3, center: { lat: -31, lng: 146 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
-    } else if (width <= 768) {
-        return { zoom: 4, center: { lat: -31, lng: 146 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
-    } else if (width <= 1024) {
-        return { zoom: 4, center: { lat: -31, lng: 145 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
-    } else {
-        return { zoom: 4, center: { lat: -31, lng: 153 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
-    }
+    return { ...commonOptions, zoom: 4, center: { lat: -31, lng: 153 } };
 };
 
 const LoadingSpinner = () => (
@@ -39,30 +31,33 @@ const LoadingSpinner = () => (
     </div>
 );
 
-
-const MapInner = ({ coordinates }) =>
+// Separated Logic Component for cleaner renders
+const MapInstance = ({ coordinates }) =>
 {
     const [map, setMap] = useState(null);
     const [markers, setMarkers] = useState([]);
 
-    const { isLoaded, loadError } = useJsApiLoader({
-        id: 'google-map-script',
-        googleMapsApiKey: GOOGLE_MAPS_API_KEY,
-        mapId: 'c5ae37729b6aeaa456641527',
-        libraries: LIBRARIES,
-    });
+    // Memoize options to prevent re-renders
+    const mapOptions = useMemo(() =>
+    {
+        if (typeof window === 'undefined') return getDefaultMapOptions(1024);
+        return getDefaultMapOptions(window.innerWidth);
+    }, []);
 
     const onLoad = useCallback((mapInstance) =>
     {
         setMap(mapInstance);
+
+        // Advanced Marker Logic
         if (window.google?.maps?.marker?.AdvancedMarkerElement) {
             const newMarkers = coordinates.map((position, index) =>
             {
-                return new window.google.maps.marker.AdvancedMarkerElement({
+                const marker = new window.google.maps.marker.AdvancedMarkerElement({
                     position: position,
                     map: mapInstance,
                     title: `Location ${index + 1}`,
                 });
+                return marker;
             });
             setMarkers(newMarkers);
         }
@@ -70,30 +65,36 @@ const MapInner = ({ coordinates }) =>
 
     const onUnmount = useCallback(() =>
     {
-        markers.forEach(marker => { if (marker.map) marker.map = null; });
+        markers.forEach(marker =>
+        {
+            if (marker.map) marker.map = null;
+        });
         setMarkers([]);
         setMap(null);
     }, [markers]);
 
-    if (loadError) return <div className="h-[500px] flex items-center justify-center bg-red-50 text-red-600">Failed to load map.</div>;
-
-    if (!isLoaded) return <LoadingSpinner />;
-
     return (
         <GoogleMap
             mapContainerStyle={{ width: '100%', height: '500px' }}
-            options={getDefaultMapOptions()}
+            options={mapOptions}
             onLoad={onLoad}
             onUnmount={onUnmount}
         />
     );
 };
 
-
 const MapSection = ({ coordinates }) =>
 {
     const [isVisible, setIsVisible] = useState(false);
     const containerRef = useRef(null);
+
+    // 1. HOISTED LOADER: Load script at section level, not inside conditional child
+    const { isLoaded, loadError } = useJsApiLoader({
+        id: 'google-map-script',
+        googleMapsApiKey: GOOGLE_MAPS_API_KEY,
+        mapId: MAP_ID, // Ensure this matches the Map options exactly
+        libraries: LIBRARIES,
+    });
 
     useEffect(() =>
     {
@@ -115,11 +116,14 @@ const MapSection = ({ coordinates }) =>
         return () => observer.disconnect();
     }, []);
 
+    if (loadError) return <div className="h-[500px] flex items-center justify-center bg-red-50 text-red-600">Failed to load map.</div>;
+
     return (
         <section id="map-section" className="w-full" ref={containerRef}>
             <div id="mapContainer" className="w-full">
-                {isVisible ? (
-                    <MapInner coordinates={coordinates} />
+                {/* Only render MapInstance if Visible AND Script is Loaded */}
+                {isVisible && isLoaded ? (
+                    <MapInstance coordinates={coordinates} />
                 ) : (
                     <LoadingSpinner />
                 )}
