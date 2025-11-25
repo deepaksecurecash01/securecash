@@ -108,7 +108,7 @@ const VideoPlayer = ({
             aria-label={`Play video: ${title}`}
           >
             {isLoading && (
-              <div className="absolute inset-0 bg-gray-800 flex items-center justify-center">
+              <div className="absolute inset-0 bg-black flex items-center justify-center">
                 <div className="w-8 h-8 border-2 border-white border-t-transparent rounded-full animate-spin" role="status" aria-label="Loading video thumbnail" />
               </div>
             )}

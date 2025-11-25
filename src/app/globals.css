@@ -884,18 +884,7 @@ body.modal-on .site-info-modal {
   }
 }
 
-/* Swiper Slide Spacing */
-.services-carousel .swiper-slide {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: auto;
-}
 
-.services-carousel .swiper-slide>div {
-  width: 100%;
-  margin: 0 !important;
-}
 
 /* Swiper Navigation Buttons - Hide default */
 .services-carousel .swiper-button-next,
@@ -1044,25 +1033,7 @@ body.modal-on .site-info-modal {
 }
 
 /* Swiper Slide */
-.team-swiper .swiper-slide {
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  box-sizing: border-box;
-}
 
-/* Fade effect for mobile */
-@media (max-width: 767px) {
-  .team-swiper .swiper-slide {
-    opacity: 0 !important;
-    transition: opacity 0.8s;
-  }
-
-  .team-swiper .swiper-slide-active {
-    opacity: 1 !important;
-  }
-}
 
 /* Item Container */
 .item-container {

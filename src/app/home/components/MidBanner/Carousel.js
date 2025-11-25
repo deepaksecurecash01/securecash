@@ -70,10 +70,9 @@ const Carousel = () =>
           display: flex;
           justify-content: center;
         }
-        @media (min-width: 1200px) {
+        @media (min-width: 992px) {
           .services-carousel-fixed .swiper-slide {
-            width: calc((100% - 10px) / 2);
-            margin-right: 10px;
+            width: calc((100%) / 2);
           }
         }
         @media (min-width: 1366px) {
@@ -130,9 +129,10 @@ const Carousel = () =>
             slidesPerView: 1,
             slidesPerGroup: 1,
           },
-          991: {
-            slidesPerView: 1,
-            slidesPerGroup: 1,
+          992: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+
           },
           1200: {
             slidesPerView: 2,
