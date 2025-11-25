@@ -1,4 +1,3 @@
-// mapCoordinates.js - Extracted location data for better maintainability
 
 // Australia coordinates
 export const AUSTRALIA_COORDINATES = [

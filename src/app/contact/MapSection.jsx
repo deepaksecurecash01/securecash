@@ -8,11 +8,29 @@ const LIBRARIES = ['marker'];
 
 const getDefaultMapOptions = () =>
 {
-    if (typeof window === 'undefined') return { zoom: 4, center: { lat: -31, lng: 153 } };
+    if (typeof window === 'undefined') {
+        return {
+            zoom: 4,
+            center: { lat: -31, lng: 153 },
+            mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID || 'DEMO_MAP_ID',
+        };
+    }
+
     const width = window.innerWidth;
-    if (width <= 375) return { zoom: 2.7, center: { lat: -31, lng: 146 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
-    else if (width <= 768) return { zoom: 4, center: { lat: -31, lng: 146 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
-    else return { zoom: 4, center: { lat: -31, lng: 153 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
+
+    if (width <= 375) {
+        return { zoom: 2.7, center: { lat: -31, lng: 146 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
+    } else if (width <= 414) {
+        return { zoom: 3, center: { lat: -31, lng: 146 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
+    } else if (width <= 667) {
+        return { zoom: 3, center: { lat: -31, lng: 146 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
+    } else if (width <= 768) {
+        return { zoom: 4, center: { lat: -31, lng: 146 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
+    } else if (width <= 1024) {
+        return { zoom: 4, center: { lat: -31, lng: 145 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
+    } else {
+        return { zoom: 4, center: { lat: -31, lng: 153 }, mapId: process.env.NEXT_PUBLIC_GOOGLE_MAP_ID };
+    }
 };
 
 const LoadingSpinner = () => (
@@ -30,7 +48,7 @@ const MapInner = ({ coordinates }) =>
     const { isLoaded, loadError } = useJsApiLoader({
         id: 'google-map-script',
         googleMapsApiKey: GOOGLE_MAPS_API_KEY,
-        mapIds: ['c5ae37729b6aeaa456641527'],
+        mapId: 'c5ae37729b6aeaa456641527',
         libraries: LIBRARIES,
     });
 
@@ -67,7 +85,6 @@ const MapInner = ({ coordinates }) =>
             options={getDefaultMapOptions()}
             onLoad={onLoad}
             onUnmount={onUnmount}
-            mapId="c5ae37729b6aeaa456641527"
         />
     );
 };
@@ -88,7 +105,7 @@ const MapSection = ({ coordinates }) =>
                     observer.disconnect();
                 }
             },
-            { rootMargin: '200px' } 
+            { rootMargin: '200px' }
         );
 
         if (containerRef.current) {
