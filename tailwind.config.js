@@ -58,7 +58,7 @@ module.exports = {
         "quote-header": "url('/images/bg-quote-header-left.avif'), url('/images/bg-quote-header-right.avif')",
         "quote-header-right": "url('/images/bg-quote-header-right.avif')",
         "quote-header-left": "url('/images/bg-quote-header-left.avif')",
-        "contact-bg": "url('/images/mainbg-contact.jpg')",
+        "contact-bg": "url('/images/mainbg-contact.avif')",
       },
 
       backgroundPosition: {

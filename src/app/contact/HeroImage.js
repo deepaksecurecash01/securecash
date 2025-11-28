@@ -13,22 +13,13 @@ const HeroImage = () =>
       1070px:h-[55vh]
       overflow-hidden"
     >
-     
       <Image
-        src="/images/contact-page/Header-Image.png"
-        alt="SecureCash Hero"
+        src="/images/contact-page/Header-Image.avif"
+        alt="Contact SecureCash - Get Reply Within 45 Minutes"
         fill
         priority
         quality={85}
         className="object-cover object-[60%_center] 480px:object-center -z-10"
-      />
-
-      {/* Overlay to match your previous linear-gradient */}
-      <div
-        className="absolute inset-0 -z-10"
-        style={{
-          background: "-webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0))"
-        }}
       />
 
       <h2 className="text-[24px] 600px:text-[40px] mb-3 leading-[30px] 768px:leading-[56px] text-white relative z-10">
