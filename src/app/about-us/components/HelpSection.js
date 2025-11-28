@@ -30,7 +30,8 @@ export const HelpSection = ({
                             <img
                                 src={imageUrl}
                                 alt={imageAlt}
-                                loading="lazy"
+                                loading="eager"
+                                fetchPriority={true}
                                 className="w-full 1200px:w-auto h-[calc(100%-68px)]"
                             />
                         </div>
