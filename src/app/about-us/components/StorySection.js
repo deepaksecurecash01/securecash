@@ -27,19 +27,12 @@ export const StorySection = ({
       <div className={`${bgClass} w-full h-full pb-[16px] flex ${paddingY}`}>
         <div className="bg-no-repeat bg-cover 480px:bg-contain w-full h-full">
           <Container className="section-col inner relative h-full 600px:h-[296px] 768px:h-[calc(342px+40px)] 1200px:h-[calc(456px+56px)] 1440px:h-full flex flex-col mt-0 600px:flex-row w-full 1024px:w-[95%] 1440px:w-full">
-            <div
-              className={`section-content-wrapper w-full h-full flex flex-col justify-end ${firstSectionOrder}`}
-              id={id}
-            >
-              <Image
+            <div className={`section-content-wrapper w-full h-full flex flex-col justify-end ${firstSectionOrder}`} id="about-us-section-story">
+              <img
                 src={imageUrl}
                 alt={imageAlt}
-                width={imageWidth}
-                height={imageHeight}
-                quality={80}
                 loading="lazy"
-                sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 732px"
-                className="w-full 1200px:w-auto h-[calc(100%-68px)] object-cover"
+                className="w-full h-[calc(100%-58px)]"
               />
             </div>
 
