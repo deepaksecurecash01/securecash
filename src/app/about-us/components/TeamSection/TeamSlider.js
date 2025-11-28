@@ -158,13 +158,13 @@ const TeamSlider = ({ member }) =>
                                     </div>
 
                                     <div className="member-info p-4 414px:p-0 414px:pl-[20px] 414px:pr-[20px] w-full text-left 768px:pl-[16px] 768px:pr-[16px] 1366px:pl-[20px] 1366px:pr-[20px] 414px:py-[25px] clear-both overflow-hidden bg-[#b9984b] rounded-bl-[6px] rounded-br-[6px]">
-                                        <h4 className="text-white font-semibold text-left text-[22px] pb-3 font-montserrat">
+                                        <h2 className="text-white font-semibold text-left text-[22px] pb-3 font-montserrat">
                                             {member.name}
-                                        </h4>
+                                        </h2>
 
-                                        <h5 className="text-white font-extrabold text-left text-[16px] leading-normal pb-3 font-prata">
+                                        <h3 className="text-white font-extrabold text-left text-[16px] leading-normal pb-3 font-prata">
                                             {member.position}
-                                        </h5>
+                                        </h3>
 
                                         <div className="email-info flex justify-items-center px-0 py-[10px]">
                                             <Image

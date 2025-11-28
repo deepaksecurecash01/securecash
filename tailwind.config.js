@@ -50,16 +50,14 @@ module.exports = {
         "quote-icon": "url('/images/quote.png')",
         "quote-icon-white": "url('/images/quote-white.png')",
         "content-bg": "url('/images/main-background.webp')",
-        "banner-mid-bg": "url('/images/banner/home-statistics.jpg')",
-        "banner-mid-mobile-bg":
-          "url('/images/banner/home-statistics-mobile.jpg')",
+        "banner-mid-bg": "url('/images/banner/home-statistics.avif')",
+        "banner-mid-mobile-bg": "url('/images/banner/home-statistics-mobile.avif')",
         "main-content-bg": "url('/images/banner/mainbg.webp')",
-        "team-bg": "url('/images/team.webp')",
+        "team-bg": "url('/images/team.avif')",
         "brown-overlay": "url('/images/brown-overlay.png')",
-        "quote-header":
-          "url('/images/bg-quote-header-left.png'), url('/images/bg-quote-header-right.png')",
-        "quote-header-right": "url('/images/bg-quote-header-right.png')",
-        "quote-header-left": "url('/images/bg-quote-header-left.png')",
+        "quote-header": "url('/images/bg-quote-header-left.avif'), url('/images/bg-quote-header-right.avif')",
+        "quote-header-right": "url('/images/bg-quote-header-right.avif')",
+        "quote-header-left": "url('/images/bg-quote-header-left.avif')",
         "contact-bg": "url('/images/mainbg-contact.jpg')",
       },
 

@@ -50,6 +50,7 @@ const HeadlineContent = () =>
                                 height={567}
                                 alt="SecureCash about us hero image"
                                 priority
+                                fetchPriority="high"
                                 quality={80}
                                 sizes="(max-width: 1024px) 580px, 851px"
                                 className="absolute -left-7 768px:w-[580px] 1024px:w-[851px] 1200px:relative"
