@@ -1,3 +1,5 @@
+
+// Australia coordinates
 export const AUSTRALIA_COORDINATES = [
   // New South Wales
   { lat: -33.865143, lng: 151.2099, label: 'Sydney' },
@@ -11,7 +13,7 @@ export const AUSTRALIA_COORDINATES = [
   { lat: -31.840233, lng: 145.612793, label: 'New South Wales' },
   { lat: -30.296276, lng: 153.114136, label: 'Coffs Harbour' },
   { lat: -36.08078, lng: 146.916473, label: 'Albury' },
-
+  
   // Western Australia
   { lat: -31.747, lng: 115.803001, label: 'Wanneroo' },
   { lat: -20.736, lng: 116.846001, label: 'Karratha' },
@@ -21,7 +23,7 @@ export const AUSTRALIA_COORDINATES = [
   { lat: -35.022778, lng: 117.881386, label: 'Albany' },
   { lat: -25.760321, lng: 122.805176, label: 'Western Australia' },
   { lat: -28.777989, lng: 114.62265, label: 'Geraldton' },
-
+  
   // Victoria
   { lat: -38.383331, lng: 142.483337, label: 'Warrnambool' },
   { lat: -35.333332, lng: 143.550003, label: 'Swan Hill' },
@@ -37,12 +39,12 @@ export const AUSTRALIA_COORDINATES = [
   { lat: -37.0201, lng: 144.9646, label: 'Victoria' },
   { lat: -34.206841, lng: 142.13649, label: 'Mildura' },
   { lat: -36.757786, lng: 144.278702, label: 'Bendigo' },
-
+  
   // Tasmania
   { lat: -41.180557, lng: 146.34639, label: 'Devonport' },
   { lat: -41.06361, lng: 145.875275, label: 'Burnie' },
   { lat: -42.880554, lng: 147.324997, label: 'Hobart' },
-
+  
   // South Australia
   { lat: -33.033333, lng: 137.566666, label: 'Whyalla' },
   { lat: -35.549999, lng: 138.616669, label: 'Victor Harbor' },
@@ -54,7 +56,7 @@ export const AUSTRALIA_COORDINATES = [
   { lat: -37.824429, lng: 140.783783, label: 'Mount Gambier' },
   { lat: -33.833569, lng: 138.610001, label: 'Clare Valley' },
   { lat: -34.688404, lng: 135.909932, label: 'Port Lincoln' },
-
+  
   // Queensland
   { lat: -19.307222, lng: 146.731674, label: 'Thuringowa' },
   { lat: -27.566668, lng: 151.949997, label: 'Toowoomba' },
@@ -70,17 +72,18 @@ export const AUSTRALIA_COORDINATES = [
   { lat: -28.169287, lng: 153.53363, label: 'Kirra, Coolangatta' },
   { lat: -16.900728, lng: 145.738388, label: 'Edge Hill' },
   { lat: -20.725378, lng: 139.493595, label: 'Mount Isa' },
-
+  
   // Northern Territory
   { lat: -12.480556, lng: 130.983063, label: 'Palmerston' },
   { lat: -12.462827, lng: 130.841782, label: 'Darwin' },
   { lat: -19.491411, lng: 132.550964, label: 'Northern Territory' },
   { lat: -23.693652, lng: 133.892037, label: 'Alice Springs' },
-
+  
   // ACT
   { lat: -35.306179, lng: 149.126419, label: 'Capital Hill, ACT' },
 ];
 
+// New Zealand coordinates
 export const NEW_ZEALAND_COORDINATES = [
   { lat: -37.683334, lng: 176.166672, label: 'Tauranga, North Island' },
   { lat: -38.685692, lng: 176.070206, label: 'Taupo' },

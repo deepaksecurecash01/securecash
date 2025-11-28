@@ -1,6 +1,10 @@
 "use client";
 import React, { useState, useCallback } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+
+// Swiper Imports
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -17,11 +21,12 @@ const TESTIMONIALS = [
     "We are extremely satisfied with our change to SecureCash. They are always willing to oblige, and using this service ensures safe banking and saves us a lot of valuable time. We would recommend them to any prospective client.",
 ];
 
-const TeamSlider = ({ testimonials }) =>
+const TeamSlider = ({ TESTIMONIALS }) =>
 {
     const [swiperInstance, setSwiperInstance] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
 
+    // Update state when slide changes
     const handleSlideChange = (swiper) =>
     {
         setActiveIndex(swiper.activeIndex);
@@ -38,7 +43,7 @@ const TeamSlider = ({ testimonials }) =>
     }, [swiperInstance]);
 
     const isFirstSlide = activeIndex === 0;
-    const isLastSlide = activeIndex === testimonials.length - 1;
+    const isLastSlide = activeIndex === TESTIMONIALS.length - 1;
 
     return (
         <>
@@ -47,13 +52,17 @@ const TeamSlider = ({ testimonials }) =>
                 spaceBetween={0}
                 slidesPerView={1}
                 speed={500}
-                loop={false}
+                loop={false} // Matches original "infinite: false"
                 onSwiper={setSwiperInstance}
                 onSlideChange={handleSlideChange}
                 className="w-full"
             >
-                {testimonials.map((testimonial, index) => (
+                {TESTIMONIALS.map((testimonial, index) => (
                     <SwiperSlide key={index}>
+                        {/* Kept exact styling structure. 
+                           The height classes allow the container to reserve space,
+                           and the inner flexbox centers the text vertically.
+                        */}
                         <div className="h-[330px] 414px:h-[260px] 480:h-[220px] 1024px:h-[176px] relative overflow-hidden">
                             <div className="contact-testimonial--carousel__items h-full flex justify-center items-center">
                                 <div className="carousel-item">
@@ -69,30 +78,35 @@ const TeamSlider = ({ testimonials }) =>
                 ))}
             </Swiper>
 
+            {/* External Controls - Kept exact styling */}
             <div className="contact-testimonial--carousel-control h-[80px] flex justify-center items-center">
-                <button
-                    className={`${isFirstSlide ? "opacity-30 cursor-not-allowed" : "cursor-pointer"}`}
-                    onClick={goToPrevSlide}
-                    disabled={isFirstSlide}
+                <div
+                    className={`${isFirstSlide ? "opacity-30" : "cursor-pointer"}`}
+                    onClick={!isFirstSlide ? goToPrevSlide : undefined}
+                    role="button"
                     aria-label="Previous Testimonial"
+                    aria-disabled={isFirstSlide}
                 >
                     <FaChevronLeft size={36} />
-                </button>
-                <div className="carousel-control-divider h-full w-[2px] bg-[#b9984b] mx-[20px] p-0 rounded-none" />
-                <button
-                    className={`${isLastSlide ? "opacity-30 cursor-not-allowed" : "cursor-pointer"}`}
-                    onClick={goToNextSlide}
-                    disabled={isLastSlide}
+                </div>
+                <div className="carousel-control-divider h-full w-[2px] bg-[#b9984b] mx-[20px] p-0 rounded-none">
+                    &nbsp;
+                </div>
+                <div
+                    className={`${isLastSlide ? "opacity-30" : "cursor-pointer"}`}
+                    onClick={!isLastSlide ? goToNextSlide : undefined}
+                    role="button"
                     aria-label="Next Testimonial"
+                    aria-disabled={isLastSlide}
                 >
                     <FaChevronRight size={36} />
-                </button>
+                </div>
             </div>
         </>
     );
 };
 
-const TestimonialsSection = () =>
+const TeamContent = () =>
 {
     return (
         <div className="inline-block w-full px-[10px] py-[24px] 414px:pt-[100px] 414px:px-0 mt-0 992px:px-2 992px:pt-[130px] bg-contact-bg bg-no-repeat bg-cover bg-center">
@@ -106,8 +120,11 @@ const TestimonialsSection = () =>
                     Hear what our customers have to say about our services!
                 </p>
                 <div className="relative select-none block w-full float-left mb-[100px]">
-                    <div className="768px:w-[90%] mx-auto 1024px:w-full" aria-label="Testimonials Slider">
-                        <TeamSlider testimonials={TESTIMONIALS} />
+                    <div
+                        className="768px:w-[90%] mx-auto 1024px:w-full"
+                        aria-label="Testimonials Slider"
+                    >
+                        <TeamSlider TESTIMONIALS={TESTIMONIALS} />
                     </div>
                 </div>
             </div>
@@ -115,4 +132,4 @@ const TestimonialsSection = () =>
     );
 };
 
-export default TestimonialsSection;
+export default TeamContent;
