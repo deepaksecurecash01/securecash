@@ -19,7 +19,7 @@ const HeadlineContent = () =>
                             fill
                             priority
                             quality={75}
-                            className="object-contain object-right-top"
+                            className="object-contain object-right-top hidden 768px:block"
                             sizes="(max-width: 768px) 100vw, 50vw"
                         />
                     </div>

@@ -42,9 +42,9 @@ export const ServiceSection = ({
                             <div className="content bg-white h-full flex flex-col self-end 1200px:max-h-[calc(600px-66px)]">
                                 <div className="section-header px-10 600px:px-6 py-[18px] relative 600px:absolute 1200px:relative 600px:top-[30px] right-0 w-auto 768px:top-0 768px:px-8 768px:py-10 bg-[#000000] items-end justify-center text-[#ffffff] m-0 flex flex-col text-right">
                                     <hr className="h-[4px] rounded-[5px] border-0 w-[100px] bg-primary mx-auto 768px:ml-auto 768px:mr-0 hidden 1200px:block divider-gold divider-2" />
-                                    <h3 className="text-[32px] font-bold leading-[1.4em] text-center 768px:text-right 1366px:pl-[56px] 600px:text-[30px] 768px:text-[32px] 992px:text-[40px] 1200px:mt-6 1200px:mb-2 font-montserrat">
+                                    <h1 className="text-[32px] font-bold leading-[1.4em] text-center 768px:text-right 1366px:pl-[56px] 600px:text-[30px] 768px:text-[32px] 992px:text-[40px] 1200px:mt-6 1200px:mb-2 font-montserrat">
                                         {title}
-                                    </h3>
+                                    </h1>
                                 </div>
 
                                 <ScrollableSection className={`section-content h-auto 600px:mt-[120px] 768px:mt-[142px] ${!id?.includes("story") && 'bg-white'} pt-8 600px:pt-5 px-8 mx-2 1200px:mt-2.5 leading-[2]`}>
