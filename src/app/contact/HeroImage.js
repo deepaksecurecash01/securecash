@@ -18,6 +18,7 @@ const HeroImage = () =>
         alt="Contact SecureCash - Get Reply Within 45 Minutes"
         fill
         priority
+        fetchPriority="high"
         quality={85}
         className="object-cover object-[60%_center] 480px:object-center -z-10"
       />

@@ -36,9 +36,10 @@ const FormSection = () =>
         >
             <div className="inner-big w-[95%] max-w-[1366px] mx-auto my-0 992px:flex">
                 <div className="414px:mx-4 992px:w-[50%] 992px:mx-0 py-8 px-10 480px:px-[5%] 992px:pl-8 1280px:pl-24 992px:pt-32 shadow-[3px_3px_10px_0px_rgba(0,0,0,0.2)] rounded-t-[8px] 992px:rounded-l-[8px] 992px:rounded-tr-none relative bg-black">
-                    <h3 className="text-[32px] text-white leading-[1.4em] text-center font-bold mb-[16px] 992px:text-left font-montserrat">
+                    {/* Changed h3 to h2 for semantic hierarchy */}
+                    <h2 className="text-[32px] text-white leading-[1.4em] text-center font-bold mb-[16px] 992px:text-left font-montserrat">
                         Contact Information
-                    </h3>
+                    </h2>
 
                     <hr className="w-[100px] mb-[24px] h-[4px] rounded-[5px] border-0 mx-auto 992px:ml-0 922px:mr-auto bg-primary" />
 
