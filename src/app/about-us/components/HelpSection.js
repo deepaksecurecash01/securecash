@@ -33,7 +33,8 @@ export const HelpSection = ({
                                 width={imageWidth}
                                 height={imageHeight}
                                 quality={80}
-                                sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 713px"
+                                loading="lazy"
+                                sizes="(max-width: 600px) 100vw, (max-width: 1200px) 50vw, 732px"
                                 className="w-full 1200px:w-auto h-[calc(100%-68px)] object-cover"
                             />
                         </div>
