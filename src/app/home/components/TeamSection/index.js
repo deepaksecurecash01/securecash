@@ -160,36 +160,32 @@ const teamMembers = [
   },
 ];
 
-const TeamContent = () =>
-{
-  return (
-    <section
-      id="team"
-      className="bg-[#ebebeb] inline-block w-full px-[10px] py-[24px] 414px:py-[100px] 414px:px-0 mt-0 768px:p-[50px] 992px:mt-[100px] 992px:px-2 992px:py-[100px]"
-      aria-labelledby="team-heading"
-    >
-      <div className="w-full max-w-[1366px] mx-[auto] my-[0]">
-        {/* ✅ FIXED: h3 → h2 (proper hierarchy) */}
-        <h2
-          id="team-heading"
-          className="text-[24px] text-[#000] font-normal leading-[1.5em] text-center w-3/5 mx-auto my-0 414px:w-auto 414px:text-[32px] font-prata"
-        >
-          Meet The SecureCash Team
-        </h2>
+const TeamContent = () => (
+  <section
+    id="team"
+    className="bg-[#ebebeb] inline-block w-full px-[10px] py-[24px] 414px:py-[100px] 414px:px-0 mt-0 768px:p-[50px] 992px:mt-[100px] 992px:px-2 992px:py-[100px]"
+    aria-labelledby="team-heading"
+  >
+    <div className="w-full max-w-[1366px] mx-[auto] my-[0]">
+      <h2
+        id="team-heading"
+        className="text-[24px] text-[#000] font-normal leading-[1.5em] text-center w-3/5 mx-auto my-0 414px:w-auto 414px:text-[32px] font-prata"
+      >
+        Meet The SecureCash Team
+      </h2>
 
-        <hr
-          className="w-[100px] mb-10 mt-4 h-[4px] rounded-[5px] border-0 mx-auto bg-primary"
-          aria-hidden="true"
-        />
+      <hr
+        className="w-[100px] mb-10 mt-4 h-[4px] rounded-[5px] border-0 mx-auto bg-primary"
+        aria-hidden="true"
+      />
 
-        <div className="members-slider relative select-none block w-full float-left">
-          <div className="team-slider w-[90%] mx-auto 1024px:w-full">
-            <TeamSlider member={teamMembers} />
-          </div>
+      <div className="members-slider relative select-none block w-full float-left">
+        <div className="team-slider w-[90%] mx-auto 1024px:w-full">
+          <TeamSlider member={teamMembers} />
         </div>
       </div>
-    </section>
-  );
-};
+    </div>
+  </section>
+);
 
 export default TeamContent;

@@ -1,7 +1,4 @@
-// /components/layout/FormSection.js
-"use client"; // Still client because of interactive children
-
-import React from "react";
+"use client";
 
 import QuoteForm from "@/components/common/forms-new/forms/QuoteForm";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
@@ -59,8 +56,6 @@ const FormSection = () =>
       aria-labelledby="contact-heading"
     >
       <div className="inner-big w-[95%] mt-10 1280px:mt-0 max-w-[1366px] mx-auto my-0 992px:flex">
-
-        {/* Render Form directly - Step 1 is fast and light */}
         <QuoteForm />
 
         <div className="right-contact-row w-[96%] 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1] 992px:pl-8">
@@ -86,17 +81,11 @@ const FormSection = () =>
           </p>
 
           <ScrollableSection className="h-auto 480px:w-[90%] 992px:w-full p-0 mx-auto 992px:h-[630px] 1200px:h-[658px] 1366px:h-[740px] bg-white mt-6 leading-[2]">
-            <ul
-              className="list-none w-full 992px:pr-6 services-content"
-              role="list"
-            >
+            <ul className="list-none w-full 992px:pr-6 services-content" role="list">
               {contentItems.map((item, index) => (
                 <li
                   key={index}
-                  className="flex items-start"
-                  style={{
-                    marginTop: index === 0 ? "0" : "26px",
-                  }}
+                  className={`flex items-start ${index > 0 ? 'mt-[26px]' : ''}`}
                 >
                   <IoCheckmarkSharp
                     className="flex-shrink-0 text-primary mt-1 mr-3"
@@ -104,12 +93,9 @@ const FormSection = () =>
                     aria-hidden="true"
                   />
                   <span className="inline-block">
-                    <h1
-                      className="mb-2.5"
-
-                    >
+                    <h3 className="mb-2.5">
                       {item.title}:
-                    </h1>
+                    </h3>
                     <p className="text-light">{item.content}</p>
                   </span>
                 </li>

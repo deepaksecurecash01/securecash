@@ -290,7 +290,7 @@ strong {
 }
 
 
-.services-content li span h1 {
+.services-content li span h3 {
   font-size: 20px;
   line-height: 30px;
   margin-left: auto;
@@ -953,12 +953,12 @@ body.modal-on .site-info-modal {
 @media (min-width: 768px) {
   .team-arrow-prev {
     left: -12px;
-    top: 42%;
+    top: 50%;
   }
 
   .team-arrow-next {
     right: -12px;
-    top: 58%;
+    top: 50%;
   }
 
   .team-arrow div {
@@ -966,10 +966,35 @@ body.modal-on .site-info-modal {
   }
 }
 
+@media (min-width: 992px) {
+  .team-arrow {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+     .team-arrow-prev {
+       left: -6px;
+       top: 44%;
+     }
+  
+     .team-arrow-next {
+       left: -6px;
+       top: 56%;
+     }
+}
 @media (min-width: 1024px) {
   .team-arrow {
     padding-left: 20px;
     padding-right: 20px;
+  }
+
+  .team-arrow-prev {
+    left: -6px;
+    top: 42%;
+  }
+
+  .team-arrow-next {
+    left: -6px;
+    top: 58%;
   }
 }
 
@@ -1003,15 +1028,17 @@ body.modal-on .site-info-modal {
   padding-bottom: 20px;
 }
 
-@media (min-width: 768px) {
+
+
+@media (min-width: 992px) {
   .team-swiper {
-    width: 92% !important;
+    width: 90% !important;
     margin-left: auto !important;
     margin-right: 0 !important;
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 992px) {
   .team-swiper {
     width: 93% !important;
     margin-left: auto !important;

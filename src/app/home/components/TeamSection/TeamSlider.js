@@ -1,11 +1,10 @@
 "use client";
 import React, { useState, useCallback } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, EffectFade, A11y } from "swiper/modules";
+import { Navigation, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
-import "swiper/css/a11y";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -52,28 +51,20 @@ const TeamSliderSwiper = ({ member }) =>
 
   return (
     <div className="team-slider-wrapper">
-      {/* PIXEL PERFECT FIX:
-          1. Override global .item-container to force width: 100% and display: flex.
-          2. Force slides to 'stretch' so they are all equal height immediately.
-          3. Pre-calculate widths to avoid horizontal flicker.
-       */}
       <style>{`
-        /* 1. Fix the Global CSS conflict inside this slider */
         .team-swiper .swiper-slide .item-container {
-          display: flex !important;       /* Override inline-block */
-          flex-direction: column;         /* Stack content */
-          width: 100% !important;         /* Override 329px fixed width */
-          height: 100% !important;        /* Force full height */
+          display: flex !important;
+          flex-direction: column;
+          width: 100% !important;
+          height: 100% !important;
           box-sizing: border-box;
         }
 
-        /* 2. Ensure the slide itself is a flex container that stretches children */
         .team-swiper .swiper-slide {
           display: flex;
           height: auto;
         }
 
-        /* 3. Pre-calculate widths (Same as before) */
         @media (min-width: 992px) {
           .team-swiper .swiper-slide {
             width: calc((100% - 16px) / 2);
@@ -94,7 +85,6 @@ const TeamSliderSwiper = ({ member }) =>
         }
       `}</style>
 
-      {/* Custom Previous Arrow */}
       <button
         onClick={() => swiperInstance?.slidePrev()}
         disabled={isBeginning}
@@ -105,7 +95,6 @@ const TeamSliderSwiper = ({ member }) =>
         <div>❮</div>
       </button>
 
-      {/* Custom Next Arrow */}
       <button
         onClick={() => swiperInstance?.slideNext()}
         disabled={isEnd}
@@ -117,7 +106,7 @@ const TeamSliderSwiper = ({ member }) =>
       </button>
 
       <Swiper
-        modules={[Navigation, EffectFade, A11y]}
+        modules={[Navigation, EffectFade]}
         spaceBetween={12}
         speed={800}
         loop={false}

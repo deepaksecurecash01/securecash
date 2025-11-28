@@ -60,14 +60,11 @@ const SLIDES = [
   },
 ];
 
-const HeroSection = () =>
-{
-  return (
-    <section id="banner" className="flex flex-col justify-end items-center" aria-label="Hero banner">
-      <BannerSlider slides={SLIDES} />
-      <InfoBar />
-    </section>
-  );
-};
+const HeroSection = () => (
+  <section id="banner" className="flex flex-col justify-end items-center" aria-label="Hero banner">
+    <BannerSlider slides={SLIDES} />
+    <InfoBar />
+  </section>
+);
 
 export default HeroSection;

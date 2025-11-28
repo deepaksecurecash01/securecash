@@ -20,8 +20,7 @@ import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate } from '@/utils/formHelpers';
 import FranchiseFormSchema, { FRANCHISE_DEFAULT_VALUES } from '@/zod/FranchiseFormSchema';
 
-// ✅ OPTIMIZATION: Lazy load Calendly only when needed (after form submission)
-// This saves ~50-80 KiB from initial bundle
+
 const PopupModal = dynamic(
     () => import('react-calendly').then(mod => mod.PopupModal),
     {
@@ -30,19 +29,7 @@ const PopupModal = dynamic(
     }
 );
 
-/**
- * Enhanced FranchiseForm - Production Optimized
- * 
- * OPTIMIZATIONS APPLIED:
- * ✅ Lazy-loaded Calendly modal (saves 50-80 KiB)
- * ✅ Unified form manager with complete focus integration
- * ✅ Controller-based architecture (no register usage)
- * ✅ Enhanced field error handling
- * ✅ Clean submission pipeline with Calendly integration
- * ✅ Consistent styling with light theme
- * ✅ Maintained exact visual styling and container classes
- * ✅ Proper cleanup on unmount
- */
+
 const FranchiseForm = ({ className }) =>
 {
     // State for Calendly integration

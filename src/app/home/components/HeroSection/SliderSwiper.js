@@ -15,12 +15,8 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
         <div className="relative overflow-hidden bg-black h-full">
             <div className="absolute inset-0 bg-black/40 z-[1]" aria-hidden="true" />
 
-            {/* ✅ LCP OPTIMIZATION: 
-               - Fixed heights to prevent layout shifts 
-            */}
             <div className="relative w-full h-full min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1024px:h-full 1440px:min-h-[70vh]">
                 <picture>
-                    {/* Mobile: < 768px */}
                     <source
                         media="(max-width: 767px)"
                         srcSet={slide.mobile.replace('.jpg', '.avif')}
@@ -31,8 +27,6 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
                         srcSet={slide.mobile.replace('.jpg', '.webp')}
                         type="image/webp"
                     />
-
-                    {/* Tablet: 768px - 1023px */}
                     <source
                         media="(min-width: 768px) and (max-width: 1023px)"
                         srcSet={slide.tablet.replace('.jpg', '.avif')}
@@ -43,8 +37,6 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
                         srcSet={slide.tablet.replace('.jpg', '.webp')}
                         type="image/webp"
                     />
-
-                    {/* Desktop: >= 1024px */}
                     <source
                         media="(min-width: 1024px)"
                         srcSet={slide.web.replace('.jpg', '.avif')}
@@ -55,25 +47,19 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
                         srcSet={slide.web.replace('.jpg', '.webp')}
                         type="image/webp"
                     />
-
-                    {/* Final Fallback */}
                     <img
                         src={slide.web}
                         alt={slide.alt || `SecureCash Banner ${slideIndex + 1}`}
-                        // ✅ OPTIMIZATION: Force 'sync' decoding for LCP to paint faster. 
-                        // 'async' for others to unblock main thread.
                         decoding={isLCP ? "sync" : "async"}
                         loading={isLCP ? "eager" : "lazy"}
                         fetchPriority={isLCP ? "high" : "low"}
                         className="absolute inset-0 w-full h-full object-cover"
-                        // Ensure browser knows the size early to reserve space
                         style={{ objectPosition: 'center' }}
                     />
                 </picture>
             </div>
 
             <Container className="z-10 w-full absolute inset-0 flex items-center">
-                {/* Pass priority to content to maybe prioritize text rendering */}
                 <SliderContent {...slide} priority={isLCP} />
             </Container>
         </div>
@@ -93,12 +79,12 @@ const CustomPagination = ({ slides, activeIndex, onDotClick }) => (
                 <li key={index}>
                     <button
                         className={`cursor-pointer h-[15px] w-[15px] mx-[2px] rounded-full inline-block transition-all duration-300 border-0 p-0 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-black ${activeIndex === index
-                            ? "bg-white transform scale-[1.34]"
-                            : "bg-[#a3a3a3]"
+                                ? "bg-white transform scale-[1.34]"
+                                : "bg-[#a3a3a3]"
                             }`}
                         onClick={() => onDotClick(index)}
                         aria-label={`Go to slide ${index + 1}`}
-                        aria-current={activeIndex === index ? "true" : "false"}
+                        aria-current={activeIndex === index}
                     />
                 </li>
             ))}
@@ -154,14 +140,10 @@ const BannerSlider = ({ slides = [] }) =>
                 onSwiper={handleSwiper}
                 onSlideChange={handleSlideChange}
                 className="w-full bg-black"
-                // ✅ OPTIMIZATION: Improves accessibility performance
                 aria-live="off"
             >
                 {slides.map((slide, index) => (
                     <SwiperSlide key={index}>
-                        {/* Only render content for active/near slides if memory is an issue, 
-                             but for LCP, keeping DOM stable is usually better. 
-                             We rely on the img loading="lazy" handled inside BannerSlide. */}
                         <BannerSlide slide={slide} slideIndex={index} />
                     </SwiperSlide>
                 ))}

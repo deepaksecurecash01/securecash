@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import ContentScroll from "./ContentScroll";
@@ -43,7 +43,7 @@ const WelcomeSection = () =>
     <section className="w-full 600px:bg-content-bg bg-no-repeat bg-center 1366px:bg-cover inline-block mt-10" aria-labelledby="welcome-heading">
       <Container className="max-[1440px]:max-w-[1280px]">
         <div id="welcome" className="min-h-[400px] w-full 992px:w-auto mx-auto">
-          <div className="center-content pb-0 block w-[82%] 768px:[80%] 992px:w-[70%] mx-auto mb-[40px] 992px:mb-0">
+          <div className="center-content pb-0 block w-[82%] 768px:w-[80%] 992px:w-[70%] mx-auto mb-[40px] 992px:mb-0">
             <p className="text-[32px] text-center mx-auto font-prata-regular">
               Welcome to
             </p>
@@ -85,6 +85,7 @@ const WelcomeSection = () =>
                     in Australia, SecureCash can serve your specific needs, we
                     provide:
                     <button
+                      type="button"
                       className={`read-more-link inline 768px:hidden ${isExpanded && "hidden"} text-[#957433] text-[16px] font-bold font-[Montserrat] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}
                       onClick={toggleContent}
                       aria-expanded={isExpanded}

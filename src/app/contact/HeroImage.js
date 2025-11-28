@@ -13,11 +13,7 @@ const HeroImage = () =>
       1070px:h-[55vh]
       overflow-hidden"
     >
-      {/* OPTIMIZATION: High Priority Image
-         - 'priority' ensures browser loads this immediately (Fixes LCP)
-         - 'object-[60%]' mimics your previous 'bg-[60%]' class
-         - '480px:object-center' mimics '480px:bg-[position:50%]'
-      */}
+     
       <Image
         src="/images/contact-page/Header-Image.png"
         alt="SecureCash Hero"

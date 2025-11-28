@@ -1,8 +1,4 @@
-/* ============================================
-   OPTIMIZED SWIPER STYLES
-   ============================================ */
 
-/* Black background for fade effect */
 #banner-slider {
     background-color: #000 !important;
 }
@@ -19,14 +15,12 @@
     background-color: #000 !important;
 }
 
-/* Performance optimizations */
 #banner-slider .swiper-slide {
     backface-visibility: hidden;
     -webkit-font-smoothing: antialiased;
     transform: translate3d(0, 0, 0);
 }
 
-/* Smooth fade transitions */
 #banner-slider .swiper-slide-active {
     z-index: 1;
 }
@@ -36,13 +30,11 @@
     z-index: 0;
 }
 
-/* Hover effect for custom dots */
 .dot-navigation button:hover {
     background: #fff !important;
     transform: scale(1.34) !important;
 }
 
-/* Reduce motion for accessibility */
 @media (prefers-reduced-motion: reduce) {
     #banner-slider .swiper-slide {
         transition-duration: 0.01ms !important;
