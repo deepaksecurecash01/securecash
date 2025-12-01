@@ -9,10 +9,8 @@ export default function JivoWidget()
 
     useEffect(() =>
     {
-        // 1. Function to trigger the load
         const startLoading = () => setShouldLoad(true);
 
-        // 2. Events that indicate the user is active
         const interactionEvents = ['scroll', 'mousemove', 'keydown', 'touchstart'];
 
         const onInteraction = () =>
@@ -20,15 +18,12 @@ export default function JivoWidget()
             startLoading();
         };
 
-        // 3. Add listeners to detect user activity
         interactionEvents.forEach((event) =>
             window.addEventListener(event, onInteraction, { passive: true, once: true })
         );
 
-        // 4. Fallback: Load after 5 seconds automatically if no interaction occurs
         const timer = setTimeout(startLoading, 5000);
 
-        // Cleanup listeners and timer
         return () =>
         {
             clearTimeout(timer);
@@ -38,7 +33,6 @@ export default function JivoWidget()
         };
     }, []);
 
-    // Don't render anything until the delay or interaction has occurred
     if (!shouldLoad) return null;
 
     return (

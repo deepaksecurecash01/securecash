@@ -52,8 +52,8 @@ const Logo = ({ onClick }) => (
         src="/images/SecureCash.webp"
         alt="SecureCash Logo"
 
-        width={0}
-        height={0}
+        width={285}
+        height={91}
 
         // ✅ FIX: Change this from "100vw" to the actual rendered width ("285px").
         // This ensures the preloader fetches the exact size needed, clearing the warning.

@@ -32,22 +32,16 @@ const LOGO_CONFIG = {
 
 const LogoSlide = ({ src, alt, width, height }) => (
   <div
-    className="flex-shrink-0 flex items-center justify-center relative" // ✅ ADDED: 'relative' is required for 'fill'
+    className="flex-shrink-0 flex items-center justify-center relative"
     style={{ width: `${width}px`, height: `${height}px` }}
   >
     <Image
-      // ✅ FIX part 1: Use 'fill' instead of width/height props.
-      // This removes the strict HTML attributes that caused the warning.
       fill
-
-      // ✅ FIX part 2: object-contain ensures the logo fits in the box without stretching
-      className="object-cover align-middle filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500 ease-in-out "
-
+      className="object-cover align-middle filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500 ease-in-out"
       src={src}
-      alt={`${alt} logo`}
-      // Optimization settings
-      loading="lazy"
-      decoding="async"
+      alt={`${alt} logo`}     
+      loading="eager"
+      decoding="sync"
       sizes="(max-width: 768px) 50vw, 300px"
       quality={75}
     />
