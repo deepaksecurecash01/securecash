@@ -1387,13 +1387,13 @@ export const CheckboxGroupInput = forwardRef(({
             case 'grid':
                 return {
                     container: "text-left relative",
-                    wrapper: "chkbox-container w-full mx-auto text-left relative chkbox-grid grid grid-flow-col place-content-around 1366px:place-content-between grid-rows-5 600px:grid-rows-3",
+                    wrapper: "chkbox-container w-full mx-auto text-left relative chkbox-grid grid grid-flow-col place-content-around 1366px:place-content-between grid-rows-5 600px:grid-rows-3 gap-2",
                     warningPosition: "top-[142px]"
                 };
             case 'site-grid':
                 return {
                     container: "text-left relative",
-                    wrapper: "chkbox-container w-full mx-auto text-left relative chkbox-grid grid grid-flow-col place-content-around gap-1 1366px:place-content-between grid-rows-5 600px:grid-rows-4",
+                    wrapper: "chkbox-container w-full mx-auto text-left relative chkbox-grid grid grid-flow-col place-content-around gap-1 1366px:place-content-between grid-rows-5 600px:grid-rows-4 gap-2",
                     warningPosition: "top-[142px]"
                 };
             case 'agreement':

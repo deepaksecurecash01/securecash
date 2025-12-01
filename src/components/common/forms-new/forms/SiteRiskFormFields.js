@@ -59,4 +59,3 @@ const SiteRiskFormFields = ({ formManager }) =>
 
 
 export default SiteRiskFormFields;
-
