@@ -2,7 +2,7 @@ import { Montserrat, Prata } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
-import Script from 'next/script'; // Import Script
+import JivoWidget from "@/utils/JivoWidget";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -74,12 +74,8 @@ export default function RootLayout({ children })
         </main>
         <Footer />
 
-        {/* Updated JivoChat Implementation */}
-        <Script
-          src="https://code.jivosite.com/widget.js"
-          data-jv-id={process.env.NEXT_PUBLIC_JIVO_ID}
-          strategy="lazyOnload"
-        />
+        <JivoWidget />
+
       </body>
     </html>
   );
