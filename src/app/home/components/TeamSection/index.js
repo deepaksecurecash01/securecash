@@ -163,7 +163,7 @@ const teamMembers = [
 const TeamContent = () => (
   <section
     id="team"
-    className="bg-[#ebebeb] inline-block w-full px-[10px] py-[24px] 414px:py-[100px] 414px:px-0 mt-0 768px:p-[50px] 992px:mt-[100px] 992px:px-2 992px:py-[100px]"
+    className="bg-[#ebebeb] inline-block w-full px-[10px] py-[24px] 414px:py-[100px] 414px:px-0 mt-0 992px:p-[50px] 992px:mt-[100px] 992px:px-2 992px:py-[100px]"
     aria-labelledby="team-heading"
   >
     <div className="w-full max-w-[1366px] mx-[auto] my-[0]">

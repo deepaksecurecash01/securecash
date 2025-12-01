@@ -7,24 +7,14 @@ import "swiper/css/navigation";
 import "swiper/css/effect-fade";
 import Link from "next/link";
 import Image from "next/image";
+import { FaEnvelope, FaFacebookF, FaTwitter, FaYoutube, FaLinkedinIn } from "react-icons/fa";
 
-const SocialLink = ({ href, icon, alt, memberName }) => (
+const SocialLink = ({ href, icon: Icon, alt }) => (
   <li className="float-left pr-[5px]">
-    <Link
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      aria-label={`${memberName}'s ${alt} profile`}
-    >
-      <Image
-        width={25}
-        height={25}
-        quality={80}
-        className="hover:filter hover:contrast-0"
-        src={`/images/icons/social/webp/${icon}.webp`}
-        alt=""
-        aria-hidden="true"
-        loading="lazy"
+    <Link href={href}>
+      <Icon
+        className="text-[25px] text-[#CFB53B] hover:filter hover:contrast-0 border-[1px] rounded-full p-1 border-[#CFB53B] transition-colors"
+        aria-label={alt}
       />
     </Link>
   </li>
@@ -174,7 +164,7 @@ const TeamSliderSwiper = ({ member }) =>
                   alt={`${member.name}, ${member.position}`}
                 />
               </div>
-              <div className="member-info p-4 414px:p-0 414px:pl-[20px] 414px:pr-[20px] w-full text-left 768px:pl-[16px] 768px:pr-[16px] 1366px:pl-[20px] 1366px:pr-[20px] 414px:py-[25px] clear-both overflow-hidden">
+              <div className="member-info p-4 414px:p-0 414px:pl-[20px] 414px:pr-[20px] w-full text-left  1366px:pl-[20px] 1366px:pr-[20px] 414px:py-[25px] clear-both overflow-hidden">
                 <h3 className="text-[20px] font-semibold text-[#333333] pb-3 text-left font-montserrat">
                   {member.name}
                 </h3>
@@ -183,16 +173,8 @@ const TeamSliderSwiper = ({ member }) =>
                   {member.position}
                 </p>
 
-                <div className="email-info flex justify-items-center px-0 py-[10px]">
-                  <Image
-                    width={5}
-                    height={5}
-                    className="mail-icon w-[5%] h-auto mr-2 py-[5px]"
-                    src="/images/icons/mail.png"
-                    alt=""
-                    aria-hidden="true"
-                    loading="lazy"
-                  />
+                <div className="email-info flex items-center px-0 py-[10px]">
+                  <FaEnvelope className="pr-2 text-[24px] relative inline text-[#CFB53B]" />
                   <Link
                     className="text-[14px] text-[#929292] hover:no-underline hover:text-[#c7a652]"
                     href={`mailto:${member.email}`}
@@ -202,30 +184,26 @@ const TeamSliderSwiper = ({ member }) =>
                   </Link>
                 </div>
                 <nav className="social-media pt-[5px]" aria-label={`${member.name}'s social media links`}>
-                  <ul className="list-none flex gap-2 m-0 p-0">
+                  <ul className="list-none flex gap-2">
                     <SocialLink
                       href={member.socialLinks?.facebook}
-                      icon="fb"
+                      icon={FaFacebookF}
                       alt="Facebook"
-                      memberName={member.name}
                     />
                     <SocialLink
                       href={member.socialLinks?.twitter}
-                      icon="twitter"
+                      icon={FaTwitter}
                       alt="Twitter"
-                      memberName={member.name}
                     />
                     <SocialLink
                       href={member.socialLinks?.youtube}
-                      icon="yt"
+                      icon={FaYoutube}
                       alt="YouTube"
-                      memberName={member.name}
                     />
                     <SocialLink
                       href={member.socialLinks?.linkedin}
-                      icon="linkedin"
+                      icon={FaLinkedinIn}
                       alt="LinkedIn"
-                      memberName={member.name}
                     />
                   </ul>
                 </nav>

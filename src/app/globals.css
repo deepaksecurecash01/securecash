@@ -972,20 +972,17 @@ body.modal-on .site-info-modal {
     padding-right: 20px;
   }
      .team-arrow-prev {
-       left: -6px;
+       left: -24px;
        top: 44%;
      }
   
      .team-arrow-next {
-       left: -6px;
+       left: -24px;
        top: 56%;
      }
 }
 @media (min-width: 1024px) {
-  .team-arrow {
-    padding-left: 20px;
-    padding-right: 20px;
-  }
+
 
   .team-arrow-prev {
     left: -6px;
