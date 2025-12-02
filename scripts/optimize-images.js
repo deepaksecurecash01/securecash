@@ -2,20 +2,46 @@ const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
 
-// CONFIGURATION: Contact Page Optimization (Per Lighthouse Report)
 const images = [
-    // ⚠️ CRITICAL: Main background image - 197.5KB savings identified by Lighthouse
+    // Quote page backgrounds (from CSS)
     {
-        input: 'public/images/mainbg-contact.jpg',
-        output: 'public/images/mainbg-contact.avif',
-        quality: 50, // Balance between quality and size for hero image
+        input: 'public/images/bg-quote-header-left.png',
+        output: 'public/images/bg-quote-header-left.avif',
+        quality: 50,
         chromaSubsampling: '4:2:0',
         effort: 9,
     },
-    // Contact page header image (if different from mainbg-contact.jpg)
     {
-        input: 'public/images/contact-page/Header-Image.png',
-        output: 'public/images/contact-page/Header-Image.avif',
+        input: 'public/images/bg-quote-header-right.png',
+        output: 'public/images/bg-quote-header-right.avif',
+        quality: 50,
+        chromaSubsampling: '4:2:0',
+        effort: 9,
+    },
+    {
+        input: 'public/images/bg-body-left.png',
+        output: 'public/images/bg-body-left.avif',
+        quality: 50,
+        chromaSubsampling: '4:2:0',
+        effort: 9,
+    },
+    {
+        input: 'public/images/bg-body-right.png',
+        output: 'public/images/bg-body-right.avif',
+        quality: 50,
+        chromaSubsampling: '4:2:0',
+        effort: 9,
+    },
+    {
+        input: 'public/images/bar-quote.png',
+        output: 'public/images/bar-quote.avif',
+        quality: 50,
+        chromaSubsampling: '4:2:0',
+        effort: 9,
+    },
+    {
+        input: 'public/images/secure-cash-head-office-2.png',
+        output: 'public/images/secure-cash-head-office-2.avif',
         quality: 50,
         chromaSubsampling: '4:2:0',
         effort: 9,

@@ -1,6 +1,6 @@
 import React from "react";
 import Container from "@/components/layout/Container";
-import { FaPhoneAlt, FaMapMarkerAlt, FaEnvelope, FaStar } from "react-icons/fa";
+import { FaMapMarkerAlt, FaEnvelope } from "react-icons/fa";
 import Link from "next/link";
 import QuoteForm from "@/components/common/forms-new/forms/QuoteForm";
 
@@ -27,41 +27,33 @@ const QuoteContent = () =>
                 aria-hidden="true"
               />
             </div>
+
             <div id="contact-info-wrapper" className="480px:flex 992px:pb-10">
               <div className="contact-info-item 768px:max-w-[50%]">
-                <h3
-                  className="mx-auto font-medium text-[24px] leading-[1.4em]
-                  flex items-center justify-center 992px:justify-start font-montserrat"
-                >
+                <h3 className="mx-auto font-medium text-[24px] leading-[1.4em] flex items-center justify-center 992px:justify-start font-montserrat">
                   <FaMapMarkerAlt className="pr-2.5 text-[26px] relative inline text-primary" aria-hidden="true" />
                   Address
                 </h3>
-                <p
-                  className="text-center 992px:text-left font-light leading-[2em] mb-2 mt-2 font-montserrat"
-                >
+                <p className="text-center 992px:text-left font-light leading-[2em] mb-2 mt-2 font-montserrat">
                   Anywhere, Anytime, Australia Wide! No matter where you are
                   located in Australia we will be able to organise someone to
                   service your location.
                 </p>
               </div>
+
               <div className="mid-row-divider-wrapper bg-transparent [flex-1] items-end flex ml-[16px] mr-[16px]" aria-hidden="true">
                 <div className="mid-row-divider self-end bg-[#dddddd] w-px h-full"></div>
               </div>
+
               <div className="contact-info-item mt-8 480px:mt-0 768px:max-w-[50%]">
-                <h3
-                  className="mx-auto font-medium text-[24px] leading-[1.4em]
-                  flex items-center justify-center 992px:justify-start font-montserrat"
-                >
+                <h3 className="mx-auto font-medium text-[24px] leading-[1.4em] flex items-center justify-center 992px:justify-start font-montserrat">
                   <FaEnvelope className="pr-2.5 text-[26px] relative inline text-primary" aria-hidden="true" />
                   Email Us
                 </h3>
-                <p
-                  className="text-center 992px:text-left font-light leading-[2em] mb-2 mt-2 font-montserrat"
-                >
-                  You can reach our Business Development&nbsp; Team directly by
-                  emailing;
+                <p className="text-center 992px:text-left font-light leading-[2em] mb-2 mt-2 font-montserrat">
+                  You can reach our Business Development Team directly by
+                  emailing{" "}
                   <strong>
-                    {" "}
                     <a
                       href="mailto:sales@securecash.com.au"
                       className="text-[#957433] hover:underline"
@@ -72,23 +64,20 @@ const QuoteContent = () =>
                 </p>
               </div>
             </div>
-            <div className="qoute-callback-cta-desktop hidden 992px:block">
+
+            <div className="hidden 992px:block">
               <div id="note-wrapper" className="mb-4">
-                <p
-                  className="mx-auto font-medium text-[20px] 1070px:text-[22px] 1200px:text-[24px] leading-[1.4em] text-center font-montserrat"
-                >
+                <p className="mx-auto font-medium text-[20px] 1070px:text-[22px] 1200px:text-[24px] leading-[1.4em] text-center font-montserrat">
                   Would You Rather Talk To Us Over The Phone?
                 </p>
-                <p
-                  className="text-center font-light leading-[2em] mb-2 font-montserrat"
-                >
+                <p className="text-center font-light leading-[2em] mb-2 font-montserrat">
                   Request a call back at a time which is convenient for you!
                 </p>
               </div>
               <div className="flex justify-center items-center">
                 <Link
                   href="/contact/#contact-form-section"
-                  className="nextBtn w-[200px] bg-[#c6a54b] text-white border-none text-center cursor-pointer rounded-[40px] outline-none appearance-none hover:opacity-80-sm px-2 py-4 shadow-none font-montserrat hover:bg-black"
+                  className="w-[200px] bg-[#c6a54b] text-white text-center cursor-pointer rounded-[40px] px-2 py-4 font-montserrat hover:bg-black transition-colors"
                   aria-label="Request a call back from our team"
                 >
                   Request a Call Back
@@ -97,26 +86,24 @@ const QuoteContent = () =>
             </div>
           </div>
         </div>
+
         <div id="quote-content-right" className="[flex-1] overflow-visible">
-          <QuoteForm className={`mt-4`} />
+          <QuoteForm className="mt-4" />
         </div>
+
         <div className="pt-10 w-[90%] mx-auto 480px:w-full 992px:hidden">
           <div id="note-wrapper" className="mb-4">
-            <p
-              className="mx-auto font-medium text-[20px] 1070px:text-[22px] 1200px:text-[24px] leading-[1.4em] text-center font-montserrat"
-            >
+            <p className="mx-auto font-medium text-[20px] 1070px:text-[22px] 1200px:text-[24px] leading-[1.4em] text-center font-montserrat">
               Would You Rather Talk To Us Over The Phone?
             </p>
-            <p
-              className="text-center font-light leading-[2em] mb-2 font-montserrat"
-            >
+            <p className="text-center font-light leading-[2em] mb-2 font-montserrat">
               Request a call back at a time which is convenient for you!
             </p>
           </div>
           <div className="flex justify-center items-center">
             <Link
               href="/contact/#contact-form-section"
-              className="nextBtn w-[200px] bg-[#c6a54b] text-white border-none text-center cursor-pointer rounded-[40px] outline-none appearance-none hover:opacity-80-sm px-2 py-4 shadow-none font-montserrat hover:bg-black"
+              className="w-[200px] bg-[#c6a54b] text-white text-center cursor-pointer rounded-[40px] px-2 py-4 font-montserrat hover:bg-black transition-colors"
               aria-label="Request a call back from our team"
             >
               Request a Call Back

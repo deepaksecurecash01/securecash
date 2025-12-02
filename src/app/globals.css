@@ -6,10 +6,7 @@
 @tailwind utilities;
 
 html {
-  /* 1. CRITICAL FIX: Stops the "not-scrolled-to-top" glitch on route change */
   scroll-behavior: auto !important;
-
-  
 }
 
 :root:has(.no-doc-scroll) {
@@ -29,16 +26,6 @@ strong {
 /* ================================
    KEYFRAME ANIMATIONS
    ================================ */
-@-webkit-keyframes fade {
-  from {
-    filter: brightness(0);
-  }
-
-  to {
-    filter: brightness(1);
-  }
-}
-
 @keyframes fade {
   from {
     filter: brightness(0);
@@ -60,8 +47,6 @@ strong {
 }
 
 @keyframes scrollleft {
-  0% {}
-
   100% {
     transform: translateX(calc(-250px * 18));
   }
@@ -73,12 +58,20 @@ strong {
   }
 }
 
+@keyframes smoothScrollLeft {
+  0% {
+    transform: translate3d(-50%, 0, 0);
+  }
+
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 /* ================================
    MOBILE MENU
    ================================ */
 #mobile-menu {
-  -webkit-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
-  -moz-box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
   box-shadow: 0 1px 6px 0 rgba(32, 33, 36, 0.28);
 }
 
@@ -102,7 +95,6 @@ strong {
 @media screen and (max-width: 991px) {
   #content-middle .slick-list {
     width: 100% !important;
-    margin: 0 auto !important;
   }
 }
 
@@ -131,18 +123,17 @@ strong {
 /* ================================
    BACKGROUND SECTIONS
    ================================ */
-
 @media (min-width: 1200px) {
   .section-wrapper {
-    background: url("../../public/images/bg-quote-header-left.webp") left top no-repeat,
-      url("../../public/images/bg-quote-header-right.webp") right top no-repeat;
+    background: url("/images/bg-quote-header-left.avif") left top no-repeat,
+      url("/images/bg-quote-header-right.avif") right top no-repeat;
     width: 100%;
   }
 }
 
 .bg-dots {
-  background: url("../../public/images/bg-quote-header-left.png") left center no-repeat,
-    url("../../public/images/bg-quote-header-right.png") right center no-repeat;
+  background: url("/images/bg-quote-header-left.avif") left center no-repeat,
+    url("/images/bg-quote-header-right.avif") right center no-repeat;
   width: 100%;
 }
 
@@ -166,10 +157,10 @@ strong {
    QUOTE CONTENT SECTION
    ================================ */
 #quote-content {
-  background: url("https://securecash.com.au/images/secure-cash-head-office-2.png"),
-    url("../../public/images/bar-quote.png"),
-    url("../../public/images/bg-body-left.png"),
-    url("../../public/images/bg-body-right.png");
+  background: url("/images/secure-cash-head-office-2.avif"),
+    url("/images/bar-quote.avif"),
+    url("/images/bg-body-left.avif"),
+    url("/images/bg-body-right.avif");
   background-size: auto, 100% 359px, auto, auto;
   background-repeat: no-repeat;
   margin-bottom: 40px;
@@ -223,9 +214,6 @@ strong {
   top: 0;
   font-size: 18px;
   font-weight: 900;
-  unicode-bidi: isolate;
-  font-variant-numeric: tabular-nums;
-  text-transform: none;
 }
 
 .partner-logo {
@@ -289,7 +277,6 @@ strong {
   padding-right: 34px;
 }
 
-
 .services-content li span h3 {
   font-size: 20px;
   line-height: 30px;
@@ -300,8 +287,6 @@ strong {
   text-align: left;
   margin-bottom: 10px;
 }
-
-
 
 #content-contact li:not(:first-child) span h4 {
   margin-top: 20px;
@@ -318,8 +303,6 @@ strong {
 .services-content li span p:not(:last-child) {
   margin-bottom: 10px;
 }
-
-
 
 /* ================================
    UTILITY CLASSES
@@ -340,19 +323,9 @@ strong {
   }
 }
 
-.testing {
-  background: linear-gradient(90deg,
-      #000 50%,
-      url("/public/images/welcome/identify-business-hero-img.jpg") 50%);
-}
-
 /* ================================
    CONTACT PAGE
    ================================ */
-.contact-page {
-  /* Base styles */
-}
-
 @media (max-width: 768px) {
   .contact-page {
     padding: 60px 0;
@@ -532,8 +505,6 @@ body.modal-on .site-info-modal {
   max-width: 824px;
   padding: 74px 116px;
   box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
-  -webkit-box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
-  -moz-box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
 }
 
 .business-type-dailog-box--card p {
@@ -571,8 +542,6 @@ body.modal-on .site-info-modal {
   max-width: 824px;
   padding: 74px 116px;
   box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
-  -webkit-box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
-  -moz-box-shadow: 1px 9px 29px -2px rgba(0, 0, 0, 0.26);
   text-align: center;
   position: relative;
 }
@@ -823,18 +792,6 @@ body.modal-on .site-info-modal {
 /* ================================
    CLIENT LOGOS SMOOTH SCROLL
    ================================ */
-
-/* Smooth scrolling animation - GPU accelerated */
-@keyframes smoothScrollLeft {
-  0% {
-    transform: translate3d(-50%, 0, 0);
-  }
-
-  100% {
-    transform: translate3d(0, 0, 0);
-  }
-}
-
 .logo-scroll-track {
   will-change: transform;
   backface-visibility: hidden;
@@ -842,13 +799,10 @@ body.modal-on .site-info-modal {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Ensure smooth rendering on all browsers */
 #client-logos {
-  -webkit-transform: translateZ(0);
   transform: translateZ(0);
 }
 
-/* Optional: Add subtle background pattern */
 #client-logos::before {
   content: "";
   position: absolute;
@@ -866,8 +820,6 @@ body.modal-on .site-info-modal {
 /* ================================
    CAROUSEL / SWIPER STYLES
    ================================ */
-
-/* Services Carousel Container */
 .carousel-wrapper {
   position: relative;
   width: 100%;
@@ -884,18 +836,11 @@ body.modal-on .site-info-modal {
   }
 }
 
-
-
-/* Swiper Navigation Buttons - Hide default */
 .services-carousel .swiper-button-next,
 .services-carousel .swiper-button-prev {
   display: none !important;
 }
 
-
-
-
-/* Custom Arrow Buttons */
 .carousel-arrow {
   outline: none;
   user-select: none;
@@ -915,8 +860,6 @@ body.modal-on .site-info-modal {
 /* ================================
    TEAM SLIDER STYLES
    ================================ */
-
-/* Team Slider Wrapper */
 .team-slider-wrapper {
   position: relative;
   width: 100%;
@@ -924,7 +867,6 @@ body.modal-on .site-info-modal {
   margin: 0;
 }
 
-/* Custom Arrow Buttons */
 .team-arrow {
   outline: none;
   user-select: none;
@@ -971,19 +913,19 @@ body.modal-on .site-info-modal {
     padding-left: 20px;
     padding-right: 20px;
   }
-     .team-arrow-prev {
-       left: -24px;
-       top: 44%;
-     }
-  
-     .team-arrow-next {
-       left: -24px;
-       top: 56%;
-     }
+
+  .team-arrow-prev {
+    left: -24px;
+    top: 44%;
+  }
+
+  .team-arrow-next {
+    left: -24px;
+    top: 56%;
+  }
 }
+
 @media (min-width: 1024px) {
-
-
   .team-arrow-prev {
     left: -6px;
     top: 42%;
@@ -1017,22 +959,11 @@ body.modal-on .site-info-modal {
   align-items: center;
 }
 
-/* Swiper Container */
 .team-swiper {
   width: 85% !important;
   margin: 0 auto !important;
   padding: 0;
   padding-bottom: 20px;
-}
-
-
-
-@media (min-width: 992px) {
-  .team-swiper {
-    width: 90% !important;
-    margin-left: auto !important;
-    margin-right: 0 !important;
-  }
 }
 
 @media (min-width: 992px) {
@@ -1043,7 +974,6 @@ body.modal-on .site-info-modal {
   }
 }
 
-/* Swiper Wrapper */
 .team-swiper .swiper-wrapper {
   display: flex;
   align-items: flex-start;
@@ -1056,10 +986,6 @@ body.modal-on .site-info-modal {
   }
 }
 
-/* Swiper Slide */
-
-
-/* Item Container */
 .item-container {
   display: inline-block;
   width: 329px;
@@ -1080,24 +1006,14 @@ body.modal-on .site-info-modal {
   }
 }
 
-@media (min-width: 1024px) {
-  .item-container {
-    width: 100%;
-  }
-}
-
-/* Hide default Swiper navigation */
 .team-swiper .swiper-button-next,
 .team-swiper .swiper-button-prev {
   display: none !important;
 }
 
-
-
-/* app/globals.css */
-
-/* --- 1. FIX SCROLLBARS --- */
-/* Extracted from .ScrollableSection_contentScroll */
+/* ================================
+   CUSTOM SCROLLBAR
+   ================================ */
 .custom-scrollbar {
   overflow: auto;
   --scrollbarBG: #ebebeb;
@@ -1123,4 +1039,3 @@ body.modal-on .site-info-modal {
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: #666;
 }
-

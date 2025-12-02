@@ -17,7 +17,7 @@ const HeroImage = () =>
         src="/images/contact-page/Header-Image.avif"
         alt="Contact SecureCash - Get support within 45 minutes"
         fill
-        priority
+        fetchPriority="high"
         quality={85}
         className="object-cover object-[60%_center] 480px:object-center -z-10"
       />
