@@ -2,28 +2,26 @@ import CompaniesSlider from "@/components/common/CompaniesSlider";
 import FranchiseForm from "@/app/franchise/FormSection";
 import HeroImage from "@/app/franchise/HeroImage";
 import SectionWrapper from "@/app/franchise/SectionWrapper";
-import React from "react";
 
-const page = () =>
+export const metadata = {
+  title: 'Franchise Opportunities - SecureCash',
+  description: 'Join Australia and New Zealand\'s largest banking courier network with your own SecureCash franchise. Full-time franchise from day one with buy-in from $5k to $25k.',
+};
+
+const FranchisePage = () =>
 {
   return (
     <>
-      <div id="content" >
+      <main id="content">
         <HeroImage />
-        <div
-          className="spacer-lg h-[30px] 768px:h-[100px]"
-          id="read-more"
-        ></div>
+        <div className="spacer-lg h-[30px] 768px:h-[100px]" id="read-more" />
         <SectionWrapper />
-      </div>
-      <div
-        className="spacer-lg h-[30px] 768px:h-[80px] 1024px:h-[100px]"
-        id="franchise-form"
-      ></div>
+      </main>
+      <div className="spacer-lg h-[30px] 768px:h-[80px] 1024px:h-[100px]" id="franchise-form" />
       <FranchiseForm />
       <CompaniesSlider />
     </>
   );
 };
 
-export default page;
+export default FranchisePage;

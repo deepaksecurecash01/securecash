@@ -3,46 +3,18 @@ const fs = require('fs');
 const path = require('path');
 
 const images = [
-    // Quote page backgrounds (from CSS)
+
     {
         input: 'public/images/bg-quote-header-left.png',
         output: 'public/images/bg-quote-header-left.avif',
-        quality: 50,
+        quality: 45,
         chromaSubsampling: '4:2:0',
         effort: 9,
     },
     {
         input: 'public/images/bg-quote-header-right.png',
         output: 'public/images/bg-quote-header-right.avif',
-        quality: 50,
-        chromaSubsampling: '4:2:0',
-        effort: 9,
-    },
-    {
-        input: 'public/images/bg-body-left.png',
-        output: 'public/images/bg-body-left.avif',
-        quality: 50,
-        chromaSubsampling: '4:2:0',
-        effort: 9,
-    },
-    {
-        input: 'public/images/bg-body-right.png',
-        output: 'public/images/bg-body-right.avif',
-        quality: 50,
-        chromaSubsampling: '4:2:0',
-        effort: 9,
-    },
-    {
-        input: 'public/images/bar-quote.png',
-        output: 'public/images/bar-quote.avif',
-        quality: 50,
-        chromaSubsampling: '4:2:0',
-        effort: 9,
-    },
-    {
-        input: 'public/images/secure-cash-head-office-2.png',
-        output: 'public/images/secure-cash-head-office-2.avif',
-        quality: 50,
+        quality: 45,
         chromaSubsampling: '4:2:0',
         effort: 9,
     },
