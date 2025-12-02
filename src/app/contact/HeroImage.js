@@ -13,27 +13,26 @@ const HeroImage = () =>
       1070px:h-[55vh]
       overflow-hidden"
     >
-     
       <Image
         src="/images/contact-page/Header-Image.avif"
-        alt="SecureCash Hero"
+        alt="Contact SecureCash - Get support within 45 minutes"
         fill
         priority
         quality={85}
         className="object-cover object-[60%_center] 480px:object-center -z-10"
       />
 
-      {/* Overlay to match your previous linear-gradient */}
       <div
         className="absolute inset-0 -z-10"
         style={{
           background: "-webkit-linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0))"
         }}
+        aria-hidden="true"
       />
 
-      <h2 className="text-[24px] 600px:text-[40px] mb-3 leading-[30px] 768px:leading-[56px] text-white relative z-10">
+      <p className="text-[24px] 600px:text-[40px] mb-3 leading-[30px] 768px:leading-[56px] text-white relative z-10">
         Get a Reply Back
-      </h2>
+      </p>
       <h1
         className="text-white font-bold text-center text-[32px] leading-[36px] 
         600px:leading-[78px] 600px:text-[56px] 
@@ -42,7 +41,7 @@ const HeroImage = () =>
         Within 45 Minutes
       </h1>
 
-      <hr className="mx-auto h-[4px] rounded-[5px] border-0 bg-primary mt-[21px] mb-[24px] w-[100px] relative z-10" />
+      <hr className="mx-auto h-[4px] rounded-[5px] border-0 bg-primary mt-[21px] mb-[24px] w-[100px] relative z-10" aria-hidden="true" />
 
       <div className="w-4/5 768px:w-[75%] mx-auto relative z-10">
         <p

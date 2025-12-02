@@ -4,9 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import Link from "next/link";
-import useScrollHide from "@/hooks/useScrollHide"; // Import the hook
+import useScrollHide from "@/hooks/useScrollHide";
 
-// --- CONSTANTS (EXACT COPY) ---
 const MENU_ITEMS = [
   { name: "Home", href: "/" },
   {
@@ -43,7 +42,6 @@ const MENU_ITEMS = [
   { name: "Get A Quote", href: "/quote" },
 ];
 
-// --- SUB COMPONENTS (EXACT COPY) ---
 
 const Logo = ({ onClick }) => (
   <div className="inline 1024px:mx-0 1024px:text-left 1024px:pb-0 mx-auto text-center pb-5">
@@ -55,8 +53,7 @@ const Logo = ({ onClick }) => (
         width={285}
         height={91}
 
-        // ✅ FIX: Change this from "100vw" to the actual rendered width ("285px").
-        // This ensures the preloader fetches the exact size needed, clearing the warning.
+
         sizes="285px"
 
         className="w-[285px] h-auto"
@@ -234,14 +231,12 @@ const MobileMenu = ({
   </div>
 );
 
-// --- MAIN NAVBAR COMPONENT ---
 
 const Navbar = () =>
 {
   const [mobileNavVisible, setMobileNavVisible] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState(null);
 
-  // 1. Hook Logic: Replaces <Headroom>
   const isVisible = useScrollHide(100);
 
   const toggleMobileMenu = () =>
@@ -257,8 +252,7 @@ const Navbar = () =>
 
   const handleMenuClick = () => setMobileNavVisible(false);
 
-  // 2. Visibility Logic
-  // If mobile menu is open, force show. Otherwise obey scroll hook.
+
   const shouldShow = isVisible || mobileNavVisible;
 
   return (
@@ -266,7 +260,6 @@ const Navbar = () =>
      
       <div className="w-full h-[160px] 1024px:h-[130px] bg-transparent" aria-hidden="true" />
 
-      {/* 4. HEADER (Replaces Headroom wrapper) */}
       <header
         className={`
           fixed top-0 left-0 right-0 z-50

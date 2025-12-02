@@ -1,10 +1,6 @@
 "use client";
 import React, { useState, useCallback } from "react";
-import Image from "next/image";
-import Link from "next/link";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-
-// Swiper Imports
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
@@ -26,7 +22,6 @@ const TeamSlider = ({ TESTIMONIALS }) =>
     const [swiperInstance, setSwiperInstance] = useState(null);
     const [activeIndex, setActiveIndex] = useState(0);
 
-    // Update state when slide changes
     const handleSlideChange = (swiper) =>
     {
         setActiveIndex(swiper.activeIndex);
@@ -52,17 +47,14 @@ const TeamSlider = ({ TESTIMONIALS }) =>
                 spaceBetween={0}
                 slidesPerView={1}
                 speed={500}
-                loop={false} // Matches original "infinite: false"
+                loop={false}
                 onSwiper={setSwiperInstance}
                 onSlideChange={handleSlideChange}
                 className="w-full"
+                aria-label="Customer testimonials"
             >
                 {TESTIMONIALS.map((testimonial, index) => (
                     <SwiperSlide key={index}>
-                        {/* Kept exact styling structure. 
-                           The height classes allow the container to reserve space,
-                           and the inner flexbox centers the text vertically.
-                        */}
                         <div className="h-[330px] 414px:h-[260px] 480:h-[220px] 1024px:h-[176px] relative overflow-hidden">
                             <div className="contact-testimonial--carousel__items h-full flex justify-center items-center">
                                 <div className="carousel-item">
@@ -78,58 +70,52 @@ const TeamSlider = ({ TESTIMONIALS }) =>
                 ))}
             </Swiper>
 
-            {/* External Controls - Kept exact styling */}
             <div className="contact-testimonial--carousel-control h-[80px] flex justify-center items-center">
-                <div
-                    className={`${isFirstSlide ? "opacity-30" : "cursor-pointer"}`}
-                    onClick={!isFirstSlide ? goToPrevSlide : undefined}
-                    role="button"
+                <button
+                    className={`${isFirstSlide ? "opacity-30" : "cursor-pointer"} border-0 bg-transparent`}
+                    onClick={goToPrevSlide}
+                    disabled={isFirstSlide}
                     aria-label="Previous Testimonial"
-                    aria-disabled={isFirstSlide}
                 >
-                    <FaChevronLeft size={36} />
-                </div>
-                <div className="carousel-control-divider h-full w-[2px] bg-[#b9984b] mx-[20px] p-0 rounded-none">
+                    <FaChevronLeft size={36} aria-hidden="true" />
+                </button>
+                <div className="carousel-control-divider h-full w-[2px] bg-[#b9984b] mx-[20px] p-0 rounded-none" aria-hidden="true">
                     &nbsp;
                 </div>
-                <div
-                    className={`${isLastSlide ? "opacity-30" : "cursor-pointer"}`}
-                    onClick={!isLastSlide ? goToNextSlide : undefined}
-                    role="button"
+                <button
+                    className={`${isLastSlide ? "opacity-30" : "cursor-pointer"} border-0 bg-transparent`}
+                    onClick={goToNextSlide}
+                    disabled={isLastSlide}
                     aria-label="Next Testimonial"
-                    aria-disabled={isLastSlide}
                 >
-                    <FaChevronRight size={36} />
-                </div>
+                    <FaChevronRight size={36} aria-hidden="true" />
+                </button>
             </div>
         </>
     );
 };
 
-const TeamContent = () =>
+const TestimonialsSection = () =>
 {
     return (
-        <div className="inline-block w-full px-[10px] py-[24px] 414px:pt-[100px] 414px:px-0 mt-0 992px:px-2 992px:pt-[130px] bg-contact-bg bg-no-repeat bg-cover bg-center">
+        <section className="inline-block w-full px-[10px] py-[24px] 414px:pt-[100px] 414px:px-0 mt-0 992px:px-2 992px:pt-[130px] bg-contact-bg bg-no-repeat bg-cover bg-center" aria-labelledby="testimonials-heading">
             <div className="w-full max-w-[1366px] mx-[auto] my-[0]">
-                <h2 className="text-center font-bold text-[32px] leading-[64px] mt-[18px] mb-[24px] mx-auto montSemiBold 414px:leading-[1.4em] font-montserrat">
+                <h2 id="testimonials-heading" className="text-center font-bold text-[32px] leading-[64px] mt-[18px] mb-[24px] mx-auto montSemiBold 414px:leading-[1.4em] font-montserrat">
                     Testimonials
                 </h2>
-                <hr className="mb-6 mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" />
+                <hr className="mb-6 mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" aria-hidden="true" />
                 <p className="text-center font-light leading-[32px] font-montserrat">
                     Don&apos;t just take our word for it. <br />
                     Hear what our customers have to say about our services!
                 </p>
                 <div className="relative select-none block w-full float-left mb-[100px]">
-                    <div
-                        className="768px:w-[90%] mx-auto 1024px:w-full"
-                        aria-label="Testimonials Slider"
-                    >
+                    <div className="768px:w-[90%] mx-auto 1024px:w-full">
                         <TeamSlider TESTIMONIALS={TESTIMONIALS} />
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
     );
 };
 
-export default TeamContent;
+export default TestimonialsSection;

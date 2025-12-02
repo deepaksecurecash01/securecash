@@ -1,4 +1,3 @@
-// /components/forms/ICA/IndependentContractorsForm.js - FULLY UNIFIED WITH UNIVERSAL FORM FIELDS
 "use client";
 import React from "react";
 import { useFormManager } from '@/hooks/useFormManager';
@@ -78,13 +77,11 @@ const SuccessMessage = () => (
     </div>
 );
 
-// Main Form Component - FULLY UNIFIED WITH UNIVERSAL FORM FIELDS
 const IndependentContractorsForm = ({
     agreementTermData,
     deedOfGuaranteeData,
 }) =>
 {
-    // Initialize the unified form manager with COMPLETE file upload support
     const formManager = useFormManager({
         schema: IcaFormSchema,
         defaultValues: ICA_DEFAULT_VALUES,
@@ -92,7 +89,6 @@ const IndependentContractorsForm = ({
         formId: 'ICA',
         theme: 'ica',
 
-        // ENABLE file upload with complete configuration
         fileUpload: {
             enabled: true,
             fields: [
@@ -109,7 +105,6 @@ const IndependentContractorsForm = ({
             concurrencyLimit: 2
         },
 
-        // Success/error handlers
         onSuccess: (result, finalData) =>
         {
             console.log("ICA form submitted successfully with attachments!", finalData);
@@ -123,15 +118,12 @@ const IndependentContractorsForm = ({
             console.error("ICA form submission failed:", error);
         },
 
-        // Data preparation - let file upload system handle everything
         prepareData: async (data) =>
         {
-            // File processing is now handled automatically by useFormManager
             return { ...data, formType: "ica" };
         }
     });
 
-    // Handle form submission
     const handleFormSubmit = async (e) =>
     {
         e.preventDefault();

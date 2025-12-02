@@ -9,7 +9,6 @@ import { FaChevronLeft, FaSpinner, FaCheckCircle } from "react-icons/fa";
 
 const SiteRiskFormFields = ({ formManager }) =>
 {
-    // Add icons to field configurations
     const fieldsWithIcons = RISK_ASSESSMENT_FIELDS.map(field => ({
         ...field,
         Icon: field.name === 'Amount' ? FaMoneyBillAlt : undefined
@@ -27,7 +26,6 @@ const SiteRiskFormFields = ({ formManager }) =>
                     theme="legacy-hazard"
                 />
             ))}
-            {/* Submit Button */}
             {submitButtonEnabled && (
                 <div className="button-controls-container 480px:w-[80%] mx-auto mt-12">
                     <div className="button-section relative">

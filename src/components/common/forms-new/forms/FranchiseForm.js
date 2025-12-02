@@ -25,7 +25,7 @@ const PopupModal = dynamic(
     () => import('react-calendly').then(mod => mod.PopupModal),
     {
         ssr: false,
-        loading: () => null // No loading state needed for hidden modal
+        loading: () => null 
     }
 );
 
@@ -39,7 +39,6 @@ const FranchiseForm = ({ className }) =>
 
     const calendlyURL = "https://calendly.com/jo_securecash?hide_gdpr_banner=1&primary_color=c7a652";
 
-    // Enhanced form manager with complete focus integration and Calendly support
     const formManager = useFormManager({
         schema: FranchiseFormSchema,
         defaultValues: FRANCHISE_DEFAULT_VALUES,

@@ -1,4 +1,3 @@
-// ============= SIMPLIFIED SiteInfoForm.js - PRODUCTION READY =============
 "use client";
 import React from "react";
 import { FaChevronLeft, FaSpinner, FaCheckCircle } from "react-icons/fa";
@@ -6,15 +5,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { useFormManager } from "@/hooks/useFormManager";
 
-// Import step components
 import SiteBusinessStep from "./SiteInfo/steps/SiteBusinessStep";
 import SiteContactStep from "./SiteInfo/steps/SiteContactStep";
 import SiteServiceStep from "./SiteInfo/steps/SiteServiceStep";
 
-// Import hazard form components
 import SiteRiskFormFields from "./SiteRiskFormFields";
 
-// UPDATED: Import the restructured schemas
 import
   {
     UNIFIED_SITE_INFO_SCHEMA,
@@ -24,21 +20,18 @@ import ThankYouModal from "./ThankYouModal";
 
 const SiteInfoForm = () =>
 {
-  // SIMPLIFIED: Single form manager for everything with proper schema structure
   const formManager = useFormManager({
-    schema: UNIFIED_SITE_INFO_SCHEMA, // Now includes 'risk' step
+    schema: UNIFIED_SITE_INFO_SCHEMA,
     defaultValues: UNIFIED_DEFAULT_VALUES,
     formType: "siteinfo",
     formId: "SiteInfo",
     theme: "hybrid",
 
-    // Multi-step configuration
     multiStep: {
       steps: ["business", "contact", "service", "risk"],
       conditional: false,
     },
 
-    // Hybrid enables hazard section after step 3
     hybrid: {
       enabled: true,
       reviewStep: 3,
@@ -62,7 +55,6 @@ const SiteInfoForm = () =>
   const { stepId, currentStep, isFirst } = formManager.getCurrentStep();
   const { submitButtonEnabled } = formManager;
 
-  // Focus hazard form when step completes to review
   React.useEffect(() =>
   {
     if (stepId === "risk") {
@@ -83,17 +75,14 @@ const SiteInfoForm = () =>
     }
   }, [stepId]);
 
-  // SIMPLIFIED: Single submit handler for both forms
   const handleFormSubmit = async (e) =>
   {
     e.preventDefault();
 
-    // The enhanced form manager handles both multi-step progression and final hybrid submission
     const result = await formManager.handleSubmit();
     return result;
   };
 
-  // Step rendering
   const renderCurrentStep = () =>
   {
     const stepComponents = {
@@ -135,7 +124,6 @@ const SiteInfoForm = () =>
 
   return (
     <>
-      {/* Contact Content Section */}
       <div
         id="content-contact"
         className="bg-content-bg bg-center bg-no-repeat bg-cover inline-block w-full 992px:my-[40px] 1280px:my-[120px]"
@@ -204,7 +192,6 @@ const SiteInfoForm = () =>
           </div>
 
           <div className="[flex:1]">
-            {/* Multi-Step Form - Dark Theme */}
             <div className="float-none w-full mx-auto relative left-0 flex-1 flex justify-center h-[844px]">
               <form
                 className="forms-site-info h-auto px-[30px] 1366px:h-full submit-status mt-4 992px:mt-0 992px:mb-16 w-full lg:mt-0 lg:mb-0 992px:w-[450px] 1100px:w-[480px] 1200px:w-[500px] 1280px:w-[600px] shadow-[3px_3px_5px_0px_rgba(0,0,0,0.75)] text-center py-8 rounded-[6px] bg-[#1a1a1a] relative"
@@ -212,7 +199,6 @@ const SiteInfoForm = () =>
                 onSubmit={handleFormSubmit}
                 noValidate
               >
-                {/* Back button */}
                 {!isFirst && stepId !== "risk" && (
                   <div className="form-slide-btn-wrap mb-4 absolute">
                     <button
@@ -226,12 +212,10 @@ const SiteInfoForm = () =>
                   </div>
                 )}
 
-                {/* Current step */}
                 <div className={`${stepId === "risk" && "h-full"}`}>
                   {renderCurrentStep()}
                 </div>
 
-                {/* Next button */}
                 {stepId !== "risk" && (
                   <div className="button-controls-container w-[80%] mx-auto mt-7">
                     <div className="button-section relative">
@@ -260,7 +244,6 @@ const SiteInfoForm = () =>
         </div>
       </div>
 
-      {/* Hazard Form Section - Always Visible */}
       <div
         id="contact-form-section"
         className="inline-block w-full mb-12 480px:mb-[120px]"
@@ -275,7 +258,6 @@ const SiteInfoForm = () =>
             />
           </div>
 
-          {/* SIMPLIFIED: Hazard Form - Uses same form manager and submit handler */}
           <div
             className={`float-none 992px:w-[80%] 992px:float-left relative left-0 flex justify-center transition-opacity duration-300 ${!submitButtonEnabled
                 ? "opacity-50 pointer-events-none"
@@ -308,7 +290,6 @@ const SiteInfoForm = () =>
                   potential hazards or dangers at this location.
                 </p>
 
-                {/* SIMPLIFIED: Risk Assessment Fields - uses same form manager */}
                 <SiteRiskFormFields formManager={formManager} />
               </div>
             </form>
@@ -316,7 +297,6 @@ const SiteInfoForm = () =>
         </div>
       </div>
 
-      {/* Thank You Modal */}
       <ThankYouModal
         showThankYou={formManager.isSubmitted}
         onClose={formManager.resetForm}

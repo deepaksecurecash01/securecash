@@ -1,20 +1,17 @@
-// /components/forms/ContactForm.js
 "use client";
 import React, { useEffect } from "react";
 import
-{
-    FaUser,
-    FaPhone,
-    FaEnvelope,
-    FaInfoCircle,
-    FaBuilding,
-    FaUsers,
-    FaClock,
-    FaMapMarkerAlt,
-    FaSpinner,
-    FaCheckCircle,
-    FaCalendarAlt,
-} from "react-icons/fa";
+    {
+        FaUser,
+        FaPhone,
+        FaEnvelope,
+        FaBuilding,
+        FaUsers,
+        FaClock,
+        FaMapMarkerAlt,
+        FaSpinner,
+        FaCheckCircle,
+    } from "react-icons/fa";
 
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
@@ -24,8 +21,6 @@ import Link from "next/link";
 
 const ContactForm = ({ className }) =>
 {
-
-    // Enhanced form manager with complete focus integration
     const formManager = useFormManager({
         schema: ContactFormSchema,
         defaultValues: CONTACT_DEFAULT_VALUES,
@@ -35,7 +30,6 @@ const ContactForm = ({ className }) =>
         onSuccess: (result, finalData) =>
         {
             console.log("Contact form submitted successfully!");
-
         },
         onError: (error) =>
         {
@@ -43,10 +37,8 @@ const ContactForm = ({ className }) =>
         },
         prepareData: async (data) =>
         {
-            // Format date of submission
             const dateOfSubmission = formatSubmissionDate();
 
-            // Format callback date if present
             let processedData = {
                 ...data,
                 "formType": "contact",
@@ -56,7 +48,6 @@ const ContactForm = ({ className }) =>
                 dateOfSubmission: dateOfSubmission,
             };
 
-            // Format CallbackDate if it exists
             if (data.CallbackDate) {
                 processedData.CallbackDate = formatDateForAPI(data.CallbackDate);
             }
@@ -65,14 +56,11 @@ const ContactForm = ({ className }) =>
         }
     });
 
-    // Watch form values for conditional logic
     const needsCallback = formManager.watch("ChkCallBack");
     const selectedCallbackDate = formManager.watch("CallbackDate");
 
-    // Extract form config
     const { departments, callBackTimes, states } = formConfig;
 
-    // Basic input fields configuration
     const inputFields = [
         {
             name: "FullName",
@@ -106,8 +94,6 @@ const ContactForm = ({ className }) =>
 
     const userName = formManager.getValues().FullName || "";
 
-
-    // Debug logging for troubleshooting
     useEffect(() =>
     {
         if (process.env.NODE_ENV === 'development') {
@@ -128,10 +114,10 @@ const ContactForm = ({ className }) =>
                     noValidate
                     autoComplete="off"
                     style={{ background: "#f1f1f1" }}
+                    aria-label="Contact form"
                 >
                     <div className="form-page contact">
                         <div className="form-tab 480px:w-[90%] mx-auto">
-                            {/* Bot field (honeypot) - hidden field for spam protection */}
                             <input
                                 type="text"
                                 name="BotField"
@@ -140,9 +126,9 @@ const ContactForm = ({ className }) =>
                                 style={{ display: "none" }}
                                 tabIndex={-1}
                                 autoComplete="off"
+                                aria-hidden="true"
                             />
 
-                            {/* Department Selection - at the top */}
                             <div className="relative">
                                 <UniversalFormField
                                     {...formManager.getFieldProps({
@@ -154,10 +140,10 @@ const ContactForm = ({ className }) =>
                                     })}
                                     theme="light"
                                     autoComplete="new-password"
+                                    aria-label="Select department"
                                 />
                             </div>
 
-                            {/* Basic input fields */}
                             {inputFields.map((field) => (
                                 <div key={field.name} className="relative">
                                     <UniversalFormField
@@ -168,7 +154,6 @@ const ContactForm = ({ className }) =>
                                 </div>
                             ))}
 
-                            {/* Callback checkbox */}
                             <div className="relative mt-6">
                                 <UniversalFormField
                                     {...formManager.getFieldProps({
@@ -187,8 +172,6 @@ const ContactForm = ({ className }) =>
                                 />
                             </div>
 
-
-                            {/* Date picker - conditional on callback */}
                             <div className="relative">
                                 <UniversalFormField
                                     {...formManager.getFieldProps({
@@ -202,11 +185,10 @@ const ContactForm = ({ className }) =>
                                         disabled: !needsCallback || needsCallback.length === 0,
                                     })}
                                     theme="light"
-
+                                    aria-label="Select callback date"
                                 />
                             </div>
 
-                            {/* Time and State Selection Boxes inline */}
                             <div className="flex flex-col md:flex-row md:gap-4">
                                 <div className="w-full md:w-1/2 relative">
                                     <UniversalFormField
@@ -219,6 +201,7 @@ const ContactForm = ({ className }) =>
                                             disabled: !needsCallback || needsCallback.length === 0,
                                         })}
                                         theme="light"
+                                        aria-label="Select callback time"
                                     />
                                 </div>
                                 <div className="w-full md:w-1/2 relative">
@@ -232,11 +215,11 @@ const ContactForm = ({ className }) =>
                                             disabled: !needsCallback || needsCallback.length === 0,
                                         })}
                                         theme="light"
+                                        aria-label="Select state"
                                     />
                                 </div>
                             </div>
 
-                            {/* Message textarea - at the end */}
                             <div className="relative">
                                 <UniversalFormField
                                     {...formManager.getFieldProps({
@@ -252,38 +235,30 @@ const ContactForm = ({ className }) =>
                             </div>
                         </div>
                     </div>
-                    {/* Form submitted overlay */}
+
                     {formManager.isSubmitted && (
                         <div
-                            className="form-submitted-message text-center py-4 absolute h-full top-0 flex  flex-col justify-center items-center bg-[#f1f1f1] z-10 w-[90%]"
+                            className="form-submitted-message text-center py-4 absolute h-full top-0 flex flex-col justify-center items-center bg-[#f1f1f1] z-10 w-[90%]"
                             style={{ background: "#f1f1f1" }}
+                            role="alert"
+                            aria-live="polite"
                         >
-
                             <div className="480px:w-[90%] mx-auto 992px:h-[75%]">
-                                <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" />
+                                <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" aria-hidden="true" />
 
-                                <h3
-
-                                    className=" text-primary font-montserrat text-center capitalize pb-2 text-[32px] leading-[30px] mt-8 font-bold"
-                                >
+                                <h2 className="text-primary font-montserrat text-center capitalize pb-2 text-[32px] leading-[30px] mt-8 font-bold">
                                     Thank you{userName && ` ${userName}`}!
-                                </h3>
-                                <h4 className="font-montserrat text-center capitalize pb-2 text-[16px]">
+                                </h2>
+                                <p className="font-montserrat text-center capitalize pb-2 text-[16px]">
                                     Your message has been sent successfully.
-                                </h4>
-                                <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" />
+                                </p>
+                                <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" aria-hidden="true" />
 
                                 <div className="quote-ty-note">
-                                    <p
-                                      
-                                        className=" font-normal text-center pb-4 text-[16px] mt-8 font-montserrat"
-                                    >
+                                    <p className="font-normal text-center pb-4 text-[16px] mt-8 font-montserrat">
                                         We&apos;ve received your inquiry and will get back to you shortly.
                                     </p>
-                                    <p
-                                      
-                                        className=" font-normal text-center pb-4 text-[16px] font-montserrat"
-                                    >
+                                    <p className="font-normal text-center pb-4 text-[16px] font-montserrat">
                                         In the meantime, feel free to explore more about our services:
                                     </p>
                                     <div className="ty-note-list-wrap mt-2">
@@ -291,40 +266,43 @@ const ContactForm = ({ className }) =>
                                             <li className="cash-collection mb-2 flex items-center">
                                                 <img
                                                     src="/images/contentpageicons/cashcollection.png"
-                                                    alt="Cash Collection"
+                                                    alt=""
                                                     className="inline-block mr-2 w-[30px]"
+                                                    aria-hidden="true"
                                                 />
                                                 <Link
                                                     href="/services/cash-collection/"
                                                     className="text-[#c6a54b] hover:underline"
                                                 >
-                                                    <p className="m-0">Cash Collections</p>
+                                                    Cash Collections
                                                 </Link>
                                             </li>
                                             <li className="cash-delivery mb-2 flex items-center">
                                                 <img
                                                     src="/images/contentpageicons/cashdelivery.png"
-                                                    alt="Cash Delivery"
+                                                    alt=""
                                                     className="inline-block mr-2 w-[30px]"
+                                                    aria-hidden="true"
                                                 />
                                                 <Link
                                                     href="/services/cash-delivery/"
                                                     className="text-[#c6a54b] hover:underline"
                                                 >
-                                                    <p className="m-0">Cash Deliveries</p>
+                                                    Cash Deliveries
                                                 </Link>
                                             </li>
                                             <li className="cash-counting mb-2 flex items-center">
                                                 <img
                                                     src="/images/contentpageicons/cashcounting.png"
-                                                    alt="Cash Counting"
+                                                    alt=""
                                                     className="inline-block mr-2 w-[30px]"
+                                                    aria-hidden="true"
                                                 />
                                                 <Link
                                                     href="/services/cash-counting/"
                                                     className="text-[#c6a54b] hover:underline"
                                                 >
-                                                    <p className="m-0">Cash Counting</p>
+                                                    Cash Counting
                                                 </Link>
                                             </li>
                                         </ul>
@@ -336,22 +314,25 @@ const ContactForm = ({ className }) =>
                                         type="button"
                                         onClick={formManager.resetForm}
                                         className="bg-[#c6a54b] text-white border-none py-[15px] font-medium cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-[15px] p-2.5 shadow-none font-montserrat"
+                                        aria-label="Send another message"
                                     >
                                         Send Another Message
                                     </button>
                                 </div>
-
                             </div>
                         </div>
                     )}
-                    {/* Display submission error if any */}
+
                     {formManager.submissionError && (
-                        <div className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded mx-4">
+                        <div
+                            className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded mx-4"
+                            role="alert"
+                            aria-live="assertive"
+                        >
                             <strong>Submission Error:</strong> {formManager.submissionError}
                         </div>
                     )}
 
-                    {/* Button section */}
                     <div className="button-controls-container w-[80%] mx-auto mt-7">
                         <div className="button-section relative">
                             <button
@@ -359,17 +340,18 @@ const ContactForm = ({ className }) =>
                                 disabled={formManager.isSubmitting}
                                 className={`nextBtn ${formManager.isSubmitted ? 'bg-[#4bb543]' : 'bg-[#c6a54b]'
                                     } text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
+                                aria-label={formManager.isSubmitting ? "Sending message" : formManager.isSubmitted ? "Message sent successfully" : "Send message"}
                             >
                                 {formManager.isSubmitting ? (
-                                    <div className="flex items-center justify-center">
-                                        <FaSpinner className="animate-spin mr-2" />
+                                    <span className="flex items-center justify-center">
+                                        <FaSpinner className="animate-spin mr-2" aria-hidden="true" />
                                         Sending Message... Please Wait.
-                                    </div>
+                                    </span>
                                 ) : formManager.isSubmitted ? (
-                                    <div className="flex items-center justify-center">
-                                        <FaCheckCircle className="text-white mr-2" />
+                                    <span className="flex items-center justify-center">
+                                        <FaCheckCircle className="text-white mr-2" aria-hidden="true" />
                                         Thank you, we received your message!
-                                    </div>
+                                    </span>
                                 ) : (
                                     "Send Message"
                                 )}

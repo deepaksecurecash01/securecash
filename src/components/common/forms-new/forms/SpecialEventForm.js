@@ -1,20 +1,14 @@
-// ============= MIGRATED SpecialEventsForm.js - NEW FOUNDATION =============
 "use client";
 import React from "react";
 import { FaChevronLeft, FaSpinner, FaCheckCircle } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { useFormManager } from "@/hooks/useFormManager";
-
-// Import step components (reuse Site-Info components with modifications)
 import SpecialEventBusinessStep from "./SpecialEvents/steps/SpecialEventBusinessStep.js";
 import SpecialEventContactStep from "./SpecialEvents/steps/SpecialEventContactStep.js";
 import SpecialEventServiceStep from "./SpecialEvents/steps/SpecialEventServiceStep.js";
-
-// Import hazard form components
 import SiteRiskFormFields from "./SiteRiskFormFields";
 
-// Import the Special-Events specific schema with previous placeholders/errors
 import
   {
     UNIFIED_SPECIAL_EVENT_SCHEMA,
@@ -24,7 +18,6 @@ import ThankYouModal from "./ThankYouModal";
 
 const SpecialEventForm = () =>
 {
-  // Form manager with Special-Events configuration
   const formManager = useFormManager({
     schema: UNIFIED_SPECIAL_EVENT_SCHEMA,
     defaultValues: UNIFIED_SPECIAL_EVENT_DEFAULT_VALUES,
@@ -32,13 +25,11 @@ const SpecialEventForm = () =>
     formId: "SpecialEvent",
     theme: "hybrid",
 
-    // Multi-step configuration
     multiStep: {
       steps: ["business", "contact", "service", "risk"],
       conditional: false,
     },
 
-    // Hybrid enables hazard section after step 3
     hybrid: {
       enabled: true,
       reviewStep: 3,
@@ -62,7 +53,6 @@ const SpecialEventForm = () =>
   const { stepId, currentStep, isFirst } = formManager.getCurrentStep();
   const { submitButtonEnabled } = formManager;
 
-  // Focus hazard form when step completes to review
   React.useEffect(() =>
   {
     if (stepId === "risk") {
@@ -83,7 +73,6 @@ const SpecialEventForm = () =>
     }
   }, [stepId]);
 
-  // Submit handler
   const handleFormSubmit = async (e) =>
   {
     console.log("first");
@@ -92,7 +81,6 @@ const SpecialEventForm = () =>
     return result;
   };
 
-  // Step rendering
   const renderCurrentStep = () =>
   {
     const stepComponents = {
@@ -134,7 +122,6 @@ const SpecialEventForm = () =>
 
   return (
     <>
-      {/* Contact Content Section - Special Events Content */}
       <div
         id="content-contact"
         className="bg-content-bg bg-center bg-cover bg-no-repeat inline-block w-full 992px:my-[40px] 1280px:my-[120px]"
@@ -248,7 +235,6 @@ const SpecialEventForm = () =>
           </div>
 
           <div className="[flex:1]">
-            {/* Multi-Step Form - Dark Theme */}
             <div className="float-none w-full mx-auto relative left-0 flex-1 flex justify-center h-[844px]">
               <form
                 className="forms-site-info h-auto px-[30px] 1366px:h-full submit-status mt-4 992px:mt-0 992px:mb-16 w-full lg:mt-0 lg:mb-0 992px:w-[450px] 1100px:w-[480px] 1200px:w-[500px] 1280px:w-[600px] shadow-[3px_3px_5px_0px_rgba(0,0,0,0.75)] text-center py-8 rounded-[6px] bg-[#1a1a1a] relative"
@@ -256,7 +242,6 @@ const SpecialEventForm = () =>
                 onSubmit={handleFormSubmit}
                 noValidate
               >
-                {/* Back button */}
                 {!isFirst && stepId !== "risk" && (
                   <div className="form-slide-btn-wrap mb-4 absolute">
                     <button
@@ -270,12 +255,10 @@ const SpecialEventForm = () =>
                   </div>
                 )}
 
-                {/* Current step */}
                 <div className={`${stepId === "risk" && "h-full"}`}>
                   {renderCurrentStep()}
                 </div>
 
-                {/* Next button */}
                 {stepId !== "risk" && (
                   <div className="button-controls-container w-[80%] mx-auto mt-7">
                     <div className="button-section relative">
@@ -304,7 +287,6 @@ const SpecialEventForm = () =>
         </div>
       </div>
 
-      {/* Hazard Form Section - Always Visible */}
       <div
         id="contact-form-section"
         className="inline-block w-full mb-12 480px:mb-[120px]"
@@ -319,7 +301,6 @@ const SpecialEventForm = () =>
             />
           </div>
 
-          {/* Risk Assessment Form - Uses same form manager */}
           <div
             className={`float-none 992px:w-[80%] 992px:float-left relative left-0 flex justify-center transition-opacity duration-300 ${!submitButtonEnabled
                 ? "opacity-50 pointer-events-none"
@@ -352,14 +333,12 @@ const SpecialEventForm = () =>
                   potential hazards or dangers at this location.
                 </p>
 
-                {/* Risk Assessment Fields - uses same form manager */}
                 <SiteRiskFormFields formManager={formManager} />
               </div>
             </form>
           </div>
         </div>
 
-        {/* Error Display */}
         {formManager.submissionError && (
           <div className="max-w-[1366px] mx-auto mt-4">
             <div className="text-red-600 text-center mb-4 p-4 bg-red-50 border border-red-200 rounded mx-4">
@@ -375,7 +354,6 @@ const SpecialEventForm = () =>
         )}
       </div>
 
-      {/* Thank You Modal */}
       <ThankYouModal
         showThankYou={formManager.isSubmitted}
         onClose={formManager.resetForm}

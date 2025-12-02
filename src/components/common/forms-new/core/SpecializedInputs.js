@@ -811,7 +811,6 @@ export const ABNInput = forwardRef(({
     );
 });
 
-// FIXED: Enhanced Select Input with proper prop destructuring
 export const SelectInput = forwardRef(({
     value,
     onChange,
@@ -825,13 +824,14 @@ export const SelectInput = forwardRef(({
     disabled = false,
     label,
     footnote,
-    // FIXED: Extract non-DOM props to prevent React warnings
+    name, // Add name prop
     currentErrorField,
     setCurrentErrorField,
     ...props
 }, ref) =>
 {
     const themeConfig = THEMES[theme];
+    const selectId = `select-${name}`; // Generate unique ID
 
     // Legacy theme rendering
     if (theme === 'legacy-hazard') {
@@ -840,14 +840,15 @@ export const SelectInput = forwardRef(({
                 <FaCircle className={themeConfig.bulletPoint} />
                 <div className={themeConfig.contentWrapper}>
                     <div className="flex items-start mb-2">
-                        <label className={themeConfig.label}>
+                        <label htmlFor={selectId} className={themeConfig.label}>
                             {label}
                         </label>
                     </div>
                     <div className={themeConfig.selectInputContainer}>
                         <Icon className={`${themeConfig.selectIcon} ${hasError && isFocused ? "text-red-500" :
-                            isFocused ? "text-primary" : "text-[#999]"}`} />
+                            isFocused ? "text-primary" : "text-[#999]"}`} aria-hidden="true" />
                         <select
+                            id={selectId}
                             ref={ref}
                             className={`${themeConfig.select} ${hasError ? "focus:outline-red-600 focus:border-none focus:ring-0" : "focus:outline-primary"}`}
                             value={value || ''}
@@ -856,6 +857,7 @@ export const SelectInput = forwardRef(({
                             onBlur={onBlur}
                             disabled={disabled}
                             data-validate="Inline"
+                            aria-label={label}
                             {...props}
                         >
                             {options.map((option, index) => (
@@ -864,7 +866,7 @@ export const SelectInput = forwardRef(({
                                 </option>
                             ))}
                         </select>
-                        <i className={themeConfig.selectArrow} />
+                        <i className={themeConfig.selectArrow} aria-hidden="true" />
                     </div>
                     {footnote && (
                         <p className={themeConfig.selectFootnote} style={{ textAlign: "left" }}>
@@ -880,8 +882,9 @@ export const SelectInput = forwardRef(({
     const stateClasses = getStateClasses(theme, hasError, isFocused);
     return (
         <div className={themeConfig.selectContainer}>
-            {Icon && <Icon className={`${themeConfig.selectIcon} ${stateClasses.selectIcon}`} />}
+            {Icon && <Icon className={`${themeConfig.selectIcon} ${stateClasses.selectIcon}`} aria-hidden="true" />}
             <select
+                id={selectId}
                 ref={ref}
                 className={`${themeConfig.select} ${stateClasses.select}`}
                 value={value || ''}
@@ -889,6 +892,7 @@ export const SelectInput = forwardRef(({
                 onFocus={onFocus}
                 onBlur={onBlur}
                 disabled={disabled}
+                aria-label={label || `Select ${name}`}
                 {...props}
             >
                 {options.map((option, index) => (
@@ -897,7 +901,7 @@ export const SelectInput = forwardRef(({
                     </option>
                 ))}
             </select>
-            <i className={themeConfig.selectArrow} />
+            <i className={themeConfig.selectArrow} aria-hidden="true" />
         </div>
     );
 });
@@ -1279,6 +1283,19 @@ export const DateInput = forwardRef(({
         .react-date-picker__button { 
             padding: 0 !important; 
         }
+        /* ACCESSIBILITY FIX: Add accessible name to calendar button */
+        .react-date-picker__calendar-button::before {
+            content: 'Open calendar';
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
     `;
 
     return (
@@ -1303,9 +1320,10 @@ export const DateInput = forwardRef(({
                 format={format}
                 autoComplete={autoComplete}
                 className={themeConfig.datePicker}
-                calendarIcon={<FaCalendarAlt className="text-[18px] transition-colors duration-200" />}
-                clearIcon={displayValue ? <FaTimes className="min-w-[40px] text-[18px] transition-colors duration-200" onClick={handleClearClick} /> : null}
+                calendarIcon={<FaCalendarAlt className="text-[18px] transition-colors duration-200" aria-label="Open calendar" />}
+                clearIcon={displayValue ? <FaTimes className="min-w-[40px] text-[18px] transition-colors duration-200" onClick={handleClearClick} aria-label="Clear date" /> : null}
                 disabled={disabled}
+                calendarAriaLabel="Choose date"
                 {...props}
             />
         </div>

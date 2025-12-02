@@ -19,7 +19,6 @@ const DoubleButton = ({
             className={`${baseContainerClasses} ${className}`}
             id={id}
         >
-            {/* Primary Button */}
             <Link href={primaryButton.href} className="mx-[10px] 992px:mx-0 button">
                 <div className={`${baseBtnClasses} bg-[#c7a652] btn-learn-more hover:bg-white`}>
                     <p className={`${baseTextClasses} text-[#ffffff] group-hover:text-[#000]`}>
@@ -28,7 +27,6 @@ const DoubleButton = ({
                 </div>
             </Link>
 
-            {/* Secondary Button */}
             <Link href={secondaryButton.href} className="mx-[10px] 992px:mx-0 button">
                 <div className={`${baseBtnClasses} bg-white`}>
                     <p className={`${baseTextClasses} group-hover:text-[#c7a652] text-[#000]`}>

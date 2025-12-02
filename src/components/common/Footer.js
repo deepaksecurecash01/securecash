@@ -51,8 +51,7 @@ const Footer = () =>
     <>
       <div
         id="footer-links"
-        // ✅ OPTIMIZATION: [content-visibility:auto] tells the browser 
-        // to skip rendering this heavy section until it approaches the viewport.
+     
         className="w-full bg-[#1a1a1a] flex flex-wrap py-10 768px:py-20 [content-visibility:auto] [contain-intrinsic-size:500px]"
       >
         <div className="w-[95%] 1280px:w-full max-w-screen-1366px mx-auto flex justify-center items-center flex-col 768px:flex-row">
