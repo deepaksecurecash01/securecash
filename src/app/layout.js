@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import JivoWidget from "@/utils/JivoWidget";
+import GlobalScrollHandler from "@/utils/GlobalScrollHandler";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
@@ -67,6 +68,7 @@ export default function RootLayout({ children })
           }}
         />
         <link rel="dns-prefetch" href="https://i.vimeocdn.com" />
+        <GlobalScrollHandler />
 
         <Header />
         <main id="main-content">

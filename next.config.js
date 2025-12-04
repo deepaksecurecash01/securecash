@@ -45,17 +45,13 @@ const nextConfig = {
       "react-date-picker",
     ],
     scrollRestoration: true,
-    webpackBuildWorker: true,
-    legacyBrowsers: false,
-    browsersListForSwc: true,
   },
+
+  turbopack: {},
 
   webpack: (config, { isServer }) =>
   {
     if (!isServer) {
-      // ✅ FIX: Target ES2022 to prevent webpack from polyfilling
-      // modern features like Array.at(), flat(), and flatMap()
-      // which are already supported by your Browserslist target.
       config.target = ["web", "es2022"];
     }
     return config;

@@ -5,7 +5,6 @@ import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import Link from "next/link";
 import useScrollHide from "@/hooks/useScrollHide";
-import useRouteScrollFix from "@/hooks/useRouteScrollFix";
 
 const MENU_ITEMS = [
   { name: "Home", href: "/" },
@@ -221,7 +220,6 @@ const Navbar = () =>
 
   const isVisible = useScrollHide(100);
 
-  useRouteScrollFix();
 
   const toggleMobileMenu = () =>
   {
