@@ -49,16 +49,14 @@ const nextConfig = {
 
   turbopack: {},
 
-  webpack: (config, { isServer }) =>
-  {
+  webpack: (config, { isServer }) => {
     if (!isServer) {
       config.target = ["web", "es2022"];
     }
     return config;
   },
 
-  async headers()
-  {
+  async headers() {
     return [
       {
         source: "/images/banner/:path*",
