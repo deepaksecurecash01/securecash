@@ -3,21 +3,13 @@ const fs = require('fs');
 const path = require('path');
 
 const images = [
-
     {
-        input: 'public/images/bg-quote-header-left.png',
-        output: 'public/images/bg-quote-header-left.avif',
-        quality: 45,
+        input: 'public/images/welcome/special-event-img.jpg',
+        output: 'public/images/welcome/special-event-img.avif',
+        quality: 50,
         chromaSubsampling: '4:2:0',
         effort: 9,
-    },
-    {
-        input: 'public/images/bg-quote-header-right.png',
-        output: 'public/images/bg-quote-header-right.avif',
-        quality: 45,
-        chromaSubsampling: '4:2:0',
-        effort: 9,
-    },
+    }
 ];
 
 async function optimize()

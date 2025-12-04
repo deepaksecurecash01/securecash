@@ -2,15 +2,21 @@ import React from 'react';
 
 const TermsListItem = ({ item, isAnnexure = false }) => (
     <li className={isAnnexure ? "annexure-item" : ""}>
-        {item.number && <span className="tnc-number absolute left-0 text-[16px] font-semibold text-primary">{item.number}</span>}
-        <p className={`${item.wide ? "bullet-wide" : ""} block leading-[2em] pl-[47px] mb-[30px]`}>{item.text}</p>
+        {item.number && (
+            <span className="tnc-number absolute left-0 text-[16px] font-semibold text-primary">
+                {item.number}
+            </span>
+        )}
+        <p className={`${item.wide ? "bullet-wide" : ""} block leading-[2em] pl-[47px] mb-[30px]`}>
+            {item.text}
+        </p>
     </li>
 );
 
 const TermsSection = ({ section, isAnnexure = false }) => (
     <>
         {section.title && (
-            <div className=" font-semibold leading-[1.6em] mx-auto 992px:text-[18px] pt-4 mb-[24px] 768px:text-left 768px:mx-0 font-montserrat">
+            <div className="font-semibold leading-[1.6em] mx-auto 992px:text-[18px] pt-4 mb-[24px] 768px:text-left 768px:mx-0 font-montserrat">
                 {section.title}
             </div>
         )}
@@ -24,16 +30,20 @@ const TermsSection = ({ section, isAnnexure = false }) => (
 
 const IcaContractorClauses = ({ data }) =>
 {
+    const mainSections = Object.entries(data || {}).filter(
+        ([key, section]) => key !== 'annexureData' && section?.items
+    );
+
+    const annexureSections = Object.entries(data?.annexureData || {});
+
     return (
         <section className="border border-dark-border/50 py-[18px] px-5">
-            <div className="h-auto w-full mx-auto max-h-[642px]   1024px:max-h-[370px] overflow-y-auto ">
-                {Object.entries(data || {}).map(([key, section]) =>
-                    key !== 'annexureData' && section?.items ? (
-                        <TermsSection key={key} section={section} />
-                    ) : null
-                )}
+            <div className="h-auto w-full mx-auto max-h-[642px] 1024px:max-h-[370px] overflow-y-auto">
+                {mainSections.map(([key, section]) => (
+                    <TermsSection key={key} section={section} />
+                ))}
 
-                {Object.entries(data?.annexureData || {}).map(([key, section]) => (
+                {annexureSections.map(([key, section]) => (
                     <TermsSection key={key} section={section} isAnnexure={true} />
                 ))}
             </div>

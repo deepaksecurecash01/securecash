@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image"; // 🚀 Import Image
+import Image from "next/image";
 import Container from "@/components/layout/Container";
 import { blogPosts } from "../../../../data/blogData";
 
@@ -20,7 +20,6 @@ const BlogIndex = () =>
                         <div key={index} className="blog-index-main--content-item w-full 768px:w-1/2 1024px:w-1/3 px-2 mb-[38px] 1024px:px-[12px]">
                             <Link href={`/blog/${item.id}`} className="flex flex-wrap justify-center transition-all duration-200 ease-in group">
                                 <div className="relative w-full h-[220px] 414px:h-[240px] 480px:h-[270px] 768px:h-[200px] 1024px:h-[240px] mb-[12px]">
-                                    {/* 🚀 OPTIMIZATION: next/image with fill */}
                                     <Image
                                         src={item.featuredImage}
                                         className="object-cover w-full h-full"
@@ -30,11 +29,11 @@ const BlogIndex = () =>
                                     />
                                 </div>
                             </Link>
-                            <h4 className="text-[22px] font-bold text-primary text-center 768px:text-left pb-5 font-montserrat">
+                            <h2 className="text-[22px] font-bold text-primary text-center 768px:text-left pb-5 font-montserrat">
                                 <Link href={`/blog/${item.id}`} className="flex flex-wrap justify-center transition-all duration-200 ease-in">
                                     {item.title}
                                 </Link>
-                            </h4>
+                            </h2>
                         </div>
                     ))}
                 </div>

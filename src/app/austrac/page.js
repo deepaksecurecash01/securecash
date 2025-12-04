@@ -3,16 +3,20 @@ import HeadlineContent from './components/HeadlineContent';
 import FormSection from './components/FormSection';
 import BottomBanner from '@/components/common/BottomBanner';
 
-const page = () =>
+export const metadata = {
+  title: 'AUSTRAC - SecureCash',
+  description: 'Complete your AUSTRAC Know Your Customer (KYC) compliance requirements. Provide your organisation details for secure cash in transit services across Australia.',
+};
+
+const AustracPage = () =>
 {
   return (
-    <div>
+    <>
       <HeadlineContent />
       <FormSection />
       <BottomBanner />
-
-    </div>
+    </>
   );
 };
 
-export default page;
+export default AustracPage;

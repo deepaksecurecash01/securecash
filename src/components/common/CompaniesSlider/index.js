@@ -2,7 +2,6 @@
 import Image from "next/image";
 import React, { useMemo } from "react";
 
-// Configuration
 const LOGO_CONFIG = {
   baseUrl: "/images/companies/",
   companies: [
@@ -39,7 +38,7 @@ const LogoSlide = ({ src, alt, width, height }) => (
       fill
       className="object-cover align-middle filter grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500 ease-in-out"
       src={src}
-      alt={`${alt} logo`}     
+      alt={`${alt} logo`}
       loading="eager"
       decoding="sync"
       sizes="(max-width: 768px) 50vw, 300px"
@@ -52,24 +51,27 @@ const ClientLogos = ({ className = "", config = LOGO_CONFIG }) =>
 {
   const { baseUrl, companies, slideWidth, slideHeight, animationDuration } = config;
 
-  // Generate slide data
   const slideData = useMemo(
-    () =>
-      companies.map((name) => ({
-        src: `${baseUrl}${name}.png`,
-        alt: name,
-      })),
+    () => companies.map((name) => ({
+      src: `${baseUrl}${name}.png`,
+      alt: name,
+    })),
     [baseUrl, companies]
   );
 
-  // Create double set for seamless infinite scroll
-  const extendedSlides = useMemo(() =>
-  {
-    return [...slideData, ...slideData];
-  }, [slideData]);
+  const extendedSlides = useMemo(() => [...slideData, ...slideData], [slideData]);
 
-  // Calculate total width
   const totalWidth = slideWidth * extendedSlides.length;
+
+  const handleMouseEnter = (e) =>
+  {
+    e.currentTarget.style.animationPlayState = "paused";
+  };
+
+  const handleMouseLeave = (e) =>
+  {
+    e.currentTarget.style.animationPlayState = "running";
+  };
 
   return (
     <section
@@ -77,28 +79,19 @@ const ClientLogos = ({ className = "", config = LOGO_CONFIG }) =>
       className={`relative px-0 py-[30px] 992px:py-[65px] bg-white ${className}`}
       aria-label="Our clients"
     >
-      {/* Gradient overlays for fade effect - kept as is, lightweight DOM */}
       <div className="absolute left-0 top-0 bottom-0 w-[100px] 992px:w-[200px] bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
       <div className="absolute right-0 top-0 bottom-0 w-[100px] 992px:w-[200px] bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
 
-      {/* Scrolling container */}
       <div className="overflow-hidden w-full">
         <div
           className="flex logo-scroll-track"
           style={{
             width: `${totalWidth}px`,
-            // Ensure this animation is defined in your global CSS or Tailwind config
             animation: `smoothScrollLeft ${animationDuration}s linear infinite`,
-            willChange: 'transform', // ✅ HINT: Tells browser to optimize compositing
+            willChange: 'transform',
           }}
-          onMouseEnter={(e) =>
-          {
-            e.currentTarget.style.animationPlayState = "paused";
-          }}
-          onMouseLeave={(e) =>
-          {
-            e.currentTarget.style.animationPlayState = "running";
-          }}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
         >
           {extendedSlides.map((slide, index) => (
             <LogoSlide
@@ -107,7 +100,6 @@ const ClientLogos = ({ className = "", config = LOGO_CONFIG }) =>
               alt={slide.alt}
               width={slideWidth}
               height={slideHeight}
-            // Removed isPriority prop entirely
             />
           ))}
         </div>

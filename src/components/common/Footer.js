@@ -55,14 +55,12 @@ const Footer = () =>
         className="w-full bg-[#1a1a1a] flex flex-wrap py-10 768px:py-20 [content-visibility:auto] [contain-intrinsic-size:500px]"
       >
         <div className="w-[95%] 1280px:w-full max-w-screen-1366px mx-auto flex justify-center items-center flex-col 768px:flex-row">
-          {/* Left Column */}
           <div className="left-column w-[85%] 600px:w-full 1024px:w-[65%] 1280x:w-[70%]">
             <h2 className="font-prata text-3xl text-white text-center 1024px:text-start font-normal m-0">
               Useful Links
             </h2>
             <hr className="h-1 border-0 m-[16px_0_40px_0] w-[180px] rounded-[5px] bg-primary text-left mx-auto 1024px:mx-0" />
 
-            {/* Desktop Links */}
             <div className="hidden lg:block">
               {links[0].columns.map((column, index) => (
                 <div
@@ -85,7 +83,6 @@ const Footer = () =>
               ))}
             </div>
 
-            {/* Mobile Links */}
             <div className="block lg:hidden">
               {links[0].columns.map((column, index) => (
                 <div
@@ -109,7 +106,6 @@ const Footer = () =>
             </div>
           </div>
 
-          {/* Right Column */}
           <div className="right-column block mt-10 md:mt-0 lg:float-left w-[85%] sm:w-full lg:w-[40%] xl:w-[30%]">
             <h2 className="font-prata text-3xl text-white text-center lg:text-start font-normal m-0">
               Contact

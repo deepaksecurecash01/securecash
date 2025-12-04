@@ -10,13 +10,29 @@ import LicensingInsuranceSection from "./sections/LicensingInsuranceSection.js";
 import EDocketSystemSection from "./sections/EDocketSystemSection.js";
 import DriversSection from "./sections/DriversSection.js";
 import { IcaFormSchema, ICA_DEFAULT_VALUES } from "@/zod/IcaFormSchema";
-import { FaCheckCircle, FaCheckDouble } from "react-icons/fa";
+import { FaCheckCircle } from "react-icons/fa";
 
 const COMPANY_INFO = {
     name: "Office Central Pty Ltd",
     acn: "ACN 668 461 050",
     address: "30 Church Hill Road, Old Noarlunga SA 5168",
     email: "sales@securecash.com.au",
+};
+
+const FILE_UPLOAD_CONFIG = {
+    enabled: true,
+    fields: [
+        { field: 'GovernmentID', prefix: 'Guarantors Government ID' },
+        { field: 'WitnessID', prefix: 'Witness ID' },
+        { field: 'SecurityLicense', prefix: 'Security or Masters License' },
+        { field: 'CITInsurance', prefix: 'CIT Insurance' }
+    ],
+    compression: {
+        targetSizeKB: 400,
+        maxSizeMB: 5,
+        allowedTypes: ['image/jpeg', 'image/png', 'image/jpg']
+    },
+    concurrencyLimit: 2
 };
 
 const LoadingSpinner = () => (
@@ -50,37 +66,30 @@ const SubmitButton = ({ formManager }) => (
                 Submitting... Please Wait.
             </span>
         ) : formManager.isSubmitted ? (
-            <div className="flex items-center justify-center">
-                    <FaCheckCircle className="text-white mr-2" />
+            <span className="flex items-center justify-center">
+                <FaCheckCircle className="text-white mr-2" />
                 Thank you. We received your submission!
-            </div>
+            </span>
         ) : (
             "Click here to execute this deed & agreement"
         )}
     </button>
 );
 
-const SuccessMessage = () => (
-    <div className="text-green-600 font-medium">
-        <svg
-            className="inline w-5 h-5 mr-2"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-        >
-            <path
-                fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                clipRule="evenodd"
-            />
-        </svg>
-        Thank you. We received your submission!
-    </div>
-);
+const ProcessingIndicator = ({ fileUpload }) =>
+{
+    if (!fileUpload?.isProcessing) return null;
 
-const IndependentContractorsForm = ({
-    agreementTermData,
-    deedOfGuaranteeData,
-}) =>
+    return (
+        <div className="max-w-[1200px] mx-auto mt-4">
+            <div className="text-blue-600 text-center mb-4 p-4 bg-blue-50 border border-blue-200 rounded mx-4">
+                <strong>Processing Files:</strong> {fileUpload.processingProgress}%
+            </div>
+        </div>
+    );
+};
+
+const IndependentContractorsForm = ({ agreementTermData, deedOfGuaranteeData }) =>
 {
     const formManager = useFormManager({
         schema: IcaFormSchema,
@@ -88,47 +97,21 @@ const IndependentContractorsForm = ({
         formType: 'ica',
         formId: 'ICA',
         theme: 'ica',
-
-        fileUpload: {
-            enabled: true,
-            fields: [
-                { field: 'GovernmentID', prefix: 'Guarantors Government ID' },
-                { field: 'WitnessID', prefix: 'Witness ID' },
-                { field: 'SecurityLicense', prefix: 'Security or Masters License' },
-                { field: 'CITInsurance', prefix: 'CIT Insurance' }
-            ],
-            compression: {
-                targetSizeKB: 400,
-                maxSizeMB: 5,
-                allowedTypes: ['image/jpeg', 'image/png', 'image/jpg']
-            },
-            concurrencyLimit: 2
-        },
-
-        onSuccess: (result, finalData) =>
+        fileUpload: FILE_UPLOAD_CONFIG,
+        onSuccess: () =>
         {
-            console.log("ICA form submitted successfully with attachments!", finalData);
             setTimeout(() =>
             {
                 formManager.resetForm();
             }, 15000);
         },
-        onError: (error) =>
-        {
-            console.error("ICA form submission failed:", error);
-        },
-
-        prepareData: async (data) =>
-        {
-            return { ...data, formType: "ica" };
-        }
+        prepareData: async (data) => ({ ...data, formType: "ica" })
     });
 
-    const handleFormSubmit = async (e) =>
+    const handleFormSubmit = (e) =>
     {
         e.preventDefault();
-        const result = await formManager.handleSubmit();
-        return result;
+        return formManager.handleSubmit();
     };
 
     return (
@@ -167,16 +150,7 @@ const IndependentContractorsForm = ({
                         <SubmitButton formManager={formManager} />
                     </div>
 
-                  
-
-                    {/* File Upload Progress */}
-                    {formManager.fileUpload && formManager.fileUpload.isProcessing && (
-                        <div className="max-w-[1200px] mx-auto mt-4">
-                            <div className="text-blue-600 text-center mb-4 p-4 bg-blue-50 border border-blue-200 rounded mx-4">
-                                <strong>Processing Files:</strong> {formManager.fileUpload.processingProgress}%
-                            </div>
-                        </div>
-                    )}
+                    <ProcessingIndicator fileUpload={formManager.fileUpload} />
                 </form>
             </div>
         </section>

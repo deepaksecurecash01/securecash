@@ -1,50 +1,41 @@
 import Container from '@/components/layout/Container';
 import Image from 'next/image';
-import React from 'react';
+
+export const metadata = {
+    title: 'Privacy Policy - SKY WALLET PTY LTD',
+    description: 'Privacy Policy for Sky Wallet Pty Ltd. Learn how we collect, use, and protect your personal information.',
+};
 
 const PrivacyPolicyPage = () =>
 {
-
-
     const SectionHeader = ({ children }) => (
-        <h3
-      
-            className={`text-[22px] flex flex-row justify-start items-center gap-2 768px:gap-2  mb-4 leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] 992px:text-left 992px:w-full mt-8 font-montserrat`}
-      >
-            <strong style={{ textAlign: "left", fontWeight: "700" }}
->
+        <h2 className="text-[22px] flex flex-row justify-start items-center gap-2 768px:gap-2 mb-4 leading-[30px] 600px:leading-[1.6em] mx-auto font-bold text-[#000] 992px:text-left 992px:w-full mt-8 font-montserrat">
+            <strong style={{ textAlign: "left", fontWeight: "700" }}>
                 {children}:
-
-            </strong>      </h3>
-       
+            </strong>
+        </h2>
     );
 
     const SectionText = ({ children }) => (
-        <p className="text-[16px] leading-[2rem] text-left mb-0 
-             768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light font-montserrat" >
+        <p className="text-[16px] leading-[2rem] text-left mb-0 768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light font-montserrat">
             {children}
         </p>
     );
 
     const ListItem = ({ children, index }) => (
-           <div className={`flex items-start mt-[30px] ${index === 0 ? '1024px:mt-[8px]' : ' 1024px:mt-[16px]'
-                                    } mb-[12px] gap-3`}>
-                                <Image
-                                    className="inline-block bg-contain bg-no-repeat  992px:w-[30px] 992px:h-full"
-                                    src="/images/icons/tick.png"
-                                    alt={"check.png"}
-                                    width={40}
-                                    height={15}
-                                    priority={true}
-        
-                                />
-                                <h4
-                                    className="text-[16px]  font-medium text-[#000] text-left mb-0 w-full font-montserrat"
-                                >
-                                    {children}
-                                </h4>
-        
-                            </div>
+        <li className={`flex items-start mt-[30px] ${index === 0 ? '1024px:mt-[8px]' : '1024px:mt-[16px]'} mb-[12px] gap-3`}>
+            <Image
+                className="inline-block bg-contain bg-no-repeat 992px:w-[30px] 992px:h-full"
+                src="/images/icons/tick.png"
+                alt="Check mark"
+                width={40}
+                height={15}
+                priority
+            />
+            <span className="text-[16px] font-medium text-[#000] text-left mb-0 w-full font-montserrat">
+                {children}
+            </span>
+        </li>
     );
 
     return (
@@ -53,22 +44,23 @@ const PrivacyPolicyPage = () =>
                 <Container className="w-full">
                     <div className="blog-single-hero--wrap flex items-center relative">
                         <div className="blog-single-hero--head h-[290px] p-0 max-w-[900px] mx-auto flex flex-col justify-center items-center 768px:h-[340px]">
-                            <h1 className={`blog-single-hero--head__title blog-index-hero--content__title text-[28px] leading-[34px] px-[10px] w-full  480px:text-[38px]  480px:leading-[36px]  480px:px-[40px] 768px:px-0 mb-[20px] text-center  768px:text-[46px] font-extrabold  768px:leading-[50px] capitalize  600px:w-[590px]`}> SKY WALLET PTY LTD</h1>
+                            <h1 className="blog-single-hero--head__title blog-index-hero--content__title text-[28px] leading-[34px] px-[10px] w-full 480px:text-[38px] 480px:leading-[36px] 480px:px-[40px] 768px:px-0 mb-[20px] text-center 768px:text-[46px] font-extrabold 768px:leading-[50px] capitalize 600px:w-[590px]">
+                                SKY WALLET PTY LTD
+                            </h1>
                             <hr className="w-[100px] mx-auto mt-[6px] mb-[16px] h-[4px] rounded-[5px] border-0 bg-primary" />
-                            <div className="blog-index-hero--content__subtitle  mb-0">
-                                <h3 className=" text-[24px]  768px:text-[34px] text-center font-semibold leading-[1.6em] font-montserrat"> Privacy Policy</h3>
+                            <div className="blog-index-hero--content__subtitle mb-0">
+                                <p className="text-[24px] 768px:text-[34px] text-center font-semibold leading-[1.6em] font-montserrat">
+                                    Privacy Policy
+                                </p>
                             </div>
                         </div>
                     </div>
                 </Container>
             </section>
-            
 
             <div className="section-wrapper w-full mx-auto">
-                <section className='max-w-[90%] 1100px:max-w-[1024px] mx-auto'>
-                  
-
-                    <div className='mt-[50px]'> 
+                <section className="max-w-[90%] 1100px:max-w-[1024px] mx-auto">
+                    <div className="mt-[50px]">
                         <SectionHeader>Introduction</SectionHeader>
                         <SectionText>
                             Sky Wallet Pty Ltd regards customer privacy as an important part of our
@@ -185,9 +177,9 @@ const PrivacyPolicyPage = () =>
                             transactions performed on this site using the Billpower gateway are
                             secured payments.
                         </SectionText>
-                   </div>
+                    </div>
 
-                    <ul className='mt-8 mb-4'>
+                    <ul className="mt-8 mb-4 list-none">
                         <ListItem index={0}>
                             Payments are fully automated with an immediate response.
                         </ListItem>
@@ -206,22 +198,23 @@ const PrivacyPolicyPage = () =>
                             Billpower is an authorised third party processor for all the major
                             Australian banks.
                         </ListItem>
-                        <ListItem>
+                        <ListItem index={5}>
                             Billpower at no time touches your funds; all monies are directly
                             transferred from your credit card to the merchant account held by
                             Sky Wallet Pty Ltd.
                         </ListItem>
                     </ul>
 
-                    <div className='flex justify-center my-12 italic'>
-                        <p className=" align-center"  >
+                    <div className="flex justify-center my-12 italic">
+                        <p className="align-center">
                             For more information about Billpower and online credit card payments,
                             please visit{" "}
-                            <a className=' text-primary hover:underline' href="https://www.billpower.co/">https://www.billpower.co/</a>.<br />
-
+                            <a className="text-primary hover:underline" href="https://www.billpower.co/">
+                                https://www.billpower.co/
+                            </a>
+                            .<br />
                         </p>
-</div>
-                   
+                    </div>
                 </section>
             </div>
         </>

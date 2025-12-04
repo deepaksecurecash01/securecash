@@ -1,48 +1,18 @@
 import React from "react";
-import
-{
-  FaMoneyBillAlt,
-  FaCar,
-  FaShieldAlt,
-  FaExclamationTriangle,
-  FaArrowDown,
-  FaLongArrowAltDown,
-  FaCircle,
-} from "react-icons/fa";
+import { FaCircle } from "react-icons/fa";
 import BottomBanner from '@/components/common/BottomBanner';
-import { FaArrowDownLong } from "react-icons/fa6";
-
 import Container from "@/components/layout/Container";
 import ScrollableSection from "@/components/layout/ScrollbarSection";
 import FormSection from './components/FormSection';
-import Link from "next/link";
 import ServiceAgreementClauses from "./components/ServiceAgreementClauses";
 import { HeroSection } from "./components/HeroSection";
+import Image from "next/image";
 
-// Constants
-const TERMS_CONDITIONS = {
-  HERO: {
-    SUBTITLE: "Our Terms &",
-    TITLE: "Conditions",
-    LEARN_MORE: "Learn More",
-    SCROLL_TARGET: "#tnc-page-main-scroll",
-  },
-  CARD_TEXT: {
-    FIRST_PARAGRAPH:
-      "Below is a copy of our terms & conditions (T&C's) of service, please understand that this is NOT a lock-in contract and if you find our services are not suitable for your organisation, then you are free to cancel at anytime!",
-    SECOND_PARAGRAPH:
-      "Please be aware that Secure Cash reserves the right to change or amend these terms and conditions at anytime. You will be provided with a copy of these T&C's for your records to the email address you nominate below.",
-  },
-  MAIN_TITLE: "Terms & Conditions",
-  IMAGE: {
-    SRC: "/images/welcome/terms-main-img-1.jpg",
-    ALT: "Filling Out Forms",
-    WIDTH: 559,
-    HEIGHT: 678,
-  },
+export const metadata = {
+  title: 'Terms & Conditions | SecureCash',
+  description: 'Review our terms and conditions for secure cash transport services. Flexible agreements with no lock-in contracts. Cancel anytime if our services don\'t suit your needs.',
 };
 
-// General terms data
 const GENERAL_TERMS = [
   "Minimum of one collection per week with no time restrictions for collection or change orders, unless otherwise agreed upon with our service proposal,",
   "Use of your nominated banks express deposit satchels (either NAB, WBC, CBA, ANZ, BSA, STG or BOM) and using your banks express depositing system,",
@@ -52,7 +22,6 @@ const GENERAL_TERMS = [
   "Limited to $50,000 (AUD) in cash per collection, cheques can be unlimited in $ value.",
 ];
 
-// Change orders terms data
 const CHANGE_ORDER_TERMS = [
   "All change orders must be submitted two business days before day requested,",
   "Orders must be under $1000.00. If above $1000.00 funds have to be EFT'd to our holding account,",
@@ -63,12 +32,10 @@ const CHANGE_ORDER_TERMS = [
   "For every 50 kg a $20 + GST sourcing fee will incur.",
 ];
 
-
-
 const TermsListItem = ({ text, isLastItem = false }) => (
   <li className="relative">
-    <FaCircle className="text-primary text-[10px] mr-3 flex-shrink-0 absolute top-3" />
-    <p className="block leading-[2em] pl-[26px]  480px:pl-[47px] font-light mb-5 1366px:mb-[30px]">
+    <FaCircle className="text-primary text-[10px] mr-3 flex-shrink-0 absolute top-3" aria-hidden="true" />
+    <p className="block leading-[2em] pl-[26px] 480px:pl-[47px] font-light mb-5 1366px:mb-[30px]">
       {text}
       {isLastItem && (
         <>
@@ -81,8 +48,7 @@ const TermsListItem = ({ text, isLastItem = false }) => (
 );
 
 const TermsList = ({ terms, showExtraBreak = false }) => (
-  <ul className="tnc-page-main--content__list list-none relative  1024px:pr-10">
-    <li />
+  <ul className="tnc-page-main--content__list list-none relative 1024px:pr-10">
     {terms.map((term, index) => (
       <TermsListItem
         key={index}
@@ -94,34 +60,30 @@ const TermsList = ({ terms, showExtraBreak = false }) => (
 );
 
 const MainSection = () => (
-  <section className="tnc-page-main relative z-[1] mt-[52px] 480px:mt-9  1024px:mt-[150px] bg-[#f7f7f7]" id="tnc-page-main-scroll">
-    <img
-      src={TERMS_CONDITIONS.IMAGE.SRC}
-      alt={TERMS_CONDITIONS.IMAGE.ALT}
-      className="tnc-page-main__img-bg hidden 1024px:block absolute right-0  768px:w-[30%] h-full object-cover -z-[1] "
-      width={TERMS_CONDITIONS.IMAGE.WIDTH}
-      height={TERMS_CONDITIONS.IMAGE.HEIGHT}
-    />
+  <section className="tnc-page-main relative z-[1] mt-[52px] 480px:mt-9 1024px:mt-[150px] bg-[#f7f7f7]" id="tnc-page-main-scroll">
+    <div className="tnc-page-main__img-bg hidden 1024px:block absolute right-0 768px:w-[30%] h-full -z-[1]">
+      <Image
+        src="/images/welcome/terms-main-img-1.jpg"
+        alt="Filling Out Forms"
+        fill
+        sizes="30vw"
+        className="object-cover"
+        quality={85}
+        priority
+        fetchPriority="high"
+      />
+    </div>
     <Container className="inner w-full">
-      <div className="tnc-page-main--content  1024px:w-[68%] 1200px:w-[65%] py-[50px] px-[30px]  480px:py-[82px]  480px:px-[34px]  1366px:pt-[110px]  1366px:pb-[110px]  1366px:pl-[18px]">
-        <h3
-         
-          className=" text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mx-auto 992px:text-[26px] 768px:mx-0 font-montserrat"
-        >
-          {TERMS_CONDITIONS.MAIN_TITLE}
-        </h3>
-        <hr
-          
-          className="mt-5  h-[4px] rounded-[5px] border-0 mb-[34px] w-[100px] 768px:text-left 768px:mx-0 bg-primary"
-        />
-        <ScrollableSection className="h-auto w-full p-0 mx-auto 992px:h-[366px]  768px:pb-[18px] bg-[#f7f7f7]">
+      <div className="tnc-page-main--content 1024px:w-[68%] 1200px:w-[65%] py-[50px] px-[30px] 480px:py-[82px] 480px:px-[34px] 1366px:pt-[110px] 1366px:pb-[110px] 1366px:pl-[18px]">
+        <h1 className="text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mx-auto 992px:text-[26px] 768px:mx-0 font-montserrat">
+          Terms & Conditions
+        </h1>
+        <hr className="mt-5 h-[4px] rounded-[5px] border-0 mb-[34px] w-[100px] 768px:text-left 768px:mx-0 bg-primary" />
+        <ScrollableSection className="h-auto w-full p-0 mx-auto 992px:h-[366px] 768px:pb-[18px] bg-[#f7f7f7]">
           <TermsList terms={GENERAL_TERMS} showExtraBreak={true} />
-          <h4
-          
-            className=" text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mb-4 mx-auto 992px:text-[26px] 768px:mx-0 font-montserrat"
-          >
+          <h2 className="text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mb-4 mx-auto 992px:text-[26px] 768px:mx-0 font-montserrat">
             Change Orders
-          </h4>
+          </h2>
           <TermsList terms={CHANGE_ORDER_TERMS} />
         </ScrollableSection>
       </div>
@@ -129,18 +91,16 @@ const MainSection = () => (
   </section>
 );
 
-// Main Component
 const TermsAndConditionsPage = () =>
 {
   return (
-    <div>
+    <>
       <HeroSection />
       <MainSection />
       <ServiceAgreementClauses />
       <FormSection />
       <BottomBanner />
-
-    </div>
+    </>
   );
 };
 

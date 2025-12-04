@@ -1,7 +1,5 @@
-// /zod/SiteInfoFormSchema.js - UPDATED FOR UNIFIED HANDLING
 import { z } from 'zod';
 
-// Individual step schemas (unchanged)
 export const BusinessInfoSchema = z.object({
   BusinessName: z.string().min(1, "Business name is required"),
   Address: z.string().min(1, "Address is required"),
@@ -30,63 +28,49 @@ export const ServiceInfoSchema = z.object({
       const today = new Date();
       today.setHours(0, 0, 0, 0);
       return date >= today;
-    }, {
-      message: "Service start date must be today or in the future",
-    }),
+    }, "Service start date must be today or in the future"),
   Schedule: z.array(z.string()).min(1, "Please select at least one schedule option"),
   Bank: z.string().min(1, "Bank name is required")
 });
 
 export const RiskAssessmentSchema = z.object({
   Amount: z.string().min(1, "Please select an amount range"),
-  Parking: z.array(z.string()).min(1, "Please select at least one parking option"),
-  Security: z.array(z.string()).min(1, "Please select at least one security feature"),
+  Parking: z.array(z.string()).optional(),
+  Security: z.array(z.string()).optional(),
   External: z.array(z.string()).optional(),
   Internal: z.array(z.string()).optional()
 });
 
-// UPDATED: Unified schema structure for production
 export const UNIFIED_SITE_INFO_SCHEMA = {
   business: BusinessInfoSchema,
   contact: ContactInfoSchema,
   service: ServiceInfoSchema,
-  // NEW: Add risk as a proper step (even though it's handled differently in UI)
   risk: RiskAssessmentSchema
 };
 
-// Complete schema for final validation
 export const COMPLETE_SITE_INFO_SCHEMA = BusinessInfoSchema
   .merge(ContactInfoSchema)
   .merge(ServiceInfoSchema)
   .merge(RiskAssessmentSchema);
 
-// Multi-step schemas (for backward compatibility)
 export const SITE_INFO_SCHEMAS = UNIFIED_SITE_INFO_SCHEMA;
 
-// Unified default values
 export const UNIFIED_DEFAULT_VALUES = {
-  // Business Info
   Type: "Regular Service",
   BusinessName: "",
   Address: "",
   Suburb: "",
   State: "",
   Postcode: "",
-
-  // Contact Info
   Contact: "",
   Position: "",
   Phone: "",
   Email: "",
   Accounts: "",
-
-  // Service Info
   Services: [],
   Dates: "",
   Schedule: [],
   Bank: "",
-
-  // Risk Assessment
   Amount: "",
   Parking: [],
   Security: [],
@@ -94,10 +78,8 @@ export const UNIFIED_DEFAULT_VALUES = {
   Internal: []
 };
 
-// Default values (for backward compatibility)
 export const SITE_INFO_DEFAULT_VALUES = UNIFIED_DEFAULT_VALUES;
 
-// Field configurations remain the same...
 export const BUSINESS_INFO_FIELDS = [
   {
     name: "BusinessName",

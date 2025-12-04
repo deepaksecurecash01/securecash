@@ -46,6 +46,8 @@ const nextConfig = {
     ],
     scrollRestoration: true,
     webpackBuildWorker: true,
+    legacyBrowsers: false,
+    browsersListForSwc: true,
   },
 
   webpack: (config, { isServer }) =>

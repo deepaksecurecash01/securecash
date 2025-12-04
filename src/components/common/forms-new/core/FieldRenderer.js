@@ -1,20 +1,15 @@
-// /components/common/forms-new/core/FieldRenderer.js - ENHANCED FOR COMPLETE FILE UPLOAD INTEGRATION
 import React, { useState, useEffect } from 'react';
 import
-{
-    TextInput,
-    ABNInput,
-    DateInput,
-    SelectInput,
-    TextareaInput,
-    CheckboxGroupInput,
-    FileUploadInput
-} from './SpecializedInputs';
+    {
+        TextInput,
+        ABNInput,
+        DateInput,
+        SelectInput,
+        TextareaInput,
+        CheckboxGroupInput,
+        FileUploadInput
+    } from './SpecializedInputs';
 
-/**
- * Enhanced FieldRenderer with Complete Theme Support and File Upload Integration
- * Handles field rendering for all themes including ICA with pixel-perfect file upload support
- */
 const FieldRenderer = ({
     type,
     field,
@@ -22,49 +17,39 @@ const FieldRenderer = ({
     currentFocusField,
     onFieldFocus,
     onFieldBlur,
-    // Field-specific props
     placeholder,
     hidden = false,
     Icon,
     Icon2,
     theme = 'dark',
-    options = [], // for select
-    rows = 3, // for textarea
+    options = [],
+    rows = 3,
     maxLength,
-    // Date picker props
     dayPlaceholder = "DD",
     monthPlaceholder = "MM",
     yearPlaceholder = "YYYY",
     format = "dd/MM/yyyy",
-    // Checkbox group props
     variant = 'horizontal',
-    // File upload props
     accept = "image/*",
     multiple = false,
-    // Legacy theme props
     label,
     footnote,
-    // Standard props
     disabled = false,
     required = false,
     autoComplete = "new-password",
-    // ENHANCED: File upload state (from useFormManager)
     fileUploadState,
     ...otherProps
 }) =>
 {
     const [isFocused, setIsFocused] = useState(false);
 
-    // Extract field and error info from React Hook Form
     const { value, onChange, onBlur, name, ref } = field;
     const { error } = fieldState;
     const hasError = !!error;
 
-    // Focus state management
     const isCurrentFocusField = currentFocusField === name;
     const isFieldFocused = isFocused || isCurrentFocusField;
 
-    // Enhanced focus handler with global state sync
     const handleFocus = (e) =>
     {
         setIsFocused(true);
@@ -72,24 +57,18 @@ const FieldRenderer = ({
         if (onFieldFocus && typeof onFieldFocus === 'function') {
             onFieldFocus(name);
         }
-
-        console.log(`Field focused: ${name}`);
     };
 
-    // Enhanced blur handler with global state sync
     const handleBlur = (e) =>
     {
         setIsFocused(false);
-        onBlur(e); // Call React Hook Form's onBlur
+        onBlur(e);
 
         if (onFieldBlur && typeof onFieldBlur === 'function') {
             onFieldBlur();
         }
-
-        console.log(`Field blurred: ${name}`);
     };
 
-    // Sync local focus state with global focus state
     useEffect(() =>
     {
         if (isCurrentFocusField && !isFocused) {
@@ -101,7 +80,6 @@ const FieldRenderer = ({
         }
     }, [isCurrentFocusField, isFocused, currentFocusField, name]);
 
-    // Common props for all input types
     const commonProps = {
         value,
         onChange,
@@ -118,7 +96,6 @@ const FieldRenderer = ({
         ...otherProps
     };
 
-    // Legacy theme specific props for complex components
     const legacyProps = theme === 'legacy-hazard' ? {
         label,
         footnote,
@@ -126,7 +103,6 @@ const FieldRenderer = ({
         setCurrentErrorField: onFieldFocus,
     } : {};
 
-    // Render appropriate input based on type
     switch (type) {
         case 'text':
         case 'email':
@@ -168,7 +144,7 @@ const FieldRenderer = ({
                     {...commonProps}
                     options={options}
                     Icon={Icon || Icon2}
-                    {...legacyProps} // Pass legacy-specific props for SelectInput
+                    {...legacyProps}
                 />
             );
 
@@ -193,7 +169,6 @@ const FieldRenderer = ({
         case 'file':
             return (
                 <FileUploadInput
-                    // ENHANCED: Complete file upload integration with ref forwarding
                     ref={ref}
                     value={value}
                     onChange={onChange}
@@ -206,7 +181,6 @@ const FieldRenderer = ({
                     disabled={disabled}
                     accept={accept}
                     multiple={multiple}
-                    // ENHANCED: Pass complete file upload state
                     fileUploadState={fileUploadState}
                     {...otherProps}
                 />
@@ -219,7 +193,7 @@ const FieldRenderer = ({
                     options={options}
                     name={field.name}
                     variant={variant}
-                    {...legacyProps} // Pass legacy-specific props for CheckboxGroupInput
+                    {...legacyProps}
                 />
             );
 

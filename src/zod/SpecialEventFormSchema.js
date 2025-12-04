@@ -1,7 +1,5 @@
-// /zod/SpecialEventFormSchema.js - UPDATED FOR NEW FOUNDATION WITH PREVIOUS PLACEHOLDERS
 import { z } from 'zod';
 
-// Individual step schemas (with previous placeholder/error messages)
 export const SpecialEventBusinessInfoSchema = z.object({
     BusinessName: z.string().min(1, "Please enter the business name of this location."),
     Address: z.string().min(1, "Please enter the number & street for this location."),
@@ -32,7 +30,6 @@ export const SpecialEventRiskAssessmentSchema = z.object({
     Internal: z.array(z.string()).optional()
 });
 
-// UPDATED: Unified schema structure for new foundation
 export const UNIFIED_SPECIAL_EVENT_SCHEMA = {
     business: SpecialEventBusinessInfoSchema,
     contact: SpecialEventContactInfoSchema,
@@ -40,35 +37,26 @@ export const UNIFIED_SPECIAL_EVENT_SCHEMA = {
     risk: SpecialEventRiskAssessmentSchema
 };
 
-// Complete schema for final validation
 export const COMPLETE_SPECIAL_EVENT_SCHEMA = SpecialEventBusinessInfoSchema
     .merge(SpecialEventContactInfoSchema)
     .merge(SpecialEventServiceInfoSchema)
     .merge(SpecialEventRiskAssessmentSchema);
 
-// Unified default values - Special Event specific
 export const UNIFIED_SPECIAL_EVENT_DEFAULT_VALUES = {
-    // Business Info
-    Type: "Special Event", // Key difference from Site-Info
+    Type: "Special Event",
     BusinessName: "",
     Address: "",
     Suburb: "",
     State: "",
     Postcode: "",
-
-    // Contact Info
     Contact: "",
     Position: "",
     Phone: "",
     Email: "",
     Accounts: "",
-
-    // Service Info - No Schedule field (key difference)
     Services: [],
     Dates: "",
     Bank: "",
-
-    // Risk Assessment
     Amount: "",
     Parking: [],
     Security: [],
@@ -76,26 +64,10 @@ export const UNIFIED_SPECIAL_EVENT_DEFAULT_VALUES = {
     Internal: []
 };
 
-// Field configurations with previous placeholders
 export const SPECIAL_EVENT_BUSINESS_FIELDS = [
-    {
-        name: "BusinessName",
-        type: "text",
-        label: "What is the business name of this location?",
-        placeholder: "e.g. Joes Supermarket"
-    },
-    {
-        name: "Address",
-        type: "text",
-        label: "What is the number & street for this location?",
-        placeholder: "e.g. 49 Commercial Road"
-    },
-    {
-        name: "Suburb",
-        type: "text",
-        label: "What is the suburb for this location?",
-        placeholder: "e.g. Port Adelaide"
-    },
+    { name: "BusinessName", type: "text", label: "What is the business name of this location?", placeholder: "e.g. Joes Supermarket" },
+    { name: "Address", type: "text", label: "What is the number & street for this location?", placeholder: "e.g. 49 Commercial Road" },
+    { name: "Suburb", type: "text", label: "What is the suburb for this location?", placeholder: "e.g. Port Adelaide" },
     {
         name: "State",
         type: "select",
@@ -113,48 +85,17 @@ export const SPECIAL_EVENT_BUSINESS_FIELDS = [
             { value: "NZ", label: "New Zealand" }
         ]
     },
-    {
-        name: "Postcode",
-        type: "text",
-        label: "Postcode",
-        placeholder: "e.g. 5015"
-    }
+    { name: "Postcode", type: "text", label: "Postcode", placeholder: "e.g. 5015" }
 ];
 
 export const SPECIAL_EVENT_CONTACT_FIELDS = [
-    {
-        name: "Contact",
-        type: "text",
-        label: "Who will be the main contact person at this location?",
-        placeholder: "e.g. Usually the Manager or Supervisor"
-    },
-    {
-        name: "Position",
-        type: "text",
-        label: "What is their position or role at this location?",
-        placeholder: "e.g. Manager, Finance Officer, etc"
-    },
-    {
-        name: "Phone",
-        type: "tel",
-        label: "What is their best contact number?",
-        placeholder: "Mobile telephone preferred if available"
-    },
-    {
-        name: "Email",
-        type: "email",
-        label: "What is email address at this location?",
-        placeholder: "Our service procedures & registers will be sent to this address"
-    },
-    {
-        name: "Accounts",
-        type: "email",
-        label: "Email address to send accounts?",
-        placeholder: "Our invoice will be sent to this email address for this location."
-    }
+    { name: "Contact", type: "text", label: "Who will be the main contact person at this location?", placeholder: "e.g. Usually the Manager or Supervisor" },
+    { name: "Position", type: "text", label: "What is their position or role at this location?", placeholder: "e.g. Manager, Finance Officer, etc" },
+    { name: "Phone", type: "tel", label: "What is their best contact number?", placeholder: "Mobile telephone preferred if available" },
+    { name: "Email", type: "email", label: "What is email address at this location?", placeholder: "Our service procedures & registers will be sent to this address" },
+    { name: "Accounts", type: "email", label: "Email address to send accounts?", placeholder: "Our invoice will be sent to this email address for this location." }
 ];
 
-// Special Events Service Fields - Key difference: no Schedule field, textarea for Dates
 export const SPECIAL_EVENT_SERVICE_FIELDS = [
     {
         name: "Services",
@@ -173,15 +114,9 @@ export const SPECIAL_EVENT_SERVICE_FIELDS = [
         placeholder: "Enter dates, times and other relevant information...",
         rows: 6,
     },
-    {
-        name: "Bank",
-        type: "text",
-        label: "Which bank does this location use?",
-        placeholder: "Eg. Commonwealth Bank"
-    }
+    { name: "Bank", type: "text", label: "Which bank does this location use?", placeholder: "Eg. Commonwealth Bank" }
 ];
 
-// Risk assessment fields (same as Site-Info but using previous placeholders)
 export const SPECIAL_EVENT_RISK_FIELDS = [
     {
         name: "Amount",

@@ -1,18 +1,72 @@
-// app/api/forms/services/emailService.js
-import { formatArrayField, formatCallbackDate, getCurrentDateTime, getMimeType, prepareAttachments, preparePdfAttachments, processAttachment } from "./utils/Helpers.js";
-import austracSubmissionEmailTemplate from "./templates/austracSubmissionEmailTemplate.js";
-import contactAdminNotificationEmailTemplate from "./templates/contactAdminNotificationEmailTemplate.js";
-import contactUserConfirmationEmailTemplate from "./templates/contactUserConfirmationEmailTemplate.js";
-import franchiseAdminInquiryEmailTemplate from "./templates/franchiseAdminInquiryEmailTemplate.js";
-import franchiseUserWelcomeEmailTemplate from "./templates/franchiseUserWelcomeEmailTemplate.js";
-import icaContractorWelcomeEmailTemplate from "./templates/icaContractorWelcomeEmailTemplate.js";
-import icaEdocketsIntroductionEmailTemplate from "./templates/icaEdocketsIntroductionEmailTemplate.js";
-import icaOperationsReviewEmailTemplate from "./templates/icaOperationsReviewEmailTemplate.js";
-import quoteAdminRequestEmailTemplate from "./templates/quoteAdminRequestEmailTemplate.js";
-import quoteUserConfirmationEmailTemplate from "./templates/quoteUserConfirmationEmailTemplate.js";
-import siteInfoAdminNotificationEmailTemplate from "./templates/siteInfoAdminNotificationEmailTemplate.js";
-import siteInfoUserConfirmationEmailTemplate from "./templates/siteInfoUserConfirmationEmailTemplate.js";
-import termsAgreementEmailTemplate from "./templates/termsAgreementEmailTemplate.js";
+import { formatArrayField, formatCallbackDate, getCurrentDateTime } from "../utils/Helpers.js";
+import { getMimeType, processAttachment } from "../utils/attachments.js";
+import austracSubmissionEmailTemplate from "../templates/austracSubmissionEmailTemplate.js";
+import contactAdminNotificationEmailTemplate from "../templates/contactAdminNotificationEmailTemplate.js";
+import contactUserConfirmationEmailTemplate from "../templates/contactUserConfirmationEmailTemplate.js";
+import franchiseAdminInquiryEmailTemplate from "../templates/franchiseAdminInquiryEmailTemplate.js";
+import franchiseUserWelcomeEmailTemplate from "../templates/franchiseUserWelcomeEmailTemplate.js";
+import icaContractorWelcomeEmailTemplate from "../templates/icaContractorWelcomeEmailTemplate.js";
+import icaEdocketsIntroductionEmailTemplate from "../templates/icaEdocketsIntroductionEmailTemplate.js";
+import icaOperationsReviewEmailTemplate from "../templates/icaOperationsReviewEmailTemplate.js";
+import quoteAdminRequestEmailTemplate from "../templates/quoteAdminRequestEmailTemplate.js";
+import quoteUserConfirmationEmailTemplate from "../templates/quoteUserConfirmationEmailTemplate.js";
+import siteInfoAdminNotificationEmailTemplate from "../templates/siteInfoAdminNotificationEmailTemplate.js";
+import siteInfoUserConfirmationEmailTemplate from "../templates/siteInfoUserConfirmationEmailTemplate.js";
+import termsAgreementEmailTemplate from "../templates/termsAgreementEmailTemplate.js";
+
+const preparePdfAttachmentsWithCache = ({ attachments, attachmentConfigs, readPdfFile }) =>
+{
+    for (const config of attachmentConfigs) {
+        const pdfContent = readPdfFile(config.filename);
+        if (pdfContent) {
+            attachments.push({
+                content: pdfContent,
+                filename: config.displayName,
+                type: "application/pdf",
+                disposition: "attachment",
+            });
+        }
+    }
+
+    return attachments;
+};
+
+const prepareAttachments = (formData) =>
+{
+    const attachments = [];
+
+    if (!formData || typeof formData !== 'object') {
+        return attachments;
+    }
+
+    if (formData.attachments && Array.isArray(formData.attachments)) {
+        formData.attachments.forEach((attachment, index) =>
+        {
+            try {
+                if (attachment && typeof attachment === 'object' && attachment.filename && attachment.content) {
+                    const sizeBytes = Buffer.byteLength(attachment.content, 'base64');
+                    if (sizeBytes > 5 * 1024 * 1024) {
+                        return;
+                    }
+
+                    const detectedMimeType = getMimeType(attachment.filename);
+                    const finalMimeType = attachment.type || detectedMimeType;
+
+                    attachments.push({
+                        content: attachment.content,
+                        filename: attachment.filename,
+                        type: finalMimeType,
+                        disposition: "attachment",
+                    });
+                }
+            } catch (error) {
+                console.error(`Error processing attachment ${index}:`, error);
+            }
+        });
+    }
+
+    return attachments;
+};
 
 export const prepareAustracSubmissionEmail = (formData, readPdfFile) =>
 {
@@ -32,8 +86,7 @@ export const prepareContactAdminNotificationEmail = (formData, readPdfFile) =>
 {
     const currentDateTime = getCurrentDateTime();
     const formattedCallbackDate = formatCallbackDate(formData.CallbackDate);
-
-    let htmlContent = contactAdminNotificationEmailTemplate(formData, currentDateTime, formattedCallbackDate);
+    const htmlContent = contactAdminNotificationEmailTemplate(formData, currentDateTime, formattedCallbackDate);
 
     return {
         to: formData.Email,
@@ -47,7 +100,7 @@ export const prepareContactAdminNotificationEmail = (formData, readPdfFile) =>
 
 export const prepareContactUserConfirmationEmail = (formData, readPdfFile) =>
 {
-    let htmlContent = contactUserConfirmationEmailTemplate(formData);
+    const htmlContent = contactUserConfirmationEmailTemplate(formData);
 
     return {
         to: formData.Email,
@@ -60,7 +113,6 @@ export const prepareContactUserConfirmationEmail = (formData, readPdfFile) =>
 
 export const prepareFranchiseAdminInquiryEmail = (formData, readPdfFile) =>
 {
-    const currentDateTime = getCurrentDateTime();
     const htmlContent = franchiseAdminInquiryEmailTemplate(formData);
 
     return {
@@ -96,9 +148,7 @@ export const prepareFranchiseUserWelcomeEmail = (formData, readPdfFile) =>
         },
     ];
 
-    // Use the enhanced PDF preparation with cache support
     const pdfAttachments = preparePdfAttachmentsWithCache({ attachments, attachmentConfigs, readPdfFile });
-
     const htmlContent = franchiseUserWelcomeEmailTemplate(formData);
 
     return {
@@ -113,7 +163,6 @@ export const prepareFranchiseUserWelcomeEmail = (formData, readPdfFile) =>
 
 export const prepareICAOperationsReviewEmail = (formData, readPdfFile, processAttachmentsSequentially) =>
 {
-    // Use sequential processing for better memory management
     const attachmentMappings = [
         { field: "GovernmentID", filename: "Guarantors Government ID" },
         { field: "WitnessID", filename: "Witness ID" },
@@ -121,12 +170,10 @@ export const prepareICAOperationsReviewEmail = (formData, readPdfFile, processAt
         { field: "CITInsurance", filename: "CIT Insurance" },
     ];
 
-    // Process attachments sequentially if function provided, otherwise use original method
     let attachments = [];
     if (processAttachmentsSequentially) {
         attachments = processAttachmentsSequentially(attachmentMappings, formData);
     } else {
-        // Fallback to original method
         attachmentMappings.forEach((mapping) =>
         {
             if (formData[mapping.field]) {
@@ -143,7 +190,6 @@ export const prepareICAOperationsReviewEmail = (formData, readPdfFile, processAt
         });
     }
 
-    // Add courier attachments if they exist
     if (formData.attachments && Array.isArray(formData.attachments)) {
         formData.attachments.forEach((attachment, index) =>
         {
@@ -173,7 +219,6 @@ export const prepareICAOperationsReviewEmail = (formData, readPdfFile, processAt
     ];
 
     const pdfAttachments = preparePdfAttachmentsWithCache({ attachments, attachmentConfigs, readPdfFile });
-
     const htmlContent = icaOperationsReviewEmailTemplate(formData);
 
     return {
@@ -203,7 +248,6 @@ export const prepareICAContractorWelcomeEmail = (formData, readPdfFile) =>
     ];
 
     const pdfAttachments = preparePdfAttachmentsWithCache({ attachments, attachmentConfigs, readPdfFile });
-
     const htmlContent = icaContractorWelcomeEmailTemplate(formData);
 
     return {
@@ -229,10 +273,8 @@ export const prepareICAEdocketsIntroductionEmail = (formData, readPdfFile) =>
     };
 };
 
-// ENHANCED QUOTE EMAIL FUNCTIONS - Now with conditional logic built-in
 export const prepareQuoteAdminRequestEmail = (formData, readPdfFile) =>
 {
-    // Use the enhanced template with conditional sections
     const htmlTemplate = quoteAdminRequestEmailTemplate(formData);
 
     return {
@@ -246,9 +288,7 @@ export const prepareQuoteAdminRequestEmail = (formData, readPdfFile) =>
 
 export const prepareQuoteUserConfirmationEmail = (formData, readPdfFile) =>
 {
-    // Get any attachments if present
     const attachments = prepareAttachments(formData);
-    // Use the clean user confirmation template (no form data sections)
     const htmlTemplate = quoteUserConfirmationEmailTemplate(formData);
 
     return {
@@ -290,7 +330,6 @@ export const prepareSiteInfoUserConfirmationEmail = (formData, readPdfFile) =>
         },
     ];
 
-    // Get PDF attachments with cache support
     const pdfAttachments = preparePdfAttachmentsWithCache({ attachments, attachmentConfigs, readPdfFile });
     const htmlContent = siteInfoUserConfirmationEmailTemplate(formData);
 
@@ -306,14 +345,10 @@ export const prepareSiteInfoUserConfirmationEmail = (formData, readPdfFile) =>
 
 export const prepareTermsAgreementEmail = (formData, readPdfFile) =>
 {
-    // Use cached PDF reading
     const pdfFilename = "Terms & Conditions.pdf";
     const pdfContent = readPdfFile(pdfFilename);
-
-    // Get current date for agreement commencement
     const agreementCommencementDate = getCurrentDateTime();
 
-    // Prepare attachments array
     const attachments = [];
     if (pdfContent) {
         attachments.push({
@@ -335,24 +370,4 @@ export const prepareTermsAgreementEmail = (formData, readPdfFile) =>
         html: htmlContent,
         attachments: attachments
     };
-};
-
-// Enhanced PDF preparation function with cache support
-const preparePdfAttachmentsWithCache = ({ attachments, attachmentConfigs, readPdfFile }) =>
-{
-    for (const config of attachmentConfigs) {
-        const pdfContent = readPdfFile(config.filename);
-        if (pdfContent) {
-            attachments.push({
-                content: pdfContent,
-                filename: config.displayName,
-                type: "application/pdf",
-                disposition: "attachment",
-            });
-        } else {
-            console.warn(`⚠️ Failed to load PDF for email: ${config.filename}`);
-        }
-    }
-
-    return attachments;
 };

@@ -1,4 +1,3 @@
-// /components/forms/FranchiseForm.js
 "use client";
 import React, { useEffect, useState } from "react";
 import dynamic from 'next/dynamic';
@@ -14,30 +13,109 @@ import
         FaSpinner,
         FaCheckCircle,
     } from "react-icons/fa";
-
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate } from '@/utils/formHelpers';
 import FranchiseFormSchema, { FRANCHISE_DEFAULT_VALUES } from '@/zod/FranchiseFormSchema';
 
-
 const PopupModal = dynamic(
     () => import('react-calendly').then(mod => mod.PopupModal),
     {
         ssr: false,
-        loading: () => null 
+        loading: () => null
     }
 );
 
+const CALENDLY_URL = "https://calendly.com/jo_securecash?hide_gdpr_banner=1&primary_color=c7a652";
+
+const INPUT_FIELDS = [
+    {
+        name: "FullName",
+        type: "text",
+        label: "Full Name",
+        placeholder: "Enter your full name",
+        Icon: FaUser,
+    },
+    {
+        name: "Phone",
+        type: "tel",
+        label: "Phone Number",
+        placeholder: "Enter your phone number",
+        Icon: FaPhone,
+    },
+    {
+        name: "Email",
+        type: "email",
+        label: "Email Address",
+        placeholder: "Your email address",
+        Icon: FaEnvelope,
+    },
+    {
+        name: "Address",
+        type: "text",
+        label: "Address",
+        placeholder: "Enter your address",
+        Icon: FaHome,
+    },
+    {
+        name: "InterestedArea",
+        type: "text",
+        label: "Territory/Area/Suburb of Interest",
+        placeholder: "What territory/area/suburb are you interested in?",
+        Icon: FaMapMarkerAlt,
+    },
+    {
+        name: "ReasonForInterest",
+        type: "textarea",
+        label: "What interests you in a SecureCash Franchise?",
+        placeholder: "Briefly tell us why you're interested in a SecureCash franchise",
+        Icon: FaInfoCircle,
+        rows: 3,
+    },
+    {
+        name: "ReferralSource",
+        type: "select",
+        label: "Where did you hear about this Franchise Opportunity?",
+        options: [
+            { value: "", label: "Please Select" },
+            { value: "Google", label: "Google" },
+            { value: "Business For Sale", label: "Business For Sale" },
+            { value: "Facebook", label: "Facebook" },
+            { value: "Instagram", label: "Instagram" },
+            { value: "LinkedIn", label: "LinkedIn" },
+            { value: "Other Social Media", label: "Other Social Media" },
+            { value: "Other", label: "Other" },
+        ],
+        Icon: FaQuestionCircle,
+    },
+];
+
+const SuccessMessage = ({ userName }) => (
+    <div
+        className="form-submitted-message text-center py-4 absolute h-full top-0 flex flex-col justify-center items-center bg-[#f1f1f1] z-10"
+        style={{ background: "#f1f1f1" }}
+    >
+        <div className="480px:w-[90%] mx-auto 992px:h-[75%]">
+            <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" />
+
+            <h3 className="text-primary font-montserrat text-center capitalize pb-2 text-[32px] leading-[30px] mt-8 font-bold">
+                Thank you{userName && ` ${userName}`}!
+            </h3>
+
+            <hr className="mt-4 mb-6 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" />
+
+            <p className="mb-6">
+                Your form has been submitted successfully. The meeting scheduler should appear shortly.
+            </p>
+        </div>
+    </div>
+);
 
 const FranchiseForm = ({ className }) =>
 {
-    // State for Calendly integration
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
     const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
     const [submittedFormData, setSubmittedFormData] = useState(null);
-
-    const calendlyURL = "https://calendly.com/jo_securecash?hide_gdpr_banner=1&primary_color=c7a652";
 
     const formManager = useFormManager({
         schema: FranchiseFormSchema,
@@ -47,38 +125,24 @@ const FranchiseForm = ({ className }) =>
         formId: 'Franchise',
         onSuccess: (result, finalData) =>
         {
-            console.log("Franchise form submitted successfully!");
-
-            // Store form data for Calendly prefill
             setSubmittedFormData(finalData);
             setIsFormSubmitted(true);
             setIsCalendlyOpen(true);
         },
-        onError: (error) =>
-        {
-            console.error("Franchise submission failed:", error);
-        },
-        prepareData: async (data) =>
-        {
-            // Format date of submission
-            const dateOfSubmission = formatSubmissionDate();
-
-            return {
-                ...data,
-                formType: "franchise",
-                timestamp: new Date().toISOString(),
-                formId: "Franchise",
-                submissionId: `franchise_${Date.now()}`,
-                dateOfSubmission: dateOfSubmission,
-            };
-        }
+        prepareData: async (data) => ({
+            ...data,
+            formType: "franchise",
+            timestamp: new Date().toISOString(),
+            formId: "Franchise",
+            submissionId: `franchise_${Date.now()}`,
+            dateOfSubmission: formatSubmissionDate(),
+        })
     });
 
-    // Watch the ReferralSource field to determine if "Other" is selected
     const referralSource = formManager.watch('ReferralSource');
     const showOtherField = referralSource === 'Other';
+    const userName = formManager.getValues().FullName || "";
 
-    // Clear the "Other" field when user changes away from "Other"
     useEffect(() =>
     {
         if (!showOtherField) {
@@ -86,7 +150,6 @@ const FranchiseForm = ({ className }) =>
         }
     }, [showOtherField, formManager]);
 
-    // Cleanup on unmount
     useEffect(() =>
     {
         return () =>
@@ -97,81 +160,12 @@ const FranchiseForm = ({ className }) =>
         };
     }, []);
 
-    // Field configurations
-    const inputFields = [
-        {
-            name: "FullName",
-            type: "text",
-            label: "Full Name",
-            placeholder: "Enter your full name",
-            Icon: FaUser,
-        },
-        {
-            name: "Phone",
-            type: "tel",
-            label: "Phone Number",
-            placeholder: "Enter your phone number",
-            Icon: FaPhone,
-        },
-        {
-            name: "Email",
-            type: "email",
-            label: "Email Address",
-            placeholder: "Your email address",
-            Icon: FaEnvelope,
-        },
-        {
-            name: "Address",
-            type: "text",
-            label: "Address",
-            placeholder: "Enter your address",
-            Icon: FaHome,
-        },
-        {
-            name: "InterestedArea",
-            type: "text",
-            label: "Territory/Area/Suburb of Interest",
-            placeholder: "What territory/area/suburb are you interested in?",
-            Icon: FaMapMarkerAlt,
-        },
-        {
-            name: "ReasonForInterest",
-            type: "textarea",
-            label: "What interests you in a SecureCash Franchise?",
-            placeholder: "Briefly tell us why you're interested in a SecureCash franchise",
-            Icon: FaInfoCircle,
-            rows: 3,
-        },
-        {
-            name: "ReferralSource",
-            type: "select",
-            label: "Where did you hear about this Franchise Opportunity?",
-            options: [
-                { value: "", label: "Please Select" },
-                { value: "Google", label: "Google" },
-                { value: "Business For Sale", label: "Business For Sale" },
-                { value: "Facebook", label: "Facebook" },
-                { value: "Instagram", label: "Instagram" },
-                { value: "LinkedIn", label: "LinkedIn" },
-                { value: "Other Social Media", label: "Other Social Media" },
-                { value: "Other", label: "Other" },
-            ],
-            Icon: FaQuestionCircle,
-        },
-    ];
-
-    const userName = formManager.getValues().FullName || "";
-
-    // Debug logging for troubleshooting (development only)
-    useEffect(() =>
+    const handleCalendlyClose = () =>
     {
-        if (process.env.NODE_ENV === 'development') {
-            const debugInfo = formManager.getDebugInfo();
-            if (debugInfo.currentFocus || Object.keys(debugInfo.errors).length > 0) {
-                console.log('🐛 FranchiseForm Debug Info:', debugInfo);
-            }
-        }
-    }, [formManager.currentFocusField, formManager.errors]);
+        setIsCalendlyOpen(false);
+        setIsFormSubmitted(false);
+        formManager.resetForm();
+    };
 
     return (
         <div className="float-none 992px:w-[60%] 992px:float-left relative left-0 flex justify-center 414px:mx-4 992px:mx-0">
@@ -186,7 +180,6 @@ const FranchiseForm = ({ className }) =>
                 >
                     <div className="form-page franchise">
                         <div className="form-tab 480px:w-[90%] mx-auto">
-                            {/* Bot field (honeypot) - hidden field for spam protection */}
                             <input
                                 type="text"
                                 name="BotField"
@@ -197,8 +190,7 @@ const FranchiseForm = ({ className }) =>
                                 autoComplete="off"
                             />
 
-                            {/* All fields now use proper focus management */}
-                            {inputFields.map((field) => (
+                            {INPUT_FIELDS.map((field) => (
                                 <div key={field.name} className="relative">
                                     <UniversalFormField
                                         {...formManager.getFieldProps(field)}
@@ -208,7 +200,6 @@ const FranchiseForm = ({ className }) =>
                                 </div>
                             ))}
 
-                            {/* Conditional "Other" text field */}
                             {showOtherField && (
                                 <div className="relative">
                                     <UniversalFormField
@@ -225,52 +216,26 @@ const FranchiseForm = ({ className }) =>
                                 </div>
                             )}
 
-                            {/* Information text */}
                             <div className="text-primary-text text-[14px] font-medium mt-4 mb-2 w-full text-left px-2 768px:px-0">
-                                After submitting the form, please pick a time from the popup
-                                screen for a video meeting.
+                                After submitting the form, please pick a time from the popup screen for a video meeting.
                             </div>
                         </div>
                     </div>
 
-                    {/* Form submitted overlay */}
-                    {isFormSubmitted && (
-                        <div
-                            className="form-submitted-message text-center py-4 absolute h-full top-0 flex flex-col justify-center items-center bg-[#f1f1f1] z-10"
-                            style={{ background: "#f1f1f1" }}
-                        >
-                            <div className="480px:w-[90%] mx-auto 992px:h-[75%]">
-                                <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" />
+                    {isFormSubmitted && <SuccessMessage userName={userName} />}
 
-                                <h3 className="text-primary font-montserrat text-center capitalize pb-2 text-[32px] leading-[30px] mt-8 font-bold">
-                                    Thank you{userName && ` ${userName}`}!
-                                </h3>
-
-                                <hr className="mt-4 mb-6 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" />
-
-                                <p className="mb-6">
-                                    Your form has been submitted successfully. The meeting scheduler
-                                    should appear shortly.
-                                </p>
-                            </div>
-                        </div>
-                    )}
-
-                    {/* Display submission error if any */}
                     {formManager.submissionError && (
                         <div className="text-red-400 text-center mb-4 p-2 bg-red-900 bg-opacity-20 border border-red-400 rounded mx-4">
                             <strong>Submission Error:</strong> {formManager.submissionError}
                         </div>
                     )}
 
-                    {/* Button section */}
                     <div className="button-controls-container w-[80%] mx-auto mt-7">
                         <div className="button-section relative">
                             <button
                                 type="submit"
                                 disabled={formManager.isSubmitting}
-                                className={`nextBtn ${formManager.isSubmitted ? 'bg-[#4bb543]' : 'bg-[#c6a54b]'
-                                    } text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
+                                className={`nextBtn ${formManager.isSubmitted ? 'bg-[#4bb543]' : 'bg-[#c6a54b]'} text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
                             >
                                 {formManager.isSubmitting ? (
                                     <div className="flex items-center justify-center">
@@ -291,10 +256,9 @@ const FranchiseForm = ({ className }) =>
                 </form>
             </div>
 
-            {/* ✅ OPTIMIZED: Calendly Modal - Only loads after form submission */}
             {submittedFormData && isCalendlyOpen && (
                 <PopupModal
-                    url={calendlyURL}
+                    url={CALENDLY_URL}
                     prefill={{
                         name: submittedFormData.FullName || "",
                         email: submittedFormData.Email || "",
@@ -302,12 +266,7 @@ const FranchiseForm = ({ className }) =>
                             a1: submittedFormData.InterestedArea || "",
                         },
                     }}
-                    onModalClose={() =>
-                    {
-                        setIsCalendlyOpen(false);
-                        setIsFormSubmitted(false);
-                        formManager.resetForm();
-                    }}
+                    onModalClose={handleCalendlyClose}
                     open={isCalendlyOpen}
                     rootElement={document.getElementById("root") || document.body}
                 />

@@ -1,22 +1,92 @@
 "use client";
-import React from "react";
-import { FaChevronLeft, FaSpinner, FaCheckCircle } from "react-icons/fa";
+import React, { useEffect } from "react";
+import { FaChevronLeft, FaSpinner } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
 import { useFormManager } from "@/hooks/useFormManager";
-
 import SiteBusinessStep from "./SiteInfo/steps/SiteBusinessStep";
 import SiteContactStep from "./SiteInfo/steps/SiteContactStep";
 import SiteServiceStep from "./SiteInfo/steps/SiteServiceStep";
-
 import SiteRiskFormFields from "./SiteRiskFormFields";
-
-import
-  {
-    UNIFIED_SITE_INFO_SCHEMA,
-    UNIFIED_DEFAULT_VALUES,
-  } from "@/zod/SiteInfoFormSchema";
+import { UNIFIED_SITE_INFO_SCHEMA, UNIFIED_DEFAULT_VALUES } from "@/zod/SiteInfoFormSchema";
 import ThankYouModal from "./ThankYouModal";
+
+const STEP_COMPONENTS = {
+  business: SiteBusinessStep,
+  contact: SiteContactStep,
+  service: SiteServiceStep,
+};
+
+const ReviewStepContent = ({ onEdit }) => (
+  <div className="h-full flex flex-col items-center justify-center gap-2">
+    <h2 className="text-white font-normal text-center capitalize pb-4 text-[26px] leading-[30px] font-montserrat">
+      Review & Edit Previous Steps
+    </h2>
+    <div>
+      <button
+        type="button"
+        onMouseDown={onEdit}
+        className="nextBtn bg-[#c6a54b] text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat"
+      >
+        Edit Form
+      </button>
+    </div>
+  </div>
+);
+
+const SubmitButton = ({ isSubmitting, currentStep }) => (
+  <button
+    type="submit"
+    disabled={isSubmitting}
+    className="nextBtn bg-[#c6a54b] text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50"
+  >
+    {isSubmitting ? (
+      <div className="flex items-center justify-center">
+        <FaSpinner className="animate-spin mr-2" />
+        Processing...
+      </div>
+    ) : currentStep === 2 ? (
+      "Continue"
+    ) : (
+      "Next"
+    )}
+  </button>
+);
+
+const ContentSection = () => (
+  <div className="right-contact-row w-[96%] 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1] 992px:pl-8">
+    <h1 className="text-[22px] 480px:mt-10 font-semibold leading-[1.6em] mx-auto 992px:text-[26px] 768px:text-left 768px:mx-0 font-montserrat">
+      Thanks for that! This is the final step in order to getting your service setup.
+    </h1>
+    <hr className="h-[4px] rounded-[5px] border-0 bg-primary w-[100px] my-5 text-left mx-0" />
+    <p className="text-[16px] leading-[2rem] text-left mb-4 768px:text-left font-light font-montserrat">
+      Please provide us with the necessary contact information and the service schedule that you would like us to implement. Please note that this form needs to be submitted once per location that you wish us to collect cash from or deliver cash to.
+    </p>
+    <p className="text-[16px] leading-[2rem] text-left mb-4 768px:text-left font-light font-montserrat">
+      If you are not after a regular collection but a once off collection fill out the form located{" "}
+      <span className="underline">
+        <strong className="uppercase">
+          <a href="/special-event/">special event form</a>
+        </strong>
+      </span>{" "}
+      instead.
+    </p>
+    <p className="text-[16px] leading-[2rem] text-left mb-4 768px:text-left font-light flex flex-col gap-4 font-montserrat">
+      <span>
+        To learn more about how we manage information provided you can view our{" "}
+        <Link className="text-primary hover:underline" href="/privacy-policy/">
+          Privacy Policy
+        </Link>
+        .
+      </span>
+      <strong>
+        <Link className="text-primary hover:underline" href="/austrac/">
+          &lt;&lt; Previous
+        </Link>
+      </strong>
+    </p>
+  </div>
+);
 
 const SiteInfoForm = () =>
 {
@@ -26,170 +96,65 @@ const SiteInfoForm = () =>
     formType: "siteinfo",
     formId: "SiteInfo",
     theme: "hybrid",
-
     multiStep: {
       steps: ["business", "contact", "service", "risk"],
       conditional: false,
     },
-
     hybrid: {
       enabled: true,
       reviewStep: 3,
       submitEnabled: false,
     },
-
-    onSuccess: (result, finalData) =>
-    {
-      console.log("Complete form submitted successfully!", finalData);
-    },
-    onError: (error) =>
-    {
-      console.error("Form submission failed:", error);
-    },
-    prepareData: async (data) =>
-    {
-      return { ...data, formType: "siteinfo" };
-    },
+    prepareData: async (data) => ({ ...data, formType: "siteinfo" }),
   });
 
   const { stepId, currentStep, isFirst } = formManager.getCurrentStep();
   const { submitButtonEnabled } = formManager;
 
-  React.useEffect(() =>
+  useEffect(() =>
   {
     if (stepId === "risk") {
-      console.log("Reached review step - focusing hazard form");
       requestAnimationFrame(() =>
       {
-        const firstHazardField = document.querySelector(
-          ".forms-franchise-v2 select:first-of-type"
-        );
+        const firstHazardField = document.querySelector(".forms-franchise-v2 select:first-of-type");
         if (firstHazardField) {
           firstHazardField.focus();
-          firstHazardField.scrollIntoView({
-            behavior: "smooth",
-            block: "center",
-          });
+          firstHazardField.scrollIntoView({ behavior: "smooth", block: "center" });
         }
       });
     }
   }, [stepId]);
 
-  const handleFormSubmit = async (e) =>
+  const handleFormSubmit = (e) =>
   {
     e.preventDefault();
+    return formManager.handleSubmit();
+  };
 
-    const result = await formManager.handleSubmit();
-    return result;
+  const handleEditForm = (e) =>
+  {
+    e.preventDefault();
+    e.stopPropagation();
+    formManager.goToStep(2);
   };
 
   const renderCurrentStep = () =>
   {
-    const stepComponents = {
-      business: SiteBusinessStep,
-      contact: SiteContactStep,
-      service: SiteServiceStep,
-      risk: () => (
-        <div className="h-full flex flex-col items-center justify-center gap-2">
-          <h2
-            className="text-white font-normal text-center capitalize pb-4 text-[26px] leading-[30px] font-montserrat"
-          >
-            Review & Edit Previous Steps
-          </h2>
-          <div>
-            <button
-              type="button"
-              onMouseDown={(e) =>
-              {
-                e.preventDefault();
-                e.stopPropagation();
-                formManager.goToStep(2);
-              }}
-              className="nextBtn bg-[#c6a54b] text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat"
-            >
-              Edit Form
-            </button>
-          </div>
-        </div>
-      ),
-    };
+    if (stepId === "risk") {
+      return <ReviewStepContent onEdit={handleEditForm} />;
+    }
 
-    const StepComponent = stepComponents[stepId];
+    const StepComponent = STEP_COMPONENTS[stepId];
     if (!StepComponent) return <div>Unknown step: {stepId}</div>;
-
-    if (stepId === "risk") return <StepComponent />;
 
     return <StepComponent formManager={formManager} theme="dark" />;
   };
 
   return (
     <>
-      <div
-        id="content-contact"
-        className="bg-content-bg bg-center bg-no-repeat bg-cover inline-block w-full 992px:my-[40px] 1280px:my-[120px]"
-      >
+      <div id="content-contact" className="480px:bg-content-bg bg-center bg-no-repeat bg-cover inline-block w-full 992px:my-[40px] 1280px:my-[120px]">
         <div className="inner-big w-[95%] max-w-[1366px] mx-auto my-0 992px:flex items-center">
-          <div className="right-contact-row w-[96%] 992px:w-1/2 mx-auto 992px:mx-0 pt-[35px] 992px:pt-0 [flex:1] 992px:pl-8">
-            <h3
-
-              className="text-[22px] 480px:mt-10 font-semibold leading-[1.6em] mx-auto 992px:text-[26px] 768px:text-left 768px:mx-0 font-montserrat"
-            >
-              Thanks for that! This is the final step in order to getting your
-              service setup.
-            </h3>
-
-            <hr className="h-[4px] rounded-[5px] border-0 bg-primary w-[100px] my-5 text-left mx-0" />
-            <p
-
-              className="text-[16px] leading-[2rem] text-left mb-4 768px:text-left font-light font-montserrat"
-            >
-              Please provide us with the necessary contact information and the
-              service schedule that you would like us to implement. Please note
-              that this form needs to be submitted once per location that you
-              wish us to collect cash from or deliver cash to.
-            </p>
-
-            <p
-
-              className="text-[16px] leading-[2rem] text-left mb-4 768px:text-left font-light font-montserrat"
-            >
-              If you are not after a regular collection but a once off
-              collection fill out the form located{" "}
-              <span className="underline">
-                <strong className="uppercase">
-                  <a href="/special-event/">
-                    HERE
-                  </a>
-                </strong>
-              </span>{" "}
-              instead.
-            </p>
-
-            <p
-
-              className="text-[16px] leading-[2rem] text-left mb-4 768px:text-left font-light flex flex-col gap-4 font-montserrat"
-            >
-              <span>
-                To learn more about how we manage information provided you can
-                view our{" "}
-                <Link
-                  className="text-primary hover:underline"
-                  href="/privacy-policy/"
-                >
-                  Privacy Policy
-                </Link>
-                .
-              </span>
-              <strong>
-                <Link
-                  className="text-primary hover:underline"
-                  href="/austrac/"
-                >
-                  &lt;&lt; Previous
-                </Link>
-              </strong>
-            </p>
-          </div>
+          <ContentSection />
 
           <div className="[flex:1]">
             <div className="float-none w-full mx-auto relative left-0 flex-1 flex justify-center h-[844px]">
@@ -219,22 +184,7 @@ const SiteInfoForm = () =>
                 {stepId !== "risk" && (
                   <div className="button-controls-container w-[80%] mx-auto mt-7">
                     <div className="button-section relative">
-                      <button
-                        type="submit"
-                        disabled={formManager.isSubmitting}
-                        className="nextBtn bg-[#c6a54b] text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50"
-                      >
-                        {formManager.isSubmitting ? (
-                          <div className="flex items-center justify-center">
-                            <FaSpinner className="animate-spin mr-2" />
-                            Processing...
-                          </div>
-                        ) : currentStep === 2 ? (
-                          "Continue"
-                        ) : (
-                          "Next"
-                        )}
-                      </button>
+                      <SubmitButton isSubmitting={formManager.isSubmitting} currentStep={currentStep} />
                     </div>
                   </div>
                 )}
@@ -244,26 +194,18 @@ const SiteInfoForm = () =>
         </div>
       </div>
 
-      <div
-        id="contact-form-section"
-        className="inline-block w-full mb-12 480px:mb-[120px]"
-      >
+      <div id="contact-form-section" className="inline-block w-full mb-12 480px:mb-[120px]">
         <div className="inner-big w-[95%] max-w-[1366px] mx-auto my-0 992px:flex">
           <div className="414px:mx-4 hidden 992px:block 992px:w-[50%] 992px:mx-0 py-8 px-10 480px:px-[5%] 992px:pl-8 1280px:pl-24 992px:pt-32 shadow-[3px_3px_10px_0px_rgba(0,0,0,0.2)] rounded-t-[8px] 992px:rounded-l-[8px] 992px:rounded-tr-none relative">
             <Image
               src="/images/welcome/terms-main-img-2.jpg"
               alt="Making A Deal"
               fill
-              objectFit="cover"
+              style={{ objectFit: "cover" }}
             />
           </div>
 
-          <div
-            className={`float-none 992px:w-[80%] 992px:float-left relative left-0 flex justify-center transition-opacity duration-300 ${!submitButtonEnabled
-                ? "opacity-50 pointer-events-none"
-                : "opacity-100"
-              }`}
-          >
+          <div className={`float-none 992px:w-[80%] 992px:float-left relative left-0 flex justify-center transition-opacity duration-300 ${!submitButtonEnabled ? "opacity-50 pointer-events-none" : "opacity-100"}`}>
             <form
               className="forms-franchise-v2 rounded-r-[8px] shadow-[3px_3px_10px_0px_rgba(0,0,0,0.2)] h-auto 992px:mx-0 px-4 600px:px-8 480px:px-[5%] 1366px:h-full submit-status w-full lg:mt-0 lg:mb-0 text-center py-8 bg-[#f1f1f1] relative 1366px:pt-[74px] 1366px:pb-[84px]"
               data-formid="SiteInfo"
@@ -272,24 +214,13 @@ const SiteInfoForm = () =>
               noValidate
             >
               <div className="form-tab 480px:w-[90%] mx-auto">
-                <h3
-
-                  className="text-[22px] font-semibold leading-[1.6em] mx-auto 992px:text-[26px] 768px:text-left 768px:mx-0 font-montserrat"
-                >
+                <h1 className="text-[22px] font-semibold leading-[1.6em] mx-auto 992px:text-[26px] 768px:text-left 768px:mx-0 font-montserrat">
                   Site Risk Information
-                </h3>
-
+                </h1>
                 <hr className="w-[100px] my-5 768px:text-left 768px:mx-0 h-[4px] rounded-[5px] border-0 bg-primary" />
-
-                <p
-
-                  className="text-[16px] leading-[2rem] text-left 768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light font-montserrat"
-                >
-                  Please provide us with the information below so our Area
-                  Managers and Banking Couriers can better identify any
-                  potential hazards or dangers at this location.
+                <p className="text-[16px] leading-[2rem] text-left 768px:mb-3 992px:mb-4 480px:mb-0 768px:text-left font-light font-montserrat">
+                  Please provide us with the information below so our Area Managers and Banking Couriers can better identify any potential hazards or dangers at this location.
                 </p>
-
                 <SiteRiskFormFields formManager={formManager} />
               </div>
             </form>
@@ -297,11 +228,7 @@ const SiteInfoForm = () =>
         </div>
       </div>
 
-      <ThankYouModal
-        showThankYou={formManager.isSubmitted}
-        onClose={formManager.resetForm}
-        type="Thankyou"
-      />
+      <ThankYouModal showThankYou={formManager.isSubmitted} onClose={formManager.resetForm} type="Thankyou" />
     </>
   );
 };

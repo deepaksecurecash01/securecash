@@ -1,6 +1,5 @@
 import React from "react";
 
-// Optimization: Removed CSS Module import to prevent render-blocking request
 const ScrollableSection = ({ children, className = "", style = {} }) =>
 {
   return (

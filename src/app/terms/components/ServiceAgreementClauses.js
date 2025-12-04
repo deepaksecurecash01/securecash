@@ -1,10 +1,8 @@
 import Container from '@/components/layout/Container';
 import ScrollableSection from '@/components/layout/ScrollbarSection';
+import Image from 'next/image';
 import React from 'react';
 
-
-
-// Terms data structure
 const termsData = {
     definitions: {
         title: "1 Definitions in this Agreement:",
@@ -469,12 +467,10 @@ const additionalSections = [
     }
 ];
 
-
-// Component for rendering list items
-const TermsListItem = ({ item, key, section }) => (
-    <li key={key}>
-        <span className="tnc-number absolute left-0 text-[16px] font-semibold text-primary">{item.number}</span>
-        <p className={`${item.wide ? "bullet-wide" : ""} block leading-[2em] pl-[47px] ${key !== section.length - 1 && 'mb-[30px]'} `}>
+const TermsListItem = ({ item, index, section }) => (
+    <li key={index}>
+        <span className="tnc-number absolute left-0 text-[16px] font-semibold text-[#8B7355]" aria-hidden="true">{item.number}</span>
+        <p className={`${item.wide ? "bullet-wide" : ""} block leading-[2em] pl-[47px] ${index !== section.length - 1 && 'mb-[30px]'}`}>
             {item.text}
             {item.link && (
                 <>
@@ -484,7 +480,7 @@ const TermsListItem = ({ item, key, section }) => (
                             href={item.link.href}
                             title={item.link.title}
                             target="_blank"
-                            rel="noopener"
+                            rel="noopener noreferrer"
                         >
                             {item.link.text}
                         </a>
@@ -504,23 +500,19 @@ const TermsListItem = ({ item, key, section }) => (
     </li>
 );
 
-// Component for rendering sections
 const TermsSection = ({ section }) => (
     <>
-        <h4
-            
-            className="text-[16px] font-medium leading-[1.6em] text-left mx-auto 992px:text-[18px] mb-[24px] 768px:text-left 768px:mx-0 font-montserrat"
-        >            {section.title}
-        </h4>
+        <h3 className="text-[16px] font-medium leading-[1.6em] text-left mx-auto 992px:text-[18px] mb-[24px] 768px:text-left 768px:mx-0 font-montserrat">
+            {section.title}
+        </h3>
         <ul className="tnc-page-sa-clauses--content__list list-none font-light relative pr-10">
             {section.items.map((item, index) => (
-                <TermsListItem key={index} item={item} section={section} />
+                <TermsListItem key={index} item={item} index={index} section={section.items} />
             ))}
         </ul>
     </>
 );
 
-// Main component
 const ServiceAgreementClauses = () =>
 {
     const allSections = [
@@ -532,31 +524,31 @@ const ServiceAgreementClauses = () =>
         termsData.pricing,
         termsData.services,
         ...additionalSections
-    ];
+    ].filter(Boolean);
+
+    if (allSections.length === 0) {
+        return null;
+    }
 
     return (
         <section className="tnc-page-sa-clauses relative z-[1] bg-[#fff] shadow-[0_1px_6px_0_rgba(32,33,36,0.28)] 1024px:shadow-none">
-            <img
-                src="/images/welcome/terms-main-img-2.jpg"
-                alt="Two People Shaking Hands"
-                className="tnc-page-sa-clauses__img-bg hidden 1024px:block absolute left-0 768px:w-[30%] h-full object-cover -z-[1]"
-                width={559}
-                height={620}
-            />
+            <div className="tnc-page-sa-clauses__img-bg hidden 1024px:block absolute left-0 768px:w-[30%] h-full -z-[1]">
+                <Image
+                    src="/images/welcome/terms-main-img-2.jpg"
+                    alt="Two People Shaking Hands"
+                    fill
+                    sizes="30vw"
+                    className="object-cover"
+                    quality={85}
+                />
+            </div>
             <Container className="inner w-full">
                 <div className="tnc-page-sa-clauses--wrap flex justify-end">
-                    <div className="tnc-page-sa-clauses--content 1024px:w-[70%] 1200px:w-[65%] py-[50px] px-[30px] 480px:py-[82px]  480px:px-[34px]  1366px:pt-[110px]  1366px:pb-[110px]  1366px:pl-[18px]">
-                        <h3
-                           
-                            className=" text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mx-auto 992px:text-[26px] 768px:mx-0 font-montserrat"
-                            >
+                    <div className="tnc-page-sa-clauses--content 1024px:w-[70%] 1200px:w-[65%] py-[50px] px-[30px] 480px:py-[82px] 480px:px-[34px] 1366px:pt-[110px] 1366px:pb-[110px] 1366px:pl-[18px]">
+                        <h2 className="text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mx-auto 992px:text-[26px] 768px:mx-0 font-montserrat">
                             Service Agreement Clauses
-                        </h3>
-                        <hr
-                          
-                            className="mt-5 mb-[34px] w-[100px] 768px:text-left 768px:mx-0 h-[4px] rounded-[5px] border-0 bg-primary"
-
-                        />
+                        </h2>
+                        <hr className="mt-5 mb-[34px] w-[100px] 768px:text-left 768px:mx-0 h-[4px] rounded-[5px] border-0 bg-primary" />
                         <ScrollableSection className="h-[652px] 992px:w-full p-0 mx-auto 992px:h-[370px] pb-[18px]">
                             {allSections.map((section, index) => (
                                 <TermsSection key={index} section={section} />

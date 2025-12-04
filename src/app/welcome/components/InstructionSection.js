@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useCallback, useRef } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 
 const InstructionSection = () =>
 {
@@ -14,27 +14,14 @@ const InstructionSection = () =>
         const childBox1 = blackBoxRef.current;
         const childBox2 = instructionBoxRef.current;
 
-        console.log('Height calculation running...', {
-            detectWidth,
-            parentBox: !!parentBox,
-            childBox1: !!childBox1,
-            childBox2: !!childBox2
-        });
-
         if (parentBox && childBox1 && childBox2) {
             if (detectWidth < 768) {
                 parentBox.style.height = "auto";
-                console.log('Mobile view - height set to auto');
                 return;
             }
 
             const childBox1Height = childBox1.offsetHeight;
             const childBox2Height = childBox2.offsetHeight;
-
-            console.log('Box heights:', {
-                childBox1Height,
-                childBox2Height
-            });
 
             let highestHeight = childBox1Height > childBox2Height ? childBox1Height : childBox2Height;
 
@@ -42,38 +29,24 @@ const InstructionSection = () =>
                 highestHeight += 80;
             }
 
-            console.log('Setting parent height to:', highestHeight + 'px');
             parentBox.style.height = highestHeight + "px";
-        } else {
-            console.log('Elements not found or not ready');
         }
     }, []);
-
 
     useEffect(() =>
     {
         const handleResize = () => fixWelcomeSectionHeight();
 
-        // Multiple attempts to ensure DOM is ready
-        const timers = [];
+        const timers = [
+            setTimeout(() => fixWelcomeSectionHeight(), 0),
+            setTimeout(() => fixWelcomeSectionHeight(), 100),
+            setTimeout(() => fixWelcomeSectionHeight(), 500),
+            setTimeout(() => fixWelcomeSectionHeight(), 1000),
+        ];
 
-        // Immediate attempt
-        timers.push(setTimeout(() => fixWelcomeSectionHeight(), 0));
-
-        // After 100ms
-        timers.push(setTimeout(() => fixWelcomeSectionHeight(), 100));
-
-        // After 500ms
-        timers.push(setTimeout(() => fixWelcomeSectionHeight(), 500));
-
-        // After 1000ms
-        timers.push(setTimeout(() => fixWelcomeSectionHeight(), 1000));
-
-        // Add event listeners
         window.addEventListener("load", fixWelcomeSectionHeight);
         window.addEventListener("resize", handleResize);
 
-        // Cleanup
         return () =>
         {
             timers.forEach(timer => clearTimeout(timer));
@@ -141,10 +114,7 @@ const InstructionSection = () =>
                     <h2 className="text-[#c7a652] text-[34px] font-semibold">
                         INSTRUCTIONS:
                     </h2>
-                    <hr
-                       
-                        className="mt-[30px] mb-[24px] w-[100px] 768px:text-left 768px:mx-0 h-[4px] rounded-[5px] border-0 bg-[#7a7a7a]"
-                    />
+                    <hr className="mt-[30px] mb-[24px] w-[100px] 768px:text-left 768px:mx-0 h-[4px] rounded-[5px] border-0 bg-[#7a7a7a]" />
                     <div className="instruction-wrapper relative mt-[40px] pt-[8px] pb-[8px]">
                         <div className="counter absolute top-0 left-0 z-0 flex justify-center items-center w-[50px] h-[67px]">
                             <p className="relative h-full text-[88px] font-extrabold leading-[0.7] text-[#ededed] p-0 m-0">
@@ -199,7 +169,7 @@ const InstructionSection = () =>
                     <div className="instruction-wrapper relative pt-[32px] pb-[24px] mt-[64px] quote">
                         <div className="counter absolute ml-5 top-1.5 left-0 z-0 flex justify-center items-center w-[50px] h-[67px]">
                             <p className="relative h-full text-[160px] font-extrabold leading-[0.7] text-[#ededed] p-0 m-0">
-                                “
+                                &ldquo;
                             </p>
                         </div>
                         <p className="text-[16px] font-light leading-[2] relative z-[1] pl-[29px] mb-[16px]">
@@ -219,8 +189,6 @@ const InstructionSection = () =>
                     </a>
                 </div>
             </div>
-
-
         </section>
     );
 };

@@ -5,6 +5,7 @@ import { useState } from "react";
 import { FaBars } from "react-icons/fa";
 import Link from "next/link";
 import useScrollHide from "@/hooks/useScrollHide";
+import useRouteScrollFix from "@/hooks/useRouteScrollFix";
 
 const MENU_ITEMS = [
   { name: "Home", href: "/" },
@@ -42,23 +43,17 @@ const MENU_ITEMS = [
   { name: "Get A Quote", href: "/quote" },
 ];
 
-
 const Logo = ({ onClick }) => (
   <div className="inline 1024px:mx-0 1024px:text-left 1024px:pb-0 mx-auto text-center pb-5">
     <Link href="/" onClick={onClick}>
       <Image
         src="/images/SecureCash.webp"
         alt="SecureCash Logo"
-
         width={285}
         height={91}
-
-
         sizes="285px"
-
         className="w-[285px] h-auto"
         style={{ width: "285px", height: "auto" }}
-
         priority={true}
       />
     </Link>
@@ -105,40 +100,35 @@ const DesktopSubmenu = ({ links }) => (
 );
 
 const DesktopMenu = ({ onMenuClick }) => (
-  <div
-    id="main-menu"
-    className="w-full 1024px:flex flex-row items-center hidden "
-  >
+  <div id="main-menu" className="w-full 1024px:flex flex-row items-center hidden">
     <ul className="m-0 p-0 bg-white list-none flex flex-row justify-between items-center ml-auto w-[97%] 1200px:w-[90%]">
-      {MENU_ITEMS.filter((item) => item.name !== "Get A Quote").map(
-        (item, index) =>
-        {
-          const hasSubMenu = Boolean(item.submenuId);
+      {MENU_ITEMS.filter((item) => item.name !== "Get A Quote").map((item, index) =>
+      {
+        const hasSubMenu = Boolean(item.submenuId);
 
-          return (
-            <li key={index} className="leading-[50px] py-5 relative group">
-              <Link
-                href={item.href}
-                onClick={() =>
-                {
-                  const itemEl = document.getElementById(item.submenuId);
-                  if (itemEl) itemEl.style.display = "none";
-                }}
-                className="block text-primary-text text-sm no-underline leading-6 group-hover:text-active-text"
-              >
-                {hasSubMenu && (
-                  <>
-                    <i className="rotate-45 inline-block border-solid border-dark-border border-t-0 border-l-0 border-r-2 border-b-2 p-[3px] relative -top-0.5 group-hover:border-active-text" />
-                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                  </>
-                )}
-                {item.name}
-              </Link>
-              {hasSubMenu && <DesktopSubmenu links={item.links} />}
-            </li>
-          );
-        }
-      )}
+        return (
+          <li key={index} className="leading-[50px] py-5 relative group">
+            <Link
+              href={item.href}
+              onClick={() =>
+              {
+                const itemEl = document.getElementById(item.submenuId);
+                if (itemEl) itemEl.style.display = "none";
+              }}
+              className="block text-primary-text text-sm no-underline leading-6 group-hover:text-active-text"
+            >
+              {hasSubMenu && (
+                <>
+                  <i className="rotate-45 inline-block border-solid border-dark-border border-t-0 border-l-0 border-r-2 border-b-2 p-[3px] relative -top-0.5 group-hover:border-active-text" />
+                  <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </>
+              )}
+              {item.name}
+            </Link>
+            {hasSubMenu && <DesktopSubmenu links={item.links} />}
+          </li>
+        );
+      })}
       <li className="leading-[50px] py-5">
         <QuoteButton />
       </li>
@@ -148,14 +138,11 @@ const DesktopMenu = ({ onMenuClick }) => (
 
 const MobileSubmenu = ({ subMenuId, links, isActive, onMenuClick }) => (
   <ul
-    className={`overflow-hidden bg-white text-[#808080] ${isActive ? "opacity-100 visible h-auto mt-5" : "opacity-0 invisible h-0"
+    className={`overflow-hidden bg-white text-[#808080] transition-all duration-200 ${isActive ? "opacity-100 visible h-auto mt-5" : "opacity-0 invisible h-0"
       }`}
   >
     {links.map((link, index) => (
-      <li
-        key={index}
-        className="w-full text-left text-base py-5 bg-white 992px:w-auto"
-      >
+      <li key={index} className="w-full text-left text-base py-5 bg-white 992px:w-auto">
         <Link
           href={link.href}
           className="text-paragraph text-sm pl-11 ml-[20%]"
@@ -168,19 +155,15 @@ const MobileSubmenu = ({ subMenuId, links, isActive, onMenuClick }) => (
   </ul>
 );
 
-const MobileMenu = ({
-  isVisible,
-  activeSubMenu,
-  onToggleSubmenu,
-  onMenuClick,
-}) => (
+const MobileMenu = ({ isVisible, activeSubMenu, onToggleSubmenu, onMenuClick }) => (
   <div
     id="mobile-menu"
-    className={`block ${isVisible ? "h-screen" : ""}  bg-white 1024px:hidden w-full`}
+    className={`block ${isVisible ? "h-screen" : ""} bg-white 1024px:hidden w-full`}
   >
     <button
       className="bg-primary w-full py-[15px] px-2.5 text-white pl-7"
       onClick={onMenuClick}
+      aria-label="Toggle mobile menu"
     >
       <span className="flex items-center gap-0.5">
         <FaBars className="relative -left-2.5" />
@@ -194,9 +177,7 @@ const MobileMenu = ({
       {MENU_ITEMS.map((item, index) => (
         <li
           key={index}
-          className={`border-b border-light-border py-5 ${item.submenuId && activeSubMenu === item.submenuId
-              ? "bg-black pb-0"
-              : "text-black"
+          className={`border-b border-light-border py-5 ${item.submenuId && activeSubMenu === item.submenuId ? "bg-black pb-0" : "text-black"
             }`}
         >
           {item.submenuId ? (
@@ -205,6 +186,8 @@ const MobileMenu = ({
                 className={`ml-[20%] flex items-center gap-4 ${activeSubMenu === item.submenuId && "text-active-text"
                   }`}
                 onClick={() => onToggleSubmenu(item.submenuId)}
+                aria-expanded={activeSubMenu === item.submenuId}
+                aria-label={`Toggle ${item.name} submenu`}
               >
                 <i className="rotate-45 border-dark-border border-r-2 border-b-2 w-2 h-2" />
                 {item.name}
@@ -231,13 +214,14 @@ const MobileMenu = ({
   </div>
 );
 
-
 const Navbar = () =>
 {
   const [mobileNavVisible, setMobileNavVisible] = useState(false);
   const [activeSubMenu, setActiveSubMenu] = useState(null);
 
   const isVisible = useScrollHide(100);
+
+  useRouteScrollFix();
 
   const toggleMobileMenu = () =>
   {
@@ -250,14 +234,16 @@ const Navbar = () =>
     setActiveSubMenu((prev) => (prev === subMenuId ? null : subMenuId));
   };
 
-  const handleMenuClick = () => setMobileNavVisible(false);
-
+  const handleMenuClick = () =>
+  {
+    setMobileNavVisible(false);
+    setActiveSubMenu(null);
+  };
 
   const shouldShow = isVisible || mobileNavVisible;
 
   return (
     <div className="relative z-50">
-     
       <div className="w-full h-[160px] 1024px:h-[130px] bg-transparent" aria-hidden="true" />
 
       <header

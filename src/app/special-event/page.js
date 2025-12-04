@@ -1,18 +1,21 @@
-import React from 'react';
 import HeadlineContent from './components/HeadlineContent';
 import BottomBanner from '@/components/common/BottomBanner';
-
 import SpecialEventForm from '@/components/common/forms-new/forms/SpecialEventForm';
 
-const page = () =>
+export const metadata = {
+  title: "Special Event Information - Secure Cash",
+  description: "Submit your special event details for once-off secure cash collection services.",
+};
+
+const Page = () =>
 {
   return (
-    <div>
+    <>
       <HeadlineContent />
       <SpecialEventForm />
       <BottomBanner />
-    </div>
+    </>
   );
 };
 
-export default page;
+export default Page;

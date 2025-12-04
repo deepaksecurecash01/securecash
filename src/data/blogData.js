@@ -236,7 +236,7 @@ export const blogPosts = [
       all not related to interest rates. So if interest rates bore you, or that&rsquo;s all you see
       when you search for banking news on Google, check out the points below to see if your bank has
       made major changes.</p>
-  <h3>ANZ to close 15 branches</h3>
+  <h1>ANZ to close 15 branches</h1>
   <p>Mostly regional branches, there will be 15 closed throughout New South Wales, Victoria and
       Western Australia. This makes 146 since the start of 2020, and will this time leave 54 people
       unemployed.</p>
@@ -244,7 +244,7 @@ export const blogPosts = [
   <p class="link-new-tab"><a target="&rdquo;_blank&rdquo;"
           href="https://www.miragenews.com/anz-bank-to-close-15-more-branches-in-nsw-vic-wa-545664/">ANZ
           bank to close 15 more branches in NSW, Vic, WA</a></p>
-  <h3>Westpac closures</h3>
+  <h1>Westpac closures</h1>
   <p>Westpac are following the footsteps of ANZ and closing 48 branches. However this still leaves
       them with the second-most number of branches throughout Australia. The banks involved in this
       include Bank SA, St George, Bank of Melbourne and Westpac branches, with over half being BOM
@@ -256,7 +256,7 @@ export const blogPosts = [
           Group to close dozens of branches</a></p>
   <img src="/images/blog/banking-updates-april-2021-img-1.jpg"
       alt="Housing Loan" width="900" height="506">
-  <h3>Faster home loans</h3>
+  <h1>Faster home loans</h1>
   <p>The Big 4 have announced a dramatic cut in wait times for home loan approvals. Some cite one day
       for regular income earners, and most claim to have simple home loans approved within two days.
   </p>
@@ -265,7 +265,7 @@ export const blogPosts = [
   <p class="link-new-tab">Read More: <a target="&rdquo;_blank&rdquo;"
           href="https://www.afr.com/companies/financial-services/big-four-banks-crunch-home-loan-approval-times-20210416-p57jty">Big
           four banks crunch home loan approval times</a></p>
-  <h3>Citi up for sale</h3>
+  <h1>Citi up for sale</h1>
   <p>Coming in fifth behind the Big 4 banks, Citigroup are putting their consumer banking business up
       for sale. The ACCC have already warned the Big 4 that if they do consider put in an offer for
       the first foreign bank to be granted a license to trade in Australia, they would consider
@@ -279,7 +279,7 @@ export const blogPosts = [
   <p class="link-new-tab">Read More: <a target="&rdquo;_blank&rdquo;"
           href="https://www.abc.net.au/news/2021-04-16/banking-citigroup-consumers-australia/100073604">ACCC
           boss Rod Sims warns big four not to buy Citi's retail bank</a></p>
-  <h3>ASIC taking Westpac to court</h3>
+  <h1>ASIC taking Westpac to court</h1>
   <p>Although there are ongoing class action, ASIC is now starting civil proceedings against Westpac
       over Consumer Credit Insurance (CCI). The allegation is that CCI was charged to clients that
       never agreed to purchase it:</p>
@@ -826,7 +826,7 @@ export const blogPosts = [
                            interest rate drop. Even if you do not own stocks and shares, if you do not earn millions
                            each year, this still has an effect on you. If we run into negative rates, you may have to
                            pay the bank to store your money.</strong></p>
-                   <h3 style="text-align:center;">Interest rates and what they are there for.</h3>
+                   <h1 style="text-align:center;">Interest rates and what they are there for.</h1>
                    <p>Banks serve multiple purposes. You can store your money there, or save, and you can take out a
                        loan, or borrow. Both of these are not free for both parties. To store your money in the bank,
                        and save it, the bank will pay you a &ldquo;fee&rdquo;. A percentage of your money is calculated
@@ -841,7 +841,7 @@ export const blogPosts = [
                    </p>
                    <p>With me so far? Pretty easy steps to here: save money and be rewarded, or borrow money and pay
                        for that privilege.</p>
-                   <h3 style="text-align:center;">High versus Low Interest Rates</h3>
+                   <h1 style="text-align:center;">High versus Low Interest Rates</h1>
                    <p>When interest rates are high it will have an effect on what people do with their money. People
                        who save money in the bank will earn more interest on their deposits. People who take out a
                        loan, will have to pay more in return. Less loans are taken out in this instance as the amount
@@ -852,7 +852,7 @@ export const blogPosts = [
                        afford the repayment total. Savings earn less interest though, so people may not keep their
                        money in the bank, but rather might spend more and have cash on hand.</p>
                    <p>Still with me? It&rsquo;s still relatively black and white. We&rsquo;re about to go grey.</p>
-                   <h3 style="text-align:center;">Negative interest rates</h3>
+                   <h1 style="text-align:center;">Negative interest rates</h1>
                    <p>This will have the effect on the banking industry of reversing everything I just said.</p>
                    <p>A negative interest rate means that when you have any savings in your bank, you have to pay them
                        to store the funds. If you borrow money, the bank will end up paying you, in a way.&nbsp;</p>

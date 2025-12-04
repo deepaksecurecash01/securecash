@@ -1,4 +1,3 @@
-// src/hooks/useScrollHide.js
 import { useState, useEffect, useRef } from 'react';
 
 export default function useScrollHide(offset = 100)
@@ -12,16 +11,11 @@ export default function useScrollHide(offset = 100)
         {
             const currentScrollY = window.scrollY;
 
-            // 1. Always show at top (respecting offset)
             if (currentScrollY < offset) {
                 setIsVisible(true);
-            }
-            // 2. Hide on scroll down
-            else if (currentScrollY > lastScrollY.current) {
+            } else if (currentScrollY > lastScrollY.current) {
                 setIsVisible(false);
-            }
-            // 3. Show on scroll up
-            else {
+            } else {
                 setIsVisible(true);
             }
 

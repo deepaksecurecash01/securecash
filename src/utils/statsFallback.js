@@ -1,21 +1,14 @@
-// utils/statsFallback.js
 import fs from 'fs/promises';
 import path from 'path';
 
-// 🚀 CHANGED: Path now points to 'src/data' instead of root 'data'
 const FALLBACK_PATH = path.join(process.cwd(), 'src/data/stats-fallback.json');
 
-// Static fallback (only used if file read fails)
 const STATIC_FALLBACK = {
     customers: 2955,
     servicesPerformed: 578424,
     cashMoved: 2652053680
 };
 
-/**
- * Read fallback stats from JSON file
- * Used by Server Components for SSR
- */
 export async function readFallbackStats()
 {
     try {
@@ -28,13 +21,8 @@ export async function readFallbackStats()
     }
 }
 
-/**
- * Write fallback stats to JSON file
- * Called by API after successful data fetch
- */
 export async function writeFallbackStats(stats)
 {
-    // Skip on Vercel (filesystem not persistent)
     if (process.env.VERCEL === '1') return;
 
     try {
@@ -49,12 +37,9 @@ export async function writeFallbackStats(stats)
             source: 'api'
         };
 
-        // Atomic write (write to temp, then rename)
         const tempPath = FALLBACK_PATH + '.tmp';
         await fs.writeFile(tempPath, JSON.stringify(data, null, 2));
         await fs.rename(tempPath, FALLBACK_PATH);
-
-        console.log('[Fallback] Updated successfully');
     } catch (error) {
         console.error('[Fallback] Write failed:', error.message);
     }

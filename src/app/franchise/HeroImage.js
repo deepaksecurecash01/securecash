@@ -13,6 +13,7 @@ const HeroImage = () =>
         alt="SecureCash Franchise Services Australia Wide"
         fill
         priority
+        fetchPriority="high"
         className="object-cover -z-10"
         style={{
           filter: 'brightness(0.5)',

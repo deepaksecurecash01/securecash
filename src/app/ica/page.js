@@ -1,12 +1,15 @@
-
 import React from 'react';
 import HeroImage from './HeroImage';
 import IndependentContractorsForm from '@/components/common/forms-new/forms/IcaForm';
 
+export const metadata = {
+  title: 'Independent Contractors Agreement | SecureCash',
+  description: 'Complete your Independent Contractors Agreement with SecureCash. Join our network of preferred contractors for secure cash transport services.',
+};
+
 const page = () =>
 {
-  
-  //Agreement Term Section
+
   const agreementTermData = {
     opening: {
       title: "",
@@ -522,8 +525,6 @@ const page = () =>
     }
   };
 
-
-  //Deed of Guarantee Section
   const deedOfGuaranteeData = {
     opening: {
       title: "",
@@ -961,7 +962,7 @@ const page = () =>
         }
       ]
     },
-    annexureData : {
+    annexureData: {
       annexure1: {
         title: "ANNEXURE 1 - Services",
         items: [
@@ -1116,16 +1117,14 @@ const page = () =>
     }
   };
 
-
   return (
-    <div>
-      <HeroImage/>
-  <IndependentContractorsForm
+    <>
+      <HeroImage />
+      <IndependentContractorsForm
         agreementTermData={agreementTermData}
         deedOfGuaranteeData={deedOfGuaranteeData}
-     />
-
-    </div>
+      />
+    </>
   );
 };
 

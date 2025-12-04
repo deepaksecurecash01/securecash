@@ -5,12 +5,30 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Keep smooth scroll for anchor links and form validation */
 html {
-  scroll-behavior: auto !important;
+  scroll-behavior: smooth;
+}
+
+/* Optional: Prevent scroll behavior override by browser */
+* {
+  scroll-behavior: inherit;
 }
 
 :root:has(.no-doc-scroll) {
   overflow: hidden;
+}
+
+:root {
+  --header-height: 130px;
+  /* Desktop default */
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --header-height: 160px;
+    /* Mobile default */
+  }
 }
 
 img,

@@ -1,18 +1,21 @@
 import BottomBanner from '@/components/common/BottomBanner';
 import BlogHeroSection from '@/app/blog/components/BlogHeroSection';
 import BlogIndex from '@/app/blog/components/BlogIndex';
-import React from 'react';
 
-const page = () =>
+export const metadata = {
+  title: 'Blog - SecureCash',
+  description: 'News, Articles & Updates From Us. Stay informed with the latest insights from SecureCash.',
+};
+
+const BlogPage = () =>
 {
   return (
-    <div>
-      <BlogHeroSection title={'Thanks for being my sounding board'} date={'News, Articles & Updates From Us'} blogIndex={true} />
+    <main>
+      <BlogHeroSection title="Thanks for being my sounding board" date="News, Articles & Updates From Us" blogIndex={true} />
       <BlogIndex />
       <BottomBanner />
-
-    </div>
+    </main>
   );
 };
 
-export default page;
+export default BlogPage;

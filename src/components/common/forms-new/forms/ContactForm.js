@@ -12,12 +12,120 @@ import
         FaSpinner,
         FaCheckCircle,
     } from "react-icons/fa";
-
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate, formatDateForAPI } from '@/utils/formHelpers';
 import ContactFormSchema, { CONTACT_DEFAULT_VALUES, formConfig } from '@/zod/ContactFormSchema';
 import Link from "next/link";
+
+const INPUT_FIELDS = [
+    {
+        name: "FullName",
+        type: "text",
+        label: "Full Name",
+        placeholder: "Enter your full name",
+        Icon: FaUser,
+    },
+    {
+        name: "Organisation",
+        type: "text",
+        label: "Organisation Name",
+        placeholder: "Enter your organisation name",
+        Icon: FaUsers,
+    },
+    {
+        name: "Phone",
+        type: "tel",
+        label: "Phone Number",
+        placeholder: "Enter your phone number",
+        Icon: FaPhone,
+    },
+    {
+        name: "Email",
+        type: "email",
+        label: "Email Address",
+        placeholder: "Your email address",
+        Icon: FaEnvelope,
+    },
+];
+
+const SuccessMessage = ({ userName, onReset }) => (
+    <div
+        className="form-submitted-message text-center py-4 absolute h-full top-0 flex flex-col justify-center items-center bg-[#f1f1f1] z-10 w-[90%]"
+        style={{ background: "#f1f1f1" }}
+        role="alert"
+        aria-live="polite"
+    >
+        <div className="480px:w-[90%] mx-auto 992px:h-[75%]">
+            <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" aria-hidden="true" />
+
+            <h2 className="text-primary font-montserrat text-center capitalize pb-2 text-[32px] leading-[30px] mt-8 font-bold">
+                Thank you{userName && ` ${userName}`}!
+            </h2>
+            <p className="font-montserrat text-center capitalize pb-2 text-[16px]">
+                Your message has been sent successfully.
+            </p>
+            <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" aria-hidden="true" />
+
+            <div className="quote-ty-note">
+                <p className="font-normal text-center pb-4 text-[16px] mt-8 font-montserrat">
+                    We&apos;ve received your inquiry and will get back to you shortly.
+                </p>
+                <p className="font-normal text-center pb-4 text-[16px] font-montserrat">
+                    In the meantime, feel free to explore more about our services:
+                </p>
+                <div className="ty-note-list-wrap mt-2">
+                    <ul className="list-none p-0 m-0 flex flex-col justify-center items-center gap-1 font-medium">
+                        <li className="cash-collection mb-2 flex items-center">
+                            <img
+                                src="/images/contentpageicons/cashcollection.png"
+                                alt=""
+                                className="inline-block mr-2 w-[30px]"
+                                aria-hidden="true"
+                            />
+                            <Link href="/services/cash-collection/" className="text-[#c6a54b] hover:underline">
+                                Cash Collections
+                            </Link>
+                        </li>
+                        <li className="cash-delivery mb-2 flex items-center">
+                            <img
+                                src="/images/contentpageicons/cashdelivery.png"
+                                alt=""
+                                className="inline-block mr-2 w-[30px]"
+                                aria-hidden="true"
+                            />
+                            <Link href="/services/cash-delivery/" className="text-[#c6a54b] hover:underline">
+                                Cash Deliveries
+                            </Link>
+                        </li>
+                        <li className="cash-counting mb-2 flex items-center">
+                            <img
+                                src="/images/contentpageicons/cashcounting.png"
+                                alt=""
+                                className="inline-block mr-2 w-[30px]"
+                                aria-hidden="true"
+                            />
+                            <Link href="/services/cash-counting/" className="text-[#c6a54b] hover:underline">
+                                Cash Counting
+                            </Link>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div className="button-controls-container w-[80%] mx-auto mt-8">
+                <button
+                    type="button"
+                    onClick={onReset}
+                    className="bg-[#c6a54b] text-white border-none py-[15px] font-medium cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-[15px] p-2.5 shadow-none font-montserrat"
+                    aria-label="Send another message"
+                >
+                    Send Another Message
+                </button>
+            </div>
+        </div>
+    </div>
+);
 
 const ContactForm = ({ className }) =>
 {
@@ -27,25 +135,15 @@ const ContactForm = ({ className }) =>
         theme: 'light',
         formType: 'contact',
         formId: 'Contact',
-        onSuccess: (result, finalData) =>
-        {
-            console.log("Contact form submitted successfully!");
-        },
-        onError: (error) =>
-        {
-            console.error("Contact submission failed:", error);
-        },
         prepareData: async (data) =>
         {
-            const dateOfSubmission = formatSubmissionDate();
-
-            let processedData = {
+            const processedData = {
                 ...data,
-                "formType": "contact",
+                formType: "contact",
                 timestamp: new Date().toISOString(),
                 formId: "Contact",
                 submissionId: `contact_${Date.now()}`,
-                dateOfSubmission: dateOfSubmission,
+                dateOfSubmission: formatSubmissionDate(),
             };
 
             if (data.CallbackDate) {
@@ -57,52 +155,10 @@ const ContactForm = ({ className }) =>
     });
 
     const needsCallback = formManager.watch("ChkCallBack");
-    const selectedCallbackDate = formManager.watch("CallbackDate");
-
-    const { departments, callBackTimes, states } = formConfig;
-
-    const inputFields = [
-        {
-            name: "FullName",
-            type: "text",
-            label: "Full Name",
-            placeholder: "Enter your full name",
-            Icon: FaUser,
-        },
-        {
-            name: "Organisation",
-            type: "text",
-            label: "Organisation Name",
-            placeholder: "Enter your organisation name",
-            Icon: FaUsers,
-        },
-        {
-            name: "Phone",
-            type: "tel",
-            label: "Phone Number",
-            placeholder: "Enter your phone number",
-            Icon: FaPhone,
-        },
-        {
-            name: "Email",
-            type: "email",
-            label: "Email Address",
-            placeholder: "Your email address",
-            Icon: FaEnvelope,
-        },
-    ];
-
+    const isCallbackDisabled = !needsCallback || needsCallback.length === 0;
     const userName = formManager.getValues().FullName || "";
 
-    useEffect(() =>
-    {
-        if (process.env.NODE_ENV === 'development') {
-            const debugInfo = formManager.getDebugInfo();
-            if (debugInfo.currentFocus || Object.keys(debugInfo.errors).length > 0) {
-                console.log('🐛 ContactForm Debug Info:', debugInfo);
-            }
-        }
-    }, [formManager.currentFocusField, formManager.errors]);
+    const { departments, callBackTimes, states } = formConfig;
 
     return (
         <div className="float-none 992px:w-[60%] 992px:float-left relative left-0 flex justify-center 414px:mx-4 992px:mx-0">
@@ -144,7 +200,7 @@ const ContactForm = ({ className }) =>
                                 />
                             </div>
 
-                            {inputFields.map((field) => (
+                            {INPUT_FIELDS.map((field) => (
                                 <div key={field.name} className="relative">
                                     <UniversalFormField
                                         {...formManager.getFieldProps(field)}
@@ -182,7 +238,7 @@ const ContactForm = ({ className }) =>
                                         monthPlaceholder: "MM",
                                         yearPlaceholder: "YYYY",
                                         format: "dd/MM/yyyy",
-                                        disabled: !needsCallback || needsCallback.length === 0,
+                                        disabled: isCallbackDisabled,
                                     })}
                                     theme="light"
                                     aria-label="Select callback date"
@@ -198,7 +254,7 @@ const ContactForm = ({ className }) =>
                                             label: "What is the best time?",
                                             Icon: FaClock,
                                             options: callBackTimes,
-                                            disabled: !needsCallback || needsCallback.length === 0,
+                                            disabled: isCallbackDisabled,
                                         })}
                                         theme="light"
                                         aria-label="Select callback time"
@@ -212,7 +268,7 @@ const ContactForm = ({ className }) =>
                                             label: "Which state are you from?",
                                             Icon: FaMapMarkerAlt,
                                             options: states,
-                                            disabled: !needsCallback || needsCallback.length === 0,
+                                            disabled: isCallbackDisabled,
                                         })}
                                         theme="light"
                                         aria-label="Select state"
@@ -237,90 +293,7 @@ const ContactForm = ({ className }) =>
                     </div>
 
                     {formManager.isSubmitted && (
-                        <div
-                            className="form-submitted-message text-center py-4 absolute h-full top-0 flex flex-col justify-center items-center bg-[#f1f1f1] z-10 w-[90%]"
-                            style={{ background: "#f1f1f1" }}
-                            role="alert"
-                            aria-live="polite"
-                        >
-                            <div className="480px:w-[90%] mx-auto 992px:h-[75%]">
-                                <FaCheckCircle className="text-[#4bb543] text-[96px] mx-auto" aria-hidden="true" />
-
-                                <h2 className="text-primary font-montserrat text-center capitalize pb-2 text-[32px] leading-[30px] mt-8 font-bold">
-                                    Thank you{userName && ` ${userName}`}!
-                                </h2>
-                                <p className="font-montserrat text-center capitalize pb-2 text-[16px]">
-                                    Your message has been sent successfully.
-                                </p>
-                                <hr className="mt-4 w-[100px] h-[4px] rounded-[5px] border-0 mx-auto bg-primary" aria-hidden="true" />
-
-                                <div className="quote-ty-note">
-                                    <p className="font-normal text-center pb-4 text-[16px] mt-8 font-montserrat">
-                                        We&apos;ve received your inquiry and will get back to you shortly.
-                                    </p>
-                                    <p className="font-normal text-center pb-4 text-[16px] font-montserrat">
-                                        In the meantime, feel free to explore more about our services:
-                                    </p>
-                                    <div className="ty-note-list-wrap mt-2">
-                                        <ul className="list-none p-0 m-0 flex flex-col justify-center items-center gap-1 font-medium">
-                                            <li className="cash-collection mb-2 flex items-center">
-                                                <img
-                                                    src="/images/contentpageicons/cashcollection.png"
-                                                    alt=""
-                                                    className="inline-block mr-2 w-[30px]"
-                                                    aria-hidden="true"
-                                                />
-                                                <Link
-                                                    href="/services/cash-collection/"
-                                                    className="text-[#c6a54b] hover:underline"
-                                                >
-                                                    Cash Collections
-                                                </Link>
-                                            </li>
-                                            <li className="cash-delivery mb-2 flex items-center">
-                                                <img
-                                                    src="/images/contentpageicons/cashdelivery.png"
-                                                    alt=""
-                                                    className="inline-block mr-2 w-[30px]"
-                                                    aria-hidden="true"
-                                                />
-                                                <Link
-                                                    href="/services/cash-delivery/"
-                                                    className="text-[#c6a54b] hover:underline"
-                                                >
-                                                    Cash Deliveries
-                                                </Link>
-                                            </li>
-                                            <li className="cash-counting mb-2 flex items-center">
-                                                <img
-                                                    src="/images/contentpageicons/cashcounting.png"
-                                                    alt=""
-                                                    className="inline-block mr-2 w-[30px]"
-                                                    aria-hidden="true"
-                                                />
-                                                <Link
-                                                    href="/services/cash-counting/"
-                                                    className="text-[#c6a54b] hover:underline"
-                                                >
-                                                    Cash Counting
-                                                </Link>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-
-                                <div className="button-controls-container w-[80%] mx-auto mt-8">
-                                    <button
-                                        type="button"
-                                        onClick={formManager.resetForm}
-                                        className="bg-[#c6a54b] text-white border-none py-[15px] font-medium cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-[15px] p-2.5 shadow-none font-montserrat"
-                                        aria-label="Send another message"
-                                    >
-                                        Send Another Message
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                        <SuccessMessage userName={userName} onReset={formManager.resetForm} />
                     )}
 
                     {formManager.submissionError && (
@@ -338,8 +311,7 @@ const ContactForm = ({ className }) =>
                             <button
                                 type="submit"
                                 disabled={formManager.isSubmitting}
-                                className={`nextBtn ${formManager.isSubmitted ? 'bg-[#4bb543]' : 'bg-[#c6a54b]'
-                                    } text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
+                                className={`nextBtn ${formManager.isSubmitted ? 'bg-[#4bb543]' : 'bg-[#c6a54b]'} text-white border-none py-[15px] px-[50px] text-[17px] cursor-pointer w-full rounded-[40px] outline-none appearance-none hover:opacity-80 text-sm p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
                                 aria-label={formManager.isSubmitting ? "Sending message" : formManager.isSubmitted ? "Message sent successfully" : "Send message"}
                             >
                                 {formManager.isSubmitting ? (

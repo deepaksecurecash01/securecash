@@ -1,4 +1,3 @@
-// /hooks/useFormSubmission.js
 import { useState } from 'react';
 import { submitForm } from '@/utils/apiClient';
 import { prepareFormMetadata } from '@/utils/formHelpers';
@@ -8,9 +7,9 @@ export const useFormSubmission = ({
     formId,
     onSuccess,
     onError,
-    prepareData, // Optional data transformation function
+    prepareData,
     enableHoneypot = true,
-    submitEndpoint = "/api/forms" // Allow custom endpoints
+    submitEndpoint = "/api/forms"
 }) =>
 {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -20,41 +19,30 @@ export const useFormSubmission = ({
     const handleSubmission = async (formData) =>
     {
         try {
-            // Reset previous states
             setSubmissionError(null);
 
-            // Check honeypot field if enabled
             if (enableHoneypot && formData.BotField) {
-                console.log("Bot detected, ignoring submission");
                 return;
             }
 
             setIsSubmitting(true);
 
-            // Prepare metadata
             const metadata = await prepareFormMetadata(formType, formId);
 
-            // Prepare final data
             let finalData = {
                 ...formData,
                 ...metadata
             };
 
-            // Apply custom data preparation if provided
             if (prepareData && typeof prepareData === 'function') {
                 finalData = await prepareData(finalData);
             }
 
-            console.log(`${formType} form submission:`, finalData);
-
-            // Submit to API
             const result = await submitForm(finalData, submitEndpoint);
-            console.log("API Response:", result);
 
             setIsSubmitted(true);
             setIsSubmitting(false);
 
-            // Call success handler
             if (onSuccess) {
                 onSuccess(result, finalData);
             }
@@ -66,12 +54,11 @@ export const useFormSubmission = ({
             setIsSubmitting(false);
             setSubmissionError(error.message);
 
-            // Call error handler
             if (onError) {
                 onError(error, formData);
             }
 
-            throw error; // Re-throw so caller can handle if needed
+            throw error;
         }
     };
 

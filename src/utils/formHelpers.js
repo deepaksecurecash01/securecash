@@ -1,11 +1,7 @@
-// /utils/formHelpers.js
-// Device and IP detection utilities
-
 export const getDeviceInfo = () =>
 {
     const userAgent = navigator.userAgent;
 
-    // Parse browser and version
     let browserInfo = 'Unknown';
     let browserVersion = '';
 
@@ -25,7 +21,6 @@ export const getDeviceInfo = () =>
         }
     }
 
-    // Parse OS information
     let osInfo = 'Unknown';
     const osPatterns = [
         { name: 'Windows NT', pattern: /Windows NT ([0-9._]+)/, format: (v) => `Windows NT ${v}` },
@@ -66,13 +61,12 @@ export const getIPAddress = async () =>
             const data = await response.json();
             if (data.ip || data.query) return data.ip || data.query;
         } catch (error) {
-            console.log(`IP service ${service} failed:`, error);
+            console.error(`IP service ${service} failed:`, error);
         }
     }
     return 'Unable to detect';
 };
 
-// Date formatting utilities
 export const formatSubmissionDate = () =>
 {
     const now = new Date();
@@ -116,53 +110,6 @@ export const formatBirthdayForAPI = (date) =>
     return `${year}-${month}-${day}`;
 };
 
-// Enhanced Focus utility for complex components
-export const focusInput = (ref) =>
-{
-    if (ref && ref.current) {
-        try {
-            const element = ref.current;
-
-            // First, try to focus the element directly (works for standard inputs)
-            if (element.focus && typeof element.focus === 'function') {
-                // Check if the element is actually focusable
-                if (element.tabIndex >= 0 || element.tagName === 'INPUT' || element.tagName === 'TEXTAREA' || element.tagName === 'SELECT') {
-                    element.focus();
-                    return;
-                }
-            }
-
-            // If direct focus doesn't work, look for focusable children
-            // This handles complex components like DatePicker, custom selects, etc.
-            const focusableSelectors = [
-                'input:not([disabled]):not([readonly])',
-                'textarea:not([disabled]):not([readonly])',
-                'select:not([disabled])',
-                'button:not([disabled])',
-                '[tabindex]:not([tabindex="-1"]):not([disabled])'
-            ];
-
-            const focusableElements = element.querySelectorAll(focusableSelectors.join(', '));
-
-            if (focusableElements.length > 0) {
-                // Focus the first focusable element found
-                focusableElements[0].focus();
-                return;
-            }
-
-            // Last resort: try to make the container focusable and focus it
-            if (element.tabIndex === undefined || element.tabIndex < 0) {
-                element.tabIndex = -1;
-            }
-            element.focus();
-
-        } catch (error) {
-            console.error('Error focusing field:', error);
-        }
-    }
-};
-
-// Common form data preparation
 export const prepareFormMetadata = async (formType, formId) =>
 {
     const deviceInfo = getDeviceInfo();

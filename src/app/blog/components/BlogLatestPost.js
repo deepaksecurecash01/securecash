@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image"; // 🚀 Import Image
+import Image from "next/image";
 import Container from "@/components/layout/Container";
 import { blogPosts } from "../../../data/blogData";
 
@@ -16,9 +16,9 @@ const BlogLatestPost = () =>
 
   return (
     <div className="blog-single-main--footer">
-      <h4 className="font-bold leading-[2rem] text-center max-[414px]:text-[36px] text-[30px] z-30 mb-[20px] font-montserrat">
+      <h2 className="font-bold leading-[2rem] text-center max-[414px]:text-[36px] text-[30px] z-30 mb-[20px] font-montserrat">
         Latest post
-      </h4>
+      </h2>
       <hr className="w-[100px] mt-[6px] mb-[16px] mx-auto 768px:ml-0 768px:mr-auto h-[4px] rounded-[5px] border-0 bg-primary" />
       <div className="inner-grid">
         <section className="blog-index-main blog-index-footer">
@@ -31,7 +31,6 @@ const BlogLatestPost = () =>
                 >
                   <Link href={`/blog/${item.id}`} className="flex flex-wrap justify-center transition-all duration-200 ease-in group">
                     <div className="relative w-full h-[220px] 414px:h-[240px] 480px:h-[270px] 768px:h-[200px] 1024px:h-[240px] mb-[12px]">
-                      {/* 🚀 OPTIMIZATION: next/image with fill */}
                       <Image
                         src={item.featuredImage}
                         className="object-cover w-full h-full"
@@ -41,11 +40,11 @@ const BlogLatestPost = () =>
                       />
                     </div>
                   </Link>
-                  <h4 className="text-[22px] font-bold text-primary text-center 768px:text-left pb-5 font-montserrat">
+                  <h3 className="text-[22px] font-bold text-primary text-center 768px:text-left pb-5 font-montserrat">
                     <Link href={`/blog/${item.id}`} className="flex flex-wrap justify-center transition-all duration-200 ease-in">
                       {item.title}
                     </Link>
-                  </h4>
+                  </h3>
                 </div>
               ))}
             </div>

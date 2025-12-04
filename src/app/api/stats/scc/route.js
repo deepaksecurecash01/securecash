@@ -1,6 +1,3 @@
-// app/api/stats/scc/route.js
-// Clean API route - no fallback logic (handled by SSR)
-
 import { connectMongo } from "@/utils/connectMongo";
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
@@ -12,8 +9,8 @@ const transactionSchema = new mongoose.Schema({}, { collection: 'transactions', 
 const Location = mongoose.models.Location || mongoose.model('Location', locationSchema);
 const Transaction = mongoose.models.Transaction || mongoose.model('Transaction', transactionSchema);
 
-const CACHE_TTL = 6 * 60 * 60 * 1000; // 6 hours
-const STALE_WINDOW = 24 * 60 * 60 * 1000; // 24 hours
+const CACHE_TTL = 6 * 60 * 60 * 1000;
+const STALE_WINDOW = 24 * 60 * 60 * 1000;
 
 let cache = {
   data: null,
@@ -21,17 +18,17 @@ let cache = {
   isRefreshing: false
 };
 
-function isCacheFresh()
+const isCacheFresh = () =>
 {
   return cache.data && cache.timestamp && (Date.now() - cache.timestamp) < CACHE_TTL;
-}
+};
 
-function isCacheStale()
+const isCacheStale = () =>
 {
   return cache.data && cache.timestamp && (Date.now() - cache.timestamp) < STALE_WINDOW;
-}
+};
 
-async function fetchFreshStats()
+const fetchFreshStats = async () =>
 {
   const startTime = Date.now();
 
@@ -97,24 +94,20 @@ async function fetchFreshStats()
     source: 'database'
   };
 
-  console.log(`[API] Query completed in ${queryTime}ms`);
-
-  // Update cache
   cache = {
     data: stats,
     timestamp: Date.now(),
     isRefreshing: false
   };
 
-  // Write to fallback file (non-blocking)
   writeFallbackStats(stats).catch(err =>
     console.error('[API] Fallback write failed:', err)
   );
 
   return stats;
-}
+};
 
-async function backgroundRefresh()
+const backgroundRefresh = async () =>
 {
   if (cache.isRefreshing) return;
   cache.isRefreshing = true;
@@ -125,12 +118,11 @@ async function backgroundRefresh()
     console.error('[API] Background refresh failed:', error);
     cache.isRefreshing = false;
   }
-}
+};
 
 export async function GET()
 {
   try {
-    // Fresh cache - return immediately
     if (isCacheFresh()) {
       return NextResponse.json(
         { ...cache.data, source: 'cache-fresh' },
@@ -144,7 +136,6 @@ export async function GET()
       );
     }
 
-    // Stale cache - return stale + refresh in background
     if (isCacheStale()) {
       backgroundRefresh().catch(console.error);
 
@@ -160,7 +151,6 @@ export async function GET()
       );
     }
 
-    // No cache - fetch fresh data
     const freshStats = await fetchFreshStats();
 
     return NextResponse.json(freshStats, {

@@ -35,7 +35,7 @@ const SectionWrapper = () =>
 {
   return (
     <div className="w-full relative">
-      <div className="absolute inset-0 bg-quote-header-left bg-left-top bg-no-repeat -z-10" />
+      <div className="absolute  inset-0 bg-quote-header-left bg-left-top bg-no-repeat -z-10" />
       <div className="absolute inset-0 bg-quote-header-right bg-right-top bg-no-repeat -z-10" />
       <section id="intro" className="max-w-[1366px] mx-auto flex flex-col px-5 justify-center items-center">
         <h2 className="montBold text-[22px] leading-[30px] 768px:text-[34px] font-bold text-center mx-auto 768px:leading-[45px] max-w-[80%] text-black">
