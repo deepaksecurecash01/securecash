@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Container from "../../../components/layout/Container";
 import Link from "next/link";
-import BannerInfo from "../../../components/common/BannerInfo";
+import BannerInfo from "../../home/components/HeroSection/BannerInfo";
 
 const HeadlineContent = () =>
 {

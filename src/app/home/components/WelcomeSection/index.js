@@ -83,7 +83,7 @@ const WelcomeSection = () =>
                     What cash in transit service does your business need? As one
                     of the largest and most respected cash logistics companies
                     in Australia, SecureCash can serve your specific needs, we
-                    provide:
+                    provide:{" "}
                     <button
                       type="button"
                       className={`read-more-link inline 768px:hidden ${isExpanded && "hidden"} text-[#957433] text-[16px] font-bold font-[Montserrat] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2`}

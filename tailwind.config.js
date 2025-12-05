@@ -31,11 +31,10 @@ module.exports = {
       },
 
       fontFamily: {
-        // ✅ UPDATED: Use CSS variables for next/font
-        montserrat: ["var(--font-montserrat)", "system-ui", "sans-serif"],
-        prata: ["var(--font-prata)", "Georgia", "serif"],
-        "prata-regular": ["var(--font-prata)", "Georgia", "serif"],
+        montserrat: ['"Montserrat"'],
         times: ['"Times New Roman"', "Times", "serif"],
+        prata: ["var(--font-prata)"], // Ensure exact font name here
+        'prata-regular': ['"Prata Regular"', "serif"], // Ensure exact font name here
       },
 
       colors: {

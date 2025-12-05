@@ -137,7 +137,7 @@ const DesktopMenu = ({ onMenuClick }) => (
 
 const MobileSubmenu = ({ subMenuId, links, isActive, onMenuClick }) => (
   <ul
-    className={`overflow-hidden bg-white text-[#808080] transition-all duration-200 ${isActive ? "opacity-100 visible h-auto mt-5" : "opacity-0 invisible h-0"
+    className={`overflow-hidden bg-white text-[#808080] transition-all duration-200 ${isActive ? "opacity-100 visible h-auto" : "opacity-0 invisible h-0"
       }`}
   >
     {links.map((link, index) => (
@@ -173,42 +173,53 @@ const MobileMenu = ({ isVisible, activeSubMenu, onToggleSubmenu, onMenuClick }) 
       className={`transition-all duration-100 ${isVisible ? "h-[70vh] opacity-100" : "max-h-0 opacity-0"
         } overflow-auto`}
     >
-      {MENU_ITEMS.map((item, index) => (
-        <li
-          key={index}
-          className={`border-b border-light-border py-5 ${item.submenuId && activeSubMenu === item.submenuId ? "bg-black pb-0" : "text-black"
-            }`}
-        >
-          {item.submenuId ? (
-            <>
-              <button
-                className={`ml-[20%] flex items-center gap-4 ${activeSubMenu === item.submenuId && "text-active-text"
-                  }`}
-                onClick={() => onToggleSubmenu(item.submenuId)}
-                aria-expanded={activeSubMenu === item.submenuId}
-                aria-label={`Toggle ${item.name} submenu`}
+      {MENU_ITEMS.map((item, index) =>
+      {
+        const isActive = item.submenuId && activeSubMenu === item.submenuId;
+
+        return (
+          <li
+            key={index}
+            className={`border-b border-light-border ${item.submenuId ? "py-0" : "py-5"
+              }`}
+          >
+            {item.submenuId ? (
+              <>
+                <div
+                  className={`w-full py-5 ${isActive ? "bg-black" : "bg-transparent"}`}
+                >
+                  <button
+                    className={`ml-[20%] flex items-center gap-4 ${isActive ? "text-active-text" : "text-black"}`}
+                    onClick={() => onToggleSubmenu(item.submenuId)}
+                    aria-expanded={isActive}
+                    aria-label={`Toggle ${item.name} submenu`}
+                  >
+                    <i
+                      className={`rotate-45 border-r-2 border-b-2 w-2 h-2 ${isActive ? "border-active-text" : "border-dark-border"}`}
+                    />
+                    {item.name}
+                  </button>
+                </div>
+                <MobileSubmenu
+                  subMenuId={item.submenuId}
+                  links={item.links}
+                  isActive={isActive}
+                  onMenuClick={onMenuClick}
+                />
+              </>
+            ) : (
+              <Link
+                href={item.href}
+                className="text-black ml-[20%]"
+                onClick={onMenuClick}
               >
-                <i className="rotate-45 border-dark-border border-r-2 border-b-2 w-2 h-2" />
                 {item.name}
-              </button>
-              <MobileSubmenu
-                subMenuId={item.submenuId}
-                links={item.links}
-                isActive={activeSubMenu === item.submenuId}
-                onMenuClick={onMenuClick}
-              />
-            </>
-          ) : (
-            <Link
-              href={item.href}
-              className="text-black ml-[20%]"
-              onClick={onMenuClick}
-            >
-              {item.name}
-            </Link>
-          )}
-        </li>
-      ))}
+              </Link>
+            )}
+          </li>
+        );
+      }
+      )}
     </ul>
   </div>
 );

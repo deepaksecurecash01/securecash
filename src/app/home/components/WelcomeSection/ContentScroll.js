@@ -27,7 +27,7 @@ const ContentScroll = ({ isExpanded, scrollData, toggleContent }) => (
           className={`text-[16px] leading-[2rem] text-left mb-0 ${index !== scrollData.length - 1 && "768px:mb-3 992px:mb-4"
             } 480px:mb-0 768px:text-left font-light font-montserrat`}
         >
-          {data.description}
+          {data.description}{" "}
           {index === scrollData.length - 1 && (
             <button
               type="button"

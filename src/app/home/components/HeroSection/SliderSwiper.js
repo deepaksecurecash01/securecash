@@ -13,7 +13,7 @@ const BannerSlide = React.memo(({ slide, slideIndex }) =>
 
     return (
         <div className="relative overflow-hidden bg-black h-full">
-            <div className="absolute inset-0 bg-black/40 z-[1]" aria-hidden="true" />
+            <div className="absolute inset-0 bg-black/50 z-[1]" aria-hidden="true" />
 
             <div className="relative w-full h-full min-h-[480px] 414px:min-h-[490px] 768px:min-h-[600px] 1024px:h-full 1440px:min-h-[70vh]">
                 <picture>

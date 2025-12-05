@@ -1,4 +1,4 @@
-import InfoBar from "@/components/common/BannerInfo";
+import InfoBar from "@/app/home/components/HeroSection/BannerInfo";
 import "./SliderSwiper.css";
 import BannerSlider from "./SliderSwiper";
 
