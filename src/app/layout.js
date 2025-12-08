@@ -33,7 +33,7 @@ export const metadata = {
 export default function RootLayout({ children })
 {
   return (
-    <html lang="en" className={`${montserrat.variable} ${prata.variable}`}>
+    <html lang="en" className={`${montserrat.variable} ${prata.variable}`} data-scroll-behavior="smooth">
       <body className="font-montserrat antialiased">
         <script
           type="application/ld+json"

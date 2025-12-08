@@ -92,9 +92,9 @@ const HeroSection = () =>
                     >
                         <img
                             src={`https://flagcdn.com/80x60/${countryCode}.png`}
-                            srcSet={`https://flagcdn.com/160x120/${countryCode}.png 2x, https://flagcdn.com/240x180/${countryCode}.png 3x`}
                             width="60"
                             height="48"
+                            loading='lazy'
                             alt={country}
                         />
                     </Link>
