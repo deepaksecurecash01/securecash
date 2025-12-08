@@ -7,6 +7,8 @@ const GlobalScrollHandler = () =>
 {
     const pathname = usePathname();
     const scrollTimeoutRef = useRef(null);
+    const previousPathnameRef = useRef(pathname);
+    const isInitialMountRef = useRef(true);
 
     const scrollToTop = useCallback(() =>
     {
@@ -27,7 +29,17 @@ const GlobalScrollHandler = () =>
 
     useEffect(() =>
     {
-        scrollToTop();
+        if (isInitialMountRef.current) {
+            isInitialMountRef.current = false;
+            previousPathnameRef.current = pathname;
+            return;
+        }
+
+        if (previousPathnameRef.current !== pathname) {
+            scrollToTop();
+            previousPathnameRef.current = pathname;
+        }
+
         return () =>
         {
             if (scrollTimeoutRef.current) {

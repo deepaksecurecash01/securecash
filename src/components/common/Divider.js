@@ -6,7 +6,6 @@ const Divider = ({
   className = "",
 }) =>
 {
-  // Determine alignment classes
   const getAlignmentClasses = () =>
   {
     switch (alignment) {
@@ -20,7 +19,6 @@ const Divider = ({
     }
   };
 
-  // Handle color - support both hex and Tailwind classes
   let colorClass = "";
   let customStyles = {};
 

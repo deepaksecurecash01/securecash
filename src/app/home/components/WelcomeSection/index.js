@@ -43,7 +43,7 @@ const WelcomeSection = () =>
     <section className="w-full 600px:bg-content-bg bg-no-repeat bg-center 1366px:bg-cover inline-block mt-10" aria-labelledby="welcome-heading">
       <Container className="max-[1440px]:max-w-[1280px]">
         <div id="welcome" className="min-h-[400px] w-full 992px:w-auto mx-auto">
-          <div className="center-content pb-0 block w-[82%] 768px:w-[80%] 992px:w-[70%] mx-auto mb-[40px] 992px:mb-0">
+          <div className="center-content pb-0 block w-[82%] 768px:w-[80%] 992px:w-[70%] mx-auto mb-[32px] 992px:mb-0">
             <p className="text-[32px] text-center mx-auto font-prata-regular">
               Welcome to
             </p>
@@ -75,7 +75,7 @@ const WelcomeSection = () =>
                 <div className="scrollable-content mt-2" style={{ direction: "ltr" }}>
                   <h2
                     id="welcome-heading"
-                    className="text-[22px] font-bold leading-[1.6em] text-center mt-2.5 mb-5 480px:text-[26px] 992px:text-left 768px:mb-4 768px:leading-[1.6rem] font-montserrat"
+                    className="text-[22px] font-bold leading-[1.6em] text-center mt-2.5 mb-5 480px:text-[26px] 992px:text-left 992px:mb-4 768px:leading-[1.6rem] font-montserrat"
                   >
                     Our Cash In Transit Services
                   </h2>

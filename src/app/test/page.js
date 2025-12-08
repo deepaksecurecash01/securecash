@@ -135,7 +135,6 @@ const Page = () =>
   return (
     <div className="bg-slate-900 w-full p-6">
 
-      {/* Main Pages Section */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-white mb-4">Main Pages ({mainPages.length})</h2>
         <ul className="space-y-4 text-white">
@@ -162,7 +161,6 @@ const Page = () =>
         </ul>
       </div>
 
-      {/* Services Section */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-white mb-4">Service Pages ({services.length})</h2>
         <ul className="space-y-4 text-white">
@@ -189,7 +187,6 @@ const Page = () =>
         </ul>
       </div>
 
-      {/* Blog Posts Section */}
       <div className="mb-8">
         <h2 className="text-2xl font-bold text-white mb-4">Blog Posts ({blogPosts.length})</h2>
         <ul className="space-y-4 text-white">
@@ -217,7 +214,6 @@ const Page = () =>
       </div>
 
 
-      {/* Summary */}
       <div className="bg-slate-800 p-4 rounded">
         <h2 className="text-xl font-bold text-white mb-2">Summary</h2>
         <div className="text-white space-y-1">

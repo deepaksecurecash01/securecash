@@ -176,7 +176,7 @@ const TeamSlider = ({ member }) =>
                                             <FaEnvelope className="pr-2 text-[24px] relative inline text-white" />
 
                                             <Link
-                                                className="text-[14px] text-white hover:no-underline hover:text-[#c7a652]"
+                                                className="text-[14px] text-white hover:no-underline"
                                                 href={`mailto:${member.email}`}
                                                 aria-label={`Send email to ${member.name}`}
                                             >

@@ -122,8 +122,8 @@ const SectionWrapper = () =>
               </div>
             </ScrollableSection>
           </div>
-          <div className="float-none w-full mx-auto 992px:w-1/2 992px:float-left relative left-0 flex-1 flex justify-end">
-            <div className="cta-box relative 992px:w-[90%]">
+          <div className="float-none w-full mx-auto 992px:w-1/2 992px:float-left relative left-0 flex-1 flex justify-end mt-8 992px:mt-0">
+            <div className="cta-box relative w-full 992px:w-[90%]">
               <Image
                 className="backdraft h-full w-full object-cover"
                 src="/images/franchise-square-car.jpg"

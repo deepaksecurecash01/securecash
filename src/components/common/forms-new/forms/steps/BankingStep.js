@@ -1,4 +1,3 @@
-// /components/forms/steps/BankingStep.js
 import React from "react";
 import
     {
@@ -42,7 +41,6 @@ const BankingStep = ({ formManager, theme = 'dark' }) =>
 
     const daysOptions = daysOfWeek.map(day => ({ label: day, value: day }));
 
-    // Field configurations using UniversalFormField pattern
     const bankingFields = [
         {
             name: "BankingFrequency",
@@ -95,7 +93,6 @@ const BankingStep = ({ formManager, theme = 'dark' }) =>
             />
 
             <div className="form-tab 480px:w-[90%] mx-auto">
-                {/* All Banking form fields */}
                 {bankingFields.map((field) => (
                     <div key={field.name} className="relative">
                         <UniversalFormField

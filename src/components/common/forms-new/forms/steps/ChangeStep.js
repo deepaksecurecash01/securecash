@@ -1,4 +1,3 @@
-// /components/forms/steps/ChangeStep.js
 import React from "react";
 import
     {
@@ -8,10 +7,7 @@ import
     } from "react-icons/fa";
 import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
 
-/**
- * Change Step Component - Controller-based Architecture
- * Follows the new foundation pattern with UniversalFormField
- */
+
 const ChangeStep = ({ formManager, theme = 'dark' }) =>
 {
 
@@ -41,12 +37,11 @@ const ChangeStep = ({ formManager, theme = 'dark' }) =>
         "Saturday",
         "Sunday",
         "Ad Hoc",
-        "Banking", // Change step includes Banking option
+        "Banking",
     ];
 
     const daysOptions = daysOfWeek.map(day => ({ label: day, value: day }));
 
-    // Field configurations using UniversalFormField pattern
     const changeFields = [
         {
             name: "ChangeFrequency",
@@ -100,7 +95,6 @@ const ChangeStep = ({ formManager, theme = 'dark' }) =>
             />
 
             <div className="form-tab 480px:w-[90%] mx-auto">
-                {/* All Change form fields */}
                 {changeFields.map((field) => (
                     <div key={field.name} className="relative">
                         <UniversalFormField

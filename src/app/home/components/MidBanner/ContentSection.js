@@ -5,14 +5,12 @@ const ContentSection = () =>
   return (
     <section
       id="content-middle"
-      className="bg-[#1a1a1a] min-h-[614px] 414px:min-h-[540px] pl-0 flex p-0 pt-0 992px:inline-block w-full mx-auto"
+      className="bg-[#1a1a1a] min-h-[614px] 414px:min-h-[540px] 992px:min-h-full pl-0 flex p-0 pt-0 992px:inline-block w-full mx-auto"
     >
       <div className="inner w-[95%] max-w-[1366px] mx-auto 992px:grid 992px:grid-cols-5 py-[40px] 992px:py-[100px]">
         <div className="w-full text-center pr-0 992px:col-span-2 992px:pr-0 text-white 1024px:flex items-center">
           <div className="service-container p-4 992px:p-0 pt-0 leading-[2em] m-0 text-[16px] text-white">
             <hr className="w-[100px] my-6 h-[4px] rounded-[5px] border-0 1024px:mt-0 mx-auto 992px:ml-0 992px:mr-auto bg-white" aria-hidden="true" />
-
-            {/* ✅ FIXED: Now h2 (proper hierarchy) */}
             <h2
               className="text-[22px] leading-[36px] text-center mb-[24px] 
              w-[90%] 992px:w-auto mx-auto 992px:mx-0 992px:text-left 
@@ -21,7 +19,6 @@ const ContentSection = () =>
               Let Us Do Your Banking,
             </h2>
 
-            {/* ✅ FIXED: Changed to <p> (stylistic emphasis, not heading) */}
             <p
               className="text-[40px] font-bold leading-[1.4em] text-center text-[#c7a652] mb-[24px] 
              w-3/4 mx-auto 992px:mx-0 480px:text-[30px] 768px:text-5xl 
@@ -40,7 +37,6 @@ const ContentSection = () =>
           </div>
         </div>
 
-        {/* Carousel */}
         <div className="ml-0 mt-[40px] 992px:mt-0 992px:mr-[40px] 992px:col-span-3">
           <div id="service-slider">
             <Carousel />

@@ -161,26 +161,22 @@ export default function CounterSectionClient({ initialStats })
             aria-label="Company statistics"
         >
             <picture className="absolute inset-0 w-full h-full -z-10">
-                {/* Desktop AVIF */}
                 <source
                     media="(min-width: 992px)"
                     type="image/avif"
                     srcSet="/images/banner/home-statistics.avif"
                 />
 
-                {/* Desktop Fallback JPG */}
                 <source
                     media="(min-width: 992px)"
                     srcSet="/images/banner/home-statistics.jpg"
                 />
 
-                {/* Mobile AVIF */}
                 <source
                     type="image/avif"
                     srcSet="/images/banner/home-statistics-mobile.avif"
                 />
 
-                {/* Main Image Component */}
                 <Image
                     src="/images/banner/home-statistics-mobile.jpg"
                     alt=""

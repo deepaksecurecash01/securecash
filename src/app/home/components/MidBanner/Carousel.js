@@ -57,11 +57,7 @@ const Carousel = () =>
 
   return (
     <div className="relative carousel-wrapper">
-      {/* FIX: Pre-calculate width and gaps for Services Slider.
-        - < 1200: 100%
-        - 1200 - 1365: 2 slides with 10px gap
-        - 1366+: 3 slides with 10px gap
-      */}
+
       <style>{`
         .services-carousel-fixed .swiper-slide {
           width: 100%;
@@ -83,7 +79,6 @@ const Carousel = () =>
         }
       `}</style>
 
-      {/* Custom Previous Arrow */}
       <button
         onClick={() => swiperInstance?.slidePrev()}
         className="absolute 992px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer z-10 top-1/2 transform -translate-y-1/2 992px:-right-6 992px:top-[38%] hover:opacity-100 text-[50px] text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]"
@@ -93,7 +88,6 @@ const Carousel = () =>
         ❮
       </button>
 
-      {/* Custom Next Arrow */}
       <button
         onClick={() => swiperInstance?.slideNext()}
         className="absolute 992px:px-5 opacity-50 transition-opacity duration-200 cursor-pointer top-1/2 z-10 right-0 992px:-right-6 transform -translate-y-1/2 992px:top-[62%] hover:opacity-100 text-[50px] text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]"
