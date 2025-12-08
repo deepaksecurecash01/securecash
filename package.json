@@ -17,7 +17,7 @@
     "browser-image-compression": "^2.0.2",
     "html-react-parser": "^5.2.3",
     "mongoose": "^8.18.1",
-    "next": "^16.0.3",
+    "next": "16.0.7",
     "react": "^19.2.0",
     "react-calendar": "^5.1.0",
     "react-calendly": "^4.3.1",
