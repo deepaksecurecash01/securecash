@@ -6,11 +6,29 @@ import TestimonialsSection from "@/app/contact/TestimonialsSection.js";
 import MapSection from "@/app/contact/MapSection.js";
 
 export const metadata = {
-  title: "Contact SecureCash - Get Support Within 45 Minutes",
-  description: "Contact SecureCash for cash handling, ATM services, and security solutions across Australia. Get a reply within 45 minutes. Call 1300 SECURE or fill out our contact form.",
+  title: "Contact Us | SecureCash",
+  description: "Call us at 1300 SECURE or email customers@securecash.com.au for a faster, safer, and more convenient way of banking.",
+  alternates: {
+    canonical: 'https://www.securecash.com.au/contact',
+  },
   openGraph: {
-    title: "Contact SecureCash - Get Support Within 45 Minutes",
-    description: "Contact SecureCash for cash handling, ATM services, and security solutions across Australia. Get a reply within 45 minutes.",
+    title: "Contact Us | SecureCash",
+    description: "Call us at 1300 SECURE or email customers@securecash.com.au for a faster, safer, and more convenient way of banking.",
+    url: 'https://www.securecash.com.au/contact',
+    images: [
+      {
+        url: 'https://www.securecash.com.au/images/contact-page/header-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Contact SecureCash - Get Support Within 45 Minutes',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Contact Us | SecureCash",
+    description: "Call us at 1300 SECURE or email customers@securecash.com.au for a faster, safer, and more convenient way of banking.",
+    images: ['https://www.securecash.com.au/images/contact-page/header-image.png'],
   },
 };
 

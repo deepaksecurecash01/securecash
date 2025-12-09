@@ -3,13 +3,35 @@ import HeroImage from './HeroImage';
 import IndependentContractorsForm from '@/components/common/forms-new/forms/IcaForm';
 
 export const metadata = {
-  title: 'Independent Contractors Agreement | SecureCash',
-  description: 'Complete your Independent Contractors Agreement with SecureCash. Join our network of preferred contractors for secure cash transport services.',
+  title: "Independent Contractors Agreement | SecureCash",
+  description: "Click here to view the Independent Contractors Agreement between SecureCash and its contractors who covers the cash-in-transit services across Australia.",
+  robots: "noindex, nofollow",
+  alternates: {
+    canonical: 'https://www.securecash.com.au/ica',
+  },
+  openGraph: {
+    title: "Independent Contractors Agreement | SecureCash",
+    description: "Click here to view the Independent Contractors Agreement between SecureCash and its contractors who covers the cash-in-transit services across Australia.",
+    url: 'https://www.securecash.com.au/ica',
+    images: [
+      {
+        url: 'https://www.securecash.com.au/images/ica/ica-hero-bg.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Independent Contractors Agreement',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Independent Contractors Agreement | SecureCash",
+    description: "Click here to view the Independent Contractors Agreement between SecureCash and its contractors who covers the cash-in-transit services across Australia.",
+    images: ['https://www.securecash.com.au/images/ica/ica-hero-bg.jpg'],
+  },
 };
 
 const page = () =>
 {
-
   const agreementTermData = {
     opening: {
       title: "",
@@ -65,7 +87,7 @@ const page = () =>
         },
         {
           number: "2.11",
-          text: '"trade secret" means a formula, practice, process, design, instrument, pattern, or compilation of information which is not generally known or reasonably ascertainable, by which the principal can obtain an economic advantage over competitors or customers.'
+          text: '"trade secret" means a formula, practice, process, design, instrument, pattern, or compilation of information which is not generally known or reasonably ascertainable, by which the Principal can obtain an economic advantage over competitors or customers.'
         }
       ]
     },
@@ -183,7 +205,7 @@ const page = () =>
         },
         {
           number: "8.1.1",
-          text: "during the term of this Agreement assist or be engaged or involved in, or contribute in any material way to the targeting, soliciting or servicing of the Clients."
+          text: "during the term of this Agreement assist or be engaged or involved in, or contribute in any material way to the targeting, soliciting or servicing of the Clients"
         },
         {
           number: "8.1.2",
@@ -225,7 +247,19 @@ const page = () =>
         },
         {
           number: "10.1.2",
-          text: "In any event Public Liability Insurance."
+          text: "In any event Public Liability Insurance that includes the use of a baton if used to perform the Services; and"
+        },
+        {
+          number: "10.1.3",
+          text: "Cash in Transit or Security Guard's Liability insurance;"
+        },
+        {
+          number: "10.1.4",
+          text: "Money on Premises insurance up to the value of at least $50,000.00; and"
+        },
+        {
+          number: "10.1.5",
+          text: "Care, Custody and Control Insurance up to the value of at least $100,000.00; On request, the Contractor shall furnish to the Principal certificates of currency for all insurance required by the Contractor pursuant to clause 10.1 herein."
         },
         {
           number: "10.2",
@@ -233,7 +267,7 @@ const page = () =>
         },
         {
           number: "10.3",
-          text: "The Contractor or the Nominated Employee(s) or Assistants must not wear a uniform of any description, nor carry a firearm or any other weapon."
+          text: "The Contractor or the Nominated Employee(s) or Assistants must not carry a firearm or any other weapon (excluding a baton if permitted by the relevant state's legislation) unless permitted to do so by the Principal."
         },
         {
           number: "10.4",
@@ -249,11 +283,15 @@ const page = () =>
         },
         {
           number: "10.4.3",
-          text: "Any Equipment as set out in Annexure 2 to this Agreement; and"
+          text: "Relevant security licence including any required cash in transit endorsement;"
         },
         {
           number: "10.4.4",
-          text: "Any equipment as proscribed by the Company's Standard Operating Procedures or as may be necessary to perform the Services."
+          text: "The Equipment as set out in Annexure 2 to this Agreement; and"
+        },
+        {
+          number: "10.4.5",
+          text: "Any other equipment as proscribed by the Company's Standard Operating Procedures or as may be necessary to perform the Services."
         },
         {
           number: "10.5",
@@ -298,47 +336,47 @@ const page = () =>
       items: [
         {
           number: "11.2",
-          text: "The Contractor agrees to take full responsibility for any insurances and declaration of income for tax purposes and for the payment thereof. In particular:"
+          text: "Either party may terminate this contract in writing without notice in the following instances:"
         },
         {
           number: "11.2.1",
-          text: "In the event that the Contractor employs any person to assist in performing the Services, the Contractor must obtain Workers Compensation Insurance and observe its legal obligations under the relevant worker's compensation insurance legislation;"
+          text: "If either party is convicted of a criminal offence."
         },
         {
           number: "11.2.2",
-          text: "In any event Public Liability Insurance."
+          text: "Failure by the Contractor to meet deadlines for performance of Services or failing to meet the standards required by the Principal in the performing of the Services."
         },
         {
           number: "11.2.3",
-          text: "The Contractor shall be legally and financially liable to pay any fines, infringements, notices or permits incurred in the performance of the Services."
+          text: "Insolvency or bankruptcy of either party."
         },
         {
           number: "11.2.4",
-          text: "The Contractor or the Nominated Employee(s) or Assistants must not wear a uniform of any description, nor carry a firearm or any other weapon."
+          text: "In the event that the project for which the Services are required is cancelled or does not eventuate."
         },
         {
           number: "11.2.5",
-          text: "The Contractor shall supply all licences, permits, Equipment or tools or instruments needed to perform the Services under this agreement including:"
+          text: "In the event that the Contractor is found to be performing Services under the influence of drugs or alcohol."
         },
         {
           number: "11.2.6",
-          text: "Current Australian Business Number (ABN);"
+          text: "In the event of failure by the Principal to comply with its payment obligations in clause 4 above."
         },
         {
           number: "11.2.7",
-          text: "Current Australian Driver's Licence;"
+          text: "By mutual agreement in writing."
         },
         {
           number: "11.3",
-          text: "Any Equipment as set out in Annexure 2 to this Agreement; and"
+          text: "Termination by the Principal will not release the Contractor from liability in respect of any past breach, or non-performance of any previously accrued obligation required of the Contractor pursuant to this Agreement."
         },
         {
           number: "11.4",
-          text: "Any equipment as proscribed by the Company's Standard Operating Procedures or as may be necessary to perform the Services."
+          text: "Unless otherwise stated in this agreement, termination will not release the Principal of its obligations to pay the Contractor for Services already performed."
         },
         {
           number: "11.5",
-          text: "In the event that equipment or tools are leased by the Contractor from the Principal, the Contractor agrees to assume all liability in the event that the equipment or tools are not returned to the Principal in the same condition as they were leased, fair wear and tear excepted. The Contractor agrees to indemnify the Principal for cost of damaged tools or equipment or replacement cost. The Principal reserves the right to deduct the cost of such repair or replacement of equipment or tools from the Payment to the Contractor after 7 days notice of the cost to the Principal of the repair or replacement has been given to the Contractor."
+          text: "Either party may terminate this Agreement at any time, for any reason by providing at least 7 days written notice to the other party."
         }
       ]
     },
@@ -351,11 +389,7 @@ const page = () =>
         },
         {
           number: "12.2",
-          text: "No party may rely on any representation, which allegedly induced that party to enter into this agreement, unless the representation is recorded herein."
-        },
-        {
-          number: "12.3",
-          text: "No agreement varying, adding to, deleting from or cancelling this agreement and no waiver of any right under this agreement shall be effective unless it is:"
+          text: "No party may rely on any representation, which allegedly induced that party to enter into this agreement, unless the representation is recorded herein. 12.4 No agreement varying, adding to, deleting from or cancelling this agreement and no waiver of any right under this agreement shall be effective unless it is:"
         },
         {
           number: "12.3.1",
@@ -417,7 +451,7 @@ const page = () =>
         items: [
           {
             number: "",
-            text: "The Contractor is responsible for the provision of the courier services of banking from clients of Principal and Its referrers to financial institutions."
+            text: "The Contractor is responsible for the provision of the secure transport of cash from clients of Principal and Its referrers to financial institutions."
           },
           {
             number: "",
@@ -474,10 +508,15 @@ const page = () =>
           {
             number: "",
             text: "The Contractor and the Nominated Employee(s) or Assistants will keep Confidential Information concealed from all third parties, including but not limited to bank tellers, other clients and friends and family."
-          },
+          }
+        ]
+      },
+      safety: {
+        title: "Safety",
+        items: [
           {
             number: "",
-            text: "Safety; The Contractor will ensure the health and safety of themselves, the Client and others is upheld at all times, in accordance with the requirements of the relevant State regulations that the services are being performed."
+            text: "The Contractor will ensure the health and safety of themselves, the Client and others is upheld at all times, in accordance with the requirements of the relevant State regulations that the services are being performed."
           },
           {
             number: "",
@@ -494,7 +533,7 @@ const page = () =>
         items: [
           {
             number: "",
-            text: "A working and connected smart phone with a vehicle charger;"
+            text: "A working and connected mobile phone with a vehicle charger;"
           },
           {
             number: "",
@@ -502,7 +541,39 @@ const page = () =>
           },
           {
             number: "",
-            text: "A Vehicle meeting the following requirements:"
+            text: "A trolley suitable for the performance of the Services, being at least of 250kg capacity;"
+          },
+          {
+            number: "",
+            text: "First aid kit that is within easy reach of the Contractor;"
+          },
+          {
+            number: "",
+            text: "Have enough lockable steel boxes and/or suitable vehicle safes fastened either directly to the vehicle, or by chain and padlock."
+          },
+          {
+            number: "",
+            text: "A Vehicle, being only one of the following;"
+          },
+          {
+            number: "1.",
+            text: "A sedan;"
+          },
+          {
+            number: "2.",
+            text: "A hatchback;"
+          },
+          {
+            number: "3.",
+            text: "A van; or"
+          },
+          {
+            number: "4.",
+            text: "A four-wheel drive"
+          },
+          {
+            number: "",
+            text: "and meeting the following requirements:"
           },
           {
             number: "1.",
@@ -510,7 +581,7 @@ const page = () =>
           },
           {
             number: "2.",
-            text: "Not have any loud or offensive logos or insignia of any type (Excluding Security insignia or Security markings);"
+            text: "Not have any logos or insignia of any type (Excluding Security insignia or Security markings);"
           },
           {
             number: "3.",
@@ -518,7 +589,11 @@ const page = () =>
           },
           {
             number: "4.",
-            text: "Must have a working security alarm fitted at all times."
+            text: "Must have a working security alarm fitted;"
+          },
+          {
+            number: "5.",
+            text: "Have a fire extinguisher fitted and within easy reach of the Contractor;"
           }
         ]
       }

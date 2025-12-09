@@ -65,5 +65,4 @@ You may optimize logic only if it improves:
 **If you understand, reply:
 “Ready. Send the next file.”**divide into chunks the large files for clean code and better understanding without breaking anything. also provide one by one file untill i ask for next
 
-i want production ready code remove unnecessary comments and log etc
-
+i want complete code and production ready code remove unnecessary comments and log etc

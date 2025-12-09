@@ -23,11 +23,38 @@ export const metadata = {
   title: "SecureCash | Covert CIT Provider",
   description: "Australia's trusted cash in transit service. Secure, covert banking solutions with 25+ years experience. Available nationwide.",
   metadataBase: new URL('https://www.securecash.com.au'),
+
+  alternates: {
+    canonical: 'https://www.securecash.com.au',
+  },
+
   openGraph: {
     title: "SecureCash | Covert CIT Provider",
-    description: "Australia's trusted cash in transit service",
+    description: "Australia's trusted cash in transit service. Secure, covert banking solutions with 25+ years experience. Available nationwide.",
+    url: 'https://www.securecash.com.au',
+    siteName: 'SecureCash',
     type: "website",
+    locale: 'en_GB',
+    images: [
+      {
+        url: '/images/banner/Slide-1-web.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'SecureCash Covert Cash in Transit Security',
+      },
+    ],
   },
+
+  twitter: {
+    card: 'summary_large_image',
+    site: '@SecureCash',
+    creator: '@SecureCash',
+    title: "SecureCash | Covert CIT Provider",
+    description: "Australia's trusted cash in transit service. Secure, covert banking solutions with 25+ years experience. Available nationwide.",
+    images: ['/images/banner/Slide-1-web.jpg'],
+  },
+
+  robots: 'index, follow',
 };
 
 export default function RootLayout({ children })

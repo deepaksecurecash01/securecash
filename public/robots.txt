@@ -1,0 +1,15 @@
+User-agent: *
+Allow: /
+
+Disallow: /welcome/
+Disallow: /terms/
+Disallow: /austrac/
+Disallow: /site-info/
+Disallow: /special-event/
+Disallow: /ica/
+Disallow: /franchise/admin/
+Disallow: /admin1/
+Disallow: /Archived/
+Disallow: /franchise-admin/
+
+Sitemap: https://www.securecash.com.au/sitemap.xml

@@ -3,6 +3,8 @@ export const blogPosts = [
     id: "bank-cyber-safety",
     title: "Bank Cyber Safety",
     date: "January 06, 2021",
+    metaTitle: "Bank Cyber Safety | Blog | SecureCash",
+    metaDescription: "We have become dependent on internet banking that we forget about the risks. Did you know that some of the well-known financial institutions were once hacked?",
     featuredImage:
       "/images/blog/bank-cyber-safety-featured-img.jpg",
     content: `<p>Long gone are the days where most of us were distrustful of internet or phone banking. Originally
@@ -176,7 +178,7 @@ export const blogPosts = [
       reporting an attack that was designed purely to elicit damage, rather than obtain any ransom
       money.</p>
   <p class="link-new-tab">Read More: <a target="&rdquo;_blank&rdquo;"
-          href="https://www.infosecurity-magazine.com/news/attacks-on-banks-spike-238-during/#:~:text=Ransomware%20attacks%20against%20the%20financial,the%20end%20of%20April%202020.&amp;text=According%20to%20Accenture%2C%20the%20cost,services%20than%20any%20other%20sector">Attacks
+          href="https://www.infosecurity-magazine.com/news/attacks-on-banks-spike-238-during/#:~:text=Ransomware%20attacks%20against%20the%20financial,services%20than%20any%20other%20sector">Attacks
           on Banks Spike 238% During #COVID19 Crisis&nbsp;</a></p>
   <p>In fact, an interview with hacker Phineas Phisher revealed he &ldquo;lived&rdquo; in banks
       networks for months before being detected. Phineas is a private individual whose
@@ -230,6 +232,8 @@ export const blogPosts = [
     id: "banking-updates-april-2021",
     title: "Banking Updates April 2021",
     date: "April 28, 2021",
+    metaTitle: "Banking Updates April 2021 | Blog | SecureCash",
+    metaDescription: "The banking industry is experiencing a lot of action this year. Some regional branches of major banking companies are closing, leaving a few people unemployed.",
     featuredImage:
       "/images/blog/banking-updates-april-2021-featured-img.jpg",
     content: `<p>There has been a lot of action with banks lately in Australia, some good, some not so good, but
@@ -332,6 +336,8 @@ export const blogPosts = [
     id: "creating-online-services",
     title: "Creating Online Services",
     date: "March 2, 2021",
+    metaTitle: "Creating Online Services | Blog | SecureCash",
+    metaDescription: "We asked our clients how we can help them and the services they provide. The years of experience and innovations certainly paid off.",
     featuredImage:
       "/images/blog/creating-online-services-featured-img.jpg",
     content: `<p>SecureCash is Australia&rsquo;s most trusted cash-in-transit services provider. For over 25
@@ -378,6 +384,8 @@ export const blogPosts = [
     id: "differences-between-banks",
     title: "Differences Between... Banks",
     date: "November 25, 2020",
+    metaTitle: "Differences Between Banks | Blog | SecureCash",
+    metaDescription: "There are various types of banking companies and each has a definite role in our society. Know what sort of bank you are currently connected with.",
     featuredImage:
       "/images/blog/differences-between-banks-featured-img.jpg",
     content: `<p>Banking institutions have a long past, and there are options. You do not have to use a
@@ -485,6 +493,8 @@ export const blogPosts = [
     id: "differences-between-cit-models",
     title: "Differences Between... CIT Models",
     date: "April 14, 2021",
+    metaTitle: "Differences Between... CIT Models | Blog | SecureCash",
+    metaDescription: "Compared to armoured CIT, SecureCash specialises in covert cash transport to avoid any potential risks during the collection and delivery of funds.",
     featuredImage:
       "/images/blog/differences-between-cit-models-featured-img.jpg",
     content: `<p>Running a business means you will be dealing with money every day. Therefore, you will need a
@@ -544,6 +554,8 @@ export const blogPosts = [
     id: "history-of-banks-part-1",
     title: "History of Banks - Part 1",
     date: "March 17, 2021",
+    metaTitle: "History of Banks - Part 1 | Blog | SecureCash",
+    metaDescription: "The history of banks and the process of banking dates back to a long long time ago, around 2000 BC in Assyria and Sumeria.",
     featuredImage:
       "/images/blog/history-of-banks-featured-img.jpg",
     content: `<p>Once upon a time, a long time ago, there were some men, who sold things. Let&rsquo;s call them
@@ -608,6 +620,8 @@ export const blogPosts = [
     id: "history-of-banks-part-2",
     title: "History of Banks - Part 2",
     date: "March 31, 2021",
+    metaTitle: "History of Banks - Part 2 | Blog | SecureCash",
+    metaDescription: "From the Egyptian grain-banking system to the Roman temples to the Goldsmiths of London, banking has come a long way.",
     featuredImage:
       "/images/blog/history-of-banks-img-2.jpg",
     content: `<p>The Egyptian grain-banking system was a huge success. The Ptolemy&rsquo;s reign (around 300BC)
@@ -687,6 +701,8 @@ export const blogPosts = [
     id: "history-of-cash-in-transit",
     title: "History of Cash in Transit",
     date: "January 19, 2021",
+    metaTitle: "History of Cash in Transit | Blog | SecureCash",
+    metaDescription: "Couriers in Australia stretch back as far as camel trains that carried supplies and goods throughout most of Australia and its outback.",
     featuredImage:
       "/images/blog/history-of-cash-in-transit-featured-img.jpg",
     content: `<p>Cash-in-transit (CIT) is largely defined as the physical transfer of banknotes, coins, cheques,
@@ -728,6 +744,8 @@ export const blogPosts = [
     id: "merry-christmas-2020",
     title: "Merry Christmas 2020",
     date: "December 22, 2020",
+    metaTitle: "Merry Christmas 2020 | Blog | SecureCash",
+    metaDescription: "It's Christmas 2020, and SecureCash continuously operates despite the Covid-19 pandemic. We look after the needs of other essential businesses that stay open.",
     featuredImage:
       "/images/blog/merry-christmas-2020-featured-img.jpg",
     content: `<p>This has been one of the most unpredictable years that we have all gone through.</p>
@@ -820,6 +838,8 @@ export const blogPosts = [
     id: "negative-interest-rates",
     title: "Negative Interest Rates",
     date: "November 12, 2020",
+    metaTitle: "Negative Interest Rates | Blog | SecureCash",
+    metaDescription: "You might have heard about high and low interest rates, but have you heard about negative interest rates and their impact on banking?",
     featuredImage: "/images/blog/laptop.jpg",
     content: `<p></p>
                    <p style="text-align:center;"><strong>Recently the Reserve Bank of Australia (RBA) announced an
@@ -931,6 +951,8 @@ export const blogPosts = [
     id: "office-culture",
     title: "Office Culture",
     date: "October 12, 2020",
+    metaTitle: "Office Culture | Blog | SecureCash",
+    metaDescription: "We support one another and we know what everyone is going through. If ones workload doubles, everyone is ready to lend a helping hand.",
     featuredImage:
       "/images/blog/featured-img-office-culture.jpg",
     content: `<p>If there&rsquo;s anything at all you need to know about the SecureCash Head Office, it&rsquo;s
@@ -1026,6 +1048,8 @@ export const blogPosts = [
     id: "paradigm-shifts",
     title: "Paradigm Shifts",
     date: "February 02, 2021",
+    metaTitle: "Paradigm Shifts | Blog | SecureCash",
+    metaDescription: "Paradigms are hard to establish, but it's even harder to shift to new processes. It takes a lot of time for changes to become generally accepted.",
     featuredImage:
       "/images/blog/paradigm-shifts-featured-img.jpg",
     content: `<p>When I was at University, I learned about paradigm shifts. Society or groups of people have ways
@@ -1143,6 +1167,8 @@ export const blogPosts = [
     id: "terminology-of-cash-in-transit",
     title: "Terminology of Cash in Transit",
     date: "December 8, 2020",
+    metaTitle: "Terminology of Cash in Transit | Blog | SecureCash",
+    metaDescription: "When you're new to the cash-in-transit industry, you'll encounter jargons or unfamiliar terminologies that can be quite difficult to differentiate.",
     featuredImage:
       "/images/blog/blog-terminology-of-cit-featured-img.jpg",
     content: `<p>Cash in transit is a broad term that has evolved through the years. But mainly, it is widely
@@ -1193,6 +1219,8 @@ export const blogPosts = [
     id: "the-relevance-of-cash",
     title: "The Relevance of Cash",
     date: "October 29, 2020",
+    metaTitle: "The Relevance of Cash | Blog | SecureCash",
+    metaDescription: "A cashless world has its pros and cons. But seven out of ten people would still prefer to have cash available on hand, which means cash will always be royalty.",
     featuredImage:
       "/images/blog/relevance-of-cash-featured-img.jpg",
     content: `<p>I was at the chemist, post-Covid, and their power was out. Customers queued outside while the
@@ -1302,6 +1330,8 @@ export const blogPosts = [
     id: "what-covid-changes-are-you-keeping",
     title: "What Covid Changes are you Keeping?",
     date: "February 17, 2021",
+    metaTitle: "What Covid Changes Are You Keeping? | Blog | SecureCash",
+    metaDescription: "People working from home are utilising LinkedIn Learning to upgrade their skill set. Question is, will they be keeping these skills once back in the office?",
     featuredImage:
       "/images/blog/what-covid-changes-are-you-keeping-featured-img.jpg",
     content: `<p>Our business is unique in that we change our procedures often. We develop our procedures in

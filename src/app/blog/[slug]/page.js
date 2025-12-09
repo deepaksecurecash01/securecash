@@ -19,15 +19,73 @@ export async function generateStaticParams()
 
 export async function generateMetadata({ params })
 {
-  const paramsData = await params;
-  const { slug } = paramsData;
-  const blog = blogPosts.find((post) => post.id.toString() === slug);
+  const { slug } = await params;
+  const blogPost = blogPosts.find((post) => post.id.toString() === slug);
 
-  if (!blog) {
-    return { title: "Blog Post Not Found", description: "The requested blog post could not be found" };
+  if (!blogPost) {
+    return { title: "Blog Post Not Found | SecureCash", description: "The requested blog post could not be found." };
   }
 
-  return { title: `${blog.title} | SecureCash`, description: blog.title };
+  const absoluteUrl = `https://www.securecash.com.au/blog/${slug}`;
+  const featuredImage = blogPost.featuredImage;
+  const imageUrl = featuredImage.startsWith('http') ? featuredImage : `https://www.securecash.com.au${featuredImage}`;
+
+  // BreadcrumbList Schema Generation
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": "https://www.securecash.com.au"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Blog",
+        "item": "https://www.securecash.com.au/blog"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": blogPost.metaTitle,
+        "item": absoluteUrl
+      }
+    ]
+  };
+
+  return {
+    title: blogPost.metaTitle,
+    description: blogPost.metaDescription,
+    alternates: {
+      canonical: absoluteUrl,
+    },
+    openGraph: {
+      title: blogPost.metaTitle,
+      description: blogPost.metaDescription,
+      url: absoluteUrl,
+      images: [
+        {
+          url: imageUrl,
+          width: 900,
+          height: 420,
+          alt: blogPost.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: blogPost.metaTitle,
+      description: blogPost.metaDescription,
+      images: [imageUrl],
+    },
+    // Inject Breadcrumb Schema
+    metadata: {
+      'application/ld+json': JSON.stringify(breadcrumbSchema),
+    },
+  };
 }
 
 export default async function BlogPost({ params })

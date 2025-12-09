@@ -4,8 +4,30 @@ import HeroImage from "@/app/franchise/HeroImage";
 import SectionWrapper from "@/app/franchise/SectionWrapper";
 
 export const metadata = {
-  title: 'Franchise Opportunities - SecureCash',
-  description: 'Join Australia and New Zealand\'s largest banking courier network with your own SecureCash franchise. Full-time franchise from day one with buy-in from $5k to $25k.',
+  title: "SecureCash | Franchise Opportunity",
+  description: "Become Your Own Boss by joining the established SecureCash network as a Franchise Owner! We are excited to offer Franchise Opportunities for sale across Australia and New Zealand.",
+  alternates: {
+    canonical: 'https://www.securecash.com.au/franchise',
+  },
+  openGraph: {
+    title: "SecureCash | Franchise Opportunity",
+    description: "Become Your Own Boss by joining the established SecureCash network as a Franchise Owner! We are excited to offer Franchise Opportunities for sale across Australia and New Zealand.",
+    url: 'https://www.securecash.com.au/franchise',
+    images: [
+      {
+        url: 'https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'SecureCash Franchise Opportunity',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "SecureCash | Franchise Opportunity",
+    description: "Become Your Own Boss by joining the established SecureCash network as a Franchise Owner! We are excited to offer Franchise Opportunities for sale across Australia and New Zealand.",
+    images: ['https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg'],
+  },
 };
 
 const FranchisePage = () =>

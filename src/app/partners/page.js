@@ -3,8 +3,30 @@ import HeroSection from './HeroSection';
 import Partners from './Partners';
 
 export const metadata = {
-  title: 'International Partners - SecureCash',
-  description: 'SecureCash partners with world-renowned security agencies and service providers across New Zealand, Singapore, Sweden, India, Thailand, Malaysia, United Kingdom, Israel, and Nigeria.',
+  title: "SecureCash International Partners | SecureCash",
+  description: "SecureCash is proud to partner with companies known for their outstanding services in security, safety, and executive protection in their respective countries.",
+  alternates: {
+    canonical: 'https://www.securecash.com.au/partners',
+  },
+  openGraph: {
+    title: "SecureCash International Partners | SecureCash",
+    description: "SecureCash is proud to partner with companies known for their outstanding services in security, safety, and executive protection in their respective countries.",
+    url: 'https://www.securecash.com.au/partners',
+    images: [
+      {
+        url: 'https://www.securecash.com.au/images/partners/australiacolors.png',
+        width: 1200,
+        height: 630,
+        alt: 'SecureCash International Partners',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "SecureCash International Partners | SecureCash",
+    description: "SecureCash is proud to partner with companies known for their outstanding services in security, safety, and executive protection in their respective countries.",
+    images: ['https://www.securecash.com.au/images/partners/australiacolors.png'],
+  },
 };
 
 const PartnersPage = () =>

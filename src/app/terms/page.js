@@ -9,8 +9,31 @@ import { HeroSection } from "./components/HeroSection";
 import Image from "next/image";
 
 export const metadata = {
-  title: 'Terms & Conditions | SecureCash',
-  description: 'Review our terms and conditions for secure cash transport services. Flexible agreements with no lock-in contracts. Cancel anytime if our services don\'t suit your needs.',
+  title: "Terms and Conditions | SecureCash",
+  description: "Read about the Terms and Conditions (T&C) of our services here. These are our agreements for service. Our services are flexible with no lock-in contracts.",
+  robots: "noindex, follow",
+  alternates: {
+    canonical: 'https://www.securecash.com.au/terms',
+  },
+  openGraph: {
+    title: "Terms and Conditions | SecureCash",
+    description: "Read about the Terms and Conditions (T&C) of our services here. These are our agreements for service. Our services are flexible with no lock-in contracts.",
+    url: 'https://www.securecash.com.au/terms',
+    images: [
+      {
+        url: 'https://www.securecash.com.au/images/welcome/terms-main-img-1.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Terms and Conditions',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Terms and Conditions | SecureCash",
+    description: "Read about the Terms and Conditions (T&C) of our services here. These are our agreements for service. Our services are flexible with no lock-in contracts.",
+    images: ['https://www.securecash.com.au/images/welcome/terms-main-img-1.jpg'],
+  },
 };
 
 const GENERAL_TERMS = [
@@ -34,7 +57,7 @@ const CHANGE_ORDER_TERMS = [
 
 const TermsListItem = ({ text, isLastItem = false }) => (
   <li className="relative">
-    <FaCircle className="text-primary text-[10px] mr-3 flex-shrink-0 absolute top-3" aria-hidden="true" />
+    <FaCircle className="text-primary text-[10px] mr-3 flex-shrink-0 absolute top-3" />
     <p className="block leading-[2em] pl-[26px] 480px:pl-[47px] font-light mb-5 1366px:mb-[30px]">
       {text}
       {isLastItem && (

@@ -8,6 +8,7 @@ import { usePathname } from "next/navigation";
 
 import useScrollHide from "@/hooks/useScrollHide";
 
+// Constants
 const MENU_ITEMS = [
   { name: "Home", href: "/" },
   {
@@ -125,6 +126,7 @@ const DesktopMenu = ({ onMenuClick }) =>
   const hoverTimeoutRef = useRef(null);
   const pathname = usePathname();
 
+  // Reset submenu state on navigation
   useEffect(() =>
   {
     setActiveSubmenu(null);
@@ -348,6 +350,7 @@ const Navbar = () =>
         className={`
           fixed top-0 left-0 right-0 z-50
           bg-white w-full shadow-[0_1px_6px_0_rgba(32,33,36,.28)]
+          transition-transform duration-300 ease-in-out
           ${mobileNavVisible ? "h-screen overflow-y-auto no-doc-scroll" : "h-auto"}
         `}
         style={{
