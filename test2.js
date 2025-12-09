@@ -1,12 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import { FaBars } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import useScrollHide from "@/hooks/useScrollHide";
 
+// Constants
 const MENU_ITEMS = [
     { name: "Home", href: "/" },
     {
@@ -69,11 +71,10 @@ const QuoteButton = () => (
     </Link>
 );
 
-const DesktopSubmenu = ({ links, isOpen, submenuId, onClose }) =>
+const DesktopSubmenu = ({ links, isOpen, onClose }) =>
 {
     const submenuRef = useRef(null);
 
-    // Close submenu when clicking outside
     useEffect(() =>
     {
         if (!isOpen) return;
@@ -88,8 +89,8 @@ const DesktopSubmenu = ({ links, isOpen, submenuId, onClose }) =>
             }
         };
 
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
+        document.addEventListener('mousedown', handleClickOutside, true);
+        return () => document.removeEventListener('mousedown', handleClickOutside, true);
     }, [isOpen, onClose]);
 
     return (
@@ -132,38 +133,41 @@ const DesktopMenu = ({ onMenuClick }) =>
         setHoverSubmenu(null);
     }, [pathname]);
 
-    const handleMouseEnter = (submenuId) =>
+    const handleMouseEnter = useCallback((submenuId) =>
     {
         if (hoverTimeoutRef.current) {
             clearTimeout(hoverTimeoutRef.current);
         }
         setHoverSubmenu(submenuId);
-    };
+    }, []);
 
-    const handleMouseLeave = () =>
+    const handleMouseLeave = useCallback(() =>
     {
         hoverTimeoutRef.current = setTimeout(() =>
         {
             setHoverSubmenu(null);
+            setActiveSubmenu(null); // Also clear clicked state on hover out
         }, 150);
-    };
+    }, []);
 
-    const handleClick = (submenuId) =>
+    const handleClick = useCallback((submenuId, e) =>
     {
-        // Toggle submenu on click (for touch devices)
-        setActiveSubmenu(prev => prev === submenuId ? null : submenuId);
-    };
+        e.preventDefault();
+        e.stopPropagation();
 
-    const closeSubmenu = () =>
+        setActiveSubmenu(prev => prev === submenuId ? null : submenuId);
+    }, []);
+
+    const closeSubmenu = useCallback(() =>
     {
         setActiveSubmenu(null);
         setHoverSubmenu(null);
-    };
+    }, []);
 
-    const isSubmenuOpen = (submenuId) =>
+    const isSubmenuOpen = useCallback((submenuId) =>
     {
         return activeSubmenu === submenuId || hoverSubmenu === submenuId;
-    };
+    }, [activeSubmenu, hoverSubmenu]);
 
     return (
         <div id="main-menu" className="w-full 1024px:flex flex-row items-center hidden">
@@ -181,10 +185,10 @@ const DesktopMenu = ({ onMenuClick }) =>
                         >
                             {hasSubMenu ? (
                                 <button
-                                    onClick={() => handleClick(item.submenuId)}
+                                    onClick={(e) => handleClick(item.submenuId, e)}
                                     className="block text-primary-text text-sm no-underline leading-6 group-hover:text-active-text transition-colors duration-150 bg-transparent border-none cursor-pointer"
                                 >
-                                    <i className="rotate-45 inline-block border-solid border-dark-border border-t-0 border-l-0 border-r-2 border-b-2 p-[3px] relative -top-0.5 transition-all duration-200 group-hover:border-active-text " />
+                                    <i className="rotate-45 inline-block border-solid border-dark-border border-t-0 border-l-0 border-r-2 border-b-2 p-[3px] relative -top-0.5 transition-all duration-200 group-hover:border-active-text" />
                                     <span>&nbsp;&nbsp;&nbsp;</span>
                                     {item.name}
                                 </button>
@@ -201,7 +205,6 @@ const DesktopMenu = ({ onMenuClick }) =>
                                 <DesktopSubmenu
                                     links={item.links}
                                     isOpen={isSubmenuOpen(item.submenuId)}
-                                    submenuId={item.submenuId}
                                     onClose={closeSubmenu}
                                 />
                             )}
@@ -216,49 +219,42 @@ const DesktopMenu = ({ onMenuClick }) =>
     );
 };
 
-const MobileSubmenu = ({ subMenuId, links, isActive, onMenuClick }) =>
-{
-    const contentRef = useRef(null);
-    const [height, setHeight] = useState(0);
+const MobileSubmenu = ({ links, isActive, onMenuClick }) => (
+    <ul
+        className={`overflow-hidden bg-white text-[#808080] transition-all duration-200 ${isActive ? "opacity-100 visible h-auto mt-5" : "opacity-0 invisible h-0"
+            }`}
+    >
+        {links.map((link, index) => (
+            <li
+                key={index}
+                className="w-full text-left text-base py-5 bg-white 992px:w-auto"
+            >
+                <Link
+                    href={link.href}
+                    className="text-paragraph text-sm pl-11 ml-[20%]"
+                    onClick={onMenuClick}
+                >
+                    {link.text}
+                </Link>
+            </li>
+        ))}
+    </ul>
+);
 
-    useEffect(() =>
-    {
-        if (contentRef.current) {
-            setHeight(isActive ? contentRef.current.scrollHeight : 0);
-        }
-    }, [isActive]);
-
-    return (
-        <div
-            style={{ height: `${height}px` }}
-            className="overflow-hidden bg-white transition-all duration-300 ease-in-out"
-        >
-            <ul ref={contentRef} className="m-0 p-0 list-none">
-                {links.map((link, index) => (
-                    <li key={index} className="w-full text-left text-base py-5 bg-white 992px:w-auto">
-                        <Link
-                            href={link.href}
-                            className="text-paragraph text-sm pl-11 ml-[20%] transition-colors duration-150  text-[#808080] hover:text-active-text"
-                            onClick={onMenuClick}
-                        >
-                            {link.text}
-                        </Link>
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-};
-
-const MobileMenu = ({ isVisible, activeSubMenu, onToggleSubmenu, onMenuClick }) => (
+const MobileMenu = ({
+    isVisible,
+    activeSubMenu,
+    onToggleSubmenu,
+    onMenuClick,
+}) => (
     <div
         id="mobile-menu"
-        className={`block ${isVisible ? "h-screen" : ""} bg-white 1024px:hidden w-full`}
+        className={`block ${isVisible ? "h-screen" : ""
+            } bg-white 1024px:hidden w-full`}
     >
         <button
-            className="bg-primary w-full py-[15px] px-2.5 text-white pl-7 transition-colors duration-150"
+            className="bg-primary w-full py-[15px] px-2.5 text-white pl-7"
             onClick={onMenuClick}
-            aria-label="Toggle mobile menu"
         >
             <span className="flex items-center gap-0.5">
                 <FaBars className="relative -left-2.5" />
@@ -266,60 +262,44 @@ const MobileMenu = ({ isVisible, activeSubMenu, onToggleSubmenu, onMenuClick }) 
             </span>
         </button>
         <ul
-            className={`transition-all  duration-300 ease-in-out ${isVisible ? "h-[70vh] opacity-100" : "max-h-0 opacity-0"
+            className={`transition-all duration-100 ${isVisible ? "h-[70vh] opacity-100" : "max-h-0 opacity-0"
                 } overflow-auto`}
         >
-            {MENU_ITEMS.map((item, index) =>
-            {
-                const isActive = item.submenuId && activeSubMenu === item.submenuId;
-
-                return (
-                    <li
-                        key={index}
-                        className={`border-b border-light-border ${item.submenuId ? "py-0" : "py-5"
-                            }`}
-                    >
-                        {item.submenuId ? (
-                            <>
-                                <div
-                                    className={`w-full py-5 transition-colors duration-200 ${isActive ? "bg-black" : "bg-transparent"
-                                        }`}
-                                >
-                                    <button
-                                        className={`ml-[20%] flex items-center gap-4 transition-colors duration-200 bg-transparent border-none cursor-pointer ${isActive ? "text-active-text" : "text-black"
-                                            }`}
-                                        onClick={() => onToggleSubmenu(item.submenuId)}
-                                        aria-expanded={isActive}
-                                        aria-label={`Toggle ${item.name} submenu`}
-                                    >
-                                        <i
-                                            className={`rotate-45 border-r-2 border-b-2 w-2 h-2 transition-all duration-200 ${isActive
-                                                ? "border-active-text"
-                                                : "border-dark-border"
-                                                }`}
-                                        />
-                                        {item.name}
-                                    </button>
-                                </div>
-                                <MobileSubmenu
-                                    subMenuId={item.submenuId}
-                                    links={item.links}
-                                    isActive={isActive}
-                                    onMenuClick={onMenuClick}
-                                />
-                            </>
-                        ) : (
-                            <Link
-                                href={item.href}
-                                className="text-black ml-[20%] transition-colors duration-150 hover:text-active-text"
-                                onClick={onMenuClick}
+            {MENU_ITEMS.map((item, index) => (
+                <li
+                    key={index}
+                    className={`border-b border-light-border py-5 ${item.submenuId && activeSubMenu === item.submenuId
+                        ? "bg-black pb-0"
+                        : "text-black"
+                        }`}
+                >
+                    {item.submenuId ? (
+                        <>
+                            <button
+                                className={`ml-[20%] flex items-center gap-4 ${activeSubMenu === item.submenuId && "text-active-text"
+                                    }`}
+                                onClick={() => onToggleSubmenu(item.submenuId)}
                             >
+                                <i className="rotate-45 border-dark-border border-r-2 border-b-2 w-2 h-2" />
                                 {item.name}
-                            </Link>
-                        )}
-                    </li>
-                );
-            })}
+                            </button>
+                            <MobileSubmenu
+                                links={item.links}
+                                isActive={activeSubMenu === item.submenuId}
+                                onMenuClick={onMenuClick}
+                            />
+                        </>
+                    ) : (
+                        <Link
+                            href={item.href}
+                            className="text-black ml-[20%]"
+                            onClick={onMenuClick}
+                        >
+                            {item.name}
+                        </Link>
+                    )}
+                </li>
+            ))}
         </ul>
     </div>
 );
@@ -328,33 +308,25 @@ const Navbar = () =>
 {
     const [mobileNavVisible, setMobileNavVisible] = useState(false);
     const [activeSubMenu, setActiveSubMenu] = useState(null);
-    const pathname = usePathname();
 
     const isVisible = useScrollHide(100);
 
-    // Reset mobile menu on navigation
-    useEffect(() =>
-    {
-        setMobileNavVisible(false);
-        setActiveSubMenu(null);
-    }, [pathname]);
-
-    const toggleMobileMenu = () =>
+    const toggleMobileMenu = useCallback(() =>
     {
         setMobileNavVisible((prev) => !prev);
         setActiveSubMenu(null);
-    };
+    }, []);
 
-    const toggleMobileSubMenu = (subMenuId) =>
+    const toggleMobileSubMenu = useCallback((subMenuId) =>
     {
         setActiveSubMenu((prev) => (prev === subMenuId ? null : subMenuId));
-    };
+    }, []);
 
-    const handleMenuClick = () =>
+    const handleMenuClick = useCallback(() =>
     {
         setMobileNavVisible(false);
         setActiveSubMenu(null);
-    };
+    }, []);
 
     const shouldShow = isVisible || mobileNavVisible;
 

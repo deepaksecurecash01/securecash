@@ -1,5 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  future: {
+    hoverOnlyWhenSupported: true, // ✅ Disables hover on touch devices
+  },
+
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -33,8 +37,8 @@ module.exports = {
       fontFamily: {
         montserrat: ['"Montserrat"'],
         times: ['"Times New Roman"', "Times", "serif"],
-        prata: ["var(--font-prata)"], // Ensure exact font name here
-        'prata-regular': ['"Prata Regular"', "serif"], // Ensure exact font name here
+        prata: ["var(--font-prata)"],
+        'prata-regular': ['"Prata Regular"', "serif"],
       },
 
       colors: {
