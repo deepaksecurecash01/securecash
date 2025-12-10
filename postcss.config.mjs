@@ -1,6 +1,4 @@
-// ============================================
-// 4. postcss.config.js - ALREADY PERFECT!
-// ============================================
+
 /** @type {import('postcss-load-config').Config} */
 const config = {
   plugins: {

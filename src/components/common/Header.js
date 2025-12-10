@@ -8,7 +8,6 @@ import { usePathname } from "next/navigation";
 
 import useScrollHide from "@/hooks/useScrollHide";
 
-// Constants
 const MENU_ITEMS = [
   { name: "Home", href: "/" },
   {
@@ -96,7 +95,7 @@ const DesktopSubmenu = ({ links, isOpen, onClose }) =>
   return (
     <div
       ref={submenuRef}
-      className={`absolute shadow-[0_2px_5px_rgba(0,0,0,0.5)] w-[220px] z-50 border-t-4 border-active-text mt-5 ml-[-3px] bg-white ease-in-out ${isOpen
+      className={`absolute shadow-[0_2px_5px_rgba(0,0,0,0.5)] w-[220px] z-50 border-t-4 border-active-text mt-5 ml-[-3px] bg-white transition-all duration-200 ease-in-out ${isOpen
           ? 'opacity-100 visible translate-y-0'
           : 'opacity-0 invisible -translate-y-2 pointer-events-none'
         }`}
@@ -108,7 +107,7 @@ const DesktopSubmenu = ({ links, isOpen, onClose }) =>
             <Link
               href={subLink.href}
               onClick={onClose}
-              className="block p-[19px_40px_18px_20px] text-primary-text text-sm no-underline leading-[22px] hover:text-active-text hover:bg-black "
+              className="block p-[19px_40px_18px_20px] text-primary-text text-sm no-underline leading-[22px] hover:text-active-text hover:bg-black transition-colors duration-150"
             >
               {subLink.text}
             </Link>
@@ -123,10 +122,9 @@ const DesktopMenu = ({ onMenuClick }) =>
 {
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const [hoverSubmenu, setHoverSubmenu] = useState(null);
-  const hoverTimeoutRef = useRef(null);
+  const closeTimeoutRef = useRef(null);
   const pathname = usePathname();
 
-  // Reset submenu state on navigation
   useEffect(() =>
   {
     setActiveSubmenu(null);
@@ -135,20 +133,25 @@ const DesktopMenu = ({ onMenuClick }) =>
 
   const handleMouseEnter = useCallback((submenuId) =>
   {
-    if (hoverTimeoutRef.current) {
-      clearTimeout(hoverTimeoutRef.current);
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+      closeTimeoutRef.current = null;
     }
     setHoverSubmenu(submenuId);
+    setActiveSubmenu(null);  
   }, []);
 
   const handleMouseLeave = useCallback(() =>
   {
-    hoverTimeoutRef.current = setTimeout(() =>
+    if (closeTimeoutRef.current) {
+      clearTimeout(closeTimeoutRef.current);
+    }
+    closeTimeoutRef.current = setTimeout(() =>
     {
       setHoverSubmenu(null);
-      setActiveSubmenu(null); // 👈 Added this line
-
-    }, 50);
+      setActiveSubmenu(null);
+      closeTimeoutRef.current = null; 
+    }, 150);
   }, []);
 
   const handleClick = useCallback((submenuId, e) =>
