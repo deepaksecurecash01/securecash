@@ -4,7 +4,7 @@ import TeamSlider from "./TeamSlider";
 const teamMembers = [
   {
     name: "Darren Bacchus",
-    position: "Chief Executive Officer",
+    position: "Managing Director",
     email: "darren@securecash.com.au",
     image: "/images/team/darren.png",
     socialLinks: {
@@ -15,10 +15,10 @@ const teamMembers = [
     },
   },
   {
-    name: "Beth Bacchus",
-    position: "Chief Business Officer",
+    name: "Bethaney Bacchus",
+    position: "Co-owner",
     email: "beth@securecash.com.au",
-    image: "/images/team/beth.png",
+    image: "/images/team/bethaney.png",
     socialLinks: {
       facebook: "https://www.facebook.com/SecureCash/",
       twitter: "https://twitter.com/SecureCash",
@@ -27,10 +27,10 @@ const teamMembers = [
     },
   },
   {
-    name: "Jo French",
-    position: "Chief Administrative Officer",
+    name: "Joanne French",
+    position: "Legal",
     email: "jo@securecash.com.au",
-    image: "/images/team/jo.png",
+    image: "/images/team/joanne.png",
     socialLinks: {
       facebook: "https://www.facebook.com/SecureCash/",
       twitter: "https://twitter.com/SecureCash",
@@ -40,7 +40,7 @@ const teamMembers = [
   },
   {
     name: "Dylan Cross",
-    position: "Chief Information Officer",
+    position: "Information Technology",
     email: "dylan@securecash.com.au",
     image: "/images/team/dylan.png",
     socialLinks: {
@@ -51,10 +51,10 @@ const teamMembers = [
     },
   },
   {
-    name: "John Dalag",
-    position: "Chief Financial Officer",
-    email: "john@securecash.com.au",
-    image: "/images/team/john.png",
+    name: "Megan Tree",
+    position: "Business Development",
+    email: "megan@securecash.com.au",
+    image: "/images/team/megan.png",
     socialLinks: {
       facebook: "https://www.facebook.com/SecureCash/",
       twitter: "https://twitter.com/SecureCash",
@@ -63,10 +63,10 @@ const teamMembers = [
     },
   },
   {
-    name: "Gretchen Dalag",
-    position: "Accounts",
-    email: "gretchen@securecash.com.au",
-    image: "/images/team/gretchen.png",
+    name: "David Hogg",
+    position: "Onboarding",
+    email: "dave@securecash.com.au",
+    image: "/images/team/david.png",
     socialLinks: {
       facebook: "https://www.facebook.com/SecureCash/",
       twitter: "https://twitter.com/SecureCash",
@@ -75,10 +75,10 @@ const teamMembers = [
     },
   },
   {
-    name: "Hazel Lucidia",
+    name: "Robert McDonald",
     position: "Operations",
-    email: "hazel@securecash.com.au",
-    image: "/images/team/hazel.jpg",
+    email: "robert@securecash.com.au",
+    image: "/images/team/robert.png",
     socialLinks: {
       facebook: "https://www.facebook.com/SecureCash/",
       twitter: "https://twitter.com/SecureCash",
@@ -87,70 +87,10 @@ const teamMembers = [
     },
   },
   {
-    name: "Mitchell Cabral",
-    position: "IT Support",
-    email: "mitchell@securecash.com.au",
-    image: "/images/team/mitchell.jpg",
-    socialLinks: {
-      facebook: "https://www.facebook.com/SecureCash/",
-      twitter: "https://twitter.com/SecureCash",
-      youtube: "https://www.youtube.com/securecash",
-      linkedin: "https://www.linkedin.com/company/securecash",
-    },
-  },
-  {
-    name: "Dennise Estipona",
-    position: "Customer Service",
-    email: "dennise@securecash.com.au",
-    image: "/images/team/dennise.jpg",
-    socialLinks: {
-      facebook: "https://www.facebook.com/SecureCash/",
-      twitter: "https://twitter.com/SecureCash",
-      youtube: "https://www.youtube.com/securecash",
-      linkedin: "https://www.linkedin.com/company/securecash",
-    },
-  },
-  {
-    name: "Mary Baga",
-    position: "Customer Service",
-    email: "mary@securecash.com.au",
-    image: "/images/team/mary.jpg",
-    socialLinks: {
-      facebook: "https://www.facebook.com/SecureCash/",
-      twitter: "https://twitter.com/SecureCash",
-      youtube: "https://www.youtube.com/securecash",
-      linkedin: "https://www.linkedin.com/company/securecash",
-    },
-  },
-  {
-    name: "Drex Aradilla",
-    position: "Reconciliation Manager",
-    email: "drex@securecash.com.au",
-    image: "/images/team/drex.jpg",
-    socialLinks: {
-      facebook: "https://www.facebook.com/SecureCash/",
-      twitter: "https://twitter.com/SecureCash",
-      youtube: "https://www.youtube.com/securecash",
-      linkedin: "https://www.linkedin.com/company/securecash",
-    },
-  },
-  {
-    name: "Kyla Lapugot",
-    position: "Reconciliation",
-    email: "kyla@securecash.com.au",
-    image: "/images/team/kyla.jpg",
-    socialLinks: {
-      facebook: "https://www.facebook.com/SecureCash/",
-      twitter: "https://twitter.com/SecureCash",
-      youtube: "https://www.youtube.com/securecash",
-      linkedin: "https://www.linkedin.com/company/securecash",
-    },
-  },
-  {
-    name: "Nadeem",
-    position: "Software Engineer",
-    email: "nadeem@securecash.com.au",
-    image: "/images/team/nadeem.jpg",
+    name: "Patrick Amadio",
+    position: "Operations",
+    email: "patrick@securecash.com.au",
+    image: "/images/team/patrick.png",
     socialLinks: {
       facebook: "https://www.facebook.com/SecureCash/",
       twitter: "https://twitter.com/SecureCash",
@@ -159,7 +99,6 @@ const teamMembers = [
     },
   },
 ];
-
 const TeamContent = () => (
   <section
     id="team"

@@ -102,13 +102,13 @@ const CardsSection = () =>
 
         <div className="bottom-row-right hidden 992px:block relative overflow-hidden">
           <Image
-            src="/images/team.webp"
+            src="/images/team.png"
             alt="SecureCash team members at head office"
             fill
             loading="lazy"
             quality={80}
             sizes="(max-width: 991px) 0vw, 50vw"
-            className="object-cover object-[10%] 1440px:object-[0%] -z-10"
+            className="object-cover object-[10%] object-top -z-10"
             placeholder="blur"
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
           />

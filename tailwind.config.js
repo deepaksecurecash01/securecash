@@ -57,7 +57,7 @@ module.exports = {
         "banner-mid-bg": "url('/images/banner/home-statistics.avif')",
         "banner-mid-mobile-bg": "url('/images/banner/home-statistics-mobile.avif')",
         "main-content-bg": "url('/images/banner/mainbg.webp')",
-        "team-bg": "url('/images/team.avif')",
+        "team-bg": "url('/images/team.png')",
         "brown-overlay": "url('/images/brown-overlay.png')",
         "quote-header": "url('/images/bg-quote-header-left.avif'), url('/images/bg-quote-header-right.avif')",
         "quote-header-right": "url('/images/bg-quote-header-right.avif')",

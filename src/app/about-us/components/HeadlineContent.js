@@ -45,7 +45,7 @@ const HeadlineContent = () =>
 
                         <div className="about-hero--img-wrap hidden 768px:w-[61.75%] 1024px:w-auto 768px:flex items-end relative">
                             <Image
-                                src="/images/header-img-about-us.avif"
+                                src="/images/about-us-images/header-img-about-us.png"
                                 width={851}
                                 height={567}
                                 alt="SecureCash about us hero image"

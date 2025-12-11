@@ -43,7 +43,7 @@ const AboutusSection = () =>
             />
             <StorySection
                 title="The story of SecureCash"
-                imageUrl="/images/team.avif"
+                imageUrl="/images/team.png"
                 imageAlt="The SecureCash Team"
                 imageWidth={683}
                 imageHeight={455}
@@ -53,7 +53,7 @@ const AboutusSection = () =>
             />
             <ServiceSection
                 title="Why a covert service is important"
-                imageUrl="/images/about-us-images/img-sec-4.avif"
+                imageUrl="/images/about-us-images/sc-about.png"
                 imageAlt="SecureCash Logo Money Wrapped In Chain"
                 imageWidth={732}
                 imageHeight={600}
