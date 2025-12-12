@@ -46,14 +46,14 @@ const HeadlineContent = () =>
                         <div className="about-hero--img-wrap hidden 768px:w-[61.75%] 1024px:w-auto 768px:flex items-end relative">
                             <Image
                                 src="/images/about-us-images/header-img-about-us.png"
-                                width={851}
-                                height={567}
+                                width={1312}
+                                height={800}
                                 alt="SecureCash about us hero image"
                                 priority
                                 fetchPriority="high"
                                 quality={80}
                                 sizes="(max-width: 1024px) 580px, 851px"
-                                className="absolute -left-7 768px:w-[580px] 1024px:w-[851px] 1200px:relative"
+                                className="absolute left-[-8.75rem] 992px:left-[-6.75rem]  1024px:left-[-5.75rem] 768px:w-[800px] 1024px:w-[1024px]"
                             />
                         </div>
                     </Container>

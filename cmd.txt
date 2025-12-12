@@ -1,2 +1,33 @@
+# Clean cache and restart dev server
+rm -rf .next && rm -rf node_modules/.cache && npm run dev
+
+# Full clean restart
+rm -rf .next && rm -rf node_modules/.cache && rm -rf .turbo && npm run dev
+
+# Nuclear option - complete reinstall
+rm -rf .next && rm -rf node_modules && npm install && npm run dev
+
+
+# Clean build and start
 rm -rf .next && npm run build && npm run start
+
+# Clean, build, and deploy
+rm -rf .next && npm run build && git add . && git commit -m "production build" && git push
+
+# Full clean production build
+rm -rf .next && rm -rf node_modules/.cache && npm run build && npm run start
+
+# Quick commit and push
 git add . && git commit -m "testing" && git push
+
+# Commit specific files
+git add src/ && git commit -m "updated components" && git push
+
+# Check status, add, commit, push
+git status && git add . && git commit -m "changes" && git push
+
+# Clean, restart dev, then commit (run in separate terminals or use background)
+rm -rf .next && npm run dev & git add . && git commit -m "testing" && git push
+
+# Test build before committing
+rm -rf .next && npm run build && git add . && git commit -m "tested build" && git push

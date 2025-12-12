@@ -7,15 +7,14 @@ const Banner = () =>
         <div id="about-us-banner" className="max-[414px]:mt-0">
             <div
                 id="banner-mid-content"
-                className="flex justify-center items-center flex-col pt-0 px-4 h-[360px] w-full mx-auto relative overflow-hidden"
+                className="flex justify-center items-center flex-col pt-0 px-4 h-[400px] w-full mx-auto relative overflow-hidden"
             >
                 <div className="absolute inset-0 w-full h-full">
                     <Image
-                        src="/images/banner-2.png"
+                        src="/images/banner/Web-corporate-funny.webp"
                         alt="SecureCash Team"
                         fill
                         loading="lazy"
-                        quality={75}
                         sizes="100vw"
                         className="object-cover object-center grayscale max-[414px]:object-[-1000px_center] brightness-50"
                     />
