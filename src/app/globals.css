@@ -928,8 +928,8 @@ body.modal-on .site-info-modal {
 
 @media (min-width: 992px) {
   .team-arrow {
-    padding-left: 20px;
-    padding-right: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
   }
 
   .team-arrow-prev {
@@ -940,6 +940,7 @@ body.modal-on .site-info-modal {
   .team-arrow-next {
     left: -24px;
     top: 56%;
+            right: unset;
   }
 }
 
