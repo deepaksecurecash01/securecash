@@ -4,10 +4,10 @@ import Image from "next/image";
 const BottomBanner = () =>
 {
   return (
-    <div id="about-us-banner-bottom" className="h-[340px] w-full max-[414px]:mt-0">
+    <div id="about-us-banner-bottom" className=" w-full max-[414px]:mt-0">
       <div
         id="banner-mid-content"
-        className="relative h-[360px] w-full mx-auto flex flex-col justify-end items-center px-4 overflow-hidden"
+        className="relative h-[400px] w-full mx-auto flex flex-col justify-end items-center px-4 overflow-hidden"
       >
         <div className="absolute inset-0 w-full h-full">
           <Image
@@ -16,7 +16,7 @@ const BottomBanner = () =>
             fill
             loading="lazy"
             sizes="100vw"
-            className="object-cover object-[top_64%] brightness-25"
+            className="object-cover object-[top_64%] brightness-50"
             placeholder="blur"
             blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAX/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwCwAB//2Q=="
           />

@@ -51,8 +51,7 @@ module.exports = {
       },
 
       backgroundImage: {
-        "quote-icon": "url('/images/quote.png')",
-        "quote-icon-white": "url('/images/quote-white.png')",
+     
         "content-bg": "url('/images/main-background.webp')",
         "banner-mid-bg": "url('/images/banner/home-statistics.avif')",
         "banner-mid-mobile-bg": "url('/images/banner/home-statistics-mobile.avif')",

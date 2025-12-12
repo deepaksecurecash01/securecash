@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaFileSignature } from "react-icons/fa";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -61,14 +61,21 @@ const Logo = ({ onClick }) => (
   </div>
 );
 
+
 const QuoteButton = () => (
   <Link href="/quote/">
-    <div className="min-w-[182px] min-h-[70px] max-h-[70px] text-black flex flex-row justify-center items-center rounded-full bg-primary hover:text-white hover:cursor-pointer shadow-[0px_7px_64px_-16px_rgba(199,166,82,1)] leading-[22px] hover:bg-black group">
-      <span className="bg-quote-icon inline-block w-[22px] h-[22px] bg-contain bg-no-repeat mr-1 mb-0.5 group-hover:bg-quote-icon-white" />
+    <div className="min-w-[182px] min-h-[70px] max-h-[70px] text-black flex flex-row justify-center items-center rounded-full bg-primary hover:text-white hover:cursor-pointer shadow-[0px_7px_64px_-16px_rgba(199,166,82,1)] leading-[22px] hover:bg-black group transition-colors">
+
+      <FaFileSignature
+        className="text-black text-[20px] mr-1 mb-0.5 transition-colors group-hover:text-white"
+      />
+
       <p className="m-0 p-0 text-base">Get a Quote</p>
     </div>
   </Link>
 );
+
+
 
 const DesktopSubmenu = ({ links, isOpen, onClose }) =>
 {
