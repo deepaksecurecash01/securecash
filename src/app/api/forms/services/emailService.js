@@ -13,6 +13,7 @@ import quoteUserConfirmationEmailTemplate from "../templates/quoteUserConfirmati
 import siteInfoAdminNotificationEmailTemplate from "../templates/siteInfoAdminNotificationEmailTemplate.js";
 import siteInfoUserConfirmationEmailTemplate from "../templates/siteInfoUserConfirmationEmailTemplate.js";
 import termsAgreementEmailTemplate from "../templates/termsAgreementEmailTemplate.js";
+import inductionEmailTemplate from "../templates/inductionEmailTemplate.js";
 
 const preparePdfAttachmentsWithCache = ({ attachments, attachmentConfigs, readPdfFile }) =>
 {
@@ -369,5 +370,25 @@ export const prepareTermsAgreementEmail = (formData, readPdfFile) =>
         text: "Please enable HTML emails in your email client to view the contents of this email.",
         html: htmlContent,
         attachments: attachments
+    };
+};
+
+
+export const prepareInductionEmail = (formData, readPdfFile) =>
+{
+    const currentDateTime = getCurrentDateTime();
+    const htmlContent = inductionEmailTemplate(formData, currentDateTime);
+
+    // Process attachments (photo + license)
+    const attachments = prepareAttachments(formData);
+
+    return {
+        to: "deepak@securecash.com.au",
+        from: "SecureCash Operations <operations@securecash.com.au>",
+        replyTo: formData.Email,
+        subject: `Induction Complete - ${formData.Name}, ${formData.State}`,
+        text: "Please enable HTML emails in your email client to view the contents of this email.",
+        html: htmlContent,
+        attachments: attachments.length > 0 ? attachments : undefined
     };
 };

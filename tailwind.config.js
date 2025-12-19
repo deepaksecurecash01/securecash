@@ -51,7 +51,6 @@ module.exports = {
       },
 
       backgroundImage: {
-     
         "content-bg": "url('/images/main-background.webp')",
         "banner-mid-bg": "url('/images/banner/home-statistics.avif')",
         "banner-mid-mobile-bg": "url('/images/banner/home-statistics-mobile.avif')",
@@ -74,10 +73,26 @@ module.exports = {
           "50%": { filter: "brightness(0.5)", opacity: "0.7" },
           "100%": { filter: "brightness(1)", opacity: "1" },
         },
+        'slide-down': {
+          'from': {
+            opacity: '0',
+            transform: 'translateY(-20px)',
+          },
+          'to': {
+            opacity: '1',
+            transform: 'translateY(0)',
+          },
+        },
+        'progress-bar': {
+          'from': { width: '100%' },
+          'to': { width: '0%' },
+        },
       },
 
       animation: {
         fade: "fade 1.5s ease-in-out",
+        'slide-down': 'slide-down 0.3s ease-out forwards',
+        'progress-bar': 'progress-bar 5s linear forwards',
       },
     },
   },

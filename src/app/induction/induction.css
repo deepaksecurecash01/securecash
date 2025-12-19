@@ -1,0 +1,58 @@
+/* Scoped styles for Induction Lesson Content - Mirrored from Blog */
+.induction-content {
+  max-width: 900px;
+  margin: 0 auto;
+  color: #333;
+}
+
+.induction-content p {
+  font-weight: 300;
+  line-height: 2em;
+  margin-bottom: 1.25rem;
+  font-family: var(--font-montserrat, sans-serif); /* Assuming you use Montserrat variable */
+}
+
+.induction-content h1, 
+.induction-content h2 {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 38px 0 18px;
+  color: #1a1a1a;
+}
+
+.induction-content h3, 
+.induction-content h4 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 26px 0 16px;
+}
+
+/* Custom List Styling from Blog */
+.induction-content ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+  margin-bottom: 26px;
+}
+
+.induction-content ul li {
+  position: relative;
+  padding-left: 1.5em;
+  margin-bottom: 0.5em;
+  line-height: 2em;
+  font-weight: 300;
+}
+
+.induction-content ul li::before {
+  content: "\2022"; /* Bullet point */
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 20px;
+  font-weight: 900;
+  color: #c6a54b; /* SecureCash Gold */
+}
+
+.induction-content strong {
+  font-weight: 600;
+}

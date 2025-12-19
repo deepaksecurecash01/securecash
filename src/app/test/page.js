@@ -107,7 +107,8 @@ const mainPages = [
   { slug: "terms", label: "Terms" },
   { slug: "welcome", label: "Welcome" },
   { slug: "services/free-change-order-service", label: "Free Change Order Service" },
-  { slug: "privacy-policy", label: "Privacy Policy" }
+  { slug: "privacy-policy", label: "Privacy Policy" },
+  { slug: "induction", label: "induction"}
 ];
 
 const blogPosts = [

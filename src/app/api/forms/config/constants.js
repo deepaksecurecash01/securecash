@@ -29,8 +29,9 @@ export const FORM_VALIDATION_RULES = {
     quote: ['Name', 'Email', 'Organisation'],
     siteinfo: ['BusinessName', 'Email', 'Contact'],
     specialevent: ['BusinessName', 'Email', 'Contact'],
-    terms: ['Full Name', 'Email', 'Organisation Name'],
-    austrac: ['Organisation', 'OrganisationEmail']
+    terms: ['FullName', 'Email', 'Organisation Name'],
+    austrac: ['Organisation', 'OrganisationEmail'],
+    induction: ['Name', 'Email', 'Phone', 'Address', 'State', 'ContractorName', 'EdocketUsername'],
 };
 
 export const EMAIL_FIELDS = ['Email', 'OrganisationEmail'];

@@ -47,7 +47,7 @@ const LogoSlide = ({ src, alt, width, height }) => (
   </div>
 );
 
-const ClientLogos = ({ className = "", config = LOGO_CONFIG }) =>
+const ClientLogos = ({  config = LOGO_CONFIG , bgColor}) =>
 {
   const { baseUrl, companies, slideWidth, slideHeight, animationDuration } = config;
 
@@ -76,7 +76,7 @@ const ClientLogos = ({ className = "", config = LOGO_CONFIG }) =>
   return (
     <section
       id="client-logos"
-      className={`relative px-0 py-[30px] 992px:py-[65px] bg-white ${className}`}
+      className={`relative px-0 py-[30px] 992px:py-[65px] ${bgColor ? bgColor : "bg-white"}`}
       aria-label="Our clients"
     >
       <div className="absolute left-0 top-0 bottom-0 w-[100px] 992px:w-[200px] bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />

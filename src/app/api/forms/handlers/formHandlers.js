@@ -12,7 +12,8 @@ import
         prepareSiteInfoAdminNotificationEmail,
         prepareSiteInfoUserConfirmationEmail,
         prepareTermsAgreementEmail,
-        prepareAustracSubmissionEmail
+        prepareAustracSubmissionEmail,
+        prepareInductionEmail
     } from "../services/emailService.js";
 import { sendEmailWithRetry, executeMultiEmailBatch, queueEmail } from "../services/emailQueue.js";
 import { fastSanitize } from "../utils/sanitization.js";
@@ -453,5 +454,36 @@ export const FORM_HANDLERS = {
         },
         response: "Special event info submitted successfully!",
         logData: (data) => ({ business: data.BusinessName, type: "special" })
+    },
+    induction: {
+        queueEmails: (data, readPdfFile) =>
+        {
+            queueEmail({
+                type: 'induction',
+                formType: 'Induction',
+                executeWithResilience: async () =>
+                {
+                    const emailData = prepareInductionEmail(data, readPdfFile);
+                    const emailDetails = [await sendEmailWithRetry(emailData, 'induction')];
+
+                    return {
+                        emailsSent: emailDetails.length,
+                        emailDetails
+                    };
+                }
+            });
+        },
+        executeEmailsSync: async (data, readPdfFile) =>
+        {
+            const emailData = prepareInductionEmail(data, readPdfFile);
+            const emailDetails = [await sendEmailWithRetry(emailData, 'induction')];
+
+            return {
+                emailsSent: emailDetails.length,
+                emailDetails
+            };
+        },
+        response: "Induction form submitted successfully!",
+        logData: (data) => ({ name: data.Name, state: data.State, contractor: data.ContractorName })
     }
 };

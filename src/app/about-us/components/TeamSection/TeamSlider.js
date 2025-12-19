@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +7,14 @@ import { Navigation, EffectFade } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/effect-fade";
-import { FaEnvelope, FaFacebookF, FaTwitter, FaYoutube, FaLinkedinIn } from "react-icons/fa";
+import
+    {
+        FaEnvelope,
+        FaFacebookF,
+        FaTwitter,
+        FaYoutube,
+        FaLinkedinIn,
+    } from "react-icons/fa";
 
 const SocialLink = ({ href, icon: Icon, alt }) => (
     <li className="float-left pr-[5px]">
@@ -26,8 +33,8 @@ const CustomArrow = ({ direction, onClick, disabled }) =>
     return (
         <div
             className={`absolute 1024px:px-5 transition-opacity duration-200 z-10 text-primary text-[66px] top-1/2 transform -translate-y-1/2 ${isPrev
-                ? " -left-[3%] 768px:left-0 min-[912px]:left-16 992px:left-32 1024px:-left-4 1100px:left-0  768px:top-[42%]"
-                : "-right-[3%] 768px:left-0 min-[912px]:left-16 992px:left-32 1024px:-left-4 1100px:left-0 768px:top-[58%]"
+                    ? " -left-[3%] 768px:left-0 min-[912px]:left-16 992px:left-32 1024px:-left-4 1100px:left-0  768px:top-[42%]"
+                    : "-right-[3%] 768px:left-0 min-[912px]:left-16 992px:left-32 1024px:-left-4 1100px:left-0 768px:top-[58%]"
                 } ${disabled
                     ? "opacity-50 pointer-events-none cursor-not-allowed no-underline"
                     : ""
@@ -75,9 +82,9 @@ const TeamSlider = ({ member }) =>
                     margin-right: auto;
                 }
               @media (min-width: 1024px) {
-         .team-slider-main .swiper-slide {
-            width: calc((100% - 16px) / 2);
-            margin-right: 16px; 
+               .team-slider-main .swiper-slide {
+                  width: calc((100% - 16px) / 2);
+                  margin-right: 16px; 
           }
         }
                 @media (min-width: 1366px) {
@@ -94,11 +101,7 @@ const TeamSlider = ({ member }) =>
                 onClick={handlePrev}
                 disabled={isBeginning}
             />
-            <CustomArrow
-                direction="next"
-                onClick={handleNext}
-                disabled={isEnd}
-            />
+            <CustomArrow direction="next" onClick={handleNext} disabled={isEnd} />
 
             <div className="w-[85%] mx-auto 1024px:w-[93%] 768px:ml-auto 768px:mr-0 768px:w-[90%]">
                 <Swiper
@@ -122,30 +125,28 @@ const TeamSlider = ({ member }) =>
                     breakpoints={{
                         0: {
                             slidesPerView: 1,
-                            effect: 'fade',
+                            effect: "fade",
                             fadeEffect: { crossFade: true },
                             speed: 800,
                             allowTouchMove: true,
                         },
                         767: {
                             slidesPerView: 1,
-                            effect: 'slide',
+                            effect: "slide",
                             speed: 600,
                             spaceBetween: 0,
-
                         },
                         1024: {
                             slidesPerView: 2,
                             spaceBetween: 16,
-                            effect: 'slide',
+                            effect: "slide",
                         },
 
                         1366: {
                             slidesPerView: 2,
-                            effect: 'slide',
+                            effect: "slide",
                             spaceBetween: 0,
-
-                        }
+                        },
                     }}
                 >
                     {member?.map((member, index) => (

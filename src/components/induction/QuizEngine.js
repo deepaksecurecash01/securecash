@@ -64,7 +64,6 @@ const QuizEngine = ({ lesson, onPass, handleReviewMaterial }) =>
 
     if (!allAnswered) {
       setStatus("warning");
-      scrollToTop();
       return;
     }
 
@@ -78,16 +77,32 @@ const QuizEngine = ({ lesson, onPass, handleReviewMaterial }) =>
 
     if (isCorrect) {
       setStatus("success");
-      scrollToTop();
+      // Scroll to bottom to show success message
+      setTimeout(() =>
+      {
+        const quizContent = document.getElementById('quiz-content-area');
+        if (quizContent) {
+          quizContent.scrollTo({ top: quizContent.scrollHeight, behavior: 'smooth' });
+        }
+      }, 100);
+
+      // Then move to next module after user has seen the message
       setTimeout(() =>
       {
         onPass();
         setAnswers({});
         setStatus("idle");
-      }, 1500);
+      }, 5000);
     } else {
       setStatus("error");
-      scrollToTop();
+      // Scroll to bottom to show error message
+      setTimeout(() =>
+      {
+        const quizContent = document.getElementById('quiz-content-area');
+        if (quizContent) {
+          quizContent.scrollTo({ top: quizContent.scrollHeight, behavior: 'smooth' });
+        }
+      }, 100);
     }
   };
 
@@ -110,74 +125,8 @@ const QuizEngine = ({ lesson, onPass, handleReviewMaterial }) =>
         id="quiz-content-area"
         className="w-full md:w-[70%] flex flex-col relative"
       >
-        <div className="relative  pointer-events-none h-20 w-full bg-gray-300">        {/* ✅ CHANGED: Alerts now absolute positioned - no layout shift */}
-          <div className="absolute top-1/2 transform -translate-y-1/2 left-0 right-0 z-40 pointer-events-none">
-            {/* Error Alert */}
-            {status === "error" && (
-              <div className="px-8 pointer-events-auto animate-slide-down">
-                <div className="bg-red-50 text-red-600 px-6 py-4 border border-red-100 text-sm font-medium rounded-sm shadow-lg relative">
-                  <button
-                    onClick={handleDismiss}
-                    className="absolute top-2 right-2 text-red-400 hover:text-red-600 transition-colors"
-                    aria-label="Dismiss alert"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                  <div className="pr-6" role="alert" aria-live="assertive">
-                    {INDUCTION_DATA.meta.failMessage}
-                  </div>
-                </div>
-              </div>
-            )}
+      
 
-            {/* Warning Alert */}
-            {status === "warning" && (
-              <div className="px-8 pointer-events-auto animate-slide-down">
-                <div className="bg-orange-50 text-orange-600 px-6 py-4 border border-orange-100 text-sm font-medium rounded-sm shadow-lg relative">
-                  <button
-                    onClick={handleDismiss}
-                    className="absolute top-2 right-2 text-orange-400 hover:text-orange-600 transition-colors"
-                    aria-label="Dismiss alert"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                  <div className="pr-6" role="alert" aria-live="polite">
-                    Please answer all questions before submitting.
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Success Alert */}
-            {status === "success" && (
-              <div className="px-8  pointer-events-auto animate-slide-down">
-                <div className="bg-green-50 text-green-700 px-6 py-4 border border-green-100 text-sm font-medium rounded-sm shadow-lg relative overflow-hidden">
-                  {/* Progress bar for auto-dismiss */}
-                  <div className="absolute bottom-0 left-0 h-1 bg-green-200 animate-progress-bar"></div>
-
-                  <button
-                    onClick={handleDismiss}
-                    className="absolute top-2 right-2 text-green-400 hover:text-green-600 transition-colors"
-                    aria-label="Dismiss alert"
-                  >
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                  <div className="pr-6" role="alert" aria-live="polite">
-                    {INDUCTION_DATA.meta.passMessage}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div></div>
-
-
-        {/* ✅ CHANGED: Added padding-top to account for absolute alerts */}
         <ScrollableSection className="h-auto max-h-[992px] bg-white p-8 pt-4 768px:py-4 768px:px-12 768px:pt-4 1024px:py-4 1024px:px-16 1024px:pt-4">
           <div className="space-y-12">
             {lesson.quiz.questions.map((q, idx) => (
@@ -193,7 +142,13 @@ const QuizEngine = ({ lesson, onPass, handleReviewMaterial }) =>
                   {q.options.map((opt, optIdx) => (
                     <label
                       key={optIdx}
-                      className="flex items-start gap-4 cursor-pointer group hover:bg-gray-50 transition-colors p-1 rounded"
+                      className={`flex items-start gap-4 cursor-pointer group hover:bg-gray-100 ${answers[q.id] === optIdx ? " bg-gray-100" : "text-gray-700"} 
+                          ${status === "error" &&
+                          answers[q.id] === optIdx &&
+                          optIdx !== q.correctIndex
+                          ? "bg-red-100"
+                          : ""
+                        } transition-colors p-1 rounded`}
                     >
                       <div className="relative flex items-center pt-1">
                         <input
@@ -220,7 +175,7 @@ const QuizEngine = ({ lesson, onPass, handleReviewMaterial }) =>
 
                       <span
                         className={`font-light leading-relaxed group-hover:text-gray-800 transition-all 
-                          ${answers[q.id] === optIdx ? "text-gray-900 font-normal" : "text-gray-700"} 
+                          ${answers[q.id] === optIdx ? "text-gray-900 font-medium" : "text-gray-700"} 
                           ${status === "error" &&
                             answers[q.id] === optIdx &&
                             optIdx !== q.correctIndex
@@ -236,7 +191,72 @@ const QuizEngine = ({ lesson, onPass, handleReviewMaterial }) =>
               </div>
             ))}
           </div>
+          <div className="relative pointer-events-none h-20 w-full">
+            <div className="absolute top-1/2 transform -translate-y-1/2 left-0 right-0 z-40 pointer-events-none">
+              {/* Error Alert */}
+              {status === "error" && (
+                <div className="px-8 pointer-events-auto animate-slide-down">
+                  <div className="bg-red-50 text-red-600 px-6 py-4 border border-red-100 text-sm font-medium rounded-sm shadow-lg relative">
+                    <button
+                      onClick={handleDismiss}
+                      className="absolute top-2 right-2 text-red-400 hover:text-red-600 transition-colors"
+                      aria-label="Dismiss alert"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                    <div className="pr-6" role="alert" aria-live="assertive">
+                      {INDUCTION_DATA.meta.failMessage}
+                    </div>
+                  </div>
+                </div>
+              )}
 
+              {/* Warning Alert */}
+              {status === "warning" && (
+                <div className="px-8 pointer-events-auto animate-slide-down">
+                  <div className="bg-orange-50 text-orange-600 px-6 py-4 border border-orange-100 text-sm font-medium rounded-sm shadow-lg relative">
+                    <button
+                      onClick={handleDismiss}
+                      className="absolute top-2 right-2 text-orange-400 hover:text-orange-600 transition-colors"
+                      aria-label="Dismiss alert"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                    <div className="pr-6" role="alert" aria-live="polite">
+                      Please answer all questions before submitting.
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Success Alert */}
+              {status === "success" && (
+                <div className="px-8 pointer-events-auto animate-slide-down">
+                  <div className="bg-green-50 text-green-700 px-6 py-4 border border-green-100 text-sm font-medium rounded-sm shadow-lg relative overflow-hidden">
+                    {/* Progress bar for auto-dismiss */}
+                    <div className="absolute bottom-0 left-0 h-1 bg-green-200 animate-progress-bar"></div>
+
+                    <button
+                      onClick={handleDismiss}
+                      className="absolute top-2 right-2 text-green-400 hover:text-green-600 transition-colors"
+                      aria-label="Dismiss alert"
+                    >
+                      <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                    <div className="pr-6" role="alert" aria-live="polite">
+                      {INDUCTION_DATA.meta.passMessage}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
           {/* FOOTER BUTTONS */}
           <div className="mt-4 mb-4 flex flex-col sm:flex-row gap-4">
             <button

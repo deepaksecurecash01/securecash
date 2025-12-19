@@ -27,7 +27,7 @@ const QuotePage = () =>
     <>
       <HeadlineContent />
       <QuoteContent />
-      <CompaniesSlider className="bg-[#f0f0f0]" />
+      <CompaniesSlider bgColor="bg-[#f0f0f0]" />
     </>
   );
 };
