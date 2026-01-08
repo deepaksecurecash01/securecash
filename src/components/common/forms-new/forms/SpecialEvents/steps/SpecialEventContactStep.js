@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaUser, FaUsers, FaPhone, FaEnvelope } from 'react-icons/fa';
-import UniversalFormField from '@/components/common/forms-new/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
 import { SPECIAL_EVENT_CONTACT_FIELDS } from '@/zod/SpecialEventFormSchema';
 
 const SpecialEventContactStep = ({ formManager, theme = 'dark' }) =>

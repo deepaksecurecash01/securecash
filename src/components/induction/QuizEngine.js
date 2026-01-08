@@ -127,7 +127,7 @@ const QuizEngine = ({ lesson, onPass, handleReviewMaterial }) =>
       >
       
 
-        <ScrollableSection className="h-auto max-h-[992px] bg-white p-8 pt-4 768px:py-4 768px:px-12 768px:pt-4 1024px:py-4 1024px:px-16 1024px:pt-4">
+        <ScrollableSection className=" py-4  768px:max-h-[992px] bg-white 768px:py-4 768px:px-12 768px:pt-4 1024px:py-4 1024px:px-16 1024px:pt-4">
           <div className="space-y-12">
             {lesson.quiz.questions.map((q, idx) => (
               <div

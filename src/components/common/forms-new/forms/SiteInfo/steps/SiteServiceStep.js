@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaUniversity } from 'react-icons/fa';
-import UniversalFormField from '@/components/common/forms-new/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
 import { SERVICE_INFO_FIELDS } from '@/zod/SiteInfoFormSchema';
 
 const SiteServiceStep = ({ formManager, theme = 'dark' }) =>

@@ -1,12 +1,12 @@
 "use client";
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useInduction } from "@/context/InductionContext";
 import { useFocusManager } from "@/hooks/useFocusManager";
-import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
+import UniversalFormField from "@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField";
 import { FaUser, FaLock } from "react-icons/fa";
 import Image from "next/image";
 
@@ -23,10 +23,13 @@ const LoginFormSchema = z.object({
     .min(4, "Password must be at least 4 characters"),
 });
 
-export default function InductionLoginPage() {
+export default function InductionLoginPage()
+{
   const router = useRouter();
   const { isAuthenticated, login } = useInduction();
 
+  // ✅ NEW: Show loading state FIRST, then check auth
+  const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loginError, setLoginError] = useState(null);
 
@@ -45,39 +48,45 @@ export default function InductionLoginPage() {
     shouldFocusError: false,
   });
 
-  // ✅ Use the existing useFocusManager hook
   const focus = useFocusManager(control);
 
-  // Redirect if already authenticated
-  useEffect(() => {
+  // ✅ Check auth on mount
+  useEffect(() =>
+  {
     if (isAuthenticated) {
       router.push("/induction/lessons");
+    } else {
+      // Not authenticated, show login form
+      setIsCheckingAuth(false);
     }
   }, [isAuthenticated, router]);
 
   const handleFieldFocus = useCallback(
-    (fieldName) => {
+    (fieldName) =>
+    {
       focus.setFocusField(fieldName);
     },
     [focus]
   );
 
-  const handleFieldBlur = useCallback(() => {
+  const handleFieldBlur = useCallback(() =>
+  {
     focus.clearFocus();
   }, [focus]);
 
   const handleValidationError = useCallback(
-    (validationErrors) => {
+    (validationErrors) =>
+    {
       focus.focusFirstError(validationErrors);
     },
     [focus]
   );
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data) =>
+  {
     setIsSubmitting(true);
     setLoginError(null);
 
-    // Small delay for better UX
     await new Promise((resolve) => setTimeout(resolve, 300));
 
     const success = login(data.username, data.password);
@@ -90,15 +99,24 @@ export default function InductionLoginPage() {
     }
   };
 
-  const handleSubmit = rhfHandleSubmit(onSubmit, (validationErrors) => {
+  const handleSubmit = rhfHandleSubmit(onSubmit, (validationErrors) =>
+  {
     handleValidationError(validationErrors);
   });
 
-  // Don't show login if already authenticated
-  if (isAuthenticated) {
-    return null;
+  // ✅ Show loading spinner while checking auth
+  if (isCheckingAuth) {
+    return (
+      <div className="min-h-[80vh] bg-[#f2f2f2] flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4">
+          <div className="w-12 h-12 border-4 border-gray-300 border-t-primary rounded-full animate-spin"></div>
+          <p className="text-gray-600 text-sm font-medium">Loading...</p>
+        </div>
+      </div>
+    );
   }
 
+  // ✅ Show login form only if not authenticated
   return (
     <div className="min-h-[80vh] bg-[#f2f2f2] flex items-center justify-center p-4">
       <div className="bg-white p-8 rounded-lg max-w-md w-full shadow-2xl">
@@ -109,7 +127,7 @@ export default function InductionLoginPage() {
             width={285}
             height={91}
             sizes="285px"
-            className="w-[285px] h-auto"
+            className="w-[285px] h-auto "
             style={{ width: "285px", height: "auto" }}
             priority={true}
           />
@@ -160,7 +178,7 @@ export default function InductionLoginPage() {
             />
           </div>
 
-     
+
 
           <div className=" mx-auto relative">
             {loginError && (
@@ -169,7 +187,6 @@ export default function InductionLoginPage() {
               </div>
             )}{" "}
             <div className="button-section relative pt-8">
-              {/* Submit Button */}
               <button
                 type="submit"
                 disabled={isSubmitting}

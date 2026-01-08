@@ -45,7 +45,7 @@ export default function LessonsPage()
 
     return (
         <div className="pt-10">
-            <Container>
+            <Container className="px-8 1280px:px-0">
                 {/* Progress Bar */}
                 <div className="mb-10 max-w-[1200px] mx-auto pt-8">
                     <div className="flex justify-between text-xs font-bold text-gray-500 mb-2 uppercase font-montserrat">
@@ -62,7 +62,7 @@ export default function LessonsPage()
 
                 {/* Lesson Container */}
                 <div className="max-w-[1200px] mx-auto bg-white rounded-lg overflow-hidden">
-                    <div className="px-8 pt-8">
+                    <div className=" pt-8">
                         <h2 className="text-[26px] font-bold mb-6 text-gray-800 font-montserrat">
                             {showQuiz ? `Quiz: ${currentLesson.title}` : `${currentLesson.title}`}
                         </h2>
@@ -70,7 +70,7 @@ export default function LessonsPage()
 
                     {!showQuiz ? (
                         <>
-                            <div className="induction-single-main--content px-8" style={{ margin: '0', maxWidth: '100%' }}>
+                            <div className="induction-single-main--content" style={{ margin: '0', maxWidth: '100%' }}>
                                 {currentLesson.modules.map((block, index) =>
                                 {
                                     if (block.type === 'text') {
@@ -105,7 +105,7 @@ export default function LessonsPage()
                             </div>
                         </>
                     ) : (
-                        <div className="animate-fade-in px-8 pb-12 mb-10">
+                        <div className="animate-fade-in pb-12 mb-10">
                             <button
                                 onClick={handleReviewMaterial}
                                 className="mb-6 text-sm text-primary hover:underline flex items-center gap-2 font-semibold font-montserrat"

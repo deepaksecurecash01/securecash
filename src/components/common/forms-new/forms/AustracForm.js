@@ -1,19 +1,19 @@
 "use client";
 import React, { useEffect } from "react";
 import
-    {
-        FaBuilding,
-        FaIdCard,
-        FaGlobe,
-        FaEnvelope,
-        FaList,
-        FaHome,
-        FaMapMarkerAlt,
-        FaUsers,
-        FaSpinner,
-        FaCheckCircle,
-    } from "react-icons/fa";
-import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
+{
+    FaBuilding,
+    FaIdCard,
+    FaGlobe,
+    FaEnvelope,
+    FaList,
+    FaHome,
+    FaMapMarkerAlt,
+    FaUsers,
+    FaSpinner,
+    FaCheckCircle,
+} from "react-icons/fa";
+import UniversalFormField from "@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate } from '@/utils/formHelpers';
 import AustracFormSchema, { AUSTRAC_DEFAULT_VALUES } from '@/zod/AustracFormSchema';

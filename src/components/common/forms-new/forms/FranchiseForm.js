@@ -2,18 +2,18 @@
 import React, { useEffect, useState } from "react";
 import dynamic from 'next/dynamic';
 import
-    {
-        FaUser,
-        FaPhone,
-        FaEnvelope,
-        FaHome,
-        FaMapMarkerAlt,
-        FaInfoCircle,
-        FaQuestionCircle,
-        FaSpinner,
-        FaCheckCircle,
-    } from "react-icons/fa";
-import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
+{
+    FaUser,
+    FaPhone,
+    FaEnvelope,
+    FaHome,
+    FaMapMarkerAlt,
+    FaInfoCircle,
+    FaQuestionCircle,
+    FaSpinner,
+    FaCheckCircle,
+} from "react-icons/fa";
+import UniversalFormField from "@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate } from '@/utils/formHelpers';
 import FranchiseFormSchema, { FRANCHISE_DEFAULT_VALUES } from '@/zod/FranchiseFormSchema';

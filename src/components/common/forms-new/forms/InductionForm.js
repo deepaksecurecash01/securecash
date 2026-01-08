@@ -3,25 +3,26 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useFormManager } from "@/hooks/useFormManager";
 import
-  {
-    InductionFormSchema,
-    INDUCTION_DEFAULT_VALUES,
-  } from "@/zod/InductionFormSchema";
-import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
+{
+  InductionFormSchema,
+  INDUCTION_DEFAULT_VALUES,
+} from "@/zod/InductionFormSchema";
+import UniversalFormField from "@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField";
 import
-  {
-    FaUser,
-    FaPhone,
-    FaEnvelope,
-    FaMapMarkerAlt,
-    FaIdCard,
-    FaLock,
-    FaInfoCircle,
-    FaCheckCircle,
-    FaSpinner,
-    FaTimesCircle,
-    FaCheck,
-  } from "react-icons/fa";
+{
+  FaUser,
+  FaPhone,
+  FaEnvelope,
+  FaMapMarkerAlt,
+  FaIdCard,
+  FaLock,
+  FaInfoCircle,
+  FaCheckCircle,
+  FaSpinner,
+  FaTimesCircle,
+  FaCheck,
+  FaExclamationTriangle,
+} from "react-icons/fa";
 import IcaContractorClauses from "./IcaAgreementClauses";
 import { checkUsernameAvailability, cancelUsernameCheck, validateUsernameFormat } from "@/utils/usernameValidation";
 
@@ -87,10 +88,9 @@ const InductionForm = () =>
 {
   const router = useRouter();
 
-  // ✅ Username status state
   const [usernameStatus, setUsernameStatus] = useState({
     checking: false,
-    available: null,
+    available: null, 
     message: ""
   });
 
@@ -113,7 +113,6 @@ const InductionForm = () =>
     prepareData: async (data) => ({ ...data, formType: "induction" }),
   });
 
-  // ✅ Watch username field value
   const usernameValue = formManager.watch("EdocketUsername");
 
   // ✅ Cleanup on unmount
@@ -150,7 +149,7 @@ const InductionForm = () =>
     if (value.length < 4) {
       setUsernameStatus({
         checking: false,
-        available: false,  // Keep as null so button knows it's not validated yet
+        available: false,
         message: ""
       });
       return;
@@ -167,11 +166,21 @@ const InductionForm = () =>
       // Check availability (debounced in helper)
       const result = await checkUsernameAvailability(value);
 
-      if (result.tooShort || result.error) {
+      if (result.tooShort) {
         setUsernameStatus({
           checking: false,
           available: null,
           message: ""
+        });
+        return;
+      }
+
+      // ✅ PATCH: Handle API errors gracefully (non-blocking)
+      if (result.error) {
+        setUsernameStatus({
+          checking: false,
+          available: "warning", // ✅ Special state for API failures
+          message: "Unable to verify username availability. After your submission it'll be validated by our system and you'll get informed about it via email."
         });
         return;
       }
@@ -191,10 +200,11 @@ const InductionForm = () =>
       }
     } catch (error) {
       console.error("Username check error:", error);
+      // ✅ PATCH: Treat unexpected errors as warnings (non-blocking)
       setUsernameStatus({
         checking: false,
-        available: null,
-        message: ""
+        available: "warning",
+        message: "Unable to verify username availability. After your submission it'll be validated by our system and you'll get informed about it via email."
       });
     }
   }, []);
@@ -205,27 +215,52 @@ const InductionForm = () =>
     if (usernameValue !== undefined) {
       handleUsernameChange(usernameValue);
     }
-  }, [usernameValue]);
+  }, [usernameValue, handleUsernameChange]);
 
-  // ✅ UPDATED: Check if form can be submitted
+  // ✅ FIXED: Simplified canSubmit logic with debug logging
   const canSubmit = () =>
   {
     const username = usernameValue || "";
 
     // Block if checking
-    if (usernameStatus.checking) return false;
+    if (usernameStatus.checking) {
+      console.log("❌ Submit blocked: checking username");
+      return false;
+    }
 
-    // Block if username is not available
-    if (usernameStatus.available === false) return false;
+    // Block if username is not available (taken)
+    if (usernameStatus.available === false) {
+      console.log("❌ Submit blocked: username taken or invalid");
+      return false;
+    }
 
     // Block if username exists but is less than 4 characters
-    if (username.length > 0 && username.length < 4) return false;
+    if (username.length > 0 && username.length < 4) {
+      console.log("❌ Submit blocked: username too short");
+      return false;
+    }
 
-    // Block if username is 4+ chars but hasn't been validated as available
-    if (username.length >= 4 && usernameStatus.available !== true) return false;
+    // Block if username is 4+ chars but hasn't been validated yet (null)
+    if (username.length >= 4 && usernameStatus.available === null) {
+      console.log("❌ Submit blocked: username not validated (null state)");
+      return false;
+    }
+
+    // ✅ ALLOW if status is "warning" (API failure - non-blocking)
+    if (usernameStatus.available === "warning") {
+      console.log("✅ Submit allowed: API failed (warning state)");
+    }
+
+    // ✅ ALLOW if status is true (available)
+    if (usernameStatus.available === true) {
+      console.log("✅ Submit allowed: username available");
+    }
 
     // Block if form is submitting
-    if (formManager.isSubmitting) return false;
+    if (formManager.isSubmitting) {
+      console.log("❌ Submit blocked: form is submitting");
+      return false;
+    }
 
     return true;
   };
@@ -453,32 +488,40 @@ const InductionForm = () =>
                 onFieldBlur={formManager.handleFieldBlur}
               />
 
-              {/* ✅ FIXED: Safe access with optional chaining */}
+              {/* ✅ FIXED: Always show status when available */}
               {!formManager.formState?.errors?.EdocketUsername &&
                 usernameValue &&
-                usernameValue.length > 3 &&
-                (usernameStatus.message || usernameStatus.checking) && (
-                  <div className={`absolute left-0 right-0 top-[calc(100%-2rem)] mt-1 flex items-center gap-2 text-sm transition-opacity duration-200 ${usernameStatus.checking
+                usernameValue.length >= 4 &&
+                (usernameStatus.checking || usernameStatus.message) && (
+                  <div className={`absolute left-0 right-0 top-[calc(100%-2rem)] mt-1 flex items-start gap-2 text-sm transition-opacity duration-200 ${usernameStatus.checking
                       ? 'text-active-text'
-                      : usernameStatus.available
+                      : usernameStatus.available === true
                         ? 'text-green-600'
-                        : 'text-red-600'
+                        : usernameStatus.available === "warning"
+                          ? 'text-yellow-600'
+                          : 'text-red-600'
                     }`}>
                     {usernameStatus.checking && (
                       <>
-                        <FaSpinner className="animate-spin" />
+                        <FaSpinner className="animate-spin mt-0.5 flex-shrink-0" />
                         <span>Checking availability...</span>
                       </>
                     )}
                     {usernameStatus.available === true && (
                       <>
-                        <FaCheck className="text-green-600" />
+                        <FaCheck className="text-green-600 mt-0.5 flex-shrink-0" />
                         <span>{usernameStatus.message}</span>
+                      </>
+                    )}
+                    {usernameStatus.available === "warning" && (
+                      <>
+                        <FaExclamationTriangle className="text-yellow-600 mt-0.5 flex-shrink-0" />
+                        <span className="text-left">{usernameStatus.message}</span>
                       </>
                     )}
                     {usernameStatus.available === false && (
                       <>
-                        <FaTimesCircle className="text-red-600" />
+                        <FaTimesCircle className="text-red-600 mt-0.5 flex-shrink-0" />
                         <span>{usernameStatus.message}</span>
                       </>
                     )}
@@ -524,9 +567,9 @@ const InductionForm = () =>
               <FaSpinner className="animate-spin" />
               Checking Username...
             </span>
-            ) : (usernameStatus.available === false && usernameValue.length < 4) ? (
-              "Enter valid username" // Text shown when length is 1-3
-            ) : usernameStatus.available === false ? (
+          ) : (usernameStatus.available === false && usernameValue && usernameValue.length < 4) ? (
+            "Enter valid username"
+          ) : usernameStatus.available === false ? (
             <span className="flex items-center justify-center gap-2">
               <FaTimesCircle />
               Username Not Available
@@ -540,8 +583,6 @@ const InductionForm = () =>
             "Submit Your Information"
           )}
         </button>
-
-       
       </div>
 
       {/* File Upload Progress Indicator */}

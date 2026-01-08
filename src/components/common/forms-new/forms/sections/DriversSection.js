@@ -3,7 +3,7 @@ import React from 'react';
 import { FaUsers, FaCircle, FaIdCard, FaArrowRightLong } from "react-icons/fa6";
 import Link from 'next/link';
 import Image from 'next/image';
-import UniversalFormField from '@/components/common/forms-new/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
 
 // Section Title Component - Pixel-perfect match to original
 const SectionTitle = ({ children, Icon, position = 'center' }) =>

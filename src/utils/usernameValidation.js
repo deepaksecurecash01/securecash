@@ -29,6 +29,9 @@ export const checkUsernameAvailability = async (username) =>
                 // Create new abort controller for this request
                 abortController = new AbortController();
 
+                // ✅ PATCH: Add 5-second timeout for better UX
+                const timeoutId = setTimeout(() => abortController.abort(), 5000);
+
                 const response = await fetch('/api/check-username', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -36,7 +39,11 @@ export const checkUsernameAvailability = async (username) =>
                     signal: abortController.signal
                 });
 
+                // Clear timeout if request completes
+                clearTimeout(timeoutId);
+
                 if (!response.ok) {
+                    console.warn('Username API returned non-OK status:', response.status);
                     // On error, allow (fail-open)
                     resolve({ available: true, error: true });
                     return;
@@ -46,8 +53,10 @@ export const checkUsernameAvailability = async (username) =>
                 resolve(data);
 
             } catch (error) {
-                // Ignore abort errors
+                // Ignore abort errors and treat as API failure
                 if (error.name === 'AbortError') {
+                    console.warn('Username check timed out or was aborted');
+                    resolve({ available: true, error: true });
                     return;
                 }
 

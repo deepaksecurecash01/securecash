@@ -1,17 +1,17 @@
 "use client";
 import React, { useEffect } from "react";
 import
-    {
-        FaUser,
-        FaBriefcase,
-        FaEnvelope,
-        FaCalendarAlt,
-        FaUsers,
-        FaIdCard,
-        FaSpinner,
-        FaCheckCircle,
-    } from "react-icons/fa";
-import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
+{
+    FaUser,
+    FaBriefcase,
+    FaEnvelope,
+    FaCalendarAlt,
+    FaUsers,
+    FaIdCard,
+    FaSpinner,
+    FaCheckCircle,
+} from "react-icons/fa";
+import UniversalFormField from "@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatBirthdayForAPI } from '@/utils/formHelpers';
 import TermsFormSchema, { TERMS_DEFAULT_VALUES } from '@/zod/TermsFormSchema';

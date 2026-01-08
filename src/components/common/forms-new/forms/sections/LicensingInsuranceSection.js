@@ -1,7 +1,7 @@
 // /components/forms/ICA/sections/LicensingInsuranceSection.js - PURE UNIVERSAL FORM FIELDS
 import React from 'react';
 import { FaShieldAlt } from "react-icons/fa";
-import UniversalFormField from '@/components/common/forms-new/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
 
 // Section Title Component - Pixel-perfect match to original
 const SectionTitle = ({ children, Icon, position = 'center' }) =>

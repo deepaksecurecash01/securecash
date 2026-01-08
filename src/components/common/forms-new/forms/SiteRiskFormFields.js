@@ -2,7 +2,7 @@
 import React from 'react';
 import { FaMoneyBillAlt, FaSpinner, FaCheckCircle } from 'react-icons/fa';
 import { RISK_ASSESSMENT_FIELDS } from '@/zod/SiteInfoFormSchema';
-import UniversalFormField from '@/components/common/forms-new/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
 import ScrollableSection from '@/components/layout/ScrollbarSection';
 
 const addIconToFields = (fields) =>
@@ -33,8 +33,8 @@ const SiteRiskFormFields = ({ formManager }) =>
                             type="submit"
                             disabled={isSubmitting}
                             className={`nextBtn ${isSubmitted
-                                    ? 'bg-[#4bb543]'
-                                    : 'bg-[#c6a54b] hover:opacity-80 cursor-pointer'
+                                ? 'bg-[#4bb543]'
+                                : 'bg-[#c6a54b] hover:opacity-80 cursor-pointer'
                                 } text-white border-none py-[15px] 768px:px-0 text-[16px] w-full rounded-[40px] outline-none appearance-none p-2.5 shadow-none font-montserrat disabled:opacity-50 disabled:cursor-not-allowed`}
                         >
                             {isSubmitting ? (

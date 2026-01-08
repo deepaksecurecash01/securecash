@@ -1,7 +1,7 @@
 // /components/forms/ICA/sections/DeedOfGuaranteeSection.js - PURE UNIVERSAL FORM FIELDS
 import React from 'react';
 import { FaUser, FaMapMarkerAlt, FaCircle, FaFileSignature } from "react-icons/fa";
-import UniversalFormField from '@/components/common/forms-new/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
 import IcaContractorClauses from '../IcaAgreementClauses';
 
 // Section Title Component - Pixel-perfect match to original

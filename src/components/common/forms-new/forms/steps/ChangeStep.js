@@ -1,11 +1,11 @@
 import React from "react";
 import
-    {
-        FaCalendarAlt,
-        FaMoneyBillAlt,
-        FaDollarSign,
-    } from "react-icons/fa";
-import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
+{
+    FaCalendarAlt,
+    FaMoneyBillAlt,
+    FaDollarSign,
+} from "react-icons/fa";
+import UniversalFormField from "@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField";
 
 
 const ChangeStep = ({ formManager, theme = 'dark' }) =>
@@ -84,7 +84,7 @@ const ChangeStep = ({ formManager, theme = 'dark' }) =>
     return (
         <div className="form-page change">
             <h3
-               
+
                 className="text-white font-normal text-center capitalize pb-4 text-[22px] leading-[30px] font-montserrat"
             >
                 Change

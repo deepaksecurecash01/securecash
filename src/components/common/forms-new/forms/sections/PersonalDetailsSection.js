@@ -1,16 +1,16 @@
 // /components/forms/ICA/sections/PersonalDetailsSection.js - PURE UNIVERSAL FORM FIELDS
 import React from 'react';
 import
-    {
-        FaUser,
-        FaPhone,
-        FaEnvelope,
-        FaInfoCircle,
-        FaBuilding,
-        FaMapMarkerAlt,
-        FaIdCard
-    } from "react-icons/fa";
-import UniversalFormField from '@/components/common/forms-new/core/UniversalFormField';
+{
+    FaUser,
+    FaPhone,
+    FaEnvelope,
+    FaInfoCircle,
+    FaBuilding,
+    FaMapMarkerAlt,
+    FaIdCard
+} from "react-icons/fa";
+import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
 
 // Section Title Component - Pixel-perfect match to original
 const SectionTitle = ({ children, Icon, position = 'center' }) =>

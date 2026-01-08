@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaCalendarAlt } from "react-icons/fa";
-import UniversalFormField from '@/components/common/forms-new/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
 import IcaContractorClauses from '../IcaAgreementClauses';
 
 const SectionTitle = ({ children, Icon, position = 'center' }) =>

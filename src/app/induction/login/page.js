@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useInduction } from "@/context/InductionContext";
-import UniversalFormField from "@/components/common/forms-new/core/UniversalFormField";
+import UniversalFormField from "@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField";
 import { FaUser, FaLock } from "react-icons/fa";
 import Image from "next/image";
 

@@ -44,7 +44,7 @@
 }
 
 .induction-content ul li::before {
-  content: "\2022"; /* Bullet point */
+  content: "\2022";
   position: absolute;
   left: 0;
   top: 0;
