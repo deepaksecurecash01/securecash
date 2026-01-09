@@ -10,7 +10,7 @@ import
     FaMapMarkerAlt,
     FaIdCard
 } from "react-icons/fa";
-import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/core/UniversalFormField';
 
 // Section Title Component - Pixel-perfect match to original
 const SectionTitle = ({ children, Icon, position = 'center' }) =>
@@ -97,7 +97,8 @@ const PersonalDetailsSection = ({ formManager }) => (
         <SectionTitle Icon={FaUser}>Personal Details</SectionTitle>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="relative">
+            {/* LEFT COLUMN */}
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     What is your full name?
                 </label>
@@ -114,7 +115,8 @@ const PersonalDetailsSection = ({ formManager }) => (
                 />
             </div>
 
-            <div className="relative">
+            {/* RIGHT COLUMN */}
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     What is the organisation structure type?
                 </label>
@@ -133,7 +135,7 @@ const PersonalDetailsSection = ({ formManager }) => (
         </div>
 
         <div className="grid grid-cols-1 768px:grid-cols-2 1024px:grid-cols-3 gap-6">
-            <div className="relative">
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     What is your ABN number?
                 </label>
@@ -150,7 +152,7 @@ const PersonalDetailsSection = ({ formManager }) => (
                 />
             </div>
 
-            <div className="relative">
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     What is your best contact number?
                 </label>
@@ -167,7 +169,7 @@ const PersonalDetailsSection = ({ formManager }) => (
                 />
             </div>
 
-            <div className="relative">
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     What is your email address?
                 </label>
@@ -193,7 +195,7 @@ const PersonalDetailsSection = ({ formManager }) => (
         </div>
 
         <div className="space-y-6">
-            <div className="relative">
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     What is your physical address?
                 </label>
@@ -210,7 +212,7 @@ const PersonalDetailsSection = ({ formManager }) => (
                 />
             </div>
 
-            <div className="relative">
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     What is your postal address?
                 </label>

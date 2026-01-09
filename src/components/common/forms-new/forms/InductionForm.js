@@ -7,7 +7,7 @@ import
   InductionFormSchema,
   INDUCTION_DEFAULT_VALUES,
 } from "@/zod/InductionFormSchema";
-import UniversalFormField from "@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField";
+import UniversalFormField from "@/components/common/forms-new/forms/core/UniversalFormField";
 import
 {
   FaUser,
@@ -90,7 +90,7 @@ const InductionForm = () =>
 
   const [usernameStatus, setUsernameStatus] = useState({
     checking: false,
-    available: null, 
+    available: null,
     message: ""
   });
 
@@ -288,7 +288,7 @@ const InductionForm = () =>
 
       {/* SECTION 1: Name & Phone */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="relative">
+        <div className="relative flex flex-col h-full justify-between">
           <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
             What is your full name?
           </label>
@@ -305,7 +305,7 @@ const InductionForm = () =>
           />
         </div>
 
-        <div className="relative">
+        <div className="relative flex flex-col h-full justify-between">
           <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
             What is your best contact number?
           </label>
@@ -324,7 +324,7 @@ const InductionForm = () =>
       </div>
 
       {/* SECTION 2: Email */}
-      <div className="relative">
+      <div className="relative flex flex-col h-full justify-between">
         <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
           What is your email address?
         </label>
@@ -342,7 +342,7 @@ const InductionForm = () =>
       </div>
 
       {/* SECTION 3: Address */}
-      <div className="relative">
+      <div className="relative flex flex-col h-full justify-between">
         <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
           What is your physical address?
         </label>
@@ -361,7 +361,7 @@ const InductionForm = () =>
 
       {/* SECTION 4: File Uploads (Photo & License) */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="relative">
+        <div className="relative flex flex-col h-full justify-between">
           <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
             Clear, frontal photo of your upper body and face:
           </label>
@@ -378,7 +378,7 @@ const InductionForm = () =>
           />
         </div>
 
-        <div className="relative">
+        <div className="relative flex flex-col h-full justify-between">
           <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
             Drivers License:
           </label>
@@ -403,7 +403,7 @@ const InductionForm = () =>
         </h4>
         <IcaContractorClauses data={agreementTermData} />
 
-        <div className="relative">
+        <div className="relative flex flex-col h-full justify-between">
           <UniversalFormField
             name="AcceptAgreement"
             control={formManager.control}
@@ -425,7 +425,7 @@ const InductionForm = () =>
 
       {/* SECTION 6: State & Contractor */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="relative">
+        <div className="relative flex flex-col h-full justify-between">
           <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
             What state will you be working in?
           </label>
@@ -442,7 +442,7 @@ const InductionForm = () =>
           />
         </div>
 
-        <div className="relative">
+        <div className="relative flex flex-col h-full justify-between">
           <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
             What contractor are you working for?
           </label>
@@ -469,7 +469,7 @@ const InductionForm = () =>
           </p>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="relative">
+          <div className="relative flex flex-col h-full justify-between">
             <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
               Preferred eDocket Username:
             </label>
@@ -494,12 +494,12 @@ const InductionForm = () =>
                 usernameValue.length >= 4 &&
                 (usernameStatus.checking || usernameStatus.message) && (
                   <div className={`absolute left-0 right-0 top-[calc(100%-2rem)] mt-1 flex items-start gap-2 text-sm transition-opacity duration-200 ${usernameStatus.checking
-                      ? 'text-active-text'
-                      : usernameStatus.available === true
-                        ? 'text-green-600'
-                        : usernameStatus.available === "warning"
-                          ? 'text-yellow-600'
-                          : 'text-red-600'
+                    ? 'text-active-text'
+                    : usernameStatus.available === true
+                      ? 'text-green-600'
+                      : usernameStatus.available === "warning"
+                        ? 'text-yellow-600'
+                        : 'text-red-600'
                     }`}>
                     {usernameStatus.checking && (
                       <>
@@ -530,7 +530,7 @@ const InductionForm = () =>
             </div>
           </div>
 
-          <div className="relative">
+          <div className="relative ">
             <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
               Preferred eDocket Password:
             </label>

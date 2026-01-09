@@ -12,7 +12,7 @@ import
     FaSpinner,
     FaCheckCircle,
 } from "react-icons/fa";
-import UniversalFormField from "@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField";
+import UniversalFormField from "@/components/common/forms-new/forms/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate, formatDateForAPI } from '@/utils/formHelpers';
 import ContactFormSchema, { CONTACT_DEFAULT_VALUES, formConfig } from '@/zod/ContactFormSchema';
@@ -185,7 +185,7 @@ const ContactForm = ({ className }) =>
                                 aria-hidden="true"
                             />
 
-                            <div className="relative">
+                            <div className="relative flex flex-col h-full justify-between">
                                 <UniversalFormField
                                     {...formManager.getFieldProps({
                                         name: "Department",
@@ -201,7 +201,7 @@ const ContactForm = ({ className }) =>
                             </div>
 
                             {INPUT_FIELDS.map((field) => (
-                                <div key={field.name} className="relative">
+                                <div key={field.name} className="relative flex flex-col h-full justify-between">
                                     <UniversalFormField
                                         {...formManager.getFieldProps(field)}
                                         theme="light"
@@ -228,7 +228,7 @@ const ContactForm = ({ className }) =>
                                 />
                             </div>
 
-                            <div className="relative">
+                            <div className="relative flex flex-col h-full justify-between">
                                 <UniversalFormField
                                     {...formManager.getFieldProps({
                                         name: "CallbackDate",
@@ -276,7 +276,7 @@ const ContactForm = ({ className }) =>
                                 </div>
                             </div>
 
-                            <div className="relative">
+                            <div className="relative flex flex-col h-full justify-between">
                                 <UniversalFormField
                                     {...formManager.getFieldProps({
                                         name: "Message",

@@ -2,7 +2,7 @@
 import React from 'react';
 import { FaMoneyBillAlt, FaSpinner, FaCheckCircle } from 'react-icons/fa';
 import { RISK_ASSESSMENT_FIELDS } from '@/zod/SiteInfoFormSchema';
-import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/core/UniversalFormField';
 import ScrollableSection from '@/components/layout/ScrollbarSection';
 
 const addIconToFields = (fields) =>

@@ -86,14 +86,14 @@ const LegacyCheckbox = ({
                 onFocus={handleFocus}
                 onBlur={handleBlur}
                 data-validate="CheckboxMulti"
-                className="text-sm p-2.5 shadow-none font-montserrat border-none w-[28px] h-[28px] opacity-0 absolute z-40 peer cursor-pointer"
+                className="text-sm p-2.5 shadow-none font-montserrat border-none min-w-[28px] h-[28px] opacity-0 absolute z-40 peer cursor-pointer"
                 disabled={disabled}
             />
             <label
                 className="font-light text-left w-full relative flex cursor-pointer"
                 htmlFor={value}
             >
-                <span className="w-[28px] h-[28px]"></span>
+                <span className="min-w-[28px] h-[28px]"></span>
                 <div>{label}</div>
             </label>
         </div>

@@ -1,7 +1,7 @@
 // /components/forms/ICA/sections/LicensingInsuranceSection.js - PURE UNIVERSAL FORM FIELDS
 import React from 'react';
 import { FaShieldAlt } from "react-icons/fa";
-import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/core/UniversalFormField';
 
 // Section Title Component - Pixel-perfect match to original
 const SectionTitle = ({ children, Icon, position = 'center' }) =>
@@ -73,7 +73,8 @@ const LicensingInsuranceSection = ({ formManager }) => (
         <SectionTitle Icon={FaShieldAlt}>Licensing & Insurance</SectionTitle>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="relative">
+            {/* LEFT COLUMN */}
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     Please upload a copy of your Security or Masters License:
                 </label>
@@ -90,7 +91,8 @@ const LicensingInsuranceSection = ({ formManager }) => (
                 />
             </div>
 
-            <div className="relative">
+            {/* RIGHT COLUMN */}
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     Please upload a copy of your cash in transit insurance:
                 </label>

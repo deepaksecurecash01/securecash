@@ -5,7 +5,7 @@ import
     FaMoneyBillAlt,
     FaDollarSign,
 } from "react-icons/fa";
-import UniversalFormField from "@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField";
+import UniversalFormField from "@/components/common/forms-new/forms/core/UniversalFormField";
 
 
 const ChangeStep = ({ formManager, theme = 'dark' }) =>

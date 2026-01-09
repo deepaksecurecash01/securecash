@@ -373,14 +373,45 @@ export const prepareTermsAgreementEmail = (formData, readPdfFile) =>
     };
 };
 
-
 export const prepareInductionEmail = (formData, readPdfFile) =>
 {
     const currentDateTime = getCurrentDateTime();
     const htmlContent = inductionEmailTemplate(formData, currentDateTime);
 
-    // Process attachments (photo + license)
-    const attachments = prepareAttachments(formData);
+    // ✅ FIXED: Process attachments from useFormManager format (Photo + DriversLicense)
+    const attachments = [];
+
+    if (formData.attachments && Array.isArray(formData.attachments)) {
+        formData.attachments.forEach((attachment, index) =>
+        {
+            try {
+                if (attachment && attachment.data && attachment.filename) {
+                    // Extract base64 data (remove data URL prefix if present)
+                    let base64Data = attachment.data;
+                    if (base64Data.includes(',')) {
+                        base64Data = base64Data.split(',')[1];
+                    }
+
+                    const sizeBytes = Buffer.byteLength(base64Data, 'base64');
+                    if (sizeBytes > 5 * 1024 * 1024) {
+                        console.warn(`Attachment ${attachment.filename} exceeds 5MB, skipping`);
+                        return;
+                    }
+
+                    const detectedMimeType = getMimeType(attachment.filename);
+
+                    attachments.push({
+                        content: base64Data,
+                        filename: attachment.filename,
+                        type: detectedMimeType,
+                        disposition: "attachment",
+                    });
+                }
+            } catch (error) {
+                console.error(`Error processing induction attachment ${index}:`, error);
+            }
+        });
+    }
 
     return {
         to: "deepak@securecash.com.au",

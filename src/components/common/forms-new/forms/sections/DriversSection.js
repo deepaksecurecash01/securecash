@@ -3,7 +3,7 @@ import React from 'react';
 import { FaUsers, FaCircle, FaIdCard, FaArrowRightLong } from "react-icons/fa6";
 import Link from 'next/link';
 import Image from 'next/image';
-import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/core/UniversalFormField';
 
 // Section Title Component - Pixel-perfect match to original
 const SectionTitle = ({ children, Icon, position = 'center' }) =>
@@ -54,8 +54,8 @@ const SectionTitle = ({ children, Icon, position = 'center' }) =>
 
     return (
         <div className="mb-2">
-            <div className={`flex items-center gap-3 mb-4 justify-center ${position === 'left' ? ' 1024px:justify-start' : 'justify-center'}`}>
-                {Icon && <Icon className="text-[24px] text-primary" />}
+            <div className={`flex items-center gap-3 mb-4 justify-center ${position === 'left' ? ' 768px:justify-start' : 'justify-center'}`}>
+                {Icon && <Icon className="min-w-[24px] text-[24px] text-primary" />}
                 <h3 className="text-[26px] font-semibold text-gray-800">
                     {children}
                 </h3>
@@ -81,7 +81,7 @@ const DriversSection = ({ formManager }) =>
                             Let&apos;s get set up for contracting using eDockets!
                         </SectionTitle>
 
-                        <div className="lg:col-span-2 flex flex-col gap-4">
+                        <div className="lg:col-span-2 flex flex-col gap-4  1024px:mr-4" >
                             <p className="text-gray-700">
                                 To complete the submission of this Independent Contractors Agreement, if you have not done so already, you will need to access the eDockets Contractor Portal where you will be required to <strong>&quot;Register as a Contractor&quot;</strong> and set yourself up as a Contractor in the eDockets system.
                             </p>
@@ -146,7 +146,7 @@ const DriversSection = ({ formManager }) =>
                         </div>
                     </div>
 
-                    <div className="flex justify-center items-center">
+                    <div className="flex justify-center items-center mt-4 1024px:mt-0">
                         <Image
                             src="/images/eDockets-Contractor-Register.webp"
                             width={450}
@@ -166,7 +166,7 @@ const DriversSection = ({ formManager }) =>
 
             <div className="space-y-6">
                 <div className="bg-[rgb(242,242,242,0.9)] p-6 rounded-lg space-y-4">
-                    <div className="w-3/5 mx-auto">
+                    <div className=" 768px:w-[90%] 992px:w-[70%] 1070px:w-3/5 mx-auto">
                         <div className="relative grid grid-cols-5 items-center">
                             <label className="text-primary-text text-[16px] font-semibold px-1 768px:px-0 col-span-2">
                                 eDockets Contractor Code

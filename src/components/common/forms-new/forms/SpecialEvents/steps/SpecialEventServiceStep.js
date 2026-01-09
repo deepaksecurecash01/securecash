@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaUniversity } from 'react-icons/fa';
-import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/core/UniversalFormField';
 import { SPECIAL_EVENT_SERVICE_FIELDS } from '@/zod/SpecialEventFormSchema';
 
 const SpecialEventServiceStep = ({ formManager, theme = 'dark' }) =>

@@ -13,7 +13,7 @@ import
     FaSpinner,
     FaCheckCircle,
 } from "react-icons/fa";
-import UniversalFormField from "@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField";
+import UniversalFormField from "@/components/common/forms-new/forms/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate } from '@/utils/formHelpers';
 import FranchiseFormSchema, { FRANCHISE_DEFAULT_VALUES } from '@/zod/FranchiseFormSchema';
@@ -191,7 +191,7 @@ const FranchiseForm = ({ className }) =>
                             />
 
                             {INPUT_FIELDS.map((field) => (
-                                <div key={field.name} className="relative">
+                                <div key={field.name} className="relative flex flex-col h-full justify-between">
                                     <UniversalFormField
                                         {...formManager.getFieldProps(field)}
                                         theme="light"
@@ -201,7 +201,7 @@ const FranchiseForm = ({ className }) =>
                             ))}
 
                             {showOtherField && (
-                                <div className="relative">
+                                <div className="relative flex flex-col h-full justify-between">
                                     <UniversalFormField
                                         {...formManager.getFieldProps({
                                             name: "ReferralSourceOther",

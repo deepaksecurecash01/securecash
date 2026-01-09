@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaBuilding, FaHome, FaMapMarkerAlt } from 'react-icons/fa';
-import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/core/UniversalFormField';
 import { BUSINESS_INFO_FIELDS } from '@/zod/SiteInfoFormSchema';
 
 const SiteBusinessStep = ({ formManager, theme = 'dark' }) =>

@@ -1,7 +1,7 @@
 // /components/forms/ICA/sections/ExecutedAsDeedSection.js - PURE UNIVERSAL FORM FIELDS
 import React from 'react';
 import { FaMapMarkerAlt, FaUser, FaFileContract, FaBuilding } from "react-icons/fa";
-import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/core/UniversalFormField';
 
 // Section Title Component - Pixel-perfect match to original
 const SectionTitle = ({ children, Icon, position = 'center' }) =>
@@ -77,7 +77,7 @@ const ExecutedAsDeedSection = ({ formManager }) => (
                 SIGNED, SEALED and DELIVERED by:
             </p>
 
-            <div className="relative">
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     Please enter your business/company name:
                 </label>
@@ -108,7 +108,7 @@ const ExecutedAsDeedSection = ({ formManager }) => (
                 Deed of Guarantee:
             </p>
 
-            <div className="relative">
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     Full name of the witness:
                 </label>
@@ -125,7 +125,7 @@ const ExecutedAsDeedSection = ({ formManager }) => (
                 />
             </div>
 
-            <div className="relative">
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     Please enter the residential address of the witness:
                 </label>
@@ -142,7 +142,7 @@ const ExecutedAsDeedSection = ({ formManager }) => (
                 />
             </div>
 
-            <div className="relative">
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     Please upload any government ID unique to the witness (e.g. driver&apos;s license):
                 </label>

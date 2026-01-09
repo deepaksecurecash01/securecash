@@ -116,10 +116,12 @@ const UniversalFormField = ({
                             type={type}
                             className={
                                 theme === 'legacy-hazard' ? "top-16" :
-                                    theme === 'ica' ? "top-12" :
-                                        theme === 'light' && type === 'textarea' ? "top-[150px]" :
-                                            theme === 'dark' && type === 'textarea' ? "top-[236px]" :
-                                                undefined
+                                    // FIX: Push error down 210px for file inputs to clear the 200px box
+                                    theme === 'ica' && type === 'file' ? "top-[210px]" :
+                                        theme === 'ica' ? "top-12" :
+                                            theme === 'light' && type === 'textarea' ? "top-[150px]" :
+                                                theme === 'dark' && type === 'textarea' ? "top-[236px]" :
+                                                    undefined
                             }
                         />
                     )

@@ -1,7 +1,7 @@
 // /components/forms/ICA/sections/DeedOfGuaranteeSection.js - PURE UNIVERSAL FORM FIELDS
 import React from 'react';
 import { FaUser, FaMapMarkerAlt, FaCircle, FaFileSignature } from "react-icons/fa";
-import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/core/UniversalFormField';
 import IcaContractorClauses from '../IcaAgreementClauses';
 
 // Section Title Component - Pixel-perfect match to original
@@ -114,7 +114,7 @@ const DeedOfGuaranteeSection = ({ formManager, deedOfGuaranteeData, COMPANY_INFO
             <h4 className="text-lg font-semibold text-gray-800">Clauses:</h4>
             <IcaContractorClauses data={deedOfGuaranteeData} />
 
-            <div className="relative">
+            <div className="relative flex flex-col h-full justify-between">
                 <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                     Date of Deed
                 </label>
@@ -146,7 +146,7 @@ const DeedOfGuaranteeSection = ({ formManager, deedOfGuaranteeData, COMPANY_INFO
             <div className="space-y-6">
                 <h4 className="text-lg font-semibold text-gray-800">Guarantors:</h4>
 
-                <div className="relative">
+                <div className="relative flex flex-col h-full justify-between">
                     <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                         What is your full name?
                     </label>
@@ -163,7 +163,7 @@ const DeedOfGuaranteeSection = ({ formManager, deedOfGuaranteeData, COMPANY_INFO
                     />
                 </div>
 
-                <div className="relative">
+                <div className="relative flex flex-col h-full justify-between">
                     <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                         Please enter your residential address here:
                     </label>
@@ -180,7 +180,7 @@ const DeedOfGuaranteeSection = ({ formManager, deedOfGuaranteeData, COMPANY_INFO
                     />
                 </div>
 
-                <div className="relative">
+                <div className="relative flex flex-col h-full justify-between">
                     <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                         Please upload any government photo ID unique to yourself, i.e. drivers license.
                     </label>

@@ -7,7 +7,7 @@ const TermsListItem = ({ item, isAnnexure = false }) => (
                 {item.number}
             </span>
         )}
-        <p className={`${item.wide ? "bullet-wide" : ""} block leading-[2em] pl-[47px] mb-[30px]`}>
+        <p className={`${item.wide ? "bullet-wide" : ""} block leading-[2em] pl-6 768px:pl-[47px] mb-[30px]`}>
             {item.text}
         </p>
     </li>

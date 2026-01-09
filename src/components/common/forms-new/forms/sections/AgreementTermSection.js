@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaCalendarAlt } from "react-icons/fa";
-import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/core/UniversalFormField';
 import IcaContractorClauses from '../IcaAgreementClauses';
 
 const SectionTitle = ({ children, Icon, position = 'center' }) =>
@@ -71,7 +71,7 @@ const AgreementTermSection = ({ formManager, agreementTermData }) => (
     <div className="space-y-6 border-b border-dark-border/30 pb-12">
         <SectionTitle Icon={FaCalendarAlt}>Agreement Term</SectionTitle>
 
-        <div className="relative">
+        <div className="relative flex flex-col h-full justify-between">
             <label className="text-primary-text text-[16px] font-medium inline-block mt-4 mb-2 w-full text-left px-1 768px:px-0">
                 This agreement will commence on the?
             </label>
@@ -99,7 +99,7 @@ const AgreementTermSection = ({ formManager, agreementTermData }) => (
             <h4 className="text-lg font-semibold text-gray-800">The Agreement</h4>
             <IcaContractorClauses data={agreementTermData} />
 
-            <div className="relative">
+            <div className="relative flex flex-col h-full justify-between">
                 <UniversalFormField
                     name="AcceptAgreement"
                     control={formManager.control}

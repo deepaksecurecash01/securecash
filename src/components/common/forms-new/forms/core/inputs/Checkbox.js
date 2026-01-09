@@ -41,13 +41,13 @@ const Checkbox = ({
         onFocus={handleFocus}
         onBlur={handleBlur}
         data-validate="CheckboxMulti"
-        className="text-sm p-2.5 shadow-none font-montserrat border-none w-[28px] h-[28px] opacity-0 absolute z-40 peer cursor-pointer"
+        className="text-sm p-2.5 shadow-none font-montserrat border-none min-w-[28px] h-[28px] opacity-0 absolute z-40 peer cursor-pointer"
       />
       <label
         className={getLabelClasses(theme)}
         htmlFor={value}
       >
-        <span className="w-[28px] h-[28px]"></span>
+        <span className="min-w-[28px] h-[28px]"></span>
         {label}
       </label>
     </div>

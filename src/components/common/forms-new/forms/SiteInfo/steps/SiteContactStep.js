@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaUser, FaUsers, FaPhone, FaEnvelope } from 'react-icons/fa';
-import UniversalFormField from '@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField';
+import UniversalFormField from '@/components/common/forms-new/forms/core/UniversalFormField';
 import { CONTACT_INFO_FIELDS } from '@/zod/SiteInfoFormSchema';
 
 const SiteContactStep = ({ formManager, theme = 'dark' }) =>

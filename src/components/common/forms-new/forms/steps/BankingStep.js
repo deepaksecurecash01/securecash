@@ -5,7 +5,7 @@ import
     FaMoneyBillAlt,
     FaUniversity,
 } from "react-icons/fa";
-import UniversalFormField from "@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField";
+import UniversalFormField from "@/components/common/forms-new/forms/core/UniversalFormField";
 
 
 const BankingStep = ({ formManager, theme = 'dark' }) =>

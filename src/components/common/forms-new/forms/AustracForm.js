@@ -13,7 +13,7 @@ import
     FaSpinner,
     FaCheckCircle,
 } from "react-icons/fa";
-import UniversalFormField from "@/components/common/forms-new/forms/SpecialEvents/core/UniversalFormField";
+import UniversalFormField from "@/components/common/forms-new/forms/core/UniversalFormField";
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate } from '@/utils/formHelpers';
 import AustracFormSchema, { AUSTRAC_DEFAULT_VALUES } from '@/zod/AustracFormSchema';
@@ -162,7 +162,7 @@ const AustracForm = ({ className, setOrganisation, setABN }) =>
                             />
 
                             {INPUT_FIELDS.map((field) => (
-                                <div key={field.name} className="relative">
+                                <div key={field.name} className="relative flex flex-col h-full justify-between">
                                     <UniversalFormField
                                         {...formManager.getFieldProps(field)}
                                         theme="dark"
