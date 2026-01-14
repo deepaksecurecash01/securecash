@@ -133,7 +133,7 @@ export const prepareFranchiseUserWelcomeEmail = (formData, readPdfFile) =>
     const attachmentConfigs = [
         {
             filename: "ACCC-Information-Statement.pdf",
-            displayName: "ACCC - 2023 Information Statement for Prospective Franchisees.pdf",
+            displayName: "ACCC - 2025 Information Statement for Prospective Franchisees.pdf",
         },
         {
             filename: "SecureCash-Franchise-Prospectus.pdf",

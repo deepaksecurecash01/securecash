@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import dynamic from 'next/dynamic';
+import { PopupModal } from "react-calendly";
 import
 {
     FaUser,
@@ -17,14 +17,6 @@ import UniversalFormField from "@/components/common/forms-new/forms/core/Univers
 import { useFormManager } from "@/hooks/useFormManager.js";
 import { formatSubmissionDate } from '@/utils/formHelpers';
 import FranchiseFormSchema, { FRANCHISE_DEFAULT_VALUES } from '@/zod/FranchiseFormSchema';
-
-const PopupModal = dynamic(
-    () => import('react-calendly').then(mod => mod.PopupModal),
-    {
-        ssr: false,
-        loading: () => null
-    }
-);
 
 const CALENDLY_URL = "https://calendly.com/jo_securecash?hide_gdpr_banner=1&primary_color=c7a652";
 
@@ -116,6 +108,13 @@ const FranchiseForm = ({ className }) =>
     const [isFormSubmitted, setIsFormSubmitted] = useState(false);
     const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
     const [submittedFormData, setSubmittedFormData] = useState(null);
+    const [rootElement, setRootElement] = useState(null);
+
+    // Set root element after component mounts to avoid SSR issues
+    useEffect(() =>
+    {
+        setRootElement(document.body);
+    }, []);
 
     const formManager = useFormManager({
         schema: FranchiseFormSchema,
@@ -256,7 +255,7 @@ const FranchiseForm = ({ className }) =>
                 </form>
             </div>
 
-            {submittedFormData && isCalendlyOpen && (
+            {submittedFormData && isCalendlyOpen && rootElement && (
                 <PopupModal
                     url={CALENDLY_URL}
                     prefill={{
@@ -268,7 +267,7 @@ const FranchiseForm = ({ className }) =>
                     }}
                     onModalClose={handleCalendlyClose}
                     open={isCalendlyOpen}
-                    rootElement={document.getElementById("root") || document.body}
+                    rootElement={rootElement}
                 />
             )}
         </div>
