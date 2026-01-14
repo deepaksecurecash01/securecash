@@ -4,7 +4,7 @@ import TeamSlider from "./TeamSlider";
 const teamMembers = [
   {
     name: "Darren Bacchus",
-    position: "Managing Director",
+    position: "Chief Executive Officer",
     email: "darren@securecash.com.au",
     image: "/images/team/darren.png",
     socialLinks: {

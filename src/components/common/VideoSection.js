@@ -25,7 +25,7 @@ const VideoSection = ({ service = false, height }) =>
             id="video-heading"
             className="text-[16px] mt-[4px] leading-[22px] w-[90%] text-black text-center relative z-[1] 768px:text-xl 992px:text-[16px] 768px:leading-[1.6rem] 768px:w-[80%] 992px:w-full mx-auto 992px:mt-3 font-normal font-montserrat"
           >
-            A couple words from our Chief Operating Officer - Bethaney Bacchus
+            A couple words from our Co-Owner - Bethaney Bacchus
           </p>
         </div>
       </div>

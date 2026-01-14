@@ -29,7 +29,7 @@ const BlogIndex = () =>
                                     />
                                 </div>
                             </Link>
-                            <h2 className="text-[22px] font-bold text-primary text-center 768px:text-left pb-5 font-montserrat">
+                            <h2 className="text-[22px] font-bold text-primary text-center 768px:text-left pb-5 font-montserrat hover:underline">
                                 <Link href={`/blog/${item.id}`} className="flex flex-wrap justify-center transition-all duration-200 ease-in">
                                     {item.title}
                                 </Link>

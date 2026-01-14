@@ -19,20 +19,38 @@ const AustracFormSchema = z.object({
 
     Website: z
         .string()
-        .min(1, "Website URL is required.")
-        .url("Please enter a valid website URL (including http:// or https://)")
-        .refine((url) => /^https?:\/\/.+/.test(url.toLowerCase()),
-            "Website URL must start with http:// or https://")
+        .optional()
+        .or(z.literal(""))
         .refine((url) =>
         {
+            // Allow empty strings
+            if (!url || url.trim() === "") return true;
+
+            // Check for valid URL format
+            try {
+                new URL(url);
+                return true;
+            } catch {
+                return false;
+            }
+        }, "Please enter a valid website URL (including http:// or https://)")
+        .refine((url) =>
+        {
+            // Allow empty strings
+            if (!url || url.trim() === "") return true;
+
+            // Must start with http:// or https://
+            return /^https?:\/\/.+/.test(url.toLowerCase());
+        }, "Website URL must start with http:// or https://")
+        .refine((url) =>
+        {
+            // Allow empty strings
+            if (!url || url.trim() === "") return true;
+
+            // Check for valid domain structure (more permissive)
             const domainRegex = /^https?:\/\/([a-zA-Z0-9-]+\.)+[a-zA-Z]{2,}(\/.*)?$/;
             return domainRegex.test(url);
-        }, "Please enter a valid website URL with proper domain.")
-        .refine((url) =>
-        {
-            const validTlds = ['.com.au', '.org.au', '.net.au', '.gov.au', '.edu.au', '.com', '.org', '.net', '.biz', '.info'];
-            return validTlds.some(tld => url.toLowerCase().includes(tld));
-        }, "Please enter a valid business website URL."),
+        }, "Please enter a valid website URL with proper domain."),
 
     OrganisationEmail: CommonValidations.businessEmail("Organisation email"),
 
