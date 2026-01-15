@@ -36,21 +36,21 @@ const CardsSection = () =>
   const services = [
     {
       imgSrc: "/images/icons/cash-collections.png",
-      link: "/services/cash-collection/",
+      link: "/cash-collection/",
       title: "Cash Collection",
       description:
         "Our cash collection service is straight forward and simple to use; but first of all, when we refer to the term 'cash collection' we simply mean we come to your business pick up your money, both cash & cheques and take it to the bank on your behalf!",
     },
     {
       imgSrc: "/images/icons/cash-delivery.png",
-      link: "/services/cash-delivery/",
+      link: "/cash-delivery/",
       title: "Cash Delivery",
       description:
         "Another one of our popular cash in transit service that we provide is our cash delivery service. We deliver the amount of cash you require broken down into different denominations as requested, delivered direct to your organization.",
     },
     {
       imgSrc: "/images/icons/cash-counting.png",
-      link: "/services/cash-counting/",
+      link: "/cash-counting/",
       title: "Cash Counting",
       description:
         "Our cash counting is one of the most valued and time saving services that we have to offer. Essentially the same as our cash collection service, but the difference is that the cash collected will be taken back to our depot where it will be sorted and counted.",

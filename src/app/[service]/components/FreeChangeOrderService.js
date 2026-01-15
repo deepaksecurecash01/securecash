@@ -23,7 +23,7 @@ const FreeChangeOrderService = () =>
                             <strong>
                                 <Link
                                     className="text-primary hover:underline"
-                                    href="/services/cash-delivery"
+                                    href="/cash-delivery"
                                 >
                                     change order service
                                 </Link>
@@ -33,7 +33,7 @@ const FreeChangeOrderService = () =>
                             <strong>
                                 <Link
                                     className="text-primary hover:underline"
-                                    href="/services/cash-in-transit"
+                                    href="/cash-in-transit"
                                 >
                                     cash-in-transit service
                                 </Link>

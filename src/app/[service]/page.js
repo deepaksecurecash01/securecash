@@ -1,12 +1,13 @@
 import BottomBanner from "@/components/common/BottomBanner";
-import SectionWrapper from "../components/SectionWrapper";
-import HeroImage from "../components/HeroImage";
+import SectionWrapper from "./components/SectionWrapper";
+import HeroImage from "./components/HeroImage";
 import { servicesData } from "@/data/servicesData";
 import VideoSection from "@/components/common/VideoSection";
-import ScrollSectionWithImage from "../components/ScrollSectionWithImage";
-import GuaranteeSection from "../components/GuaranteeSection";
+import ScrollSectionWithImage from "./components/ScrollSectionWithImage";
+import GuaranteeSection from "./components/GuaranteeSection";
 import { notFound } from "next/navigation";
-import FreeChangeOrderService from "../components/FreeChangeOrderService";
+import FreeChangeOrderService from "./components/FreeChangeOrderService";
+
 
 export const dynamicParams = false;
 export const dynamic = 'force-static';
@@ -59,7 +60,7 @@ export async function generateStaticParams()
 export async function generateMetadata({ params })
 {
   const { service } = await params;
-  const canonicalPath = `/services/${service}`;
+  const canonicalPath = `/${service}`;
   const absoluteUrl = `https://www.securecash.com.au${canonicalPath}`;
 
   if (service === "free-change-order-service") {
@@ -111,12 +112,6 @@ export async function generateMetadata({ params })
         {
           "@type": "ListItem",
           "position": 2,
-          "name": "Services",
-          "item": "https://www.securecash.com.au/services"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
           "name": metaTitle,
           "item": absoluteUrl
         }

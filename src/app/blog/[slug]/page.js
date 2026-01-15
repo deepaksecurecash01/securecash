@@ -96,6 +96,14 @@ export default async function BlogPost({ params })
 
   if (!blog) notFound();
 
+  // Generate the absolute URL for this blog post
+  const absoluteUrl = `https://www.securecash.com.au/blog/${slug}`;
+
+  // Generate social sharing URLs dynamically
+  const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(absoluteUrl)}&text=${encodeURIComponent(blog.title)}`;
+  const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(absoluteUrl)}`;
+  const linkedinShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(absoluteUrl)}`;
+
   return (
     <>
       <BlogHeroSection title={blog.title} date={blog.date} />
@@ -108,8 +116,8 @@ export default async function BlogPost({ params })
                 <li className="mb-[26px]">
                   <a
                     target="_blank"
-                    href={blog.socialLinks.twitter}
-                    rel="noopener"
+                    href={twitterShareUrl}
+                    rel="noopener noreferrer"
                     className="group bg-[#f2f2f2] rounded-full h-[36px] w-[36px] flex justify-center items-center transition-all duration-150 ease-in hover:bg-black hover:text-white hover:no-underline"
                     aria-label="Share on Twitter"
                   >
@@ -119,8 +127,8 @@ export default async function BlogPost({ params })
                 <li className="mb-[26px]">
                   <a
                     target="_blank"
-                    href={blog.socialLinks.facebook}
-                    rel="noopener"
+                    href={facebookShareUrl}
+                    rel="noopener noreferrer"
                     className="group bg-[#f2f2f2] rounded-full h-[36px] w-[36px] flex justify-center items-center transition-all duration-150 ease-in hover:bg-black hover:text-white hover:no-underline"
                     aria-label="Share on Facebook"
                   >
@@ -130,8 +138,8 @@ export default async function BlogPost({ params })
                 <li className="mb-[26px]">
                   <a
                     target="_blank"
-                    href={blog.socialLinks.linkedin}
-                    rel="noopener"
+                    href={linkedinShareUrl}
+                    rel="noopener noreferrer"
                     className="group bg-[#f2f2f2] rounded-full h-[36px] w-[36px] flex justify-center items-center transition-all duration-150 ease-in hover:bg-black hover:text-white hover:no-underline"
                     aria-label="Share on LinkedIn"
                   >

@@ -85,7 +85,7 @@ export default function sitemap()
     ];
 
     const servicePages = services.map((service) => ({
-        url: `${baseUrl}/services/${service}`,
+        url: `${baseUrl}/${service}`,
         lastModified: currentDate,
         changeFrequency: 'monthly',
         priority: 0.8,
@@ -93,7 +93,7 @@ export default function sitemap()
 
     const specialServices = [
         {
-            url: `${baseUrl}/services/free-change-order-service`,
+            url: `${baseUrl}/free-change-order-service`,
             lastModified: currentDate,
             changeFrequency: 'monthly',
             priority: 0.7,

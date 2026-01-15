@@ -28,6 +28,9 @@ export const metadata = {
     description: "Become Your Own Boss by joining the established SecureCash network as a Franchise Owner! We are excited to offer Franchise Opportunities for sale across Australia and New Zealand.",
     images: ['https://www.securecash.com.au/images/3-australia-securecash-services-featured.jpg'],
   },
+  other: {
+    'Content-Security-Policy': "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://assets.calendly.com https://calendly.com https://m.stripe.network https://m.stripe.com;",
+  },
 };
 
 const FranchisePage = () =>

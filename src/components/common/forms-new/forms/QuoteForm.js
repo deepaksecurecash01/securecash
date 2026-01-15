@@ -143,7 +143,7 @@ const SuccessMessage = ({ userName, onReset }) => (
               aria-hidden="true"
             />
             <Link
-              href="/services/cash-collection/"
+              href="/cash-collection/"
               className="text-[#c6a54b] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]"
             >
               Cash Collections
@@ -157,7 +157,7 @@ const SuccessMessage = ({ userName, onReset }) => (
               aria-hidden="true"
             />
             <Link
-              href="/services/cash-delivery/"
+              href="/cash-delivery/"
               className="text-[#c6a54b] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]"
             >
               Cash Deliveries
@@ -171,7 +171,7 @@ const SuccessMessage = ({ userName, onReset }) => (
               aria-hidden="true"
             />
             <Link
-              href="/services/cash-counting/"
+              href="/cash-counting/"
               className="text-[#c6a54b] hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-[#1a1a1a]"
             >
               Cash Counting

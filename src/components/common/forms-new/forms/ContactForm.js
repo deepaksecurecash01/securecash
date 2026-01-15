@@ -83,7 +83,7 @@ const SuccessMessage = ({ userName, onReset }) => (
                                 className="inline-block mr-2 w-[30px]"
                                 aria-hidden="true"
                             />
-                            <Link href="/services/cash-collection/" className="text-[#c6a54b] hover:underline">
+                            <Link href="/cash-collection/" className="text-[#c6a54b] hover:underline">
                                 Cash Collections
                             </Link>
                         </li>
@@ -94,7 +94,7 @@ const SuccessMessage = ({ userName, onReset }) => (
                                 className="inline-block mr-2 w-[30px]"
                                 aria-hidden="true"
                             />
-                            <Link href="/services/cash-delivery/" className="text-[#c6a54b] hover:underline">
+                            <Link href="/cash-delivery/" className="text-[#c6a54b] hover:underline">
                                 Cash Deliveries
                             </Link>
                         </li>
@@ -105,7 +105,7 @@ const SuccessMessage = ({ userName, onReset }) => (
                                 className="inline-block mr-2 w-[30px]"
                                 aria-hidden="true"
                             />
-                            <Link href="/services/cash-counting/" className="text-[#c6a54b] hover:underline">
+                            <Link href="/cash-counting/" className="text-[#c6a54b] hover:underline">
                                 Cash Counting
                             </Link>
                         </li>

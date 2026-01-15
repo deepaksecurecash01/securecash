@@ -8,7 +8,7 @@ const links = [
     columns: [
       [
         { href: "/", text: "Home" },
-        { href: "/services/cash-in-transit", text: "Services" },
+        { href: "/cash-in-transit", text: "Services" },
         { href: "/quote", text: "Get a Quote" },
         { href: "/contact", text: "Contact Us" },
       ],

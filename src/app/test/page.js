@@ -106,7 +106,7 @@ const mainPages = [
   { slug: "special-event", label: "Special Event" },
   { slug: "terms", label: "Terms" },
   { slug: "welcome", label: "Welcome" },
-  { slug: "services/free-change-order-service", label: "Free Change Order Service" },
+  { slug: "free-change-order-service", label: "Free Change Order Service" },
   { slug: "privacy-policy", label: "Privacy Policy" },
   { slug: "induction", label: "induction"}
 ];
@@ -169,7 +169,7 @@ const Page = () =>
             <li key={index} className="flex flex-wrap items-center gap-4">
               <span>{index + 1}. {slug}</span>
               <Link
-                href={`/services/${slug}`}
+                href={`/${slug}`}
                 target='_blank'
                 className="bg-blue-600 px-3 py-1 rounded hover:bg-blue-700"
               >
