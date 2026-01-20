@@ -1,3 +1,4 @@
+//securecash site next.config.js file - Fully optimized for performance and security
 /** @type {import('next').NextConfig} */
 
 const nextConfig = {
