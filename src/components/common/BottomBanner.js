@@ -11,7 +11,7 @@ const BottomBanner = () =>
       >
         <div className="absolute inset-0 w-full h-full">
           <Image
-            src="/images/banner/Web-corporate.webp"
+            src="/images/banner/Banner.webp"
             alt="SecureCash Team - Let us do the banking for you"
             fill
             loading="lazy"
