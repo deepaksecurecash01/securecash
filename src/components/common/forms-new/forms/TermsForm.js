@@ -116,7 +116,7 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) => {
     formType: "terms",
     formId: "Terms",
     onSuccess: () => {
-      // router.push("/austrac");
+      router.push("/austrac");
     },
     prepareData: async (data) => {
       // 1. Construct the final object
@@ -133,18 +133,18 @@ const TermsForm = ({ setName, setPosition, setOrganisation, setAbn }) => {
         "Agreement Commencement": `**THIS AGREEMENT COMMENCES ON THE:** ${formatAgreementDate()} and will be ongoing unless either party terminates this Agreement in accordance with the termination provisions herein ("Expiry").`,
       };
 
-      // 2. Log it to console (Success Payload)
-      console.log("✅ Form Submission Success Payload:", finalData);
+    //   // 2. Log it to console (Success Payload)
+    //   console.log("✅ Form Submission Success Payload:", finalData);
 
-      // 3. Explicitly log the signature to verify it was captured
-      if (finalData.Signature) {
-        console.log(
-          "✏️ Signature Data (Base64):",
-          finalData.Signature.substring(0, 50) + "...",
-        );
-      } else {
-        console.warn("⚠️ No Signature found in payload!");
-      }
+    //   // 3. Explicitly log the signature to verify it was captured
+    //   if (finalData.Signature) {
+    //     console.log(
+    //       "✏️ Signature Data (Base64):",
+    //       finalData.Signature.substring(0, 50) + "...",
+    //     );
+    //   } else {
+    //     console.warn("⚠️ No Signature found in payload!");
+    //   }
 
       return finalData;
     },
