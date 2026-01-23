@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-01-23T05:24:24.048Z",
+  "formType": "terms",
+  "error": "Provide at least one of to, cc or bcc",
+  "emailData": {
+    "hasAttachments": false,
+    "attachmentCount": 0
+  },
+  "retryable": true
+}

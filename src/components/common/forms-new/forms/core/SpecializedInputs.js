@@ -1,18 +1,19 @@
-import { TextInput } from './inputs/TextInput';
-import { ABNInput } from './inputs/ABNInput';
-import { DateInput } from './inputs/DateInput';
-import { SelectInput } from './inputs/SelectInput';
-import { TextareaInput } from './inputs/TextareaInput';
-import { CheckboxGroupInput } from './inputs/CheckboxGroupInput';
-import { FileUploadInput } from './inputs/FileUploadInput';
+import { ABNInput } from "./inputs/ABNInput";
+import { CheckboxGroupInput } from "./inputs/CheckboxGroupInput";
+import { DateInput } from "./inputs/DateInput";
+import { FileUploadInput } from "./inputs/FileUploadInput";
+import { SelectInput } from "./inputs/SelectInput";
+import { SignatureInput } from "./inputs/SignatureInput";
+import { TextareaInput } from "./inputs/TextareaInput";
+import { TextInput } from "./inputs/TextInput";
 
-export
-{
-    TextInput,
-    ABNInput,
-    DateInput,
-    SelectInput,
-    TextareaInput,
-    CheckboxGroupInput,
-    FileUploadInput
+export {
+  ABNInput,
+  CheckboxGroupInput,
+  DateInput,
+  FileUploadInput,
+  SelectInput,
+  SignatureInput,
+  TextareaInput,
+  TextInput,
 };

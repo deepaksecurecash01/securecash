@@ -61,73 +61,79 @@ const UniversalFormField = ({
     }
 
     return (
-        <div className="relative">
-            {label && themeConfig.label && !hidden && (
-                <label className={themeConfig.label}>
-                    {label}
-                </label>
-            )}
+      <div className="relative">
+        {label && themeConfig.label && !hidden && (
+          <label className={themeConfig.label}>{label}</label>
+        )}
 
-            <Controller
-                name={name}
-                control={control}
-                render={({ field, fieldState }) => (
-                    <FieldRenderer
-                        type={type}
-                        field={field}
-                        fieldState={fieldState}
-                        currentFocusField={currentFocusField}
-                        onFieldFocus={onFieldFocus}
-                        onFieldBlur={onFieldBlur}
-                        placeholder={placeholder}
-                        Icon={Icon}
-                        Icon2={Icon2}
-                        hidden={hidden}
-                        theme={theme}
-                        options={options}
-                        rows={rows}
-                        maxLength={maxLength}
-                        dayPlaceholder={dayPlaceholder}
-                        monthPlaceholder={monthPlaceholder}
-                        yearPlaceholder={yearPlaceholder}
-                        format={format}
-                        disabled={disabled}
-                        required={required}
-                        autoComplete={autoComplete}
-                        variant={variant}
-                        accept={accept}
-                        multiple={multiple}
-                        fileUploadState={fileUploadState}
-                        label={label}
-                        footnote={footnote}
-                        {...otherProps}
-                    />
-                )}
+        <Controller
+          name={name}
+          control={control}
+          render={({ field, fieldState }) => (
+            <FieldRenderer
+              type={type}
+              field={field}
+              fieldState={fieldState}
+              currentFocusField={currentFocusField}
+              onFieldFocus={onFieldFocus}
+              onFieldBlur={onFieldBlur}
+              placeholder={placeholder}
+              Icon={Icon}
+              Icon2={Icon2}
+              hidden={hidden}
+              theme={theme}
+              options={options}
+              rows={rows}
+              maxLength={maxLength}
+              dayPlaceholder={dayPlaceholder}
+              monthPlaceholder={monthPlaceholder}
+              yearPlaceholder={yearPlaceholder}
+              format={format}
+              disabled={disabled}
+              required={required}
+              autoComplete={autoComplete}
+              variant={variant}
+              accept={accept}
+              multiple={multiple}
+              fileUploadState={fileUploadState}
+              label={label}
+              footnote={footnote}
+              {...otherProps}
             />
+          )}
+        />
 
-            <Controller
-                name={name}
-                control={control}
-                render={({ fieldState }) => (
-                    fieldState?.error && currentFocusField === name && (
-                        <WarningPopup
-                            error={fieldState.error.message}
-                            isFirstError={true}
-                            type={type}
-                            className={
-                                theme === 'legacy-hazard' ? "top-16" :
-                                    // FIX: Push error down 210px for file inputs to clear the 200px box
-                                    theme === 'ica' && type === 'file' ? "top-[210px]" :
-                                        theme === 'ica' ? "top-12" :
-                                            theme === 'light' && type === 'textarea' ? "top-[150px]" :
-                                                theme === 'dark' && type === 'textarea' ? "top-[236px]" :
-                                                    undefined
-                            }
-                        />
-                    )
-                )}
-            />
-        </div>
+        <Controller
+          name={name}
+          control={control}
+          render={({ fieldState }) =>
+            fieldState?.error &&
+            currentFocusField === name && (
+              <WarningPopup
+                error={fieldState.error.message}
+                isFirstError={true}
+                type={type}
+                className={
+                  theme === "legacy-hazard"
+                    ? "top-16"
+                    : theme === "ica" && type === "file"
+                      ? "top-[210px]"
+                      : theme === "ica"
+                        ? "top-12"
+                        : theme === "light" && type === "textarea"
+                          ? "top-[150px]"
+                          : theme === "dark" && type === "textarea"
+                            ? "top-[236px]"
+                            : 
+                              theme === "dark" && type === "signature"
+                              ? "top-[250px]"
+                              : undefined
+                }
+              />
+            )
+          }
+        />
+      </div>
     );
 };
 

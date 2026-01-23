@@ -14,6 +14,7 @@ import siteInfoAdminNotificationEmailTemplate from "../templates/siteInfoAdminNo
 import siteInfoUserConfirmationEmailTemplate from "../templates/siteInfoUserConfirmationEmailTemplate.js";
 import termsAgreementEmailTemplate from "../templates/termsAgreementEmailTemplate.js";
 import inductionEmailTemplate from "../templates/inductionEmailTemplate.js";
+import { generateExecutedAgreement } from "./pdfService.js";
 
 const preparePdfAttachmentsWithCache = ({ attachments, attachmentConfigs, readPdfFile }) =>
 {
@@ -344,21 +345,48 @@ export const prepareSiteInfoUserConfirmationEmail = (formData, readPdfFile) =>
     };
 };
 
-export const prepareTermsAgreementEmail = (formData, readPdfFile) =>
-{
-    const pdfFilename = "Terms & Conditions.pdf";
-    const pdfContent = readPdfFile(pdfFilename);
-    const agreementCommencementDate = getCurrentDateTime();
 
+export const prepareTermsAgreementEmail = async (formData, readPdfFile) =>
+{
+    const agreementCommencementDate = getCurrentDateTime();
+    
+    // Generate the executed agreement PDF dynamically
+    const pdfBase64 = await generateExecutedAgreement(formData);
+    
     const attachments = [];
-    if (pdfContent) {
+    
+    if (pdfBase64) {
+        // Create filename with organization and person name
+        const orgName = (formData["Organisation Name"] || "Unknown")
+            .replace(/[^a-z0-9]/gi, '_')  // Replace special chars with underscore
+            .replace(/_+/g, '_')            // Replace multiple underscores with single
+            .substring(0, 30);              // Limit length
+        
+        const personName = (formData["Full Name"] || "Unknown")
+            .replace(/[^a-z0-9]/gi, '_')
+            .replace(/_+/g, '_')
+            .substring(0, 20);
+        
         attachments.push({
-            filename: "Terms & Conditions.pdf",
+            filename: `SecureCash T's & C's - ${orgName} - ${personName} - 2026.pdf`,
             type: "application/pdf",
             disposition: "attachment",
-            content_id: "terms_conditions",
-            content: pdfContent
+            content_id: "executed_agreement",
+            content: pdfBase64
         });
+    } else {
+        console.error("Failed to generate executed agreement PDF");
+        // Fallback to static PDF if generation fails
+        const staticPdfContent = readPdfFile("Terms & Conditions.pdf");
+        if (staticPdfContent) {
+            attachments.push({
+                filename: "Terms & Conditions.pdf",
+                type: "application/pdf",
+                disposition: "attachment",
+                content_id: "terms_conditions",
+                content: staticPdfContent
+            });
+        }
     }
 
     const htmlContent = termsAgreementEmailTemplate(formData, agreementCommencementDate);
@@ -368,7 +396,7 @@ export const prepareTermsAgreementEmail = (formData, readPdfFile) =>
         from: "SecureCash Sign Up <sign-up@securecash.com.au>",
         subject: `Terms & Conditions - ${formData["Full Name"]}, ${formData["Organisation Name"]}`,
         text: "Please enable HTML emails in your email client to view the contents of this email.",
-        html: htmlContent,
+        html: htmlContent, 
         attachments: attachments
     };
 };

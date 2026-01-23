@@ -29,7 +29,7 @@ export const FORM_VALIDATION_RULES = {
     quote: ['Name', 'Email', 'Organisation'],
     siteinfo: ['BusinessName', 'Email', 'Contact'],
     specialevent: ['BusinessName', 'Email', 'Contact'],
-    terms: ['FullName', 'Email', 'Organisation Name'],
+    terms: ['Name', 'Email', 'Organisation Name'],
     austrac: ['Organisation', 'OrganisationEmail'],
     induction: ['Name', 'Email', 'Phone', 'Address', 'State', 'ContractorName', 'EdocketUsername'],
 };
