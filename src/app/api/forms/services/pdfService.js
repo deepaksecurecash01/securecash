@@ -1,24 +1,17 @@
 import { PDFDocument, rgb } from "pdf-lib";
 import fontkit from "@pdf-lib/fontkit";
-import fs from "fs";
-import path from "path";
 
-/**
- * Fetches font from Google Fonts
- * @param {string} weight - Font weight (300, 400, 700)
- * @returns {Promise<ArrayBuffer>} - Font buffer
- */
-const fetchGoogleFont = async (weight) => {
-  const fontUrls = {
-    300: "https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Ew-.ttf",
-    400: "https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw-.ttf",
-    700: "https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM70w-.ttf",
-  };
+// Helper to fetch assets over the network instead of using 'fs'
+const fetchAsset = async (path) => {
+  // Determine the correct base URL
+  const baseUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}`
+    : "http://localhost:3000";
 
-  const response = await fetch(fontUrls[weight]);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch font weight ${weight}`);
-  }
+  // Fetch the file as a buffer
+  const response = await fetch(`${baseUrl}/${path}`);
+  if (!response.ok)
+    throw new Error(`Failed to load ${path}: ${response.statusText}`);
   return await response.arrayBuffer();
 };
 
@@ -29,51 +22,38 @@ const fetchGoogleFont = async (weight) => {
  */
 export const generateExecutedAgreement = async (formData) => {
   try {
-    // 1. SETUP PATHS
-    const publicDir = path.join(process.cwd(), "public");
-    const pdfPath = path.join(
-      publicDir,
-      "upload",
-      "SecureCash_Terms_Dynamic.pdf",
-    );
-
-    if (!fs.existsSync(pdfPath)) {
-      throw new Error(`PDF Template not found at: ${pdfPath}`);
-    }
-
-    const pdfBuffer = fs.readFileSync(pdfPath);
+    // 1. SETUP & LOAD TEMPLATE (Using Fetch)
+    // Was: fs.readFileSync(path.join(..., 'upload', 'SecureCash_Terms_Dynamic.pdf'))
+    const pdfBuffer = await fetchAsset("upload/SecureCash_Terms_Dynamic.pdf");
     const pdfDoc = await PDFDocument.load(pdfBuffer);
     pdfDoc.registerFontkit(fontkit);
 
-    // 2. FETCH & EMBED GOOGLE FONTS
-    let regularFont, boldFont, lightFont;
+    // 2. EMBED FONTS (Using Fetch)
+    let regularFont, boldFont;
     try {
-      console.log("Fetching fonts from Google Fonts...");
-
-      const [lightBuffer, regularBuffer, boldBuffer] = await Promise.all([
-        fetchGoogleFont(300), // Light
-        fetchGoogleFont(400), // Regular
-        fetchGoogleFont(700), // Bold
+      // Fetch fonts concurrently for speed
+      const [regularBytes, boldBytes] = await Promise.all([
+        fetchAsset("fonts/montserrat/Montserrat-Regular.ttf"),
+        fetchAsset("fonts/montserrat/Montserrat-Bold.ttf"),
       ]);
 
-      lightFont = await pdfDoc.embedFont(lightBuffer);
-      regularFont = await pdfDoc.embedFont(regularBuffer);
-      boldFont = await pdfDoc.embedFont(boldBuffer);
+      regularFont = await pdfDoc.embedFont(regularBytes);
+      boldFont = await pdfDoc.embedFont(boldBytes);
 
-      console.log("Google Fonts loaded successfully");
+      // Load light font if needed (optional)
+      // const lightBytes = await fetchAsset("fonts/montserrat/Montserrat-Light.ttf");
     } catch (e) {
       console.warn(
-        "Failed to load Google Fonts, falling back to Helvetica:",
+        "Custom fonts missing or failed to load, falling back to Helvetica",
         e,
       );
       const { StandardFonts } = await import("pdf-lib");
       regularFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
       boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
-      lightFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
     }
 
     // =========================================================
-    // HELPER: Form Row Drawer
+    // HELPER: Form Row Drawer (Logic remains exactly the same)
     // =========================================================
     const drawFormRow = (page, { label, value, x, y, width = 200 }) => {
       const fontSize = 12;
@@ -132,7 +112,6 @@ export const generateExecutedAgreement = async (formData) => {
     // STEP 2: PAGE 11 - EXECUTION FORM
     // ==========================================
     const page11 = pdfDoc.getPages()[10];
-
     const startY = 580;
     const col1X = 38;
     const col2X = 320;
@@ -249,11 +228,11 @@ export const generateExecutedAgreement = async (formData) => {
       });
     }
 
-    // Date & Time - Simple parsing
+    // Date & Time
     const dateTimeStr = formData["Date of Acceptance"] || "";
     const parts = dateTimeStr.split(",");
-    const dateValue = parts[0]?.trim() || ""; // "23/01/2026"
-    const timeValue = parts[1]?.trim() || ""; // "8:26:36 AM"
+    const dateValue = parts[0]?.trim() || "";
+    const timeValue = parts[1]?.trim() || "";
 
     drawFormRow(page11, {
       label: "Date:",
@@ -275,6 +254,6 @@ export const generateExecutedAgreement = async (formData) => {
     return await pdfDoc.saveAsBase64();
   } catch (error) {
     console.error("PDF Generation Error:", error);
-    return null; // Return null on failure so email service can handle it
+    return null;
   }
 };
