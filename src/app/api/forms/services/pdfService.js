@@ -4,6 +4,25 @@ import fs from "fs";
 import path from "path";
 
 /**
+ * Fetches font from Google Fonts
+ * @param {string} weight - Font weight (300, 400, 700)
+ * @returns {Promise<ArrayBuffer>} - Font buffer
+ */
+const fetchGoogleFont = async (weight) => {
+  const fontUrls = {
+    300: "https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Ew-.ttf",
+    400: "https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCtr6Hw-.ttf",
+    700: "https://fonts.gstatic.com/s/montserrat/v26/JTUHjIg1_i6t8kCHKm4532VJOt5-QNFgpCuM70w-.ttf",
+  };
+
+  const response = await fetch(fontUrls[weight]);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch font weight ${weight}`);
+  }
+  return await response.arrayBuffer();
+};
+
+/**
  * Generates the Executed Agreement PDF
  * @param {Object} formData - The form data including signature
  * @returns {Promise<string>} - The base64 PDF string
@@ -18,11 +37,6 @@ export const generateExecutedAgreement = async (formData) => {
       "SecureCash_Terms_Dynamic.pdf",
     );
 
-    const fontBase = path.join(publicDir, "fonts", "montserrat");
-    const regularFontPath = path.join(fontBase, "Montserrat-Regular.ttf");
-    const boldFontPath = path.join(fontBase, "Montserrat-Bold.ttf");
-    const lightFontPath = path.join(fontBase, "Montserrat-Light.ttf");
-
     if (!fs.existsSync(pdfPath)) {
       throw new Error(`PDF Template not found at: ${pdfPath}`);
     }
@@ -31,18 +45,27 @@ export const generateExecutedAgreement = async (formData) => {
     const pdfDoc = await PDFDocument.load(pdfBuffer);
     pdfDoc.registerFontkit(fontkit);
 
-    // 2. EMBED FONTS
+    // 2. FETCH & EMBED GOOGLE FONTS
     let regularFont, boldFont, lightFont;
     try {
-      regularFont = await pdfDoc.embedFont(fs.readFileSync(regularFontPath));
-      boldFont = await pdfDoc.embedFont(fs.readFileSync(boldFontPath));
-      if (fs.existsSync(lightFontPath)) {
-        lightFont = await pdfDoc.embedFont(fs.readFileSync(lightFontPath));
-      } else {
-        lightFont = regularFont;
-      }
+      console.log("Fetching fonts from Google Fonts...");
+
+      const [lightBuffer, regularBuffer, boldBuffer] = await Promise.all([
+        fetchGoogleFont(300), // Light
+        fetchGoogleFont(400), // Regular
+        fetchGoogleFont(700), // Bold
+      ]);
+
+      lightFont = await pdfDoc.embedFont(lightBuffer);
+      regularFont = await pdfDoc.embedFont(regularBuffer);
+      boldFont = await pdfDoc.embedFont(boldBuffer);
+
+      console.log("Google Fonts loaded successfully");
     } catch (e) {
-      console.warn("Custom fonts missing, falling back to Helvetica");
+      console.warn(
+        "Failed to load Google Fonts, falling back to Helvetica:",
+        e,
+      );
       const { StandardFonts } = await import("pdf-lib");
       regularFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
       boldFont = await pdfDoc.embedFont(StandardFonts.HelveticaBold);
@@ -226,7 +249,7 @@ export const generateExecutedAgreement = async (formData) => {
       });
     }
 
-    // ✅ UPDATED: Date & Time - Simple parsing
+    // Date & Time - Simple parsing
     const dateTimeStr = formData["Date of Acceptance"] || "";
     const parts = dateTimeStr.split(",");
     const dateValue = parts[0]?.trim() || ""; // "23/01/2026"
