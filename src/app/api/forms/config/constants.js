@@ -19,7 +19,6 @@ export const PDF_FILES_TO_CACHE = [
     "SecureCash Deed - Courier Lab.pdf",
     "SecureCash-Online-Services-Flyer.pdf",
     "How-to-Prepare-Your-Banking.pdf",
-    "Terms & Conditions.pdf"
 ];
 
 export const FORM_VALIDATION_RULES = {

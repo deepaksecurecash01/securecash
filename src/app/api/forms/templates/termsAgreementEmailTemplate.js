@@ -134,7 +134,7 @@ const termsAgreementEmailTemplate = (formData, agreementCommencementDate) =>
                       <p><strong>AND</strong></p>
                       <p>${formData["Full Name"]} (${formData["Organisation Role"]}) of ${formData["Organisation Name"]} ABN ${formData["Organisation ABN"]} (hereinafter referred to as "the Customer", together with the Principal and the Customer are referred to as "the Parties")</p>
                       <p><strong>THIS AGREEMENT COMMENCES ON THE:</strong> ${agreementCommencementDate} and will be ongoing unless either party terminates this Agreement in accordance with the termination provisions herein ("Expiry").</p>
-                      <p>Please see attached for a copy of the Service Agreement Clauses.</p>
+                      <p>Please see the attached <strong>SecureCash T's & C's Agreement</strong> PDF which includes your signature and all submitted details.</p>
                     </td>
                   </tr>
                   <tr>
