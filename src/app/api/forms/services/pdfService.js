@@ -96,7 +96,7 @@ export const generateExecutedAgreement = async (formData) => {
     // STEP 1: PAGE 2 - DYNAMIC PARAGRAPH
     // ==========================================
     const page2 = pdfDoc.getPages()[1];
-    const dynamicText = `${formData["Full Name"]} (${formData["Organisation Role"]}) of ${formData["Organisation Name"]} ABN ${formData["Organisation ABN"]} (hereinafter referred to as "the Customer", together with the Principal and the Customer are referred to as "the Parties")`;
+    const dynamicText = `${formData["Full Name"]} (${formData["Organisation Role"]}) of ${formData["Organisation Name"]} ABN ${formData["Organisation ABN"]} (Customer) together with the Principal and the Customer are referred to as "the Parties")`;
 
     page2.drawText(dynamicText, {
       x: 38,

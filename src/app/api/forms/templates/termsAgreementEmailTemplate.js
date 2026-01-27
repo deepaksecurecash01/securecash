@@ -128,12 +128,33 @@ const termsAgreementEmailTemplate = (formData, agreementCommencementDate) =>
                           <td colspan="2" style="height:2px;"></td>
                         </tr>
                       </table>
-                      <h2 style="font-size:20px;font-weight:bold;">Service Agreement</h2>
-                      <p><strong>THE PARTIES TO THIS AGREEMENT ARE:</strong></p>
-                      <p>Sky Wallet Pty Ltd ABN 39 668 299 027 of 30 Church Hill Road, Old Noarlunga, SA, 5168 its assigns, related entities, licensees or agents. (hereinafter referred to as "the Principal")</p>
-                      <p><strong>AND</strong></p>
-                      <p>${formData["Full Name"]} (${formData["Organisation Role"]}) of ${formData["Organisation Name"]} ABN ${formData["Organisation ABN"]} (hereinafter referred to as "the Customer", together with the Principal and the Customer are referred to as "the Parties")</p>
-                      <p><strong>THIS AGREEMENT COMMENCES ON THE:</strong> ${agreementCommencementDate} and will be ongoing unless either party terminates this Agreement in accordance with the termination provisions herein ("Expiry").</p>
+                         <h2 style="font-size:20px;font-weight:bold;margin-bottom:20px;">Service Agreement</h2>
+                      
+                      <h3 style="font-size:16px;font-weight:bold;text-transform:uppercase;margin-bottom:10px;">PARTIES</h3>
+                      
+                      <p style="margin-bottom:5px;font-weight:bold;font-size:16px;">Principal</p>
+                      <p style="margin-top:0;margin-bottom:20px;">
+                        Sky Wallet Pty Ltd<br />
+                        ABN 39 668 299 027<br />
+                        30 Church Hill Road, Old Noarlunga SA 5168<br />
+                        Trading under licence as <strong>SecureCash</strong><br />
+                        (including its permitted contractors, franchisees, agents and assigns)
+                        (<strong>Principal</strong>)
+                      </p>
+                      
+                      <p style="margin-bottom:5px;font-weight:bold;font-size:16px;">Customer</p>
+                      <p style="margin-top:0;margin-bottom:20px;">
+                        ${formData["Full Name"]} (${formData["Organisation Role"]}) of ${formData["Organisation Name"]} ABN ${formData["Organisation ABN"]} (<strong>Customer</strong>) together with the Principal and the Customer are referred to as "the Parties")
+                      </p>
+                      
+                      <h3 style="font-size:16px;font-weight:bold;text-transform:uppercase;margin-bottom:10px;">COMMENCEMENT AND TERM</h3>
+                      <p style="margin-top:0;margin-bottom:10px;">
+                        This Agreement commences on the date the Customer accepts these Terms and continues until terminated in accordance with this Agreement.
+                      </p>
+                      <p style="margin-top:0;margin-bottom:20px;">
+                        Acceptance may occur by written signature, electronic acceptance, or continued use of the Services.
+                      </p>
+
                       <p>Please see the attached <strong>SecureCash T's & C's Agreement</strong> PDF which includes your signature and all submitted details.</p>
                     </td>
                   </tr>

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import {
   forwardRef,
   useEffect,
@@ -5,7 +6,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { FaPen, FaTrash } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import SignatureCanvas from "react-signature-canvas";
 
 export const SignatureInput = forwardRef(
@@ -16,166 +17,156 @@ export const SignatureInput = forwardRef(
       onFocus,
       onBlur,
       name,
-      theme = "dark",
       hasError,
       isFocused,
-      label,
       disabled = false,
-      ...otherProps
     },
     ref,
   ) => {
-    const sigCanvas = useRef({});
+    const sigCanvas = useRef(null);
     const containerRef = useRef(null);
     const [isEmpty, setIsEmpty] = useState(!value);
 
-    useImperativeHandle(
-      ref,
-      () => ({
-        focus: () => {
-          if (containerRef.current) {
-            containerRef.current.scrollIntoView({
-              behavior: "smooth",
-              block: "center",
-            });
-            // 1. Actually focus the DOM element so blur events work
-            containerRef.current.focus({ preventScroll: true });
-
-            if (onFocus) {
-              onFocus({ target: { name } });
-            }
-          }
-        },
-        scrollIntoView: (options) => {
-          if (containerRef.current) {
-            containerRef.current.scrollIntoView({
-              behavior: "smooth",
-              block: "center",
-              ...options,
-            });
-          }
-        },
-        name,
-        type: "signature",
-      }),
-      [onFocus, name],
-    );
+    useImperativeHandle(ref, () => ({
+      focus: () => {
+        containerRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+        containerRef.current?.focus({ preventScroll: true });
+        onFocus?.({ target: { name } });
+      },
+      name,
+      type: "signature",
+    }));
 
     useEffect(() => {
       if (value && sigCanvas.current && isEmpty) {
         sigCanvas.current.fromDataURL(value);
         setIsEmpty(false);
       }
-    }, [value]);
+    }, [value, isEmpty]);
 
-    // 2. Hide icon IMMEDIATELY when drawing starts
-    const handleBegin = () => {
-      setIsEmpty(false);
-    };
+    const handleBegin = () => setIsEmpty(false);
 
     const handleEnd = () => {
-      if (sigCanvas.current) {
-        if (sigCanvas.current.isEmpty()) {
-          setIsEmpty(true);
-          onChange(null);
-        } else {
-          setIsEmpty(false);
-          const signatureData = sigCanvas.current.toDataURL("image/png");
-          onChange(signatureData);
-        }
-        // No need to trigger blur here; let the container handle it naturally
+      if (!sigCanvas.current) return;
+
+      if (sigCanvas.current.isEmpty()) {
+        setIsEmpty(true);
+        onChange(null);
+      } else {
+        onChange(sigCanvas.current.toDataURL("image/png"));
+        setIsEmpty(false);
       }
     };
 
     const clearSignature = (e) => {
       e.preventDefault();
       e.stopPropagation();
-      if (sigCanvas.current) {
-        sigCanvas.current.clear();
-        setIsEmpty(true);
-        onChange(null);
-      }
-      // Re-focus container after clearing so user can sign again immediately
+      sigCanvas.current?.clear();
+      setIsEmpty(true);
+      onChange(null);
       containerRef.current?.focus();
     };
 
-    // 3. Handle native blur events (clicking outside)
-    const handleContainerBlur = (e) => {
-      // Only blur if the new focus is NOT inside this component (e.g. not the clear button)
-      if (!e.currentTarget.contains(e.relatedTarget)) {
-        if (onBlur) onBlur();
-      }
+    const handleBlur = (e) => {
+      if (!e.currentTarget.contains(e.relatedTarget)) onBlur?.();
     };
 
-    const handleContainerClick = () => {
-      if (!disabled && onFocus) {
-        onFocus({ target: { name } });
-      }
+    const handleClick = () => {
+      if (!disabled) onFocus?.({ target: { name } });
     };
 
     const getContainerClasses = () => {
-      // 4. Add 'outline-none' to prevent double focus rings (browser blue ring + your custom border)
-      const baseClasses =
-        "relative w-full rounded-md border border-gray-400 mb-2.5 p-4 shadow-none font-montserrat bg-white h-48 outline-none";
+      const base =
+        "relative w-full h-48 rounded-xl p-4 mb-2.5 outline-none " +
+        "bg-white/90 border border-white/40 " +
+        "shadow-[inset_0_1px_0_rgba(255,255,255,0.95)," +
+        "inset_0_-6px_12px_rgba(0,0,0,0.22)," +
+        "0_14px_32px_rgba(0,0,0,0.35)]";
 
-      let stateStyles = "";
+      if (disabled) return `${base} opacity-60 cursor-not-allowed`;
 
-      if (disabled) {
-        stateStyles = "bg-gray-100 cursor-not-allowed opacity-75";
-      }
+      if (hasError && isFocused) return `${base} outline outline-red-600 [outline-style:auto]`;
 
-      if (hasError && isFocused) {
-        stateStyles =
-          "outline outline-red-600 [outline-offset:unset] [outline-style:auto]";
-      } else if (isFocused) {
-        stateStyles =
-          "outline outline-primary [outline-offset:unset] [outline-style:auto]";
-      }
 
-      return `${baseClasses} ${stateStyles}`;
+      return base;
     };
 
     return (
       <div
         ref={containerRef}
+        tabIndex={0}
         className="w-full relative"
-        onClick={handleContainerClick}
-        onBlur={handleContainerBlur} // 5. Bind the blur handler
-        tabIndex={0} // 6. Make div focusable so it can receive/lose focus
+        onClick={handleClick}
+        onBlur={handleBlur}
         data-field-name={name}
       >
         <div className={getContainerClasses()}>
-          <SignatureCanvas
-            ref={sigCanvas}
-            penColor="black"
-            canvasProps={{
-              className: "w-full h-full absolute top-0 left-0 cursor-crosshair",
-            }}
-            onBegin={handleBegin} // 7. Bind the begin handler
-            onEnd={handleEnd}
+          {/* Placeholder */}
+          {isEmpty && (
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-[1]">
+              <Image
+                src="/images/SignaturePlaceholder.svg"
+                alt="Sign here"
+                width={320}
+                height={120}
+                className="opacity-40"
+                unoptimized
+              />
+            </div>
+          )}
+
+          {/* TOP EDGE LIGHT (glass thickness) */}
+          <div
+            className="absolute top-0 left-0 right-0 h-[2px] rounded-t-xl
+            bg-gradient-to-r from-transparent via-white/90 to-transparent
+            pointer-events-none z-[2]"
           />
 
-          <div className="absolute top-2 right-2 flex gap-2 pointer-events-none">
-            {!isEmpty && !disabled && (
+          {/* MAIN GLOSS REFLECTION */}
+          <div className="absolute inset-0 rounded-xl overflow-hidden pointer-events-none z-[3]">
+            <div
+              className="absolute -top-1/2 -left-1/3 w-[180%] h-[180%]
+              bg-gradient-to-br from-white/70 via-white/25 to-transparent
+              rotate-[18deg]"
+            />
+          </div>
+
+          {/* SUBTLE INTERNAL REFRACTION */}
+          <div
+            className="absolute inset-0 rounded-xl pointer-events-none z-[4]
+            bg-[linear-gradient(145deg,rgba(255,255,255,0.12),transparent_45%,rgba(0,0,0,0.08))]"
+          />
+
+          {/* Signature Canvas */}
+          <SignatureCanvas
+            ref={sigCanvas}
+            penColor="rgba(15,15,15,0.9)"
+            minWidth={0.8}
+            maxWidth={2.3}
+            velocityFilterWeight={0.72}
+            onBegin={handleBegin}
+            onEnd={handleEnd}
+            canvasProps={{
+              className:
+                "absolute inset-0 w-full h-full cursor-crosshair z-[5] touch-none",
+            }}
+          />
+
+          {/* Clear Button */}
+          {!isEmpty && !disabled && (
+            <div className="absolute top-2 right-2 z-[6]">
               <button
                 type="button"
                 onClick={clearSignature}
-                className="bg-red-100 hover:bg-red-200 text-red-600 p-2 rounded-full transition-colors shadow-sm pointer-events-auto"
                 title="Clear Signature"
+                className="p-2 rounded-full bg-red-100/90 hover:bg-red-200
+                  text-red-600 shadow-lg backdrop-blur-md"
               >
                 <FaTrash size={14} />
               </button>
-            )}
-          </div>
-
-          {isEmpty && (
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
-              <div className="text-center">
-                <FaPen size={36} className="mx-auto mb-1 text-gray-500" />
-                <span className="text-gray-500 text-sm font-montserrat">
-                  Sign here
-                </span>
-              </div>
             </div>
           )}
         </div>
@@ -185,4 +176,3 @@ export const SignatureInput = forwardRef(
 );
 
 SignatureInput.displayName = "SignatureInput";
-
