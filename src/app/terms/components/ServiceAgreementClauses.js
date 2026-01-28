@@ -467,7 +467,7 @@ const ServiceAgreementClauses = () => {
       </div>
       <Container className="inner w-full">
         <div className="tnc-page-sa-clauses--wrap flex justify-end">
-          <div className="tnc-page-sa-clauses--content 1024px:w-[70%] 1200px:w-[65%] py-[50px] px-[30px] 480px:py-[82px] 480px:px-[34px] 1366px:pt-[74px] 1366px:pb-[74px] 1366px:pl-[0px] 1366px:pr-[18px]">
+          <div className="tnc-page-sa-clauses--content 1024px:w-[70%] 1200px:w-[65%] py-[50px] px-[30px] 480px:py-[82px] 480px:px-[34px] 1366px:pt-[74px] 1366px:pb-[74px] 1366px:pl-[0px] 1366px:pr-[0px]">
             <h2 className="text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mx-auto 992px:text-[26px] 768px:mx-0 font-montserrat uppercase">
               Service Agreement Clauses
             </h2>
@@ -477,7 +477,7 @@ const ServiceAgreementClauses = () => {
                 <TermsSection
                   key={index}
                   section={section}
-                  isLast={index === serviceAgreementData.length - 1} // Check if last section
+                  isLast={index === serviceAgreementData.length - 1} 
                 />
               ))}
             </ScrollableSection>

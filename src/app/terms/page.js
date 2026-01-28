@@ -169,7 +169,7 @@ const MainSection = () => (
       />
     </div>
     <Container className="inner w-full">
-      <div className="tnc-page-main--content 1024px:w-[68%] 1200px:w-[65%] py-[50px] px-[30px] 480px:py-[82px] 480px:px-[34px] 1366px:pt-[110px] 1366px:pb-[110px] 1366px:pl-[18px]">
+      <div className="tnc-page-main--content 1024px:w-[68%] 1200px:w-[65%] py-[50px] px-[30px] 480px:py-[82px] 480px:px-[34px] 1366px:pt-[110px] 1366px:pb-[110px] 1366px:pl-[18px] 1366px:pr-0">
         <h1 className="text-[22px] 480px:text-[24px] 1024px:text-[26px] font-semibold leading-[1.6em] text-left mx-auto 992px:text-[26px] 768px:mx-0 font-montserrat uppercase">
           Service Conditions
         </h1>
